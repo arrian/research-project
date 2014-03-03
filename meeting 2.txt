@@ -1,0 +1,61 @@
+Research Project - Meeting 2 - 24 February 2014
+
+Reason for the Visualisations
+-authenticity - shows that there is responsiveness
+	-many levels of authenticity
+-authenticity vs understanding
+
+-expressiveness - show phase within the musical piece
+
+-perceived difficulty vs 
+-directness
+-direct action vs authenticity
+
+
+-knowing when things go wrong
+-errors within live coding should be presented to the audience
+
+-logging in extempore
+
+Process of Exploration
+understand, model, further understanding
+
+Performances
+-art not apart - ben and torb
+-you are here - ben, 9pm at the city
+-cssa performance - ben and andrew
+
+
+-objective vs subjective
+
+-complementary artistic visualisation
+
+Action Items
+
+-Levels of Taxonomy
+	-types of visualisations
+		-visualisations based on intent
+		-placement on the display
+		-visualisations that responded to music
+		-typing visualisations that respond to typing
+		-infographics augmenting the code
+		-passive vs active visualisations for understanding
+-Survey audience
+	-open ended
+	-closed ended - set of questions
+		-have you ever seen live coding performance before
+		-audience participation through the live coding performance (ask the audience to rate their engagement across a variety of dimensions by selecting a curve that best represents the specific dimension)
+			-interest (curve)
+			-understanding
+			-enjoyment
+			-curiosity
+			-admiration
+			-authenticity
+		-what aspects of the projection of the code did you find confusing?
+		-did the visualisation distract or complement the performance?
+		-what do you think the visualisation achieved
+-Project plan
+-Timeline
+-Reading summary
+-Design ideas (how we will visualise the code)
+-Presentation for next week
