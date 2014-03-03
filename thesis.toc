@@ -1,16 +1,25 @@
 \contentsline {chapter}{Acknowledgements}{vii}
 \contentsline {chapter}{Abstract}{ix}
-\contentsline {chapter}{\numberline {1}An Introduction to My Thesis}{1}
-\contentsline {section}{\numberline {1.1}The Basis for this Work}{1}
-\contentsline {subsection}{\numberline {1.1.1}A Theoretical Framework}{1}
-\contentsline {chapter}{\numberline {2}The First Experiment}{3}
-\contentsline {section}{\numberline {2.1}Why I Did It}{3}
-\contentsline {section}{\numberline {2.2}What I Did}{3}
-\contentsline {chapter}{\numberline {3}The Second Experiment}{7}
-\contentsline {section}{\numberline {3.1}Why I Did It}{7}
-\contentsline {section}{\numberline {3.2}What I Did}{7}
-\contentsline {chapter}{\numberline {4}Conclusion}{9}
-\contentsline {section}{\numberline {4.1}Why this is a Very Clever Thesis}{9}
-\contentsline {chapter}{\numberline {A}Some Other Stuff}{11}
-\contentsline {section}{\numberline {A.1}Why I Did It}{11}
-\contentsline {chapter}{\numberline {B}More Stuff}{13}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {1.1}Background}{1}
+\contentsline {section}{\numberline {1.2}Theoretical Framework}{1}
+\contentsline {chapter}{\numberline {2}Literature Review}{3}
+\contentsline {section}{\numberline {2.1}Visual Performance}{3}
+\contentsline {section}{\numberline {2.2}Code Comprehension}{3}
+\contentsline {chapter}{\numberline {3}Survey}{5}
+\contentsline {section}{\numberline {3.1}Rationale}{5}
+\contentsline {section}{\numberline {3.2}Procedure}{5}
+\contentsline {subsection}{\numberline {3.2.1}Live Coder Survey}{5}
+\contentsline {subsection}{\numberline {3.2.2}Audience Survey}{5}
+\contentsline {section}{\numberline {3.3}Results}{5}
+\contentsline {chapter}{\numberline {4}Visualisation Experiment 1}{7}
+\contentsline {section}{\numberline {4.1}Rationale}{7}
+\contentsline {section}{\numberline {4.2}Procedure}{7}
+\contentsline {section}{\numberline {4.3}Results}{7}
+\contentsline {chapter}{\numberline {5}Visualisation Experiment 2}{9}
+\contentsline {section}{\numberline {5.1}Rationale}{9}
+\contentsline {section}{\numberline {5.2}Procedure}{9}
+\contentsline {section}{\numberline {5.3}Results}{9}
+\contentsline {chapter}{\numberline {6}Conclusion}{11}
+\contentsline {chapter}{\numberline {A}Survey Results}{13}
+\contentsline {chapter}{\numberline {B}Visualisations}{15}

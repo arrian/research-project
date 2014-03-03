@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.3.2)  2 MAR 2014 23:47
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.3.2)  3 MAR 2014 11:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -253,63 +253,54 @@ LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <14.4> not available
 
 ]
 Chapter 2.
-
-LaTeX Warning: Citation `lamport94' on page 3 undefined on input line 18.
-
-
-LaTeX Warning: Citation `knuth86' on page 3 undefined on input line 19.
-
-
-LaTeX Warning: Citation `goossens94' on page 3 undefined on input line 19.
-
-
-LaTeX Warning: Citation `lamport94' on page 3 undefined on input line 21.
-
-[3] [4
-
-]) (./chap2.tex [5
-
-] [6
+) (./chap2.tex [3] [4
 
 ]
 Chapter 3.
-) (./conclusion.tex [7] [8
+) (./chap3.tex [5] [6
 
 ]
 Chapter 4.
-) (./appendix.tex [9] [10
+) (./chap4.tex [7] [8
+
+]
+Chapter 5.
+) (./conclusion.tex [9] [10
+
+]
+Chapter 6.
+) (./appendix.tex [11] [12
 
 ]
 Appendix A.
-[11] [12
+[13] [14
 
 ]
 Appendix B.
-) [13] [14
+) [15] [16
 
 ]
 No file thesis.bbl.
 No file thesis.ind.
 (./thesis.aux) ) 
 Here is how much of TeX's memory you used:
- 2052 strings out of 493315
- 28823 string characters out of 6137905
- 86581 words of memory out of 5000000
- 5418 multiletter control sequences out of 15000+600000
- 31421 words of font info for 77 fonts, out of 8000000 for 9000
+ 2050 strings out of 493315
+ 28972 string characters out of 6137905
+ 87660 words of memory out of 5000000
+ 5413 multiletter control sequences out of 15000+600000
+ 28845 words of font info for 72 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 37i,8n,23p,415b,193s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,7n,23p,415b,193s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc
 }</usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
 </usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/euler/eurm10.pf
 b></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr
 /local/texlive/2013/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/
-texlive/2013/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive
-/2013/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on thesis.pdf (26 pages, 83096 bytes).
+texlive/2013/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
+Output written on thesis.pdf (28 pages, 74626 bytes).
 PDF statistics:
- 113 PDF objects out of 1000 (max. 8388607)
- 78 compressed objects within 1 object stream
+ 115 PDF objects out of 1000 (max. 8388607)
+ 79 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
