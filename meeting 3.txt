@@ -1,0 +1,44 @@
+Research Project - Meeting 3 - 3 March 2014
+
+Should run through ben’s live coding videos
+
+—— 
+
+what do they understand now
+what do they enjoy now
+
+——
+alternatively:
+what do they understand in the code now
+what do they enjoy in the code now
+
+what do they understand in the music now
+what do they enjoy in the music now
+
+
+
+now->then
+
+categorise visualisations
+
+code vs music
+
+what did you pay attention to 
+
+
+
+———
+Follow Up
+
+Henry’s Observations on the McLean Paper
+
+Thanks for the papers. I looked at the McLean et al paper just now. My impressions:
+
+1) Very interesting. But it is descriptive without any formal study as yet.
+2) The Blackwell and Collins paper is cited as the fundamental study; you need to read this paper.
+3) The introduction is a bit hand wavy but contains some useful observations for you. You picked up on "enjoyment" and "understanding". But I would add to these "distracted" and "excluded" as targets to evaluate from the audience perspective.
+4) Notions of "chunking" and "spactial dance" are possibly useful considerations of cognition.
+5) They talk about symbols, shape and geometry in comprehension of computation. Can you think about (or find references to ) symbols, shape, geometry in music visualisation?
+6) They talk about custom programming languages. As a challenge, perhaps you can come up with visualisations which are language independent?
+7) The observation about "time" being preceived differently between performer and audience is interesting and perhaps a rich area to delve into.
+8) I increasingly like the idea of the "is it really live" experiment. I think that this is new and different and fun and might sell the work.
