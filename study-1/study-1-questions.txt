@@ -1,5 +1,6 @@
 Study 1 Questions
 
+Draft 1
 -Have you ever seen a live coding performance before?
 -What did you enjoy about the performance?
 -What did you understand about the performance?
@@ -8,3 +9,11 @@ Study 1 Questions
 -Choose the image that best represents your enjoyment through the performance.
 -Choose the image that best represents your understanding through the performance.
 
+Draft 2
+-How many live coding performances have you been to?
+-How much experience do you have with live music performance?
+-How much experience do you have with programming?
+-Choose the image that best represents your enjoyment through the performance.
+-Choose the image that best represents your understanding of the relationship between the visuals and the music.
+-Can you think of any visuals that would make the performance easier to understand?
+-Can you think of any visuals that would make the performance more enjoyable?
