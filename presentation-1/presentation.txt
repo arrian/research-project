@@ -1,0 +1,46 @@
+Research Project - Presentation
+
+WHAT WILL I BE DOING THIS YEAR
+-investigating code understanding and comprehension through the use of visualisations
+-target audience not necessarily just programmers
+-will be investigating visualisations of code targeted at public audiences
+-to achieve this, I need a space in which code is common and the audience for the code is not just programmers
+-live coding fits the specification 
+
+DEFINE TERMS
+-live coding definition
+	-what it is?
+		-performance
+		-musical
+		-show the audience the code
+	-….show example….
+-audience participation and involvement
+	-authenticity vs understanding
+
+DEFINE PROBLEM
+-what is the problem within live coding?
+	-visualisations are often abstract
+	-do not represent the programmers intent
+	-audience often cannot comprehend the authors intent
+-furthermore, there has been little movement towards formal analysis within the area 
+
+WHY DO I CARE?
+-application to the wider field of software engineering
+-why, as a software engineer, does live coding matter?
+-presents code to audience’s who have little previous exposure
+-code comprehension has huge impacts on software engineering practice
+-developing an approach to live coding that provides context through visualisations could inform further development within software engineering practice
+
+WHAT NEEDS TO BE DONE?
+-The study would approach the issue from two angles. 
+-live coding from the audience's perspective to gain insight into how to design visualisations to support their existing mental model
+-examining live coding from the artist's perspective, gaining insight into what the artist wants to convey and the best method to approach this.
+-project plan?
+	1. investigate existing mental models within both the audience and programmer (eg. survey). 
+		-in the process now of preparing surveys
+	2. develop and test visualisations informed by lit review and survey
+	3. test the newly developed visualisations
+		-plan is to develop visualisations, run a study within a controlled setting
+	4. analyse the results of the study and build on the results to develop a refined set of visualisations
+-move the field towards formal analysis 
+
