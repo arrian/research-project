@@ -1,0 +1,14 @@
+music visualisation
+
+
+big question - how do these music visualisations relate to programming visualisations
+
+can we combine into meaningful manner to help people understand code.
+
+methodology - incl. taxonomy 
+
+software engineering - phenomena, systematic survey, papers I have read, iterative approach, whilst trialling with live audiences
+
+timeline
+
+feasibility
