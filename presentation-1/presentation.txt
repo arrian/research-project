@@ -1,5 +1,80 @@
 Research Project - Presentation
 
+Revised Presentation
+
+Understanding through Visualisation
+
+Introduction
+
+-what is my project about
+	-examining code visualisations with specific application to live coding
+	-what is live coding - I’ll show a video
+	-why is this relevant to me as a software engineer
+
+-what is live coding?
+	-method of programming in front of an audience
+	-gives the audience insight into the programming process
+	-
+
+Video
+
+-note that it is typically performed in front of an audience - an audience that may have no previous exposure to programming
+
+Visualisations
+-what role do visualisations play
+-what visualisations currently exist
+	-software visualisations
+	-music visualisations
+
+Big Question
+-can we combine these visualisations in a meaningful way?
+-how can we 
+
+Methodology
+-taxonomy
+-survey to get initial understanding of public audience - plug weekend performance
+-lab study
+-refine visualisations
+-second lab study testing refined visualisations
+
+Software Engineering Perspective
+-how do these visualisations relate to software engineering?
+-applying concepts to live coding
+	-design
+	-coding
+	-comprehension
+-application to wider goal of software engineering?
+	-public awareness of code and code understanding
+	-developing techniques for working in cross disciplinary teams (in this case artist-programmer)
+	-developing techniques for better understanding the relationship between those who have little experience in programming and code understanding
+	-developing a visualisation framework that may have application outside the scope of live coding in the wider software engineering context
+
+Timeline
+15 March (9pm) - "You Are Here” surveying visualisations
+28 March - Literature Review
+2 May - First Stage Visualisations Prepared
+12 May - First Lab Study
+23 June - Second Stage Visualisations Prepared
+4 July - Second Lab Study
+3 October - Draft Thesis
+13 October - Final Seminar
+25 October (3pm) - Thesis Due
+
+Feasibility
+
+-in terms of schedule, some good progress has been made so far
+	-well on the way to the first survey (15th March Saturday 9pm)
+	-literature review on schedule
+	-enough time to refine visualisations and plan studies
+	-studies should be completed before August ready for write up
+
+Goal
+
+-add value to the field - goal of this project is to make a contribution to the field of software engineering, visualisations and understanding of code. At current stage it seems that a valuable contribution 
+-leave you with this thought - 
+
+DRAFT 1
+
 WHAT WILL I BE DOING THIS YEAR
 -investigating code understanding and comprehension through the use of visualisations
 -target audience not necessarily just programmers
