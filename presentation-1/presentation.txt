@@ -1,223 +1,109 @@
-Research Project - Presentation
+Research Project - Revised Presentation 2
 
+Understanding Code through Visualisation
 
-Revised Presentation 2
-
-Research Project - Revised Presentation
-
-Understanding through Visualisation
+[SLIDE 1]
 
 Introduction
+-code is often difficult to quickly understand
+-some observers may lack the experience to understand the software or the programming process
 
--A large amount of code is difficult or impossible for external observers to understand or contribute to. 
+-how can we improve source code comprehension?
+-how can we aid understanding of the programming process?
+-better yet, how can we better communicate the programmers intention?
 
--This may be due to these external observers lacking programming experience but it may also be true of those with large amounts of programming experience
+-techniques such as modelling or code documentation aren’t dynamic or flexible
+-don’t allow for close to realtime understanding
+-an effective technique is the use of visualisations
+-it would be valuable to use visualisations as a means to communicate the programmer’s intention
 
--How can we improve code understanding and comprehension?
+[SLIDE 2]
 
--Variety of techniques to resolve this issue eg. static analysis or documentation
+Project (what is the project about?)
+-this project will explore code visualisations
+-specifically, it will investigate visuals within the domains of software and music
+-will be using Iive coding as a platform and case study for this (will discuss later)
+-will develop and test code visualisations on audiences with audiences of varied levels of experience with programming, addressing code comprehension
 
--Are not dynamic
-
--Most effective technique is visualisation. Understanding through Code Visualisation.
-
--what is my project about?
-	-exploring code visualisations 
-	-purpose is to use these visualisations to aid in code comprehension and allow for better understanding
-	-will be using live coding as the platform to investigate the techniques and visuals developed
-	-I will show a short video later and also explain what relevance live coding has to software engineering
-	-first, what is live coding
-
--what is live coding?
-	-method of programming in front of an audience for artistic or informative purposes
-	-the live coder displays their screen to an audience, showing their code as they are working on it building a functional program
-	-often focusses on improvisation - the programmer often has to think on their feet
-	-makes use of interactive programming environments - the results of the program need to be produced ‘live’ often iteratively, with the program running while changes are being made 
-	-what does live coding achieve?
-		-gives the audience insight into the programming process
-
--*live coding music relevance*
-
--I’ll run a quick video
-Video (http://vimeo.com/86664303, http://vimeo.com/78788032)
-
--point out a few things in the video
--start with blank screen - had to cut some of ben’s performance for time
--note that it is typically performed in front of an audience - an audience that may have no previous exposure to programming
+[SLIDE 3]
 
 Visualisations
--how can visualisations help here?
--what role do visualisations play
--what visualisations currently exist
-	-software visualisations
-		-example 1 - scheme bricks
-		-example 2 - 
-	-music visualisations
-		-example 1 - 
-		-example 2 - 
+-but first; I just want to run through a couple of existing visualisations with the domains of software and music
+-show what role visualisations play in the understanding of specific domain knowledge
+Software Visualisations
+-gource - shows program file structure, based on data from code repository, shows dev progress
+-scheme bricks - shows program structure clearly, relevant components light up when code is run 
+
+[SLIDE 4]
+
+Music Visualisations
+-frequency spectrum visualisations - frequency spectrum while playing music
+-midi visualiser - relevant to its domain, clear representation of purpose
+
+-key question is...
+
+[SLIDE 5]
 
 Big Question
--can we combine these visualisations in a meaningful way?
+-can we combine these domain-specific visualisations in a meaningful way?
 -how can we use this to aid in code comprehension?
 
+[SLIDE 6]
+
+Live Coding
+-live coding is a platform for bridging these two domain visualisations 
+-what is live coding?
+-method of programming in front of an audience for artistic or informative purposes
+-the live coder displays their screen to an audience, showing their code as they are working on it building a functional program
+-makes use of interactive programming environments 
+-program running while changes are being made 
+-often focusses on improvisation - the programmer often has to think on their feet
+
+-what does live coding achieve?
+-gives the audience insight into the programming process - i’ll be taking advantage of this
+
+-I’ll run a quick video
+
+[Video]
+
+-a typical audience may have no previous exposure to programming - may have a hard time understanding
+-we need the audience to be able to get a better sense of what is going on
+-we need a way to better convey the programmers intent
+
+-this will be the goal of the project
+
+[SLIDE 7]
+
 Timeline and Methodology
--taxonomy - determine existing visualisations - categorise - determine best approach
 -survey to get initial understanding of public audience - [plug weekend performance]
--develop visualisations (April)
+-develop taxonomy (categorising existing visualisations, determine best approach) 
+-and develop a variety of visualisations (April)
 -first lab study examining initial visualisations (start of May)
--process of refining visualisations (June)
+-iterative process of refining visualisations (June)
 -second lab study testing refined visualisations (start of July)
 
-Software Engineering Perspective
--how do these visualisations relate to software engineering?
--applying concepts to live coding
-	-design
-	-coding
-	-IEEE - the application of systematic, disciplined, quantifiable approach to the development, operation and maintenance of software and the study of these approaches.
-	-comprehension
--application to wider goal of software engineering?
-	-public awareness of code and code understanding
-	-developing techniques for working in cross disciplinary teams (in this case artist-programmer)
-	-developing techniques for better understanding the relationship between those who have little experience in programming and code understanding
-	-developing a visualisation framework that may have application outside the scope of live coding in the wider software engineering context
+-overall methodology following IEEE definition of software engineer - "the application of a systematic, disciplined, quantifiable approach to the development, operation and maintenance of software".
+
+[SLIDE 8]
 
 Feasibility
-
 -in terms of schedule, some good progress has been made so far
-	-well on the way to the first survey (15th March Saturday 9pm)
-	-literature review on schedule
-	-enough time to refine visualisations and plan studies
-	-studies should be completed before August ready for write up
--rich basis in literature - some examination of areas surrounding this but a move towards formalisation is needed
+-realistic timeline
+-enough time to refine visualisations and plan studies
+-studies should be completed before August ready for write up
+-good basis in literature - 
+-rich potential - application of visuals to live coding not yet formalised/analysed 
 
-Goal
-
--add value to the field - goal of this project is to make a contribution to the field of software engineering, visualisations and understanding of code
--leave you with this thought - 
+[SLIDE 9]
 
 Questions?
 
 
 
-Notes
-Missed talking about role of audience--------
 
-Revised Presentation
 
-Understanding through Visualisation
 
-Introduction
 
--what is my project about
-	-examining code visualisations with specific application to live coding
-	-what is live coding - I’ll show a video
-	-why is this relevant to me as a software engineer
 
--what is live coding?
-	-method of programming in front of an audience
-	-gives the audience insight into the programming process
-	-
 
-Video
-
--note that it is typically performed in front of an audience - an audience that may have no previous exposure to programming
-
-Visualisations
--what role do visualisations play
--what visualisations currently exist
-	-software visualisations
-	-music visualisations
-
-Big Question
--can we combine these visualisations in a meaningful way?
--how can we 
-
-Methodology
--taxonomy
--survey to get initial understanding of public audience - plug weekend performance
--lab study
--refine visualisations
--second lab study testing refined visualisations
-
-Software Engineering Perspective
--how do these visualisations relate to software engineering?
--applying concepts to live coding
-	-design
-	-coding
-	-comprehension
--application to wider goal of software engineering?
-	-public awareness of code and code understanding
-	-developing techniques for working in cross disciplinary teams (in this case artist-programmer)
-	-developing techniques for better understanding the relationship between those who have little experience in programming and code understanding
-	-developing a visualisation framework that may have application outside the scope of live coding in the wider software engineering context
-
-Timeline
-15 March (9pm) - "You Are Here” surveying visualisations
-28 March - Literature Review
-2 May - First Stage Visualisations Prepared
-12 May - First Lab Study
-23 June - Second Stage Visualisations Prepared
-4 July - Second Lab Study
-3 October - Draft Thesis
-13 October - Final Seminar
-25 October (3pm) - Thesis Due
-
-Feasibility
-
--in terms of schedule, some good progress has been made so far
-	-well on the way to the first survey (15th March Saturday 9pm)
-	-literature review on schedule
-	-enough time to refine visualisations and plan studies
-	-studies should be completed before August ready for write up
-
-Goal
-
--add value to the field - goal of this project is to make a contribution to the field of software engineering, visualisations and understanding of code. At current stage it seems that a valuable contribution 
--leave you with this thought - 
-
-DRAFT 1
-
-WHAT WILL I BE DOING THIS YEAR
--investigating code understanding and comprehension through the use of visualisations
--target audience not necessarily just programmers
--will be investigating visualisations of code targeted at public audiences
--to achieve this, I need a space in which code is common and the audience for the code is not just programmers
--live coding fits the specification 
-
-DEFINE TERMS
--live coding definition
-	-what it is?
-		-performance
-		-musical
-		-show the audience the code
-	-….show example….
--audience participation and involvement
-	-authenticity vs understanding
-
-DEFINE PROBLEM
--what is the problem within live coding?
-	-visualisations are often abstract
-	-do not represent the programmers intent
-	-audience often cannot comprehend the authors intent
--furthermore, there has been little movement towards formal analysis within the area 
-
-WHY DO I CARE?
--application to the wider field of software engineering
--why, as a software engineer, does live coding matter?
--presents code to audience’s who have little previous exposure
--code comprehension has huge impacts on software engineering practice
--developing an approach to live coding that provides context through visualisations could inform further development within software engineering practice
-
-WHAT NEEDS TO BE DONE?
--The study would approach the issue from two angles. 
--live coding from the audience's perspective to gain insight into how to design visualisations to support their existing mental model
--examining live coding from the artist's perspective, gaining insight into what the artist wants to convey and the best method to approach this.
--project plan?
-	1. investigate existing mental models within both the audience and programmer (eg. survey). 
-		-in the process now of preparing surveys
-	2. develop and test visualisations informed by lit review and survey
-	3. test the newly developed visualisations
-		-plan is to develop visualisations, run a study within a controlled setting
-	4. analyse the results of the study and build on the results to develop a refined set of visualisations
--move the field towards formal analysis 
 
