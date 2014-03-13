@@ -1,5 +1,107 @@
 Research Project - Presentation
 
+
+Revised Presentation 2
+
+Research Project - Revised Presentation
+
+Understanding through Visualisation
+
+Introduction
+
+-A large amount of code is difficult or impossible for external observers to understand or contribute to. 
+
+-This may be due to these external observers lacking programming experience but it may also be true of those with large amounts of programming experience
+
+-How can we improve code understanding and comprehension?
+
+-Variety of techniques to resolve this issue eg. static analysis or documentation
+
+-Are not dynamic
+
+-Most effective technique is visualisation. Understanding through Code Visualisation.
+
+-what is my project about?
+	-exploring code visualisations 
+	-purpose is to use these visualisations to aid in code comprehension and allow for better understanding
+	-will be using live coding as the platform to investigate the techniques and visuals developed
+	-I will show a short video later and also explain what relevance live coding has to software engineering
+	-first, what is live coding
+
+-what is live coding?
+	-method of programming in front of an audience for artistic or informative purposes
+	-the live coder displays their screen to an audience, showing their code as they are working on it building a functional program
+	-often focusses on improvisation - the programmer often has to think on their feet
+	-makes use of interactive programming environments - the results of the program need to be produced ‘live’ often iteratively, with the program running while changes are being made 
+	-what does live coding achieve?
+		-gives the audience insight into the programming process
+
+-*live coding music relevance*
+
+-I’ll run a quick video
+Video (http://vimeo.com/86664303, http://vimeo.com/78788032)
+
+-point out a few things in the video
+-start with blank screen - had to cut some of ben’s performance for time
+-note that it is typically performed in front of an audience - an audience that may have no previous exposure to programming
+
+Visualisations
+-how can visualisations help here?
+-what role do visualisations play
+-what visualisations currently exist
+	-software visualisations
+		-example 1 - scheme bricks
+		-example 2 - 
+	-music visualisations
+		-example 1 - 
+		-example 2 - 
+
+Big Question
+-can we combine these visualisations in a meaningful way?
+-how can we use this to aid in code comprehension?
+
+Timeline and Methodology
+-taxonomy - determine existing visualisations - categorise - determine best approach
+-survey to get initial understanding of public audience - [plug weekend performance]
+-develop visualisations (April)
+-first lab study examining initial visualisations (start of May)
+-process of refining visualisations (June)
+-second lab study testing refined visualisations (start of July)
+
+Software Engineering Perspective
+-how do these visualisations relate to software engineering?
+-applying concepts to live coding
+	-design
+	-coding
+	-IEEE - the application of systematic, disciplined, quantifiable approach to the development, operation and maintenance of software and the study of these approaches.
+	-comprehension
+-application to wider goal of software engineering?
+	-public awareness of code and code understanding
+	-developing techniques for working in cross disciplinary teams (in this case artist-programmer)
+	-developing techniques for better understanding the relationship between those who have little experience in programming and code understanding
+	-developing a visualisation framework that may have application outside the scope of live coding in the wider software engineering context
+
+Feasibility
+
+-in terms of schedule, some good progress has been made so far
+	-well on the way to the first survey (15th March Saturday 9pm)
+	-literature review on schedule
+	-enough time to refine visualisations and plan studies
+	-studies should be completed before August ready for write up
+-rich basis in literature - some examination of areas surrounding this but a move towards formalisation is needed
+
+Goal
+
+-add value to the field - goal of this project is to make a contribution to the field of software engineering, visualisations and understanding of code
+-leave you with this thought - 
+
+Questions?
+
+
+
+Notes
+Missed talking about role of audience--------
+
 Revised Presentation
 
 Understanding through Visualisation
