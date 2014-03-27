@@ -1,0 +1,6 @@
+Research Project - Meeting 5 - 17 March 2014
+
+Ran through survey results - analysis with R
+Develop taxonomy and mockups of visualisations for next meeting
+
+
