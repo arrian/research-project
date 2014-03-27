@@ -17,3 +17,49 @@ Draft 2
 -Choose the image that best represents your understanding of the relationship between the visuals and the music through the performance.
 -Can you think of any visuals that would make the performance easier to understand?
 -Can you think of any visuals that would make the performance more enjoyable?
+
+Final
+1. How many live coding performances have you been to?
+None - This is my first one
+Less than five
+Five or more
+
+2. How much music do you listen to?
+Hardly any
+A little
+A large amount
+
+3. Do you play an instrument or sing?
+No - I would not consider myself a musician or singer
+Occasionally or I have in the past
+Yes - I play or sing regularly
+
+4. How much experience do you have with programming?
+I have no experience with it
+I have some experience programming
+I currently program for my study/hobby/work
+
+5. Please circle the image below that best represents your enjoyment through the performance.
+
+Up then down
+Down then up
+Flat
+Down
+Up
+Unsure
+
+6. Please circle the image below that best represents your understanding of the relationship between the visuals and the music through the performance.
+
+Up then down
+Down then up
+Flat
+Down
+Up
+Unsure
+
+7. This was a live performance! What effect did the visuals have on your sense of ‘liveness’ of the performance?
+The visuals were distracting
+They had no effect on my sense of ‘liveness’
+They helped
+
+8. Were there any aspects of the visuals that you found confusing?
