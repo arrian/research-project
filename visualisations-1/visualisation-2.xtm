@@ -5,9 +5,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (bind-val VFS_FUNCTION_COUNT i32 0);;pointer to last function in array
-(bind-val VFS_FUNCTION_TRANSITION_DURATION float 2500.0);;duration of the intial entry transition
+(bind-val VFS_FUNCTION_TRANSITION_DURATION float 250000.0);;duration of the intial entry transition
 (bind-val VFS_FUNCTION_ARRAY |16,<i1,float,float,float>*|*);;<is_active,size,color,transition_start>
-
 
 (bind-func vfs_create
   (lambda ()
@@ -44,18 +43,13 @@
 ;;};
 
 (bind-func vfs_transition_ease_out_quadratic
-  (lambda (elapsed:float val_start:float val_change:float)
-    (+ (* (* (- 0.0 val_change) (/ VFS_FUNCTION_TRANSITION_DURATION elapsed)) (- (/ VFS_FUNCTION_TRANSITION_DURATION elapsed) 2.0)) val_start)))
-
-(bind-func vfs_get_y_transition
-  (lambda (index:i32 y_start:float y_change:float)
-      (vfs_transition_ease_out_quadratic (- (i64tof (now)) (vfs_get_start index)) y_start y_change)))
-
-(bind-func vfs_get_alpha_transition
-  (lambda (index:i32)
-      (vfs_transition_ease_out_quadratic (- (i64tof (now)) (vfs_get_start index)) 1.0 1.0)))
-
-
+  (lambda (index:i32 start:float change:float)
+    (let ((current:float (- (i64tof (now)) (vfs_get_start index)))
+          (neg_change:float (- 0.0 change)))
+      (let ((percent_complete:float (/ current 25000.0)))
+        ;(println percent_complete)
+        (cond ((> percent_complete 1.0) (change))
+        (else (+ start (* (- percent_complete 2.0) (* (neg_change) (percent_complete))))))))))
 
 (define fullscreen #f)
 
@@ -79,9 +73,9 @@
         
 		    ;(xtm_paint_setup_stroke stroke (dtof (random 0.3 0.9)) (dtof (random 0.5 0.7)) 0.2 0.5 5.0)
         (dotimes (i VFS_FUNCTION_COUNT)
-            ;;(println (vfs_get_y_transition i 500.0 500.0))
-            (xtm_paint_setup_fill fill 0.0 1.0 0.0 (vfs_get_alpha_transition i))
-            (xtm_draw_rectf (+ 100.0 (* (i32tof i) 100.0)) (vfs_get_y_transition i 500.0 500.0) (vfs_get_size i) (vfs_get_size i))      
+            (println (vfs_transition_ease_out_quadratic i 0.0 500.0))
+            (xtm_paint_setup_fill fill 0.0 1.0 0.0 (vfs_transition_ease_out_quadratic i 0.0 1.0))
+            (xtm_draw_rectf (+ 100.0 (* (i32tof i) 100.0)) (vfs_transition_ease_out_quadratic i 0.0 500.0) (vfs_get_size i) (vfs_get_size i))      
           )
         (xtm_destroy_paint fill)
         (xtm_destroy_paint stroke)
