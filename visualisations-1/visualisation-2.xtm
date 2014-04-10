@@ -1,0 +1,175 @@
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Visualisation 1 (Function Symbols) ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(bind-val VFS_FUNCTION_COUNT i32 0);;pointer to last function in array
+(bind-val VFS_FUNCTION_TRANSITION_DURATION float 2500.0);;duration of the intial entry transition
+(bind-val VFS_FUNCTION_ARRAY |16,<i1,float,float,float>*|*);;<is_active,size,color,transition_start>
+
+
+(bind-func vfs_create
+  (lambda ()
+    (let ((value:<i1,float,float,float>* (halloc)))
+      (tfill! value 1 90.0 0.1 (i64tof (now)))
+      (aset! VFS_FUNCTION_ARRAY VFS_FUNCTION_COUNT value)
+      (set! VFS_FUNCTION_COUNT (+ 1 VFS_FUNCTION_COUNT)
+      (- 1 VFS_FUNCTION_COUNT)))))
+
+(bind-func vfs_set_size
+  (lambda (index:i32 value:float)
+    (tset! (aref VFS_FUNCTION_ARRAY index) 1 value)))
+
+(bind-func vfs_get_size
+  (lambda (index:i32)
+    (tref (aref VFS_FUNCTION_ARRAY index) 1)))
+
+(bind-func vfs_set_colour
+  (lambda (index:i32 value:float)
+    (tset! (aref VFS_FUNCTION_ARRAY index) 1 value)))
+
+(bind-func vfs_get_colour
+  (lambda (index:i32)
+    (tref (aref VFS_FUNCTION_ARRAY index) 1)))
+
+(bind-func vfs_get_start
+  (lambda (index:i32)
+    (tref (aref VFS_FUNCTION_ARRAY index) 3)))
+
+
+;;Math.easeOutQuad = function (t, b, c, d) {
+;;  t /= d;
+;;  return -c * t*(t-2) + b;
+;;};
+
+(bind-func vfs_transition_ease_out_quadratic
+  (lambda (elapsed:float val_start:float val_change:float)
+    (+ (* (* (- 0.0 val_change) (/ VFS_FUNCTION_TRANSITION_DURATION elapsed)) (- (/ VFS_FUNCTION_TRANSITION_DURATION elapsed) 2.0)) val_start)))
+
+(bind-func vfs_get_y_transition
+  (lambda (index:i32 y_start:float y_change:float)
+      (vfs_transition_ease_out_quadratic (- (i64tof (now)) (vfs_get_start index)) y_start y_change)))
+
+(bind-func vfs_get_alpha_transition
+  (lambda (index:i32)
+      (vfs_transition_ease_out_quadratic (- (i64tof (now)) (vfs_get_start index)) 1.0 1.0)))
+
+
+
+(define fullscreen #f)
+
+(define width 1024.0)
+(define height 768.0)
+(bind-val width float width)
+(bind-val height float height)
+
+(define *gl-ctx* (gl:make-ctx ":0.0" fullscreen 0.0 0.0 width height))
+
+(xtm_render_setup width height)
+(if (<> (xtm-vg-create-context width height) 1) (xtm_vg_print_error))
+
+(bind-func gl_render
+  (lambda (time:float)
+    (let ((stroke (vgCreatePaint))
+          (fill (vgCreatePaint))
+          (i:i32 0))
+        (xtm_vg_reset_matrices)
+        (xtm_vg_clear 0.0 0.0 0.0 1.0 (ftoi32 width) (ftoi32 height))
+        
+		    ;(xtm_paint_setup_stroke stroke (dtof (random 0.3 0.9)) (dtof (random 0.5 0.7)) 0.2 0.5 5.0)
+        (dotimes (i VFS_FUNCTION_COUNT)
+            ;;(println (vfs_get_y_transition i 500.0 500.0))
+            (xtm_paint_setup_fill fill 0.0 1.0 0.0 (vfs_get_alpha_transition i))
+            (xtm_draw_rectf (+ 100.0 (* (i32tof i) 100.0)) (vfs_get_y_transition i 500.0 500.0) (vfs_get_size i) (vfs_get_size i))      
+          )
+        (xtm_destroy_paint fill)
+        (xtm_destroy_paint stroke)
+    void)))
+
+(define draw
+  (lambda (time)
+      (begin
+        (gl_render time)
+        (gl:swap-buffers *gl-ctx*))))
+
+(define update
+  (lambda (beat dur)
+    (draw beat)
+    (callback (*metro* (+ beat dur)) 'update (+ beat dur)
+              dur)))
+
+(update (*metro* 'get-beat 1.0) 1/32)
+
+
+
+
+
+
+(println (vfs_create))
+(println (vfs_get_size 0))
+(println (vfs_set_size 0 (+ 0.1 (vfs_get_size 0))))
+
+
+
+
+
+
+;;To Write:
+;limiters
+;transitions
+;beat matcher
+
+
+
+
+
+
+
+(bind-func vfs_transition_ease_out_quadratic
+  (lambda (start:float duration:float val_start:float val_change:float)
+    ((+ (* (* (- val_change) start) (- start 2.0)) val_change))))
+
+
+
+
+
+
+
+(bind-func vfs_print_count
+	(lambda ()
+		(println (pref VFS_FUNCTION_COUNT 0))))
+
+
+(bind-func test_set_tuple
+  (lambda ()
+    (let ((value:<i1,float,float>* (halloc)))
+      (tfill! value 0 0.1 0.2)
+      (aset! VFS_FUNCTION_ARRAY 0 value))))
+
+(test_set_tuple)
+
+(bind-func test_get_tuple
+  (lambda ()
+      (println (tref (aref VFS_FUNCTION_ARRAY 0) 1))))
+
+(test_get_tuple)
+
+
+;;Creates a new function symbol
+(bind-func vfs_create
+	(lambda ()
+		(let )))
+
+;;Updates the function symbol making it the brightest colour
+(bind-func vfs_update)
+
+;;Turns the function symbol to an inactive state 
+(bind-func vfs_stop)
+
+;;Pulses the function symbol
+(bind-func vfs_pulse) 
+
+(bind-func draw)
+
+(bind-func update)
