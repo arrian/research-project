@@ -1,0 +1,215 @@
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Visualisation utility functions ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(bind-val VU_LEVELS_RMS |16,SAMPLE|*)
+
+(bind-func rms_power
+  (lambda (data:SAMPLE* len)
+    (let ((data_vec:/4,SAMPLE/* (cast data))
+          (sum_vec:/4,SAMPLE/* (alloc))
+          (j 0))
+      (dotimes (j (/ len 4))
+        (pset! sum_vec 0 (+ (* (pref-ptr data_vec j)
+                               (pref-ptr data_vec j))
+                            sum_vec)))
+      (/ (+ (vref sum_vec 0) (vref sum_vec 1)
+            (vref sum_vec 2) (vref sum_vec 3))
+         (convert len)))))
+
+(bind-func vu_meter_c
+  "frame_size must be a multiple of 4 (since the RMS sum is SIMD-optimised)"
+  (lambda (ninst frame_size)
+    (let ((data:SAMPLE* (zalloc (* ninst frame_size)))
+          (counters:i64* (zalloc ninst)))
+      (lambda (chan inst_idx in)
+        (if (or (< inst_idx 0)
+                (> inst_idx ninst)
+                (<> chan 0))
+            in
+            (let ((counter (pref counters inst_idx)))
+              (pset! data (+ (* inst_idx frame_size) counter) in)
+              (pset! counters inst_idx (% (+ counter 1) frame_size))
+              (if (= (% counter frame_size) 0)
+                  (aset! VU_LEVELS_RMS inst_idx
+                         (rms_power (pref-ptr data (* inst_idx frame_size))
+                                    frame_size)))
+              in))))))
+
+(bind-func vu_level
+  (lambda (inst_idx)
+    (if (or (< inst_idx 0)
+            (> inst_idx 16))
+        (begin (println "Error: index must be between 0 and 16.")
+               0.)
+        (aref VU_LEVELS_RMS inst_idx))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Audio demo
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(bind-func dsp:[SAMPLE,SAMPLE,i64,i64,SAMPLE*]* 100000
+  ;; VU metering at 30Hz, 4 distinct channels
+  (let ((vu_meter (vu_meter_c 8 (/ 44100 15))))
+    (lambda (in time chan dat)
+      (+ (vu_meter chan 0 (* (random 0.1) (cos (/ (* STWOPI (convert time) 1.0) SR))))
+         (vu_meter chan 1 (* (random 0.1) (cos (/ (* STWOPI (convert time) 0.5) SR))))))))
+
+(dsp:set! dsp)
+
+(define vu-print
+  (lambda (beat dur)
+    (let ((lev0 (* 3000 (vu_level 0)))
+          (lev1 (* 3000 (vu_level 1))))
+      (dotimes (i lev0)
+        (print "*"))
+      (println)
+      (dotimes (i lev1)
+        (print "-"))
+      (println))
+    (callback (*metro* (+ beat (* .5 dur))) 'vu-print (+ beat dur) dur)))
+
+(vu-print (*metro* 'get-beat 4) 1/16)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Graphical context
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define fullscreen #f)
+
+(define width 1024.0)
+(define height 768.0)
+(bind-val width float width)
+(bind-val height float height)
+
+(define *gl-ctx* (gl:make-ctx ":0.0" fullscreen 0.0 0.0 width height))
+
+(sys:load "libs/xtm.xtm")
+
+(xtm_render_setup width height)
+(if (<> (xtm-vg-create-context width height) 1) (xtm_vg_print_error))
+
+(bind-func gl_render
+  (lambda (time:float xloc:float yloc:float)
+    (let ((stroke (vgCreatePaint))
+          (fill (vgCreatePaint))
+          (img (xtm_load_vgimage "~/Desktop/the-milky-way-galaxy-1920-1080-6808.jpg")))
+        (xtm_vg_reset_matrices)
+        (xtm_vg_clear 0.0 0.0 0.0 1.0 (ftoi32 width) (ftoi32 height))
+        (xtm_paint_setup_fill fill (dtof (random 1.0)) (dtof (random 0.2)) 0.0 (dtof 1.0))
+    		;(xtm_paint_setup_stroke stroke (dtof (random 0.3 0.9)) (dtof (random 0.5 0.7)) 0.2 0.5 5.0) 
+		    (xtm_draw_ellipsef xloc yloc 90.0 90.0)
+        (xtm_draw_vgimage img)
+        (xtm_destroy_paint fill)
+        (xtm_destroy_paint stroke)
+        (xtm_destroy_vgimage img))
+    void))
+
+(define draw
+  (lambda (time xloc yloc)
+      (begin
+        (gl_render time xloc yloc)
+        (gl:swap-buffers *gl-ctx*))
+    ))
+
+(define update
+  (lambda (beat dur)
+    (draw beat 400.0 400.0)
+    (callback (*metro* (+ beat dur)) 'update (+ beat dur)
+              dur)))
+
+(update (*metro* 'get-beat 1.0) 1/4)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Visualisation 1 (Function Symbols) ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(bind-val VFS_FUNCTION_COUNT i8*);;pointer to last function in array
+(bind-val VFS_FUNCTION_ARRAY |16,<i1,float,float>*|*);;<is_active,size,color>
+
+
+(bind-func test_set_tuple
+  (lambda ()
+    (let ((value:<i1,float,float>* (halloc)))
+      (tfill! value 0 0.1 0.2)
+      (aset! VFS_FUNCTION_ARRAY 0 value))))
+
+(test_set_tuple)
+
+(bind-func test_get_tuple
+  (lambda ()
+      (println (tref (aref VFS_FUNCTION_ARRAY 0) 1))))
+
+(test_get_tuple)
+
+
+;;Creates a new function symbol
+(bind-func vfs_create)
+
+;;Updates the function symbol making it the brightest colour
+(bind-func vfs_update)
+
+;;Turns the function symbol to an inactive state 
+(bind-func vfs_stop)
+
+;;Pulses the function symbol
+(bind-func vfs_pulse) 
+
+(bind-func draw)
+
+(bind-func update)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Visualisation 3 (Abstract Pulse) ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(bind-func vab_pulse)
+
+(bind-func draw)
+
+(bind-func update)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Visualisation 2 (Instrument frequency spectrum) ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;Need map containing all instruments, plus previous spectrum
+
+;; Creates the instrument image
+(bind-func vspec_create)
+
+;; Draws the wave form for the instruments
+(bind-func draw)
+
+(bind-func update)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Visualisation 3 (Instrument beat) ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;Need map containing all instruments, plus previous beats
+
+;; Creates the instrument image
+(bind-func vbeat_create)
+
+;; Pulses the instrument
+(bind-func vbeat_pulse)
+
+;; Draws the beat for the instruments
+(bind-func draw)
+
+(bind-func update)
+
+
+
+
+
+
