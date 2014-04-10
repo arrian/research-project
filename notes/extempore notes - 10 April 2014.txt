@@ -1,0 +1,27 @@
+Extempore
+
+-determine when a function has been compiled
+-overlay
+-best way to change visuals based on sound (eg. beat, raw dsp, musician triggered)
+-get defined functions
+-run music and visuals on different thread? communication between threads. shared memory
+-
+
+
+
+-ipc:call
+
+-
+
+ipc:define
+
+
+all compiling in the primary thread
+
+
+
+
+
+
+
+-openvg supported images
