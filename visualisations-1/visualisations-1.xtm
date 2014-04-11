@@ -5,6 +5,25 @@
 
 (bind-val VU_LEVELS_RMS |16,SAMPLE|*)
 
+(bind-val SOUND_ARRAY |25,float|*)
+
+(bind-func fill_sound_array
+  (lambda ()
+    (let ((j 0))
+      (dotimes (j 25)
+        (pset! SOUND_ARRAY j 0.0)))))
+
+(bind-val SOUND_ARRAY2 |25,float|*)
+
+(bind-func fill_sound_array
+  (lambda ()
+    (let ((j 0))
+      (dotimes (j 25)
+        (pset! SOUND_ARRAY2 j 0.0)))))
+
+(fill_sound_array)
+
+
 (bind-func rms_power
   (lambda (data:SAMPLE* len)
     (let ((data_vec:/4,SAMPLE/* (cast data))
@@ -58,21 +77,6 @@
 
 (dsp:set! dsp)
 
-(define vu-print
-  (lambda (beat dur)
-    (let ((lev0 (* 3000 (vu_level 0)))
-          (lev1 (* 3000 (vu_level 1))))
-      (dotimes (i lev0)
-        (print "*"))
-      (println)
-      (dotimes (i lev1)
-        (print "-"))
-      (println))
-    (callback (*metro* (+ beat (* .5 dur))) 'vu-print (+ beat dur) dur)))
-
-(vu-print (*metro* 'get-beat 4) 1/16)
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Graphical context
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -86,41 +90,49 @@
 
 (define *gl-ctx* (gl:make-ctx ":0.0" fullscreen 0.0 0.0 width height))
 
-(sys:load "libs/xtm.xtm")
-
 (xtm_render_setup width height)
 (if (<> (xtm-vg-create-context width height) 1) (xtm_vg_print_error))
 
+
 (bind-func gl_render
-  (lambda (time:float xloc:float yloc:float)
+  (lambda (time:float)
     (let ((stroke (vgCreatePaint))
           (fill (vgCreatePaint))
-          (img (xtm_load_vgimage "~/Desktop/the-milky-way-galaxy-1920-1080-6808.jpg")))
+          (lev0:float (* 30000.0 (vu_level 0)))
+          (lev1:float (* 30000.0 (vu_level 1)))
+          (i:i32 0))
         (xtm_vg_reset_matrices)
         (xtm_vg_clear 0.0 0.0 0.0 1.0 (ftoi32 width) (ftoi32 height))
-        (xtm_paint_setup_fill fill (dtof (random 1.0)) (dtof (random 0.2)) 0.0 (dtof 1.0))
-    		;(xtm_paint_setup_stroke stroke (dtof (random 0.3 0.9)) (dtof (random 0.5 0.7)) 0.2 0.5 5.0) 
-		    (xtm_draw_ellipsef xloc yloc 90.0 90.0)
-        (xtm_draw_vgimage img)
+        (xtm_paint_setup_fill fill 1.0 0.2 0.0 1.0)
+    	;(xtm_paint_setup_stroke stroke (dtof (random 0.3 0.9)) (dtof (random 0.5 0.7)) 0.2 0.5 5.0) 
+		
+		
+		(dotimes (i 1)
+			(xtm_draw_rectf (+ 200.0 (* (i32tof i) 10.0)) 400.0 400.0 lev0)
+			(xtm_draw_rectf (+ 200.0 (* (i32tof i) 10.0)) 200.0 400.0 lev1))
+
         (xtm_destroy_paint fill)
         (xtm_destroy_paint stroke)
-        (xtm_destroy_vgimage img))
-    void))
+    void)))
+
 
 (define draw
-  (lambda (time xloc yloc)
+  (lambda (time)
       (begin
-        (gl_render time xloc yloc)
-        (gl:swap-buffers *gl-ctx*))
-    ))
+        (gl_render time)
+        (gl:swap-buffers *gl-ctx*))))
 
 (define update
   (lambda (beat dur)
-    (draw beat 400.0 400.0)
+    (draw beat)
     (callback (*metro* (+ beat dur)) 'update (+ beat dur)
               dur)))
 
-(update (*metro* 'get-beat 1.0) 1/4)
+(update (*metro* 'get-beat 1.0) 1/32)
+
+
+
+
 
 
 
@@ -167,6 +179,22 @@
 
 (bind-func update)
 
+
+
+
+(define vu-print
+  (lambda (beat dur)
+    (let ((lev0 (* 3000 (vu_level 0)))
+          (lev1 (* 3000 (vu_level 1))))
+      (dotimes (i lev0)
+        (print "*"))
+      (println)
+      (dotimes (i lev1)
+        (print "-"))
+      (println))
+    (callback (*metro* (+ beat (* .5 dur))) 'vu-print (+ beat dur) dur)))
+
+(vu-print (*metro* 'get-beat 4) 1/16)
 
 
 

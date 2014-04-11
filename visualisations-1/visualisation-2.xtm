@@ -20,21 +20,32 @@
   (lambda (index:i32 value:float)
     (tset! (aref VFS_FUNCTION_ARRAY index) 1 value)))
 
+(vfs_set_size 1 110.0)
+
 (bind-func vfs_get_size
   (lambda (index:i32)
     (tref (aref VFS_FUNCTION_ARRAY index) 1)))
 
 (bind-func vfs_set_colour
   (lambda (index:i32 value:float)
-    (tset! (aref VFS_FUNCTION_ARRAY index) 1 value)))
+    (tset! (aref VFS_FUNCTION_ARRAY index) 2 value)))
 
 (bind-func vfs_get_colour
   (lambda (index:i32)
-    (tref (aref VFS_FUNCTION_ARRAY index) 1)))
+    (tref (aref VFS_FUNCTION_ARRAY index) 2)))
 
 (bind-func vfs_get_start
   (lambda (index:i32)
     (tref (aref VFS_FUNCTION_ARRAY index) 3)))
+
+(bind-func vfs_pulse
+  (lambda (index:i32)
+    (vfs_set_size index 120.0)
+    void))
+
+(bind-func draw_rectf_centre
+  (lambda (xcentre:float ycentre:float size:float)
+    (xtm_draw_rectf (- xcentre (/ size 2.0)) (- ycentre (/ size 2.0)) size size)))
 
 
 ;;Math.easeOutQuad = function (t, b, c, d) {
@@ -71,15 +82,20 @@
         (xtm_vg_reset_matrices)
         (xtm_vg_clear 0.0 0.0 0.0 1.0 (ftoi32 width) (ftoi32 height))
         
-		    ;(xtm_paint_setup_stroke stroke (dtof (random 0.3 0.9)) (dtof (random 0.5 0.7)) 0.2 0.5 5.0)
+		    (xtm_paint_setup_stroke stroke (dtof 0.5) (dtof 0.6) 0.2 0.5 3.0)
         (dotimes (i VFS_FUNCTION_COUNT)
-            (println (vfs_transition_ease_out_quadratic i 0.0 500.0))
-            (xtm_paint_setup_fill fill 0.0 1.0 0.0 (vfs_transition_ease_out_quadratic i 0.0 1.0))
-            (xtm_draw_rectf (+ 100.0 (* (i32tof i) 100.0)) (vfs_transition_ease_out_quadratic i 0.0 500.0) (vfs_get_size i) (vfs_get_size i))      
+            (let ((row:float (i32tof (/ i (ftoi32 (/ width 120.0))))) 
+                  (col:float (i32tof (% i (ftoi32 (/ width 120.0))))))
+              ;(println (vfs_transition_ease_out_quadratic i 0.0 500.0))
+              (xtm_paint_setup_fill fill 0.0 1.0 0.0 (vfs_transition_ease_out_quadratic i 0.0 1.0))
+              (draw_rectf_centre (+ 90.0 (* col 120.0)) (+ (* row 120.0) (- (vfs_transition_ease_out_quadratic i 0.0 300.0) -100.0)) (vfs_get_size i))
+              (if (> (vfs_get_size i) 90.0) (vfs_set_size i (- (vfs_get_size i) 1.0)))
+              )      
           )
         (xtm_destroy_paint fill)
         (xtm_destroy_paint stroke)
     void)))
+
 
 (define draw
   (lambda (time)
@@ -96,7 +112,7 @@
 (update (*metro* 'get-beat 1.0) 1/32)
 
 
-
+(vfs_pulse 1)
 
 
 
