@@ -20,7 +20,13 @@
   (lambda (index:i32 value:float)
     (tset! (aref VFS_FUNCTION_ARRAY index) 1 value)))
 
-(vfs_set_size 1 110.0)
+(bind-func func-name
+  (lambda ()
+    (set! VFS_FUNCTION_COUNT (i64toi32 0))))
+
+(func-name)
+
+;(vfs_set_size 1 110.0)
 
 (bind-func vfs_get_size
   (lambda (index:i32)
@@ -88,9 +94,9 @@
                   (col:float (i32tof (% i (ftoi32 (/ width 120.0))))))
               ;(println (vfs_transition_ease_out_quadratic i 0.0 500.0))
               (xtm_paint_setup_fill fill 0.0 1.0 0.0 (vfs_transition_ease_out_quadratic i 0.0 1.0))
-              (draw_rectf_centre (+ 90.0 (* col 120.0)) (+ (* row 120.0) (- (vfs_transition_ease_out_quadratic i 0.0 300.0) -100.0)) (vfs_get_size i))
+              (draw_rectf_centre (+ 90.0 (* col 120.0)) (+ (* row 120.0) (- (vfs_transition_ease_out_quadratic i 0.0 300.0) 200.0)) (vfs_get_size i))
               (if (> (vfs_get_size i) 90.0) (vfs_set_size i (- (vfs_get_size i) 1.0)))
-              )      
+              )
           )
         (xtm_destroy_paint fill)
         (xtm_destroy_paint stroke)
@@ -112,15 +118,38 @@
 (update (*metro* 'get-beat 1.0) 1/32)
 
 
+(println (vfs_create))
+(println (vfs_create))
+
+
+
+
+
+
 (vfs_pulse 1)
 
-
-
-(println (vfs_create))
 (println (vfs_get_size 0))
 (println (vfs_set_size 0 (+ 0.1 (vfs_get_size 0))))
 
 
+
+
+(define drumloop
+  (lambda (beat dur)
+    ;;(println beat)
+    (if (= (modulo beat 1/2) 0)
+        (vfs_pulse 0))
+    (if (= (modulo beat 1) 0)
+        (vfs_pulse 1))
+    (if (= (modulo beat 2) 0)
+        (vfs_pulse 2))
+    (if (= (modulo beat 4) 0)
+        (vfs_pulse 3))
+    ;;(play kit (cosr 45 9 1/7) (cosr 80 30 1/2) .1)
+    ;;(play kit (cosr 59 9 1/9) (cosr 80 30 1/2) (* dur (random '(1/4 1/4 5))) 1)
+    (callback (*metro* (+ beat (* .5 dur))) 'drumloop (+ beat dur) dur)))
+
+(drumloop (*metro* 'get-beat 4) 1/4)
 
 
 
