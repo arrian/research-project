@@ -2,26 +2,26 @@
 
 (bind-val g float 9.81)
 
-(bind-type vec2 <float,float>)
+(bind-alias vec2 <float,float>)
 
-(bind-type object <vec2,vec2,float>);<position,velocity,mass>
+(bind-alias gravitational <vec2*,vec2*,float>);<position,velocity,mass>
 
-(bind-val OBJECTS |200,object*|)
+(bind-val GRAVITATIONAL |200,<vec2*,vec2*,float>*|*)
 
-(bind-func object_create
+(bind-func gravitational_create
   (lambda ()
-  	(let ((obj:object* (halloc))
+  	(let ((grav:<vec2*,vec2*,float>* (halloc))
   		  (pos:vec2* (halloc))
   		  (vel:vec2* (halloc)))
-  		(tfill! obj pos vel 100.0)
-  		(aset! OBJECTS 0 obj))))
+  		(tfill! grav pos vel 100.0)
+  		(aset! GRAVITATIONAL 0 grav))))
 (object_create)
 
 (bind-func get_object_position
   (lambda ()
     ))
 
-(println (aref OBJECTS 0))
+(println (aref GRAVITATIONAL 0))
 
 (bind-func vec2_mult
   (lambda (v:vec2* factor:float)
