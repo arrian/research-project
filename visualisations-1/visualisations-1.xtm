@@ -5,25 +5,6 @@
 
 (bind-val VU_LEVELS_RMS |16,SAMPLE|*)
 
-(bind-val SOUND_ARRAY |25,float|*)
-
-(bind-func fill_sound_array
-  (lambda ()
-    (let ((j 0))
-      (dotimes (j 25)
-        (pset! SOUND_ARRAY j 0.0)))))
-
-(bind-val SOUND_ARRAY2 |25,float|*)
-
-(bind-func fill_sound_array
-  (lambda ()
-    (let ((j 0))
-      (dotimes (j 25)
-        (pset! SOUND_ARRAY2 j 0.0)))))
-
-(fill_sound_array)
-
-
 (bind-func rms_power
   (lambda (data:SAMPLE* len)
     (let ((data_vec:/4,SAMPLE/* (cast data))
@@ -108,8 +89,8 @@
 		
 		
 		(dotimes (i 1)
-			(xtm_draw_rectf (+ 200.0 (* (i32tof i) 10.0)) 400.0 400.0 lev0)
-			(xtm_draw_rectf (+ 200.0 (* (i32tof i) 10.0)) 200.0 400.0 lev1))
+			(xtm_draw_ellipsef (+ 200.0 (* (i32tof i) 10.0)) 400.0 400.0 lev0)
+			(xtm_draw_ellipsef (+ 200.0 (* (i32tof i) 10.0)) 200.0 400.0 lev1))
 
         (xtm_destroy_paint fill)
         (xtm_destroy_paint stroke)
