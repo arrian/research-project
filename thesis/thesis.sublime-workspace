@@ -1,0 +1,1193 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"if",
+				"if"
+			],
+			[
+				"saw",
+				"sawlead"
+			],
+			[
+				"plat",
+				"play-note"
+			],
+			[
+				"CIAR_FONT",
+				"CAIRO_FONT_WEIGHT_BOLD"
+			],
+			[
+				"get",
+				"get-bind-func-set"
+			],
+			[
+				"lam",
+				"lam	lambda"
+			],
+			[
+				"buffer",
+				"buffer"
+			],
+			[
+				"BU",
+				"BUFFER_SIZE"
+			],
+			[
+				"bv",
+				"bindv	bind-val"
+			],
+			[
+				"xtlan",
+				"xtlang-load"
+			],
+			[
+				"cursor",
+				"cursorEnd"
+			],
+			[
+				"curs",
+				"cursorStart"
+			],
+			[
+				"vec",
+				"vec2_get_x"
+			],
+			[
+				"vec2_set",
+				"vec2_set_y"
+			],
+			[
+				"i",
+				"ifris	if-rising"
+			],
+			[
+				"GRA",
+				"GRAV_ARRAY_COUNT"
+			],
+			[
+				"graget",
+				"grav_get_position"
+			],
+			[
+				"vec2_get",
+				"vec2_get_y"
+			],
+			[
+				"graarr",
+				"grav_get_array_value"
+			],
+			[
+				"gra",
+				"grav_get_mass"
+			],
+			[
+				"GRAV",
+				"GRAV_ARRAY"
+			],
+			[
+				"pos",
+				"pos_change"
+			],
+			[
+				"vec2_",
+				"vec2_scale"
+			],
+			[
+				"vec2",
+				"vec2_unit"
+			],
+			[
+				"grav",
+				"grav_get_position"
+			],
+			[
+				"set",
+				"vec2_set_x"
+			],
+			[
+				"vec2_s",
+				"vec2_sub"
+			],
+			[
+				"grav_get",
+				"grav_get_position"
+			],
+			[
+				"b",
+				"bindt	bind-type"
+			],
+			[
+				"p2",
+				"p2_mass"
+			],
+			[
+				"p1",
+				"p1_mass"
+			],
+			[
+				"vfs_",
+				"vfs_pulse"
+			],
+			[
+				"fil",
+				"fill_sound_array"
+			],
+			[
+				"val_",
+				"val_start"
+			],
+			[
+				"p",
+				"pl	println"
+			],
+			[
+				"VFS",
+				"VFS_FUNCTION_TRANSITION_DURATION"
+			],
+			[
+				"vfs",
+				"vfs_increment"
+			],
+			[
+				"test",
+				"test_get_tuple"
+			],
+			[
+				"line",
+				"line_edit"
+			],
+			[
+				"bac",
+				"background-size"
+			],
+			[
+				"back",
+				"background-image"
+			],
+			[
+				"border",
+				"border-color"
+			],
+			[
+				"bord",
+				"border-color"
+			],
+			[
+				"margin",
+				"margin"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"bor",
+				"border-bottom"
+			],
+			[
+				"font",
+				"font-style"
+			],
+			[
+				"fon",
+				"font-weight"
+			],
+			[
+				"marg",
+				"margin-right"
+			],
+			[
+				"gl",
+				"glloop	gl-loop"
+			],
+			[
+				"d",
+				"df	define"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "thesis.tex",
+			"settings":
+			{
+				"buffer_size": 1867,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Part 1 Question 3\n\nOf the various definitions of quality that have been provided in the Introduction (Session 1) which three does your team think best suit today’s software development endeavours? Give reasons for your choices!\n\n\nsoftware quality is subjective...\n-acceptance by clients\n-fit for user consumption\n-longer term worth\n-desirability\n-non-functional requirements (usually tested subjectively)\n\nsoftware quality is objective...\n-dichotomy between subjectivity and objectivity\n-methods of measurement\n-formal verifiction and validation\n-functional requirements\n-project manager perspective (is the project over time or over budget etc.)\n-metrics\n\nsoftware quality is the absence of error\n-strong overlap with quality is objective\n-can't be free from error but we need to get to a desired level of stability\n-we depend more on software today (eg. medical, planes, cars, safety critical systems)\n-purpose of inspections, detect defects\n-in todays environment it makes sense from a user perspective as well as an economic perspective (cost to fix defects later in project)\n\n\n-emphasis on thorough processes (eg. Deming)\n-user bases are often highly diverse putting emphasis on subjectivity and absence of error\n\n\n-----------------------------\n\nThe three definitions that best fit today's software development endeavours includes 'quality is subjective', 'quality is objective' and 'quality is the absence of error'. The dichotomy associated with the first two terms will be resolved in order to argue for the final definition.\n\nFirstly, quality is subjective. Within modern commercial software projects the goal is to create products that are acceptable to clients and that are fit for use by the customer. Within this scenario it is essential to produce software that is highly desirable to the customer and has longer term worth. Much of this focus revolves around the -ilities of software development; for example usability, maintainability and scalability. In modern software projects these nonfunctional requirements are often not measurable (or not measured) and often vary significantly from person to person. For example... [insert evidence here]\n\nSecondly, quality is objective. Quality within modern software development endeavours covers not just the subjective nature of software development but also the objective nature of software quality. In terms of the objectivity of software quality, in modern software development endeavours the functional requirements are central to the deliverables to the customer and the determination of success within a project. The functional and, by extension, the objective success of a project is determined by satisfying the minimum of the objective quality indicators. For example... [insert evidence here]\n\nFinally, bringing the previous two defintions together, we have that quality is the 'absence of error'. Within today's software development endeavours, 'error' could be defined as both how much a software project diverges from the objective measures of success (the functional requirements) and also how much the software diverges from the subjective measures of success (the nonfunctional requirements). This perspective is seen throughout the software industry. Furthermore, this definition of quality has always been strong within the software industry in which the detection and early elimination of defects ultimately defines software quality. As safety critical systems become more widespread within the software engineering community this defintion has become the standard for determining software quality. For example... [insert evidence here]\n\n\n------------------------------------\n------------------------------------\n\nPart 2 Question 2\n\nBacchelli & Bird report that today,finding defects is still the number one motivation for inspections. Perusing Figure 3 in Bacchelli and Bird’s paper one can see that by looking at the “Top” motivations only the order of importance is:\na. Finding defects\nb. Code improvement\nc. Alternative solutions\nd. Avoid build breaks\ne. Improving development process\nConsider these five (5) motivations from both a quality and an economic perspective and discuss the inferences of attempting to meet different combinations of these motivations in terms of the biggest bang for the quality buck? Please note that my main motivation in asking this question is to get you to think about “trade-offs” and their implications, and hopefully various ways in which they might be reasoned. So your answer needs to be a reasoned argument, and if you do have evidence to support your argument then please include it. Perhaps a way to begin the argument might be to work with the facts surrounding only doing ‘a’ above, and then introducing the other ‘motivations’ one-by-one, noting possible impacts on previous combinations.\n\nOur Stuff:\n\nMotivations for inspections	(quality/economic)				\nFinding defects (high/medium)\nCode improvement (medium/high)\nAlternative solutions (medium/medium)\nAvoid build breaks (low/medium)\nImproving development process (low/medium)\n\nTrade-offs\nTime\nCost\nScope\nFinding defects most important, improving process is secondary.  Defects take precedence.\n\n-------------------------------------\n\n-quality perspective\nFinding defects produces the highest quality impact. [insert evidence here]\n\n-economic perspective\n\n\n-biggest bang for quality buck\n-tradeoffs\n-implications\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+			"file": "/Users/arrian/Desktop/COMP4130/Assignment P1 Q3 P2 Q2.txt",
+			"file_size": 5431,
+			"file_write_time": 130429474200000000,
+			"settings":
+			{
+				"buffer_size": 5411,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/arrian/Desktop/COMP4540/research-project/visualisations-1/visualisation-4.xtm",
+			"settings":
+			{
+				"buffer_size": 2437,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "chap4.tex",
+			"settings":
+			{
+				"buffer_size": 330,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/Markdown Preview/Markdown.sublime-build",
+	"command_palette":
+	{
+		"height": 67.0,
+		"selected_items":
+		[
+			[
+				"spell",
+				"Google Spell Check"
+			],
+			[
+				"instlal",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Bookmarks: Clear All"
+			],
+			[
+				"listpa",
+				"Package Control: List Packages"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"latex",
+				"LaTeXTools: View PDF"
+			],
+			[
+				"thesis",
+				"Thesis: Compile"
+			],
+			[
+				"late",
+				"LaTeXTools: View PDF"
+			],
+			[
+				"lat",
+				"LaTeXTools: Jump to PDF"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"dis",
+				"Extempore: Disconnect"
+			],
+			[
+				"mark",
+				"Markdown Preview: Python Markdown: Preview in Browser"
+			],
+			[
+				"d",
+				"Extempore: Disconnect"
+			],
+			[
+				"mar",
+				"Markdown Preview: Python Markdown: Preview in Browser"
+			],
+			[
+				"start",
+				"Code Visualisation: Start"
+			],
+			[
+				"stop",
+				"Code Visualisation: Stop"
+			],
+			[
+				"star",
+				"Code Visualisation: Start"
+			],
+			[
+				"code ",
+				"Code Visualisation: Start"
+			],
+			[
+				"di",
+				"Extempore: Disconnect"
+			],
+			[
+				"open",
+				"File Navigator: Open"
+			],
+			[
+				"conn",
+				"Extempore: Connect"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: List Packages"
+			],
+			[
+				"disc",
+				"Extempore: Disconnect"
+			],
+			[
+				"file",
+				"File Navigator: Open"
+			],
+			[
+				"packages",
+				"Package Control: Install Package"
+			],
+			[
+				"paccka",
+				"Preferences: Browse Packages"
+			],
+			[
+				"extempore",
+				"Extempore: Connect"
+			],
+			[
+				"ex",
+				"Extempore: Disconnect"
+			],
+			[
+				"connec",
+				"Extempore: Connect"
+			],
+			[
+				"eva",
+				"Extempore: Evaluate"
+			],
+			[
+				"eval",
+				"Extempore: Evaluate"
+			],
+			[
+				"ev",
+				"Extempore: Evaluate"
+			]
+		],
+		"width": 647.0
+	},
+	"console":
+	{
+		"height": 260.0,
+		"history":
+		[
+			"view.window()",
+			"view.get_window()",
+			"window.active_view()",
+			"active_view()",
+			"view.sel()[0].end()",
+			"view.sel().clear()",
+			"view.sel()[0].clear()",
+			"view.sel()[0].end()",
+			"view.sel()[0].begin()",
+			"self.view.sel()[0].begin()",
+			"view.sel().clear()",
+			"for a in view.sel():",
+			"view.sel().clear()",
+			"view.sel().__len__()",
+			"view.sel().__dir__()",
+			"view.sel().x",
+			"view.sel().x()",
+			"view.sel()",
+			"time.time()",
+			"int(time.time())",
+			" int(time.time())",
+			"import time",
+			"datetime.now()",
+			"datetime.datetime.now()",
+			"import datetime",
+			"os.getcwd()",
+			"import os",
+			"file.close()",
+			"file.write(view.substr(sublime.Region(0, view.size())))",
+			"file = open(\"newfile.txt\", \"w\")",
+			"view.substr(sublime.Region(0, view.size()))",
+			"view.settings().get('background_color')",
+			"view.settings().get('background')",
+			"view.settings().get('color')",
+			"view.settings()",
+			"view.visible_region()",
+			"view",
+			"visible_region()",
+			"print(window)",
+			"tab",
+			"window",
+			"package",
+			"packages()",
+			"sys.version",
+			"import sys",
+			"sys.version",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"(stdout, stderr) = Popen([\"nethack\",\"\"], stdout=PIPE).communicate()",
+			"from subprocess import Popen, PIPE",
+			"sys.version",
+			"import sys",
+			"sys.version",
+			"print(\"test\\x00\")",
+			"print(\"\\x00\\x00\\x00\")",
+			"print(test)",
+			"print test",
+			"test = \"test\\x00\"",
+			"print u\"test\\x00\"",
+			"print \"test\\x00\"",
+			"print \"\\x00\"",
+			"print \"\\x00\\x00\\x00\"",
+			"view.encoding()"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/chap2.tex",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/chap1.tex",
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/chap4.tex",
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/thesis.bib",
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/chap3.tex",
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/appendix.tex",
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/intro.tex",
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/acknowledgement.tex",
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/conclusion.tex",
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/abstract.tex",
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/chap5.tex",
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/thesis.tex",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/thesis/Thesis.py",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/thesis/Thesis.sublime-commands",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/LaTeXTools/viewPDF.py",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/extempore-sublime/Default.sublime-keymap",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/extempore-sublime/Extempore.sublime-commands",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/thesis/Default.sublime-keymap",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/extempore-sublime/Extempore.sublime-settings",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/extempore-sublime/Extempore.tmLanguage",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/extempore-sublime/ExtemporeComments.tmPreferences",
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/frontmatter.tex",
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/thesis.sty",
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/dedication.tex",
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/ack.tex",
+		"/Users/arrian/Desktop/COMP4540/research-project/thesis/thesis.sublime-project",
+		"/Users/arrian/Desktop/interface.xtm",
+		"/usr/local/Cellar/extempore/0.49/examples/external/xtmrender3.xtm",
+		"/usr/local/Cellar/extempore/0.49/examples/external/xtmrender4.xtm",
+		"/usr/local/Cellar/extempore/0.49/libs/external/cairo.xtm",
+		"/Users/arrian/Desktop/COMP4540/research-project/visualisations-1/visualisation-4.xtm",
+		"/Users/arrian/Dev/extempore-hackday/sampler-maps.xtm",
+		"/Users/arrian/Dev/xtlang-parse/xtlang-parse-binding.xtm",
+		"/Users/arrian/Desktop/COMP4540/research-project/visualisations-1/visualisation-2.xtm",
+		"/Users/arrian/Desktop/COMP4540/research-project/visualisations-1/visualisation-3.xtm",
+		"/Users/arrian/Desktop/colour.todo.txt",
+		"/Users/arrian/Dev/extempore-hackday/charles.xtm",
+		"/Users/arrian/Dev/extempore-hackday/arrian.xtm",
+		"/usr/local/Cellar/extempore/0.49/examples/external/xtmrender2.xtm",
+		"/usr/local/Cellar/extempore/0.49/examples/external/xtmrender1.xtm",
+		"/Users/arrian/Downloads/sadeep-ack-edit.txt",
+		"/usr/local/Cellar/extempore/0.49/examples/external/particles.xtm",
+		"/Users/arrian/Dev/extempore/libs/external/opengl.xtm",
+		"/Users/arrian/Downloads/persondata_en.ttl",
+		"/Users/arrian/Desktop/glfw3.xtm",
+		"/usr/local/Cellar/extempore/0.49/libs/external/openvg.xtm",
+		"/Users/arrian/Desktop/anton-gerdelan-tutorials/hello-triangle.xtm",
+		"/Users/arrian/Dev/extempore/examples/contrib/spectral_meter.xtm",
+		"/usr/local/Cellar/extempore/0.49/examples/external/gpu_image.xtm",
+		"/usr/local/Cellar/extempore/0.49/examples/external/convolution_reverb.xtm",
+		"/usr/local/Cellar/extempore/0.49/examples/external/drawtext.xtm",
+		"/usr/local/Cellar/extempore/0.49/examples/external/electrofunk.xtm",
+		"/Users/arrian/Dev/extempore/libs/external/assimp.xtm",
+		"/Users/arrian/Desktop/cc80edea82110a99e891f43c8058eb08",
+		"/Users/arrian/Dev/xtlang-parse/xtlang-parse.c",
+		"/Users/arrian/Dev/xtlang-parse/xtlang-parse.h",
+		"/usr/local/Cellar/extempore/0.49/examples/external/raymarcher.xtm",
+		"/usr/local/Cellar/extempore/0.49/examples/contrib/drawing.xtm",
+		"/Users/arrian/Dev/extempore/examples/contrib/drawing.xtm",
+		"/Users/arrian/Desktop/COMP4540/research-project/visualisations-1/gravity.xtm",
+		"/usr/local/Cellar/extempore/0.49/vis.cache",
+		"/Users/arrian/Desktop/COMP4540/research-project/visualisations-1/vu-meter.xtm",
+		"/Users/arrian/Desktop/comp4130.txt",
+		"/Users/arrian/Desktop/COMP4540/research-project/visualisations-1/visualisations-1.xtm",
+		"/Users/arrian/Desktop/COMP4540/research-project/visualisations-1/code.xtm",
+		"/Users/arrian/Desktop/COMP4540/research-project/visualisations-1/transitions.xtm",
+		"/Users/arrian/Dev/extempore/examples/core/polysynth.xtm",
+		"/usr/local/Cellar/extempore/0.49/libs/xtm.xtm",
+		"/usr/local/Cellar/extempore/0.49/libs/external/drawtext.xtm",
+		"/usr/local/Cellar/extempore/0.49/libs/core/xthread.xtm",
+		"/usr/local/Cellar/extempore/0.49/libs/core/xstring.xtm",
+		"/Users/arrian/Desktop/sublime-save-on-change/SaveOnChange.sublime-settings",
+		"/Users/arrian/Desktop/sublime-save-on-change/Main.sublime-menu",
+		"/Users/arrian/Desktop/sublime-save-on-change/SaveOnChange.sublime-commands",
+		"/Users/arrian/Desktop/sublime-save-on-change/SaveOnChange.py",
+		"/Users/arrian/Desktop/xtlang-parse.h",
+		"/Users/arrian/Desktop/xtlang-parse.c",
+		"/Users/arrian/Desktop/xtlang-parse-binding.xtm",
+		"/Users/arrian/Desktop/vis.cache",
+		"/usr/local/Cellar/extempore/0.49/libs/core/xobject.xtm",
+		"/Users/arrian/Desktop/Makefile",
+		"/Users/arrian/Desktop/libtextgrab.m",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/extempore-sublime/Extempore.py",
+		"/Users/arrian/Dev/extempore/libs/doc.py",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/code-visualisation/CodeVisualisation.py",
+		"/Users/arrian/Desktop/vis.cache.xtm",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/code-visualisation/Extempore.sublime-commands",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/code-visualisation/Main.sublime-menu",
+		"/Users/arrian/Dev/extempore/examples/core/extempore_lang.xtm",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/vis.cache",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/code-visualisation/CodeVisualisation.sublime-settings",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/code-visualisation/Extempore.sublime-settings",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/code-visualisation/ExtemporeComments.tmPreferences",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/code-visualisation/Extempore.tmLanguage",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/code-visualisation/Extempore.JSON-tmLanguage",
+		"/Users/arrian/Library/Application Support/Sublime Text 3/Packages/code-visualisation/Default.sublime-keymap",
+		"/Users/arrian/Dev/extempore/examples/core/caas-example.xtm",
+		"/Users/arrian/Dev/extempore/examples/core/osc_101.xtm",
+		"/Users/arrian/Dev/extempore/examples/core/xthread.xtm",
+		"/Users/arrian/Dev/extempore/libs/external/soil.xtm",
+		"/Users/arrian/Dev/extempore/libs/external/openvg.xtm",
+		"/Users/arrian/Dev/extempore/libs/external/horde3d.xtm",
+		"/Users/arrian/Dev/extempore/libs/external/fluid2d.xtm",
+		"/Users/arrian/Dev/extempore/examples/core/fmsynth.xtm",
+		"/Users/arrian/Dev/extempore/examples/core/simd_audio.xtm",
+		"/Users/arrian/Dev/extempore/examples/core/temporal_recursion_101.xtm",
+		"/Users/arrian/Dev/extempore/examples/core/topclock_metro.xtm",
+		"/Users/arrian/Dev/extempore/examples/core/audio_101.xtm",
+		"/Users/arrian/Dev/arrian.github.io/index.html",
+		"/Users/arrian/Dev/extempore-experiments/experiment-4.xtm",
+		"/Users/arrian/Dev/extempore-experiments/experiment-3.xtm",
+		"/Users/arrian/Dev/extempore/libs/xtm.xtm",
+		"/Users/arrian/Downloads/vu-meter.xtm",
+		"/Users/arrian/Desktop/COMP4540/research-project/notes/extempore notes - 10 April 2014.txt",
+		"/Users/arrian/Dev/extempore/libs/lib.md",
+		"/Users/arrian/Dev/extempore/libs/core/xthread.xtm",
+		"/Users/arrian/Dev/extempore/libs/core/instruments.xtm",
+		"/Users/arrian/Dev/extempore/libs/core/xstring.xtm",
+		"/Users/arrian/Dev/extempore/libs/core/wave_reader.xtm",
+		"/Users/arrian/Dev/extempore/libs/core/topclock.xtm",
+		"/Users/arrian/Dev/extempore/libs/core/math.xtm",
+		"/Users/arrian/Dev/extempore/libs/external/drawtext.xtm",
+		"/Users/arrian/Dev/extempore/examples/external/drawtext.xtm",
+		"/Users/arrian/Dev/extempore/libs/external/qr-code.xtm",
+		"/Users/arrian/Dev/arrian.github.io/_layouts/post.html",
+		"/Users/arrian/Desktop/notification.html",
+		"/Users/arrian/Desktop/notification.css"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"<open folders>",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"generative",
+			"subsubsubsection",
+			"\"",
+			"\"understand\"",
+			"line",
+			"cairo",
+			"alloc-buffer",
+			"test2",
+			"fft_cpxd",
+			"mag_spectrum",
+			"clear",
+			"5",
+			"15",
+			"glVertex4f",
+			"150",
+			"100",
+			"1.0",
+			"text",
+			"\n// struct buffer_set\n// {\n// 	char* locations[SIZE];\n// 	int lengths[SIZE];\n// 	int count;\n// };",
+			"strstr",
+			"printf",
+			"set.",
+			"code",
+			"pre.",
+			"pre",
+			"set",
+			"buffer_set",
+			"prefix_set",
+			"fileToBuffer",
+			"(",
+			"-",
+			"|10,i8*|",
+			"|10,i32|",
+			"text",
+			"dtx",
+			"dtx_string",
+			"64",
+			"code",
+			"MAXBUFLEN",
+			"20",
+			"foundStart",
+			"j",
+			"start",
+			"grav",
+			"grav_create",
+			"print",
+			"beat",
+			"dur",
+			"g2",
+			"g1",
+			"f",
+			"pull",
+			"create_vec2",
+			"grav2",
+			"grav1",
+			"get",
+			"vec",
+			"x",
+			"vec",
+			"neg_change",
+			"OBJECTS",
+			"obj",
+			"change",
+			"start",
+			"update",
+			"vu-print",
+			"(bind-func dsp:[SAMPLE,SAMPLE,i64,i64,SAMPLE*]* 100000\n  ;; VU metering at 30Hz, 4 distinct channels\n  (let ((vu_meter (vu_meter_c 8 (/ 44100 15))))\n    (lambda (in time chan dat)\n      (+ (vu_meter chan 0 (* (random 0.1) (cos (/ (* STWOPI (convert time) 1.0) SR))))\n         (vu_meter chan 1 (* (random 0.1) (cos (/ (* STWOPI (convert time) 0.5) SR))))))))\n\n(dsp:set! dsp)",
+			"i32tod",
+			"float",
+			"1/8",
+			"dur",
+			"1/4",
+			"dur",
+			"VFS_FUNCTION_COUNT2",
+			"VFS_FUNCTION_COUNT",
+			"line_edit",
+			"line",
+			"ipc",
+			"ipc:audio-setup\nipc:audio-setup",
+			".types",
+			"types",
+			"define_s",
+			".defines",
+			"Defines",
+			"defines",
+			"functions",
+			"Functions",
+			"functions",
+			"function_s",
+			"n",
+			"():]",
+			"left",
+			"time off",
+			"reject",
+			"project code",
+			"}\n",
+			"clear",
+			"float",
+			"div",
+			"48px",
+			" />",
+			"github",
+			"font",
+			"post",
+			"page",
+			"page.",
+			"site.posts.first",
+			"site.posts.firs",
+			"post",
+			"Post",
+			"post",
+			"Post",
+			"post",
+			"\">\n",
+			"page",
+			"pre",
+			"link",
+			"30",
+			"background",
+			"ddd",
+			"tag",
+			"content",
+			"style",
+			"centre",
+			"footer",
+			"max-width",
+			"blue",
+			"footer"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"command",
+			"(bind-val SAMPLERATE SAMPLE (integer->real *au:samplerate*))\n(bind-val SR SAMPLE (integer->real *au:samplerate*))\n(bind-val CHANNELS i64 *au:channels*)\n(bind-val IN_CHANNELS i64 *au:in-channels*)\n(bind-val FRAMES i64 *au:block-size*)"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "thesis.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1867,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								177,
+								177
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"rulers":
+							[
+							],
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/arrian/Desktop/COMP4130/Assignment P1 Q3 P2 Q2.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5411,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3617,
+								3617
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1236.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/arrian/Desktop/COMP4540/research-project/visualisations-1/visualisation-4.xtm",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2437,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								57,
+								57
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close"
+							],
+							"syntax": "Packages/extempore-sublime/Extempore.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "chap4.tex",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 330,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close"
+							],
+							"syntax": "Packages/LaTeX/LaTeX.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.exec":
+	{
+		"height": 210.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.markdown":
+	{
+		"height": 112.0
+	},
+	"project": "thesis.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"cha1",
+				"chap1.tex"
+			],
+			[
+				"thesis",
+				"thesis.tex"
+			],
+			[
+				"in",
+				"intro.tex"
+			],
+			[
+				"appe",
+				"appendix.tex"
+			],
+			[
+				"chap4",
+				"chap4.tex"
+			],
+			[
+				"thesistex",
+				"thesis.tex"
+			],
+			[
+				"thesitex",
+				"thesis.tex"
+			],
+			[
+				"tehsis",
+				"thesis.bib"
+			],
+			[
+				"che2",
+				"chap2.tex"
+			],
+			[
+				"chap",
+				"chap4.tex"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 167.0,
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": false,
+	"side_bar_visible": true,
+	"side_bar_width": 182.0,
+	"status_bar_visible": false,
+	"template_settings":
+	{
+	}
+}

@@ -8,6 +8,14 @@
 -code is often difficult to quickly understand
 -some observers may lack the experience to understand the software or the programming process
 
+Additionally, how we program does not achieve the goals we set out to achieve (from $https://www.youtube.com/watch?v=1f13TTu_X9k$, taken from presentation reimagining programming languages):
+-programming is unobservable (looking at the system through a keyhole)
+-programming is indirect (no direct feedback)
+-programming is incidentally complex (complexity not inherent in the problem that we need to solve)
+
+
+
+
 -how can we improve source code comprehension?
 -how can we aid understanding of the programming process?
 -better yet, how can we better communicate the programmers intention?
@@ -29,7 +37,8 @@
 \label{sec:basis}
 
 
-Live Coding
+\subsection{Live Coding}
+
 -live coding is a platform for bridging these two domain visualisations 
 -what is live coding?
 -method of programming in front of an audience for artistic or informative purposes
@@ -46,19 +55,10 @@ Live Coding
 \label{sec:framework}
 
 
+
+
 \subsection{Taxonomy}
-\subsubsection{Code Visualisation}
-Visuals based on Code Augmentation (eg. infographics, annotations, sparklines)\\
-Visuals based on Abstraction (eg. scheme bricks, gource, code flow)\\
-Domain Visualisations (eg. fluid source code views, indentation, class diagrams)\\
-\subsubsection{Music Visualisation}
-Generative Visualisations (eg. frequency wave, VLC/iTunes visualisations)\\
-Associative or Emotive Visualisations (eg. video art, sampled video)\\
-Domain Visualisations (eg. ableton, sheet music)\\
 
-
-
-\subsection{Old Taxonomy}
 
 -Goal: categorising existing visualisations
 -Gaps in existing models: elaboration of dynamic software visualisation taxonomies, taxonomy of music visualisation
@@ -77,26 +77,30 @@ Domain Visualisations (eg. ableton, sheet music)\\
 -Discussed in A Principled Taxonomy of Software Visualisation (1993)
 -Myers (1986) classifies using level of abstraction vs level of animation. (Visual Programming, Programming by Example… A Taxonomy) Also uses {static, dynamic} vs {code, data}. Minimal discussion of dynamic visualisations; no elaboration.
 
--Most effective visualisation technique might be 'Self-illustrating phenomena'
+-Most effective visualisation technique might be \"Self-illustrating phenomena\" \\
 
 Both code and music present a wide variety of visualisation techniques. These techniques will be summarised below.
 
-Code Visualisation
 
-//Generative Visualisations
-//-visualisations that respond to typing
-
+\subsubsection{Code Visualisation}
+\paragraph{Code Augmentation}
+Visuals based on Code Augmentation (eg. infographics, annotations, sparklines)\\
 Visuals based on Code Augmentation
 -infographics
 -annotations (visual code annotations for cyberphysical programming)
 -sparklines (Visual Monitoring of Numeric Variables Embedded in Source Code)
 -etc
 
+\paragraph{Code Abstraction}
+Visuals based on Abstraction (eg. scheme bricks, gource, code flow)\\
+
 Visuals based on Abstraction
 -scheme bricks
 -gource
 -code flow
 -etc
+\paragraph{Software Domain Visualisations}
+Domain Visualisations (eg. fluid source code views, indentation, class diagrams)\\
 
 Domain Visualisations
 -understood by the domain, not necessarily useful for observers
@@ -106,8 +110,7 @@ Domain Visualisations
 -debugging
 -tracing
 
-Music Visualisation
-
+\subsubsection{Music Visualisation}
 -music is similar to software in a number of ways
 -often has standardised notation
 -expression may diverge from notation
@@ -115,17 +118,27 @@ Music Visualisation
 -can be visualised using dynamic methods
 -understanding can augmented with visualisation techniques
 
+\paragraph{Generative Visualisations}
+Generative Visualisations (eg. frequency wave, VLC/iTunes visualisations)\\
+
 Generative Visualisations
--“generates animated imagery based on a piece of music”
+-\"generates animated imagery based on a piece of music\"
 -eg. change with loudness and frequency spectrum
 -VLC, iTunes etc.
 -visualisations that respond to music
+
+\paragraph{Associative or Emotive Visualisations}
+Associative or Emotive Visualisations (eg. video art, sampled video)\\
 
 Associative or Emotive Visualisations
 -includes areas such as synaesthesia (Movies from Music)
 -eg. video art, sampled video with sampled music
 -extension/exploration of Emotion-based Music Visualisation using Photos
 -Classifications including: sublime, sad, touching, easy, light, happy, exciting, grand
+
+
+\paragraph{Music Domain Visualisations}
+Domain Visualisations (eg. ableton, sheet music)\\
 
 Domain Visualisations
 -understood by the domain, not necessarily useful for observers (A Visualisation of Music)
@@ -134,6 +147,21 @@ Domain Visualisations
 -direct visualisation
 -eg. sheet music (again, A Visualisation of Music)
 
+
+
+
+\subsection{Design}
+
+-NOTE: make it clear that this is not intended to be a visual programming language environment. The intention of this project is to assist in code comprehension 
+
+\subsubsection{Cognitive Dimensions of Notation}
+$http://en.wikipedia.org/wiki/Cognitive_dimensions$
+
+\subsubsection{Visual Primitives}
+
+structural units include line, shape, color, form, motion, texture, pattern, direction, orientation, scale, angle, space and proportion.
+
+deutsch limit (max 50 visual elements onscreen)
 
 
 %%% Local Variables: 
