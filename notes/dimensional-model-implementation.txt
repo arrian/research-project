@@ -1,0 +1,21 @@
+TODO:
+
+-two dimensional model
+-abstract visualisation
+-concrete visualisation
+
+
+Abstract Visualisation vs Concrete Visualisation
+-by code
+-by function 
+-by evaluation
+-by physical representation
+-through reaction to sound
+-through reaction to coder
+-through reaction to audience
+
+
+
+
+
+

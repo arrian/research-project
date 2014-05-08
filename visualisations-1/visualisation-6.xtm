@@ -51,6 +51,10 @@
 
 (bind-val threshold type (* 44100 10));; number of samples instrument needs to be quiet to remove from graphics 
 
+(bind-func draw_segment
+  (lambda (cx cy start_radius end_radius)
+    ))
+
 (bind-val previous double 0.0)
 
 (bind-func draw
@@ -101,7 +105,7 @@
       (draw cr t)
       ;(cairo_surface_flush surface)
       (cairo_image_surface_get_data surface))))
-        
+      
 (bind-func gl_draw
   (lambda ()
     (glLoadIdentity)
