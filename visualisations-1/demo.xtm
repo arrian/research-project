@@ -1,0 +1,47 @@
+(sys:load "/Users/arrian/Desktop/COMP4540/research-project/visualisations-1/visualisation-8.xtm")
+
+(define ctx (gl:make-ctx ":0.0" #f 0.0 0.0 900.0 600.0))
+(cairo-animation (*metro* 'get-beat 4) 1/60 0 0.0)
+
+(define *user-sample-dir* "/Users/arrian/Projects/Music/Assets/samples")
+(load "/Users/arrian/Dev/extempore-hackday/sampler-maps.xtm")
+(define-sampler kit sampler_note_hermite_c sampler_fx)
+(sm-load-map kit *808-kit-map*)
+
+(bind-func dsp:[SAMPLE,SAMPLE,i64,i64,SAMPLE*]* 100000
+  (let ((vu_meter (vu_meter_c 8 (/ 44100 15))))
+    (lambda (in time chan dat)
+      (+ 
+         (vu_meter chan 1 (epad in time chan dat))
+         (vu_meter chan 2 (fmsynth in time chan dat))
+         (vu_meter chan 0 (* 1.0 (kit in time chan dat)))
+         ))))
+
+(dsp:set! dsp)
+
+(define drumloop
+  (lambda (beat dur)
+    (if (= (modulo beat 2/4) 0) 
+      (play kit 52 120 dur))
+    (if (= (modulo beat 3/4) 0)
+        (play kit 51 120 dur))
+    (if (= (modulo beat 1) 0)
+        (play kit 68 90 dur))
+    (callback (*metro* (+ beat (* .5 dur))) 'drumloop (+ beat dur) dur)))
+
+(drumloop (*metro* 'get-beat 4) 1/4)
+
+
+(define fmsynth_instrument
+  (lambda (beat dur)
+    (play-note (now) fmsynth (random '(78 82 97 99 94)) 88 1000);99 94
+    (callback (*metro* (+ beat (* 1.0 dur))) 'fmsynth_instrument (+ beat dur) dur)))
+
+(fmsynth_instrument (*metro* 'get-beat 4) 1/2)
+
+(define epad_instrument
+  (lambda (beat dur)
+    (play-note (now) epad (random '(77 82 85 89)) 75 6000);89
+    (callback (*metro* (+ beat (* 4.0 dur))) 'epad_instrument (+ beat dur) dur)))
+
+(epad_instrument (*metro* 'get-beat 4) 1/4)
