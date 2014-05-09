@@ -40,7 +40,7 @@
   (let ((surface (cairo_image_surface_create CAIRO_FORMAT_RGB24 900 600))
   (cr (cairo_create surface)))
     (lambda (t:double k:double)
-      (cairo_set_source_rgba cr 0.0 0.0 0.0 0.03)
+      (cairo_set_source_rgba cr 0.0 0.0 0.0 0.02)
       (cairo_paint cr)
       (draw cr t k)
       ;(cairo_surface_flush surface)

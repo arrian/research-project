@@ -1,0 +1,55 @@
+Meeting 10 (9/05/2014)
+
+Two Dimensional Model of Program Visualisation in the Domain of Music:
+-Music vs Code and Concrete vs Abstract
+
+Could be further extended to 'Two Dimensional Model of Program Visualisation':
+-Domain vs Code and Concrete vs Abstract
+
+
+Could ask questions such as:
+-Do concrete or abstract visualisations improve the understanding of programming within specific domains?
+-Does a visual representation close to the music increase enjoyment of the performance?
+-Does a visual representation closer to the code assist in understanding the process?
+-Where do the most effective visualisations in terms of understanding sit within the two dimensional model?
+-Where do the most effective visualisations in terms of enjoyment sit within the two dimensional model?
+-How does a combined abstract, concrete visualisation change the dynamic of the performance?
+
+Visualisations:
+-Some experiments. Not polished. Abstract....
+-How limited should the visualsations be in order to get meaningful results?
+
+Discuss Performance:
+-one visualisation abstract, one visualisation concrete. Will this be enough to come to some sort of conclusion on the two dimensional model.
+-pushing back date from 12 May to end of May.
+-hard deadline for the mid-term seminar (16 June).
+-ethics - read some of the statement, ethics approval.
+
+
+Ideas Developing for the next performance:
+-manipulation of the text for concrete
+-more advanced abstract patterns
+
+
+
+artistic vs informational
+change two dimensional model to grid
+
+aesthetic and didactic
+
+working hypothesis: the visualsations help
+
+
+
+
+
+Experiements
+----------------
+0 - informal
+1 - Didactic vs aesthetic
+2 - Combo DA
+3 - Combo + overlay
+
+
+Talk to henry's class
+

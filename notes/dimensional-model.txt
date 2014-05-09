@@ -1,4 +1,26 @@
-2 Dimensional Model
+Meeting 
 
-Concrete vs Abstract
-Music vs Code
+
+Two Dimensional Model of Program Visualisation in the Domain of Music:
+-Music vs Code and Concrete vs Abstract
+
+
+Could be further extended to 'Two Dimensional Model of Program Visualisation':
+-Domain vs Code and Concrete vs Abstract
+
+
+Could ask questions such as:
+-Do concrete or abstract visualisations improve the understanding of programming within specific domains?
+-Does a visual representation close to the music increase enjoyment of the performance?
+-Does a visual representation closer to the code improve understanding?
+-Where do the most effective visualisations in terms of understanding sit within the two dimensional model?
+-Where do the most effective visualisations in terms of enjoyment sit within the two dimensional model?
+
+Visualisations:
+-Some experiments. Not polished. Abstract.
+
+Discuss Performance:
+-one visualisation abstract, one visualisation concrete
+-pushing back date from 12 May to end of May
+-hard deadline for the mid-term seminar (16 June)
+-ethics - read some of the statement, ethics approval

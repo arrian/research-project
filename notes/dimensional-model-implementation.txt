@@ -3,7 +3,6 @@ TODO:
 -two dimensional model
 -abstract visualisation
 -concrete visualisation
--
 
 
 Abstract Visualisation vs Concrete Visualisation
@@ -14,6 +13,8 @@ Abstract Visualisation vs Concrete Visualisation
 -through reaction to sound
 -through reaction to coder
 -through reaction to audience
+
+
 
 
 

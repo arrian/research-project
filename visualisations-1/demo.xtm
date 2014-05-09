@@ -19,7 +19,7 @@
 
 (dsp:set! dsp)
 
-(define drumloop
+(define drumloop)
   (lambda (beat dur)
     (if (= (modulo beat 2/4) 0) 
       (play kit 52 120 dur))
@@ -32,14 +32,14 @@
 (drumloop (*metro* 'get-beat 4) 1/4)
 
 
-(define fmsynth_instrument
+(define fmsynth_instrument)
   (lambda (beat dur)
     (play-note (now) fmsynth (random '(78 82 97 99 94)) 88 1000);99 94
     (callback (*metro* (+ beat (* 1.0 dur))) 'fmsynth_instrument (+ beat dur) dur)))
 
 (fmsynth_instrument (*metro* 'get-beat 4) 1/2)
 
-(define epad_instrument
+(define epad_instrument)
   (lambda (beat dur)
     (play-note (now) epad (random '(77 82 85 89)) 75 6000);89
     (callback (*metro* (+ beat (* 4.0 dur))) 'epad_instrument (+ beat dur) dur)))
