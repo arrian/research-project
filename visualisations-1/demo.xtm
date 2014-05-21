@@ -1,12 +1,24 @@
-(sys:load "/Users/arrian/Desktop/COMP4540/research-project/visualisations-1/visualisation-8.xtm")
 
-(define ctx (gl:make-ctx ":0.0" #f 0.0 0.0 900.0 600.0))
+(define *research-project-dir* "/Users/ben/Code/xtm/arrian-research-project")
+;; (define *research-project-dir* "/Users/arrian/Desktop/blahblahblah")
+
+(sys:load (string-append *research-project-dir* "/visualisations-1/visualisation-8.xtm"))
+
+(define width 1920.0)
+(define height 1080.0)
+(bind-val width float 1920.0)
+(bind-val height float 1080.0)
+(define fullscreen #t)
+
+(define ctx (gl:make-ctx ":0.0" fullscreen 0.0 0.0 width height))
 (cairo-animation (*metro* 'get-beat 4) 1/60 0 0.0)
 
-(define *user-sample-dir* "/Users/arrian/Projects/Music/Assets/samples")
-(load "/Users/arrian/Dev/extempore-hackday/sampler-maps.xtm")
+;; (define *user-sample-dir* "/Users/arrian/Projects/Music/Assets/samples")
+
+(sys:load "/Users/ben/Code/xtm/lib/sampler-maps.xtm")
+;; (load "/Users/arrian/Dev/extempore-hackday/sampler-maps.xtm")
 (define-sampler kit sampler_note_hermite_c sampler_fx)
-(sm-load-map kit *808-kit-map*)
+(sm-load-map kit *NI-synthetic-kit-sample-map*)
 
 (bind-func dsp:[SAMPLE,SAMPLE,i64,i64,SAMPLE*]* 100000
   (let ((vu_meter (vu_meter_c 8 (/ 44100 15))))
@@ -19,10 +31,10 @@
 
 (dsp:set! dsp)
 
-(define drumloop)
+(define drumloop
   (lambda (beat dur)
     (if (= (modulo beat 2/4) 0) 
-      (play kit 52 120 dur))
+        (play kit 52 120 dur))
     (if (= (modulo beat 3/4) 0)
         (play kit 51 120 dur))
     (if (= (modulo beat 1) 0)
@@ -32,16 +44,19 @@
 (drumloop (*metro* 'get-beat 4) 1/4)
 
 
-(define fmsynth_instrument)
+(define fmsynth_instrument
   (lambda (beat dur)
-    (play-note (now) fmsynth (random '(78 82 97 99 94)) 88 1000);99 94
+    (if (= (modulo beat 4) 0)
+        (play fmsynth (- 46 (if (< (modulo beat 32) 16) 0 4))
+              (random 90 100) dur (random .4 1.4) .5))
+    (play-note (now) fmsynth (- (random '(78 82 97 99 94)) 12) 88 1000);99 94
     (callback (*metro* (+ beat (* 1.0 dur))) 'fmsynth_instrument (+ beat dur) dur)))
 
 (fmsynth_instrument (*metro* 'get-beat 4) 1/2)
 
-(define epad_instrument)
+(define epad_instrument
   (lambda (beat dur)
-    (play-note (now) epad (random '(77 82 85 89)) 75 6000);89
+    (play epad (random '(77 82 85 89)) 75 (/ dur (trir 1 6 1/9)))
     (callback (*metro* (+ beat (* 4.0 dur))) 'epad_instrument (+ beat dur) dur)))
 
 (epad_instrument (*metro* 'get-beat 4) 1/4)

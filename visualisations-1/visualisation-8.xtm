@@ -2,7 +2,7 @@
 (sys:load "libs/external/cairo.xtm")
 (sys:load "libs/core/vu-meter.xtm")
 
-;(define ctx (gl:make-ctx ":0.0" #f 0.0 0.0 900.0 600.0))
+;; (define ctx (gl:make-ctx ":0.0" #f 0.0 0.0 900.0 600.0))
 
 (bind-func draw_vu_circle
   (lambda (cr cx cy vu_index r g b)
@@ -37,19 +37,19 @@
     ))
 
 (bind-func cairo_draw
-  (let ((surface (cairo_image_surface_create CAIRO_FORMAT_RGB24 900 600))
-  (cr (cairo_create surface)))
+  (let ((surface (cairo_image_surface_create CAIRO_FORMAT_RGB24 (convert  width) (convert  height)))
+        (cr (cairo_create surface)))
     (lambda (t:double k:double)
       (cairo_set_source_rgba cr 0.0 0.0 0.0 0.02)
       (cairo_paint cr)
       (draw cr t k)
-      ;(cairo_surface_flush surface)
+                                        ;; (cairo_surface_flush surface)
       (cairo_image_surface_get_data surface))))
         
 (bind-func gl_draw
   (lambda (k:double)
     (glLoadIdentity)
-    (gl_load_tex_bgr 900 600 4 GL_UNSIGNED_BYTE (cairo_draw (i64tod (now)) k) 5)
+    (gl_load_tex_bgr width height 4 GL_UNSIGNED_BYTE (cairo_draw (i64tod (now)) k) 5)
     (gl_draw_img_reverse -1.0 -1.0 2.0 2.0 180.0 5)
     void))
 
@@ -59,7 +59,7 @@
     (gl:swap-buffers ctx)    
     (callback (*metro* (+ beat (* .5 dur))) 'cairo-animation (+ beat dur) dur (+ 0.00 k))))
 
-;(cairo-animation (*metro* 'get-beat 4) 1/20 0 0.0)
+(cairo-animation (*metro* 'get-beat 4) 1/20 0 0.0)
 
 
 ;;--------------------------------------------------------------
