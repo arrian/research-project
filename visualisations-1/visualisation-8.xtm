@@ -1,6 +1,6 @@
 
 (sys:load "libs/external/cairo.xtm")
-(sys:load "libs/external/vu-meter.xtm")
+(sys:load "libs/core/vu-meter.xtm")
 
 ;(define ctx (gl:make-ctx ":0.0" #f 0.0 0.0 900.0 600.0))
 
