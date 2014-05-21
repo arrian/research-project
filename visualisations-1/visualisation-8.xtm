@@ -49,7 +49,7 @@
 (bind-func gl_draw
   (lambda (k:double)
     (glLoadIdentity)
-    (gl_load_tex_bgr width height 4 GL_UNSIGNED_BYTE (cairo_draw (i64tod (now)) k) 5)
+    (gl_load_tex_bgr (convert width) (convert height) 4 GL_UNSIGNED_BYTE (cairo_draw (i64tod (now)) k) 5)
     (gl_draw_img_reverse -1.0 -1.0 2.0 2.0 180.0 5)
     void))
 
@@ -59,7 +59,7 @@
     (gl:swap-buffers ctx)    
     (callback (*metro* (+ beat (* .5 dur))) 'cairo-animation (+ beat dur) dur (+ 0.00 k))))
 
-(cairo-animation (*metro* 'get-beat 4) 1/20 0 0.0)
+;; (cairo-animation (*metro* 'get-beat 4) 1/20 0 0.0)
 
 
 ;;--------------------------------------------------------------

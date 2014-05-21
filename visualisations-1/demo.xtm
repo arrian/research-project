@@ -2,23 +2,29 @@
 (define *research-project-dir* "/Users/ben/Code/xtm/arrian-research-project")
 ;; (define *research-project-dir* "/Users/arrian/Desktop/blahblahblah")
 
-(sys:load (string-append *research-project-dir* "/visualisations-1/visualisation-8.xtm"))
-
 (define width 1920.0)
 (define height 1080.0)
 (bind-val width float 1920.0)
 (bind-val height float 1080.0)
-(define fullscreen #t)
+(define fullscreen #f)
 
+;; load the visualisation file (make sure it's the right one!)
+(sys:load (string-append *research-project-dir* "/visualisations-1/visualisation-8.xtm"))
+
+;; create the graphics context
 (define ctx (gl:make-ctx ":0.0" fullscreen 0.0 0.0 width height))
+;; start the animation loop (check the args are ok)
 (cairo-animation (*metro* 'get-beat 4) 1/60 0 0.0)
 
-;; (define *user-sample-dir* "/Users/arrian/Projects/Music/Assets/samples")
+;; set up the drum kit (symlink 'sample-libs' in the research-project
+;; dir to wherever your drum samples are)
+(define *user-sample-dir* (string-append *research-project-dir* "/sample-libs"))
+(sys:load (string-append *research-project-dir* "/visualisations-1/lib/sampler-maps.xtm"))
 
-(sys:load "/Users/ben/Code/xtm/lib/sampler-maps.xtm")
-;; (load "/Users/arrian/Dev/extempore-hackday/sampler-maps.xtm")
+(println '*user-sample-dir*: *user-sample-dir*)
+
 (define-sampler kit sampler_note_hermite_c sampler_fx)
-(sm-load-map kit *NI-synthetic-kit-sample-map*)
+(sm-load-map kit *808-kit-map*)
 
 (bind-func dsp:[SAMPLE,SAMPLE,i64,i64,SAMPLE*]* 100000
   (let ((vu_meter (vu_meter_c 8 (/ 44100 15))))
@@ -30,6 +36,9 @@
          ))))
 
 (dsp:set! dsp)
+
+;; testing!
+(play-note (now) kit (random 36 46) 100 (/ 44100 8))
 
 (define drumloop
   (lambda (beat dur)
