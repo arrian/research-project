@@ -21,3 +21,6 @@
 *.mtc1
 *.out
 *.synctex.gz
+
+# should be a symlink to wherever the samples are
+/sample-libs
