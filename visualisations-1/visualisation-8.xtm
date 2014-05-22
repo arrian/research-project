@@ -54,13 +54,13 @@
     void))
 
 (define cairo-animation
-  (lambda (beat dur k)
+  (lambda (time delta-t k)
     (gl_draw k)
-    (gl:swap-buffers ctx)    
-    (callback (*metro* (+ beat (* .5 dur))) 'cairo-animation (+ beat dur) dur (+ 0.00 k))))
-
-;; (cairo-animation (*metro* 'get-beat 4) 1/20 0 0.0)
-
+    (gl:swap-buffers ctx)        
+    (callback (+ time (* *second* delta-t) 0.5)
+              'cairo-animation
+              (+ time (* *second* delta-t)) 
+              delta-t k)))
 
 ;;--------------------------------------------------------------
 

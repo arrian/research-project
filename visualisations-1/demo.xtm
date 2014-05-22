@@ -6,7 +6,7 @@
 (define height 1080.0)
 (bind-val width float 1920.0)
 (bind-val height float 1080.0)
-(define fullscreen #f)
+(define fullscreen #t)
 
 ;; load the visualisation file (make sure it's the right one!)
 (sys:load (string-append *research-project-dir* "/visualisations-1/visualisation-8.xtm"))
@@ -14,7 +14,7 @@
 ;; create the graphics context
 (define ctx (gl:make-ctx ":0.0" fullscreen 0.0 0.0 width height))
 ;; start the animation loop (check the args are ok)
-(cairo-animation (*metro* 'get-beat 4) 1/60 0 0.0)
+(cairo-animation (now) 1/10 0.0)
 
 ;; set up the drum kit (symlink 'sample-libs' in the research-project
 ;; dir to wherever your drum samples are)
