@@ -10,31 +10,6 @@
 ;; wrap any instruments/signals you want to monitor in a call to that
 ;; closure. The current VU level can then be accessed through vu_level
 
-;; Example code:
-
-(bind-func dsp:[SAMPLE,SAMPLE,i64,i64,SAMPLE*]* 100000
-  ;; VU metering at 30Hz, 4 distinct channels
-  (let ((vu_meter (vu_meter_c 8 (/ 44100 15))))
-    (lambda (in time chan dat)
-      (+ (vu_meter chan 0 (* (random 0.1) (cos (/ (* STWOPI (convert time) 1.0) SR))))
-         (vu_meter chan 1 (* (random 0.1) (cos (/ (* STWOPI (convert time) 0.5) SR))))))))
-
-(dsp:set! dsp)
-
-(define vu-print
-  (lambda (beat dur)
-    (let ((lev0 (* 3000 (vu_level 0)))
-          (lev1 (* 3000 (vu_level 1))))
-      (dotimes (i lev0)
-        (print "*"))
-      (println)
-      (dotimes (i lev1)
-        (print "-"))
-      (println))
-    (callback (*metro* (+ beat (* .5 dur))) 'vu-print (+ beat dur) dur)))
-
-(vu-print (*metro* 'get-beat 4) 1/16)
-
 ;;; Code:
 
 (bind-val VU_LEVELS_RMS |16,SAMPLE|*)
