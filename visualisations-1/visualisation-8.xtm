@@ -18,7 +18,9 @@
 
 (bind-func draw
   (lambda (cr t:double k:double)
-    (let ((radius:double 100.0))
+    (let ((radius:double 100.0)
+          (halfx:double (convert (/ width 2.0)))
+          (halfy:double (convert (/ height 2.0))))
       (cairo_set_line_width cr 1.0)
       (draw_vu_circle cr (+ 250.0 (* radius (cos t))) (+ 300.0 (* radius (sin t))) 0 1.0 0.0 0.0)
       (draw_vu_circle cr (+ 450.0 (* radius (cos t))) (+ 300.0 (* radius (sin t))) 1 0.0 1.0 0.0)
@@ -28,11 +30,13 @@
 
 (bind-func draw
   (lambda (cr t:double k:double)
-    (let ((radius:double 100.0))
-      (cairo_set_line_width cr 1.0)
-      (draw_vu_circle cr (+ 450.0 (* radius (cos t))) (+ 300.0 (* radius (sin t))) 0 1.0 0.0 0.0)
-      (draw_vu_circle cr (+ 450.0 (* (* 2.0 radius) (cos t))) (+ 300.0 (* (* 2.0 radius) (sin t))) 1 0.0 1.0 0.0)
-      (draw_vu_circle cr (+ 450.0 (* (* 3.0 radius) (cos t))) (+ 300.0 (* (* 3.0 radius) (sin t))) 2 0.0 0.0 1.0)
+    (let ((radius:double 100.0)
+          (half_w:double (convert (/ width 2.0)))
+          (half_h:double (convert (/ height 2.0))))
+      (cairo_set_line_width cr (random 1.0 10.))
+      (draw_vu_circle cr (+ half_w (* radius (cos t))) (+ half_h (* radius (sin t))) 0 1.0 0.0 0.0)
+      (draw_vu_circle cr (+ half_w (* (* 2.0 radius) (cos t))) (+ half_h (* (* 2.0 radius) (sin t))) 1 0.0 1.0 0.0)
+      (draw_vu_circle cr (+ half_w (* (* 3.0 radius) (cos t))) (+ half_h (* (* 3.0 radius) (sin t))) 2 0.0 0.0 1.0)
       )
     ))
 
@@ -63,4 +67,3 @@
               delta-t k)))
 
 ;;--------------------------------------------------------------
-
