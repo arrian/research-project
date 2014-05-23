@@ -1,0 +1,88 @@
+;; 0 name
+;; 1 next callback time (now-based)
+(bind-type CallbackWidget <String*,i64>)
+
+(bind-func cw_name
+  (lambda (cbw:CallbackWidget*)
+    (tref cbw 0)))
+
+(bind-func cw_set_name
+  (lambda (cbw:CallbackWidget* name:String*)
+    (tset! cbw 0 name)))
+
+(bind-func cw_cb_time
+  (lambda (cbw:CallbackWidget*)
+    (tref cbw 1)))
+
+(bind-func cw_set_cb_time
+  (lambda (cbw:CallbackWidget* cb_time:i64)
+    (tset! cbw 1 cb_time)))
+
+(bind-val CW_LIST List:<CallbackWidget*,List*>*)
+
+(bind-func cw_print_master_list_pointer
+  (lambda ()
+    (printf "CW_LIST: %p\n" CW_LIST)))
+
+(cw_print_master_list_pointer)
+
+(bind-func cw_master_list_init
+  (lambda ()
+    (set! CW_LIST null)))
+
+(bind-func cw_add_widget
+  (lambda (name cb_time)
+    (set! CW_LIST (cons (CallbackWidget name cb_time)
+                        CW_LIST))))
+
+(bind-func cw_remove_widget
+  (lambda (name)
+    (set! CW_LIST (filter (lambda (cbw)
+                            (not (equal name (cw_name cbw))))
+                          CW_LIST))))
+
+(bind-func cw_draw
+  (lambda (cbw:CallbackWidget* phase:double)
+    (println "name:" (cw_name cbw) "phase:" phase "\n")
+    void))
+
+(bind-func cw_draw_all
+  (lambda ()
+    (for-each (lambda (cbw) (cw_draw cbw (random))) CW_LIST)))
+
+(define draw_loop
+  (lambda (time delta-t)
+    (println 'time: time)
+    (callback (+ time (* *second* delta-t) 0.5)
+              'draw_loop
+              (+ time (* *second* delta-t)) 
+              delta-t)))
+
+(draw_loop (now) 0.5)
+
+;; testing
+
+(bind-func cw_add_widget_wrapper
+  (lambda (name:i8* cb_time)
+    (cw_add_widget (Str name) cb_time)))
+
+(cw_add_widget_wrapper "benfunc" (random 100))
+
+(bind-func cw_print_all_widgets
+  (lambda ()
+    (if (not (null? CW_LIST))
+        (begin (println "length:" (length CW_LIST))
+               (println "CW_LIST:" CW_LIST))
+        (println "CW_LIST is null"))
+    void))
+
+;; (cw_print_all_widgets)
+
+;; here's a list of things to look for if you get stuck.
+
+;; grep through the whole extempore source dir (order of preference:
+;; examples/ libs/ tests/ runtime/)
+
+;; email extemporelang@googlegroups.com
+
+;; ring Ben.
