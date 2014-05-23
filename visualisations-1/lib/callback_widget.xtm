@@ -20,15 +20,12 @@
 
 (bind-val CW_LIST List:<CallbackWidget*,List*>*)
 
-(bind-func cw_print_master_list_pointer
-  (lambda ()
-    (printf "CW_LIST: %p\n" CW_LIST)))
-
-(cw_print_master_list_pointer)
-
 (bind-func cw_master_list_init
   (lambda ()
-    (set! CW_LIST null)))
+    (let ((n:List:<CallbackWidget*,List*>* null))
+      (set! CW_LIST n))))
+
+(cw_master_list_init)
 
 (bind-func cw_add_widget
   (lambda (name cb_time)
@@ -43,20 +40,18 @@
 
 (bind-func cw_draw
   (lambda (cbw:CallbackWidget* phase:double)
-    (println "name:" (cw_name cbw) "phase:" phase "\n")
+    (println "name:" (cw_name cbw) "phase:" phase)
     void))
 
-(bind-func cw_draw_all
-  (lambda ()
-    (for-each (lambda (cbw) (cw_draw cbw (random))) CW_LIST)))
-
-(define draw_loop
-  (lambda (time delta-t)
-    (println 'time: time)
-    (callback (+ time (* *second* delta-t) 0.5)
-              'draw_loop
-              (+ time (* *second* delta-t)) 
-              delta-t)))
+(bind-func draw_loop
+  (lambda (time delta_t)
+    (for-each (lambda (cbw) (cw_draw cbw (convert (cw_cb_time cbw)))) CW_LIST)
+    (if #t ; set to #f to cancel the recursion
+        (callback (+ time (convert (* SR delta_t 0.5)))
+                  draw_loop
+                  (+ time (convert (* SR delta_t)))
+                  delta_t))
+    void))
 
 (draw_loop (now) 0.5)
 
@@ -66,23 +61,4 @@
   (lambda (name:i8* cb_time)
     (cw_add_widget (Str name) cb_time)))
 
-(cw_add_widget_wrapper "benfunc" (random 100))
-
-(bind-func cw_print_all_widgets
-  (lambda ()
-    (if (not (null? CW_LIST))
-        (begin (println "length:" (length CW_LIST))
-               (println "CW_LIST:" CW_LIST))
-        (println "CW_LIST is null"))
-    void))
-
-;; (cw_print_all_widgets)
-
-;; here's a list of things to look for if you get stuck.
-
-;; grep through the whole extempore source dir (order of preference:
-;; examples/ libs/ tests/ runtime/)
-
-;; email extemporelang@googlegroups.com
-
-;; ring Ben.
+(cw_add_widget_wrapper (random (list "foo" "bar" "baz")) (random 100))
