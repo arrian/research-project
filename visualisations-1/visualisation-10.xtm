@@ -1,0 +1,12 @@
+
+
+(bind-func cw_draw
+  (lambda (widget:CallbackWidget* phase:double)
+    ;;(println "name:" (cw_name widget) "phase:" phase)
+    void))
+
+(bind-func cw_array_draw
+  (lambda ()
+    (let ((i 0))
+        (dotimes (i CW_ARRAY_CURRENT)
+            (cw_draw (aref CW_ARRAY i) (random))))))

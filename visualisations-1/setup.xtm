@@ -2,7 +2,7 @@
 
 ;; make sure this is the right path for your machine!
 (define *research-project-dir* "/Users/ben/Code/xtm/arrian-research-project")
-;; (define *research-project-dir* "/Users/arrian/Desktop/blahblahblah")
+;; (define *research-project-dir* "/Users/arrian/Desktop/COMP4540/research-project")
 
 ;;;;;;;;;;;;;;;;;;;;
 ;; graphics setup ;;
@@ -38,7 +38,7 @@
       (+ 
          (vu_meter chan 1 (epad in time chan dat))
          (vu_meter chan 2 (fmsynth in time chan dat))
-         (vu_meter chan 0 (* 1.0 (kit in time chan dat)))
+         (vu_meter chan 0 (kit in time chan dat))
          ))))
 
 (ipc:bind-func "utility" 'kit)

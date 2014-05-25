@@ -1,0 +1,112 @@
+
+
+(bind-val ENTER_TIME i64 1000);; time for enter transition
+
+
+;; 0 name
+;; 1 next callback time (now-based)
+;; 2 initial callback time (now-based)
+(bind-type CallbackWidget <String*,i64,i64>)
+
+(bind-func cw_name
+  (lambda (cbw:CallbackWidget*)
+    (tref cbw 0)))
+
+(bind-func cw_set_name
+  (lambda (cbw:CallbackWidget* name:String*)
+    (tset! cbw 0 name)))
+
+(bind-func cw_cb_time
+  (lambda (cbw:CallbackWidget*)
+    (tref cbw 1)))
+
+(bind-func cw_set_cb_time
+  (lambda (cbw:CallbackWidget* cb_time:i64)
+    (tset! cbw 1 cb_time)))
+
+(bind-func cw_initial_time
+  (lambda (cbw:CallbackWidget*)
+    (tref cbw 2)))
+
+(bind-val CW_ARRAY |10,CallbackWidget*|*)
+(bind-val CW_ARRAY_MAX i64 10)
+(bind-val CW_ARRAY_CURRENT i64 0)
+
+(bind-func cw_add
+  (lambda (name:i8* phase:i64)
+    (let ((widget:CallbackWidget* (halloc)))
+      (tset! widget 0 (Str name))
+      (tset! widget 1 phase)
+      (tset! widget 2 (now))
+      (aset! CW_ARRAY CW_ARRAY_CURRENT widget)
+      (set! CW_ARRAY_CURRENT (+ CW_ARRAY_CURRENT 1))
+      (- CW_ARRAY_CURRENT 1))))
+
+;;(cw_add "test1" 100)
+
+;; (bind-func cw_remove
+;;   (lambda (index:i64)
+;;     ))
+
+(bind-func cw_print
+  (lambda (widget:CallbackWidget*)
+    (println "name:" (cw_name widget) "cb_time:" (cw_cb_time widget))
+    void))
+
+(bind-func cw_array_print
+  (lambda ()
+    (let ((i 0))
+        (dotimes (i CW_ARRAY_CURRENT)
+            (cw_print (aref CW_ARRAY i))))))
+
+(cw_array_print)
+
+
+(bind-func cw_draw
+  (lambda (widget:CallbackWidget* phase:double)
+    ;;(println "name:" (cw_name widget) "phase:" phase)
+    void))
+
+(bind-func cw_array_draw
+  (lambda ()
+    (let ((i 0))
+        (dotimes (i CW_ARRAY_CURRENT)
+            (cw_draw (aref CW_ARRAY i) (random))))))
+
+
+(define draw_loop
+  (lambda (time delta-t)
+    ;;(println 'time: time)
+    (cw_array_draw)
+    (callback (+ time (* *second* delta-t) 0.5)
+              'draw_loop
+              (+ time (* *second* delta-t)) 
+              delta-t)))
+
+(draw_loop (now) 0.5)
+
+
+(define last
+  (lambda (lst)
+    (if (= (length lst) 1)
+      (car lst)
+      (last (cdr lst)))))
+
+;;Needs beat, duration and widget index (TODO: should default to -1)
+(define cv-callback
+  (lambda (time cb-sym . args)
+    (let ((beat (list-ref args 0))
+          (dur (list-ref args 1))
+          (old_widget (list-ref args 2)))
+        ;;(print "cv-callback " time cb-sym args "\n")
+      (let ((widget (if (>= old_widget 0) old_widget (cw_add (symbol->string cb-sym) 100))))
+        (apply callback (list time cb-sym beat dur widget (list-tail args 3)))))))
+
+;;;;;;;;;Example
+
+(define foo
+  (lambda (beat dur widget)
+    (cv-callback (*metro* (+ beat (* .5 dur))) 'foo (+ beat dur) dur widget)))
+
+(foo (*metro* 'get-beat 1/2) 1 -1)
+

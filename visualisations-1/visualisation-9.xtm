@@ -1,0 +1,107 @@
+
+(sys:load "libs/external/cairo.xtm")
+(sys:load "libs/external/vu-meter.xtm")
+
+
+
+
+(bind-func draw_vu_circle
+  (lambda (cr cx cy vu_index r g b)
+    (cairo_set_source_rgba cr r g b 1.0)
+    (cairo_arc cr cx cy (if (> (vu_level vu_index) 0.000000005) (+ 1.0 (* 20000.0 (ftod (vu_level vu_index)))) 0.0) 0.0 TWOPI)
+    (cairo_stroke cr)
+
+    (cairo_set_source_rgba cr r g b 0.2)
+    (cairo_arc cr cx cy (if (> (vu_level vu_index) 0.000000005) (+ 1.0 (* 20000.0 (ftod (vu_level vu_index)))) 0.0) 0.0 TWOPI)
+    (cairo_fill cr)
+
+    ))
+
+(bind-func draw
+  (lambda (cr t:double k:double)
+    (let ((radius:double 100.0))
+      (cairo_set_line_width cr 1.0)
+      (draw_vu_circle cr (+ 250.0 (* radius (cos t))) (+ 300.0 (* radius (sin t))) 0 1.0 0.0 0.0)
+      (draw_vu_circle cr (+ 450.0 (* radius (cos t))) (+ 300.0 (* radius (sin t))) 1 0.0 1.0 0.0)
+      (draw_vu_circle cr (+ 650.0 (* radius (cos t))) (+ 300.0 (* radius (sin t))) 2 0.0 0.0 1.0)
+      )
+    ))
+
+(bind-func draw
+  (lambda (cr t:double k:double)
+    (let ((radius:double 100.0))
+      (cairo_set_line_width cr 1.0)
+      (draw_vu_circle cr (+ 450.0 (* radius (cos t))) (+ 300.0 (* radius (sin t))) 0 1.0 0.0 0.0)
+      (draw_vu_circle cr (+ 450.0 (* (* 2.0 radius) (cos t))) (+ 300.0 (* (* 2.0 radius) (sin t))) 1 0.0 1.0 0.0)
+      (draw_vu_circle cr (+ 450.0 (* (* 3.0 radius) (cos t))) (+ 300.0 (* (* 3.0 radius) (sin t))) 2 0.0 0.0 1.0)
+      (arc_draw cr)
+      
+      )
+    ))
+
+(bind-func cairo_draw
+  (let ((surface (cairo_image_surface_create CAIRO_FORMAT_RGB24 900 600))
+  (cr (cairo_create surface)))
+    (lambda (t:double k:double)
+    	(cairo_set_operator cr CAIRO_OPERATOR_OVER)
+      (cairo_set_source_rgba cr 0.0 0.0 0.0 0.09)
+      (cairo_paint cr)
+      ;; (draw cr t k)
+      (cairo_set_operator cr CAIRO_OPERATOR_SCREEN)
+      (draw_circle_segment cr 10.0 100.0 100.0 0.0 (PI))
+      ;;(arc_draw cr)
+      ;(cairo_surface_flush surface)
+      (cairo_image_surface_get_data surface))))
+      
+(bind-func gl_draw
+  (lambda (k:double)
+    (glLoadIdentity)
+    (gl_load_tex_bgr 900 600 4 GL_UNSIGNED_BYTE (cairo_draw (i64tod (now)) k) 5)
+    (gl_draw_img_reverse -1.0 -1.0 2.0 2.0 180.0 5)
+    void))
+
+(define cairo-animation
+  (lambda (beat dur k)
+    (gl_draw k)
+    (gl:swap-buffers ctx)    
+    (callback (*metro* (+ beat (* .5 dur))) 'cairo-animation (+ beat dur) dur (+ 0.00 k))))
+
+
+(define ctx (gl:make-ctx ":0.0" #f 0.0 0.0 900.0 600.0))
+(cairo-animation (*metro* 'get-beat 4) 1/60 0 0.0)
+
+
+;;--------------------------------------------------------------
+(bind-func draw_circle_segment
+  (lambda (cr radius:double centre_x:double centre_y:double start_angle:double end_angle:double)
+      (cairo_set_source_rgba cr 1.0 0.0 0.0 1.0)
+      (cairo_move_to cr centre_x centre_y)
+      (cairo_line_to cr (- centre_x (* radius (cos start_angle))) (- centre_y (* radius (cos start_angle))))
+      (cairo_arc cr centre_x centre_y radius 0.0 3.0)
+      (cairo_fill cr)
+    ))
+
+
+
+;; (bind-func arc_draw
+;;   (lambda (cr)
+;;       (let ((i 0.0)) 
+;;       	(dotimes (i (random 0.0 1.1))
+;;             	(cairo_set_source_rgba cr 0.0 (random) 0.0 0.8)
+;;                   (cairo_set_line_width cr (* 1000.0 (convert (vu_level 1))))
+;;                   ;;(println (* 1000.0 (vu_level 1)))
+;;                   (cairo_arc cr 500.0 (+ 1200.0 (random 200.0)) 1000.0 (* TWOPI 90.0 100.0 (convert (vu_level 1))) TWOPI)
+;;                   (cairo_stroke cr)
+
+;;                   (cairo_set_source_rgba cr 0.0 0.0 1.0 0.8)
+;;                   (cairo_arc cr 1000.0 (+ 800.0 (random 200.0)) 1000.0 (* TWOPI 90.0 100.0 (convert (vu_level 1))) TWOPI)
+;;                   (cairo_stroke cr)))
+;;     ))
+
+
+
+
+
+
+
+
