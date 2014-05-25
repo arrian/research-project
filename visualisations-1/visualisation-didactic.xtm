@@ -1,12 +1,19 @@
 
 
 (bind-func cw_draw
-  (lambda (widget:CallbackWidget* phase:double)
+  (lambda (cr widget:CallbackWidget* phase:double)
     ;;(println "name:" (cw_name widget) "phase:" phase)
     void))
 
 (bind-func cw_array_draw
-  (lambda ()
+  (lambda (cr)
     (let ((i 0))
         (dotimes (i CW_ARRAY_CURRENT)
-            (cw_draw (aref CW_ARRAY i) (random))))))
+            (cw_draw cr (aref CW_ARRAY i) (random))))))
+
+(bind-func draw
+  (lambda (cr t:double k:double)
+		(cairo_set_source_rgba cr 0.1 0.1 0.0 1.0)
+		(cairo_paint cr)
+
+    void))

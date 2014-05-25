@@ -1,8 +1,4 @@
-
-(sys:load "libs/external/cairo.xtm")
 (sys:load "libs/core/vu-meter.xtm")
-
-;; (define ctx (gl:make-ctx ":0.0" #f 0.0 0.0 900.0 600.0))
 
 (bind-func draw_vu_circle
   (lambda (cr cx cy vu_index r g b)
@@ -12,58 +8,17 @@
 
     (cairo_set_source_rgba cr r g b 0.2)
     (cairo_arc cr cx cy (if (> (vu_level vu_index) 0.000000005) (+ 1.0 (* 20000.0 (ftod (vu_level vu_index)))) 0.0) 0.0 TWOPI)
-    (cairo_fill cr)
-
-    ))
-
-(bind-func draw
-  (lambda (cr t:double k:double)
-    (let ((radius:double 100.0)
-          (halfx:double (convert (/ width 2.0)))
-          (halfy:double (convert (/ height 2.0))))
-      (cairo_set_line_width cr 1.0)
-      (draw_vu_circle cr (+ 250.0 (* radius (cos t))) (+ 300.0 (* radius (sin t))) 0 1.0 0.0 0.0)
-      (draw_vu_circle cr (+ 450.0 (* radius (cos t))) (+ 300.0 (* radius (sin t))) 1 0.0 1.0 0.0)
-      (draw_vu_circle cr (+ 650.0 (* radius (cos t))) (+ 300.0 (* radius (sin t))) 2 0.0 0.0 1.0)
-      )
-    ))
+    (cairo_fill cr)))
 
 (bind-func draw
   (lambda (cr t:double k:double)
     (let ((radius:double 100.0)
           (half_w:double (convert (/ width 2.0)))
           (half_h:double (convert (/ height 2.0))))
+      (cairo_set_source_rgba cr 0.0 0.0 0.0 0.02)
+      (cairo_paint cr)
       (cairo_set_line_width cr (random 1.0 10.))
       (draw_vu_circle cr (+ half_w (* radius (cos t))) (+ half_h (* radius (sin t))) 0 1.0 0.0 0.0)
       (draw_vu_circle cr (+ half_w (* (* 2.0 radius) (cos t))) (+ half_h (* (* 2.0 radius) (sin t))) 1 0.0 1.0 0.0)
-      (draw_vu_circle cr (+ half_w (* (* 3.0 radius) (cos t))) (+ half_h (* (* 3.0 radius) (sin t))) 2 0.0 0.0 1.0)
-      )
-    ))
+      (draw_vu_circle cr (+ half_w (* (* 3.0 radius) (cos t))) (+ half_h (* (* 3.0 radius) (sin t))) 2 0.0 0.0 1.0))))
 
-(bind-func cairo_draw
-  (let ((surface (cairo_image_surface_create CAIRO_FORMAT_RGB24 (convert  width) (convert  height)))
-        (cr (cairo_create surface)))
-    (lambda (t:double k:double)
-      (cairo_set_source_rgba cr 0.0 0.0 0.0 0.02)
-      (cairo_paint cr)
-      (draw cr t k)
-                                        ;; (cairo_surface_flush surface)
-      (cairo_image_surface_get_data surface))))
-        
-(bind-func gl_draw
-  (lambda (k:double)
-    (glLoadIdentity)
-    (gl_load_tex_bgr (convert width) (convert height) 4 GL_UNSIGNED_BYTE (cairo_draw (i64tod (now)) k) 5)
-    (gl_draw_img_reverse -1.0 -1.0 2.0 2.0 180.0 5)
-    void))
-
-(define cairo-animation
-  (lambda (time delta-t k)
-    (gl_draw k)
-    (gl:swap-buffers ctx)        
-    (callback (+ time (* *second* delta-t) 0.5)
-              'cairo-animation
-              (+ time (* *second* delta-t)) 
-              delta-t k)))
-
-;;--------------------------------------------------------------
