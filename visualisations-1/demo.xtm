@@ -22,6 +22,7 @@
 
 (drumloop (*metro* 'get-beat 4) 1/4)
 
+;;;;;;;;;;;;;;;Aesthetic
 
 (define fmsynth_instrument
   (lambda (beat dur)
@@ -34,8 +35,28 @@
 (fmsynth_instrument (*metro* 'get-beat 4) 1/2)
 
 (define epad_instrument
-  (lambda (beat dur)
+  (lambda (beat dur widget)
     (play epad (random '(77 82 85 89)) 75 (/ dur (trir 1 6 1/9)))
     (callback (*metro* (+ beat (* 4.0 dur))) 'epad_instrument (+ beat dur) dur)))
 
 (epad_instrument (*metro* 'get-beat 4) 1/4)
+
+
+;;;;;;;;;;;;;;;;Didactic
+
+(define fmsynth_instrument
+  (lambda (beat dur widget)
+    (if (= (modulo beat 4) 0)
+        (play fmsynth (- 46 (if (< (modulo beat 32) 16) 0 4))
+              (random 90 100) dur (random .4 1.4) .5))
+    (play-note (now) fmsynth (- (random '(78 82 97 99 94)) 12) 88 1000)
+    (cv-callback (*metro* (+ beat (* 1.0 dur))) 'fmsynth_instrument (+ beat dur) dur widget)))
+
+(fmsynth_instrument (*metro* 'get-beat 4) 1/2 -1)
+
+(define epad_instrument
+  (lambda (beat dur widget)
+    (play epad (random '(77 82 85 89)) 75 (/ dur (trir 1 6 1/9)))
+    (cv-callback (*metro* (+ beat (* 4.0 dur))) 'epad_instrument (+ beat dur) dur widget)))
+
+(epad_instrument (*metro* 'get-beat 4) 1/4 -1)

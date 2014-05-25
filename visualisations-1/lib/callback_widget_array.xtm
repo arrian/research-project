@@ -1,4 +1,6 @@
 
+;; This implements storing callback widgets in an array. Replace with the list version.
+
 
 (bind-val ENTER_TIME i64 1000);; time for enter transition
 
@@ -85,13 +87,6 @@
 
 ;; (draw_loop (now) 0.5)
 
-
-(define last
-  (lambda (lst)
-    (if (= (length lst) 1)
-      (car lst)
-      (last (cdr lst)))))
-
 ;;Needs beat, duration and widget index (TODO: should default to -1)
 (define cv-callback
   (lambda (time cb-sym . args)
@@ -99,7 +94,7 @@
           (dur (list-ref args 1))
           (old_widget (list-ref args 2)))
         ;;(print "cv-callback " time cb-sym args "\n")
-      (let ((widget (if (>= old_widget 0) old_widget (cw_add (symbol->string cb-sym) 100))))
+      (let ((widget (if (>= old_widget 0) old_widget (cw_add (symbol->string cb-sym) dur))))
         (apply callback (list time cb-sym beat dur widget (list-tail args 3)))))))
 
 ;;;;;;;;;Example
