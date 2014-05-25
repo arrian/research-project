@@ -1,4 +1,3 @@
-(sys:load "libs/core/vu-meter.xtm")
 
 (bind-func draw_vu_circle
   (lambda (cr cx cy vu_index r g b)
