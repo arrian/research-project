@@ -10,7 +10,7 @@
     (cairo_fill cr)))
 
 (bind-func draw
-  (lambda (cr t:double k:double)
+  (lambda (cr t:double)
     (let ((radius:double 100.0)
           (half_w:double (convert (/ width 2.0)))
           (half_h:double (convert (/ height 2.0))))

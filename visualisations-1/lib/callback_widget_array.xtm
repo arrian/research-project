@@ -4,47 +4,70 @@
 
 (bind-val ENTER_TIME i64 1000);; time for enter transition
 
-
 ;; 0 name
-;; 1 next callback time (now-based)
-;; 2 initial callback time (now-based)
-(bind-type CallbackWidget <String*,i64,i64>)
-
-(bind-func cw_name
-  (lambda (cbw:CallbackWidget*)
-    (tref cbw 0)))
-
-(bind-func cw_set_name
-  (lambda (cbw:CallbackWidget* name:String*)
-    (tset! cbw 0 name)))
-
-(bind-func cw_cb_time
-  (lambda (cbw:CallbackWidget*)
-    (tref cbw 1)))
-
-(bind-func cw_set_cb_time
-  (lambda (cbw:CallbackWidget* cb_time:i64)
-    (tset! cbw 1 cb_time)))
-
-(bind-func cw_initial_time
-  (lambda (cbw:CallbackWidget*)
-    (tref cbw 2)))
+;; 1 initial callback time (now-based)
+;; 2 previous callback time (now-based)
+;; 3 next callback time (now-based)
+(bind-type CallbackWidget <String*,i64,i64,i64>)
 
 (bind-val CW_ARRAY |10,CallbackWidget*|*)
 (bind-val CW_ARRAY_MAX i64 10)
 (bind-val CW_ARRAY_CURRENT i64 0)
 
+(bind-func cw_get
+  (lambda (cw_index:i64)
+    (aref CW_ARRAY cw_index)))
+
+(bind-func cw_name
+  (lambda (cw_index:i64)
+    (cstr_from_string (tref (cw_get cw_index) 0))))
+
+(bind-func cw_set_name
+  (lambda (cw_index:i64 name:i8*)
+    (tset! (cw_get cw_index) 0 (Str name))))
+
+(bind-func cw_initial_time
+  (lambda (cw_index:i64)
+    (tref (cw_get cw_index) 1)))
+
+(bind-func cw_previous_time
+  (lambda (cw_index:i64)
+    (tref (cw_get cw_index) 2)))
+
+(bind-func cw_next_time
+  (lambda (cw_index:i64)
+    (tref (cw_get cw_index) 3)))
+
+(bind-func cw_set_next_time
+  (lambda (cw_index:i64 cb_time:i64)
+    (tset! (cw_get cw_index) 2 (cw_next_time cw_index))
+    (tset! (cw_get cw_index) 3 cb_time)))
+
+(bind-func cw_progress
+  (lambda (cw_index:i64)
+    (let ((diff:i64 (- (cw_next_time cw_index) (cw_previous_time cw_index))))
+      ;;(println (cw_next_time cw_index) (cw_previous_time cw_index) (now))
+      (if (equal (cw_next_time cw_index) (cw_previous_time cw_index)) 0.0
+        (/ (i64tod (modulo (- (now) (cw_initial_time cw_index)) diff)) (i64tod diff))))))
+
 (bind-func cw_add
-  (lambda (name:i8* phase:i64)
+  (lambda (name:i8* initial_callback_time:i64)
     (let ((widget:CallbackWidget* (halloc)))
       (tset! widget 0 (Str name))
-      (tset! widget 1 phase)
-      (tset! widget 2 (now))
+      (tset! widget 1 initial_callback_time)
+      (tset! widget 2 initial_callback_time)
+      (tset! widget 3 initial_callback_time)
       (aset! CW_ARRAY CW_ARRAY_CURRENT widget)
       (set! CW_ARRAY_CURRENT (+ CW_ARRAY_CURRENT 1))
       (- CW_ARRAY_CURRENT 1))))
 
 ;;(cw_add "test1" 100)
+
+;;(println (modulo 10 3) (cw_progress 0))
+
+
+;; next - previous = diff
+;; now - initial = 
 
 ;; (bind-func cw_remove
 ;;   (lambda (index:i64)
@@ -87,15 +110,34 @@
 
 ;; (draw_loop (now) 0.5)
 
+;;(cw_add (symbol->string 'cv-callback) 10)
+
 ;;Needs beat, duration and widget index (TODO: should default to -1)
 (define cv-callback
   (lambda (time cb-sym . args)
     (let ((beat (list-ref args 0))
           (dur (list-ref args 1))
           (old_widget (list-ref args 2)))
+      ;;(println (real->integer time) (now))
+      (if (>= old_widget 0) (cw_set_next_time old_widget (real->integer time)))
         ;;(print "cv-callback " time cb-sym args "\n")
-      (let ((widget (if (>= old_widget 0) old_widget (cw_add (symbol->string cb-sym) dur))))
-        (apply callback (list time cb-sym beat dur widget (list-tail args 3)))))))
+        ;;(println "now: " (now) " beat: " beat " dur: " dur)
+      ;;(let ((widget ));;(symbol->string cb-sym) dur))))
+        (apply callback 
+          (cons time (cons cb-sym (cons beat 
+            (cons dur 
+              (cons (if (>= old_widget 0) old_widget (cw_add (symbol->string cb-sym) (real->integer time))) 
+                    (list-tail args 3))))))))))
+
+;;;;;;;;;;;;;;;;;;;;;;
+
+;; (define test-clock-samples
+;;   (lambda ()
+;;     (println (now) (samples->clock 1/2) (clock->samples (now)))))
+
+;; (test-clock-samples)
+
+;; (println *samplerate*)
 
 ;;;;;;;;;Example
 
@@ -104,4 +146,27 @@
 ;;     (cv-callback (*metro* (+ beat (* .5 dur))) 'foo (+ beat dur) dur widget)))
 
 ;; (foo (*metro* 'get-beat 1/2) 1 -1)
+
+
+;;;;;;;;;;;;;;;;;;;
+
+;; (define test-function
+;;   (lambda ()
+;;     (print_func (symbol->string 'test-function))))
+
+;; (println (test-function))
+
+;; (bind-func print_func
+;;   (lambda (sym:i8*)
+;;     (printf "%s\n" sym)
+;;     void))
+
+;; (test-function)
+
+;; ;;;;;;;;;;;;;;;;;;;;;
+
+
+
+
+
 

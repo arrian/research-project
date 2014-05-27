@@ -1,8 +1,8 @@
 (sys:load "libs/xtm.xtm")
 
 ;; make sure this is the right path for your machine!
-(define *research-project-dir* "/Users/ben/Code/xtm/arrian-research-project")
-;; (define *research-project-dir* "/Users/arrian/Desktop/COMP4540/research-project")
+;; (define *research-project-dir* "/Users/ben/Code/xtm/arrian-research-project")
+(define *research-project-dir* "/Users/arrian/Desktop/COMP4540/research-project")
 
 (sys:load (string-append *research-project-dir* "/visualisations-1/lib/callback_widget_array.xtm"))
 (sys:load (string-append *research-project-dir* "/visualisations-1/lib/vu-meter.xtm"))
@@ -21,42 +21,38 @@
 
 ;; Should be redefined in each visualisation
 (bind-func draw
-  (lambda (cr t:double k:double)
+  (lambda (cr t:double)
 		(cairo_set_source_rgba cr 0.0 0.0 0.0 1.0)
 		(cairo_paint cr)
     void))
 
-(bind-func cairo_draw
+(bind-func gl_draw
   (let ((surface (cairo_image_surface_create CAIRO_FORMAT_RGB24 (convert  width) (convert  height)))
         (cr (cairo_create surface)))
-    (lambda (t:double k:double)
-      (draw cr t k)
-      (cairo_image_surface_get_data surface))))
-        
-(bind-func gl_draw
-  (lambda (k:double)
+  (lambda ()
     (glLoadIdentity)
-    (gl_load_tex_bgr (convert width) (convert height) 4 GL_UNSIGNED_BYTE (cairo_draw (i64tod (now)) k) 5)
+    (draw cr (i64tod (now)))
+    (gl_load_tex_bgr (convert width) (convert height) 4 GL_UNSIGNED_BYTE (cairo_image_surface_get_data surface) 5)
     (gl_draw_img_reverse -1.0 -1.0 2.0 2.0 180.0 5)
-    void))
+    void)))
 
 (define draw-loop
-  (lambda (time delta-t k)
-    (gl_draw k)
+  (lambda (time delta-t)
+    (gl_draw)
     (gl:swap-buffers ctx)        
     (callback (+ time (* *second* delta-t) 0.5)
               'draw-loop
               (+ time (* *second* delta-t)) 
-              delta-t k)))
+              delta-t)))
 
 ;; load the visualisation file (make sure it's the right one!)
-(sys:load (string-append *research-project-dir* "/visualisations-1/visualisation-didactic.xtm"))
+(sys:load (string-append *research-project-dir* "/visualisations-1/visualisation-didactic.xtm"));;didactic.xtm"))
 
 ;; create the graphics context
 (define ctx (gl:make-ctx ":0.0" fullscreen 0.0 0.0 width height))
 
 ;; start the animation loop (check the args are ok)
-(draw-loop (now) 0 0)
+(draw-loop (now) 0)
 
 ;;;;;;;;;;;;;;;;;
 ;; audio setup ;;

@@ -1,6 +1,7 @@
 ;; 0 name
 ;; 1 next callback time (now-based)
-(bind-type CallbackWidget <String*,i64>)
+;; 2 initial callback time (now-based)
+(bind-type CallbackWidget <String*,i64,i64>)
 
 (bind-func cw_name
   (lambda (cbw:CallbackWidget*)
