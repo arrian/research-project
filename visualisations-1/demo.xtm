@@ -1,8 +1,8 @@
 ;; load the setup file
 
 ;; make sure this is the right path for your machine!
-;; (define *research-project-dir* "/Users/ben/Code/xtm/arrian-research-project")
-(define *research-project-dir* "/Users/arrian/Desktop/COMP4540/research-project")
+(define *research-project-dir* "/Users/ben/Code/xtm/arrian-research-project")
+;; (define *research-project-dir* "/Users/arrian/Desktop/COMP4540/research-project")
 
 (sys:load (string-append *research-project-dir* "/visualisations-1/setup.xtm"))
 
