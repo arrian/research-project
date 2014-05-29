@@ -166,36 +166,60 @@
 		    void))
 
 ;;cw draw utility
-(bind-func stage_three
-  (lambda (cr:cairo_t*)
+;; (bind-func stage_three
+;;   (lambda (cr:cairo_t*)
+;;     (let ((i 0)
+;;     	  (radius:double (/ (* 0.9 (ftod half_height)) (i64tod CW_ARRAY_CURRENT)))
+;;     	  (xStart:double (- (ftod half_width) (* 0.5 (* 3.0 radius) (i64tod (- CW_ARRAY_CURRENT 1)))))
+;;     	  (yCentre:double (ftod half_height)))
+;;         (dotimes (i CW_ARRAY_CURRENT)
+;;         	(if (equal (cw_active_count) 3)
+;;         		(draw_clock_fill cr radius (+ xStart (* (i64tod i) (* 3.0 radius))) yCentre (cw_progress i))
+;;         		(draw_circle_fill cr radius (+ xStart (* (i64tod i) (* 3.0 radius))) yCentre (cw_progress i))
+;;        		)
+;;   			(draw_text cr i (+ xStart (* (i64tod i) (* 3.0 radius))) (+ (* 1.3 radius) (ftod half_height)) 20.0)
+;;   			void
+;;   ))))
+
+(bind-func draw_with_function
+  (lambda (cr:cairo_t* func:[void,cairo_t*,double,double,double,double]*)
     (let ((i 0)
-    	  (radius:double (/ (* 0.9 (ftod half_height)) (i64tod CW_ARRAY_CURRENT)))
-    	  (xStart:double (- (ftod half_width) (* 0.5 (* 3.0 radius) (i64tod (- CW_ARRAY_CURRENT 1)))))
+    	  (radius:double (/ (* 0.9 (ftod half_height)) (i64tod (cw_active_count))))
+    	  (xStart:double (- (ftod half_width) (* 0.5 (* 3.0 radius) (i64tod (- (cw_active_count) 1)))))
     	  (yCentre:double (ftod half_height)))
-        (dotimes (i CW_ARRAY_CURRENT)
-        	(if (equal (cw_active_count) 3)
-        		(draw_clock_fill cr radius (+ xStart (* (i64tod i) (* 3.0 radius))) yCentre (cw_progress i))
-        		(draw_circle_fill cr radius (+ xStart (* (i64tod i) (* 3.0 radius))) yCentre (cw_progress i))
-       		)
+        (dotimes (i (cw_active_count))
+        	(let ((active:i64 (cw_get_active i)))
+        		(func cr radius (+ xStart (* (i64tod i) (* 3.0 radius))) yCentre (cw_progress i))
   			(draw_text cr i (+ xStart (* (i64tod i) (* 3.0 radius))) (+ (* 1.3 radius) (ftod half_height)) 20.0)
-  			void
-  ))))
+  			void)))))
+
 
 (bind-func stage_one
   (lambda (cr)
-  	(draw_clock_stroke cr (* 0.6 (ftod half_height)) (ftod half_width) (ftod half_height) (cw_progress 0))
-  	(draw_text cr 0 (ftod half_width) (ftod half_height) (if (<= (now) (+ (cw_initial_time 0) (cw_duration 0))) (* 30.0 (cw_progress 0)) 30.0))
-  	void
-    ))
+  	(let ((active_one:i64 (cw_get_active 0)))
+  	(draw_clock_stroke cr (* 0.6 (ftod half_height)) (ftod half_width) (ftod half_height) (cw_progress active_one))
+  	(draw_text cr active_one (ftod half_width) (ftod half_height) (if (<= (now) (+ (cw_initial_time active_one) (cw_duration active_one))) (* 30.0 (cw_progress active_one)) 30.0))
+  	void)))
 
 (bind-func stage_two
   (lambda (cr)
-  	(draw_clock_segments cr (* 0.9 (ftod half_height)) (ftod half_width) (ftod half_height) (cw_progress 0) 10.0 1.0 0.0 0.0)
-  	(draw_clock_segments cr (* 0.6 (ftod half_height)) (ftod half_width) (ftod half_height) (cw_progress 1) 10.0 0.0 0.0 1.0)
-    (draw_text cr 1 (ftod half_width) (ftod half_height) 30.0)
-    (draw_text cr 0 (ftod half_width) (+ (* 0.8 (ftod half_height)) (ftod half_height)) 30.0)
-    void
-    ))
+  	(let ((active_one:i64 (cw_get_active 0))
+  		  (active_two:i64 (cw_get_active 1)))
+  	(draw_clock_segments cr (* 0.9 (ftod half_height)) (ftod half_width) (ftod half_height) (cw_progress active_one) 10.0 1.0 0.0 0.0)
+  	(draw_clock_segments cr (* 0.6 (ftod half_height)) (ftod half_width) (ftod half_height) (cw_progress active_two) 10.0 0.0 0.0 1.0)
+    (draw_text cr active_two (ftod half_width) (ftod half_height) 30.0)
+    (draw_text cr active_one (ftod half_width) (+ (* 0.8 (ftod half_height)) (ftod half_height)) 30.0)
+    void)))
+
+(bind-func stage_three
+  (lambda (cr:cairo_t*)
+  	(draw_with_function cr draw_clock_fill)
+	void))
+
+(bind-func stage_four
+  (lambda (cr)
+	(draw_with_function cr draw_circle_fill)
+	void))
 
 ;;main draw function
 (bind-func draw
@@ -204,7 +228,8 @@
 		(cairo_paint cr)
 		(cond ((equal (cw_active_count) 1) (stage_one cr))
 		      ((equal (cw_active_count) 2) (stage_two cr))
-		      (else (stage_three cr)))
+		      ((equal (cw_active_count) 3) (stage_three cr))
+		      (else (stage_four cr)))
     	void))
 
 

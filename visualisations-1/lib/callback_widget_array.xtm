@@ -5,9 +5,8 @@
 ;; 3 next callback time (now-based)
 (bind-type CallbackWidget <String*,i64,i64,i64>)
 
-(bind-val CW_ARRAY |10,CallbackWidget*|*)
-(bind-val CW_ARRAY_ACTIVE |10,i64|*)
-(bind-val CW_ARRAY_MAX i64 10)
+(bind-val CW_ARRAY |100,CallbackWidget*|*)
+(bind-val CW_ARRAY_MAX i64 100)
 (bind-val CW_ARRAY_CURRENT i64 0)
 
 (bind-func cw_get
@@ -84,7 +83,7 @@
 
 (bind-func cw_is_active
   (lambda (cw_index:i64)
-    (<= (now) (cw_next_time cw_index))))
+    (<= (now) (+ (cw_duration cw_index) (cw_next_time cw_index)))));;
 
 (bind-func cw_active_count
   (lambda ()
@@ -92,6 +91,20 @@
     (dotimes (i CW_ARRAY_CURRENT)
       (if (cw_is_active i) (set! count (+ 1 count))))
     count)))
+
+;; Get the active widget from a 0 index (eg. if widget 
+;; indexed as 3 is the first active widget then call (cw_get_active 0))
+;; An index too high will return the last active widget in the array
+(bind-func cw_get_active
+  (lambda (number:i64)
+    (let ((i 0)
+          (count 0)
+          (found 0))
+    (dotimes (i CW_ARRAY_CURRENT)
+        (if (and (cw_is_active i) (<= count number)) (begin (set! count (+ count 1)) (set! found i) void) void))
+    found)))
+
+;;(println (cw_get_active 1))
 
 ;;Needs beat, duration and widget index (TODO: should default to -1)
 (define cv-callback
