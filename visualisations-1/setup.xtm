@@ -17,6 +17,8 @@
 (define height 600.0)
 (bind-val width float 900.0)
 (bind-val height float 600.0)
+(bind-val half_width float (/ width 2.0))
+(bind-val half_height float (/ height 2.0))
 (define fullscreen #f)
 
 ;; Should be redefined in each visualisation

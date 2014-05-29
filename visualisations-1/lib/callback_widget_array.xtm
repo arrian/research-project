@@ -42,6 +42,10 @@
     (tset! (cw_get cw_index) 2 (cw_next_time cw_index))
     (tset! (cw_get cw_index) 3 cb_time)))
 
+(bind-func cw_duration
+  (lambda (cw_index:i64)
+    (- (cw_next_time cw_index) (cw_previous_time cw_index))))
+
 (bind-func cw_progress
   (lambda (cw_index:i64)
     (let ((diff:i64 (- (cw_next_time cw_index) (cw_previous_time cw_index))))
@@ -59,6 +63,18 @@
       (aset! CW_ARRAY CW_ARRAY_CURRENT widget)
       (set! CW_ARRAY_CURRENT (+ CW_ARRAY_CURRENT 1))
       (- CW_ARRAY_CURRENT 1))))
+
+(bind-func cw_is_active
+  (lambda (cw_index:i64)
+      (<= (now) (cw_next_time cw_index))))
+
+(bind-func cw_active_count
+  (lambda ()
+    (let ((i:i64 0) (count:i64 0))
+    (dotimes (i CW_ARRAY_CURRENT)
+      (if (cw_is_active i) (set! count (+ 1 count))))
+    count)))
+
 
 ;;Needs beat, duration and widget index (TODO: should default to -1)
 (define cv-callback

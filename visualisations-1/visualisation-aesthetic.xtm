@@ -1,20 +1,19 @@
 
 ;;progression
-;;bars ;;arcs (as in poster) ;;circles ;;circle rotation
+;;bars ;;rectangles ;;arcs (as in poster) ;;circles ;;circle rotation
 
-;;progression #3
-
+;;bars progression utilities
 (bind-val TOTAL_BARS double 10.0)
 (bind-val CURRENT_BAR double 1.0)
 (bind-val CURRENT_BAR_PERCENT double 0.0)
 (bind-val PREVIOUS_TIME double 0.0)
 (bind-val CUMMULATION double 0.0)
 
-(bind-func draw
+;;bars progression
+(bind-func draw_bar
   (lambda (cr:cairo_t* t:double)
-      (if (equal PREVIOUS_TIME 0.0) (set! PREVIOUS_TIME t) )
-      ;;(println (- t PREVIOUS_TIME))
-      (if (>= (- t PREVIOUS_TIME) 1000.0) (printf "."))
+    (if (equal PREVIOUS_TIME 0.0) (set! PREVIOUS_TIME t) )
+      ;;(if (>= (- t PREVIOUS_TIME) 1000.0) (printf "."))
     (cairo_set_source_rgba cr 0.0 0.0 0.0 0.02)
     (cairo_paint cr)
     (cairo_set_source_rgba cr 1.0 (random) 0.0 0.4)
@@ -25,9 +24,8 @@
     (set! PREVIOUS_TIME t)
     void))
 
-;;progression #2
-
-(bind-func draw_rectangles
+;;rectangles progression utility function
+(bind-func draw_rectangles_xy
   (lambda (cr x:double y:double x_divisions:i64 y_divisions:i64)
       (cairo_set_source_rgba cr (random 0.2 0.4) (random 0.0 0.2) 0.0 0.2)
       (cairo_rectangle cr (* x (/ (convert width) (convert x_divisions))) (* y (/ (convert height) (convert y_divisions))) (+ 10.0 (/ (convert width) (convert x_divisions))) (+ 10.0 (/ (convert height) (convert y_divisions))))
@@ -35,12 +33,10 @@
 
       (cairo_set_source_rgba cr (random 0.8 1.0) (random 0.0 0.5) 0.0 1.0)
       (cairo_rectangle cr (* x (/ (convert width) (convert x_divisions))) (* y (/ (convert height) (convert y_divisions))) (/ (convert width) (convert x_divisions)) (/ (convert height) (convert y_divisions)))
-      (cairo_fill cr)
+      (cairo_fill cr)))
 
-
-    ))
-
-(bind-func draw
+;;rectangles progression
+(bind-func draw_rectangles
   (lambda (cr t:double)
     (let ((radius:double 100.0)
           (half_w:double (convert (/ width 2.0)))
@@ -49,9 +45,23 @@
       (cairo_set_source_rgba cr 0.0 0.0 0.0 0.02)
       (cairo_paint cr)
       (cairo_set_line_width cr (random 1.0 10.))
-      (draw_rectangles cr (round (random 0.0 50.0)) (round (random 0.0 35.0)) 50 35))))
+      (draw_rectangles_xy cr (round (random 0.0 50.0)) (round (random 0.0 35.0)) 50 35))))
 
-(bind-func draw
+;;arc progression utlility function
+(bind-func draw_arc_xy
+  (lambda (cr cx:double cy:double r:double g:double b:double radius:double angle:double)
+    (cairo_set_source_rgba cr r g b 1.0)
+    (cairo_arc cr cx cy radius angle (+ angle PI))
+    (cairo_stroke cr)))
+
+;;arc progression
+(bind-func draw_arcs
+  (lambda (cr:cairo_t* t:double)
+    void
+    ))
+
+;;rotated rectangles progression
+(bind-func draw_rectangles_rotated
   (lambda (cr t:double)
     (let ((i 0.0)
           (radius:double 100.0)
@@ -64,15 +74,12 @@
       ;;(cairo_set_matrix cr (cairo_identity_matrix cr))
       (cairo_set_line_width cr (random 1.0 10.))
       (dotimes (i 100.0)
-        (draw_rectangles cr (round (random 0.0 100.0)) (random 0.0 20.0) 10 20))
-      )))
+        (draw_rectangles_xy cr (round (random 0.0 100.0)) (random 0.0 20.0) 10 20)))))
 
-
-;;progression #1
-
+;;circle progression function
 (bind-func draw_vu_circle
   (lambda (cr cx cy vu_index r g b)
-    (cairo_set_source_rgba cr r g b 1.0)
+    (cairo_set_source_rgba cr (+ r (random 0.0 0.1)) g b 1.0)
     (cairo_arc cr cx cy (if (> (vu_level vu_index) 0.000000005) (+ 1.0 (* 20000.0 (ftod (vu_level vu_index)))) 0.0) 0.0 TWOPI)
     (cairo_stroke cr)
 
@@ -80,6 +87,18 @@
     (cairo_arc cr cx cy (if (> (vu_level vu_index) 0.000000005) (+ 1.0 (* 20000.0 (ftod (vu_level vu_index)))) 0.0) 0.0 TWOPI)
     (cairo_fill cr)))
 
+;;circle progression function
+(bind-func draw_circles
+  (lambda (cr t:double)
+    (let ((radius:double 100.0)
+          (half_w:double (convert (/ width 2.0)))
+          (half_h:double (convert (/ height 2.0))))
+      (cairo_set_line_width cr (random 1.0 10.))
+      (draw_vu_circle cr (+ half_w (* radius (cos t))) (+ half_h (* radius (sin t))) 0 1.0 0.0 0.0)
+      (draw_vu_circle cr (+ half_w (* (* 2.0 radius) (cos t))) (+ half_h (* (* 2.0 radius) (sin t))) 1 0.0 1.0 0.0)
+      (draw_vu_circle cr (+ half_w (* (* 3.0 radius) (cos t))) (+ half_h (* (* 3.0 radius) (sin t))) 2 0.0 0.0 1.0))))
+
+;;main draw function
 (bind-func draw
   (lambda (cr t:double)
     (let ((radius:double 100.0)
@@ -88,11 +107,9 @@
       (cairo_set_source_rgba cr 0.0 0.0 0.0 0.02)
       (cairo_paint cr)
       (cairo_set_line_width cr (random 1.0 10.))
-      (draw_vu_circle cr (+ half_w (* radius (cos t))) (+ half_h (* radius (sin t))) 0 1.0 0.0 0.0)
-      (draw_vu_circle cr (+ half_w (* (* 2.0 radius) (cos t))) (+ half_h (* (* 2.0 radius) (sin t))) 1 0.0 1.0 0.0)
-      (draw_vu_circle cr (+ half_w (* (* 3.0 radius) (cos t))) (+ half_h (* (* 3.0 radius) (sin t))) 2 0.0 0.0 1.0))))
-
-
-
-
+      (cond ((equal (cw_active_count) 1) (draw_bar cr t))
+            ((equal (cw_active_count) 2) (draw_rectangles cr t))
+            ;;((equal (cw_active_count) 3) (draw_arcs cr t))
+            (else (draw_circles cr t)))
+      void)))
 
