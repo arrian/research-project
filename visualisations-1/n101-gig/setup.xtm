@@ -1,0 +1,34 @@
+;;; setup.xtm --- setup file for n101-gig
+(sys:load "libs/xtm.xtm")
+(sys:load "/Users/ben/Code/xtm/lib/ben-lib-xtlang.xtm")
+(sys:load "/Users/ben/Code/xtm/lib/ben-lib-scheme.xtm")
+(ipc:load "utility" "/Users/ben/Code/xtm/lib/ben-lib-scheme.xtm")
+(sys:load "/Users/ben/Code/xtm/arrian-research-project/visualisations-1/lib/sampler-maps.xtm")
+(ipc:load "utility" "/Users/ben/Code/xtm/arrian-research-project/visualisations-1/lib/sampler-maps.xtm")
+
+(define-sampler kit sampler_note_hermite_c sampler_fx)
+(sm-load-map kit *SSO-percussion-sample-map*)
+(sm-load-map kit *NI-Dakeat-kit-sample-map* 1)
+
+(define-sampler cello sampler_note_hermite_c sampler_fx)
+(sm-load-map cello *SSO-celli-sample-map*)
+
+(define-sampler trumpet sampler_note_hermite_c sampler_fx)
+(sm-load-map trumpet *SSO-trumpets-sample-map*)
+
+(define-sampler clarinet sampler_note_hermite_c sampler_fx)
+(sm-load-map clarinet *SSO-clarinets-sample-map*)
+
+(bind-func dsp:[SAMPLE,SAMPLE,i64,i64,SAMPLE*]*
+  (lambda (in time chan dat)
+    (+ (kit in time chan dat)
+       (cello in time chan dat)
+       (trumpet in time chan dat)
+       (clarinet in time chan dat))))
+
+(ipc:bind-func "utility" 'kit)
+(ipc:bind-func "utility" 'cello)
+(ipc:bind-func "utility" 'trumpet)
+(ipc:bind-func "utility" 'clarinet)
+(ipc:audio-setup "utility")
+(dsp:set! dsp)
