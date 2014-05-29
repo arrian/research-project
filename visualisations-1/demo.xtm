@@ -3,12 +3,11 @@
 ;; make sure this is the right path for your machine!
 (define *research-project-dir* "/Users/ben/Code/xtm/arrian-research-project")
 ;; (define *research-project-dir* "/Users/arrian/Desktop/COMP4540/research-project")
-
 (sys:load (string-append *research-project-dir* "/visualisations-1/setup.xtm"))
 
 ;; testing!
 (play-note (now) kit (random 36 46) 100 (/ 44100 8))
-(play-note (now) fmsynth (random 36 46) 100 (/ 44100 8))
+(play-note (now) clarinet (random 36 46) 100 (/ 44100 8))
 
 ;; (define drumloop
 ;;   (lambda (beat dur widget)

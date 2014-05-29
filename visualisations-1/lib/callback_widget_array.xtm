@@ -71,7 +71,6 @@
       (if (cw_is_active i) (set! count (+ 1 count))))
     count)))
 
-
 ;;Needs beat, duration and widget index (TODO: should default to -1)
 (define cv-callback
   (lambda (time cb-sym . args)
@@ -84,6 +83,3 @@
             (cons dur 
               (cons (if (>= old_widget 0) old_widget (cw_add (symbol->string cb-sym) (real->integer time))) 
                     (list-tail args 3))))))))))
-
-
-
