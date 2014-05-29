@@ -13,13 +13,13 @@
 
 (sys:load "libs/external/cairo.xtm")
 
-(define width 900.0)
-(define height 600.0)
-(bind-val width float 900.0)
-(bind-val height float 600.0)
+(define width 1920.0)
+(define height 1080.0)
+(bind-val width float 1920.0)
+(bind-val height float 1080.0)
 (bind-val half_width float (/ width 2.0))
 (bind-val half_height float (/ height 2.0))
-(define fullscreen #f)
+(define fullscreen #t)
 
 ;; Should be redefined in each visualisation
 (bind-func draw
