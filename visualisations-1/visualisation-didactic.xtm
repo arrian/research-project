@@ -234,7 +234,7 @@
 ;;main draw function
 (bind-func draw
   (lambda (cr:cairo_t* t:double)
-		(cairo_set_source_rgba cr 0.0 0.0 0.0 0.04)
+		(cairo_set_source_rgba cr 0.0 0.0 0.0 .8)
 		(cairo_paint cr)
 		(cond ((equal (cw_active_count) 1) (stage_one cr))
 		      ((equal (cw_active_count) 2) (stage_two cr));;bug if 3rd instrument called twice
