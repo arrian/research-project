@@ -52,7 +52,7 @@
 (define ctx (gl:make-ctx ":0.0" fullscreen 0.0 0.0 width height))
 
 ;; start the animation loop (check the args are ok)
-(draw-loop (now) 0)
+(draw-loop (now) 1/40)
 
 ;;;;;;;;;;;;;;;;;
 ;; audio setup ;;
