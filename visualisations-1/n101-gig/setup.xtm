@@ -18,6 +18,8 @@
 
 (define-sampler clarinet sampler_note_hermite_c sampler_fx)
 (sm-load-map clarinet *SSO-clarinets-sample-map*)
+(sm-load-map clarinet *SSO-bass-clarinet-sample-map* 1)
+(sm-load-map clarinet *SSO-solo-clarinet-sample-map* 2)
 
 (bind-func dsp:[SAMPLE,SAMPLE,i64,i64,SAMPLE*]*
   (lambda (in time chan dat)
