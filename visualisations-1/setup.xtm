@@ -38,14 +38,23 @@
     (gl_draw_img_reverse -1.0 -1.0 2.0 2.0 180.0 5)
     void)))
 
+;; (define draw-loop
+;;   (lambda (time delta-t)
+;;     (gl_draw)
+;;     (gl:swap-buffers ctx)        
+;;     (callback (+ time (* *second* delta-t) 0.5)
+;;               'draw-loop
+;;               (+ time (* *second* delta-t)) 
+;;               delta-t)))
+
 (define draw-loop
-  (lambda (time delta-t)
+  (lambda (beat dur)
     (gl_draw)
     (gl:swap-buffers ctx)        
-    (callback (+ time (* *second* delta-t) 0.5)
+    (callback (*metro* (+ beat (* .5 dur)))
               'draw-loop
-              (+ time (* *second* delta-t)) 
-              delta-t)))
+              (+ beat dur) 
+              dur)))
 
 ;;TODO convert draw loop to beat duration 
 
@@ -56,7 +65,7 @@
 (define ctx (gl:make-ctx ":0.0" fullscreen 0.0 0.0 width height))
 
 ;; start the animation loop (check the args are ok)
-(draw-loop (now) 1/20)
+(draw-loop (*metro* 'get-beat 4) 1/40)
 
 ;;;;;;;;;;;;;;;;;
 ;; audio setup ;;

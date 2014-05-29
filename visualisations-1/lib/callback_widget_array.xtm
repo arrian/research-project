@@ -92,7 +92,8 @@
 
 (bind-func cw_active_count
   (lambda ()
-    (let ((i:i64 0) (count:i64 0))
+    (let ((i:i64 0) 
+          (count:i64 0))
     (dotimes (i CW_ARRAY_CURRENT)
       (if (cw_is_active i) (set! count (+ 1 count))))
     count)))
@@ -104,7 +105,7 @@
   (lambda (number:i64)
     (let ((i 0)
           (count 0)
-          (found 0))
+          (found -1))
     (dotimes (i CW_ARRAY_CURRENT)
         (if (and (cw_is_active i) (<= count number)) (begin (set! count (+ count 1)) (set! found i) void) void))
     found)))
