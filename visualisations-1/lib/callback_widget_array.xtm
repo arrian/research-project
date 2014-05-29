@@ -1,8 +1,4 @@
-
 ;; This implements storing callback widgets in an array. Replace with the list version.
-
-(bind-val ENTER_TIME i64 1000);; time for enter transition
-
 ;; 0 name
 ;; 1 initial callback time (now-based)
 ;; 2 previous callback time (now-based)
