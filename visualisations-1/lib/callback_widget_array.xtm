@@ -114,7 +114,8 @@
 
 ;;Needs beat, duration and widget index (TODO: should default to -1)
 (define cv-callback
-  (lambda (time cb-sym . args)
-      (cw_check (symbol->string cb-sym) (real->integer time))
+  (lambda (time cb-sym beat dur . args)
+    (cw_check (symbol->string cb-sym)
+              (real->integer (*metro* beat)))
       (apply callback 
-        (cons time (cons cb-sym args)))))
+             (append (list time cb-sym beat dur) args))))
