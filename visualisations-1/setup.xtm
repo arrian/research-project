@@ -1,14 +1,11 @@
+(sys:load "libs/xtm.xtm")
+
 ;; make sure this is the right path for your machine!
 (define *research-project-dir* "/Users/ben/Code/xtm/arrian-research-project")
-;; (define *research-project-dir* "/Users/arrian/Desktop/COMP4540/research-project")
+;;(define *research-project-dir* "/Users/arrian/Desktop/COMP4540/research-project")
 
 (sys:load (string-append *research-project-dir* "/visualisations-1/lib/callback_widget_array.xtm"))
-
 (sys:load (string-append *research-project-dir* "/visualisations-1/lib/vu-meter.xtm"))
-(sys:load (string-append *research-project-dir* "/visualisations-1/lib/sampler-maps.xtm"))
-(ipc:load "utility" (string-append *research-project-dir* "/visualisations-1/lib/sampler-maps.xtm"))
-(sys:load "libs/core/pc_ivl.xtm")
-(ipc:load "utility" "libs/core/pc_ivl.xtm")
 
 ;;;;;;;;;;;;;;;;;;;;
 ;; graphics setup ;;
@@ -16,13 +13,13 @@
 
 (sys:load "libs/external/cairo.xtm")
 
-(define width 1920.0)
-(define height 1080.0)
-(bind-val width float 1920.0)
-(bind-val height float 1080.0)
-(define fullscreen #t)
+(define width 900.0)
+(define height 600.0)
+(bind-val width float 900.0)
+(bind-val height float 600.0)
 (bind-val half_width float (/ width 2.0))
 (bind-val half_height float (/ height 2.0))
+(define fullscreen #f)
 
 ;; Should be redefined in each visualisation
 (bind-func draw
@@ -57,7 +54,7 @@
 (define ctx (gl:make-ctx ":0.0" fullscreen 0.0 0.0 width height))
 
 ;; start the animation loop (check the args are ok)
-(draw-loop (now) 1/30)
+(draw-loop (now) 1/40)
 
 ;;;;;;;;;;;;;;;;;
 ;; audio setup ;;
@@ -68,38 +65,20 @@
 (define *user-sample-dir* (string-append *research-project-dir* "/sample-libs"))
 (sys:load (string-append *research-project-dir* "/visualisations-1/lib/sampler-maps.xtm"))
 
-
 (define-sampler kit sampler_note_hermite_c sampler_fx)
-(sm-load-map kit *SSO-percussion-sample-map*)
-(sm-load-map kit *NI-Dakeat-kit-sample-map* 1)
-
-(define-sampler cello sampler_note_hermite_c sampler_fx)
-(sm-load-map cello *SSO-celli-sample-map*)
-
-(define-sampler trumpet sampler_note_hermite_c sampler_fx)
-(sm-load-map trumpet *SSO-trumpets-sample-map*)
-
-(define-sampler clarinet sampler_note_hermite_c sampler_fx)
-(sm-load-map clarinet *SSO-clarinets-sample-map*)
-(sm-load-map clarinet *SSO-bass-clarinet-sample-map* 1)
-(sm-load-map clarinet *SSO-solo-clarinet-sample-map* 2)
+(sm-load-map kit *808-kit-map*)
 
 (bind-func dsp:[SAMPLE,SAMPLE,i64,i64,SAMPLE*]* 100000
-  (let ((vu_meter (vu_meter_c 8 1472)))
+  (let ((vu_meter (vu_meter_c 8 1472))) ;; approx 30fps
     (lambda (in time chan dat)
-      (+ (vu_meter chan 0 (kit in time chan dat))
-         (vu_meter chan 1 (cello in time chan dat))
-         (vu_meter chan 2 (trumpet in time chan dat))
-         (vu_meter chan 3 (clarinet in time chan dat))))))
+      (+ 
+         (vu_meter chan 1 (epad in time chan dat))
+         (vu_meter chan 2 (fmsynth in time chan dat))
+         (vu_meter chan 0 (kit in time chan dat))
+         ))))
 
 (ipc:bind-func "utility" 'kit)
-(ipc:bind-func "utility" 'cello)
-(ipc:bind-func "utility" 'trumpet)
-(ipc:bind-func "utility" 'clarinet)
+(ipc:bind-func "utility" 'epad)
+(ipc:bind-func "utility" 'fmsynth)
 (ipc:audio-setup "utility")
 (dsp:set! dsp)
-
-(ipc:define "utility" 'cv-callback cv-callback)
-(ipc:bind-func "utility" 'cw_add)
-(ipc:bind-func "utility" 'cw_set_next_time)
-
