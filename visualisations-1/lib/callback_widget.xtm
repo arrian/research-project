@@ -44,22 +44,22 @@
     (println "name:" (cw_name cbw) "phase:" phase)
     void))
 
-(bind-func draw_loop
-  (lambda (time delta_t)
-    (for-each (lambda (cbw) (cw_draw cbw (convert (cw_cb_time cbw)))) CW_LIST)
-    (if #t ; set to #f to cancel the recursion
-        (callback (+ time (convert (* SR delta_t 0.5)))
-                  draw_loop
-                  (+ time (convert (* SR delta_t)))
-                  delta_t))
-    void))
 
-(draw_loop (now) 0.5)
+;;Needs beat, duration and widget index (TODO: should default to -1)
+(define cv-callback
+  (lambda (time cb-sym . args)
+      (cw_check (symbol->string cb-sym) (real->integer time))
+      (apply callback 
+        (cons time (cons cb-sym args)))))
+
 
 ;; testing
 
-(bind-func cw_add_widget_wrapper
-  (lambda (name:i8* cb_time)
-    (cw_add_widget (Str name) cb_time)))
+;; (bind-func cw_add_widget_wrapper
+;;   (lambda (name:i8* cb_time)
+;;     (cw_add_widget (Str name) cb_time)))
 
-(cw_add_widget_wrapper (random (list "foo" "bar" "baz")) (random 100))
+;; (cw_add_widget_wrapper (random (list "foo" "bar" "baz")) (random 100))
+
+
+

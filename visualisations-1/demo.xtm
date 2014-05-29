@@ -11,41 +11,41 @@
 (play-note (now) fmsynth (random 36 46) 100 (/ 44100 8))
 
 ;; (define drumloop
-;;   (lambda (beat dur widget)
+;;   (lambda (beat dur)
 ;;     (if (= (modulo beat 2/4) 0) 
 ;;         (play kit 52 120 dur))
 ;;     (if (= (modulo beat 3/4) 0)
 ;;         (play kit 51 120 dur))
 ;;     (if (= (modulo beat 1) 0)
 ;;         (play kit 68 90 dur))
-;;     (cv-callback (*metro* (+ beat (* .5 dur))) 'drumloop (+ beat dur) dur widget)))
+;;     (cv-callback (*metro* (+ beat (* .5 dur))) 'drumloop (+ beat dur) dur)))
 
-;; (drumloop (*metro* 'get-beat 4) 1/4 -1)
+;; (drumloop (*metro* 'get-beat 4) 1/4)
 
 
 (define fmsynth_instrument
-  (lambda (beat dur widget)
+  (lambda (beat dur)
     (if (= (modulo beat 4) 0)
         (play fmsynth (- 46 (if (< (modulo beat 32) 16) 0 4))
               (random 90 100) dur (random .4 1.4) .5))
     (play-note (now) fmsynth (- (random '(78 82 97 99 94)) 12) 75 1000)
-    (cv-callback (*metro* (+ beat (* 1.0 dur))) 'fmsynth_instrument (+ beat dur) dur widget)))
+    (cv-callback (*metro* (+ beat (* 1.0 dur))) 'fmsynth_instrument (+ beat dur) dur)))
 
-(fmsynth_instrument (*metro* 'get-beat 4) 4 -1)
+(fmsynth_instrument (*metro* 'get-beat 4) 4)
 
 (define epad_instrument
-  (lambda (beat dur widget)
+  (lambda (beat dur)
     (play epad (random '(77 82 85 89)) 75 (/ dur (trir 1 6 1/9)))
-    (cv-callback (*metro* (+ beat (* 4.0 dur))) 'epad_instrument (+ beat dur) dur widget)))
+    (cv-callback (*metro* (+ beat (* 4.0 dur))) 'epad_instrument (+ beat dur) dur)))
 
-(epad_instrument (*metro* 'get-beat 4) 1 -1)
+(epad_instrument (*metro* 'get-beat 4) 1)
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; (define foo
-;;   (lambda (beat dur widget)
+;;   (lambda (beat dur)
 ;;     (println (now))
-;;     (cv-callback (*metro* (+ beat (* .5 dur))) 'foo (+ beat dur) dur widget)))
+;;     (cv-callback (*metro* (+ beat (* .5 dur))) 'foo (+ beat dur) dur)))
 
-;; (foo (*metro* 'get-beat 1) 1 -1)
+;; (foo (*metro* 'get-beat 1) 2)
 
