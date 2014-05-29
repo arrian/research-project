@@ -12,16 +12,19 @@
 ;;bars progression
 (bind-func draw_bar
   (lambda (cr:cairo_t* t:double)
-    (if (equal PREVIOUS_TIME 0.0) (set! PREVIOUS_TIME t) )
-      ;;(if (>= (- t PREVIOUS_TIME) 1000.0) (printf "."))
-    (cairo_set_source_rgba cr 0.0 0.0 0.0 0.02)
-    (cairo_paint cr)
-    (cairo_set_source_rgba cr 1.0 (random) 0.0 0.4)
-    (cairo_rectangle cr (* CURRENT_BAR (/ (ftod width) TOTAL_BARS)) 0.0 (/ (ftod width) TOTAL_BARS) (ftod height))
-    (cairo_fill cr)
-    (set! CURRENT_BAR (+ CURRENT_BAR 1.0))
-    (if (>= CURRENT_BAR TOTAL_BARS) (set! CURRENT_BAR 0.0))
-    (set! PREVIOUS_TIME t)
+    (if (>= CUMMULATION 20.0) (begin
+      (cairo_set_source_rgba cr 0.0 0.0 0.0 0.02)
+      (cairo_paint cr)
+      (if (>= (random) 0.7) (cairo_set_source_rgba cr 0.0 0.6 1.0 1.0)
+        (cairo_set_source_rgba cr 1.0 (random) 0.0 1.0))
+      (cairo_rectangle cr (* CURRENT_BAR (/ (ftod width) TOTAL_BARS)) 0.0 (/ (ftod width) TOTAL_BARS) (ftod height))
+      (cairo_fill cr)
+      (set! CURRENT_BAR (+ CURRENT_BAR 1.0))
+      (if (>= CURRENT_BAR TOTAL_BARS) (set! CURRENT_BAR 0.0))
+      (set! CUMMULATION 0.0)
+      )
+    (begin (set! CUMMULATION (+ CUMMULATION 1.0)))
+    )
     void))
 
 ;;rectangles progression utility function
