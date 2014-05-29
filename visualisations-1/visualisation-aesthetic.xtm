@@ -15,8 +15,8 @@
     (if (>= CUMMULATION 20.0) (begin
       (cairo_set_source_rgba cr 0.0 0.0 0.0 0.02)
       (cairo_paint cr)
-      (if (>= (random) 0.7) (cairo_set_source_rgba cr 0.0 0.6 1.0 1.0)
-        (cairo_set_source_rgba cr 1.0 (random) 0.0 1.0))
+      (if (>= (random) 0.7) (cairo_set_source_rgba cr 0.0 (random 0.2 0.4) 1.0 1.0)
+        (cairo_set_source_rgba cr 1.0 (random 0.1 0.6) 0.0 1.0))
       (cairo_rectangle cr (* CURRENT_BAR (/ (ftod width) TOTAL_BARS)) 0.0 (/ (ftod width) TOTAL_BARS) (ftod height))
       (cairo_fill cr)
       (set! CURRENT_BAR (+ CURRENT_BAR 1.0))
@@ -30,11 +30,13 @@
 ;;rectangles progression utility function
 (bind-func draw_rectangles_xy
   (lambda (cr x:double y:double x_divisions:i64 y_divisions:i64)
+            
       (cairo_set_source_rgba cr (random 0.2 0.4) (random 0.0 0.2) 0.0 0.2)
       (cairo_rectangle cr (* x (/ (convert width) (convert x_divisions))) (* y (/ (convert height) (convert y_divisions))) (+ 10.0 (/ (convert width) (convert x_divisions))) (+ 10.0 (/ (convert height) (convert y_divisions))))
       (cairo_fill cr)
 
-      (cairo_set_source_rgba cr (random 0.8 1.0) (random 0.0 0.5) 0.0 1.0)
+      (if (< (random) 0.95) (cairo_set_source_rgba cr (random 0.8 1.0) (random 0.0 0.5) 0.0 1.0)
+        (cairo_set_source_rgba cr 0.0 (random 0.2 0.4) 1.0 1.0))
       (cairo_rectangle cr (* x (/ (convert width) (convert x_divisions))) (* y (/ (convert height) (convert y_divisions))) (/ (convert width) (convert x_divisions)) (/ (convert height) (convert y_divisions)))
       (cairo_fill cr)))
 
@@ -46,17 +48,16 @@
           (half_w:double (convert (/ width 2.0)))
           (half_h:double (convert (/ height 2.0))))
       ;;(println (% t (* 20. 15.)))
-      (cairo_set_source_rgba cr 0.0 0.0 0.0 0.02)
-      (cairo_paint cr)
+      ;; (cairo_set_source_rgba cr 0.0 0.0 0.0 0.02)
+      ;; (cairo_paint cr)
       (cairo_set_line_width cr (random 1.0 10.))
-      (dotimes (i 2)
+      (dotimes (i 4)
         (draw_rectangles_xy cr (round (random 0.0 50.0)) (round (random 0.0 35.0)) 50 35))
       )))
 
 (bind-func random_variant
   (lambda (value:double variant:double)
-    (+ value (random (* -1.0 variant) variant))
-    ))
+    (+ value (random (* -1.0 variant) variant))))
 
 ;;arc progression utlility function
 (bind-func draw_arc_x
@@ -65,10 +66,7 @@
     (cairo_set_source_rgba cr r g b 0.9)
     (cairo_curve_to cr (random_variant x 50.0) (ftod height) (random_variant (* 0.5 (+ x (ftod half_width))) 100.0) (random_variant -200.0 300.0) (+ x (ftod width)) (random_variant (ftod height) 300.0))
     (cairo_stroke cr) 
-    void
-    ))
-
-
+    void))
 
 ;;arc progression
 (bind-func draw_arcs
@@ -79,10 +77,8 @@
         (draw_arc_x cr 0.0 0.0 0.6 1.0 (ftod height))
         (draw_arc_x cr (* 0.2 (ftod width)) 1.0 0.2 0.0 (ftod height))
         (draw_arc_x cr (* 0.5 (ftod width)) 1.0 0.5 0.0 (ftod height))
-        (cairo_set_operator cr CAIRO_OPERATOR_OVER)
-        ))
-    void
-    ))
+        (cairo_set_operator cr CAIRO_OPERATOR_OVER)))
+    void))
 
 ;;rotated rectangles progression
 (bind-func draw_rectangles_rotated
@@ -91,7 +87,6 @@
           (radius:double 100.0)
           (half_w:double (convert (/ width 2.0)))
           (half_h:double (convert (/ height 2.0))))
-      ;;(println (% t (* 20. 15.)))
       (cairo_set_source_rgba cr 0.0 0.0 0.0 0.02)
       (cairo_paint cr)
       (cairo_rotate cr (/ PI 5.0))
