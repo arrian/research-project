@@ -1,0 +1,9 @@
+(define *research-project-dir* "/Users/ben/Code/xtm/arrian-research-project")
+(sys:load (string-append *research-project-dir* "/visualisations-1/n101-gig/setup.xtm"))
+(sys:load (string-append *research-project-dir* "/visualisations-1/visualisation-aesthetic.xtm"))
+
+;; create the graphics context
+(define ctx (gl:make-ctx ":0.0" fullscreen 0.0 0.0 width height))
+
+;; start the animation loop (check the args are ok)
+(draw-loop (now) 1/30)
