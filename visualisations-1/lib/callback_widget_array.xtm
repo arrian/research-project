@@ -21,6 +21,11 @@
   (lambda (cw_index:i64 name:i8*)
     (tset! (cw_get cw_index) 0 (Str name))))
 
+(bind-func cw_print_name
+  (lambda (cw_index:i64)
+      (printf "%s\n" (cw_name cw_index))
+    ))
+
 (bind-func cw_initial_time
   (lambda (cw_index:i64)
     (tref (cw_get cw_index) 1)))
