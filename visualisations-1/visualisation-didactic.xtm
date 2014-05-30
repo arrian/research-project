@@ -1,4 +1,3 @@
-
 ;;progression
 ;;one large clock no fill ;;2 clocks one over the other filled ;; 3 circle fill ;;4 clocks lines of segments
 
@@ -11,9 +10,8 @@
 
 			(cairo_move_to cr x y)
 		    (cairo_set_source_rgba cr (* 0.8 percent r) (* 0.8 percent g) (* 0.8 percent b) 1.0)
-		(cairo_arc cr x y radius 0.0 TWOPI )
-		(cairo_fill cr)
-
+			(cairo_arc cr x y radius 0.0 TWOPI )
+			(cairo_fill cr)
 
 			(cairo_move_to cr x y)
 		    (cairo_set_source_rgba cr r g b 1.0)
@@ -21,69 +19,16 @@
 		    (cairo_fill cr)
 		    )))
 
-;; (bind-func cw_draw
-;;   (lambda (cr:cairo_t* widget_index:i64 phase:double x:double y:double radius:double)
-;; 		    (draw_clock_segments cr (+ 20.0 (* 50000.0 (ftod (vu_level 1)))) x y (cw_progress widget_index) 6.0)
-;; 		    (cairo_set_font_size cr 20.0)
-;; 		    (cairo_move_to cr (- x 80.0) (+ y 140.0))
-;; 		    (cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
-;; 		    (cairo_show_text cr (cw_name widget_index))
-;; 		    void))
-
-;; (bind-func cw_array_draw
-;;   (lambda (cr:cairo_t*)
-;;     (let ((i 0) 
-;;     	  (centre:double (/ (i32tod (cairo_image_surface_get_width (cairo_get_target cr))) 2.0))
-;;     	  (xStart:double (- centre (* 0.5 210.0 (i64tod (- CW_ARRAY_CURRENT 1)))))
-;;     	  (yCentre:double (/ (i32tod (cairo_image_surface_get_height (cairo_get_target cr))) 2.0)))
-;;     	;;(print CW_ARRAY_CURRENT)
-;;         (dotimes (i CW_ARRAY_CURRENT)
-;;             (cw_draw cr i (random) (+ xStart (* (i64tod i) 210.0)) yCentre 90.0)))))
-
-;; (bind-func draw
-;;   (lambda (cr:cairo_t* t:double)
-;; 		(cairo_set_source_rgba cr 0.0 0.0 0.0 0.02)
-;; 		(cairo_paint cr)
-;; 		(cw_array_draw cr)
-;;     void))
-
-;;progression #3 - may be better placed in the aesthetic visualisations
-;; (bind-func draw_clock
-;;   (lambda (cr radius x y percent)
-;;   	(let ((half_chord:double (sqrt (- (* radius radius) (* (- radius (* 2.0 radius percent)) (- radius (* 2.0 radius percent))))))
-;;   		  (angle:double (* 2.0 (asind (/ half_chord radius))))
-;;   		  (start_angle:double (- (* PI 0.5) (* angle 0.5)))
-;;   		  (end_angle:double (+ (* PI 0.5) (* angle 0.5))))
-
-;;     (cairo_move_to cr (+ x (- radius (* 2.0 radius percent))) (+ y half_chord))
-;;     (cairo_set_source_rgba cr 1.0 (random) (random) 0.3)
-;;     (cairo_arc cr x y radius start_angle end_angle)
-;;     (cairo_line_to cr (+ x radius) y)
-;;     (cairo_fill cr)
-
-;;     void)))
-
 ;;circle fill progression function
 (bind-func draw_circle_fill
   (lambda (cr radius x y percent)
     (cairo_move_to cr (+ x radius) y)
-    (cairo_set_source_rgba cr 1.0 (random) (random) 0.3)
+    (cairo_set_source_rgba cr 1.0 (random) (random) 0.5)
     (cairo_arc cr x y radius 0.0 (if (>= percent 0.95) TWOPI (* TWOPI percent)))
     (cairo_line_to cr (+ x radius) y)
     (cairo_fill cr)
 
     void))
-
-;; ;;progression #? - includes vu_meter
-;; (bind-func draw_clock
-;;   (lambda (cr radius:double x y percent)
-
-;; 	(cairo_set_line_width cr 4.0)
-;;     (cairo_move_to cr (+ 4.0 (if (> (vu_level 1) 0.000000005) (+ 1.0 (* 30000.0 (ftod (vu_level 1)))) 0.0) x) y)
-;;     (cairo_set_source_rgba cr 1.0 0.0 0.0 1.0)
-;;     (cairo_arc cr x y (+ 4.0 (if (> (vu_level 1) 0.000000005) (+ 1.0 (* 30000.0 (ftod (vu_level 1)))) 0.0)) 0.0 (if (>= percent 0.95) TWOPI (* TWOPI percent)))
-;;     (cairo_stroke cr)
-;;     void))
 
 ;;clock fill progression function
 (bind-func draw_clock_fill
@@ -100,22 +45,11 @@
     (cairo_stroke cr)
     void))
 
-;;clock stroke progression function
-;; (bind-func draw_clock_stroke
-;;   (lambda (cr radius:double x y percent)
-;; 	(cairo_set_line_width cr 10.0)
-;;     (cairo_move_to cr (+ 4.0 radius x) y)
-;;     (cairo_set_source_rgba cr 1.0 0.0 0.0 1.0)
-;;     (cairo_arc cr x y (+ 4.0 radius) 0.0 (if (>= percent 0.95) TWOPI (* TWOPI percent)))
-;;     (cairo_stroke cr)
-
-;;     void))
-
 (bind-func draw_circle_pulse
   (lambda (cr radius:double x:double y:double percent:double)
   	(cairo_set_source_rgba cr 1.0 (* 0.5 percent) 0.0 1.0)
   	(cairo_move_to cr x y) 
-	(cairo_arc cr x y (* 50.0 (* 2.0 percent)) 0.0 TWOPI)
+	(cairo_arc cr x y (* radius percent) 0.0 TWOPI)
 	(cairo_fill cr)
 	void
     ))
@@ -129,11 +63,11 @@
     (cairo_stroke cr)
 
     (let ((r:double (+ 20.0 radius (* 300.0 percent))))
-	(cairo_set_line_width cr 3.0)
-    (cairo_move_to cr (+ x (* r (cos TWOPI))) (+ y (* r (sin TWOPI))))
-    (cairo_set_source_rgba cr 1.0 0.5 0.1 (- 1.0 percent));;(cairo_set_source_rgba cr 1.0 (random) (random) 1.0)
-    (cairo_arc cr x y r 0.0 TWOPI)
-    (cairo_stroke cr))
+		(cairo_set_line_width cr 3.0)
+	    (cairo_move_to cr (+ x (* r (cos TWOPI))) (+ y (* r (sin TWOPI))))
+	    (cairo_set_source_rgba cr 1.0 0.5 0.1 (- 1.0 percent));;(cairo_set_source_rgba cr 1.0 (random) (random) 1.0)
+	    (cairo_arc cr x y r 0.0 TWOPI)
+	    (cairo_stroke cr))
     
     void))
 
@@ -154,56 +88,38 @@
 (bind-func draw_text
   (lambda (cr widget_index:i64 x:double y:double size:double)
 		(cairo_set_font_size cr size)
-		(cairo_move_to cr (- x (* 0.5 (text_width cr (cw_name widget_index)))) y)
-		(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
-		(cairo_show_text cr (cw_name widget_index))
+
+		(let ((t_width (text_width cr (cw_name widget_index)))
+			  (t_height (text_height cr (cw_name widget_index))))
+			(cairo_move_to cr (- x (* 0.5 t_width)) y)
+			(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
+			(cairo_text_path cr (cw_name widget_index))
+
+			(cairo_fill_preserve cr)
+			(cairo_set_source_rgb cr 0.5 0.5 1.0)
+			(cairo_set_line_width cr 1.0)
+			(cairo_stroke cr)
+		)
 		void))
-
-;;clock progression utility
-(bind-func cw_draw
-  (lambda (cr:cairo_t* widget_index:i64 phase:double x:double y:double radius:double)
-		    (draw_clock_stroke cr radius x y (cw_progress widget_index))
-		    (cairo_set_font_size cr 20.0)
-		    (cairo_move_to cr (- x 80.0) (+ y 140.0))
-		    (cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
-		    (cairo_show_text cr (cw_name widget_index))
-		    void))
-
-;;cw draw utility
-;; (bind-func stage_three
-;;   (lambda (cr:cairo_t*)
-;;     (let ((i 0)
-;;     	  (radius:double (/ (* 0.9 (ftod half_height)) (i64tod CW_ARRAY_CURRENT)))
-;;     	  (xStart:double (- (ftod half_width) (* 0.5 (* 3.0 radius) (i64tod (- CW_ARRAY_CURRENT 1)))))
-;;     	  (yCentre:double (ftod half_height)))
-;;         (dotimes (i CW_ARRAY_CURRENT)
-;;         	(if (equal (cw_active_count) 3)
-;;         		(draw_clock_fill cr radius (+ xStart (* (i64tod i) (* 3.0 radius))) yCentre (cw_progress i))
-;;         		(draw_circle_fill cr radius (+ xStart (* (i64tod i) (* 3.0 radius))) yCentre (cw_progress i))
-;;        		)
-;;   			(draw_text cr i (+ xStart (* (i64tod i) (* 3.0 radius))) (+ (* 1.3 radius) (ftod half_height)) 20.0)
-;;   			void
-;;   ))))
 
 (bind-func draw_with_function
   (lambda (cr:cairo_t* func:[void,cairo_t*,double,double,double,double]*)
     (let ((i 0)
     	  (active_count (cw_active_count))
-    	  (radius:double (/ (* 0.9 (ftod half_height)) (i64tod active_count)))
+    	  (radius:double (/ (* 0.95 (ftod half_height)) (i64tod active_count)))
     	  (xStart:double (- (ftod half_width) (* 0.5 (* 3.0 radius) (i64tod (- active_count 1)))))
     	  (yCentre:double (ftod half_height)))
         (dotimes (i active_count)
         	(let ((active:i64 (cw_get_active i)))
-        		(func cr radius (+ xStart (* (i64tod i) (* 3.0 radius))) yCentre (cw_progress active))
-  				(draw_text cr active (+ xStart (* (i64tod i) (* 3.0 radius))) (+ (* 1.3 radius) (ftod half_height)) 20.0)
-  			void)))))
-
+        		(func cr (+ 80.0 radius) (+ xStart (* (i64tod i) (* 3.0 radius))) yCentre (cw_progress active))
+  				(draw_text cr active (+ xStart (* (i64tod i) (* 3.0 radius))) (+ (* 1.3 radius) (ftod half_height)) 50.0)))
+        void)))
 
 (bind-func stage_one
   (lambda (cr)
   	(let ((active_one:i64 (cw_get_active 0)))
   	(draw_clock_stroke cr (* 0.6 (ftod half_height)) (ftod half_width) (ftod half_height) (cw_progress active_one))
-  	(draw_text cr active_one (ftod half_width) (ftod half_height) (if (<= (now) (+ (cw_initial_time active_one) (cw_duration active_one))) (* 30.0 (cw_progress active_one)) 30.0))
+  	(draw_text cr active_one (ftod half_width) (ftod half_height) 90.)
   	void)))
 
 (bind-func stage_two
@@ -217,8 +133,8 @@
   	(cairo_arc cr (ftod half_width) (ftod half_height) (* 0.3 (ftod half_height)) 0.0 TWOPI)
 	(cairo_fill cr)
 
-    (draw_text cr active_two (ftod half_width) (+ (* 0.45 (ftod half_height)) (ftod half_height)) 30.0)
-    (draw_text cr active_one (ftod half_width) (+ (* 0.75 (ftod half_height)) (ftod half_height)) 30.0)
+    (draw_text cr active_two (ftod half_width) (ftod half_height) 60.0)
+    (draw_text cr active_one (ftod half_width) (+ (* 0.75 (ftod half_height)) (ftod half_height)) 60.0)
     void)))
 
 (bind-func stage_three
@@ -239,11 +155,9 @@
 		(cond ((equal (cw_active_count) 1) (stage_one cr))
 		      ((equal (cw_active_count) 2) (stage_two cr));;bug if 3rd instrument called twice
 		      ((equal (cw_active_count) 3) (stage_three cr))
-		      (else (stage_four cr)))
+		      ((equal (cw_active_count) 4) (stage_four cr))
+		      (else void))
     	void))
-
-
-
 
 
 

@@ -2,11 +2,12 @@ Script
 ----------
 
 
--Welcome
+-Thanks for coming
 -We are running a study... visualisations within livecoding
 -Livecoding (as some of you may already know) is the process of:
 	-programming for an audience for entertainment or education
--This study will be run in 2 parts with two performances by Ben
+-Purpose of this performance
+-This study will be run in 2 parts with two performances by Ben (2 10 minute sets)
 -We will get you to fill out a page of the survey after each performance
 -To get started... everyone should have received an information sheet and a survey paper
 -Please feel free to read the information sheet
