@@ -1,19 +1,20 @@
 Script
 ----------
 
-
 -Thanks for coming
--We are running a study... visualisations within livecoding
+-Today we are running a study... visualisations within livecoding
 -Livecoding (as some of you may already know) is the process of:
 	-programming for an audience for entertainment or education
--Purpose of this performance
--This study will be run in 2 parts with two performances by Ben (2 10 minute sets)
+-Purpose of this performance is to examine visuals within the space of live coding
+-This study will be run in 2 parts with two performances by Ben
+-The two performances will be about 10 minutes
 -We will get you to fill out a page of the survey after each performance
--To get started... everyone should have received an information sheet and a survey paper
--Please feel free to read the information sheet
--Once you have done that, could I get everyone to fill out just the FIRST page of the survey paper
--The first page of the survey is demographic information
--The remaining three pages will be completed throughout the following performances
+-To get started... everyone should have received an information sheet, a survey paper and a pen
+-Please feel free to read the information sheet + take it home
+-Once you have done that, please fill in just PART A of the survey paper now
+-The first page of the survey is general demographic information
+-The remaining three pages will be completed throughout the following performances, so please don't fill them in yet.
+-We'll give you a few minutes to fill in PART A and then continue with the first performance
 
 -----------Wait for people to finish------------------------------
 --------------------------------------------------------------------
@@ -24,7 +25,7 @@ Script
 ------------Wait for first performance to finish----------------
 --------------------------------------------------------------------
 
--Could I get everyone to fill in the SECOND page of the survey...
+-Could I get everyone to fill in PART B of the survey...
 
 
 -----------Wait for people to finish-------------------------------
@@ -35,6 +36,10 @@ Script
 ------------Wait for second performance to finish-----------------
 --------------------------------------------------------------------
 
--Could I get everyone to fill in the last two pages of the survey....
+-Could I get everyone to fill in PART C and D of the survey....
 -We have now finished the performances..
 -Please complete the survey and post into the designated box....
+-Thank you for your time
+
+
+
