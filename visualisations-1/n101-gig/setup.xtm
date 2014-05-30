@@ -63,7 +63,7 @@
 
 (define-sampler kit sampler_note_hermite_c sampler_fx)
 (sm-load-map kit *NI-Dakeat-kit-sample-map*)
-(sm-load-map kit *SSO-percussion-sample-map*)
+(sm-load-map kit *SSO-percussion-sample-map* 1)
 
 (bind-func dsp:[SAMPLE,SAMPLE,i64,i64,SAMPLE*]* 100000
   (let ((vu_meter (vu_meter_c 8 1472))) ;; approx 30fps
