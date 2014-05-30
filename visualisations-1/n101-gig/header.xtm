@@ -2,3 +2,5 @@
 ;; (define *research-project-dir* "/Users/arrian/Desktop/COMP4540/research-project")
 (sys:load (string-append *research-project-dir* "/visualisations-1/n101-gig/setup-aesthetic.xtm"))
 (sys:load (string-append *research-project-dir* "/visualisations-1/n101-gig/setup-didactic.xtm"))
+
+;; remember to set the tempo!
