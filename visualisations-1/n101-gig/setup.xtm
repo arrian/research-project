@@ -70,7 +70,7 @@
     (lambda (in time chan dat)
       (+ (vu_meter chan 1 (epad in time chan dat))
          (vu_meter chan 2 (fmsynth in time chan dat))
-         (vu_meter chan 3 (* .4 (fuzz_bass in time chan dat)))
+         (vu_meter chan 3 (subbass in time chan dat))
          (vu_meter chan 0 (kit in time chan dat))))))
 
 (dsp:set! dsp)
