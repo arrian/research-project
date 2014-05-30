@@ -7,3 +7,5 @@
 
 ;; start the animation loop (check the args are ok)
 (draw-loop (now) 1/30)
+
+(*metro* 'set-tempo 72)
