@@ -1,0 +1,59 @@
+;; a practice
+
+(*metro* 'set-tempo 60)
+
+(define chords
+  (lambda (beat dur root)
+    (let ((chrd (pc:make-chord 60 72 10 (pc:chord root '^))))
+      (play epad (list-ref chrd (real->integer (trir 0 (- (length chrd) 1) 1))) (cosr 40 10 1) dur)
+      (cv-callback (*metro* (+ beat (* .5 dur))) 'chords (+ beat dur)
+                1/4
+                (random (cdr (assoc root '((0 8)
+                                           (8 0)
+                                           (10 0)
+                                           (5 0)))))))))
+
+(chords (*metro* 'get-beat 4) 1/4 0)
+
+(define bass
+  (lambda (beat dur pitch)
+    (play subbass (if (> dur 3) pitch
+                      (pc:relative pitch (random 7) (pc:scale 0 'ionian)))
+          (+ 20 (random 50 70))
+          (if (< dur 2) (* .5 dur) dur))
+    (cv-callback (*metro* (+ beat (* .5 dur))) 'bass (+ beat dur)
+                 (if (< (modulo beat 8) 3)
+                     (random (list 1/2 1/2 1/4))
+                     (- 8 (modulo beat 8) dur))
+                 (if (= (modulo beat 16) 0)
+                     (if (< pitch 31)
+                         36
+                         (pc:relative pitch -1 (pc:scale 0 'mixolydian)))
+                     pitch))))
+
+(bass (*metro* 'get-beat 4) 8 36)
+
+(define drums
+  (lambda (beat dur)
+    (play kit 39 (random 40 50) .1)
+    (if (<> (modulo beat 1) 1/4)
+        (play kit 48 (random 40 50) .1)
+        (play kit 51 (random 40 50) .1))
+    (if (= (modulo beat 2) 0) (play kit *gm-kick* 110 .1))
+    (if (or (= (modulo beat 2) 1)
+            (= (modulo (modulo beat 4) 5/4) 1))
+        (play kit *gm-snare-2* (cosr 80 20 1) .1))
+    (if (= (modulo (modulo beat 4) 3/4) 0) (play kit *gm-kick-2* 90 .1))
+    (cv-callback (*metro* (+ beat (* .5 dur))) 'drums (+ beat dur) dur)))
+
+(drums (*metro* 'get-beat 4) 1/4)
+
+(define jiblet
+  (lambda (beat dur i)
+    (play fmsynth (pc:relative 72 i (pc:scale 0 'dorian)) (random 40 60) (* .5 dur))
+    (cv-callback (*metro* (+ beat (* .5 dur))) 'jiblet (+ beat dur)
+                 (if (= (modulo (* -1 i) 3) 0)
+                     1/4 3/4)
+                 (if (> i -8) (- i 1) 0))))
+
+(jiblet (*metro* 'get-beat 4) 3/4 0)

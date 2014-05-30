@@ -1,0 +1,50 @@
+;-*- mode: Extempore; extempore-default-port: 7098; -*-
+(ipc:load "primary" "/Users/ben/Code/xtm/arrian-research-project/visualisations-1/n101-gig/setup-aesthetic.xtm")
+(sys:load "libs/core/pc_ivl.xtm")
+
+(play-note (now) kit 60 80 44100)
+
+(define percussion
+  (lambda (beat dur i widget)
+    (play kit (+ i (random -4 5)) (- (random 80 100) 20) dur)
+    (cv-callback (*metro* (+ beat (* .5 dur))) 'percussion (+ beat dur) dur i
+                 widget)))
+
+(define percussion
+  (lambda (beat dur i widget)
+    (play kit (+ i (random -4 5)) (- (random 80 100) 20) dur)
+    (cv-callback (*metro* (+ beat (* .5 dur))) 'percussion (+ beat dur) dur i
+                 widget)))
+
+(percussion (*metro* 'get-beat 4) 1 100 -1)
+
+(define theme
+  (lambda (beat dlist plist)
+    (play trumpet (pc:relative 60 (car plist) (pc:scale 0 'ionian)) 80 (car dlist))
+    (cv-callback (*metro* (+ beat (* .5 (car dlist)))) 'theme (+ beat (car dlist))
+              (rotate dlist -1)
+              (rotate plist -1))))
+
+(theme (*metro* 'get-beat 4) '(2 1 -4 2 2) '(0 0 -1))
+
+(play-note (now) trumpet 60 80 44100 (random 3))
+
+(define drums
+  (lambda (beat dur)
+    (play kit (cosr 41 5 1/8) (cosr 60 10 2) .1 1)
+    (if (= (modulo beat 1) 0) (play kit *gm-kick* 100 .1 1))
+    (if (= (modulo beat 4) 3)
+        (play kit *gm-snare-2* 100 .1 1))
+    (if (and (= (modulo beat 3/4) 0)
+             (> (modulo beat 8) 5))
+        (play kit 40 (random 80 100) .1 1))
+    (cv-callback (*metro* (+ beat (* .5 dur))) 'drums (+ beat dur) dur)))
+
+(drums (*metro* 'get-beat 4) 1/4)
+
+(define claribass
+  (lambda (beat dur root)
+    (play clarinet (+ 36 root) 80 dur 0)
+    (cv-callback (*metro* (+ beat (* .5 dur))) 'claribass (+ beat dur) dur root)))
+
+(claribass (*metro* 'get-beat 4) 4 0)
