@@ -2,8 +2,6 @@
 (sys:load (string-append *research-project-dir* "/visualisations-1/n101-gig/setup.xtm"))
 (sys:load (string-append *research-project-dir* "/visualisations-1/visualisation-didactic.xtm"))
 
-(*metro* 'set-tempo 60)
-
 ;; create the graphics context
 (define ctx (gl:make-ctx ":0.0" fullscreen 0.0 0.0 width height))
 
