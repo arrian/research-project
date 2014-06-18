@@ -1,4 +1,6 @@
-#Presentation Requirements (Damien's notes)
+# Presentation Requirements 
+
+## Damien's Notes
 
 - Plan carefully what you're going to say
 - Should be approximately 20 slides, including a Title Slide and an outline of the talk
@@ -11,3 +13,51 @@
 - Remember it's about taking the audience from where they are to where you want them to be.
 - People want to see enthusiasm about our work.
 - Above all, remind us what the project is and why it's interesting.
+
+## John Slaney's Requirements
+Your talk should remind us all of what your project is, and why it's interesting, and then focus on progress of your project to date and any preliminary results you may have. Any plan you may have for finishing it in the remaining time should also get a mention.
+
+
+
+
+# Presentation Slides
+
+-intro slide
+	-name of the project - code understanding through visualisation
+	-what is this project about? - assisting the audience to understand 
+-overview
+-background
+-what the project is, what the project is about
+-why is this project interesting/important
+-what has been developed/implemented
+	-investigative approach being used - iterative, working with the artist, applying software engineering principles to the development and implementation of the software, grounded theory
+	-model being used - didactic vs aesthetic
+	-balance between developing informative annotations without being invasive
+	-
+-study 1 - purpose
+	-to determine the best approach considering audience feedback from a performance with only code projected
+	-conducted at an art festival - demographics of the audience were those with little experience coding, but predominantly coding experience
+-study 1 - data
+	-
+-study 1 - results
+-study 2 - purpose
+-study 2 - data
+-study 2 - results
+-how do these studies relate to project
+-timeline/progress
+-remaining time
+-prototypes
+-what do i intend to achieve
+-'take a step backwards'
+-what to take away from this
+-conclusion/questions
+
+
+
+
+
+
+
+
+
+
