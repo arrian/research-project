@@ -1,0 +1,29 @@
+﻿Internals\\liveness - § 14 references coded [ 7.71% Coverage]
+Reference 1 - 0.32% Coverage
+I liked these visuals better
+Reference 2 - 0.31% Coverage
+Visualisations were nicer
+Reference 3 - 0.35% Coverage
+Yes. Response to code changes.
+Reference 4 - 0.76% Coverage
+Variation in visualisations in response to the code & music changes
+Reference 5 - 0.13% Coverage
+vis are cool
+Reference 6 - 1.05% Coverage
+random noise' sequences when two instruments were playing was a really interesting metaphor
+Reference 7 - 0.48% Coverage
+Much more of a pleasant addition this time.
+Reference 8 - 0.74% Coverage
+The visualizations were less dominating and more complementary.
+Reference 9 - 0.72% Coverage
+Vis much more fun when you can see what he's doing & what's coming.
+Reference 10 - 0.50% Coverage
+Yes. The triggers when the sounds are played.
+Reference 11 - 0.04% Coverage
+yes
+Reference 12 - 0.44% Coverage
+even though it was interesting to watch
+Reference 13 - 1.08% Coverage
+yeah - it was easy to experience he real-time correspondence between sound and what we could see.
+Reference 14 - 0.80% Coverage
+the visualisations helped to show when a piece of code started working.

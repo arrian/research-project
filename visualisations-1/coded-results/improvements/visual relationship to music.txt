@@ -1,0 +1,33 @@
+﻿Internals\\improvements - § 16 references coded [ 21.94% Coverage]
+Reference 1 - 1.10% Coverage
+Unsure how the visualizations related to music -> need to be intuitive
+Reference 2 - 1.78% Coverage
+I found the three wavy live vis confusing - knowing what it was refering in the music (labels) would have been good.
+Reference 3 - 1.51% Coverage
+It might be interesting to look at some of the literature on synaethesia for inspiration on this.
+Reference 4 - 0.90% Coverage
+Second one was better but did not reflect rhythm too much.
+Reference 5 - 0.93% Coverage
+but they don't feel like they reflected what is playing well
+Reference 6 - 1.27% Coverage
+Movement of animations is synch with beats. Small beats -> small animations etc.
+Reference 7 - 0.92% Coverage
+Would be better for vis to relfect each element of the music
+Reference 8 - 0.77% Coverage
+maybe better if they relfect the mood of the music
+Reference 9 - 2.54% Coverage
+perhaps have a stronger correlations with hush tones -> defined shapes. Baselines -> wide and soft shapes... that animations follow the beat more consistently.
+Reference 10 - 1.63% Coverage
+The interaction between the sound and the visuals is interesting and could be pushed much more forward.
+Reference 11 - 2.80% Coverage
+It would have been better if the visualisation was more uniform in the last performance + more meaningful in terms of the beat + rhythm rather than the time it took for the code to run.
+Reference 12 - 0.92% Coverage
+visualisation changing size as the tempo went up and down.
+Reference 13 - 1.21% Coverage
+For the first one, the visualisation could be based on the melody of the music.
+Reference 14 - 1.50% Coverage
+One can also create a visualisation that shows the layer of the music. From base up to melody etc.
+Reference 15 - 1.50% Coverage
+Maybe it would be cool to keep them all up rather than taking them down or as an instrument enters.
+Reference 16 - 0.67% Coverage
+Representation of pitch as well as volume?

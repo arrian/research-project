@@ -1,0 +1,5 @@
+﻿Internals\\liveness - § 2 references coded [ 1.91% Coverage]
+Reference 1 - 0.36% Coverage
+not as much as first performance
+Reference 2 - 1.55% Coverage
+I thought the last visualisations [2 didactic] were better and in hindsight helped more with communicating that the performance was live.

@@ -1,0 +1,53 @@
+﻿Internals\\liveness - § 26 references coded [ 16.78% Coverage]
+Reference 1 - 0.46% Coverage
+Probably not because I had the context set
+Reference 2 - 1.01% Coverage
+I guess we're used to auto-visualisations of music so that didn't contribute quite as much
+Reference 3 - 1.09% Coverage
+Also I didn't feel the visualisations were very representitive of what was happening musically.
+Reference 4 - 0.27% Coverage
+visualisations did not
+Reference 5 - 0.82% Coverage
+Visualisations not so much - vis are cool but not clear what they represent
+Reference 6 - 0.54% Coverage
+No. visualisations need to be clearer in the code
+Reference 7 - 0.11% Coverage
+in sync??
+Reference 8 - 0.62% Coverage
+The visualisations were interesting but distracting.
+Reference 9 - 0.69% Coverage
+May be better having a second projection for visualisations.
+Reference 10 - 0.04% Coverage
+no.
+Reference 11 - 0.57% Coverage
+the visuals only responded to what was being typed.
+Reference 12 - 0.89% Coverage
+transitions between ""musical forms"" didn't occur at the most expected times
+Reference 13 - 0.53% Coverage
+More could be done giving interesting results.
+Reference 14 - 0.74% Coverage
+viualisations were a bit all over the shop + not all that meaningful
+Reference 15 - 0.68% Coverage
+not very interesting or meaningful for chords, bleeps + base
+Reference 16 - 0.93% Coverage
+Also the [circle in circle] aren't appear in time neither the [backtick in circle].
+Reference 17 - 0.88% Coverage
+Generally took away from the code + not a good visualisation of what is going on.
+Reference 18 - 0.31% Coverage
+Visualisations not so much
+Reference 19 - 0.50% Coverage
+perhaps made performance seem too polished.
+Reference 20 - 0.43% Coverage
+This taking away fom live aspect of it.
+Reference 21 - 0.65% Coverage
+I found the projected visualisation a little simplistic.
+Reference 22 - 0.48% Coverage
+The graphics were distracting in this set.
+Reference 23 - 0.41% Coverage
+It felt harder to understand the code
+Reference 24 - 1.74% Coverage
+The visualisations for this performance were overly distracting from the experience and thereby detracted from the notion that it was a live performance.
+Reference 25 - 0.73% Coverage
+The visualisations distracted from the code + because the focus.
+Reference 26 - 0.65% Coverage
+I found them distracting & preferred just to read the code.

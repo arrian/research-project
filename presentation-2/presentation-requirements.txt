@@ -18,41 +18,75 @@
 Your talk should remind us all of what your project is, and why it's interesting, and then focus on progress of your project to date and any preliminary results you may have. Any plan you may have for finishing it in the remaining time should also get a mention.
 
 
-
+------------------------
 
 # Presentation Slides
 
--intro slide
-	-name of the project - code understanding through visualisation
-	-what is this project about? - assisting the audience to understand 
--overview
--background
--what the project is, what the project is about
--why is this project interesting/important
--what has been developed/implemented
-	-investigative approach being used - iterative, working with the artist, applying software engineering principles to the development and implementation of the software, grounded theory
-	-model being used - didactic vs aesthetic
-	-balance between developing informative annotations without being invasive
-	-
--study 1 - purpose
-	-to determine the best approach considering audience feedback from a performance with only code projected
-	-conducted at an art festival - demographics of the audience were those with little experience coding, but predominantly coding experience
--study 1 - data
-	-
--study 1 - results
--study 2 - purpose
--study 2 - data
--study 2 - results
--how do these studies relate to project
--timeline/progress
--remaining time
--prototypes
--what do i intend to achieve
--'take a step backwards'
--what to take away from this
--conclusion/questions
+- intro slide
+	- name of the project - code understanding through visualisation
+	- what is this project about? - assisting in the comprehension of code 
+- overview
+	- investigating visualisations within the space of live coding
+- background
+	- what is live coding?
+- what the project is, what the project is about
+	- can we combine these visualisations in a meaningful way to aid in code comprehension?
+- why is this project interesting/important
+	- interesting application of software engineering process to what is currently predominantly a musical area - (implications to the use of live coding in other areas)
+	- implications to high level understanding of code concepts and abstractions - useful for the wider population
+	- implications in code comprehension among those experienced with programming - will be investigating this more in an upcoming study
+- what has been developed/implemented
+	- investigative approach being used - iterative, working with the artist, applying software engineering principles to the development and implementation of the software, grounded theory
+	- model being used - didactic vs aesthetic, code vs music, 
+	- balance between developing informative annotations without being invasive
+- study 1 - Details and Purpose
+	- to determine the best approach considering audience feedback from a performance with only code projected
+	- conducted at an art festival - demographics of the audience were those with little experience coding, but predominantly coding experience
+- study 1 - Data & Results
+	- 14 respondents
+- study 1 - Results
+- study 2 - Details and Purpose
+	- conducted to determine if the visualisations developed were heading in the right direction
+- study 2 - data
+	- 41 respondents
+- study 2 - results
+	- were they heading in the right direction? much improvement to be made
+	- what improvements?
+	- what is the strategy to improve?
+- how do these studies relate to project
+	- determining the best approach to aid in understanding
+	- testing out prototypes
+- timeline/progress
+- remaining time
+- prototypes
+- what do i intend to achieve
+- 'take a step backwards'
+	- relevance to the 
+- what to take away from this
+- conclusion/questions
 
 
+
+
+
+
+
+# Potential Questions
+-what software engineering approach has been taken?
+	-heurisitic evaluation - over the next study
+	-iterative approach
+	-incremental development and the exposure of an incremental development process
+	-investigation of abstraction and seperation of concerns within the context of visualsations
+	-boehms seven principles:
+		(1) manage using a phased life-cycle plan
+		(2) perform continuous validation
+		(3) maintain disciplined product control
+		(4) use modern programming practices
+		(5) maintain clear accountability for results
+		(6) use better and fewer people
+		(7) maintain a commitement to improve the process
+	-human centred approach
+	-approaching the question of complexity - what is the best way to integrate software engineering into other types of engineering... how do we make software engineering more useful to the general public?
 
 
 

@@ -1,0 +1,13 @@
+﻿Internals\\improvements - § 6 references coded [ 6.34% Coverage]
+Reference 1 - 1.33% Coverage
+some part of music was monotonous. Too many use of ""random"" where music was off beat
+Reference 2 - 1.53% Coverage
+I feel vis could be more complex - show more information. May be combine some (segmented circles?)
+Reference 3 - 0.60% Coverage
+First one was factual but ""boring"".
+Reference 4 - 1.66% Coverage
+Perhaps a more vivid variation when the code is updated, especially when adding or removing instruments.
+Reference 5 - 0.73% Coverage
+could you ""live code"" the colour pallettes?
+Reference 6 - 0.49% Coverage
+but it's a bit boring in a sense.

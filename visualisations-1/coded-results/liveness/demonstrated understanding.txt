@@ -1,0 +1,13 @@
+Internals\\liveness - § 6 references coded [ 4.84% Coverage]
+Reference 1 - 0.76% Coverage
+Changing number produced changes in tone and speed of the music pitch
+Reference 2 - 0.76% Coverage
+Visualisation explained how these actions translated into sound.
+Reference 3 - 0.56% Coverage
+Understood the code much more the 2nd time around.
+Reference 4 - 0.58% Coverage
+I assume it was representing the time of each element
+Reference 5 - 0.93% Coverage
+the connection between the code changing and the music/visualisations changing.
+Reference 6 - 1.25% Coverage
+they were much more mechanistic, displaying the state of the algorithm more obviously than in the previous gig.

@@ -1,0 +1,5 @@
+﻿Internals\\liveness - § 2 references coded [ 0.53% Coverage]
+Reference 1 - 0.32% Coverage
+I liked these visuals better
+Reference 2 - 0.21% Coverage
+Yes but not as much;

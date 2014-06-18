@@ -1,0 +1,3 @@
+﻿Internals\\improvements - § 1 reference coded [ 1.40% Coverage]
+Reference 1 - 1.40% Coverage
+If you must use the visuals, probably images with the instrument being played could help.

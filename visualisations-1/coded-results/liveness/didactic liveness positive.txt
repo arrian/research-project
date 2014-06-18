@@ -1,0 +1,39 @@
+﻿Internals\\liveness - § 19 references coded [ 11.72% Coverage]
+Reference 1 - 0.20% Coverage
+Yes. Live editing
+Reference 2 - 0.04% Coverage
+Yes
+Reference 3 - 0.70% Coverage
+helped more with communicating that the performance was live.
+Reference 4 - 1.12% Coverage
+the visualisations were far more interesting to look at so it was good to have a combination of the two
+Reference 5 - 0.13% Coverage
+vis are cool
+Reference 6 - 1.34% Coverage
+Code showed what the musician was doing physically. Visualisation explained how these actions translated into sound.
+Reference 7 - 0.76% Coverage
+the visualization seemed to change/evolve with the flow of the work
+Reference 8 - 0.43% Coverage
+The visualisations were interesting
+Reference 9 - 0.94% Coverage
+Yes due to the way the visualisations changed according to which tracks were active.
+Reference 10 - 0.62% Coverage
+Yes. The ""progression bar[?]"" aspects interesting.
+Reference 11 - 0.56% Coverage
+the visualisation shows the performance is live.
+Reference 12 - 0.04% Coverage
+Yes
+Reference 13 - 0.05% Coverage
+Yes.
+Reference 14 - 0.49% Coverage
+The visualisation now make a bit more sense.
+Reference 15 - 0.84% Coverage
+It was easier to see when each of the elements were working at any given time.
+Reference 16 - 0.69% Coverage
+Still clear it was a live performance. Other than that, great.
+Reference 17 - 0.88% Coverage
+This time the visualisations clearly showed the changes being made to the code
+Reference 18 - 1.25% Coverage
+The visualisations really helped to convey the timing required for each function to complete a cycle or period.
+Reference 19 - 0.64% Coverage
+It was easier to follow this visualisation than the code.

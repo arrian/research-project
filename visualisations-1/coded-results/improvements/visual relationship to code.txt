@@ -1,0 +1,9 @@
+﻿Internals\\improvements - § 4 references coded [ 7.81% Coverage]
+Reference 1 - 1.18% Coverage
+Second set of visualisations looks prettier but less connected with code.
+Reference 2 - 2.41% Coverage
+It would be really cool once you edit a code line and then activate it / schedule for it to morph into a visualisation for as long as this line of code is active?
+Reference 3 - 3.03% Coverage
+It will be better not just relate the function to the sound but relate every beat to the sound or to the code responsible for that beat as well. Think about flashing s-exps rather than flashing HUD.
+Reference 4 - 1.20% Coverage
+For the first one including name of methods(?) with each new visualisation.

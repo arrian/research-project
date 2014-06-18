@@ -1,0 +1,17 @@
+﻿Internals\\liveness - § 8 references coded [ 7.27% Coverage]
+Reference 1 - 0.88% Coverage
+You can see code changing and visualisations changing as soon as code changes.
+Reference 2 - 0.65% Coverage
+Yes. Connection between code and vis was understandable.
+Reference 3 - 0.46% Coverage
+it was good to have a combination of the two
+Reference 4 - 1.00% Coverage
+The visualisation shows which function is responsible for which component of the music.
+Reference 5 - 1.26% Coverage
+Changes in variables within functions left me anticipating how the performance was also going to change as well.
+Reference 6 - 0.97% Coverage
+Yes, because they changed as the performanec progressed + were linked to code changes.
+Reference 7 - 1.21% Coverage
+Yes -> they related to beat/completion of repeat + they were changing/added/removed as the code was edited.
+Reference 8 - 0.84% Coverage
+It was easier to see when each of the elements were working at any given time.

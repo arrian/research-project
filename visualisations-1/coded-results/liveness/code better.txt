@@ -1,0 +1,11 @@
+﻿Internals\\liveness - § 5 references coded [ 1.49% Coverage]
+Reference 1 - 0.89% Coverage
+the code change was more helpful in communicating that the performance was live
+Reference 2 - 0.12% Coverage
+Code - yes.
+Reference 3 - 0.13% Coverage
+the code did
+Reference 4 - 0.16% Coverage
+Same as before
+Reference 5 - 0.19% Coverage
+Code definitely

@@ -1,0 +1,17 @@
+﻿Internals\\improvements - § 8 references coded [ 8.91% Coverage]
+Reference 1 - 1.16% Coverage
+You need separate screens... overlayed code and graphics was confusing.
+Reference 2 - 0.82% Coverage
+Maybe have the code and visuals on different screens
+Reference 3 - 1.20% Coverage
+Being on a separate screen might help so they aren't competing with the code.
+Reference 4 - 1.16% Coverage
+A surrounding projection would be better (though trickier to organise).
+Reference 5 - 1.08% Coverage
+The words in the second performance also obscured some lines of code.
+Reference 6 - 1.31% Coverage
+Having 2 separate screens could help because at times the vis was covering the code.
+Reference 7 - 1.12% Coverage
+Feel the rest blocked too much code and made it difficult to see the code.
+Reference 8 - 1.07% Coverage
+Perhaps the code & the visualisations could be on separate screens?

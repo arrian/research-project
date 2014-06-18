@@ -1,0 +1,11 @@
+﻿Internals\\improvements - § 5 references coded [ 5.01% Coverage]
+Reference 1 - 0.62% Coverage
+Don't be overly stimulating visuallly
+Reference 2 - 0.71% Coverage
+The second one w/ the drums was too 'flashing'
+Reference 3 - 0.82% Coverage
+You could use coour + like pulses to reflect the beat?
+Reference 4 - 1.03% Coverage
+Flashing images in the second performance were a bit hard to watch
+Reference 5 - 1.83% Coverage
+The small speckly squares made reading the code hard -> some way to make them interfere less for reading would be good.

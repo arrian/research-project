@@ -1,0 +1,43 @@
+﻿Internals\\liveness - § 21 references coded [ 10.85% Coverage]
+Reference 1 - 0.31% Coverage
+Confusing when vis changed
+Reference 2 - 0.70% Coverage
+I still did not feel they represented the code or music very well
+Reference 3 - 0.52% Coverage
+Doesn't seem to be linked with the code as much.
+Reference 4 - 0.21% Coverage
+didn't change much
+Reference 5 - 0.23% Coverage
+Visualisations - no
+Reference 6 - 0.16% Coverage
+Same as before
+Reference 7 - 0.77% Coverage
+No. Does the code influence visualisations? Influence is not clear.
+Reference 8 - 0.66% Coverage
+it didn't actually look random... too evenly distributed?
+Reference 9 - 0.57% Coverage
+Not really - seemed disconnected from performance
+Reference 10 - 0.36% Coverage
+The visualisations not so much.
+Reference 11 - 0.64% Coverage
+no. the visuals seemed to be timed? didn't seem to be live.
+Reference 12 - 0.65% Coverage
+Visualisations can *distract* from appreciation of code
+Reference 13 - 0.43% Coverage
+But the visualisation does not help :(
+Reference 14 - 0.98% Coverage
+to me the visualisations did not help communicate to me the fact that this was live coding
+Reference 15 - 1.18% Coverage
+Visualisations just felt like a 90s windows screensaver that changed w/ each addition to the performance
+Reference 16 - 0.56% Coverage
+But I did not grasp the meaning of visualisations,
+Reference 17 - 0.54% Coverage
+Some of the visualisation did not make much sense
+Reference 18 - 0.33% Coverage
+only made the code hard to read
+Reference 19 - 0.20% Coverage
+Not necessarily -
+Reference 20 - 0.61% Coverage
+the visualisations did nothing to suggest it was live.
+Reference 21 - 0.24% Coverage
+Visualisations: no.
