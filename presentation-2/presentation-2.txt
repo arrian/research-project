@@ -1,0 +1,156 @@
+
+# Presentation 2
+
+## Introduction
+	- project is understanding through code visualisation
+	- investigating code visualisations within the space of live coding
+
+## Outline
+	- background
+	- importance
+	- progress
+		- models
+		- study 1
+		- study 2
+		- timeline
+	- remaining time
+	- what will be achieved
+	- what to take away
+
+## Background
+	- this project has focussed on assisting in code comprehension
+	- code is often difficult to quickly understand even for the experienced
+	- some observers may lack the experience to understand the software or the programming process
+
+	- visualisations would be the best approach to help improve source code comprehension
+	- literature pointed to visualisation assisting with realtime understanding in complex domains (eg. infovis and datavis)
+	- determined that *live coding* would be relevant and good application domain
+		- gives the audience insight into the programming process - this has been taken advantage of
+		- huge potential for visualisations
+		- need for realtime understanding
+
+	- what is live coding? 
+		- some of you may already know
+		- method of programming for an audience for informative or artistic purposes
+		- the live coder displays their screen to an audience
+		- show their code as they are working on it building a constantly running ever changing program
+	
+	- the question we asked at the start of the year was: how can we combine code visualisations and music visualisations in a meaningful way to aid code comprehension?
+
+## Importance of Project
+	- project has a number of implications
+	- implications to high level understanding of code concepts and abstractions - useful for the wider population
+	- implications in code comprehension among those experienced with programming - will be investigating this more in an upcoming study
+	- interesting application of software engineering process
+
+	- wider value to education and entertainment within the space of live coding
+	- wider exposure to the programming process
+	- application beyond live coding 
+
+## Progress
+ 	- iterative and user-centric design approach
+	- investigate users, develop visualisations, test on users, repeat
+	- a field study and a more formal lab study have been conducted to determine and evaluate approaches
+	- a number of interviews have also been conducted
+	- studying users to elicit requirements
+	- also working with a live coding artist (Ben) to elicit requirements
+	- number of visualisations prototyped and tested
+
+## Visual Variables
+	- visualisations developed inspired by Bertin's visual variables
+	- using 2d space, and selecting one of the 6 outer variables most effective
+	- more than one of the outer variables and the visualisation becomes confusing
+	- this means a maximum of 3 data dimensions displayed at a time
+
+## Hierarchy of Graphical Elements
+	- developed by cleveland and published in 1994
+	- arranges graphical elements on a scale from best to worst in terms of specificity
+	- both the visual variables and hierarchy of graphical elements have influenced the creation of the visualisation analysis model...
+
+## Visualisation Analysis Model
+	- developed a model for analysing visualisations, developing new ones
+	- intent and coverage examined
+	- didactic intent vs aesthetic intent - recent literature on the effect of data visualisation aesthetics on attention and error
+	- generic coverage vs specific coverage - large history and body of literature on effective visual elements
+	- concepts from information visualisation highly relevant to both of these dimensions
+
+## Visualisation Analysis Model - Prelim Arrows
+	- preliminary studies focussed on analysing visualisations falling within the generic coverage dimension and the range of didactic to aesthetic intent
+	- future studies will further investigate the coverage dimension
+
+## Study 1
+	- field study with survey conducted at art festival
+	- generate user requirements
+	- goal was to determine the best approach to begin developing visualisations
+	- supplementary goal of determining the relationship between understanding and enjoyment
+
+	- 14 respondents
+	- decided to conduct follow up interviews with some of those present
+	- from this determined that visualisations appeared to influence enjoyment
+	- determined that focus should be on helping the audience understand the link between code changes and music changes
+	- cemented the idea of using visualisations as a means of realtime understanding
+	- provided a basis on which to build visualisations
+
+## Study 2 - Details and Purpose
+	- conducted a lab study
+	- prototyped visualistions based around concepts from first study
+	- developed two sets of visualisations:
+		- one with aesthetic intent
+		- one with didactic intent
+	- for this early study, wanted to minimise number of data dimensions displayed
+	- easier to examine... see what worked, what didn't
+	- conducted to determine if the visualisations developed were heading in the right direction
+
+## Prototypes
+
+## Visualisations
+
+## Study 2 - data & results
+	- still in the process of analysing data... a full analysis is to come
+	- 41 respondents
+	- has provided direction for improvement
+		- focus on simplicity
+		- approach of mapping number of functions active to visual objects on the screen provided visual interest but did not provide enough detail, while also competing with the highly detailed code. 
+		- reactivity with the music provided an interesting visual dimension but did not necessarily provide more interesting details about the code
+		- indication of more understanding but less enjoyment when using 2 dimensions of data
+		- suggestions for improvement
+			- eg. use of bold colours and fast changes did not contribute well to understanding
+
+## Timeline
+	- tracking well
+	- on schedule as defined by the initially presented timeline
+		- 2 studies completed
+		- 1 more planned... end of july or start of august
+		- given the progress... potential for 1 more after that
+	- have not had significant delays
+
+## Remaining time
+	- run another study... potential for another study after that
+	- build some more prototypes
+	- further develop model
+	- currently prototyping code manipulation visualisations and code structure visualisations
+	- further analysis of the data and investigation of the literature will inform which of these to develop further
+
+## What Do I Intend to Achieve?
+	- effective base level visualisations of code that indicate visual understanding of code
+	- questions that we are still yet to ask
+		- how can we better communicate the programmer's intention?
+		- how can we better communicate the program's intention?
+
+## What to Take Away From This
+	- project on track
+	- visualisations show potential for influencing both understanding and enjoyment
+	- will focus more effort for next study on linking code and visual to achieve original goal of understanding through visualisation
+
+
+
+## Conclusion
+	- thanks for listening
+	- questions?
+
+
+-----------------------
+
+	- taking a step backwards... 
+	- coming back to my initial question...
+	- how can.........................

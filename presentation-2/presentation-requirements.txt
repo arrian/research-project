@@ -22,6 +22,7 @@ Your talk should remind us all of what your project is, and why it's interesting
 
 # Presentation Slides
 
+
 ## Intro slide
 	- project is code understanding through visualisation
 	- investigating code visualisations within the space of live coding
@@ -43,20 +44,17 @@ Your talk should remind us all of what your project is, and why it's interesting
 	- code is often difficult to quickly understand
 	- some observers may lack the experience to understand the software or the programming process
 
+ 	-realtime..
 	- determined that visualisations would be the best approach to help improve source code comprehension
 	- literature points to visualisation assisting with realtime understanding in complex domains (eg. infovis)
 	- determined that *live coding* would be a good application domain because it revealed the programming process
 
-	/////- we have focused on specific application of visualsations to live coding
 	- what is live coding? 
 		- some of you may already know
-		- for those who don't:
-			- method of programming in front of an audience for artistic or informative purposes
-			- the live coder displays their screen to an audience
-			- live coder shows their code as they are working on it building a constantly running ever changing program
-			- key point is that program is running while changes are being made 
-			- often focusses on improvisation - the programmer often has to think on their feet
-	-what does live coding achieve / why is it relevant?
+		- method of programming in front of an audience for artistic or informative purposes
+		- the live coder displays their screen to an audience
+		- live coder shows their code as they are working on it building a constantly running ever changing program
+	- why is live coding relevant?
 		-gives the audience insight into the programming process - this has been taken advantage of
 	
 	- taking a user-centred design approach
@@ -90,6 +88,7 @@ Your talk should remind us all of what your project is, and why it's interesting
 	- applying software engineering principles to the development and implementation of the software
 
 ## Study 1 - Background and Purpose
+	field study and requirements
 	- survey of live coding performance conducted at an art festival 
 	- goal was to determine the best approach to begin developing visualisations
 	- supplementary goal of determining the relationship between understanding and enjoyment
@@ -119,7 +118,7 @@ Your talk should remind us all of what your project is, and why it's interesting
 		- projector screens
 		- use of bold colours and fast changes did not contribute well to understanding
 		- etc...
-	- analysis determined that...
+	- analysis determined that more information dimensions 
 	- what is the strategy to improve?
 		- previous visualisations had 1 or 2 dimensions of information
 		- focus on simplicity
@@ -154,6 +153,9 @@ Your talk should remind us all of what your project is, and why it's interesting
 		- how can we better communicate the program's intention?
 
 ## 'Take a step backwards'
+	- what is the purpose
+	- what 
+where is the action?
 	- relevance to code comprehension?
 		- application of visualisations to domain of 
 	- relevance to visualisation?
@@ -176,7 +178,6 @@ Your talk should remind us all of what your project is, and why it's interesting
 	- thanks for listening
 	- questions?
 
------------------------------------ 2 mins remaining
 
 
 
@@ -184,7 +185,7 @@ Your talk should remind us all of what your project is, and why it's interesting
 
 
 
-
+-----------------------------
 
 # Potential Questions
 - what software engineering approach has been taken?
@@ -209,4 +210,5 @@ Your talk should remind us all of what your project is, and why it's interesting
 - grounded theory?
 	- codes, concepts, categories, theories
 	- certainly has relevance to this area
-
+- why didactic vs aesthetic?
+	- 
