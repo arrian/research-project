@@ -23,47 +23,141 @@ Your talk should remind us all of what your project is, and why it's interesting
 # Presentation Slides
 
 - intro slide
-	- name of the project - code understanding through visualisation
-	- what is this project about? - assisting in the comprehension of code 
-- overview
+	- project is code understanding through visualisation
 	- investigating visualisations within the space of live coding
+
+- overview
+	- Background
+	- Importance
+	- Study 1
+	- Study 2
+	- Results
+	- Timeline
+	- Progress
+	- Remaining time
+	- What will be achieved
+	- What to take away
+	- Conclusion
+
 - background
-	- what is live coding?
-- what the project is, what the project is about
-	- can we combine these visualisations in a meaningful way to aid in code comprehension?
+	- this project is focussing on assisting in code comprehension
+	- code is often difficult to quickly understand
+	- some observers may lack the experience to understand the software or the programming process
+
+	- determined that visualisations would be the best approach to help improve source code comprehension
+	- literature points to visualisation assisting with realtime understanding in complex domains (eg. infovis)
+	- determined that *live coding* would be a good application domain because it revealed the programming process
+
+	- we have focused on specific application of visualsations to live coding
+	- what is live coding? 
+		- some of you may already know
+		- for those who don't:
+			- method of programming in front of an audience for artistic or informative purposes
+			- the live coder displays their screen to an audience
+			- live coder shows their code as they are working on it building a constantly running ever changing program
+			- key point is that program is running while changes are being made 
+			- often focusses on improvisation - the programmer often has to think on their feet
+	-what does live coding achieve / why is it relevant?
+		-gives the audience insight into the programming process - this has been taken advantage of
+	
+	- this project was started with the intention of combining the code visualisation domain and the music visualisation domain
+	- the question we asked at the start of the year was: can we combine these two domain visualisations in a meaningful way to aid code comprehension?
+
 - why is this project interesting/important
-	- interesting application of software engineering process to what is currently predominantly a musical area - (implications to the use of live coding in other areas)
-	- implications to high level understanding of code concepts and abstractions - useful for the wider population
-	- implications in code comprehension among those experienced with programming - will be investigating this more in an upcoming study
-- what has been developed/implemented
-	- investigative approach being used - iterative, working with the artist, applying software engineering principles to the development and implementation of the software, grounded theory
-	- model being used - didactic vs aesthetic, code vs music, 
-	- balance between developing informative annotations without being invasive
-- study 1 - Details and Purpose
-	- to determine the best approach considering audience feedback from a performance with only code projected
-	- conducted at an art festival - demographics of the audience were those with little experience coding, but predominantly coding experience
+	- number of implications
+		- wider exposure to the programming process
+		- wider value to education and entertainment within the space of live coding
+		- interesting application of software engineering process
+
+		- implications to high level understanding of code concepts and abstractions - useful for the wider population
+		- implications in code comprehension among those experienced with programming - will be investigating this more in an upcoming study
+		- application beyond live coding 
+		- many types of programming and sdlc have features of live coding... application to these
+
+- progress... what has been developed/implemented
+	- iterative approach being used
+	- working with the artist to elicit requirements
+	- user-centred design... surveys conducted to determine approaches to take
+	- examining visualisations using didactic vs aesthetic and code visualisation vs music visualisation models 
+	- concepts from information visualisation highly relevant
+	- visualisations developed inspired by Bertin's planar and 7 retinal variables... additional investigation of relevance of motion/ temporal information
+	
+	- balance between developing informative visualisations/annotations without being invasive
+	- applying software engineering principles to the development and implementation of the software
+
+- study 1 - Background and Purpose
+	- survey of live coding performance conducted at an art festival 
+	- demographics of the audience were those with little experience coding, but predominantly musical experience
+	- goal was to determine the best approach to begin developing visualisations
+	- supplementary goal of determining the relationship between understanding and enjoyment
+	- only projected the code without visualisations
+	- investigated understanding and enjoyment of the audience through survey
+
 - study 1 - Data & Results
 	- 14 respondents
-- study 1 - Results
+	- from this determined that visualisations appeared to influence enjoyment but the results were inconclusive
+	- decided to conduct follow up interviews with some of those present
+	- determined that focus should be on helping the audience understand the link between code changes and music changes
+	- cemented the idea of using visualisations as the means of understanding
+
 - study 2 - Details and Purpose
+	- built a number of visualisation prototypes 
+	- one set based more around aesthetic nature of visualisations but still representing high level code structures
+	- other on didactic aspects - visuals more educational in nature
+	- tested on audience of 40
+	- gathered feedback from a survey
 	- conducted to determine if the visualisations developed were heading in the right direction
-- study 2 - data
-	- 41 respondents
-- study 2 - results
-	- were they heading in the right direction? much improvement to be made
-	- what improvements?
+	- supplementary goal of..............
+- study 2 - data & results
+	- gave us direction for improvement
+		- projector screens
+		- use of bold colours and fast changes did not contribute well to understanding
+		- etc...
+	- 
 	- what is the strategy to improve?
+		-...
+-----------------------------10.5 mins
+
 - how do these studies relate to project
 	- determining the best approach to aid in understanding
 	- testing out prototypes
-- timeline/progress
+	- outcome
+		- approach of mapping number of functions active to visual objects on the screen provided visual interest but did not provide enough detail, while also competing with the highly detailed code. 
+		- reactivity with the music provided an interesting visual dimension but did not necessarily provide more interesting details about the code
+		- nevertheless, maximum three dimensions: 2 planar, 1 retinal appears to be the best approach as we are prototyping the next stage of the project 
+- timeline
+	- tracking well
+	- on schedule as defined by the initially presented timeline
+		- 2 studies completed
+	- have not had delays
 - remaining time
-- prototypes
+	- build some more prototypes
+	- currently prototyping code manipulation visualisations, diff visualisations and code structure visualisations
+	- further analysis of the data and investigation of the literature will inform which of these to develop further
+	- run another study... potential for another study after that
 - what do i intend to achieve
+	- effective base level visualisations of code that indicate progress towards visual understanding of code
+	- take advantage of existing areas (eg. infovis...) that have well developed visualsation concepts (eg. Bertin's 7 variables)
+	- questions that we are still yet to ask
+		- how can we better communicate the programmer's intention?
+		- how can we better communicate the program's intention?
 - 'take a step backwards'
-	- relevance to the 
+	- relevance to software engineering?
+		-
+	- relevance to code comprehension?
+		-
+	- relevance to visualisation?
+		-
 - what to take away from this
+	- project on track
+	- visualisations show potential for influencing both understanding and enjoyment
+	- will focus more effort for next study on linking code and visual to achieve original goal of understanding through visualisation
 - conclusion/questions
+	- thanks for listening
+	- questions?
+
+
+
 
 
 
@@ -84,14 +178,11 @@ Your talk should remind us all of what your project is, and why it's interesting
 		(4) use modern programming practices
 		(5) maintain clear accountability for results
 		(6) use better and fewer people
-		(7) maintain a commitement to improve the process
+		(7) maintain a commitment to improve the process
 	-human centred approach
 	-approaching the question of complexity - what is the best way to integrate software engineering into other types of engineering... how do we make software engineering more useful to the general public?
-
-
-
-
-
-
-
+-(art) apart from the abstract representation of code structures how do your visualisations relate to the code?
+	-wanted to minimise dimensions through the first studies... easier to determine if it worked or not
+	-literature suggests that the number of dimensions shown impacts ease of understanding
+	-for the next phase visualisations intend to use code manipulation visualisations (eg. moving relevant code around), code diff visualisations (showing temporal changes to code) or code structure visualisations (showing code flow/structure graphically... eg. code paths as graph)
 
