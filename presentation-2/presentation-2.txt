@@ -45,16 +45,27 @@
 
 	- wider value to education and entertainment within the space of live coding
 	- wider exposure to the programming process
-	- application beyond live coding 
+	- application beyond live coding
+		- other languages
+		- other fields of computer science and software/ systems engineering
+		- other fields altogether
 
 ## Progress
- 	- iterative and user-centric design approach
-	- investigate users, develop visualisations, test on users, repeat
 	- a field study and a more formal lab study have been conducted to determine and evaluate approaches
+ 	- conducted using iterative and user-centric design approach
+	- investigate users, develop visualisations, test on users, repeat
+
 	- a number of interviews have also been conducted
+	- determine users needs with more precision
+
 	- studying users to elicit requirements
 	- also working with a live coding artist (Ben) to elicit requirements
+
 	- number of visualisations prototyped and tested
+	- basis in literature
+
+	- from the literature also developed a model for categorising variables in terms of intent and coverage
+	- combination of existing models with application to software context
 
 ## Visual Variables
 	- visualisations developed inspired by Bertin's visual variables
@@ -102,6 +113,8 @@
 	- conducted to determine if the visualisations developed were heading in the right direction
 
 ## Prototypes
+	- developing visualisations based on prototypes
+	- 
 
 ## Visualisations
 
@@ -122,7 +135,6 @@
 		- 2 studies completed
 		- 1 more planned... end of july or start of august
 		- given the progress... potential for 1 more after that
-	- have not had significant delays
 
 ## Remaining time
 	- run another study... potential for another study after that
@@ -141,8 +153,6 @@
 	- project on track
 	- visualisations show potential for influencing both understanding and enjoyment
 	- will focus more effort for next study on linking code and visual to achieve original goal of understanding through visualisation
-
-
 
 ## Conclusion
 	- thanks for listening
