@@ -65,7 +65,8 @@
 	- basis in literature
 
 	- from the literature also developed a model for categorising variables in terms of intent and coverage
-	- combination of existing models with application to software context
+	- has specific application to software context
+	- combination of existing models... information and data visualisations fields have been a useful resource
 
 ## Visual Variables
 	- visualisations developed inspired by Bertin's visual variables
@@ -81,7 +82,7 @@
 ## Visualisation Analysis Model
 	- developed a model for analysing visualisations, developing new ones
 	- intent and coverage examined
-	- didactic intent vs aesthetic intent - recent literature on the effect of data visualisation aesthetics on attention and error
+	- didactic intent vs aesthetic intent - recent literature on the effect of data visualisation aesthetics on attention and the comparison between the educational and that which is intended to entertain 
 	- generic coverage vs specific coverage - large history and body of literature on effective visual elements
 	- concepts from information visualisation highly relevant to both of these dimensions
 
@@ -93,13 +94,14 @@
 	- field study with survey conducted at art festival
 	- generate user requirements
 	- goal was to determine the best approach to begin developing visualisations
-	- supplementary goal of determining the relationship between understanding and enjoyment
+	- supplementary goal of examining the code as a visualisation with didactic intent and high specific coverage 
+	- determining the relationship between understanding and enjoyment
 
 	- 14 respondents
 	- decided to conduct follow up interviews with some of those present
-	- from this determined that visualisations appeared to influence enjoyment
+	- from this determined that the code influenced both understanding and enjoyment
 	- determined that focus should be on helping the audience understand the link between code changes and music changes
-	- cemented the idea of using visualisations as a means of realtime understanding
+	- interviews cemented the idea of using visualisations as a means of realtime understanding
 	- provided a basis on which to build visualisations
 
 ## Study 2 - Details and Purpose
@@ -114,9 +116,12 @@
 
 ## Prototypes
 	- developing visualisations based on prototypes
-	- 
+	- few examples that led to the existing visualisations
 
 ## Visualisations
+	- on the left is one of the set of visualisations from the aesthetic intent set
+	- on the right is one of the set of visualisations from the didactic intent set
+	- these were compared
 
 ## Study 2 - data & results
 	- still in the process of analysing data... a full analysis is to come
@@ -131,17 +136,19 @@
 
 ## Timeline
 	- tracking well
-	- on schedule as defined by the initially presented timeline
-		- 2 studies completed
-		- 1 more planned... end of july or start of august
-		- given the progress... potential for 1 more after that
+	- first two studies have been completed
+	- basic visualisations have been developed
+	- in the process of refining the visualisations further
 
 ## Remaining time
-	- run another study... potential for another study after that
+	- one more study planned... end of july or early august
+	- given the progress... potential for another study after that
+	
+	- further develop theoretical model
 	- build some more prototypes
-	- further develop model
 	- currently prototyping code manipulation visualisations and code structure visualisations
-	- further analysis of the data and investigation of the literature will inform which of these to develop further
+	- address limitations of visualisations based on results of studies
+	- further analysis of the data and investigation of the literature will inform the direction in which to use the remaining time within the project
 
 ## What Do I Intend to Achieve?
 	- effective base level visualisations of code that indicate visual understanding of code

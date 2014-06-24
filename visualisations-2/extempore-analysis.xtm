@@ -1,0 +1,38 @@
+(define analysis (sys:open-dylib "extempore-analysis.dylib"))
+
+(bind-alias codetree i8)
+(bind-alias codeforest i8)
+
+(bind-lib analysis codetree_create [codetree*,i8*]*)
+(bind-lib analysis codetree_destroy [void,codetree*]*)
+
+(bind-lib analysis codetree_get_children_count [i32,codetree*]*)
+(bind-lib analysis codetree_get_child [codetree*,i32]*)
+(bind-lib analysis codetree_get_children [codeforest*,codetree*]*)
+(bind-lib analysis codetree_get_tag [i8*,codetree*]*)
+(bind-lib analysis codetree_get_type [i32,codetree*]*)
+(bind-lib analysis codetree_get_code [i8*,codetree*]*)
+(bind-lib analysis codetree_is_active [i1,codetree*]*)
+
+(bind-lib analysis codetree_print [void,codetree*]*)
+(bind-lib analysis codetree_print_top_level [void,codetree*]*)
+
+(bind-lib analysis codeforest_count [i32,codeforest*]*)
+(bind-lib analysis codeforest_get [i32,codeforest*]*)
+(bind-lib analysis codeforest_print [void,codeforest*]*)
+
+(bind-func test
+  (lambda ()
+  	(let ((code (codetree_create "test.xtm")))
+  		(print (codetree_get_children_count code))
+  		(codetree_print_top_level code)
+  		(codetree_destroy code))))
+
+(test)
+
+
+
+
+
+
+
