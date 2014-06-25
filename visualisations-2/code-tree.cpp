@@ -1,4 +1,4 @@
-#include "extempore-analysis.h"
+#include "code-tree.h"
 
 CodeTree::CodeTree(std::string code, std::string tag, CodeType type)
 {
@@ -124,14 +124,26 @@ void CodeTree::printTopLevelStructure()
 	}
 }
 
-CodeForest CodeTree::getByArgument(std::string name, int arg)
+CodeTree* CodeTree::find(std::string name, int arg)
+{
+	for(CodeForest::iterator it = this->children.begin(); it < this->children.end(); ++it)
+	{
+		if((*it)->children.size() > arg && (*it)->children[arg]->code == name) return (*it);
+		
+		CodeTree* subNode = (*it)->find(name, arg);
+		if(subNode) return subNode;
+	}
+	return nullptr;
+}
+
+CodeForest CodeTree::findAll(std::string name, int arg, int count)
 {
 	CodeForest nodes(0);
 	for(CodeForest::iterator it = this->children.begin(); it < this->children.end(); ++it)
 	{
 		if((*it)->children.size() > arg && (*it)->children[arg]->code == name) nodes.push_back(*it);
 		
-		CodeForest subNodes = (*it)->getByArgument(name, arg);
+		CodeForest subNodes = (*it)->findAll(name, arg);
 		nodes.insert(nodes.end(), subNodes.begin(), subNodes.end());
 	}
 	return nodes;
@@ -139,12 +151,17 @@ CodeForest CodeTree::getByArgument(std::string name, int arg)
 
 CodeForest CodeTree::getDefinitions()
 {
-	return getByArgument("define");
+	return findAll("define");
+}
+
+CodeTree* CodeTree::getDsp()
+{
+	return find("dsp");
 }
 
 CodeTree* CodeTree::getFunctionDefinition(std::string name)
 {
-	CodeForest defn = getByArgument(name, 1);
+	CodeForest defn = findAll(name, 1);
 
 	if(defn.size() > 0) return defn[0];//just get the first (there should only be one anyway)
 	return nullptr;
@@ -152,7 +169,15 @@ CodeTree* CodeTree::getFunctionDefinition(std::string name)
 
 CodeForest CodeTree::getFunctionCalls(std::string name)
 {
-	return getByArgument(name);
+	return findAll(name);
+}
+
+std::string load(std::string file)
+{
+	std::ifstream t(file);
+	std::string code((std::istreambuf_iterator<char>(t)),
+		              std::istreambuf_iterator<char>());
+	return code;
 }
 
 codetree* codetree_create(char* path)
@@ -206,6 +231,16 @@ bool codetree_is_active(codetree* codetree)
 {
 	return reinterpret_cast<CodeTree*>(codetree)->isActive;
 }
+
+codetree* codetree_find(codetree* codetree, char* name)
+{
+	return reinterpret_cast<struct codetree*>(reinterpret_cast<CodeTree*>(codetree)->find(name));
+}
+
+// codeforest* codetree_find_all(codetree* codetree, char* name)
+// {
+// 	return reinterpret_cast<codeforest*>(&(reinterpret_cast<CodeTree*>(codetree)->findAll(name)));
+// }
 
 void codetree_print(codetree* codetree)
 {

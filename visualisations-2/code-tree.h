@@ -1,4 +1,6 @@
 
+#pragma once
+
 #include <iostream>
 #include <string>
 #include <cstddef>
@@ -8,13 +10,30 @@
 #include <stack>
 #include <locale>
 
-enum CodeState
+/**
+ * What is the state of the code from a previous version.
+ **/
+enum CodeDiffState
 {
 	ADDED,
 	DELETED,
 	SAME
 };
 
+/**
+ * What is the current state of the code.
+ **/
+enum CodeEditState
+{
+	EDITING,
+	COMPLETE,
+	PARTIAL,
+	INVALID
+};
+
+/**
+ * What should this code be classified as.
+ **/
 enum CodeType
 {
 	ROOT,
@@ -57,29 +76,26 @@ public:
 	void print(int depth = 0);
 	void printTopLevelStructure();
 
-	CodeForest getByArgument(std::string name, int arg = 0);
-	CodeForest getDefinitions();
 	CodeTree* getFunctionDefinition(std::string name);
 	CodeForest getFunctionCalls(std::string name);
+	CodeForest getDefinitions();
+	CodeTree* getDsp();
+
+	CodeTree* find(std::string argv, int argc = 0);
+	CodeForest findAll(std::string argv, int argc = 0, int count = 0);
+
 };
 
+std::string load(std::string file);
 
-std::string load(std::string file)
-{
-	std::ifstream t(file);
-	std::string code((std::istreambuf_iterator<char>(t)),
-		              std::istreambuf_iterator<char>());
-	return code;
-}
+// int main()
+// {
+// 	CodeTree tree(load("test.xtm"));
+// 	tree.parse();
+// 	tree.printTopLevelStructure();
 
-int main()
-{
-	CodeTree tree(load("test.xtm"));
-	tree.parse();
-	tree.printTopLevelStructure();
-
-	return 0;
-}
+// 	return 0;
+// }
 
 extern "C" {
 	struct codetree;
@@ -95,6 +111,10 @@ extern "C" {
 	int codetree_get_type(codetree* codetree);
 	const char* codetree_get_code(codetree* codetree);
 	bool codetree_is_active(codetree* codetree);
+
+	codetree* codetree_find(codetree* codetree, char* name);
+	//codeforest* codetree_find_all(codetree* codetree, char* name);
+
 	void codetree_print(codetree* codetree);
 	void codetree_print_top_level(codetree* codetree);
 	

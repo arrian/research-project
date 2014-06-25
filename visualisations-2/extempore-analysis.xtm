@@ -1,18 +1,26 @@
 (define analysis (sys:open-dylib "extempore-analysis.dylib"))
 
+;;Types
+
 (bind-alias codetree i8)
 (bind-alias codeforest i8)
+(bind-alias forcegraph i8)
+
+;;Code Tree Bindings
 
 (bind-lib analysis codetree_create [codetree*,i8*]*)
 (bind-lib analysis codetree_destroy [void,codetree*]*)
 
 (bind-lib analysis codetree_get_children_count [i32,codetree*]*)
-(bind-lib analysis codetree_get_child [codetree*,i32]*)
+(bind-lib analysis codetree_get_child [codetree*,codetree*,i32]*)
 (bind-lib analysis codetree_get_children [codeforest*,codetree*]*)
 (bind-lib analysis codetree_get_tag [i8*,codetree*]*)
 (bind-lib analysis codetree_get_type [i32,codetree*]*)
 (bind-lib analysis codetree_get_code [i8*,codetree*]*)
 (bind-lib analysis codetree_is_active [i1,codetree*]*)
+
+(bind-lib analysis codetree_find [codetree*,codetree*,i8*]*)
+;;(bind-lib analysis codetree_find_all [codeforest*,codetree*,i8*]*)
 
 (bind-lib analysis codetree_print [void,codetree*]*)
 (bind-lib analysis codetree_print_top_level [void,codetree*]*)
@@ -21,14 +29,50 @@
 (bind-lib analysis codeforest_get [i32,codeforest*]*)
 (bind-lib analysis codeforest_print [void,codeforest*]*)
 
-(bind-func test
+;;Force Graph Bindings
+
+(bind-lib analysis forcegraph_create [forcegraph*,codetree*]*)
+(bind-lib analysis forcegraph_destroy [void,forcegraph*]*)
+
+(bind-lib analysis forcegraph_update [void,forcegraph*,codetree*]*)
+(bind-lib analysis forcegraph_step [void,forcegraph*,float]*)
+
+(bind-lib analysis forcegraph_get_x [float,forcegraph*]*)
+(bind-lib analysis forcegraph_get_y [float,forcegraph*]*)
+(bind-lib analysis forcegraph_get_size [float,forcegraph*]*)
+
+(bind-lib analysis forcegraph_get_child_count [i32,forcegraph*]*)
+(bind-lib analysis forcegraph_get_child [forcegraph*,forcegraph*,i32]*)
+(bind-lib analysis forcegraph_get_code [codetree*,forcegraph*]*)
+
+(bind-lib analysis forcegraph_print [void,forcegraph*]*)
+
+
+;;Examples
+
+(bind-func test_codetree
   (lambda ()
   	(let ((code (codetree_create "test.xtm")))
-  		(print (codetree_get_children_count code))
-  		(codetree_print_top_level code)
-  		(codetree_destroy code))))
+  		(printf "%s\n" (codetree_get_code (codetree_find code "define")))
+  		(codetree_destroy code)
+  		void)))
 
-(test)
+(test_codetree)
+
+(bind-func test_forcegraph
+  (lambda ()
+  	(let ((code (codetree_create "test.xtm"))
+  		  (graph (forcegraph_create code)))
+  		(print (forcegraph_get_size graph))
+
+  		(forcegraph_destroy graph)
+  		(codetree_destroy code)
+    	void)))
+
+(test_forcegraph)
+
+
+
 
 
 
