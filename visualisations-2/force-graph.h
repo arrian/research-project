@@ -9,14 +9,15 @@
 #include <vector>
 #include <stack>
 #include <locale>
+#include <utility>
+#include <cmath>
 
 #include "code-tree.h"
 
 class ForceGraph
 {
 public:
-	ForceGraph(CodeTree* code);
-	ForceGraph(CodeTree* code, ForceGraph* parent);
+	ForceGraph(CodeTree* code, ForceGraph* parent = nullptr);
 	~ForceGraph();
 
 	void update(CodeTree* code);
@@ -25,6 +26,11 @@ public:
 	float x;
 	float y;
 	float size;
+	float vx;
+	float vy;
+
+	float tx;//temp location
+	float ty;//temp location
 
 	ForceGraph* parent;
 	std::vector<ForceGraph*> children;
@@ -32,6 +38,9 @@ public:
 	CodeTree* data;
 
 	void print(int depth = 0);
+
+	std::vector<ForceGraph*> getVertices();
+	std::vector<std::pair<ForceGraph*, ForceGraph*> > getEdges();
 };
 
 int main()
@@ -41,7 +50,8 @@ int main()
 	tree->printTopLevelStructure();
 
 	ForceGraph* graph = new ForceGraph(tree);
-	graph->step(1.0);
+
+	for(int i = 0; i < 100; i++) graph->step(1.0);
 	graph->print();
 
 	delete graph;

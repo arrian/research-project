@@ -77,7 +77,8 @@ std::size_t CodeTree::pushString(std::size_t found)
 	return i;
 }
 
-std::size_t CodeTree::pushStatement(std::size_t found) {
+std::size_t CodeTree::pushStatement(std::size_t found) 
+{
 	std::size_t end = code.find_first_of(" ();\n", found + 1);
 	if(end - found == 0) return end;
 
@@ -85,7 +86,8 @@ std::size_t CodeTree::pushStatement(std::size_t found) {
 	return end;
 }
 
-std::size_t CodeTree::pushList(std::size_t found) {
+std::size_t CodeTree::pushList(std::size_t found) 
+{
 	return found;
 }
 
