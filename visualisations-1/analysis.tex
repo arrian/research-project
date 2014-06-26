@@ -57,17 +57,19 @@ visualisation analysis model...\\
 [link to study method]\\
 
 \section{Method}
-Two sets of visualisations were presented during a live coding performance to an audience. The performance was run as two ten minute improvised songs with each song demonstrating one of the two experimental visualisation conditions including the didactic condition and the aesthetic condition. The experiment was run twice, with two separate participant groups, swapping the order in which the two sets of visualisations were presented to the audience.\\
+Two sets of visualisations were presented to an audience during a live coding performance and surveys were distributed. The performance was run as two ten minute improvised songs with each song demonstrating one of the two experimental visualisation conditions, either the didactic condition or the aesthetic condition. The experiment was run twice, with two separate participant groups, swapping the order in which the two sets of visualisations were presented to the audience.\\
 
-After explaining to the participants the order and the high level intention of the experiment and allowing the participants to complete the initial demographic section of a survey, the live coder began a performance set utilising one type of visualisation with music. Following this first set, some survey questions were administered to the participants asking them specifically about their enjoyment and understanding related to the visualisations. A second set was then played using the alternative visualisation. Following this second set, the same survey questions were administered again, again asking the participants specifics about their enjoyment and understanding related to the specific visualisation demonstrated. A final survey question was then asked relating to their opinion regarding the whole performance and suggested improvements.
+The audience members completed a survey consisting of four sections over the course of the performance. These sections included a demographic information section, opinion of the first visualisation, opinion of the second visualisation and a section investigating the audience's overall opinion of the performance. The sections regarding the visualisations predominantly focussed on the enjoyment and understanding related to the visualisation while the final section focussed on eliciting potential improvements.
+
+After explaining to the participants the structure of the experiment and allowing the participants to complete the initial demographic section of a survey, the live coder began the first performance utilising one of the two visualisations. Following this first set, the second section of the survey was conducted. A second set was then played using the alternative visualisation. Following this second set, the same survey questions were administered again, again asking the participants specifics about their enjoyment and understanding related to the specific visualisation demonstrated. A final survey question was then asked relating to their opinion regarding the whole performance and suggested improvements.
 
 \section{Participants}
 
-A total of 41 participants took part in the study. $66\%$ of the participants stated that they were male (see Figure \ref{genderdistribution}) and most participants were aged between 18 and 32 ($76\%$, see Figure \ref{agedistribution}). As the study was conducted within the Computer Science Department, a large proportion of the participants were experienced with programming with $90\%$ having current or previous experience with it. Nevertheless, only $15\%$ of participants had previous experience with any of the Lisp style languages.\\
+A total of 41 participants took part in the study. Over the two performances, 19 participants observed the first performance and 22 participants observed the second performance. The demographic makeup between the two performances was very similar.\\
+
+$66\%$ of the participants stated that they were male (see Figure \ref{genderdistribution}) and most participants were aged between 18 and 32 ($76\%$, see Figure \ref{agedistribution}). As the study was conducted within the Computer Science Department, a large proportion of the participants were experienced with programming with $90\%$ having current or previous experience with it. Nevertheless, only $15\%$ of participants had previous experience with any of the Lisp style of languages.\\
 
 Of the participants, $68\%$ stated that they listened to a large amount of music (see Figure \ref{musicdistribution}) though only about $15\%$ of participants stated that they played and instrument or sung regularly (see Figure \ref{instrumentdistribution}). Only $22\%$ of participants had seen a live coding performance before.\\
-
-Over the two performances, 19 participants observed the first performance and 22 participants observed the second performance. The demographic makeup of the two performances were very similar.
 
 \begin{figure}[t]
 \centering
@@ -126,88 +128,34 @@ Over the two performances, 19 participants observed the first performance and 22
 
 \subsection{Aesthetic vs Didactic Visualisation}
 
-For the following statistical analysis a significance level of $0.05$ will be used with the chi-squared test for independence.\\
-
-Understanding and enjoyment trends throughout the performance are available in Table \ref{tab:understandtrend} and Table \ref{tab:enjoytrend}.
+Understanding and enjoyment were evaluated against the didactic and aesthetic visualisations. Understanding and enjoyment trends throughout the performance are available in Table \ref{tab:understandtrend} and Table \ref{tab:enjoytrend}. Results and statistical analysis of the differences between the aesthetic and didactic conditions follows. Note that for the following statistical analysis a significance level of $0.05$ was used with the chi-squared test for independence.\\
 
 \subsubsection{Understanding}
-Overall, 15 participants stated specifically that the didactic visualisations helped them to understand the code, whereas 26 participants stated that the aesthetic visualisations did not assist in understanding the code. See Table \ref{tab:helpunderstand}.\\
+Overall, $37\%$ participants stated specifically that the didactic visualisations helped them to understand the code, whereas $12\%$ participants stated that the aesthetic visualisations assisted in understanding the code. See Table \ref{tab:helpunderstand} for the distribution of understanding between the aesthetic and didactic visualisations.\\
 
 $H_0$: There is no difference between the aesthetic visualisations and didactic visualisations in terms of understanding.\\
 $H_1$: There is a difference between the two visualisations in terms of understanding.\\
 
 Significant difference between the visualisations effect on understanding were found ($\chi^2=7.1986,df=2,p=0.02734$).
 
-
-\begin{table}
-\caption {Help Understanding by Participant Count} \label{tab:helpunderstand} 
-\begin{center}
-\begin{tabular}{ l | c c c c }
-
-&Yes&No&No Opinion\\
-\hline
-Aesthetic&5&26&10 \\
-Didactic&15&21&5 \\
-\end{tabular}
-\end{center}
-\end{table}
-
-
 \subsubsection{Enjoyment}
-Overall, for both visualisations, a large proportion ($> 50\%$) of the participants stated that the visualisations helped their enjoyment of the performance. See Table \ref{tab:helpenjoy}.\\
+Overall, for both visualisations, a large proportion ($> 50\%$) of the participants stated that the visualisations helped their enjoyment of the performance. Of the participants, $76\%$ stated that the aesthetic visualisations helped their enjoyment compared to $56\%$ participants that stated the didactic visualisations helped their enjoyment. See Table \ref{tab:helpenjoy} for the distribution of enjoyment between the aesthetic and didactic visualisations.\\
 
 $H_0$: There is no difference between the aesthetic visualisations and didactic visualisations in terms of enjoyment.\\
 $H_1$: There is a difference between the two visualisations in terms of enjoyment.\\
 
 No significant difference between the two visualisations effect on enjoyment were found ($\chi^2=3.7733,df=2,p=0.1516$).
 
-\begin{table}
-\caption {Helped Enjoyment by Participant Count} \label{tab:helpenjoy} 
-\begin{center}
-\begin{tabular}{ l | c c c c }
-
-&Yes&No&No Opinion\\
-\hline
-Aesthetic&31&5&5 \\
-Didactic&24&12&5 \\
-\end{tabular}
-\end{center}
-\end{table}
+\subsubsection{Liveness}
 
 
-
-
-\begin{table}
-\caption {Understanding Trend by Participant Count} \label{tab:understandtrend} 
-\begin{center}
-\begin{tabular}{ l | c c c c }
-
-&Up&Down&Flat&Unspecified\\
-\hline
-Aesthetic&13&8&18&2 \\
-Didactic&15&4&20&2 \\
-\end{tabular}
-\end{center}
-\end{table}
-
-
-\begin{table}
-\caption {Enjoyment Trend by Participant Count} \label{tab:enjoytrend} 
-\begin{center}
-\begin{tabular}{ l | c c c c }
-
-&Up&Down&Flat&Unspecified\\
-\hline
-Aesthetic&15&11&13&1 \\
-Didactic&15&12&14&0 \\
-\end{tabular}
-\end{center}
-\end{table}
+\subsection{Improvements}
 
 
 \section{Discussion}
 
 The response to the aesthetic visualisation [...more discussion to come]\\
+
 [data indicates that aesthetic reduced early drop in enjoyment]\\
 
 [didactic response]\\
@@ -215,6 +163,7 @@ The response to the aesthetic visualisation [...more discussion to come]\\
 In general, the visualisations contribution to enjoyment was fairly positive. This was the case for both visualisations. For understanding however, only the didactic visualisation assisted understanding during the performance.\\
 
 [understanding discussion]\\
+
 [understanding had the same pattern of understanding throughout the performance despite the starting differences]\\
 
 [enjoyment discussion]\\
