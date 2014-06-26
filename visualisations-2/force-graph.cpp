@@ -22,14 +22,14 @@ ForceGraph::~ForceGraph()
 	while(!children.empty()) delete children.back(), children.pop_back();
 }
 
+void ForceGraph::addChild(CodeTree* tree)
+{
+	children.push_back(new ForceGraph(tree, this));
+}
+
 void ForceGraph::update(CodeTree* code)
 {
 	//iterate this and code and compare
-}
-
-float squared_distance(float p1, float p2, float q1, float q2)
-{
-	return fabs((p1 - q1) * (p1 - q1) + (p2 - q2) * (p2 - q2));
 }
 
 void ForceGraph::step(float dt)
@@ -37,10 +37,8 @@ void ForceGraph::step(float dt)
 	std::vector<ForceGraph*> vertices = getVertices();
 	std::vector<std::pair<ForceGraph*, ForceGraph*> > edges = getEdges();
 
-
-
-	float multiplier = 1.0f;
-	float area = 10000.0f;//width * height
+	float multiplier = 1.0f;//1.0f
+	float area = 7000.0f;//width * height
     float maxDisplace = sqrt(multiplier * area) / 10.0f;
     float k = sqrt((multiplier * area) / (1.0f + vertices.size()));
 
@@ -93,7 +91,7 @@ void ForceGraph::step(float dt)
 		float dist = sqrt(v->tx * v->tx + v->ty * v->ty);
 		if(dist > 0)
 		{
-			std::cout << v->x << " " << v->y << std::endl;
+			//std::cout << v->x << " " << v->y << std::endl;
 			v->x += (v->tx / dist);
 			v->y += (v->ty / dist);
 		}
@@ -145,6 +143,7 @@ std::vector<std::pair<ForceGraph*, ForceGraph*> > ForceGraph::getEdges()
 
 forcegraph* forcegraph_create(codetree* code)
 {
+	std::cout << "Allocating forcegraph" << std::endl;
 	return reinterpret_cast<forcegraph*>(new ForceGraph(reinterpret_cast<CodeTree*>(code)));
 }
 
@@ -161,6 +160,11 @@ void forcegraph_update(forcegraph* graph, codetree* update)
 void forcegraph_step(forcegraph* graph, float dt)
 {
 	(reinterpret_cast<ForceGraph*>(graph))->step(dt);
+}
+
+void forcegraph_add_child(forcegraph* graph, codetree* code)
+{
+	(reinterpret_cast<ForceGraph*>(graph))->addChild(reinterpret_cast<CodeTree*>(code));
 }
 
 float forcegraph_get_x(forcegraph* graph)

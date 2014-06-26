@@ -184,6 +184,7 @@ std::string load(std::string file)
 
 codetree* codetree_create(char* path)
 {
+	std::cout << "Allocating codetree" << std::endl;
 	std::string code = load(std::string(path));
 	CodeTree* tree = new CodeTree(code);
 	tree->parse();
@@ -221,7 +222,14 @@ int codetree_get_type(codetree* codetree)
 	CodeType type = reinterpret_cast<CodeTree*>(codetree)->type;
 
 	if(type == ROOT) return 1;
-	return 2;
+	if(type == COMMENT) return 2;
+	if(type == STRING) return 3;
+	if(type == STATEMENT) return 4;
+	if(type == FUNCTION) return 5;
+	if(type == CONDITIONAL) return 6;
+	if(type == LOOP) return 7;
+	if(type == ERROR) return -1;
+	return 0;
 }
 
 const char* codetree_get_code(codetree* codetree)

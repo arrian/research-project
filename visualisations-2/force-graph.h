@@ -23,6 +23,8 @@ public:
 	void update(CodeTree* code);
 	void step(float dt);
 
+	void addChild(CodeTree* code);
+
 	float x;
 	float y;
 	float size;
@@ -68,6 +70,8 @@ extern "C" {
 
 	void forcegraph_update(forcegraph* graph, codetree* update);
 	void forcegraph_step(forcegraph* graph, float dt);
+
+	void forcegraph_add_child(forcegraph* graph, codetree* code);
 
 	float forcegraph_get_x(forcegraph* graph);
 	float forcegraph_get_y(forcegraph* graph);
