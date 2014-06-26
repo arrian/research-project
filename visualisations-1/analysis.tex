@@ -8,12 +8,12 @@
 
 \begin{document}
 
-\title{Live Coding Visualisation Study Report - DRAFT}
+\title{Visualising Live Code Study Report}
 \author{Arrian Purcell}
 
 \maketitle
 
-\begin{figure}[t]
+\begin{figure}
 \centering
 \begin{subfigure}{.5\textwidth}
     \centering
@@ -30,18 +30,36 @@
 \caption{Visualisation Examples}
 \end{figure}
 
+For most of its history programming code has been displayed as simple text due to the expressiveness of this format and despite its inefficiencies. It is only recently, due to ever increasing programming language complexity and increasing computational power, that code annotations and syntax highlighting have become more commonplace. Nevertheless, these visual enhancements rarely provide information beyond the basic grammar of the language they are intended to augment. The limitations of this approach are becoming ever more apparent as programming languages and interactive programming environments move towards the need for real-time comprehension.\\
 
-Two visualisations in the context of a live coding performance have been analysed to determine effective presentational and educational features. The two visualsations tested included a visualisation targetting aesthetic appeal and a visualisation with a more didactic approach. The goal was to determine differences between the two approaches in order to inform future live coding visualisations.\\
+[talk about interactive programming environments and real-time comprehension]\\
 
-The didactic visusalisations predominantly focussed on the relationship to the programs functions, prominantly displaying the names of the active functions with visual indication of the number of functions running and their callback time. Bright colours and solid shapes were used to ensure the intention of the code was communicated. An example of this approach can be seen in Figure \ref{dvis}.\\
+The human brain is highly proficient in pattern recognition (Ware, 2013) and there is evidence to suggest that visualisations can take advantage of this proficiency to enhance understanding (Najjar, 1998). From this, one could potentially conclude that visualisations could be further applied to aid in the process of real-time code comprehension within the space of interactive programming environments [citation needed].\\
 
-The aesthetic visualisation focussed less on the programmatic aspects of the performance, intending to provide additional visual interest to the projected code. To this end, more variety was used in visual structure and colour. An example of this approach can be seen in Figure \ref{avis}.
+[how can the problem be approached?]\\
 
+To this end, two code visualisations have been analysed in a live coding context to determine effective presentational and educational features. The two visualisations evaluated included a visualisation targeting aesthetic appeal and a visualisation with a more didactic approach. The goal was to determine differences and desirable aspects of the two visualisation approaches in order to inform future live coding visualisations.\\
+
+The set of didactic visualisations predominantly focussed on the relationship between the live coding active processes and their behaviour. The visualisations prominently displaying the names of the active functions with visual indication of the number of functions running and their callback time. Bright colours and solid shapes were used to ensure constant visibility and communicate the intention of the underlying code. An example of this approach can be seen in Figure \ref{dvis}. Overall, four visualisations were presented with each introduced depending on the number of active functions.\\
+
+The set of aesthetic visualisations focussed less on the programmatic aspects of the live coding performance, rather intending to provide additional visual interest to the projected code. To this end, more variety was used in visual structure and colour. An example of this approach can be seen in Figure \ref{avis}. Again, four visualisations were presented, varying which visualisation was displayed depending on the number of active functions.\\
+
+[literature supporting the visualisations presented]\\
+
+visual variables...\\
+
+hierarchy of graphical elements...\\
+
+visualisation analysis model...\\
+
+[summary]\\
+
+[link to study method]\\
 
 \section{Method}
-Two live coding performances were conducted with separate participant groups. Each performance was divided into two sets of ten minutes demonstrating one of the two experimental visualisation conditions including the aesthetic condition and the didactic condition. The order in which these two conditions were presented to the audience was swapped over the two performances.\\
+Two sets of visualisations were presented during a live coding performance to an audience. The performance was run as two ten minute improvised songs with each song demonstrating one of the two experimental visualisation conditions including the didactic condition and the aesthetic condition. The experiment was run twice, with two separate participant groups, swapping the order in which the two sets of visualisations were presented to the audience.\\
 
-After explaining to the parcipants the order and the high level intention of the experiment and allowing the participants to complete the initial demographic section of a survey, the live coder began a performance set utilising one type of visualisation with music. Following this first set, some survey questions were administered to the participants asking them specifically about their enjoyment and undertstanding related to the visualisations. A second set was then played using the alternative visualisation. Following this second set, the same survey questions were adminstered again, again asking the particiants specfics about their enjoyment and understanding related to the specific visualisation demonstrated. A final survey question was then asked relating to their opinion regarding the whole performance and suggested improvements.
+After explaining to the participants the order and the high level intention of the experiment and allowing the participants to complete the initial demographic section of a survey, the live coder began a performance set utilising one type of visualisation with music. Following this first set, some survey questions were administered to the participants asking them specifically about their enjoyment and understanding related to the visualisations. A second set was then played using the alternative visualisation. Following this second set, the same survey questions were administered again, again asking the participants specifics about their enjoyment and understanding related to the specific visualisation demonstrated. A final survey question was then asked relating to their opinion regarding the whole performance and suggested improvements.
 
 \section{Participants}
 
@@ -55,13 +73,13 @@ Over the two performances, 19 participants observed the first performance and 22
 \centering
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=1.0\linewidth]{age.png}
+    \includegraphics[width=1.0\linewidth]{graphs/age.png}
     \caption{Age Distribution}
     \label{agedistribution}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=1.0\linewidth]{gender.png}
+    \includegraphics[width=1.0\linewidth]{graphs/gender.png}
     \caption{Gender Distribution}
     \label{genderdistribution}
 \end{subfigure}
@@ -73,13 +91,13 @@ Over the two performances, 19 participants observed the first performance and 22
 \centering
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=1.0\linewidth]{programming.png}
+    \includegraphics[width=1.0\linewidth]{graphs/programming.png}
     \caption{Programming Experience Distribution}
     \label{programmingdistribution}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=1.0\linewidth]{lisp.png}
+    \includegraphics[width=1.0\linewidth]{graphs/lisp.png}
     \caption{Lisp Experience Distribution}
     \label{lispdistribution}
 \end{subfigure}
@@ -91,13 +109,13 @@ Over the two performances, 19 participants observed the first performance and 22
 \centering
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=1.0\linewidth]{music.png}
+    \includegraphics[width=1.0\linewidth]{graphs/music.png}
     \caption{Listen to Music Regularity Distribution}
     \label{musicdistribution}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[width=1.0\linewidth]{instrument-regularity.png}
+    \includegraphics[width=1.0\linewidth]{graphs/instrument-regularity.png}
     \caption{Playing Instrument or Singing Regularity Distribution}
     \label{instrumentdistribution}
 \end{subfigure}
@@ -189,10 +207,53 @@ Didactic&15&12&14&0 \\
 
 \section{Discussion}
 
+The response to the aesthetic visualisation [...more discussion to come]\\
+[data indicates that aesthetic reduced early drop in enjoyment]\\
+
+[didactic response]\\
+
 In general, the visualisations contribution to enjoyment was fairly positive. This was the case for both visualisations. For understanding however, only the didactic visualisation assisted understanding during the performance.\\
+
+[understanding discussion]\\
+[understanding had the same pattern of understanding throughout the performance despite the starting differences]\\
+
+[enjoyment discussion]\\
+
+[difference between the two studies?]\\
+
+[contribution of demographics to examined factors]\\
+
+[qualitative data for improvement discussion]\\
+
 
 A number of participants stated that the didactic visualisations were distracting, too abrupt or took away from the code in other ways. On the other hand, some said that the didactic visualisations gave the performance a sense of being 'too polished'. The general consensus, however, was that the visualisation should either better reflect the code, better reflect the music or have more variety.\\
 
-The response to the aesthetic visualisation [...more discussion to come]
+[qualitative data for liveness discussion]\\
+
+[what results will be used from this study]\\
+
+[summarising thoughts]\\
+
+\section{References}
+
+
+@book{ware2013information,
+  title={Information visualization: perception for design},
+  author={Ware, Colin},
+  year={2013},
+  publisher={Elsevier}
+}
+
+@article{najjar1998principles,
+  title={Principles of educational multimedia user interface design},
+  author={Najjar, Lawrence J},
+  journal={Human Factors: The Journal of the Human Factors and Ergonomics Society},
+  volume={40},
+  number={2},
+  pages={311--323},
+  year={1998},
+  publisher={SAGE Publications}
+}
+
 
 \end{document}
