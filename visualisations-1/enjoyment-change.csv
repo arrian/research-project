@@ -7,3 +7,38 @@ Decreasing Enjoyment,1,11
 Increasing Enjoyment,15,7
 Same Enjoyment,18,25
 Decreasing Enjoyment,7,8
+
+
+
+
+
+
+
+
+dat <- data.frame(Enjoyment=c('Increasing','Unchanged','Decreasing'),PerformanceMiddle=c(20,19,1),PerformanceEnd=c(5,24,11))
+dat.m <- melt(dat, id.vars='Enjoyment')
+
+
+ggplot(dat.m, aes(variable, value)) + 
+  geom_bar(aes(fill = Enjoyment), position = "dodge") + scale_x_discrete("Performance Phase", labels=c('Middle','End')) + scale_y_continuous("Audience Count")
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;
+
+
+dat <- data.frame(Enjoyment=c('Increasing','Unchanged','Decreasing'),PerformanceMiddle=c(15,18,7),PerformanceEnd=c(7,25,8))
+dat.m <- melt(dat, id.vars='Enjoyment')
+
+
+ggplot(dat.m, aes(variable, value)) + 
+  geom_bar(aes(fill = Enjoyment), position = "dodge") + scale_x_discrete("Performance Phase", labels=c('Middle','End')) + scale_y_continuous("Audience Count")
+
+
+
+
+
+
+
+
+
