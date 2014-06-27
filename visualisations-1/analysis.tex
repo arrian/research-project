@@ -6,6 +6,8 @@
 \usepackage[titletoc]{appendix}
 \usepackage{float}
 
+\bibliographystyle{unsrt}
+
 \begin{document}
 
 \title{Visualising Live Code Study Report}
@@ -15,17 +17,17 @@
 
 
 
-For most of its history source code has been displayed as simple text due to the expressiveness of this format, despite its inefficiencies. It is only recently, due to ever increasing programming language complexity and increasing computational power, that code annotations and syntax highlighting have become more commonplace. Nevertheless, these visual enhancements rarely provide information beyond the basic grammar of the language they are intended to augment. The limitations of this approach are becoming ever more apparent as programming languages and interactive programming environments move towards the need for real-time comprehension and a need to understand the source code within the context of a running program.\\
+For most of its history source code has been displayed as simple text due to the expressiveness of this format and despite its inefficiencies. It is only recently, due to ever increasing programming language complexity and increasing computational power, that code annotations and syntax highlighting have become more commonplace. Nevertheless, these visual enhancements rarely provide information beyond the basic grammar of the language they are intended to augment. The limitations of this approach are becoming ever more apparent as programming languages and interactive programming environments move towards the need for real-time comprehension and a need to understand the source code within the context of a running program.\\
 
-The problem of understanding code within a running environment is complex. The fact that programming concepts are fundamentally different to human understandable concepts (Biggerstaff, 1994) presents challenges in communicating the complex nature and intention of the program. The fundamental complexity lies within the translation from code to the brain; the programming concepts to the human understandable concepts.\\
+The problem of understanding code within a running environment is complex. The fact that programming concepts are fundamentally different to human understandable concepts~\cite{Biggerstaff1994} presents challenges in communicating the complex nature and intention of the program. The fundamental complexity lies within the translation from code to the brain; the programming concepts to the human understandable concepts.\\
 
-The human brain is highly proficient in pattern recognition (Ware, 2013) and there is evidence to suggest that visualisations can take advantage of this proficiency to enhance understanding (Najjar, 1998). It would be informative to investigate this translation using visual representations to translate and assist in the understanding of program concepts.\\
+The human brain is highly proficient in pattern recognition~\cite{ware2013information} and there is evidence to suggest that visualisations can take advantage of this proficiency to enhance understanding~\cite{najjar1998principles}. It would be informative to investigate this translation using visual representations to translate and assist in the understanding of program concepts.\\
 
 To this end, two code visualisations have been analysed in a live coding context to determine effective presentational and educational features. The two visualisations evaluated included a visualisation targeting aesthetic appeal and a visualisation with a more didactic approach. The goal was to determine differences and desirable aspects of the two visualisation approaches in order to inform future live coding visualisations.\\
 
 The set of didactic visualisations predominantly focussed on the relationship between the live coding active processes and their behaviour. The visualisations prominently displaying the names of the active functions with visual indication of the number of functions running and their callback time. Bright colours and solid shapes were used to ensure constant visibility and communicate the intention of the underlying code. An example of this approach can be seen in Figure \ref{dvis}. Overall, four visualisations were presented with each introduced depending on the number of active functions.\\
 
-The set of aesthetic visualisations focussed less on the programmatic aspects of the live coding performance, rather intending to provide additional visual interest to the projected code thereby increasing retention. More variety was used in visual structure and colour. An example of this approach can be seen in Figure \ref{avis}. Again, four visualisations were presented, varying the visualisation based on the number of active functions.\\
+The set of aesthetic visualisations focussed less on the programmatic aspects of the live coding performance, rather intending to provide additional visual interest to the projected code thereby prolonging attention. More variety was used in visual structure and colour. An example of this approach can be seen in Figure \ref{avis}. Again, four visualisations were presented, varying the visualisation based on the number of active functions.\\
 
 
 \begin{figure}[H]
@@ -65,7 +67,7 @@ Two sets of visualisations were presented to an audience during a live coding pe
 
 The audience members completed a survey consisting of four sections over the course of the performance. These sections included a demographic information section, opinion of the first visualisation, opinion of the second visualisation and a section investigating the audience's overall opinion of the performance. The sections regarding the visualisations predominantly focussed on the enjoyment and understanding related to the visualisation while the final section focussed on eliciting potential improvements.\\
 
-After explaining to the participants the structure of the experiment and allowing the participants to complete the initial demographic section of a survey, the live coder began the first performance utilising one of the two visualisations. Following this first set, the second section of the survey was conducted. A second set was then played using the alternative visualisation. Following this second set, the same survey questions were administered again, again asking the participants specifics about their enjoyment and understanding related to the specific visualisation demonstrated. A final survey question was then asked relating to their opinion regarding the whole performance and suggested improvements.
+After explaining to the participants the structure of the experiment and allowing the participants to complete the initial demographic section of a survey, the live coder began the first performance utilising one of the two visualisations. Following this first set, the second section of the survey was conducted. A second set was then played using the alternative visualisation. Following this second set, the same survey questions were administered again, again asking the participants specifics about their enjoyment and understanding related to the specific visualisation demonstrated. A final survey question was then asked relating to their opinion regarding the whole performance and their suggested improvements.
 
 \section{Participants}
 
@@ -163,67 +165,16 @@ Other suggestions included increasing the readability of source code,  increasin
 
 \section{Discussion}
 
-The response to the aesthetic visualisation [...more discussion to come]\\
+Overall enjoyment of the visualisations was high. This was the case for both the aesthetic and didactic visualisations. However, it is interesting to note that enjoyment of the aesthetic visualisation was higher and generally increased during the earlier stages of the performances suggesting that the aesthetic visualisations held the audience's attention for longer (as shown in Figure \ref{aestheticenjoymentchange}). The didactic visualisation on the other hand had a more constant decrease in enjoyment. The audience improvements offer some insight into this suggesting that the visualisations were competing with the projected code.\\
 
-[data indicates that aesthetic reduced early drop in enjoyment]\\
+Although the results surrounding the understanding afforded by the visualisations are unsurprising with the didactic visualisations having a clear educational benefit over the aesthetic visualisations, this will provide a baseline for future visualisations. Some improvements suggested by the audience will be examined in more detail and potentially implemeneted. For example, a number of participants stated that the didactic visualisations were distracting, too abrupt or took away from the code in other ways. On the other hand, some said that the didactic visualisations gave the performance a sense of being 'too polished'. The general consensus, however, was that the visualisation should either better reflect the code, better reflect the music or have more variety.\\
 
-[didactic response]\\
+The overall reponse indicates that there is much potential to improve the examined visualisations, developing both the aesthetic aspects of the visualisations in addition to the educational aspects. Future visualisations will focus on taking advantage of the prolonged attention afforded by the aesthetic visualisations and combine it with the more educational aspects of the didactic visualisations demonstrated within this experiement. With these results there is some progress towards an effective interactive programming environment visualisation.
 
-In general, the visualisations contribution to enjoyment was fairly positive. This was the case for both visualisations. For understanding however, only the didactic visualisation assisted understanding during the performance.\\
+\bibliography{references}
 
-[understanding discussion]\\
-
-[understanding had the same pattern of understanding throughout the performance despite the starting differences]\\
-
-[enjoyment discussion]\\
-
-[difference between the two studies?]\\
-
-[contribution of demographics to examined factors]\\
-
-[qualitative data for improvement discussion]\\
-
-
-A number of participants stated that the didactic visualisations were distracting, too abrupt or took away from the code in other ways. On the other hand, some said that the didactic visualisations gave the performance a sense of being 'too polished'. The general consensus, however, was that the visualisation should either better reflect the code, better reflect the music or have more variety.\\
-
-[qualitative data for liveness discussion]\\
-
-[what results will be used from this study]\\
-
-[summarising thoughts]\\
-
-\section{References}
-
-
-@book{ware2013information,
-  title={Information visualization: perception for design},
-  author={Ware, Colin},
-  year={2013},
-  publisher={Elsevier}
-}
-
-@article{najjar1998principles,
-  title={Principles of educational multimedia user interface design},
-  author={Najjar, Lawrence J},
-  journal={Human Factors: The Journal of the Human Factors and Ergonomics Society},
-  volume={40},
-  number={2},
-  pages={311--323},
-  year={1998},
-  publisher={SAGE Publications}
-}
-
-@article{Biggerstaff1994,
-author = {Biggerstaff, TJ},
-file = {:Users/arrian/Desktop/COMP4540/Articles/CACMCONCEPTAssignmentProblemWithGlossarySidebarsandBios.pdf:pdf},
-journal = {Communications of the \ldots},
-title = {{Program understanding and the concept assignment problem}},
-url = {http://www.softwaregenerators.com/Papers/CACMCONCEPTAssignmentProblemWithGlossarySidebarsandBios.pdf},
-year = {1994}
-}
-
-
-\section{Appendix A}
+\newpage
+\section*{Appendix A}
 
 \begin{figure}[H]
 \centering
