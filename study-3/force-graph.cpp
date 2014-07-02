@@ -7,13 +7,16 @@ ForceGraph::ForceGraph(CodeTree* code, ForceGraph* parent)
 	  vx(0.0),
 	  vy(0.0),
 	  size(10.0),
-	  data(code),
+	  //data(code),
+	  tag(code->tag),
+	  type(code->type),
+	  code(code->code),
 	  parent(parent),
 	  children()
 {
-	for(std::vector<CodeTree*>::iterator it = code->children.begin(); it != code->children.end(); ++it)//iterate children of code
+	for(auto codeChild : code->children)//iterate children of code
 	{
-		children.push_back(new ForceGraph(*it, this));
+		children.push_back(new ForceGraph(codeChild, this));
 	}
 }
 
@@ -29,7 +32,40 @@ void ForceGraph::addChild(CodeTree* tree)
 
 void ForceGraph::update(CodeTree* code)
 {
+	children.erase(std::remove_if(children.begin(), children.end(), 
+                   [](ForceGraph* f) { 
+						bool match = false;
+						for(auto codeChild : code->children)//iterate children of code
+						{	
+							if (f->isMatch(codeChild)) 
+							{
+								match = true;
+								break;
+							}
+						}
+                   		return !match;
+                   }));
+
+	for(auto codeChild : code->children)//iterate children of code
+	{
+		bool match = false;
+		for(auto graphChild : children)
+		{
+			if(graphChild->isMatch(codeChild))
+			{
+				match = true;
+				break;
+			}
+		}
+		if(!match) children.push_back(new ForceGraph(*it, this));//add new node... check for sub matches
+	}
+
 	//iterate this and code and compare
+}
+
+bool ForceGraph::isMatch(CodeTree* code)
+{
+	return code->code == code;//change to approximately equals
 }
 
 void ForceGraph::step(float dt)
@@ -114,9 +150,9 @@ std::vector<ForceGraph*> ForceGraph::getVertices()
 	std::vector<ForceGraph*> vertices;
 	vertices.push_back(this);
 
-	for(std::vector<ForceGraph*>::iterator it = children.begin(); it != children.end(); ++it)
+	for(auto graphChild : children)
 	{
-		std::vector<ForceGraph*> childVertices = (*it)->getVertices();
+		std::vector<ForceGraph*> childVertices = it->getVertices();
 		vertices.insert(vertices.end(), childVertices.begin(), childVertices.end());
 	}
 
@@ -127,11 +163,11 @@ std::vector<std::pair<ForceGraph*, ForceGraph*> > ForceGraph::getEdges()
 {
 	std::vector<std::pair<ForceGraph*, ForceGraph*> > edges;
 
-	for(std::vector<ForceGraph*>::iterator it = children.begin(); it != children.end(); ++it)
+	for(auto graphChild : children)
 	{
-		edges.push_back(std::pair<ForceGraph*, ForceGraph*>(this, *it));
+		edges.push_back(std::pair<ForceGraph*, ForceGraph*>(this, graphChild));
 
-		std::vector<std::pair<ForceGraph*, ForceGraph*> > childEdges = (*it)->getEdges();
+		std::vector<std::pair<ForceGraph*, ForceGraph*> > childEdges = graphChild->getEdges();
 		edges.insert(edges.end(), childEdges.begin(), childEdges.end());
 	}
 
@@ -149,6 +185,7 @@ forcegraph* forcegraph_create(codetree* code)
 
 void forcegraph_destroy(forcegraph* graph)
 {
+	std::cout << "Deallocating forcegraph" << std::endl;
 	delete reinterpret_cast<ForceGraph*>(graph);
 }
 
@@ -192,10 +229,14 @@ forcegraph* forcegraph_get_child(forcegraph* graph, int index)
 	return reinterpret_cast<forcegraph*>((reinterpret_cast<ForceGraph*>(graph))->children.at(index));
 }
 
-codetree* forcegraph_get_code(forcegraph* graph)
-{
-	return (reinterpret_cast<codetree*>(reinterpret_cast<ForceGraph*>(graph)->data));
-}
+// codetree* forcegraph_get_code(forcegraph* graph)
+// {
+// 	return (reinterpret_cast<codetree*>(reinterpret_cast<ForceGraph*>(graph)->data));
+//}
+
+//int forcegraph_get_type
+//const char* forcegraph_get_code
+//const char* forcegraph_get_tag
 
 void forcegraph_print(forcegraph* graph)
 {

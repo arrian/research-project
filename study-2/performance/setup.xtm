@@ -1,8 +1,8 @@
 (sys:load "libs/xtm.xtm")
 
 ;; make sure this is the right path for your machine!
-(define *research-project-dir* "/Users/ben/Code/xtm/arrian-research-project")
-;;(define *research-project-dir* "/Users/arrian/Desktop/COMP4540/research-project")
+;;(define *research-project-dir* "/Users/ben/Code/xtm/arrian-research-project")
+(define *research-project-dir* "/Users/arrian/Desktop/COMP4540/research-project")
 
 (sys:load (string-append *research-project-dir* "/visualisations-1/lib/callback_widget_array.xtm"))
 (sys:load (string-append *research-project-dir* "/visualisations-1/lib/vu-meter.xtm"))
@@ -13,13 +13,13 @@
 
 (sys:load "libs/external/cairo.xtm")
 
-(define width 1920.0)
-(define height 1080.0)
-(bind-val width float 1920.0)
-(bind-val height float 1080.0)
+(define width 1024.0)
+(define height 768.0)
+(bind-val width float 1024.0)
+(bind-val height float 768.0)
 (bind-val half_width float (/ width 2.0))
 (bind-val half_height float (/ height 2.0))
-(define fullscreen #t)
+(define fullscreen #f)
 
 ;; Should be redefined in each visualisation
 (bind-func draw
@@ -59,7 +59,7 @@
 ;;TODO convert draw loop to beat duration 
 
 ;; load the visualisation file (make sure it's the right one!)
-(sys:load (string-append *research-project-dir* "/visualisations-1/visualisation-didactic.xtm"));;didactic.xtm"))
+(sys:load (string-append *research-project-dir* "/visualisations-1/visualisation-aesthetic.xtm"));;didactic.xtm"))
 
 ;; create the graphics context
 (define ctx (gl:make-ctx ":0.0" fullscreen 0.0 0.0 width height))

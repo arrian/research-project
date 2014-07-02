@@ -45,7 +45,7 @@
 
 (bind-lib analysis forcegraph_get_child_count [i32,forcegraph*]*)
 (bind-lib analysis forcegraph_get_child [forcegraph*,forcegraph*,i32]*)
-(bind-lib analysis forcegraph_get_code [codetree*,forcegraph*]*)
+;;(bind-lib analysis forcegraph_get_code [codetree*,forcegraph*]*)
 
 (bind-lib analysis forcegraph_print [void,forcegraph*]*)
 
@@ -106,7 +106,8 @@
   		  (y (ftod (+ half_height (forcegraph_get_y graph))))
   		  (size (ftod (/ (forcegraph_get_size graph) 3.0)))
   		  (children (forcegraph_get_child_count graph))
-  		  (type (codetree_get_type (forcegraph_get_code graph))))
+  		  ;;(type (codetree_get_type (forcegraph_get_code graph)))
+        )
 
 
   		(dotimes (i children)
@@ -121,25 +122,28 @@
   				(cairo_stroke cr)
   				(draw_graph cr child)))
 
-  		;;(printf "%d\n" type)
-  		(cond ((= type 4) ;;function
-  				(cairo_set_source_rgba cr 0.0 0.0 1.0 1.0)
-  				)
-  			  ((= type 1) ;;root
-  				(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
-  				(println (forcegraph_get_x graph))
-  				)
-  			  ((= type 5)
+  		;; ;;(printf "%d\n" type)
+  		;; (cond ((= type 4) ;;function
+  		;; 		(cairo_set_source_rgba cr 0.0 0.0 1.0 1.0)
+  		;; 		)
+  		;; 	  ((= type 1) ;;root
+  		;; 		(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
+  		;; 		(println (forcegraph_get_x graph))
+  		;; 		)
+  		;; 	  ((= type 5)
   				
-				(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
-				(cairo_set_font_size cr 10.0)
-				(cairo_move_to cr x y)
-				;;(cairo_show_text cr (codetree_get_code (forcegraph_get_code graph)))
-				(cairo_set_source_rgba cr 1.0 1.0 0.0 1.0)
-  				)
-  		      (else 
-  				(cairo_set_source_rgba cr 1.0 0.0 0.0 1.0)
-  		      	))
+				;; (cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
+				;; (cairo_set_font_size cr 10.0)
+				;; (cairo_move_to cr x y)
+				;; ;;(cairo_show_text cr (codetree_get_code (forcegraph_get_code graph)))
+				;; (cairo_set_source_rgba cr 1.0 1.0 0.0 1.0)
+  		;; 		)
+  		;;       (else 
+  		;; 		(cairo_set_source_rgba cr 1.0 0.0 0.0 1.0)
+  		;;       	)
+    ;;         )
+
+      (cairo_set_source_rgba cr 1.0 0.0 0.0 1.0)
 			(cairo_arc cr x y (* 2.0 size) 0.0 TWOPI)
 			(cairo_fill cr)
 			(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
@@ -155,6 +159,10 @@
 	(forcegraph_step graph 1.0)
 	(cairo_set_source_rgba cr 0.0 0.0 0.0 1.0)
 	(cairo_paint cr)
+  (let ((code (codetree_create "test.xtm")))
+      (forcegraph_update graph code)
+      (codetree_destroy code)
+    )
 	(draw_graph cr graph)
     void))
 

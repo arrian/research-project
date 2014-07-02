@@ -1,8 +1,8 @@
 ;; load the setup file
 
 ;; make sure this is the right path for your machine!
-(define *research-project-dir* "/Users/ben/Code/xtm/arrian-research-project")
-;; (define *research-project-dir* "/Users/arrian/Desktop/COMP4540/research-project")
+;;(define *research-project-dir* "/Users/ben/Code/xtm/arrian-research-project")
+(define *research-project-dir* "/Users/arrian/Desktop/COMP4540/research-project")
 
 (sys:load (string-append *research-project-dir* "/visualisations-1/setup.xtm"))
 
@@ -23,22 +23,22 @@
 ;; (drumloop (*metro* 'get-beat 4) 1/4)
 
 
-(define fmsynth_instrument
+(define synth
   (lambda (beat dur)
     (if (= (modulo beat 4) 0)
         (play fmsynth (- 46 (if (< (modulo beat 32) 16) 0 4))
               (random 90 100) dur (random .4 1.4) .5))
     (play-note (now) fmsynth (- (random '(78 82 97 99 94)) 12) 75 1000)
-    (cv-callback (*metro* (+ beat (* 1.0 dur))) 'fmsynth_instrument (+ beat dur) dur)))
+    (cv-callback (*metro* (+ beat (* 1.0 dur))) 'synth (+ beat dur) dur)))
 
-(fmsynth_instrument (*metro* 'get-beat 4) 4)
+(synth (*metro* 'get-beat 4) 4)
 
-(define epad_instrument
+(define epad
   (lambda (beat dur)
     (play epad (random '(77 82 85 89)) 75 (/ dur (trir 1 6 1/9)))
-    (cv-callback (*metro* (+ beat (* 4.0 dur))) 'epad_instrument (+ beat dur) dur)))
+    (cv-callback (*metro* (+ beat (* 4.0 dur))) 'epad (+ beat dur) dur)))
 
-(epad_instrument (*metro* 'get-beat 4) 1)
+(epad (*metro* 'get-beat 4) 1)
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;
 

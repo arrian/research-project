@@ -24,6 +24,7 @@ public:
 	void step(float dt);
 
 	void addChild(CodeTree* code);
+	bool isChild(CodeTree* code);
 
 	float x;
 	float y;
@@ -37,7 +38,10 @@ public:
 	ForceGraph* parent;
 	std::vector<ForceGraph*> children;
 
-	CodeTree* data;
+	std::string tag;
+	CodeType type;
+	std::string code;
+	//CodeTree* data;
 
 	void print(int depth = 0);
 

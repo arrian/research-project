@@ -1,0 +1,116 @@
+(sys:load "libs/external/glfw3.xtm")
+
+(glfw_init)
+(glfw_set_osx_core_profile)
+
+(define *gl-window* (glfw_create_window 640 480))
+
+(glfw_make_context_current *gl-window*)
+
+(glew_init 1)
+
+(gl_print_driver_info)
+
+(bind-func gl_set_depth_test
+  (lambda ()
+    (glEnable GL_DEPTH_TEST)
+    (glDepthFunc GL_LESS)
+    ))
+
+(gl_set_depth_test)
+
+(bind-val points float*)
+
+(bind-func fill_points
+  (lambda ()
+    (pfill! points
+            0. .5 .5
+            .5 -.5 0.
+            -.5 -.5 0.)))
+
+(fill_points)
+
+(bind-func print_points
+  (lambda ()
+    (doloop (i 9)
+      (println (pref points i)))))
+
+;; (print_points)
+
+(bind-func create_triangle_vbo
+  (lambda ()
+    (let ((vbo_ptr:i32* (salloc))
+          (vbo:i32 0))
+      (glGenBuffers 1 vbo_ptr)
+      (set! vbo (pref vbo_ptr 0))
+      (glBindBuffer GL_ARRAY_BUFFER vbo)
+      (glBufferData GL_ARRAY_BUFFER (* 9 4) (convert points) GL_DYNAMIC_DRAW)
+      vbo)))
+
+(bind-func create_triangle_vao
+  (lambda (vbo)
+    (let ((vao_ptr:i32* (salloc))
+          (vao:i32 0))
+      (glGenVertexArrays 1 vao_ptr)
+      (set! vao (pref vao_ptr 0))
+      (glBindVertexArray vao)
+      (glEnableVertexAttribArray 0)
+      (glBindBuffer GL_ARRAY_BUFFER vbo)
+      (glVertexAttribPointer 0 3 GL_FLOAT (convert GL_FALSE) 0 null)
+      vao)))
+
+(define vbo (create_triangle_vbo))
+(define vao (create_triangle_vao vbo))
+
+(define fragment-shader
+  "#version 400
+
+out vec4 frag_colour;
+void main () {
+  frag_colour = vec4 (0.5, 0.0, 0.5, 1.0);
+}")
+
+(define vertex-shader
+  "#version 400
+
+in vec3 vp;
+void main () {
+  gl_Position = vec4 (vp, 1.0);
+}")
+
+(define shader-program (create_shader vertex-shader fragment-shader))
+
+(bind-func draw
+  (lambda (window program vao)
+    (glClear (bitwise-or GL_COLOR_BUFFER_BIT GL_DEPTH_BUFFER_BIT))        
+    (glUseProgram program)
+    (glBindVertexArray vao)
+    (glDrawArrays GL_TRIANGLES 0 3)
+    (glfwPollEvents)
+    (glfwSwapBuffers window)))
+
+(define gl-loop
+  (lambda (time delta-t)
+    (draw *gl-window* shader-program vao)
+    (println 'time: time)
+    (print_points)
+    (if (<> (glfw_window_should_close *gl-window*) 0)
+        (begin (glfw_destroy_window *gl-window*)
+               (print "Finishing gl-loop.\n"))
+        (callback (+ time (* *second* delta-t) 0.5)
+                  'gl-loop
+                  (+ time (* *second* delta-t)) 
+                  delta-t))))
+
+(gl-loop (now) 1)
+
+;; extra credit stuff
+
+(bind-func munge_points
+  (lambda ()
+    (doloop (i 9)
+      (if (< (random) .1)
+          (pset! points i (random -0.5 0.5))))))
+
+
+(munge_points)
