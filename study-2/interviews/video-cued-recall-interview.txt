@@ -1,23 +1,28 @@
 # Interview Questions
 
 ## Overall Performance
+
+-overall, how do you think the performance went?
+
 -what went well?
 	-turnout?
 -what didn't go well?
 	-before the performance there was concern for boredom. did this influence the performance?
 -improvements?
 
--overall, how do you think the performance went?
 -preparation? what was the approach you took in preparing the music?
+	-did you prepare more for a particular visualisation?
 -performance? what was your approach during the performance?
 
--you spent some time during practice attempting to get the most out of the visuals. did you spend time during the performance doing this?
 -did you spend much time during the performance thinking about the visuals?
+-you spent some time during practice attempting to get the most out of the visuals. did you spend any time during the performance doing this?
 
 ## Didactic vs Aesthetic
 -two visualisations were presented to the audience. what do you think worked well/ didn't work well?
--do you think one worked better than the other. for what reason?
+	-do you think one worked better than the other. for what reason?
 -the intention of the visuals were to provide both interest and understanding. do you think either achieved that?
+	-interest?
+	-understanding?
 
 ## General Live Coding
 -what is your intended audience? (this audience was predominantly those experienced with computer science...)
@@ -26,25 +31,18 @@
 
 -should there be a focus on one more than the other while live coding is still relatively new? eg. visual aesthetic to get more people interested
 -why are visuals not regularly live coded?
--
+
+-could visualisations help the coder's sense of enjoyment/engagement?
+-could visualisations help the coder take risks/think quicker
 
 
 
 # Cued Recall
 -talk through process
--talk through mindset
+-talk through mindset while performing
 -things that went better than expected
 -things that went worse than expected
 -impressions of the performance
--how safe were the performances
-
-
-
-
-——————
-How safe were the performances
-Could the visualisations help the coder’s sense of enjoyment
-Could the visualisations help the coder to take risks
-
-Did you spend more time preparing for a particular visualisation. If so, why?
+-how safe were the performances?
+-did the visualisations get in the way?
 

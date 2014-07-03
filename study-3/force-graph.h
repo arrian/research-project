@@ -24,7 +24,8 @@ public:
 	void step(float dt);
 
 	void addChild(CodeTree* code);
-	bool isChild(CodeTree* code);
+	
+	bool isMatch(CodeTree* code);
 
 	float x;
 	float y;
@@ -49,22 +50,37 @@ public:
 	std::vector<std::pair<ForceGraph*, ForceGraph*> > getEdges();
 };
 
+// int main()
+// {
+// 	CodeTree* tree = new CodeTree(load("test.xtm"));
+// 	tree->parse();
+// 	tree->printTopLevelStructure();
+
+// 	ForceGraph* graph = new ForceGraph(tree);
+
+// 	for(int i = 0; i < 100; i++) graph->step(1.0);
+// 	graph->print();
+
+// 	delete graph;
+// 	delete tree;
+
+// 	return 0;
+// }
+
 int main()
 {
-	CodeTree* tree = new CodeTree(load("test.xtm"));
-	tree->parse();
-	tree->printTopLevelStructure();
-
-	ForceGraph* graph = new ForceGraph(tree);
-
-	for(int i = 0; i < 100; i++) graph->step(1.0);
-	graph->print();
-
-	delete graph;
-	delete tree;
+	CodeTree code(load("test.xtm"));
+	code.parse();
+	code.printTopLevelStructure();
+	
+	ForceGraph graph(&code);
+	graph.print();
+	graph.update(&code);
+	graph.print();
 
 	return 0;
 }
+
 
 extern "C" {
 	struct forcegraph;

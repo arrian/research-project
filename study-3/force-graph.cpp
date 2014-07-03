@@ -32,19 +32,30 @@ void ForceGraph::addChild(CodeTree* tree)
 
 void ForceGraph::update(CodeTree* code)
 {
+	std::cout << "----------------started erase from the list--------------------------" << std::endl;	
 	children.erase(std::remove_if(children.begin(), children.end(), 
-                   [](ForceGraph* f) { 
+                   [&](ForceGraph* f) { 
 						bool match = false;
 						for(auto codeChild : code->children)//iterate children of code
 						{	
+							std::cout << "started" << std::endl;
+							std::cout << "code child" << codeChild << std::endl;
+							std::cout << "code" << codeChild->code << std::endl;
+							std::cout << "graph child" << f << std::endl;
+							std::cout << "graph" << f->code << std::endl;
+							if(!f) return false;
+							if(!codeChild) return false;
 							if (f->isMatch(codeChild)) 
 							{
 								match = true;
 								break;
 							}
+							std::cout << "finished" << std::endl;
 						}
                    		return !match;
                    }));
+
+	std::cout << "----------------erased from the list--------------------------" << std::endl;
 
 	for(auto codeChild : code->children)//iterate children of code
 	{
@@ -57,7 +68,7 @@ void ForceGraph::update(CodeTree* code)
 				break;
 			}
 		}
-		if(!match) children.push_back(new ForceGraph(*it, this));//add new node... check for sub matches
+		if(!match) children.push_back(new ForceGraph(codeChild, this));//add new node... check for sub matches
 	}
 
 	//iterate this and code and compare
@@ -65,7 +76,8 @@ void ForceGraph::update(CodeTree* code)
 
 bool ForceGraph::isMatch(CodeTree* code)
 {
-	return code->code == code;//change to approximately equals
+	//std::cout << code->code << std::endl << "------------- vs -------------" << std::endl << this->code << std::endl;
+	return code->code == this->code;//change to approximately equals
 }
 
 void ForceGraph::step(float dt)
@@ -137,7 +149,7 @@ void ForceGraph::step(float dt)
 void ForceGraph::print(int depth)
 {
 	for(int i = 0; i < depth; i++) std::cout << "--";
-	std::cout << data->tag << std::endl;
+	std::cout << tag << std::endl;
 
 	for(std::vector<ForceGraph*>::iterator it = children.begin(); it != children.end(); ++it)
 	{
@@ -152,7 +164,7 @@ std::vector<ForceGraph*> ForceGraph::getVertices()
 
 	for(auto graphChild : children)
 	{
-		std::vector<ForceGraph*> childVertices = it->getVertices();
+		std::vector<ForceGraph*> childVertices = graphChild->getVertices();
 		vertices.insert(vertices.end(), childVertices.begin(), childVertices.end());
 	}
 
@@ -173,8 +185,6 @@ std::vector<std::pair<ForceGraph*, ForceGraph*> > ForceGraph::getEdges()
 
 	return edges;
 }
-
-
 
 
 forcegraph* forcegraph_create(codetree* code)
