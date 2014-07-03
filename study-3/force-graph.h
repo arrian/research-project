@@ -74,8 +74,10 @@ int main()
 	code.printTopLevelStructure();
 	
 	ForceGraph graph(&code);
+	std::cout << "graph before update-----------------" << std::endl;
 	graph.print();
 	graph.update(&code);
+	std::cout << "graph after update-----------------" << std::endl;
 	graph.print();
 
 	return 0;

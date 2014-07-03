@@ -32,30 +32,30 @@ void ForceGraph::addChild(CodeTree* tree)
 
 void ForceGraph::update(CodeTree* code)
 {
-	std::cout << "----------------started erase from the list--------------------------" << std::endl;	
+	// std::cout << "----------------started erase from the list--------------------------" << std::endl;	
+
 	children.erase(std::remove_if(children.begin(), children.end(), 
                    [&](ForceGraph* f) { 
 						bool match = false;
 						for(auto codeChild : code->children)//iterate children of code
 						{	
-							std::cout << "started" << std::endl;
-							std::cout << "code child" << codeChild << std::endl;
-							std::cout << "code" << codeChild->code << std::endl;
-							std::cout << "graph child" << f << std::endl;
-							std::cout << "graph" << f->code << std::endl;
-							if(!f) return false;
-							if(!codeChild) return false;
+							// std::cout << "started" << std::endl;
+							// std::cout << "code child" << codeChild << std::endl;
+							// std::cout << "code" << codeChild->code << std::endl;
+							// std::cout << "graph child" << f << std::endl;
+							// std::cout << "graph" << f->code << std::endl;
 							if (f->isMatch(codeChild)) 
 							{
 								match = true;
 								break;
 							}
-							std::cout << "finished" << std::endl;
+							// std::cout << "finished" << std::endl;
 						}
+						// std::cout << "size" << children.size() << std::endl;
                    		return !match;
-                   }));
+                   }), children.end());
 
-	std::cout << "----------------erased from the list--------------------------" << std::endl;
+	// std::cout << "----------------erased from the list--------------------------" << std::endl;
 
 	for(auto codeChild : code->children)//iterate children of code
 	{
@@ -76,7 +76,8 @@ void ForceGraph::update(CodeTree* code)
 
 bool ForceGraph::isMatch(CodeTree* code)
 {
-	//std::cout << code->code << std::endl << "------------- vs -------------" << std::endl << this->code << std::endl;
+	// std::cout << "MATCH" << std::endl;
+	// std::cout << code->code << std::endl << "------------- vs -------------" << std::endl << this->code << std::endl;
 	return code->code == this->code;//change to approximately equals
 }
 
@@ -139,7 +140,7 @@ void ForceGraph::step(float dt)
 		float dist = sqrt(v->tx * v->tx + v->ty * v->ty);
 		if(dist > 0)
 		{
-			//std::cout << v->x << " " << v->y << std::endl;
+			std::cout << v->x << " " << v->y << std::endl;
 			v->x += (v->tx / dist);
 			v->y += (v->ty / dist);
 		}
@@ -189,13 +190,13 @@ std::vector<std::pair<ForceGraph*, ForceGraph*> > ForceGraph::getEdges()
 
 forcegraph* forcegraph_create(codetree* code)
 {
-	std::cout << "Allocating forcegraph" << std::endl;
+	// std::cout << "Allocating forcegraph" << std::endl;
 	return reinterpret_cast<forcegraph*>(new ForceGraph(reinterpret_cast<CodeTree*>(code)));
 }
 
 void forcegraph_destroy(forcegraph* graph)
 {
-	std::cout << "Deallocating forcegraph" << std::endl;
+	// std::cout << "Deallocating forcegraph" << std::endl;
 	delete reinterpret_cast<ForceGraph*>(graph);
 }
 
