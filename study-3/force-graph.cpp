@@ -69,6 +69,7 @@ void ForceGraph::update(CodeTree* code)
 			}
 		}
 		if(!match) children.push_back(new ForceGraph(codeChild, this));//add new node... check for sub matches
+
 	}
 
 	//iterate this and code and compare
@@ -140,7 +141,7 @@ void ForceGraph::step(float dt)
 		float dist = sqrt(v->tx * v->tx + v->ty * v->ty);
 		if(dist > 0)
 		{
-			std::cout << v->x << " " << v->y << std::endl;
+			// std::cout << v->x << " " << v->y << std::endl;
 			v->x += (v->tx / dist);
 			v->y += (v->ty / dist);
 		}
@@ -149,12 +150,20 @@ void ForceGraph::step(float dt)
 
 void ForceGraph::print(int depth)
 {
-	for(int i = 0; i < depth; i++) std::cout << "--";
-	std::cout << tag << std::endl;
-
+	int nextDepth = depth + 1;
+	if(tag == "statement")
+	{
+		nextDepth = depth;
+	}
+	else
+	{
+		for(int i = 0; i < depth; i++) std::cout << "--";
+		std::cout << tag << std::endl;
+	}
+	
 	for(std::vector<ForceGraph*>::iterator it = children.begin(); it != children.end(); ++it)
 	{
-		(*it)->print(depth + 1);
+		(*it)->print(nextDepth);
 	}
 }
 
@@ -238,6 +247,16 @@ int forcegraph_get_child_count(forcegraph* graph)
 forcegraph* forcegraph_get_child(forcegraph* graph, int index)
 {
 	return reinterpret_cast<forcegraph*>((reinterpret_cast<ForceGraph*>(graph))->children.at(index));
+}
+
+int forcegraph_get_type(forcegraph* graph)
+{
+	return codeTypeToInteger(reinterpret_cast<ForceGraph*>(graph)->type);
+}
+
+const char* forcegraph_get_tag(forcegraph* graph)
+{
+	return reinterpret_cast<ForceGraph*>(graph)->tag.c_str();
 }
 
 // codetree* forcegraph_get_code(forcegraph* graph)

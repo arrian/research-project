@@ -1,0 +1,18 @@
+
+
+(bind-func dsp:[float,float,i64,i64,float*]*
+  (lambda (in time chan dat)
+    (test-function)))
+
+(dsp:set! dsp)
+
+(define test-function
+  (lambda (beat dur)
+      (play inst 60 80 dur)
+      (callback (*metro* (+ beat (* .5 dur))) 'test-function (+ beat dur) dur)))
+
+(test-function (*metro* 'get-beat 4) 1/4)
+
+
+;;test comment
+

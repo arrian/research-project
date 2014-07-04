@@ -21,7 +21,7 @@ void CodeTree::parse()
 		if(code[index] == ';') index = pushComment(index);
 		else if(code[index] == '(') index = pushBracket(index);
 		else if(code[index] == '"') index = pushString(index);
-		else if(isspace(code[index])) index++;
+		else if(isspace(code[index])) continue;
 		else index = pushStatement(index);
 
 		if(index == -1) break;
@@ -174,6 +174,19 @@ CodeForest CodeTree::getFunctionCalls(std::string name)
 	return findAll(name);
 }
 
+int codeTypeToInteger(CodeType type)
+{
+	if(type == ROOT) return 1;
+	if(type == COMMENT) return 2;
+	if(type == STRING) return 3;
+	if(type == STATEMENT) return 4;
+	if(type == FUNCTION) return 5;
+	if(type == CONDITIONAL) return 6;
+	if(type == LOOP) return 7;
+	if(type == ERROR) return -1;
+	return 0;
+}
+
 std::string load(std::string file)
 {
 	std::ifstream t(file);
@@ -193,6 +206,7 @@ codetree* codetree_create(char* path)
 
 void codetree_destroy(codetree* codetree)
 {
+	std::cout << "Deallocating codetree" << std::endl;
 	delete reinterpret_cast<CodeTree*>(codetree);
 }
 
@@ -221,15 +235,7 @@ int codetree_get_type(codetree* codetree)
 {
 	CodeType type = reinterpret_cast<CodeTree*>(codetree)->type;
 
-	if(type == ROOT) return 1;
-	if(type == COMMENT) return 2;
-	if(type == STRING) return 3;
-	if(type == STATEMENT) return 4;
-	if(type == FUNCTION) return 5;
-	if(type == CONDITIONAL) return 6;
-	if(type == LOOP) return 7;
-	if(type == ERROR) return -1;
-	return 0;
+	return codeTypeToInteger(type);
 }
 
 const char* codetree_get_code(codetree* codetree)

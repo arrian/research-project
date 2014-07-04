@@ -67,16 +67,28 @@ public:
 // 	return 0;
 // }
 
-int main()
+int main(int argc, char* argv[])
 {
-	CodeTree code(load("test.xtm"));
-	code.parse();
-	code.printTopLevelStructure();
+	std::string path1 = "test.xtm";
+	std::string path2 = path1;
+	if(argc > 1) 
+	{
+		path1 = std::string(argv[1]);
+		path2 = path1;
+	}
+	if(argc > 2) path2 = std::string(argv[2]);
+
+	CodeTree code1(load(path1));
+	code1.parse();
+	code1.printTopLevelStructure();
 	
-	ForceGraph graph(&code);
+	ForceGraph graph(&code1);
 	std::cout << "graph before update-----------------" << std::endl;
 	graph.print();
-	graph.update(&code);
+
+	CodeTree code2(load(path2));
+	code2.parse();
+	graph.update(&code2);
 	std::cout << "graph after update-----------------" << std::endl;
 	graph.print();
 
@@ -98,6 +110,9 @@ extern "C" {
 	float forcegraph_get_x(forcegraph* graph);
 	float forcegraph_get_y(forcegraph* graph);
 	float forcegraph_get_size(forcegraph* graph);
+
+	int forcegraph_get_type(forcegraph* graph);
+	const char* forcegraph_get_tag(forcegraph* graph);
 
 	int forcegraph_get_child_count(forcegraph* graph);
 	forcegraph* forcegraph_get_child(forcegraph* graph, int index);

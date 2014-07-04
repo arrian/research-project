@@ -47,6 +47,8 @@ enum CodeType
 	UNKNOWN
 };
 
+int codeTypeToInteger(CodeType type);
+
 class CodeTree;
 
 typedef std::vector<CodeTree*> CodeForest;
