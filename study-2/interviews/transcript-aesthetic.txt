@@ -38,7 +38,7 @@ Though I feel that as an artist sure, as a programmer this is not so interesting
 There are a lot of people in computer music today that use fancy algorithms, they use cellular automata, they use generative algorithms
 But I think it works better if you use... I've had more artistic success using these simple algorithms and then just using my musical experience and intelligence to select good parameters.. 
 
-[A: question]
+[A: did the visuals influence the performance?]
 
 To be honest, I think in the second piece I tried to limit the callback rate because I knew that some of the visuals in the didactic setup worked better with a longer callback rate
 
@@ -48,7 +48,7 @@ No, it certainly didn't hold me back.
 In some ways it is nice to have constraints.
 
 I'm now going up an octave
-It gives it a harder edge
+It gives it a harder edge...
 
 It is interesting that I'm very concious of the hypermeter.
 
