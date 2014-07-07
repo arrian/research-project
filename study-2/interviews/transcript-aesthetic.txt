@@ -1,0 +1,143 @@
+I'll sit nice and close
+Right so this is the beginning
+So the first little synth thing in this I knew pretty much exactly what I wanted to do
+I was going to do random pitches at 16th notes
+I think I probably did this synth thing exactly the same in other performances
+
+[A: question here]
+
+Yeah, well
+This was not even prepared specifically for this performance
+But I've done stuff like this in the past
+This is a pretty common trick I use for getting up and running early
+
+I think the bass is playing at this point but I can't hear on these speakers
+
+[A: question here]
+
+This performance was pretty safe.
+It was pretty simple and pretty preplanned
+What I would say is that the form of all of the instruments are pretty standard for my live coding
+
+So the bass to go through a list of pitches like that 
+I do that alot
+
+For the drums I play with some sort of modulation of the sample slot, of the kit
+I do that alot
+
+I probably choose slightly different parameters each time through
+But yeah, none of these things are really adventurous by the standards of my live coding
+
+[A: question]
+
+Honestly, the main reason is that these things work well
+And I've tried other algorithms and they don't sound as good as these simpler algorithmic structures with judicious choice of parameters
+
+Though I feel that as an artist sure, as a programmer this is not so interesting because the algorithms are pretty safe
+
+There are a lot of people in computer music today that use fancy algorithms, they use cellular automata, they use generative algorithms
+But I think it works better if you use... I've had more artistic success using these simple algorithms and then just using my musical experience and intelligence to select good parameters.. 
+
+[A: question]
+
+To be honest, I think in the second piece I tried to limit the callback rate because I knew that some of the visuals in the didactic setup worked better with a longer callback rate
+
+[A: question - do you think this held you back?]
+
+No, it certainly didn't hold me back.
+In some ways it is nice to have constraints.
+
+I'm now going up an octave
+It gives it a harder edge
+
+It is interesting that I'm very concious of the hypermeter.
+
+I'm just grooving along and it just makes sense to evaluate in time.
+
+[A: question]
+Ah, nah.
+In general I'm just so focussed on the [code?].
+
+This little bit is adventurous.
+This drum bit I didn't know exactly what samples were in those slots.
+Before I was just guessing some numbers and picking numbers I thought might be good.
+
+This bit is certainly more intense.
+This is more european house.
+I don't actually know wether it is european house but I'm sure there is some name for this genre.
+
+This end bit is a bit new.
+I hadn't planned to end it like that.
+
+[A: question]
+Not so much by chance.
+I got to the end and wasn't really sure how I would finish this.
+This is true making it up.
+
+[A: question - were you happy?]
+Yeah.
+
+I'm actually going didatonically out of the scale I was using for the whole piece.
+
+Yeah, I hadn't planned to finish like that but...
+Yeah, yeah, I'm reasonably happy with that.
+----------
+
+I think in terms of the surprising stuff.
+There were no surprises when I started/added each new instrument
+I knew pretty much exactly what I was going to do.
+I might not have had the exact parameters in mind.
+
+I would have put maybe a 60 instead of a 70.
+Even when I didn't have an exact number in mind I would have had an approximate number in mind... loud vs soft.
+
+Once stuff is going then I think all bets are off and I at least don't really think through what I'm going to do after that.
+Generally I'll go back and start messing with stuff.
+In that case I went back and messed with the synth.
+I did a bit of interesting stuff with the drums.
+I went from a more groovy and pretty standard drum beat to a heightened beat which definitely changed the mood of the piece.
+
+I'm not unhappy with that.
+I'd probably do something different next time just because you do something different every time. 
+But that was one of the things that surprised me.
+In general I was pretty happy with it.
+I think it is a good sound palette.
+The drums grooved pretty well which is an important thing.
+The bass line was pretty cool, though I couldn't hear it in that recording.
+
+[A:question - in terms of the visualisations, do you think they added anything to the piece?]
+
+I think they added something.
+I think they are just ambience.
+It is definitely cool to have that stuff going on that is a little visually interesting.
+But I wasn't paying attention to them even then.
+I definitely wasn't paying attention to them on the day.
+In fact I tuned them out as best I can because I am just trying to focus on the code.
+
+Like I was saying before there were times where it was hard to see the code underneath the visualisations.
+
+[A: was this during the aesthetic or didactic?]
+
+I think it was more the didactic and I think it was the text in the didactic ones and not in the aesthetic.
+
+I definitely like the visuals.
+They definitely add something and they don't take anything away even though I wasn't paying attention to them.
+I still see the text as the main thing but the visuals are gravy and that was nice gravy. 
+
+[A: question - audience was computer literature. do you think they would have preferred to focus on the code, the music or the visuals?] 
+
+That's a good question.
+I don't know.
+
+I'm really curious.
+Focus is a funny thing. You really explicitly go 'alright, I'm going to focus on blah and focus on blah'.
+I think you drift.
+Probably at different points they were paying attention to each.
+
+I think I'm a bad judge of what people pay attention to because I pay attention to completely different stuff when I watch it.
+
+What I pay attention is probably completely unhelpful in terms of an indicator for what even a computer literate audience member would pay attention to.
+
+
+
+
