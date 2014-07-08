@@ -1,0 +1,137 @@
+Now this one starts at a slower tempo.
+Half the speed... 60bpm vs 120bpm.
+
+[A: question - was this due to the nature of the visualisation?]
+
+No, that was just to be different.
+They both work fine with the visualisations.
+
+In fact the visualisation pretty much work with whatever tempo.
+
+So this one is a slower starting one.
+I still get it going fairly quickly.
+
+[A: question - did the visualisations get in the way?]
+
+It wasn't too bad because it's not over the top of where I was trying to work.
+
+
+This is one of the things that I did have the visuals in mind when I put together this thing.
+Initially you have the fast spinning visuals.
+I knew that I was going to slow this one down and go for two bars of eight beat long sustained chords.
+I knew that that would look cool as a slowly rotating thing.
+
+In fact I stuffed it up there.
+It wasn't so much a typo as I did a tricky thing where I tried to have a couple of overlapping temporal recursions and filter out only the fast one keeping the slow one going.
+But that relies on changing the code once you've got it to the state you want.
+
+I think in general with these parameters I was just messing around.
+I knew the general form.
+I was going to do some modulo [...?] beat parameter
+
+You've got a couple of polyrythms.
+I really like this bit.
+I think it works well.
+
+[A: question]
+
+Timing is off by half.
+We knew that was a problem.
+I still think it works pretty well.
+
+[A: question]
+I think this one has real potential but it is disappointing that they didn't sync up.
+
+
+This one is just grooving.
+I quite like the beat in this one.
+
+[A: question]
+I quite like this one too.
+The bleeps [..?]
+
+[A: question - did the visuals affect your ability to see here?]
+I can't remember to be honest.
+It wasn't a big problem to be honest.
+It probably only happened once through all four pieces.
+
+[A: question]
+Even when I'm watching it I'm tuning out the visuals.
+But definitely during the performance.
+
+I don't think this was planned.
+It is a fairly standard part of my live coding toolbox.
+
+
+I'm just changing the pitch.
+So it's to do with the bass.
+Quick ones and then long ones.
+
+Then I changed the offset of the chords and the chords would come in staggered.
+I don't know how well this one worked in the end.
+I like bits of it but...
+
+This one I think the stuff that is kind of up beat and is really groovy is easier to do than this.
+
+This bit was dissappointing.
+I had a cool ending in mind and the I stuffed it up here.
+I forgot to put the tick symbol.
+
+[A: question - did you manage to do the cool ending in the second performance?]
+
+No, I tried to do the same thing and stuffed it up in the exact same way.
+That was interesting and frustrating.
+I had a cool ending that I just thought of that day.
+Where I was going to do some harmonic organ-y stuff.
+Take it through the circle of fifths and do an interesting chord progression.
+But really kind of draw one out, slow finish.
+But I just forgot to quote that symbol when I went from the minor to the major.
+
+If I had other instruments covering me I could of started it again.
+But since everything had died if I started it again it would have been really obvious so I decided in the moment that that is where I would finish it.
+Whereas I had one more minute planned.
+I started to go down a path where I had a minute more of material to finish it off but then just dogged it.
+Frustratingly I did not quite the same mistake but a similar sort of mistake in the second one.
+It's kind of really rare... obviously I make typos but I don't tend to make them in that way.
+
+[A - was there some reason for the mistakes?]
+Not really.
+[A - chance?]
+Yeah, just chance. Just life.
+
+[A - was the main goal of this performance to entertain the audience... beyond the research?]
+Yeah, I think so. I always want the people to enjoy themselves.
+I tried to keep them pretty short.
+I think every little set was under ten minutes.
+If you're going to do a live coding set longer than ten minutes it needs to be bloody good.
+So in general I try to stay under ten minutes.
+
+It's interesting, some of my earlier videos are longer than ten minutes and I watch them now and I think 'this drags on'.
+I'm much better at it now and I'm much better at making things happen quickly.
+I'm especially better at getting stuff up and running, partially because I'm an emacs guru and have all the snippet magic to make that happen.
+But also you just learn the little extempore tricks and the general tricks for getting things up and running.
+
+For example in the aesthetic set, there was probably stuff going after only 10 seconds.
+For this one there was probably stuff up before 30 seconds.
+I reckon you've got to get something up before 30 seconds.
+
+[11:38]
+[A: was boredom getting to?]
+Not really. Certainly not in a big way.
+By the fourth I was like "I'm done, this has been a lot of live coding, I'm sort of out of ideas".
+
+It's not even fair to say 'out of ideas'.
+I had that cool idea about how I was going to finish it that I dogged both times.
+It's just exhausting.
+It really does take a lot of concentration.
+I was done at the end and I was pretty happy it was done.
+I enjoyed it, I had a good time but I was glad it was done.
+
+
+
+
+
+
+
+
+
