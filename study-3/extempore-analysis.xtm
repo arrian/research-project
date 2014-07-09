@@ -45,6 +45,11 @@
 
 (bind-lib analysis forcegraph_get_tag [i8*,forcegraph*]*)
 (bind-lib analysis forcegraph_get_type [i32,forcegraph*]*)
+(bind-lib analysis forcegraph_get_code [i8*,forcegraph*]*)
+
+(bind-lib analysis forcegraph_get_time_added [i32,forcegraph*]*)
+(bind-lib analysis forcegraph_get_time_activated [i32,forcegraph*]*)
+;; (bind-lib analysis forcegraph_get_is_active [i64,forcegraph*]*)
 
 (bind-lib analysis forcegraph_get_child_count [i32,forcegraph*]*)
 (bind-lib analysis forcegraph_get_child [forcegraph*,forcegraph*,i32]*)
@@ -122,7 +127,7 @@
             (set! code null)
             void))
     (set! code (codetree_create path))
-    (codetree_print_top_level code)
+    ;;(codetree_print_top_level code)
     ;;(printf "%p\n" code)
     code
     ))
@@ -131,7 +136,7 @@
 ;;;;;;;;;;Testing Code Helper;;;;;;
 
 
-(load_code "research/test3.xtm")
+(load_code "research/test4.xtm")
 
 (bind-func print_codetree
   (lambda ()
@@ -147,18 +152,19 @@
   	(let ((i 0)
   		  (x (ftod (+ half_width (forcegraph_get_x graph))))
   		  (y (ftod (+ half_height (forcegraph_get_y graph))))
-  		  (size (ftod (/ (forcegraph_get_size graph) 3.0)))
   		  (children (forcegraph_get_child_count graph))
+        (size (* 0.01 (i64tod (strlen (forcegraph_get_code graph)))));;(+ 1.0 (ftod (forcegraph_get_size graph))))
   		  (type (forcegraph_get_type graph))
         )
 
-
+      ;;(printf "%d\n" (strlen (forcegraph_get_code graph)))
   		(dotimes (i children)
   			(let ((child (forcegraph_get_child graph i))
   				  (xc (ftod (+ half_width (forcegraph_get_x child))))
   				  (yc (ftod (+ half_height (forcegraph_get_y child)))))
 
-				(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
+        (if (= type 1) (cairo_set_source_rgba cr 1.0 1.0 1.0 0.0) (cairo_set_source_rgba cr 1.0 1.0 1.0 1.0))
+				
 				(cairo_set_line_width cr 2.0)
 				(cairo_move_to cr x y)
   				(cairo_line_to cr xc yc)
@@ -166,13 +172,14 @@
   				(draw_graph cr child)
           ))
 
+      ;;(printf "%d\n" type)
   		;;(printf "%d\n" type)
   		(cond ((= type 5) ;;function
   		  		(cairo_set_source_rgba cr 0.0 0.0 1.0 1.0)
   				)
   			  ((= type 1) ;;root
     				(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
-    				(println (forcegraph_get_x graph))
+    				;;(println (forcegraph_get_x graph))
   				)
   			  ((= type 4)
   				
@@ -187,7 +194,7 @@
   		      	)
             )
 
-      (cairo_set_source_rgba cr 1.0 0.0 0.0 1.0)
+      ;;(cairo_set_source_rgba cr 1.0 0.0 0.0 1.0)
 			(cairo_arc cr x y (* 2.0 size) 0.0 TWOPI)
 			(cairo_fill cr)
 			(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
@@ -203,9 +210,13 @@
 	(forcegraph_step graph 1.0)
 	(cairo_set_source_rgba cr 0.0 0.0 0.0 1.0)
 	(cairo_paint cr)
+  (load_code "research/test.xtm")
   (forcegraph_update graph code)
 	(draw_graph cr graph)
     void))
+
+
+
 
 (bind-func gl_draw
   (let ((surface (cairo_image_surface_create CAIRO_FORMAT_RGB24 (convert  width) (convert  height)))
@@ -213,7 +224,6 @@
         (code (codetree_create "test3.xtm"))
         (graph (forcegraph_create code)))
   (lambda ()
-  	;; (forcegraph_add_child graph code)
     (glLoadIdentity)
     (draw cr (i64tod (now)) graph)
     (gl_load_tex_bgr (convert width) (convert height) 4 GL_UNSIGNED_BYTE (cairo_image_surface_get_data surface) 5)
@@ -235,4 +245,16 @@
 ;; start the animation loop (check the args are ok)
 (draw-loop (*metro* 'get-beat 4) 1/40)
 
+
+
+;;-------------------------------------
+(define func-name
+  (let ((x 2))
+  (lambda (test)
+    x
+    42
+    )))
+
+(get-closure-code func-name)
+(get-eldoc-string func-name)
 

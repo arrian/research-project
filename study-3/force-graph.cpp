@@ -1,12 +1,17 @@
 #include "force-graph.h"
 
+#include <ctime>
+
 
 ForceGraph::ForceGraph(CodeTree* code, ForceGraph* parent)
 	: x(rand() % 100 + 1),
 	  y(rand() % 100 + 1),
 	  vx(0.0),
 	  vy(0.0),
-	  size(10.0),
+	  size(code->children.size()),//10.0),
+	  timeAdded(std::time(0)),
+	  timeActivated(0),
+	  active(false),
 	  //data(code),
 	  tag(code->tag),
 	  type(code->type),
@@ -14,10 +19,14 @@ ForceGraph::ForceGraph(CodeTree* code, ForceGraph* parent)
 	  parent(parent),
 	  children()
 {
-	for(auto codeChild : code->children)//iterate children of code
-	{
-		children.push_back(new ForceGraph(codeChild, this));
-	}
+	//if(type == ROOT)
+	//{
+		size = 1.0;
+		for(auto codeChild : code->children)
+		{
+			children.push_back(new ForceGraph(codeChild, this));
+		}
+//	}
 }
 
 ForceGraph::~ForceGraph()
@@ -39,11 +48,6 @@ void ForceGraph::update(CodeTree* code)
 						bool match = false;
 						for(auto codeChild : code->children)//iterate children of code
 						{	
-							// std::cout << "started" << std::endl;
-							// std::cout << "code child" << codeChild << std::endl;
-							// std::cout << "code" << codeChild->code << std::endl;
-							// std::cout << "graph child" << f << std::endl;
-							// std::cout << "graph" << f->code << std::endl;
 							if (f->isMatch(codeChild)) 
 							{
 								match = true;
@@ -259,14 +263,25 @@ const char* forcegraph_get_tag(forcegraph* graph)
 	return reinterpret_cast<ForceGraph*>(graph)->tag.c_str();
 }
 
-// codetree* forcegraph_get_code(forcegraph* graph)
-// {
-// 	return (reinterpret_cast<codetree*>(reinterpret_cast<ForceGraph*>(graph)->data));
-//}
+const char* forcegraph_get_code(forcegraph* graph)
+{
+	return reinterpret_cast<ForceGraph*>(graph)->code.c_str();
+}
 
-//int forcegraph_get_type
-//const char* forcegraph_get_code
-//const char* forcegraph_get_tag
+int forcegraph_get_time_added(forcegraph* graph)
+{
+	return reinterpret_cast<ForceGraph*>(graph)->timeAdded;
+}
+
+int forcegraph_get_time_activated(forcegraph* graph)
+{
+	return reinterpret_cast<ForceGraph*>(graph)->timeActivated;
+}
+
+int forcegraph_is_active(forcegraph* graph)
+{
+	return reinterpret_cast<ForceGraph*>(graph)->active;
+}
 
 void forcegraph_print(forcegraph* graph)
 {

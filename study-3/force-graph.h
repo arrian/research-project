@@ -36,6 +36,10 @@ public:
 	float tx;//temp location
 	float ty;//temp location
 
+	int timeAdded;
+	int timeActivated;
+	bool active;
+
 	ForceGraph* parent;
 	std::vector<ForceGraph*> children;
 
@@ -113,10 +117,14 @@ extern "C" {
 
 	int forcegraph_get_type(forcegraph* graph);
 	const char* forcegraph_get_tag(forcegraph* graph);
+	const char* forcegraph_get_code(forcegraph* graph);
+
+	int forcegraph_get_time_added(forcegraph* graph);
+	int forcegraph_get_time_activated(forcegraph* graph);
+	int forcegraph_is_active(forcegraph* graph);
 
 	int forcegraph_get_child_count(forcegraph* graph);
 	forcegraph* forcegraph_get_child(forcegraph* graph, int index);
-	codetree* forcegraph_get_code(forcegraph* graph);
 
 	void forcegraph_print(forcegraph* graph);
 
