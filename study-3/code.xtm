@@ -1,4 +1,4 @@
-(define analysis (sys:open-dylib "extempore-analysis.dylib"))
+(define analysis (sys:open-dylib "code.dylib"))
 
 ;;Types
 
@@ -29,7 +29,7 @@
 (bind-lib analysis codeforest_get [i32,codeforest*]*)
 (bind-lib analysis codeforest_print [void,codeforest*]*)
 
-;;Force Graph Bindings
+;;Code Force Graph Bindings
 
 (bind-lib analysis codegraph_create [codegraph*,codetree*]*)
 (bind-lib analysis codegraph_destroy [void,codegraph*]*)
