@@ -22,22 +22,22 @@ void CodeHistory::addError(std::string error, long time)
 
 std::string CodeHistory::getCodeAtTime(long time)
 {
-	std::string* previous = nullptr;
+	std::string previous = "";
+	long previousTime = -1;
 	for(auto item : codeCache)
 	{
-		if(previous == nullptr)
+		if(previousTime == -1)
 		{
-			previous = &(item.second);
+			previousTime = item.first;
+			previous = item.second;
 			continue;
 		}
 
 		if(item.first > time) break;
-		
-		previous = &(item.second);
+		previous = item.second;
 	}
 
-	if(previous) return *(previous);
-	return "";
+	return previous;
 }
 
 std::string CodeHistory::getCodeCurrent()
@@ -50,6 +50,16 @@ std::string CodeHistory::getCodePrevious()
 {
 	if(codeCache.size() < 2) return "";
 	return codeCache.end()[-2].second;
+}
+
+std::string CodeHistory::getCodeDiff(long timeStart, long timeEnd)
+{
+	// get diff here
+	std::string start = getCodeAtTime(timeStart);
+	std::string end = getCodeAtTime(timeEnd);
+
+	CodeDiff codeDiff;
+	return codeDiff.diff(start, end);
 }
 
 std::string CodeHistory::toString()

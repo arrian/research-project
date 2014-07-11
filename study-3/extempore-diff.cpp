@@ -8,7 +8,6 @@
 #include <stack>
 #include <locale>
 
-#include "dtl/dtl.hpp"
 
 enum CodeState
 {
@@ -145,17 +144,17 @@ public:
 		else if(this->type == FUNCTION || this->type == ROOT)
 		{
 			int i = 0;
-			for(CodeForest::iterator it = children.begin(); it < children.end(); ++it)
+			for(auto child : children)
 			{
 				if(i == 0)
 				{
 					i++;
 					std::cout << tag;
-						(*it)->print(depth + 1);
+					child->print(depth + 1);
 					
 					continue;
 				}
-				(*it)->print(depth + 1);
+				child->print(depth + 1);
 				i++;
 			}
 		}
@@ -163,20 +162,20 @@ public:
 
 	void printTopLevelStructure()
 	{
-		for(CodeForest::iterator it = children.begin(); it < children.end(); ++it)
+		for(auto child : children)
 		{
-			std::cout << "----------------------" << std::endl << (*it)->code << std::endl;
+			std::cout << "----------------------" << std::endl << child->code << std::endl;
 		}
 	}
 
 	CodeForest getByArgument(std::string name, int arg = 0)
 	{
 		CodeForest nodes(0);
-		for(CodeForest::iterator it = this->children.begin(); it < this->children.end(); ++it)
+		for(auto child : children)
 		{
-			if((*it)->children.size() > arg && (*it)->children[arg]->code == name) nodes.push_back(*it);
+			if(child->children.size() > arg && child->children[arg]->code == name) nodes.push_back(child);
 			
-			CodeForest subNodes = (*it)->getByArgument(name, arg);
+			CodeForest subNodes = child->getByArgument(name, arg);
 			nodes.insert(nodes.end(), subNodes.begin(), subNodes.end());
 		}
 		return nodes;
@@ -208,41 +207,7 @@ void print(CodeTree* tree)
 
 void print(CodeForest forest)
 {
-	for(CodeForest::iterator it = forest.begin(); it < forest.end(); ++it) print(*it);
-}
-
-void diff(std::string oldCode, std::string newCode)
-{
-	dtl::Diff<char, std::string> d(oldCode, newCode);
-    d.compose();
-    
-    std::cout << "Shortest Edit Script" << std::endl;
-    //d.printSES();
-
-    typedef std::vector<std::pair<char, dtl::elemInfo> > SESVec;
-    SESVec ses = d.getSes().getSequence();
-    dtl::edit_t previousType = dtl::SES_COMMON;
-    std::cout << std::endl << "---------same---------" << std::endl;
-    for(SESVec::iterator it = ses.begin(); it < ses.end(); ++it)
-    {
-    	dtl::edit_t currentType = (*it).second.type;
-    	if(currentType != previousType && !isspace((*it).first))//we want to ignore whitespace changes for now
-    	{
-    		std::cout << std::endl << "---------";
-    		if(currentType == dtl::SES_ADD) std::cout << "add";
-    		else if(currentType == dtl::SES_DELETE) std::cout << "delete";
-    		else if(currentType == dtl::SES_COMMON) std::cout << "same";
-    		std::cout << "---------" << std::endl;
-    		previousType = currentType;
-    	}
-
-    	std::cout << (*it).first;
-    }
-}
-
-void diffCodeTree(codetree* tree1, codetree* tree2)
-{
-
+	for(auto tree : forest) print(tree);
 }
 
 std::string load(std::string file)
@@ -272,7 +237,6 @@ int main()
 extern "C" {
 	struct CodeTree;
 	struct CodeForest;
-	struct CodeDiff;
 
 	CodeTree* codetree_create(char* path)
 	{
@@ -300,13 +264,6 @@ extern "C" {
 	int codeforest_count(CodeForest* codeforest);
 	CodeTree* codeforest_get(CodeForest* codeforest, int index);
 	void codeforest_print(CodeForest* codeforest);
-
-
-	//code diff comparisons
-//	char* diff_add(char* previous, char* current);
-//	char* diff_delete(char* previous, char* current);
-//	char* diff_same(char* previous, char* current);
-
 }
 
 
