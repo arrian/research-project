@@ -1,9 +1,9 @@
-#include "force-graph.h"
+#include "code-graph.h"
 
 #include <ctime>
 
 
-ForceGraph::ForceGraph(CodeTree* code, ForceGraph* parent)
+CodeGraph::CodeGraph(CodeTree* code, CodeGraph* parent)
 	: x(rand() % 100 + 1),
 	  y(rand() % 100 + 1),
 	  vx(0.0),
@@ -24,27 +24,27 @@ ForceGraph::ForceGraph(CodeTree* code, ForceGraph* parent)
 		size = 1.0;
 		for(auto codeChild : code->children)
 		{
-			children.push_back(new ForceGraph(codeChild, this));
+			children.push_back(new CodeGraph(codeChild, this));
 		}
 //	}
 }
 
-ForceGraph::~ForceGraph()
+CodeGraph::~CodeGraph()
 {
 	while(!children.empty()) delete children.back(), children.pop_back();
 }
 
-void ForceGraph::addChild(CodeTree* tree)
+void CodeGraph::addChild(CodeTree* tree)
 {
-	children.push_back(new ForceGraph(tree, this));
+	children.push_back(new CodeGraph(tree, this));
 }
 
-void ForceGraph::update(CodeTree* code)
+void CodeGraph::update(CodeTree* code)
 {
 	// std::cout << "----------------started erase from the list--------------------------" << std::endl;	
 
 	children.erase(std::remove_if(children.begin(), children.end(), 
-                   [&](ForceGraph* f) { 
+                   [&](CodeGraph* f) { 
 						bool match = false;
 						for(auto codeChild : code->children)//iterate children of code
 						{	
@@ -72,24 +72,24 @@ void ForceGraph::update(CodeTree* code)
 				break;
 			}
 		}
-		if(!match) children.push_back(new ForceGraph(codeChild, this));//add new node... check for sub matches
+		if(!match) children.push_back(new CodeGraph(codeChild, this));//add new node... check for sub matches
 
 	}
 
 	//iterate this and code and compare
 }
 
-bool ForceGraph::isMatch(CodeTree* code)
+bool CodeGraph::isMatch(CodeTree* code)
 {
 	// std::cout << "MATCH" << std::endl;
 	// std::cout << code->code << std::endl << "------------- vs -------------" << std::endl << this->code << std::endl;
 	return code->code == this->code;//change to approximately equals
 }
 
-void ForceGraph::step(float dt)
+void CodeGraph::step(float dt)
 {
-	std::vector<ForceGraph*> vertices = getVertices();
-	std::vector<std::pair<ForceGraph*, ForceGraph*> > edges = getEdges();
+	std::vector<CodeGraph*> vertices = getVertices();
+	std::vector<std::pair<CodeGraph*, CodeGraph*> > edges = getEdges();
 
 	float multiplier = 1.0f;//1.0f
 	float area = 7000.0f;//width * height
@@ -122,8 +122,8 @@ void ForceGraph::step(float dt)
 
 	for(auto e : edges)
 	{
-		ForceGraph* source = e.first;
-		ForceGraph* target = e.second;
+		CodeGraph* source = e.first;
+		CodeGraph* target = e.second;
 
 		float xd = source->x - target->x;
 		float yd = source->y - target->y;
@@ -152,7 +152,7 @@ void ForceGraph::step(float dt)
 	}
 }
 
-void ForceGraph::print(int depth)
+void CodeGraph::print(int depth)
 {
 	int nextDepth = depth + 1;
 	if(tag == "statement")
@@ -165,35 +165,35 @@ void ForceGraph::print(int depth)
 		std::cout << tag << std::endl;
 	}
 	
-	for(std::vector<ForceGraph*>::iterator it = children.begin(); it != children.end(); ++it)
+	for(std::vector<CodeGraph*>::iterator it = children.begin(); it != children.end(); ++it)
 	{
 		(*it)->print(nextDepth);
 	}
 }
 
-std::vector<ForceGraph*> ForceGraph::getVertices()
+std::vector<CodeGraph*> CodeGraph::getVertices()
 {
-	std::vector<ForceGraph*> vertices;
+	std::vector<CodeGraph*> vertices;
 	vertices.push_back(this);
 
 	for(auto graphChild : children)
 	{
-		std::vector<ForceGraph*> childVertices = graphChild->getVertices();
+		std::vector<CodeGraph*> childVertices = graphChild->getVertices();
 		vertices.insert(vertices.end(), childVertices.begin(), childVertices.end());
 	}
 
 	return vertices;
 }
 
-std::vector<std::pair<ForceGraph*, ForceGraph*> > ForceGraph::getEdges()
+std::vector<std::pair<CodeGraph*, CodeGraph*> > CodeGraph::getEdges()
 {
-	std::vector<std::pair<ForceGraph*, ForceGraph*> > edges;
+	std::vector<std::pair<CodeGraph*, CodeGraph*> > edges;
 
 	for(auto graphChild : children)
 	{
-		edges.push_back(std::pair<ForceGraph*, ForceGraph*>(this, graphChild));
+		edges.push_back(std::pair<CodeGraph*, CodeGraph*>(this, graphChild));
 
-		std::vector<std::pair<ForceGraph*, ForceGraph*> > childEdges = graphChild->getEdges();
+		std::vector<std::pair<CodeGraph*, CodeGraph*> > childEdges = graphChild->getEdges();
 		edges.insert(edges.end(), childEdges.begin(), childEdges.end());
 	}
 
@@ -201,91 +201,91 @@ std::vector<std::pair<ForceGraph*, ForceGraph*> > ForceGraph::getEdges()
 }
 
 
-forcegraph* forcegraph_create(codetree* code)
+codegraph* codegraph_create(codetree* code)
 {
-	// std::cout << "Allocating forcegraph" << std::endl;
-	return reinterpret_cast<forcegraph*>(new ForceGraph(reinterpret_cast<CodeTree*>(code)));
+	// std::cout << "Allocating codegraph" << std::endl;
+	return reinterpret_cast<codegraph*>(new CodeGraph(reinterpret_cast<CodeTree*>(code)));
 }
 
-void forcegraph_destroy(forcegraph* graph)
+void codegraph_destroy(codegraph* graph)
 {
-	// std::cout << "Deallocating forcegraph" << std::endl;
-	delete reinterpret_cast<ForceGraph*>(graph);
+	// std::cout << "Deallocating codegraph" << std::endl;
+	delete reinterpret_cast<CodeGraph*>(graph);
 }
 
-void forcegraph_update(forcegraph* graph, codetree* update)
+void codegraph_update(codegraph* graph, codetree* update)
 {
-	(reinterpret_cast<ForceGraph*>(graph))->update(reinterpret_cast<CodeTree*>(update));
+	(reinterpret_cast<CodeGraph*>(graph))->update(reinterpret_cast<CodeTree*>(update));
 }
 
-void forcegraph_step(forcegraph* graph, float dt)
+void codegraph_step(codegraph* graph, float dt)
 {
-	(reinterpret_cast<ForceGraph*>(graph))->step(dt);
+	(reinterpret_cast<CodeGraph*>(graph))->step(dt);
 }
 
-void forcegraph_add_child(forcegraph* graph, codetree* code)
+void codegraph_add_child(codegraph* graph, codetree* code)
 {
-	(reinterpret_cast<ForceGraph*>(graph))->addChild(reinterpret_cast<CodeTree*>(code));
+	(reinterpret_cast<CodeGraph*>(graph))->addChild(reinterpret_cast<CodeTree*>(code));
 }
 
-float forcegraph_get_x(forcegraph* graph)
+float codegraph_get_x(codegraph* graph)
 {
-	return (reinterpret_cast<ForceGraph*>(graph))->x;
+	return (reinterpret_cast<CodeGraph*>(graph))->x;
 }
 
-float forcegraph_get_y(forcegraph* graph)
+float codegraph_get_y(codegraph* graph)
 {
-	return (reinterpret_cast<ForceGraph*>(graph))->y;
+	return (reinterpret_cast<CodeGraph*>(graph))->y;
 }
 
-float forcegraph_get_size(forcegraph* graph)
+float codegraph_get_size(codegraph* graph)
 {
-	return (reinterpret_cast<ForceGraph*>(graph))->size;
+	return (reinterpret_cast<CodeGraph*>(graph))->size;
 }
 
-int forcegraph_get_child_count(forcegraph* graph)
+int codegraph_get_child_count(codegraph* graph)
 {
-	return (reinterpret_cast<ForceGraph*>(graph))->children.size();
+	return (reinterpret_cast<CodeGraph*>(graph))->children.size();
 }
 
-forcegraph* forcegraph_get_child(forcegraph* graph, int index)
+codegraph* codegraph_get_child(codegraph* graph, int index)
 {
-	return reinterpret_cast<forcegraph*>((reinterpret_cast<ForceGraph*>(graph))->children.at(index));
+	return reinterpret_cast<codegraph*>((reinterpret_cast<CodeGraph*>(graph))->children.at(index));
 }
 
-int forcegraph_get_type(forcegraph* graph)
+int codegraph_get_type(codegraph* graph)
 {
-	return codeTypeToInteger(reinterpret_cast<ForceGraph*>(graph)->type);
+	return codeTypeToInteger(reinterpret_cast<CodeGraph*>(graph)->type);
 }
 
-const char* forcegraph_get_tag(forcegraph* graph)
+const char* codegraph_get_tag(codegraph* graph)
 {
-	return reinterpret_cast<ForceGraph*>(graph)->tag.c_str();
+	return reinterpret_cast<CodeGraph*>(graph)->tag.c_str();
 }
 
-const char* forcegraph_get_code(forcegraph* graph)
+const char* codegraph_get_code(codegraph* graph)
 {
-	return reinterpret_cast<ForceGraph*>(graph)->code.c_str();
+	return reinterpret_cast<CodeGraph*>(graph)->code.c_str();
 }
 
-int forcegraph_get_time_added(forcegraph* graph)
+int codegraph_get_time_added(codegraph* graph)
 {
-	return reinterpret_cast<ForceGraph*>(graph)->timeAdded;
+	return reinterpret_cast<CodeGraph*>(graph)->timeAdded;
 }
 
-int forcegraph_get_time_activated(forcegraph* graph)
+int codegraph_get_time_activated(codegraph* graph)
 {
-	return reinterpret_cast<ForceGraph*>(graph)->timeActivated;
+	return reinterpret_cast<CodeGraph*>(graph)->timeActivated;
 }
 
-int forcegraph_is_active(forcegraph* graph)
+int codegraph_is_active(codegraph* graph)
 {
-	return reinterpret_cast<ForceGraph*>(graph)->active;
+	return reinterpret_cast<CodeGraph*>(graph)->active;
 }
 
-void forcegraph_print(forcegraph* graph)
+void codegraph_print(codegraph* graph)
 {
-	(reinterpret_cast<ForceGraph*>(graph))->print();	
+	(reinterpret_cast<CodeGraph*>(graph))->print();	
 }
 
 

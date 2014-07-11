@@ -4,7 +4,7 @@
 
 (bind-alias codetree i8)
 (bind-alias codeforest i8)
-(bind-alias forcegraph i8)
+(bind-alias codegraph i8)
 
 ;;Code Tree Bindings
 
@@ -31,31 +31,31 @@
 
 ;;Force Graph Bindings
 
-(bind-lib analysis forcegraph_create [forcegraph*,codetree*]*)
-(bind-lib analysis forcegraph_destroy [void,forcegraph*]*)
+(bind-lib analysis codegraph_create [codegraph*,codetree*]*)
+(bind-lib analysis codegraph_destroy [void,codegraph*]*)
 
-(bind-lib analysis forcegraph_add_child [void,forcegraph*,codetree*]*)
+(bind-lib analysis codegraph_add_child [void,codegraph*,codetree*]*)
 
-(bind-lib analysis forcegraph_update [void,forcegraph*,codetree*]*)
-(bind-lib analysis forcegraph_step [void,forcegraph*,float]*)
+(bind-lib analysis codegraph_update [void,codegraph*,codetree*]*)
+(bind-lib analysis codegraph_step [void,codegraph*,float]*)
 
-(bind-lib analysis forcegraph_get_x [float,forcegraph*]*)
-(bind-lib analysis forcegraph_get_y [float,forcegraph*]*)
-(bind-lib analysis forcegraph_get_size [float,forcegraph*]*)
+(bind-lib analysis codegraph_get_x [float,codegraph*]*)
+(bind-lib analysis codegraph_get_y [float,codegraph*]*)
+(bind-lib analysis codegraph_get_size [float,codegraph*]*)
 
-(bind-lib analysis forcegraph_get_tag [i8*,forcegraph*]*)
-(bind-lib analysis forcegraph_get_type [i32,forcegraph*]*)
-(bind-lib analysis forcegraph_get_code [i8*,forcegraph*]*)
+(bind-lib analysis codegraph_get_tag [i8*,codegraph*]*)
+(bind-lib analysis codegraph_get_type [i32,codegraph*]*)
+(bind-lib analysis codegraph_get_code [i8*,codegraph*]*)
 
-(bind-lib analysis forcegraph_get_time_added [i32,forcegraph*]*)
-(bind-lib analysis forcegraph_get_time_activated [i32,forcegraph*]*)
-;; (bind-lib analysis forcegraph_get_is_active [i64,forcegraph*]*)
+(bind-lib analysis codegraph_get_time_added [i32,codegraph*]*)
+(bind-lib analysis codegraph_get_time_activated [i32,codegraph*]*)
+;; (bind-lib analysis codegraph_get_is_active [i64,codegraph*]*)
 
-(bind-lib analysis forcegraph_get_child_count [i32,forcegraph*]*)
-(bind-lib analysis forcegraph_get_child [forcegraph*,forcegraph*,i32]*)
-;;(bind-lib analysis forcegraph_get_code [codetree*,forcegraph*]*)
+(bind-lib analysis codegraph_get_child_count [i32,codegraph*]*)
+(bind-lib analysis codegraph_get_child [codegraph*,codegraph*,i32]*)
+;;(bind-lib analysis codegraph_get_code [codetree*,codegraph*]*)
 
-(bind-lib analysis forcegraph_print [void,forcegraph*]*)
+(bind-lib analysis codegraph_print [void,codegraph*]*)
 
 
 ;;Examples
@@ -69,17 +69,17 @@
 
 (test_codetree)
 
-(bind-func test_forcegraph
+(bind-func test_codegraph
   (lambda ()
   	(let ((code (codetree_create "test.xtm"))
-  		  (graph (forcegraph_create code)))
-  		(print (forcegraph_get_size graph))
+  		  (graph (codegraph_create code)))
+  		(print (codegraph_get_size graph))
 
-  		(forcegraph_destroy graph)
+  		(codegraph_destroy graph)
   		(codetree_destroy code)
     	void)))
 
-(test_forcegraph)
+(test_codegraph)
 
 
 
@@ -150,18 +150,18 @@
 (bind-func draw_graph
   (lambda (cr graph)
   	(let ((i 0)
-  		  (x (ftod (+ half_width (forcegraph_get_x graph))))
-  		  (y (ftod (+ half_height (forcegraph_get_y graph))))
-  		  (children (forcegraph_get_child_count graph))
-        (size (* 0.01 (i64tod (strlen (forcegraph_get_code graph)))));;(+ 1.0 (ftod (forcegraph_get_size graph))))
-  		  (type (forcegraph_get_type graph))
+  		  (x (ftod (+ half_width (codegraph_get_x graph))))
+  		  (y (ftod (+ half_height (codegraph_get_y graph))))
+  		  (children (codegraph_get_child_count graph))
+        (size (* 0.01 (i64tod (strlen (codegraph_get_code graph)))));;(+ 1.0 (ftod (codegraph_get_size graph))))
+  		  (type (codegraph_get_type graph))
         )
 
-      ;;(printf "%d\n" (strlen (forcegraph_get_code graph)))
+      ;;(printf "%d\n" (strlen (codegraph_get_code graph)))
   		(dotimes (i children)
-  			(let ((child (forcegraph_get_child graph i))
-  				  (xc (ftod (+ half_width (forcegraph_get_x child))))
-  				  (yc (ftod (+ half_height (forcegraph_get_y child)))))
+  			(let ((child (codegraph_get_child graph i))
+  				  (xc (ftod (+ half_width (codegraph_get_x child))))
+  				  (yc (ftod (+ half_height (codegraph_get_y child)))))
 
         (if (= type 1) (cairo_set_source_rgba cr 1.0 1.0 1.0 0.0) (cairo_set_source_rgba cr 1.0 1.0 1.0 1.0))
 				
@@ -179,14 +179,14 @@
   				)
   			  ((= type 1) ;;root
     				(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
-    				;;(println (forcegraph_get_x graph))
+    				;;(println (codegraph_get_x graph))
   				)
   			  ((= type 4)
   				
     				(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
     				(cairo_set_font_size cr 10.0)
     				(cairo_move_to cr x y)
-    				;;(cairo_show_text cr (codetree_get_code (forcegraph_get_code graph)))
+    				;;(cairo_show_text cr (codetree_get_code (codegraph_get_code graph)))
     				(cairo_set_source_rgba cr 1.0 1.0 0.0 1.0)
   				)
   		      (else 
@@ -207,11 +207,11 @@
 ;; Should be redefined in each visualisation
 (bind-func draw
   (lambda (cr t:double graph)
-	(forcegraph_step graph 1.0)
+	(codegraph_step graph 1.0)
 	(cairo_set_source_rgba cr 0.0 0.0 0.0 1.0)
 	(cairo_paint cr)
   (load_code "research/test.xtm")
-  (forcegraph_update graph code)
+  (codegraph_update graph code)
 	(draw_graph cr graph)
     void))
 
@@ -222,7 +222,7 @@
   (let ((surface (cairo_image_surface_create CAIRO_FORMAT_RGB24 (convert  width) (convert  height)))
         (cr (cairo_create surface))
         (code (codetree_create "test3.xtm"))
-        (graph (forcegraph_create code)))
+        (graph (codegraph_create code)))
   (lambda ()
     (glLoadIdentity)
     (draw cr (i64tod (now)) graph)
