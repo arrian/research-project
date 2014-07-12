@@ -50,7 +50,7 @@ int main(int argc, char* argv[])
 	std::cout << "Previous Code: " << codeHistory.getCodePrevious() << std::endl;
 	std::cout << "At Time 0 Code: " << codeHistory.getCodeAtTime(0) << std::endl;
 
-	std::cout << "Code History State: " << codeHistory.toString() << std::endl;
+	std::cout << "Code History State: " << std::endl << codeHistory.toString() << std::endl;
 	std::cout << "Code History Example: " << codeHistory.getCodeDiff(0, std::time(0)) << std::endl;
 
 	return 0;
