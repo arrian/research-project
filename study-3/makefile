@@ -3,9 +3,12 @@ CXXFLAGS = -Wall -g -std=c++11 -Wc++11-extensions
 extempore-analysis: code-tree.o code-history.o code-diff.o code-graph.o
 	g++ code-tree.o code-history.o code-diff.o code-graph.o -dynamiclib -o code.dylib
 
-test: code-tree.o code-history.o code-diff.o code-graph.o
-	g++ code-tree.o code-history.o code-diff.o code-graph.o -o code-test
+test: code-tree.o code-history.o code-diff.o code-graph.o main.o
+	g++ code-tree.o code-history.o code-diff.o code-graph.o main.o -o code-test
 	./code-test
+
+main.o:
+	g++ $(CXXFLAGS) -c -o main.o main.cpp
 
 code-tree.o:
 	g++ $(CXXFLAGS) -c -o code-tree.o code-tree.cpp

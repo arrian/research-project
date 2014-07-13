@@ -52,14 +52,12 @@ std::string CodeHistory::getCodePrevious()
 	return codeCache.end()[-2].second;
 }
 
-std::string CodeHistory::getCodeDiff(long timeStart, long timeEnd)
+CodeDiff CodeHistory::getCodeDiff(long timeStart, long timeEnd)
 {
-	// get diff here
 	std::string start = getCodeAtTime(timeStart);
 	std::string end = getCodeAtTime(timeEnd);
 
-	CodeDiff codeDiff;
-	return codeDiff.diff(start, end);
+	return CodeDiff(start, end);
 }
 
 std::string CodeHistory::toString()

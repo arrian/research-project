@@ -1,10 +1,40 @@
 #include "code-tree.h"
 
-CodeTree::CodeTree(std::string code, std::string tag, CodeType type)
+CodeTree::CodeTree(std::string code, CodeType type)
+  : code(code),
+    tokens(tokenise(code)),
+    type(type)
 {
-	this->tag = tag;
-	this->type = type;
-	this->code = code;
+	parse();
+}
+
+CodeTree::CodeTree(std::string code)
+  : code(code),
+    tokens(),
+    type(UNKNOWN)
+{
+	tokens.push_back(code);
+	type = getType();
+}
+
+CodeTree::CodeTree(CodeDiff* diff)
+  : code(diff->newCode),
+    diff(diff),
+    tokens(tokenise(diff->newCode)),
+    type(UNKNOWN)
+{ 
+	parse();
+}
+
+CodeTree::CodeTree(StringList tokens)
+  : tokens(tokens),
+    type(UNKNOWN)
+{
+	std::stringstream ss;
+	for(auto token : tokens) ss << token;
+	code = ss.str();
+
+	parse();
 }
 
 CodeTree::~CodeTree()
@@ -12,88 +42,133 @@ CodeTree::~CodeTree()
 	while(!children.empty()) delete children.back(), children.pop_back();
 }
 
-void CodeTree::parse()
+bool CodeTree::isSpace(std::string code)
 {
-	if(code.empty()) return;
-
-	for(int index = 0; index < code.length(); index++)
-	{
-		if(code[index] == ';') index = pushComment(index);
-		else if(code[index] == '(') index = pushBracket(index);
-		else if(code[index] == '"') index = pushString(index);
-		else if(isspace(code[index])) continue;
-		else index = pushStatement(index);
-
-		if(index == -1) break;
-	}
+	return (code.size() == 0) || (code.find_first_not_of(" \t\n\v\f\r") == std::string::npos);
 }
 
-std::size_t CodeTree::pushComment(std::size_t found)
+StringList CodeTree::tokenise(std::string code)
 {
-	std::size_t end;
-	for(end = found; end < code.length(); end++)
+    StringList tokens;
+    size_t pos = 0, lastPos = 0;
+    while ((pos = code.find_first_of("() \n", lastPos)) != std::string::npos)
+    {
+        if(lastPos != pos) tokens.push_back(code.substr(lastPos, pos - lastPos));
+        tokens.push_back(code.substr(pos, 1));
+        lastPos = pos + 1;
+    }
+    tokens.push_back(code.substr(lastPos));
+
+    //condense comment tokens
+    std::string condensed = "";
+    bool found = false;
+    StringList result;
+    for(auto token : tokens)
+    {
+    	if(found == true)
+    	{
+    		if(token == "\n") 
+    		{
+    			found = false;
+    		 	result.push_back(condensed);
+    			condensed = "";
+    		 	continue;
+    		}
+    		condensed += token;
+    		continue;
+    	}
+
+    	if(token.size() > 0 && token[0] == ';')
+    	{
+    	   	found = true;
+    		condensed += token;	
+    	}
+    	else result.push_back(token);
+    }
+
+    return result;
+}
+
+CodeType CodeTree::getType()
+{
+	if(type != UNKNOWN) return type;
+
+	for(auto token : tokens)
 	{
-		if(code[end] == '\n')
+		if(token.size() == 0) continue;
+		if(token == "(") return FUNCTION;
+		if(token[0] == '\"') return STRING;
+		if(token[0] == '\'') return LITERAL;
+		if(!isSpace(token)) return STATEMENT;
+	}
+	return UNKNOWN;
+}
+
+/**
+ * Gets the subset of elements enclosed by brackets.
+ * The first element of the subset passed in should be the opening bracket.
+ */
+StringList CodeTree::getFunctionSubset(StringList subset)
+{
+	int count = 0;
+	int index = 0;
+	for(auto token : subset)
+	{
+		if(token == "(") count++;
+		else if(token == ")") count--;
+		index++;
+
+		if(count == 0) return StringList(subset.begin(), subset.begin() + index); 
+	}
+
+	return StringList();
+}
+
+void CodeTree::parse()
+{
+	type = getType();
+
+	if(type != FUNCTION && type != ROOT) return;
+
+	StringList subtokens = tokens;
+	if(type == FUNCTION)
+	{
+		bool foundFirst = true;
+		for(int i = 0; i < tokens.size(); ++i)
 		{
-			if(end + 1 < code.length() && code[end + 1] == ';') end++;
-			else break;
+			if(isSpace(tokens[i])) continue;
+			if(type == FUNCTION && tokens[i] == "(")
+			{
+				StringList subset = getFunctionSubset(StringList(tokens.begin() + i, tokens.end()));
+				i += subset.size();
+				subset.pop_back();
+				subset.pop_front();
+				subtokens = subset;
+				break;
+			}
 		}
 	}
 
-	children.push_back(new CodeTree(code.substr(found, end - found), "comment", COMMENT));
-	return end;
-}
-
-std::size_t CodeTree::pushBracket(std::size_t found)
-{
-	std::size_t end;
-	int depth = 0;
-	for(end = found; end < code.length(); end++)
-	{	
-		if(code[end] == '(') depth++;
-		else if(code[end] == ')') depth--;
-
-		if(depth <= 0) break;
-	}
-
-	if(end == std::string::npos || end - found == 0) return end;
-
-	//lots of optimisation possible here
-	CodeTree* subtree = new CodeTree(code.substr(found + 1, end - (found + 1)), "function", FUNCTION);
-	subtree->parse();
-	children.push_back(subtree);
-	return end;
-}
-
-std::size_t CodeTree::pushString(std::size_t found)
-{
-	int i;
-	for(i = found + 1; i < code.length(); i++)
+	for(int index = 0; index < subtokens.size(); ++index)
 	{
-		if('\\' == code[found]) i++;//skip escaped strings
-		else if('\"' == code[found]) break;
+		std::string token = subtokens[index];
+
+		if(isSpace(token)) continue;
+		else if(token == "(") 
+		{
+			StringList list = getFunctionSubset(StringList(subtokens.begin() + index, subtokens.end()));
+			index += list.size();//TODO: check bounds
+			children.push_back(new CodeTree(list));
+			continue;
+		}
+		else children.push_back(new CodeTree(token));
 	}
-	children.push_back(new CodeTree(code.substr(found, i - found), "string", STRING));
-	return i;
-}
 
-std::size_t CodeTree::pushStatement(std::size_t found) 
-{
-	std::size_t end = code.find_first_of(" ();\n", found + 1);
-	if(end - found == 0) return end;
-
-	children.push_back(new CodeTree(code.substr(found, end - found), "statement", STATEMENT));
-	return end;
-}
-
-std::size_t CodeTree::pushList(std::size_t found) 
-{
-	return found;
 }
 
 void CodeTree::print(int depth)
 {
-	if(this->type == STATEMENT || this->type == STRING)
+	if(this->type == STATEMENT || this->type == STRING || this->type == LITERAL || this->type == UNKNOWN)
 	{
 		std::cout << tag;
 		for(int i = 0; i <= depth; i++) std::cout << "----";
@@ -101,20 +176,7 @@ void CodeTree::print(int depth)
 	}
 	else if(this->type == FUNCTION || this->type == ROOT)
 	{
-		int i = 0;
-		for(CodeForest::iterator it = children.begin(); it < children.end(); ++it)
-		{
-			if(i == 0)
-			{
-				i++;
-				std::cout << tag;
-					(*it)->print(depth + 1);
-				
-				continue;
-			}
-			(*it)->print(depth + 1);
-			i++;
-		}
+		for(CodeForest::iterator it = children.begin(); it < children.end(); ++it) (*it)->print(depth + 1);
 	}
 }
 
@@ -183,6 +245,7 @@ int codeTypeToInteger(CodeType type)
 	if(type == FUNCTION) return 5;
 	if(type == CONDITIONAL) return 6;
 	if(type == LOOP) return 7;
+	if(type == LITERAL) return 8;
 	if(type == ERROR) return -1;
 	return 0;
 }
@@ -199,7 +262,7 @@ codetree* codetree_create(char* path)
 {
 	std::cout << "Allocating codetree" << std::endl;
 	std::string code = load(std::string(path));
-	CodeTree* tree = new CodeTree(code);
+	CodeTree* tree = new CodeTree(code, ROOT);
 	tree->parse();
 	return reinterpret_cast<codetree*>(tree);
 }

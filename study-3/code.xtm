@@ -216,8 +216,6 @@
     void))
 
 
-
-
 (bind-func gl_draw
   (let ((surface (cairo_image_surface_create CAIRO_FORMAT_RGB24 (convert  width) (convert  height)))
         (cr (cairo_create surface))

@@ -11,8 +11,11 @@
 
 (test-function (*metro* 'get-beat 4) 1/4)
 
-(define test-function2
-  (lambda (beat dur)
+(define func-name
+  (lambda ()
+  	(test)
     ))
 
-;;test comment
+(define func-name2
+  (lambda ()
+    ))

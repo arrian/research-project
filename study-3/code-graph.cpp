@@ -6,27 +6,27 @@
 CodeGraph::CodeGraph(CodeTree* code, CodeGraph* parent)
 	: x(rand() % 100 + 1),
 	  y(rand() % 100 + 1),
+	  size(code->children.size()),//10.0),
 	  vx(0.0),
 	  vy(0.0),
-	  size(code->children.size()),//10.0),
 	  timeAdded(std::time(0)),
 	  timeActivated(0),
 	  active(false),
 	  //data(code),
+	  parent(parent),
+	  children(),
 	  tag(code->tag),
 	  type(code->type),
-	  code(code->code),
-	  parent(parent),
-	  children()
+	  code(code->code)	  
 {
-	//if(type == ROOT)
-	//{
+	if(type == ROOT)
+	{
 		size = 1.0;
 		for(auto codeChild : code->children)
 		{
 			children.push_back(new CodeGraph(codeChild, this));
 		}
-//	}
+	}
 }
 
 CodeGraph::~CodeGraph()
@@ -41,27 +41,23 @@ void CodeGraph::addChild(CodeTree* tree)
 
 void CodeGraph::update(CodeTree* code)
 {
-	// std::cout << "----------------started erase from the list--------------------------" << std::endl;	
-
 	children.erase(std::remove_if(children.begin(), children.end(), 
                    [&](CodeGraph* f) { 
 						bool match = false;
-						for(auto codeChild : code->children)//iterate children of code
+						
+						for(auto codeChild : code->children)
 						{	
 							if (f->isMatch(codeChild)) 
 							{
 								match = true;
 								break;
 							}
-							// std::cout << "finished" << std::endl;
 						}
-						// std::cout << "size" << children.size() << std::endl;
+
                    		return !match;
                    }), children.end());
 
-	// std::cout << "----------------erased from the list--------------------------" << std::endl;
-
-	for(auto codeChild : code->children)//iterate children of code
+	for(auto codeChild : code->children)
 	{
 		bool match = false;
 		for(auto graphChild : children)
@@ -72,11 +68,9 @@ void CodeGraph::update(CodeTree* code)
 				break;
 			}
 		}
-		if(!match) children.push_back(new CodeGraph(codeChild, this));//add new node... check for sub matches
+		if(!match) children.push_back(new CodeGraph(codeChild, this));
 
 	}
-
-	//iterate this and code and compare
 }
 
 bool CodeGraph::isMatch(CodeTree* code)

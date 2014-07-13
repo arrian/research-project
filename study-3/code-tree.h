@@ -10,26 +10,7 @@
 #include <stack>
 #include <locale>
 
-/**
- * What is the state of the code from a previous version.
- **/
-enum CodeDiffState
-{
-	ADDED,
-	DELETED,
-	SAME
-};
-
-/**
- * What is the current state of the code.
- **/
-enum CodeEditState
-{
-	EDITING,
-	COMPLETE,
-	PARTIAL,
-	INVALID
-};
+#include "code-diff.h"
 
 /**
  * What should this code be classified as.
@@ -41,8 +22,10 @@ enum CodeType
 	STRING,
 	STATEMENT,
 	FUNCTION,
+	LITERAL,
 	CONDITIONAL,
 	LOOP,
+	EMPTY,
 	ERROR,
 	UNKNOWN
 };
@@ -52,6 +35,7 @@ int codeTypeToInteger(CodeType type);
 class CodeTree;
 
 typedef std::vector<CodeTree*> CodeForest;
+typedef std::deque<std::string> StringList;
 
 class CodeTree
 {
@@ -60,20 +44,22 @@ public:
 	CodeType type;
 	std::string code;
 	bool isActive;
+	CodeDiff* diff;
+	StringList tokens;
 
 	CodeForest children;
 
-	CodeTree(std::string code, std::string tag = "root", CodeType type = ROOT);
+	CodeTree(std::string code, CodeType type);//construct using ROOT
+	CodeTree(CodeDiff* code);
 
 	~CodeTree();
 
-	void parse();
+	StringList tokenise(std::string code);
+	bool isSpace(std::string code);
+	CodeType getType();
+	StringList getFunctionSubset(StringList subset);
 
-	std::size_t pushComment(std::size_t found);
-	std::size_t pushBracket(std::size_t found);
-	std::size_t pushString(std::size_t found);
-	std::size_t pushStatement(std::size_t found);
-	std::size_t pushList(std::size_t found);
+	void parse();
 
 	void print(int depth = 0);
 	void printTopLevelStructure();
@@ -86,18 +72,16 @@ public:
 	CodeTree* find(std::string argv, int argc = 0);
 	CodeForest findAll(std::string argv, int argc = 0, int count = 0);
 
+private:
+	int getBracketClose(std::string code, int bracketOpen);
+	int getCommentClose(std::string code, int commentOpen);
+
+	CodeTree(std::string code);
+	CodeTree(StringList tokens);
+
 };
 
 std::string load(std::string file);
-
-// int main()
-// {
-// 	CodeTree tree(load("test.xtm"));
-// 	tree.parse();
-// 	tree.printTopLevelStructure();
-
-// 	return 0;
-// }
 
 extern "C" {
 	struct codetree;
