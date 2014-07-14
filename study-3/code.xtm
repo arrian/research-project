@@ -1,4 +1,4 @@
-(define analysis (sys:open-dylib "code.dylib"))
+(define code (sys:open-dylib "research-project/code.dylib"))
 
 ;;Types
 
@@ -8,76 +8,76 @@
 
 ;;Code Tree Bindings
 
-(bind-lib analysis codetree_create [codetree*,i8*]*)
-(bind-lib analysis codetree_destroy [void,codetree*]*)
+(bind-lib code codetree_create [codetree*,i8*]*)
+(bind-lib code codetree_destroy [void,codetree*]*)
 
-(bind-lib analysis codetree_get_children_count [i32,codetree*]*)
-(bind-lib analysis codetree_get_child [codetree*,codetree*,i32]*)
-(bind-lib analysis codetree_get_children [codeforest*,codetree*]*)
-(bind-lib analysis codetree_get_tag [i8*,codetree*]*)
-(bind-lib analysis codetree_get_type [i32,codetree*]*)
-(bind-lib analysis codetree_get_code [i8*,codetree*]*)
-(bind-lib analysis codetree_is_active [i1,codetree*]*)
+(bind-lib code codetree_get_children_count [i32,codetree*]*)
+(bind-lib code codetree_get_child [codetree*,codetree*,i32]*)
+(bind-lib code codetree_get_children [codeforest*,codetree*]*)
+(bind-lib code codetree_get_tag [i8*,codetree*]*)
+(bind-lib code codetree_get_type [i32,codetree*]*)
+(bind-lib code codetree_get_code [i8*,codetree*]*)
+(bind-lib code codetree_is_active [i1,codetree*]*)
 
-(bind-lib analysis codetree_find [codetree*,codetree*,i8*]*)
-;;(bind-lib analysis codetree_find_all [codeforest*,codetree*,i8*]*)
+(bind-lib code codetree_find [codetree*,codetree*,i8*]*)
+;;(bind-lib code codetree_find_all [codeforest*,codetree*,i8*]*)
 
-(bind-lib analysis codetree_print [void,codetree*]*)
-(bind-lib analysis codetree_print_top_level [void,codetree*]*)
+(bind-lib code codetree_print [void,codetree*]*)
+(bind-lib code codetree_print_top_level [void,codetree*]*)
 
-(bind-lib analysis codeforest_count [i32,codeforest*]*)
-(bind-lib analysis codeforest_get [i32,codeforest*]*)
-(bind-lib analysis codeforest_print [void,codeforest*]*)
+(bind-lib code codeforest_count [i32,codeforest*]*)
+(bind-lib code codeforest_get [i32,codeforest*]*)
+(bind-lib code codeforest_print [void,codeforest*]*)
 
 ;;Code Force Graph Bindings
 
-(bind-lib analysis codegraph_create [codegraph*,codetree*]*)
-(bind-lib analysis codegraph_destroy [void,codegraph*]*)
+(bind-lib code codegraph_create [codegraph*,codetree*]*)
+(bind-lib code codegraph_destroy [void,codegraph*]*)
 
-(bind-lib analysis codegraph_add_child [void,codegraph*,codetree*]*)
+(bind-lib code codegraph_add_child [void,codegraph*,codetree*]*)
 
-(bind-lib analysis codegraph_update [void,codegraph*,codetree*]*)
-(bind-lib analysis codegraph_step [void,codegraph*,float]*)
+(bind-lib code codegraph_update [void,codegraph*,codetree*]*)
+(bind-lib code codegraph_step [void,codegraph*,float]*)
 
-(bind-lib analysis codegraph_get_x [float,codegraph*]*)
-(bind-lib analysis codegraph_get_y [float,codegraph*]*)
-(bind-lib analysis codegraph_get_size [float,codegraph*]*)
+(bind-lib code codegraph_get_x [float,codegraph*]*)
+(bind-lib code codegraph_get_y [float,codegraph*]*)
+(bind-lib code codegraph_get_size [float,codegraph*]*)
 
-(bind-lib analysis codegraph_get_tag [i8*,codegraph*]*)
-(bind-lib analysis codegraph_get_type [i32,codegraph*]*)
-(bind-lib analysis codegraph_get_code [i8*,codegraph*]*)
+(bind-lib code codegraph_get_tag [i8*,codegraph*]*)
+(bind-lib code codegraph_get_type [i32,codegraph*]*)
+(bind-lib code codegraph_get_code [i8*,codegraph*]*)
 
-(bind-lib analysis codegraph_get_time_added [i32,codegraph*]*)
-(bind-lib analysis codegraph_get_time_activated [i32,codegraph*]*)
-;; (bind-lib analysis codegraph_get_is_active [i64,codegraph*]*)
+(bind-lib code codegraph_get_time_added [i32,codegraph*]*)
+(bind-lib code codegraph_get_time_activated [i32,codegraph*]*)
+;; (bind-lib code codegraph_get_is_active [i64,codegraph*]*)
 
-(bind-lib analysis codegraph_get_child_count [i32,codegraph*]*)
-(bind-lib analysis codegraph_get_child [codegraph*,codegraph*,i32]*)
-;;(bind-lib analysis codegraph_get_code [codetree*,codegraph*]*)
+(bind-lib code codegraph_get_child_count [i32,codegraph*]*)
+(bind-lib code codegraph_get_child [codegraph*,codegraph*,i32]*)
+;;(bind-lib code codegraph_get_code [codetree*,codegraph*]*)
 
-(bind-lib analysis codegraph_print [void,codegraph*]*)
+(bind-lib code codegraph_print [void,codegraph*]*)
 
 
 ;;Examples
 
 (bind-func test_codetree
-  (lambda ()
-  	(let ((code (codetree_create "test.xtm")))
-  		(printf "%s\n" (codetree_get_code (codetree_find code "define")))
-  		(codetree_destroy code)
-  		void)))
+	(lambda ()
+		(let ((code (codetree_create "research-project/test.xtm")))
+			(printf "%s\n" (codetree_get_code (codetree_find code "define")))
+			(codetree_destroy code)
+			void)))
 
 (test_codetree)
 
 (bind-func test_codegraph
-  (lambda ()
-  	(let ((code (codetree_create "test.xtm"))
-  		  (graph (codegraph_create code)))
-  		(print (codegraph_get_size graph))
+	(lambda ()
+		(let ((code (codetree_create "research-project/test.xtm"))
+				(graph (codegraph_create code)))
+			(print (codegraph_get_size graph))
 
-  		(codegraph_destroy graph)
-  		(codetree_destroy code)
-    	void)))
+			(codegraph_destroy graph)
+			(codetree_destroy code)
+			void)))
 
 (test_codegraph)
 
@@ -112,89 +112,89 @@
 (bind-val code i8* 0)
 
 (bind-func init_code
-  (lambda ()
-    (set! code null)))
+	(lambda ()
+		(set! code null)))
 (init_code)
 
 (bind-func load_code
-  (lambda (path:i8*)
-    (cond ((null? code) 
-            ;;(printf "%s\n" "is null") 
-            void)
-          (else 
-            ;;(printf "%s\n" "is not null")
-            (codetree_destroy code)
-            (set! code null)
-            void))
-    (set! code (codetree_create path))
-    ;;(codetree_print_top_level code)
-    ;;(printf "%p\n" code)
-    code
-    ))
+	(lambda (path:i8*)
+		(cond ((null? code) 
+						;;(printf "%s\n" "is null") 
+						void)
+					(else 
+						;;(printf "%s\n" "is not null")
+						(codetree_destroy code)
+						(set! code null)
+						void))
+		(set! code (codetree_create path))
+		;;(codetree_print_top_level code)
+		;;(printf "%p\n" code)
+		code
+		))
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;Testing Code Helper;;;;;;
 
 
-(load_code "research/test4.xtm")
+(load_code "research-project/test4.xtm")
 
 (bind-func print_codetree
-  (lambda ()
-    (printf "%s\n" "printing")
-    (codetree_print_top_level code)))
+	(lambda ()
+		(printf "%s\n" "printing")
+		(codetree_print_top_level code)))
 
 (print_codetree)
 
 ;;;;;;;;;;;;;;;;
 
 (bind-func draw_graph
-  (lambda (cr graph)
-  	(let ((i 0)
-  		  (x (ftod (+ half_width (codegraph_get_x graph))))
-  		  (y (ftod (+ half_height (codegraph_get_y graph))))
-  		  (children (codegraph_get_child_count graph))
-        (size (* 0.01 (i64tod (strlen (codegraph_get_code graph)))));;(+ 1.0 (ftod (codegraph_get_size graph))))
-  		  (type (codegraph_get_type graph))
-        )
+	(lambda (cr graph)
+		(let ((i 0)
+				(x (ftod (+ half_width (codegraph_get_x graph))))
+				(y (ftod (+ half_height (codegraph_get_y graph))))
+				(children (codegraph_get_child_count graph))
+				(size (+ 0.1 (* 0.015 (i64tod (strlen (codegraph_get_code graph))))));;(+ 1.0 (ftod (codegraph_get_size graph))))
+				(type (codegraph_get_type graph))
+				)
 
-      ;;(printf "%d\n" (strlen (codegraph_get_code graph)))
-  		(dotimes (i children)
-  			(let ((child (codegraph_get_child graph i))
-  				  (xc (ftod (+ half_width (codegraph_get_x child))))
-  				  (yc (ftod (+ half_height (codegraph_get_y child)))))
+			;;(printf "%d\n" (strlen (codegraph_get_code graph)))
+			(dotimes (i children)
+				(let ((child (codegraph_get_child graph i))
+						(xc (ftod (+ half_width (codegraph_get_x child))))
+						(yc (ftod (+ half_height (codegraph_get_y child)))))
 
-        (if (= type 1) (cairo_set_source_rgba cr 1.0 1.0 1.0 0.0) (cairo_set_source_rgba cr 1.0 1.0 1.0 1.0))
+				(if (= type 1) (cairo_set_source_rgba cr 1.0 1.0 1.0 0.0) (cairo_set_source_rgba cr 1.0 1.0 1.0 1.0))
 				
 				(cairo_set_line_width cr 2.0)
 				(cairo_move_to cr x y)
-  				(cairo_line_to cr xc yc)
-  				(cairo_stroke cr)
-  				(draw_graph cr child)
-          ))
+				(cairo_line_to cr xc yc)
+				(cairo_stroke cr)
+				(draw_graph cr child)
+					))
 
-      ;;(printf "%d\n" type)
-  		;;(printf "%d\n" type)
-  		(cond ((= type 5) ;;function
-  		  		(cairo_set_source_rgba cr 0.0 0.0 1.0 1.0)
-  				)
-  			  ((= type 1) ;;root
-    				(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
-    				;;(println (codegraph_get_x graph))
-  				)
-  			  ((= type 4)
-  				
-    				(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
-    				(cairo_set_font_size cr 10.0)
-    				(cairo_move_to cr x y)
-    				;;(cairo_show_text cr (codetree_get_code (codegraph_get_code graph)))
-    				(cairo_set_source_rgba cr 1.0 1.0 0.0 1.0)
-  				)
-  		      (else 
-  				(cairo_set_source_rgba cr 1.0 0.0 0.0 1.0)
-  		      	)
-            )
+			;;(printf "%d\n" type)
+			;;(printf "%d\n" type)
+			(cond ((= type 5) ;;function
+						(cairo_set_source_rgba cr 0.0 0.0 1.0 1.0)
+					)
+					((= type 1) ;;root
+						(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
+						;;(println (codegraph_get_x graph))
+					)
+					((= type 4)
+					
+						(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
+						(cairo_set_font_size cr 10.0)
+						(cairo_move_to cr x y)
+						;;(cairo_show_text cr (codetree_get_code (codegraph_get_code graph)))
+						(cairo_set_source_rgba cr 1.0 1.0 0.0 1.0)
+					)
+						(else 
+					(cairo_set_source_rgba cr 1.0 0.0 0.0 1.0)
+							)
+						)
 
-      ;;(cairo_set_source_rgba cr 1.0 0.0 0.0 1.0)
+			;;(cairo_set_source_rgba cr 1.0 0.0 0.0 1.0)
 			(cairo_arc cr x y (* 2.0 size) 0.0 TWOPI)
 			(cairo_fill cr)
 			(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
@@ -202,40 +202,40 @@
 			(cairo_stroke cr)  		
 		
 		void
-    )))
+		)))
 
 ;; Should be redefined in each visualisation
 (bind-func draw
-  (lambda (cr t:double graph)
+	(lambda (cr t:double graph)
 	(codegraph_step graph 1.0)
 	(cairo_set_source_rgba cr 0.0 0.0 0.0 1.0)
 	(cairo_paint cr)
-  (load_code "research/test.xtm")
-  (codegraph_update graph code)
+	(load_code "research-project/test.xtm")
+	(codegraph_update graph code)
 	(draw_graph cr graph)
-    void))
+		void))
 
 
 (bind-func gl_draw
-  (let ((surface (cairo_image_surface_create CAIRO_FORMAT_RGB24 (convert  width) (convert  height)))
-        (cr (cairo_create surface))
-        (code (codetree_create "test3.xtm"))
-        (graph (codegraph_create code)))
-  (lambda ()
-    (glLoadIdentity)
-    (draw cr (i64tod (now)) graph)
-    (gl_load_tex_bgr (convert width) (convert height) 4 GL_UNSIGNED_BYTE (cairo_image_surface_get_data surface) 5)
-    (gl_draw_img_reverse -1.0 -1.0 2.0 2.0 180.0 5)
-    void)))
+	(let ((surface (cairo_image_surface_create CAIRO_FORMAT_RGB24 (convert  width) (convert  height)))
+				(cr (cairo_create surface))
+				(code (codetree_create "research-project/test3.xtm"))
+				(graph (codegraph_create code)))
+	(lambda ()
+		(glLoadIdentity)
+		(draw cr (i64tod (now)) graph)
+		(gl_load_tex_bgr (convert width) (convert height) 4 GL_UNSIGNED_BYTE (cairo_image_surface_get_data surface) 5)
+		(gl_draw_img_reverse -1.0 -1.0 2.0 2.0 180.0 5)
+		void)))
 
 (define draw-loop
-  (lambda (beat dur)
-    (gl_draw)
-    (gl:swap-buffers ctx)        
-    (callback (*metro* (+ beat (* .5 dur)))
-              'draw-loop
-              (+ beat dur) 
-              dur)))
+	(lambda (beat dur)
+		(gl_draw)
+		(gl:swap-buffers ctx)        
+		(callback (*metro* (+ beat (* .5 dur)))
+							'draw-loop
+							(+ beat dur) 
+							dur)))
 
 ;; create the graphics context
 (define ctx (gl:make-ctx ":0.0" fullscreen 0.0 0.0 width height))
@@ -247,11 +247,11 @@
 
 ;;-------------------------------------
 (define func-name
-  (let ((x 2))
-  (lambda (test)
-    x
-    42
-    )))
+	(let ((x 2))
+	(lambda (test)
+		x
+		42
+		)))
 
 (get-closure-code func-name)
 (get-eldoc-string func-name)

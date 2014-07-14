@@ -104,10 +104,6 @@ CodeType CodeTree::getType()
 	return UNKNOWN;
 }
 
-/**
- * Gets the subset of elements enclosed by brackets.
- * The first element of the subset passed in should be the opening bracket.
- */
 StringList CodeTree::getFunctionSubset(StringList subset)
 {
 	int count = 0;
@@ -263,7 +259,7 @@ codetree* codetree_create(char* path)
 	std::cout << "Allocating codetree" << std::endl;
 	std::string code = load(std::string(path));
 	CodeTree* tree = new CodeTree(code, ROOT);
-	tree->parse();
+	std::cout << "Finished allocating codetree" << std::endl;
 	return reinterpret_cast<codetree*>(tree);
 }
 
@@ -303,6 +299,7 @@ int codetree_get_type(codetree* codetree)
 
 const char* codetree_get_code(codetree* codetree)
 {
+	if(!codetree) return "";
 	return reinterpret_cast<CodeTree*>(codetree)->code.c_str();
 }
 
@@ -315,11 +312,6 @@ codetree* codetree_find(codetree* codetree, char* name)
 {
 	return reinterpret_cast<struct codetree*>(reinterpret_cast<CodeTree*>(codetree)->find(name));
 }
-
-// codeforest* codetree_find_all(codetree* codetree, char* name)
-// {
-// 	return reinterpret_cast<codeforest*>(&(reinterpret_cast<CodeTree*>(codetree)->findAll(name)));
-// }
 
 void codetree_print(codetree* codetree)
 {

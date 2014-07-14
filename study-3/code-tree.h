@@ -57,6 +57,11 @@ public:
 	StringList tokenise(std::string code);
 	bool isSpace(std::string code);
 	CodeType getType();
+
+	/**
+	 * Gets the subset of elements enclosed by brackets.
+	 * The first element of the subset passed in should be the opening bracket.
+	 */
 	StringList getFunctionSubset(StringList subset);
 
 	void parse();
@@ -99,7 +104,6 @@ extern "C" {
 	bool codetree_is_active(codetree* codetree);
 
 	codetree* codetree_find(codetree* codetree, char* name);
-	//codeforest* codetree_find_all(codetree* codetree, char* name);
 
 	void codetree_print(codetree* codetree);
 	void codetree_print_top_level(codetree* codetree);
