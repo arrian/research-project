@@ -256,16 +256,13 @@ std::string load(std::string file)
 
 codetree* codetree_create(char* path)
 {
-	std::cout << "Allocating codetree" << std::endl;
 	std::string code = load(std::string(path));
 	CodeTree* tree = new CodeTree(code, ROOT);
-	std::cout << "Finished allocating codetree" << std::endl;
 	return reinterpret_cast<codetree*>(tree);
 }
 
 void codetree_destroy(codetree* codetree)
 {
-	std::cout << "Deallocating codetree" << std::endl;
 	delete reinterpret_cast<CodeTree*>(codetree);
 }
 

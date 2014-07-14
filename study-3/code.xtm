@@ -136,7 +136,7 @@
 ;;;;;;;;;;Testing Code Helper;;;;;;
 
 
-(load_code "research-project/test4.xtm")
+(load_code "research-project/test.xtm")
 
 (bind-func print_codetree
 	(lambda ()
@@ -153,23 +153,25 @@
 				(x (ftod (+ half_width (codegraph_get_x graph))))
 				(y (ftod (+ half_height (codegraph_get_y graph))))
 				(children (codegraph_get_child_count graph))
-				(size (+ 0.1 (* 0.015 (i64tod (strlen (codegraph_get_code graph))))));;(+ 1.0 (ftod (codegraph_get_size graph))))
+				(size (+ 3.0 (* 0.004 (i64tod (strlen (codegraph_get_code graph))))));;(+ 1.0 (ftod (codegraph_get_size graph))))
 				(type (codegraph_get_type graph))
 				)
 
 			;;(printf "%d\n" (strlen (codegraph_get_code graph)))
 			(dotimes (i children)
+				;;(printf "%d" i)
 				(let ((child (codegraph_get_child graph i))
 						(xc (ftod (+ half_width (codegraph_get_x child))))
 						(yc (ftod (+ half_height (codegraph_get_y child)))))
 
-				(if (= type 1) (cairo_set_source_rgba cr 1.0 1.0 1.0 0.0) (cairo_set_source_rgba cr 1.0 1.0 1.0 1.0))
-				
-				(cairo_set_line_width cr 2.0)
-				(cairo_move_to cr x y)
-				(cairo_line_to cr xc yc)
-				(cairo_stroke cr)
-				(draw_graph cr child)
+						;;(if (= type 1) (cairo_set_source_rgba cr 1.0 1.0 1.0 0.0) (cairo_set_source_rgba cr 1.0 1.0 1.0 1.0))
+						(cairo_set_source_rgba cr 1.0 1.0 1.0 1.0)
+						(cairo_set_line_width cr 2.0)
+						(cairo_move_to cr x y)
+						(cairo_line_to cr xc yc)
+						(cairo_stroke cr)
+						(draw_graph cr child)
+
 					))
 
 			;;(printf "%d\n" type)
@@ -219,7 +221,7 @@
 (bind-func gl_draw
 	(let ((surface (cairo_image_surface_create CAIRO_FORMAT_RGB24 (convert  width) (convert  height)))
 				(cr (cairo_create surface))
-				(code (codetree_create "research-project/test3.xtm"))
+				(code (codetree_create "research-project/test.xtm"))
 				(graph (codegraph_create code)))
 	(lambda ()
 		(glLoadIdentity)

@@ -19,14 +19,14 @@ CodeGraph::CodeGraph(CodeTree* code, CodeGraph* parent)
 	  type(code->type),
 	  code(code->code)	  
 {
-	if(type == ROOT)
-	{
+	//if(type == ROOT)
+	//{
 		size = 1.0;
 		for(auto codeChild : code->children)
 		{
 			children.push_back(new CodeGraph(codeChild, this));
 		}
-	}
+	//}
 }
 
 CodeGraph::~CodeGraph()
@@ -137,12 +137,16 @@ void CodeGraph::step(float dt)
 	for(auto v : vertices)
 	{
 		float dist = sqrt(v->tx * v->tx + v->ty * v->ty);
-		if(dist > 0)
+		if(dist > 0.0)
 		{
 			// std::cout << v->x << " " << v->y << std::endl;
 			v->x += (v->tx / dist);
 			v->y += (v->ty / dist);
 		}
+
+		float FALLOFF = 0.9999;
+		v->tx *= FALLOFF;
+		v->ty *= FALLOFF;
 	}
 }
 

@@ -37,6 +37,13 @@
 
 (chords (- (*metro* 'get-beat 4) 1/2) 4 0)
 
+(define libname (sys:open-dylib "/Users/ben/Code/xtm/dylibs/libname.dylib"))
+(load "libs/core/libname.xtmh")
+
+(map1 (lambda ((map (lambda (map2 1 213 23 2 2342 23 4 293  293482 9234 (map ( (map)))))))))
+
+
+(map (lambda ((map (lambda (map (map (lambda (map)))))))))
 ;; cheers
 ;;
 ;; ben.swift@anu.edu.au

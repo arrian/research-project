@@ -4,8 +4,8 @@ int main(int argc, char* argv[])
 {
 	std::cout << "Entering main" << std::endl;
 	CodeTree tree(load("test.xtm"), ROOT);
-	tree.printTopLevelStructure();
-	//tree.print();
+	//tree.printTopLevelStructure();
+	tree.print();
 }
 
 // int main(int argc, char* argv[])
