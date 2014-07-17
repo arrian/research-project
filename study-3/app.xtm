@@ -1,0 +1,24 @@
+(define cocoaapp (sys:open-dylib "research-project/app.dylib"))
+;; (define cocoaapp (sys:open-dylib "app.dylib"))
+
+;;Types
+
+(bind-alias app i8)
+
+(bind-lib cocoaapp app_create [app*]*)
+(bind-lib cocoaapp app_destroy [void,app*]*)
+(bind-lib cocoaapp app_update [void,app*])
+
+(bind-val application app* 0)
+
+(bind-func test_app
+	(lambda ()
+		(set! application (app_create))))
+
+(test_app)
+
+(bind-func test_app_update
+  (lambda ()
+    (app_update application)))
+
+(test_app_update)

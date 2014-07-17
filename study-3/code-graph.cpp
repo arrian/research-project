@@ -143,10 +143,6 @@ void CodeGraph::step(float dt)
 			v->x += (v->tx / dist);
 			v->y += (v->ty / dist);
 		}
-
-		float FALLOFF = 0.9999;
-		v->tx *= FALLOFF;
-		v->ty *= FALLOFF;
 	}
 }
 
