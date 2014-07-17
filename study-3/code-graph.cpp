@@ -17,7 +17,10 @@ CodeGraph::CodeGraph(CodeTree* code, CodeGraph* parent)
 	  children(),
 	  tag(code->tag),
 	  type(code->type),
-	  code(code->code)	  
+	  code(code->code),
+	  width(1024.0),
+	  height(768.0),
+	  temperature(width / 100.0f)
 {
 	//if(type == ROOT)
 	//{
@@ -68,7 +71,10 @@ void CodeGraph::update(CodeTree* code)
 				break;
 			}
 		}
-		if(!match) children.push_back(new CodeGraph(codeChild, this));
+		if(!match)
+		{
+			children.push_back(new CodeGraph(codeChild, this));
+		}
 
 	}
 }
@@ -80,15 +86,20 @@ bool CodeGraph::isMatch(CodeTree* code)
 	return code->code == this->code;//change to approximately equals
 }
 
+void CodeGraph::cool()
+{
+	temperature *= 0.9999;
+}
+
 void CodeGraph::step(float dt)
 {
 	std::vector<CodeGraph*> vertices = getVertices();
 	std::vector<std::pair<CodeGraph*, CodeGraph*> > edges = getEdges();
 
-	float multiplier = 1.0f;//1.0f
-	float area = 7000.0f;//width * height
+	float multiplier = 0.001f;//1.0f
+	float area = width * height;//7000.0f;//width * height
     float maxDisplace = sqrt(multiplier * area) / 10.0f;
-    float k = sqrt((multiplier * area) / (1.0f + vertices.size()));
+    float k = sqrt((1.5f * multiplier * area) / (4.0f + (vertices.size() / 15.0f)));//
 
     for(auto v : vertices)
     {
@@ -142,6 +153,9 @@ void CodeGraph::step(float dt)
 			// std::cout << v->x << " " << v->y << std::endl;
 			v->x += (v->tx / dist);
 			v->y += (v->ty / dist);
+
+			v->x = fmin(width / 2.0, fmax(-width / 2.0, v->x));
+			v->y = fmin(height / 2.0, fmax(-height / 2.0, v->y));
 		}
 	}
 }
@@ -275,6 +289,11 @@ int codegraph_get_time_activated(codegraph* graph)
 int codegraph_is_active(codegraph* graph)
 {
 	return reinterpret_cast<CodeGraph*>(graph)->active;
+}
+
+void codegraph_set_active(codegraph* graph, char* defname)
+{
+
 }
 
 void codegraph_print(codegraph* graph)

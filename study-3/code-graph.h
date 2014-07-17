@@ -27,6 +27,10 @@ public:
 	
 	bool isMatch(CodeTree* code);
 
+	//frame size
+	float width;
+	float height;
+
 	float x;
 	float y;
 	float size;
@@ -35,6 +39,9 @@ public:
 
 	float tx;//temp location
 	float ty;//temp location
+
+	float temperature;
+	void cool();
 
 	int timeAdded;
 	int timeActivated;
@@ -76,6 +83,7 @@ extern "C" {
 	int codegraph_get_time_added(codegraph* graph);
 	int codegraph_get_time_activated(codegraph* graph);
 	int codegraph_is_active(codegraph* graph);
+	void codegraph_set_active(codegraph* graph, char* defname);
 
 	int codegraph_get_child_count(codegraph* graph);
 	codegraph* codegraph_get_child(codegraph* graph, int index);

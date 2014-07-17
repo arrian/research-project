@@ -31,14 +31,17 @@
 
 - (id)init {
     if (self = [super init]) {
-    	frame = NSMakeRect(0, 0, 640, 480);
+    	frame = NSMakeRect(0, 0, 1024, 768);
         window  = [[[NSWindow alloc] initWithContentRect:frame
-		                styleMask:NSBorderlessWindowMask
+			        	styleMask: NSTitledWindowMask | NSResizableWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask
+		                //styleMask:NSBorderlessWindowMask
 		                backing:NSBackingStoreBuffered
 		                defer:NO] autorelease];
         [window center];
 		[window setBackgroundColor:[NSColor redColor]];
 		[window makeKeyAndOrderFront:NSApp];
+
+
 
 		std::cout << "created window" << std::endl;
 
@@ -60,7 +63,9 @@
 
 		[[window contentView] addSubview: mainView];
 
-		app = new HelloPolycodeApp(mainView);
+		//[NSApp initWithFrame:frame];
+
+		app = new PolycodeApp(mainView);
     }
     return self;
 }
@@ -93,6 +98,11 @@
 - (void)update 
 {
 	app->Update();
+}
+
+- (PolycodeApp*)getPolycode
+{
+	return app;
 }
 
 @end

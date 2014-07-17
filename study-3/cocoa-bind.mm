@@ -16,6 +16,21 @@ CocoaApp::CocoaApp()
 
 	std::cout << "created pool and nsapplication" << std::endl;
 
+
+	//----------------
+	id menubar = [[NSMenu new] autorelease];
+    id appMenuItem = [[NSMenuItem new] autorelease];
+    [menubar addItem:appMenuItem];
+    [NSApp setMainMenu:menubar];
+    id appMenu = [[NSMenu new] autorelease];
+    id appName = [[NSProcessInfo processInfo] processName];
+    id quitTitle = [@"Quit " stringByAppendingString:appName];
+    id quitMenuItem = [[[NSMenuItem alloc] initWithTitle:quitTitle
+        action:@selector(terminate:) keyEquivalent:@"q"] autorelease];
+    [appMenu addItem:quitMenuItem];
+    [appMenuItem setSubmenu:appMenu];
+	//--------------
+
 	appDelegate = [[PolycodeExampleAppDelegate alloc] init];
 	[NSApp setDelegate:appDelegate];
 
@@ -50,6 +65,11 @@ void CocoaApp::run()
 	[NSApp run];
 }
 
+PolycodeApp* CocoaApp::getPolycode()
+{
+	if(appDelegate) return [appDelegate getPolycode];
+	return nullptr;
+}
 
 app* app_create()
 {
@@ -67,10 +87,7 @@ void app_update(app* a)
 	reinterpret_cast<CocoaApp*>(a)->update();
 }
 
-
-
-
-
-
-
-
+polycode* app_get_polycode(app* a)
+{
+	return reinterpret_cast<polycode*>(reinterpret_cast<CocoaApp*>(a)->getPolycode());
+}

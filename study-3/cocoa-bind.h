@@ -2,7 +2,10 @@
 
 //#import <Cocoa/Cocoa.h>
 
+
 #ifdef __cplusplus
+
+class PolycodeApp;
 
 class CocoaApp
 {
@@ -13,37 +16,25 @@ public:
 	void run();
 	void update();
 
+	PolycodeApp* getPolycode();
 };
-
-
-
-
 
 extern "C" {
 
 #endif
 
 	struct app;
+	struct polycode;
 
 	struct app* app_create();
 	void app_destroy(struct app* a);
 	void app_update(struct app* a);
+	struct polycode* app_get_polycode(struct app* a);
+
 
 #ifdef __cplusplus
 }
 
 #endif
-
-
-// int main(int argc, char* argv[])
-// {
-// 	app* a = reinterpret_cast<app*>(new CocoaApp());
-
-// 	//delete reinterpret_cast<CocoaApp*>(a);
-
-
-// 	// CocoaApp();
-// 	return 0;
-// }
 
 
