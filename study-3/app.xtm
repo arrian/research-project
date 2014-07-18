@@ -47,12 +47,12 @@
 
 (bind-func test_add_text
   (lambda (x y text size)
-  		(polycode_add_text poly x y text size)
+  		(polycode_set_color (polycode_add_text poly x y text size) 0.2 0.2 0.4)
   		(app_step)
   		void
     ))
 
-(test_add_text (random -300.0 300.0) (random -200.0 200.0) "test text" 45)
+(test_add_text 0 0 "Loading..." 45)
 
 (bind-func test_add_circle
   (lambda ()

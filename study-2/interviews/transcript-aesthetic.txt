@@ -4,7 +4,7 @@ So the first little synth thing in this I knew pretty much exactly what I wanted
 I was going to do random pitches at 16th notes
 I think I probably did this synth thing exactly the same in other performances
 
-[A: question here]
+[A: question here - Is this a common technique you use?]
 
 Yeah, well
 This was not even prepared specifically for this performance
@@ -13,7 +13,7 @@ This is a pretty common trick I use for getting up and running early
 
 I think the bass is playing at this point but I can't hear on these speakers
 
-[A: question here]
+[A: question here - How much planning went into this performance?]
 
 This performance was pretty safe.
 It was pretty simple and pretty preplanned
@@ -28,7 +28,7 @@ I do that alot
 I probably choose slightly different parameters each time through
 But yeah, none of these things are really adventurous by the standards of my live coding
 
-[A: question]
+[A: question - Why is that?]
 
 Honestly, the main reason is that these things work well
 And I've tried other algorithms and they don't sound as good as these simpler algorithmic structures with judicious choice of parameters
@@ -38,14 +38,15 @@ Though I feel that as an artist sure, as a programmer this is not so interesting
 There are a lot of people in computer music today that use fancy algorithms, they use cellular automata, they use generative algorithms
 But I think it works better if you use... I've had more artistic success using these simple algorithms and then just using my musical experience and intelligence to select good parameters.. 
 
-[A: did the visuals influence the performance?]
+[A: Did the visuals influence the performance?]
 
 To be honest, I think in the second piece I tried to limit the callback rate because I knew that some of the visuals in the didactic setup worked better with a longer callback rate
 
-[A: question - do you think this held you back?]
+[A: question - Do you think this held you back?]
 
 No, it certainly didn't hold me back.
 In some ways it is nice to have constraints.
+
 
 I'm now going up an octave
 It gives it a harder edge...
@@ -54,9 +55,9 @@ It is interesting that I'm very concious of the hypermeter.
 
 I'm just grooving along and it just makes sense to evaluate in time.
 
-[A: question]
+[A: question - Did you find this visualisation distracting?]
 Ah, nah.
-In general I'm just so focussed on the [code?].
+In general I'm just so focussed on the code.
 
 This little bit is adventurous.
 This drum bit I didn't know exactly what samples were in those slots.
@@ -64,17 +65,17 @@ Before I was just guessing some numbers and picking numbers I thought might be g
 
 This bit is certainly more intense.
 This is more european house.
-I don't actually know wether it is european house but I'm sure there is some name for this genre.
+I don't actually know if it is european house but I'm sure there is some name for this genre.
 
 This end bit is a bit new.
 I hadn't planned to end it like that.
 
-[A: question]
+[A: question - Did it occur by chance?]
 Not so much by chance.
 I got to the end and wasn't really sure how I would finish this.
 This is true making it up.
 
-[A: question - were you happy?]
+[A: question - Were you happy with the performance?]
 Yeah.
 
 I'm actually going didatonically out of the scale I was using for the whole piece.
@@ -124,7 +125,7 @@ I definitely like the visuals.
 They definitely add something and they don't take anything away even though I wasn't paying attention to them.
 I still see the text as the main thing but the visuals are gravy and that was nice gravy. 
 
-[A: question - audience was computer literature. do you think they would have preferred to focus on the code, the music or the visuals?] 
+[A: question - The audience was computer literature. Do you think they would have preferred to focus on the code, the music or the visuals?] 
 
 That's a good question.
 I don't know.

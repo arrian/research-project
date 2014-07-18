@@ -7,6 +7,16 @@
 
 (speaker (*metro* 'get-beat 4) 1/4 0)
 
+(define melody
+  (lambda (beat dur pitch)
+      (play epad pitch 80 dur)
+      (cv-callback (*metro* (+ beat (* .5 dur))) 'melody (+ beat dur)
+               (random (list 1/2 1/4 1/2 1/4 1/2))
+               (if (< pitch 50) 79
+                   (pc:relative pitch (random -3 0) (pc:scale 0 'dorian))))))
+
+(melody (*metro* 'get-beat 4) 3 72)
+
 (define drums
   (lambda (beat dur)
     (play kit (cosr 43 3 1/8) (cosr 60 30 1) .1)
@@ -18,24 +28,26 @@
 
 (drums (*metro* 'get-beat 4) 1/4)
 
-(define chords
-  (lambda (beat dur root)
-    (for-each (lambda (p)
-                (play (random (list 0 0 1/4 1/2))
-                      rhodes p 90 dur (random 3)))
-              (pc:make-chord 50 75 7
-                             (pc:chord root (random (cdr (assoc root '((0 -9)
-                                                                       (3 ^9)
-                                                                       (10 7))))))))
-    (play subbass (+ root 36) 80 dur)
-    (callback (*metro* (+ beat (* .5 dur))) 'chords (+ beat dur)
-              (if (< (modulo beat 16) 4)
-                  2 4)
-              (random (cdr (assoc root '((0 3)
-                                         (3 10)
-                                         (10 0))))))))
+;; (define chords
+;;   (lambda (beat dur root)
+;;     (for-each (lambda (p)
+;;                 (play (random (list 0 0 1/4 1/2))
+;;                       rhodes p 90 dur (random 3)))
+;;               (pc:make-chord 50 75 7
+;;                              (pc:chord root (random (cdr (assoc root '((0 -9)
+;;                                                                        (3 ^9)
+;;                                                                        (10 7))))))))
+;;     (play subbass (+ root 36) 80 dur)
+;;     (callback (*metro* (+ beat (* .5 dur))) 'chords (+ beat dur)
+;;               (if (< (modulo beat 16) 4)
+;;                   2 4)
+;;               (random (cdr (assoc root '((0 3)
+;;                                          (3 10)
+;;                                          (10 0))))))))
 
-(chords (- (*metro* 'get-beat 4) 1/2) 4 0)
+;; (chords (- (*metro* 'get-beat 4) 1/2) 4 0)
+
+
 
 
 ;; cheers

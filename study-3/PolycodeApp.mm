@@ -60,6 +60,10 @@ PolycodeApp::PolycodeApp(PolycodeView *view) {
     Texture *tex = CoreServices::getInstance()->getMaterialManager()->createTextureFromFile("Resources/particle.png");
     emitter->getLocalShaderOptions()->addTexture("diffuse", tex);
 
+
+    SceneImage* bg = new SceneImage("research-project/Resources/gradient.png");
+    scene->addChild(bg);
+
 	scene->addChild(emitter);
 
 	circles = new SceneEntity();
@@ -91,7 +95,7 @@ Scene* PolycodeApp::getScene() {
 
 void PolycodeApp::clear()
 {
-	std::cout << "size: " << clearables.size() << std::endl;
+	// std::cout << "size: " << clearables.size() << std::endl;
 
 	for(auto clearable : clearableLabels)
 	{

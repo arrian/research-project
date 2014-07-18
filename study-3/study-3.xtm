@@ -1,7 +1,6 @@
-
-(sys:load "research-project/app.xtm")
-(sys:load "research-project/code.xtm")
-
+(sys:load "research-project/setup.xtm")
+;; (sys:load "research-project/app.xtm")
+;; (sys:load "research-project/code.xtm")
 
 ;; (define func-name
 ;; 	(let ((x 2))
@@ -94,15 +93,15 @@
 				(x (codegraph_get_x graph))
 				(y (codegraph_get_y graph))
 				(children (codegraph_get_child_count graph))
-				(size (+ 10.0 (* (i32tof children) 5.0)))
+				(size (+ 20.0 (if (> (vu_level 1) 0.000000005) (+ 1.0 (* 10000.0 (vu_level 1))) 0.0)));;(+ 10.0 (* (i32tof children) 5.0)))
 				(type (codegraph_get_type graph))
 				(circle2 (polycode_add_circle poly x y (+ 4.1 size) (+ 4.1 size) 5 0.0 0.0 0.0))
 				(circle (polycode_add_circle poly x y size size 5 0.3 (/ 1.0 (/ (i32tof depth) 2.0)) 0.3)) ;;(sin (/ (i64tof (now)) 10000.0))
 				)
 
-			(if (not (null? parent)) (polycode_set_color (polycode_add_line poly circle parent 10.0) 0.5 (/ 1.0 (/ (i32tof depth) 3.5)) 0.5))
+			(if (not (null? parent)) (polycode_set_color (polycode_add_line poly circle parent 10.0) 0.3 (/ 0.7 (/ (i32tof depth) 3.5)) 0.3))
 
-
+			;;(printf "%d\n" (vu_level 1))
 			;; (printf "%d\n" (strlen (codegraph_get_code graph)))
 			(dotimes (i children)
 				;;(printf "%d" i)
@@ -110,7 +109,7 @@
 						(xc (ftod (+ half_width (codegraph_get_x child))))
 						(yc (ftod (+ half_height (codegraph_get_y child)))))
 
-						(if (> (codegraph_get_child_count child) 2) (draw_graph child circle (+ 1 depth)))
+						(if (> (codegraph_get_child_count child) 1) (draw_graph child circle (+ 1 depth)))
 
 					))
 
@@ -183,7 +182,7 @@
 (define load-code-loop
 	(lambda (beat dur)
 		(load_code "research-project/vis.cache")
-		(print "loadedcode")
+		;; (print "loadedcode")
 		(callback (*metro* (+ beat (* .5 dur)))
 							'load-code-loop
 							(+ beat dur) 
@@ -192,7 +191,7 @@
 (load-code-loop (*metro* 'get-beat 4) 1/4)
 
 
-
+;;------------------------------------------
 
 
 
