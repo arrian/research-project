@@ -1,3 +1,5 @@
+*.a
+*.o
 *.aux
 *.glo
 *.idx

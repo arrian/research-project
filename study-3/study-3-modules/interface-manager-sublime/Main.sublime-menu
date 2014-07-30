@@ -1,0 +1,17 @@
+[
+	{
+		"id": "tools",
+		"children":
+		[
+			{
+				"caption": "Extempore OSC",
+				"id": "ExtemporeOSC",
+				"children":
+				[
+					{ "caption": "OSC Start", "command": "extempore_osc_start" },
+					{ "caption": "OSC Stop", "command": "extempore_osc_stop" }
+				]
+			}
+		]
+	}
+]
