@@ -1,0 +1,27 @@
+;; Interface Manager
+;;
+;; This manager handles all interfacing between Extempore and the source code editor.
+
+(bind-func receive
+  (lambda ()
+    ))
+
+(bind-func handle_code
+  (lambda ()
+    ))
+
+(bind-func handle_key_event
+  (lambda ()
+    ))
+
+(bind-func handle_keepalive
+  (lambda ()
+    ))
+
+(bind-func handle_error
+  (lambda ()
+    ))
+
+
+
+

@@ -1,0 +1,29 @@
+
+
+Modules:
+
+Source Code Manager (current code state, active code state)
+Visual Manager (drawing, code drawing, visual element drawing)
+Event Manager (keyboard events)
+Timing Manager (musical events, callback state)
+Interface Manager (interface between editor and extempore)
+
+
+
+
+Other elements:
+Music state
+Code state
+Code change state
+
+
+
+
+
+
+
+
+
+
+
+

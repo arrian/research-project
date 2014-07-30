@@ -1,0 +1,27 @@
+;; Code Manager
+;;
+;; This manager handles all source code management including active code, 
+;; currently edited code and the relationship between these two code states.
+
+;; Defines the time to cache code changes.
+(bind-val CACHE_TIME i64 100000)
+
+;; Supplies updated code for the specified time.
+(bind-func update
+  (lambda (code time:i64)
+    void))
+
+;; Get the current code
+(bind-func get_code
+  (lambda ()
+    void))
+
+;; Get the code diff from a specific time in history 
+(bind-func get_code_diff
+  (lambda (from:i64)
+    void))
+
+
+
+
+
