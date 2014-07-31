@@ -2,7 +2,7 @@
 ;;
 ;; This manager handles all interfacing between Extempore and the source code editor.
 
-;; Handles /interface/selection
+;; Handles the /interface/selection address.
 (bind-func handle_selection
   (lambda (args:i32*)
   	(let ((i:i32 0))
@@ -13,36 +13,42 @@
 	void
 	))
 
-;; Handles /interface/code
+;; Handles the /interface/code address.
 (bind-func handle_code
-  (lambda (args:i32*)
+  (lambda (args:i8*)
   	(pref args 0)
+  	(update_code args (now))
 	(printf "code %.80s...\n" args)
 	void
 	))
 
-;; Handles /interface/keyboard
+;; Handles the /interface/keyboard address.
 (bind-func handle_keyboard
   (lambda (args:i32*)
 	void
 	))
 
-;; Handles /interface/error
+;; Handles the /interface/error address.
 (bind-func handle_error
   (lambda (args:i32*)
 	void
 	))
 
+;; handle evaluate?
+;; other events? 
+
+;; OSC receive function. Handles routing of addresses.
 (bind-func receive
   (lambda (address:i8* types:i8* args:i8*)
     (let ((data (bitcast args i32*)))
     	;; (printf "%s\n" types)
 		(cond ((= (strcmp address "/interface/selection") 0) (handle_selection data))
-			((= (strcmp address "/interface/code") 0) (handle_code data))
+			((= (strcmp address "/interface/code") 0) (handle_code args))
 			((= (strcmp address "/interface/keyboard") 0) (handle_keyboard data))
 			((= (strcmp address "/interface/error") 0) (handle_error data))
 			(else void))
-		;;(printf "%s\n" address)
+		(printf "%s\n" address)
       	void)))
 
+;; OSC start the receive server.
 (io:osc:start-server 9880 "receive" (llvm:get-native-function "receive"))

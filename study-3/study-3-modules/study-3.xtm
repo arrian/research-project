@@ -3,13 +3,13 @@
 ;; Main entry point for study 3.
 
 
-(define *research-project-dir* "/Users/arrian/Desktop/COMP4540/research-project/study-3/study-3-modules")
+(define *study-3-dir* "/Users/arrian/Desktop/COMP4540/research-project/study-3/study-3-modules")
 
-(sys:load (string-append *research-project-dir* "/interface-manager.xtm"))
-(sys:load (string-append *research-project-dir* "/event-manager.xtm"))
-(sys:load (string-append *research-project-dir* "/timing-manager.xtm"))
-(sys:load (string-append *research-project-dir* "/code-manager.xtm"))
-(sys:load (string-append *research-project-dir* "/visual-manager.xtm"))
+(sys:load (string-append *study-3-dir* "/event-manager.xtm"))
+(sys:load (string-append *study-3-dir* "/timing-manager.xtm"))
+(sys:load (string-append *study-3-dir* "/code-manager.xtm"))
+(sys:load (string-append *study-3-dir* "/visual-manager.xtm"))
+(sys:load (string-append *study-3-dir* "/interface-manager.xtm"))
 
 
 
