@@ -9,17 +9,11 @@
 
 (bind-val app application* 0)
 
-(bind-func app_init
-	(lambda ()
-		(set! app (app_create))))
-
-(app_init)
-
 (bind-func app_step
   (lambda ()
     (app_update app)))
 
-(app_step);;call once to init view
+;; (app_step);;call once to init view
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -43,7 +37,7 @@
 	(lambda ()
 		(set! poly (app_get_polycode app))))
 
-(poly_init)
+;; (poly_init)
 
 (bind-func test_add_text
   (lambda (x y text size)
@@ -52,14 +46,14 @@
   		void
     ))
 
-(test_add_text 0 0 "Loading..." 45)
+;; (test_add_text 0 0 "Loading..." 45)
 
 (bind-func test_add_circle
   (lambda ()
   		(polycode_add_circle poly (random -320.0 320.0) (random -240.0 240.0) 50.0 50.0 30 (random) (random) (random))
     ))
 
-(test_add_circle)
+;; (test_add_circle)
 
 (bind-func test_add_line
   (lambda (start end)
@@ -67,6 +61,18 @@
   		(app_step)
     ))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(bind-func app_init
+  (lambda ()
+    (set! app (app_create))
+    (app_step)
+    (poly_init)
+    (test_add_text 0.0 0.0 "Loading..." 15)
+    ;; (test_add_circle)
+    ))
+
+(app_init)
 
 
 

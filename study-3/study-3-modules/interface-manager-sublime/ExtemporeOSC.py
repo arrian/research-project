@@ -16,6 +16,12 @@ class ExtemporeOscCommand(sublime_plugin.EventListener):
 		self.port = 9880
 		self.client = udp_client.UDPClient("localhost", self.port)
 
+	def on_activated(self, view):
+		focus = view.file_name()
+		if focus is None:
+			focus = "null"
+		self.send("/interface/focus", focus)
+
 	def on_selection_modified(self, view):
 		selections = []
 		for sel in view.sel():
@@ -30,11 +36,17 @@ class ExtemporeOscCommand(sublime_plugin.EventListener):
 	def on_pre_save(self, view):
 		self.send("/interface/save", "test")
 
+	def on_text_command(self, view, command_name, args):
+		if command_name == "extempore_connect":
+			self.send("/interface/connect", 0)
+		elif command_name == "extempore_disconnect":
+			self.send("/interface/disconnect", 0)
+		# print(command_name)
+		return None
+
 	def send(self, address, *args):
 		msg = osc_message_builder.OscMessageBuilder(address = address)
 		for arg in args:
 			msg.add_arg(arg)
 		msg = msg.build()
 		self.client.send(msg)
-
-
