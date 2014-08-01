@@ -2,9 +2,9 @@ CXXFLAGS = -Wall -g -std=c++11 -Wc++11-extensions
 
 all:
 	$(MAKE) clean
-	$(MAKE) extempore-analysis
+	$(MAKE) code-lib
 
-extempore-analysis: bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o
+code-lib: bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o
 	g++ bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o -dynamiclib -o bin/code.dylib
 
 test: bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o bin/main.o
