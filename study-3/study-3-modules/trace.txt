@@ -1,0 +1,66 @@
+
+------------------------trace calling from osc
+Starting OSC server on port: 9880 calling back to receive
+text: success3asdfasdf4sdgdfsg
+started setting text
+checked text and options
+set new text
+getting material manager
+deleting texture
+deleting texture in materialmanager
+have 4 textures
+found matching texture: 0x7f9ec62ad140 vs 0x7f9ec62ad140
+erased texture
+entered destroy texture in gl renderer 0x7f9ec62ad1401024
+finished destroying texture
+destroyed texture
+creating texture
+entered createTextureFromImage
+entered createTexture
+creating opengl texture
+determining opengl texture type
+entering recreateFromImageData
+getting anisotropy amount
+gltexture was not loaded0
+generated texture
+binding texture
+Segmentation fault: 11
+
+----------------------------trace calling outside osc
+text: success3asdfasdf4sdgdfsg
+started setting text
+checked text and options
+set new text
+getting material manager
+deleting texture
+deleting texture in materialmanager
+have 4 textures
+found matching texture: 0x7fb09389a1a0 vs 0x7fb09389a1a0
+erased texture
+entered destroy texture in gl renderer 0x7fb09389a1a01024
+finished destroying texture
+destroyed texture
+creating texture
+entered createTextureFromImage
+entered createTexture
+creating opengl texture
+determining opengl texture type
+entering recreateFromImageData
+getting anisotropy amount
+gltexture was not loaded0
+generated texture
+binding texture
+finished binding
+determined clamping
+found linear filtering
+determined filtering
+created texture in renderer
+setting primitive options
+setting bounding box
+updated from label
+started update in cocoa-bind
+sending event in cocoa-bind
+updating windows in cocoa-bind
+updating app delegate in cocoa-bind
+started update and render
+finished update and render

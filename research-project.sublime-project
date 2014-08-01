@@ -2,9 +2,27 @@
 	"folders":
 	[
 		{
+			"file_exclude_patterns":
+			[
+				"*.bbl",
+				"*.log",
+				"*.dvi",
+				"*.idx",
+				"*.blg",
+				"*.toc",
+				"*.gz",
+				"*.aux"
+			],
 			"follow_symlinks": true,
-			"path": ".",
-			"file_exclude_patterns": ["*.bbl", "*.log", "*.dvi", "*.idx", "*.blg", "*.toc", "*.gz", "*.aux"]
+			"path": "."
+		},
+		{
+			"follow_symlinks": false,
+			"path": "/usr/local/Cellar/extempore/0.52"
+		},
+		{
+			"follow_symlinks": false,
+			"path": "~/Dev/polycode/Core"
 		}
 	]
 }

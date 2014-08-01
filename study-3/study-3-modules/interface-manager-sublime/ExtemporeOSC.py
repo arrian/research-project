@@ -7,22 +7,25 @@ import sys
 sys.path.insert(0, os.path.dirname(__file__))
 
 # OSC imports
-import pythonosc
+from pythonosc import osc_message_builder
+from pythonosc import udp_client
 
 class ExtemporeOscCommand(sublime_plugin.EventListener):
 
 	def __init__(self):
-		print("created")
+		# print("created")
 		self.port = 9880
-		self.client = udp_client.UDPClient("localhost", self.port)
+		self.client = pythonosc.udp_client.UDPClient("localhost", self.port)
 
 	def on_activated(self, view):
+		# print("activated")
 		focus = view.file_name()
 		if focus is None:
 			focus = "null"
 		self.send("/interface/focus", focus)
 
 	def on_selection_modified(self, view):
+		# print("selection modified")
 		selections = []
 		for sel in view.sel():
 			selections.append(sel.begin());
@@ -45,7 +48,8 @@ class ExtemporeOscCommand(sublime_plugin.EventListener):
 		return None
 
 	def send(self, address, *args):
-		msg = osc_message_builder.OscMessageBuilder(address = address)
+		# print("sending")
+		msg = pythonosc.osc_message_builder.OscMessageBuilder(address = address)
 		for arg in args:
 			msg.add_arg(arg)
 		msg = msg.build()

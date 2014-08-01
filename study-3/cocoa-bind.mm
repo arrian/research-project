@@ -18,25 +18,28 @@ CocoaApp::CocoaApp()
 
 
 	//----------------
-	id menubar = [[NSMenu new] autorelease];
-    id appMenuItem = [[NSMenuItem new] autorelease];
-    [menubar addItem:appMenuItem];
-    [NSApp setMainMenu:menubar];
-    id appMenu = [[NSMenu new] autorelease];
-    id appName = [[NSProcessInfo processInfo] processName];
-    id quitTitle = [@"Quit " stringByAppendingString:appName];
-    id quitMenuItem = [[[NSMenuItem alloc] initWithTitle:quitTitle
-        action:@selector(terminate:) keyEquivalent:@"q"] autorelease];
-    [appMenu addItem:quitMenuItem];
-    [appMenuItem setSubmenu:appMenu];
+	// id menubar = [[NSMenu new] autorelease];
+ //    id appMenuItem = [[NSMenuItem new] autorelease];
+ //    [menubar addItem:appMenuItem];
+ //    [NSApp setMainMenu:menubar];
+ //    id appMenu = [[NSMenu new] autorelease];
+ //    id appName = [[NSProcessInfo processInfo] processName];
+ //    id quitTitle = [@"Quit " stringByAppendingString:appName];
+ //    id quitMenuItem = [[[NSMenuItem alloc] initWithTitle:quitTitle
+ //        action:@selector(terminate:) keyEquivalent:@"q"] autorelease];
+ //    [appMenu addItem:quitMenuItem];
+ //    [appMenuItem setSubmenu:appMenu];
 	//--------------
 
 	appDelegate = [[PolycodeExampleAppDelegate alloc] init];
+	std::cout << "created delegate" << std::endl;
+
 	[NSApp setDelegate:appDelegate];
+	std::cout << "set the delegate" << std::endl;
 
 	[NSApp finishLaunching];
-
-	std::cout << "created delegate" << std::endl;
+	std::cout << "finished launching in cocoa-bind" << std::endl;
+	
 
 }
 
@@ -47,27 +50,35 @@ CocoaApp::~CocoaApp()
 
 void CocoaApp::update()
 {
+	std::cout << "started update in cocoa-bind" << std::endl;
 	NSEvent *event =
             [NSApp
                 nextEventMatchingMask:NSAnyEventMask
                 untilDate:[NSDate distantFuture]
                 inMode:NSDefaultRunLoopMode
                 dequeue:YES];
+
+    std::cout << "sending event in cocoa-bind" << std::endl;
  
     [NSApp sendEvent:event];
+
+    std::cout << "updating windows in cocoa-bind" << std::endl;
     [NSApp updateWindows];
 
+    std::cout << "updating app delegate in cocoa-bind" << std::endl;
 	[appDelegate update];
 }
 
 void CocoaApp::run()
 {
+	std::cout << "running nsapp in cocoa-bind" << std::endl;
 	[NSApp run];
 }
 
 PolycodeApp* CocoaApp::getPolycode()
 {
 	if(appDelegate) return [appDelegate getPolycode];
+	std::cout << "got null polycode in cocoa-bind" << std::endl;
 	return nullptr;
 }
 

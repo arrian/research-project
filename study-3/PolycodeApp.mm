@@ -2,20 +2,27 @@
 
 #include <iostream>
 #include <sstream>
+#include <thread>
 
 PolycodeApp::PolycodeApp(PolycodeView *view) {
 
+	std::cout << "creating polycode core" << std::endl;
+	if(!view) std::cout << "got null view while creating polycode core" << std::endl;
 	core = new POLYCODE_CORE(view, 1024, 768, false, true, 0, 0, 90, 0, true);
 
+	std::cout << "adding archive and dir resources" << std::endl;
 	CoreServices::getInstance()->getResourceManager()->addArchive("Resources/default.pak");
 	CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
 	
+	std::cout << "creating polycode scene" << std::endl;
 	scene = new Scene(Scene::SCENE_2D);
 
 	std::cout << CoreServices::getInstance()->getRenderer()->getBackingResolutionScaleX() << std::endl;
 
+	std::cout << "setting camera size" << std::endl;
 	scene->getActiveCamera()->setOrthoSize(1024, 768);
 
+	std::cout << "creating initial emitter" << std::endl;
 	SceneParticleEmitter *emitter = new SceneParticleEmitter(100, 2.0, 0.5);
 	
     emitter->setParticleRotationSpeed(Vector3(0.0, 0.0, 100.0));
@@ -82,7 +89,9 @@ PolycodeApp::~PolycodeApp() {
 }
 
 bool PolycodeApp::Update() {
-    return core->updateAndRender();
+	std::cout << "started update and render" << std::endl;
+    bool result = core->updateAndRender();
+    std::cout << "finished update and render" << std::endl;
 }
 
 Core* PolycodeApp::getCore() {
@@ -123,7 +132,7 @@ void PolycodeApp::clear()
 
 }
 
-polycode_scenemesh* polycode_add_text(polycode* pc, float x, float y, char* text, int size)
+polycode_scenelabel* polycode_add_text(polycode* pc, float x, float y, char* text, int size)
 {
 	if(!pc) 
 	{
@@ -137,7 +146,7 @@ polycode_scenemesh* polycode_add_text(polycode* pc, float x, float y, char* text
 	label->setPosition(x, y);
 	app->text->addChild(label);
 	app->clearableLabels.push_back(label);
-	return reinterpret_cast<polycode_scenemesh*>(label);
+	return reinterpret_cast<polycode_scenelabel*>(label);
 }
 
 float polycode_add_code(polycode* pc, float x, float y, char* text, int size)
@@ -231,6 +240,15 @@ void polycode_set_roll(polycode_scenemesh* mesh, int degree)
 void polycode_set_scale(polycode_scenemesh* mesh, float sx, float sy)
 {
 
+}
+
+void polycode_set_text(polycode_scenelabel* label, char* text)
+{
+	std::cout << "current thread: " << std::hash<std::thread::id>()(std::this_thread::get_id()) << ", current pid: " << getpid() << std::endl;
+	if(!label) std::cout << "label was null while attempting to set label text" << std::endl;
+	if(!text) std::cout << "text was null while attempting to set label text" << std::endl;
+	std::cout << "text: " << text << std::endl;
+	reinterpret_cast<SceneLabel*>(label)->setText(std::string(text));
 }
 
 void polycode_clear_scene(polycode* pc)

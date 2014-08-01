@@ -30,15 +30,23 @@
 @synthesize mainView;
 
 - (id)init {
+	app = NULL;
     if (self = [super init]) {
+    	std::cout << "making rectangle" << std::endl;
     	frame = NSMakeRect(0, 0, 1024, 768);
+
+    	std::cout << "initialising window with rectangle" << std::endl;
         window  = [[[NSWindow alloc] initWithContentRect:frame
 			        	styleMask: NSTitledWindowMask | NSResizableWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask
 		                //styleMask:NSBorderlessWindowMask
 		                backing:NSBackingStoreBuffered
 		                defer:NO] autorelease];
+
+        std::cout << "centering window" << std::endl;
         [window center];
-		[window setBackgroundColor:[NSColor redColor]];
+
+        std::cout << "setting window background color" << std::endl;
+		[window setBackgroundColor:[NSColor blackColor]];
 		[window makeKeyAndOrderFront:NSApp];
 
 
@@ -66,6 +74,8 @@
 		//[NSApp initWithFrame:frame];
 
 		app = new PolycodeApp(mainView);
+
+		if(!app) std::cout << "polycode app was null in init" << std::endl;
     }
     return self;
 }
@@ -90,6 +100,8 @@
 
 - (void)animationTimer:(NSTimer *)timer
 {
+	if(!app) std::cout << "polycode app was null in animationTimer" << std::endl;
+
 	if(!app->Update()) {
 		[[NSApplication sharedApplication] stop:self];
 	}
@@ -97,11 +109,13 @@
 
 - (void)update 
 {
+	if(!app) std::cout << "polycode app was null in update" << std::endl;
 	app->Update();
 }
 
 - (PolycodeApp*)getPolycode
 {
+	if(!app) std::cout << "polycode app was null in getPolycode" << std::endl;
 	return app;
 }
 

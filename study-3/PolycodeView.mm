@@ -22,6 +22,8 @@
 
 #import "PolycodeView.h"
 
+#include <iostream>
+
 
 @implementation PolycodeView
 
@@ -31,6 +33,7 @@
 
 - (id)initWithFrame:(NSRect)frameRect pixelFormat:(NSOpenGLPixelFormat *)format 
 {
+	std::cout << "init with frame in polycode view" << std::endl;
 	self = [super initWithFrame:frameRect pixelFormat:format];
 	if(self) {
 		glSizeX = 0;
@@ -39,6 +42,7 @@
 		currentCursor = NULL;
 		contextLock = [[NSLock alloc] init];
 	}
+	std::cout << "completed init with frame in polycode view" << std::endl;
 	return self;
 }
 
@@ -242,9 +246,12 @@
 }
 
 - (void) update {
+	std::cout << "locking context" << std::endl;
 	[contextLock lock];
 	[super update];
-	[contextLock unlock];	
+	std::cout << "finished update" << std::endl;
+	[contextLock unlock];
+	std::cout << "unlocking context" << std::endl;
 }
 
 - (void) lockContext {

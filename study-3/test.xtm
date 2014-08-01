@@ -11,7 +11,7 @@
   (lambda (beat dur pitch)
       (play epad pitch 80 dur)
       (cv-callback (*metro* (+ beat (* .5 dur))) 'melody (+ beat dur)
-               (random (list 1/2 1/4 1/2 1/4 1/2))
+               (random (list 1/2 5/4 3/4 2))
                (if (< pitch 50) 79
                    (pc:relative pitch (random -3 0) (pc:scale 0 'dorian))))))
 

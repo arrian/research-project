@@ -25,8 +25,6 @@ public:
 private:
 	Core* core;
 	Scene* scene;
-
-
 };
 
 
@@ -34,8 +32,9 @@ extern "C"
 {
 	struct polycode;
 	struct polycode_scenemesh;
+	struct polycode_scenelabel;
 
-	struct polycode_scenemesh* polycode_add_text(polycode* pc, float x, float y, char* text, int size);
+	struct polycode_scenelabel* polycode_add_text(polycode* pc, float x, float y, char* text, int size);
 	struct polycode_scenemesh* polycode_add_image(polycode* pc, char* path);
 	struct polycode_scenemesh* polycode_add_circle(polycode* pc, float x, float y, float w, float h, int segments, float r, float g, float b);
 	struct polycode_scenemesh* polycode_add_line(polycode* pc, polycode_scenemesh* source, polycode_scenemesh* target, float width);
@@ -45,6 +44,7 @@ extern "C"
 	void polycode_set_color(polycode_scenemesh* mesh, float r, float g, float b);
 	void polycode_set_roll(polycode_scenemesh* mesh, int degree);
 	void polycode_set_scale(polycode_scenemesh* mesh, float sx, float sy);
+	void polycode_set_text(polycode_scenelabel* label, char* text);
 
 	void polycode_clear_scene(polycode* pc);
 }

@@ -4,49 +4,69 @@
 ;; including code drawing, visual elements drawing and
 ;; all visual effects.
 
-(bind-val WIDTH i64 1024)
-(bind-val HEIGHT i64 768)
+(sys:load "research-project/app.xtm")
 
-
-
-;; Draws the code fitting it into the given width and height.
-(bind-func draw_code
-  (lambda (code x:double y:double width:double height:double)
-    	
-    void))
-
-;; Draws the code graph scaling it by the supplied value.
-(bind-func draw_graph
-  (lambda (graph x:double y:double scale:double)
-
-    void))
-
+;; (define WIDTH 1024)
+;; (define HEIGHT 768)
+;; (bind-val WIDTH i64 1024)
+;; (bind-val HEIGHT i64 768)
 
 (bind-func draw
-  (lambda (state)
-
-    void))
-
-
-;; Debug Drawing
-(bind-func debug_draw_interface_manager
   (lambda ()
-    ))
+    (printf "--------------\n")
+  	(printf "beginning step\n")
+    (app_step)
+    (printf "ending step\n")))
 
-(bind-func debug_draw_event_manager
-  (lambda ()
-    ))
+(define draw-loop
+	(let ((app_init_ret (app_init)))
+  		(lambda (time delta-t)
+  			(draw)
+    		(callback (+ time (* *second* delta-t) 0.5)
+                  'draw-loop
+                  (+ time (* *second* delta-t)) 
+                  delta-t))))
 
-(bind-func debug_draw_timing_manager
-  (lambda ()
-    ))
+(draw-loop (now) 1)
 
-(bind-func debug_draw_code_manager
-  (lambda ()
-    ))
+;; Draws the code fitting it into the given width and height.
+;; (bind-func draw_code
+;;   (lambda (code x:double y:double width:double height:double)
+    	
+;;     void))
 
-(bind-func debug_draw_visual_manager
-  (lambda ()
-    ))
+;; ;; Draws the code graph scaling it by the supplied value.
+;; (bind-func draw_graph
+;;   (lambda (graph x:double y:double scale:double)
+
+;;     void))
+
+
+;; (bind-func draw
+;;   (lambda (state)
+
+;;     void))
+
+
+;; ;; Debug Drawing
+;; (bind-func debug_draw_interface_manager
+;;   (lambda ()
+;;     ))
+
+;; (bind-func debug_draw_event_manager
+;;   (lambda ()
+;;     ))
+
+;; (bind-func debug_draw_timing_manager
+;;   (lambda ()
+;;     ))
+
+;; (bind-func debug_draw_code_manager
+;;   (lambda ()
+;;     ))
+
+;; (bind-func debug_draw_visual_manager
+;;   (lambda ()
+;;     ))
 
 

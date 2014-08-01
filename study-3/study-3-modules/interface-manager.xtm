@@ -2,6 +2,31 @@
 ;;
 ;; This manager handles all interfacing between Extempore and the source code editor.
 
+(sys:load "research-project/app.xtm")
+(app_init)
+(app_step)
+
+
+(bind-val code_visual polycode_scenelabel* 0)
+
+(bind-func code_visual_init
+  (lambda ()
+  	(set! code_visual (polycode_add_text poly 0.0 0.0 "loading..." 115))
+    ))
+
+(code_visual_init)
+
+(bind-func test_init_code_visual
+  (lambda ()
+  	(polycode_set_text code_visual "teasdfst")
+  	(code_visual)
+    ))
+
+(test_init_code_visual)
+
+(app_step)
+
+
 ;; Handles the /interface/selection address.
 (bind-func handle_selection
   (lambda (args:i32*)
@@ -13,19 +38,27 @@
 	void
 	))
 
+;; (sys:load "research-project/code.xtm")
+
+;; (bind-val test_string i8* "success")
+
 ;; Handles the /interface/code address.
 (bind-func handle_code
   (lambda (args:i8*)
-  	(pref args 0)
-  	(update_code args (now))
-	(printf "code %.80s...\n" args)
-	void
-	))
+  	;;(pref args 0)
+  	;; (polycode_set_text code_visual "test_string")
+  	;; (app_step)
+  	(test_init_code_visual)
+  	;; (test_init_code_visual)
+  	void))
+  	;;(update_code args (now))
+	;;(printf "code %.80s...\n" args)
+	
 
 ;; Handles the /interface/keyboard address.
 (bind-func handle_keyboard
   (lambda (args:i32*)
-	void
+	void 
 	))
 
 ;; Handles the /interface/error address.
@@ -52,3 +85,35 @@
 
 ;; OSC start the receive server.
 (io:osc:start-server 9880 "receive" (llvm:get-native-function "receive"))
+
+
+
+;; current thread: 477732107089896007, current pid: 46621
+;; current thread: 11686591936744189465, current pid: 46621
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
