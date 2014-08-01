@@ -1,7 +1,7 @@
 #pragma once
 
 #include <sstream>
-#include "dtl/dtl.hpp"
+#include "deps/dtl/dtl.hpp"
 
 /**
  * Defines the state of the code from a previous version.

@@ -1,30 +1,32 @@
 CXXFLAGS = -Wall -g -std=c++11 -Wc++11-extensions
 
 all:
-	clean
-	extempore-analysis
+	$(MAKE) clean
+	$(MAKE) extempore-analysis
 
-extempore-analysis: code-tree.o code-history.o code-diff.o code-graph.o
-	g++ code-tree.o code-history.o code-diff.o code-graph.o -dynamiclib -o code.dylib
+extempore-analysis: bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o
+	g++ bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o -dynamiclib -o bin/code.dylib
 
-test: code-tree.o code-history.o code-diff.o code-graph.o main.o
-	g++ code-tree.o code-history.o code-diff.o code-graph.o main.o -o code-test
-	./code-test
+test: bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o bin/main.o
+	g++ bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o bin/main.o -o bin/code-test
+	./bin/code-test
 
-main.o:
-	g++ $(CXXFLAGS) -c -o main.o main.cpp
+bin/main.o:
+	g++ $(CXXFLAGS) -c -o bin/main.o main.cpp
 
-code-tree.o:
-	g++ $(CXXFLAGS) -c -o code-tree.o code-tree.cpp
+bin/code-tree.o:
+	g++ $(CXXFLAGS) -c -o bin/code-tree.o code-tree.cpp
 
-code-history.o:
-	g++ $(CXXFLAGS) -c -o code-history.o code-history.cpp
+bin/code-history.o:
+	g++ $(CXXFLAGS) -c -o bin/code-history.o code-history.cpp
 
-code-diff.o:
-	g++ $(CXXFLAGS) -c -o code-diff.o code-diff.cpp
+bin/code-diff.o:
+	g++ $(CXXFLAGS) -c -o bin/code-diff.o code-diff.cpp
 
-code-graph.o:
-	g++ $(CXXFLAGS) -c -o code-graph.o code-graph.cpp
+bin/code-graph.o:
+	g++ $(CXXFLAGS) -c -o bin/code-graph.o code-graph.cpp
 
 clean:
-	rm -f *.o
+	rm -f ./bin/*.o
+	rm -f ./bin/code.dylib
+	rm -f ./bin/code-test
