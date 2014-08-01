@@ -23,6 +23,7 @@
 *.mtc1
 *.out
 *.synctex.gz
+*.fdb_latexmk
 
 # should be a symlink to wherever the samples are
 /sample-libs

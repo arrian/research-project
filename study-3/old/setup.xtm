@@ -1,0 +1,46 @@
+
+;;;;;;;;;;;;;;;;;;;;
+;; graphics setup ;;
+;;;;;;;;;;;;;;;;;;;;
+
+(sys:load "research-project/code.xtm")
+(sys:load "research-project/app.xtm")
+
+;;;;;;;;;;;;;;;;;;;;
+;; main setup ;;
+;;;;;;;;;;;;;;;;;;;;
+(sys:load "libs/xtm.xtm")
+
+;; make sure this is the right path for your machine!
+;;(define *research-project-dir* "/Users/ben/Code/xtm/arrian-research-project")
+(define *research-project-dir* "/Users/arrian/Desktop/COMP4540/research-project")
+
+(sys:load (string-append *research-project-dir* "/study-2/performance/lib/callback_widget_array.xtm"))
+(sys:load (string-append *research-project-dir* "/study-2/performance/lib/vu-meter.xtm"))
+
+;;;;;;;;;;;;;;;;;
+;; audio setup ;;
+;;;;;;;;;;;;;;;;;
+
+;; set up the drum kit (symlink 'sample-libs' in the research-project
+;; dir to wherever your drum samples are)
+(define *user-sample-dir* (string-append *research-project-dir* "/sample-libs"))
+(sys:load (string-append *research-project-dir* "/study-2/performance/lib/sampler-maps.xtm"))
+
+(define-sampler kit sampler_note_hermite_c sampler_fx)
+(sm-load-map kit *808-kit-map*)
+
+(bind-func dsp:[SAMPLE,SAMPLE,i64,i64,SAMPLE*]* 100000
+  (let ((vu_meter (vu_meter_c 8 1472))) ;; approx 30fps
+    (lambda (in time chan dat)
+      (+ 
+         (vu_meter chan 1 (epad in time chan dat))
+         (vu_meter chan 2 (fmsynth in time chan dat))
+         (vu_meter chan 0 (kit in time chan dat))
+         ))))
+
+(ipc:bind-func "utility" 'kit)
+(ipc:bind-func "utility" 'epad)
+(ipc:bind-func "utility" 'fmsynth)
+(ipc:audio-setup "utility")
+(dsp:set! dsp)

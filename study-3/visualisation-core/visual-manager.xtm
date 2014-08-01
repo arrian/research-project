@@ -6,20 +6,35 @@
 
 (sys:load "research-project/app.xtm")
 
+;; (bind-val code_visual polycode_scenelabel* 0)
+
+;; (bind-func code_visual_init
+;;   (lambda ()
+;;     (set! code_visual (polycode_add_text poly 0.0 0.0 "loading..." 115))
+;;     ))
+
+;; (code_visual_init)
+
 ;; (define WIDTH 1024)
 ;; (define HEIGHT 768)
 ;; (bind-val WIDTH i64 1024)
 ;; (bind-val HEIGHT i64 768)
 
+(app_init)
+(update_code "init" (now))
+
 (bind-func draw
+  (let ((code_label (polycode_add_text poly 0.0 0.0 "code..." 115)))
   (lambda ()
     (printf "--------------\n")
   	(printf "beginning step\n")
+    (polycode_set_text code_label (string_cstr (get_code)))
     (app_step)
-    (printf "ending step\n")))
+    (printf "ending step\n")
+    void)))
 
 (define draw-loop
-	(let ((app_init_ret (app_init)))
+	(let ((app_init_ret 0))
   		(lambda (time delta-t)
   			(draw)
     		(callback (+ time (* *second* delta-t) 0.5)
@@ -27,7 +42,7 @@
                   (+ time (* *second* delta-t)) 
                   delta-t))))
 
-(draw-loop (now) 1)
+(draw-loop (now) 1/10)
 
 ;; Draws the code fitting it into the given width and height.
 ;; (bind-func draw_code

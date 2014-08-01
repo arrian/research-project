@@ -2,29 +2,29 @@
 ;;
 ;; This manager handles all interfacing between Extempore and the source code editor.
 
-(sys:load "research-project/app.xtm")
-(app_init)
-(app_step)
+;; (sys:load "research-project/app.xtm")
+;; (app_init)
+;; (app_step)
 
 
-(bind-val code_visual polycode_scenelabel* 0)
+;; (bind-val code_visual polycode_scenelabel* 0)
 
-(bind-func code_visual_init
-  (lambda ()
-  	(set! code_visual (polycode_add_text poly 0.0 0.0 "loading..." 115))
-    ))
+;; (bind-func code_visual_init
+;;   (lambda ()
+;;   	(set! code_visual (polycode_add_text poly 0.0 0.0 "loading..." 115))
+;;     ))
 
-(code_visual_init)
+;; (code_visual_init)
 
-(bind-func test_init_code_visual
-  (lambda ()
-  	(polycode_set_text code_visual "teasdfst")
-  	(code_visual)
-    ))
+;; (bind-func test_init_code_visual
+;;   (lambda ()
+;;   	(polycode_set_text code_visual "teasdfst")
+;;   	(code_visual)
+;;     ))
 
-(test_init_code_visual)
+;; (test_init_code_visual)
 
-(app_step)
+;; (app_step)
 
 
 ;; Handles the /interface/selection address.
@@ -48,10 +48,11 @@
   	;;(pref args 0)
   	;; (polycode_set_text code_visual "test_string")
   	;; (app_step)
-  	(test_init_code_visual)
+  	(update_code args (now))
+  	;; (test_init_code_visual)
   	;; (test_init_code_visual)
   	void))
-  	;;(update_code args (now))
+  	
 	;;(printf "code %.80s...\n" args)
 	
 
@@ -85,6 +86,8 @@
 
 ;; OSC start the receive server.
 (io:osc:start-server 9880 "receive" (llvm:get-native-function "receive"))
+
+
 
 
 

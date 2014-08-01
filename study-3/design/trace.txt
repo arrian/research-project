@@ -64,3 +64,62 @@ updating windows in cocoa-bind
 updating app delegate in cocoa-bind
 started update and render
 finished update and render
+
+
+
+
+------------------init segfault 1 (seems random)
+determining monitor and fullscreen info
+finished determining monitor and fullscreen info
+set context sync and swap interval
+Segmentation fault: 11
+------------------
+started messing with gl
+cleared gl context
+set gl context in cocoa core
+set view to gl view
+set renderer anisotropy
+Segmentation fault: 11
+------------------
+released format
+started messing with gl
+cleared gl context
+set gl context in cocoa core
+Segmentation fault: 11
+------------------
+released format
+started messing with gl
+cleared gl context
+set gl context in cocoa core
+Segmentation fault: 11
+------------------
+released format
+started messing with gl
+cleared gl context
+set gl context in cocoa core
+Segmentation fault: 11
+------------------
+released format
+started messing with gl
+cleared gl context
+set gl context in cocoa core
+Segmentation fault: 11
+
+
+
+
+
+
+
+------------------init freezes
+generated texture
+binding texture with glerror: 0
+finished binding
+determined clamping
+found linear filtering
+....
+----------------------
+
+
+
+
