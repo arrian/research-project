@@ -1,5 +1,9 @@
 CXXFLAGS = -Wall -g -std=c++11 -Wc++11-extensions
 
+all:
+	clean
+	extempore-analysis
+
 extempore-analysis: code-tree.o code-history.o code-diff.o code-graph.o
 	g++ code-tree.o code-history.o code-diff.o code-graph.o -dynamiclib -o code.dylib
 

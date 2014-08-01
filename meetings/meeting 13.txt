@@ -1,0 +1,56 @@
+Meeting 13
+
+THESIS
+-----------
+
+Can the application of visualisations to code aid in the coordination of the mental model of the coder and audience thereby reducing the knowledge gap?
+
+Why does the audience and the coder report such a different experience?
+
+Alternatives:
+-Can the application of visualisations to code aid in the experiential coordination of coder and observer thereby  
+
+LIVENESS
+---------------
+
+We have already conducted a study investigating how an audience responds to what a live coder intends. perhaps investigate why there is such a large gap between what the live coder is interested in and what the external person observes ...
+
+Eg. Ben had very little focus on anything but the code whereas the audience was mesmerised by everything but what the code was intended to do.
+
+Visualisation as a tool for collaboration.
+
+
+Interesting resource for liveness (Liveness - performance in a mediatized culture, phillip auslander)
+
+
+STUDY
+----------
+
+Smaller user study to get more directed feedback.
+Study with around 12 participants (user study or focus group)
+
+
+VISUALISATION
+----------------------
+
+Visualisation prototype demo.
+
+What was taken from the previous study/ interview?
+-Immediacy for actions - taken from responses to previous study.
+-Less intrusive visualisations - dedicating portions of the screen to the intrusive parts of the visualisation. 
+-Avoiding the use of text.
+
+
+INTERVIEW REPORT
+------------------------------
+
+Will have a full analysis of the interview with Ben by the end of the weekend.
+
+
+NOTES
+----------
+
+Goals for the OzCHI short paper:
+-build in drama
+-live coding visualisations that investigate the drama of a live performance
+
