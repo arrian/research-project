@@ -91,6 +91,52 @@ Scene* PolycodeApp::getScene() {
     return scene;
 }
 
+//////////////////////////////////////////////////////
+
+poly_core* poly_core_create(int width, int height)
+{
+	GLFWCore* core = new GLFWCore(width, height);
+	CoreServices::getInstance()->getResourceManager()->addArchive("../resources/default.pak");
+	CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
+	return reinterpret_cast<poly_core*>(core);
+}
+
+void poly_core_update(poly_core* core)
+{
+	reinterpret_cast<Core*>(core)->updateAndRender();
+}
+
+void poly_core_destroy(poly_core* core)
+{
+	delete reinterpret_cast<Core*>(core);
+}
+
+poly_scene* poly_scene_create()
+{
+	Scene* scene = new Scene(Scene::SCENE_2D);
+	//scene->getActiveCamera()->setOrthoSize(width, height);
+	return reinterpret_cast<poly_scene*>(scene);
+}
+
+void poly_scene_destroy(poly_scene* scene)
+{
+	delete reinterpret_cast<Scene*>(scene);
+}
+
+void poly_scene_add_child(poly_scene* scene, poly_entity* entity)
+{
+	reinterpret_cast<Scene*>(scene)->addChild(reinterpret_cast<Entity*>(entity));
+}
+
+poly_scene_image* poly_scene_image_create(char* path)
+{
+	return reinterpret_cast<poly_scene_image*>(new SceneImage(path));
+}
+
+void poly_scene_image_destroy(poly_scene_image* image)
+{
+	delete reinterpret_cast<SceneImage*>(image);
+}
 
 
 

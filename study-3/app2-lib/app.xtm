@@ -8,11 +8,14 @@
 (bind-lib polycode poly_core_update [void,poly_core*]*)
 (bind-lib polycode poly_core_destroy [void,poly_core*]*)
 
+;;entity
+(bind-alias poly_entity i8)
+
 ;;scene
 (bind-alias poly_scene i8)
 (bind-lib polycode poly_scene_create [poly_scene*]*)
 (bind-lib polycode poly_scene_destroy [void,poly_scene*]*)
-(bind-lib polycode poly_scene_add_child [void,poly_scene*]*)
+(bind-lib polycode poly_scene_add_child [void,poly_scene*,poly_entity*]*)
 
 ;;scene image
 (bind-alias poly_scene_image i8)
@@ -21,7 +24,7 @@
 
 ;;scene mesh
 (bind-alias poly_scene_mesh i8)
-(bind-lib polycode poly_scene_mesh_create [poly_scene_mesh*,i8*]*)
+(bind-lib polycode poly_scene_mesh_create [poly_scene_mesh*]*)
 (bind-lib polycode poly_scene_mesh_destroy [void,poly_scene_mesh*]*)
 
 ;;scene label
@@ -29,11 +32,19 @@
 (bind-lib polycode poly_scene_label_create [poly_scene_label*,i8*]*)
 (bind-lib polycode poly_scene_label_destroy [void,poly_scene_label*]*)
 
+;;scene ui input
+(bind-alias poly_ui_input i8)
+(bind-lib polycode poly_ui_input_create [poly_ui_input*,i8*]*)
+(bind-lib polycode poly_ui_input_destroy [void,poly_ui_input*]*)
+
 ;;initialisation
-(bind-val POLY_CORE polycode* 0)
+(bind-val POLY_CORE poly_core* 0)
 
 (bind-func poly_core_init
   (lambda (width height)
       (set! POLY_CORE (poly_core_create width height))))
 
 (poly_core_init 1024 768)
+
+
+
