@@ -6,35 +6,6 @@
 
 using namespace Polycode;
 
-class PolycodeApp {
-public:
-    PolycodeApp(int width, int height);
-    ~PolycodeApp();
-
-    bool update();
-
-    Core* getCore();
-    Scene* getScene();
-
-private:
-	Core* core;
-	Scene* scene;
-};
-
-
-int main(int argc, char* argv[])
-{
-	PolycodeApp* app = new PolycodeApp(640, 480);
-	
-	while(true)
-	{
-		app->update();
-	}
-
-	return 0;
-}
-
-
 extern "C"
 {
 
@@ -50,7 +21,7 @@ extern "C"
 	void poly_core_update(poly_core* core);
 	void poly_core_destroy(poly_core* core);
 
-	poly_scene* poly_scene_create();
+	poly_scene* poly_scene_create(int width, int height);
 	void poly_scene_destroy(poly_scene* scene);
 	void poly_scene_add_child(poly_scene* scene, poly_entity* entity);
 
@@ -74,5 +45,16 @@ extern "C"
 }
 
 
+int main(int argc, char* argv[])
+{
+	poly_core* core = poly_core_create(640, 480);
+	
+	while(true)
+	{
+		poly_core_update(core);
+	}
+
+	return 0;
+}
 
 

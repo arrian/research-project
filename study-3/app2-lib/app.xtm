@@ -13,7 +13,7 @@
 
 ;;scene
 (bind-alias poly_scene i8)
-(bind-lib polycode poly_scene_create [poly_scene*]*)
+(bind-lib polycode poly_scene_create [poly_scene*,i32,i32]*)
 (bind-lib polycode poly_scene_destroy [void,poly_scene*]*)
 (bind-lib polycode poly_scene_add_child [void,poly_scene*,poly_entity*]*)
 
@@ -39,12 +39,33 @@
 
 ;;initialisation
 (bind-val POLY_CORE poly_core* 0)
+(bind-val POLY_SCENE poly_scene* 0)
 
 (bind-func poly_core_init
   (lambda (width height)
-      (set! POLY_CORE (poly_core_create width height))))
+      (set! POLY_CORE (poly_core_create width height))
+      (set! POLY_SCENE (poly_scene_create width height))
+      ))
 
 (poly_core_init 1024 768)
+
+;; Testing
+;;
+;; (bind-func scene_create
+;;   (lambda ()
+;;     (poly_scene_add_child POLY_SCENE (poly_scene_image_create "research-project/resources/gradient.png"))))
+
+;; (scene_create)
+
+;; (bind-func update
+;;   (lambda ()
+;;     (poly_core_update POLY_CORE)
+;;     ))
+
+;; (update)
+
+
+
 
 
 
