@@ -3,6 +3,7 @@
 #include <thread>
 
 #include "PolycodeApp.h"
+#include "PolyUITextInput.h"
 
 // PolycodeApp::PolycodeApp(int width, int height) {
 
@@ -93,10 +94,10 @@
 
 //////////////////////////////////////////////////////
 
-poly_core* poly_core_create(int width, int height)
+poly_core* poly_core_create(char* title, int width, int height, char* resources)
 {
-	GLFWCore* core = new GLFWCore(width, height);
-	CoreServices::getInstance()->getResourceManager()->addArchive("../resources/default.pak");
+	GLFWCore* core = new GLFWCore(title, width, height);
+	CoreServices::getInstance()->getResourceManager()->addArchive(resources);//"../resources/default.pak"
 	CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
 	return reinterpret_cast<poly_core*>(core);
 }
@@ -137,6 +138,30 @@ void poly_scene_image_destroy(poly_scene_image* image)
 {
 	delete reinterpret_cast<SceneImage*>(image);
 }
+
+poly_ui_input* poly_ui_input_create(char* text)
+{
+	std::cout << "created ui input" << std::endl;
+	UIMultilineLabel* input = new UIMultilineLabel(text, 30, 1);
+	return reinterpret_cast<poly_ui_input*>(input);
+}
+
+void poly_ui_input_destroy(poly_ui_input* input)
+{
+	delete reinterpret_cast<UIMultilineLabel*>(input);
+}
+
+poly_scene_label* poly_scene_label_create(char* text, int size)
+{
+	return reinterpret_cast<poly_scene_label*>(new SceneLabel(text, size));
+}
+
+void poly_scene_label_destroy(poly_scene_label* label)
+{
+	delete reinterpret_cast<SceneLabel*>(label);
+}
+
+
 
 
 

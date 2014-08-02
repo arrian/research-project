@@ -39,7 +39,7 @@ class VideoModeChangeInfo {
 class _PolyExport GLFWCore : public Core {		
 public:
 	
-	GLFWCore(int xRes=640, int yRes=480, bool fullScreen=false, bool vSync=false, int aaLevel=0, int anisotropyLevel=0, int frameRate=40, int monitorIndex=-1, bool retinaSupport=false);
+	GLFWCore(String title, int xRes=640, int yRes=480, bool fullScreen=false, bool vSync=false, int aaLevel=0, int anisotropyLevel=0, int frameRate=40, int monitorIndex=-1, bool retinaSupport=false);
 	virtual ~GLFWCore();
 	
 	void enableMouse(bool newval);
@@ -99,3 +99,38 @@ protected:
 	
 	VideoModeChangeInfo modeChangeInfo;
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////
+
+// GLFWwindowposfun 	glfwSetWindowPosCallback (GLFWwindow *window, GLFWwindowposfun cbfun)
+//  	Sets the position callback for the specified window. More...
+ 
+// GLFWwindowsizefun 	glfwSetWindowSizeCallback (GLFWwindow *window, GLFWwindowsizefun cbfun)
+//  	Sets the size callback for the specified window. More...
+ 
+// GLFWwindowclosefun 	glfwSetWindowCloseCallback (GLFWwindow *window, GLFWwindowclosefun cbfun)
+//  	Sets the close callback for the specified window. More...
+ 
+// GLFWwindowrefreshfun 	glfwSetWindowRefreshCallback (GLFWwindow *window, GLFWwindowrefreshfun cbfun)
+//  	Sets the refresh callback for the specified window. More...
+ 
+// GLFWwindowfocusfun 	glfwSetWindowFocusCallback (GLFWwindow *window, GLFWwindowfocusfun cbfun)
+//  	Sets the focus callback for the specified window. More...
+ 
+// GLFWwindowiconifyfun 	glfwSetWindowIconifyCallback (GLFWwindow *window, GLFWwindowiconifyfun cbfun)
+//  	Sets the iconify callback for the specified window. More...
+ 
+// GLFWframebuffersizefun 	glfwSetFramebufferSizeCallback (GLFWwindow *window, GLFWframebuffersizefun cbfun)
+//  	Sets the framebuffer resize callback for the specified window. More...

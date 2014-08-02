@@ -4,45 +4,39 @@
 ;; including code drawing, visual elements drawing and
 ;; all visual effects.
 
-(sys:load "research-project/app.xtm")
+(sys:load "research-project/app2-lib/app.xtm")
 
-;; (bind-val code_visual polycode_scenelabel* 0)
-
-;; (bind-func code_visual_init
-;;   (lambda ()
-;;     (set! code_visual (polycode_add_text poly 0.0 0.0 "loading..." 115))
-;;     ))
-
-;; (code_visual_init)
-
-;; (define WIDTH 1024)
-;; (define HEIGHT 768)
+(define WIDTH 640)
+(define HEIGHT 480)
 ;; (bind-val WIDTH i64 1024)
 ;; (bind-val HEIGHT i64 768)
 
-(app_init)
-(update_code "init" (now))
+(poly_core_init WIDTH HEIGHT)
+
+(bind-func scene_create
+  (lambda ()
+    (poly_scene_add_child POLY_SCENE (poly_scene_image_create "research-project/resources/gradient.png"))
+    (poly_scene_add_child POLY_SCENE (poly_scene_label_create "test text here more text" 30))
+    (poly_scene_add_child POLY_SCENE (poly_ui_input_create "test text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\n"))
+    ))
+    
+(scene_create)
 
 (bind-func draw
-  (let ((code_label (polycode_add_text poly 0.0 0.0 "code..." 115)))
   (lambda ()
-    (printf "--------------\n")
-  	(printf "beginning step\n")
-    (polycode_set_text code_label (string_cstr (get_code)))
-    (app_step)
-    (printf "ending step\n")
-    void)))
+    (poly_core_update POLY_CORE)
+    void))
 
 (define draw-loop
-	(let ((app_init_ret 0))
-  		(lambda (time delta-t)
-  			(draw)
-    		(callback (+ time (* *second* delta-t) 0.5)
-                  'draw-loop
-                  (+ time (* *second* delta-t)) 
-                  delta-t))))
+  (lambda (time delta-t)
+    (draw)
+    (callback (+ time (* *second* delta-t) 0.5)
+              'draw-loop
+              (+ time (* *second* delta-t)) 
+              delta-t)))
 
 (draw-loop (now) 1/10)
+
 
 ;; Draws the code fitting it into the given width and height.
 ;; (bind-func draw_code
