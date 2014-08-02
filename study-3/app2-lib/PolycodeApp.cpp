@@ -16,7 +16,7 @@ PolycodeApp::PolycodeApp(int width, int height) {
 	std::cout << "creating polycode scene" << std::endl;
 	scene = new Scene(Scene::SCENE_2D);
 
-	std::cout << CoreServices::getInstance()->getRenderer()->getBackingResolutionScaleX() << std::endl;
+	// std::cout << CoreServices::getInstance()->getRenderer()->getBackingResolutionScaleX() << std::endl;
 
 	std::cout << "setting camera size" << std::endl;
 	scene->getActiveCamera()->setOrthoSize(width, height);

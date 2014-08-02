@@ -28,7 +28,6 @@ int main(int argc, char* argv[])
 	
 	while(true)
 	{
-		// std::cout << "updating" << std::endl;
 		app->update();
 	}
 
