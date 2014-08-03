@@ -1,14 +1,15 @@
 #pragma once
 
+#include <string>
 #include "queue.h"
 
 
 struct Event
 {
   int time;
-  char* address;
-  char* type;
-  void* data;
+  std::string address;
+  std::string type;
+  char* data;
 };
 
 extern "C" 
@@ -19,7 +20,7 @@ extern "C"
   eventqueue* eventqueue_create();
   void eventqueue_destroy(eventqueue* eq);
 
-  event* event_create(int time, char* address, char* type, void* data);
+  event* event_create(int time, char* address, char* type, const char* data);
   void event_destroy(event* e);
 
   void eventqueue_push(eventqueue* eq, event* e);
@@ -27,8 +28,8 @@ extern "C"
   int eventqueue_size(eventqueue* eq);
 
   int event_get_time(event* e);
-  char* event_get_address(event* e);
-  char* event_get_type(event* e);
-  void* event_get_data(event* e);
+  const char* event_get_address(event* e);
+  const char* event_get_type(event* e);
+  char* event_get_data(event* e);
 }
 

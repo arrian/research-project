@@ -2,7 +2,7 @@
 ;;
 ;; Main entry point for study 3.
 
-(define *study-3-dir* "research-project/study-3-modules/visualisation-core")
+(define *study-3-dir* "research-project/visualisation-core")
 
 (sys:load (string-append *study-3-dir* "/event-manager.xtm"))
 (sys:load (string-append *study-3-dir* "/timing-manager.xtm"))
