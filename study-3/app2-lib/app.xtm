@@ -1,5 +1,5 @@
 
-(define polycode (sys:open-dylib "/Users/Arrian/Dev/research-project/study-3/app2-lib/bin/app.dylib"))
+(define polycode (sys:open-dylib "research-project/app2-lib/bin/app.dylib"))
 
 ;;core
 (bind-alias poly_core i8)

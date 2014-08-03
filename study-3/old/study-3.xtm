@@ -2,17 +2,6 @@
 ;; (sys:load "research-project/app.xtm")
 ;; (sys:load "research-project/code.xtm")
 
-;; (define func-name
-;; 	(let ((x 2))
-;; 	(lambda (test)
-;; 		x
-;; 		42
-;; 		)))
-
-;; (get-closure-code func-name)
-;; (get-eldoc-string func-name)
-
-
 ;;Examples
 
 ;; (bind-func test_codetree
@@ -402,13 +391,20 @@
 
 ;; ;; Code Introspection Stuff
 
-;; ;; (define func-name
-;; ;; 	(let ((x 2))
-;; ;; 	(lambda (test)
-;; ;; 		x
-;; ;; 		42
-;; ;; 		)))
+;; (bind-func test-func
+;;   (lambda ()
+;;   	(43)
+;;   	void
+;;     ))
 
-;; ;; (get-closure-code func-name)
-;; ;; (get-eldoc-string func-name)
+;; (define func-name
+;; 	(let ((x 2))
+;; 	(lambda (test)
+;; 		x
+;; 		42
+;; 		)))
 
+;; (get-closure-code func-name)
+;; (get-eldoc-string func-name)
+
+;; (get-eldoc-string test-func)

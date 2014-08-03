@@ -3,7 +3,8 @@
 ;; This manager handles all source code management including active code, 
 ;; currently edited code and the relationship between these two code states.
 
-(sys:load (string-append *study-3-dir* "/code-cache.xtm"))
+
+(sys:load "research-project/visualisation-core/code-cache.xtm")
 
 ;; Defines the time to cache code changes.
 (bind-val CACHE_TIME i64 100000)
