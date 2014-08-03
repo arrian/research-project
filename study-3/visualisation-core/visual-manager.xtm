@@ -27,15 +27,15 @@
     (poly_core_update POLY_CORE)
     void))
 
-(define draw-loop
-  (lambda (time delta-t)
-    (draw)
-    (callback (+ time (* *second* delta-t) 0.5)
-              'draw-loop
-              (+ time (* *second* delta-t)) 
-              delta-t)))
+;; (define draw-loop
+;;   (lambda (time delta-t)
+;;     (draw)
+;;     (callback (+ time (* *second* delta-t) 0.5)
+;;               'draw-loop
+;;               (+ time (* *second* delta-t)) 
+;;               delta-t)))
 
-(draw-loop (now) 1/10)
+;; (draw-loop (now) 1/10)
 
 
 ;; Draws the code fitting it into the given width and height.

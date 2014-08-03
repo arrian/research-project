@@ -45,6 +45,5 @@ extern "C" {
 	void codehistory_get_code_previous(codehistory* history);
 
 	void codehistory_print(codehistory* history);
+
 }
-
-

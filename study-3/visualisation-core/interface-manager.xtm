@@ -2,34 +2,20 @@
 ;;
 ;; This manager handles all interfacing between Extempore and the source code editor.
 
-;; (sys:load "research-project/app.xtm")
-;; (app_init)
-;; (app_step)
+(sys:load "research-project/code-lib/code.xtm")
 
+(bind-val EVENT_QUEUE eventqueue* 0)
 
-;; (bind-val code_visual polycode_scenelabel* 0)
+(bind-func eventqueue_init
+  (lambda ()
+  		(set! EVENT_QUEUE (eventqueue_create))))
 
-;; (bind-func code_visual_init
-;;   (lambda ()
-;;   	(set! code_visual (polycode_add_text poly 0.0 0.0 "loading..." 115))
-;;     ))
-
-;; (code_visual_init)
-
-;; (bind-func test_init_code_visual
-;;   (lambda ()
-;;   	(polycode_set_text code_visual "teasdfst")
-;;   	(code_visual)
-;;     ))
-
-;; (test_init_code_visual)
-
-;; (app_step)
-
+(eventqueue_init)
 
 ;; Handles the /interface/selection address.
 (bind-func handle_selection
   (lambda (args:i32*)
+  	;; (printf "%s\n" args)
   	(let ((i:i32 0))
 	  	(printf "selection ")
 	  	(dotimes (i (unswap32i (pref args 0)))
@@ -38,23 +24,21 @@
 	void
 	))
 
-;; (sys:load "research-project/code.xtm")
-
-;; (bind-val test_string i8* "success")
-
 ;; Handles the /interface/code address.
 (bind-func handle_code
   (lambda (args:i8*)
+  	;; (printf "code %.80s...\n" args)
   	;;(pref args 0)
   	;; (polycode_set_text code_visual "test_string")
   	;; (app_step)
-  	(update_code args (now))
+  	;;(update_code args (now))
   	;; (test_init_code_visual)
   	;; (test_init_code_visual)
   	void))
   	
 	;;(printf "code %.80s...\n" args)
 	
+
 
 ;; Handles the /interface/keyboard address.
 (bind-func handle_keyboard
@@ -68,52 +52,47 @@
 	void
 	))
 
-;; handle evaluate?
-;; other events? 
-
-;; OSC receive function. Handles routing of addresses.
-(bind-func receive
-  (lambda (address:i8* types:i8* args:i8*)
-    (let ((data (bitcast args i32*)))
-    	;; (printf "%s\n" types)
+(bind-func handle_event
+  (lambda (e:event*)
+  	(let ((data (bitcast (event_get_data e) i32*))
+  		  (address (event_get_address e)))
+    	(printf "handling %p\n" (event_get_data e))
 		(cond ((= (strcmp address "/interface/selection") 0) (handle_selection data))
-			((= (strcmp address "/interface/code") 0) (handle_code args))
+			((= (strcmp address "/interface/code") 0) (handle_code (event_get_data e)))
 			((= (strcmp address "/interface/keyboard") 0) (handle_keyboard data))
 			((= (strcmp address "/interface/error") 0) (handle_error data))
 			(else void))
-		(printf "%s\n" address)
+		;; (printf "%s\n" address)
       	void)))
+
+;; Handles routing of addresses for messages in the queue.
+(bind-func handle_events
+  (lambda ()
+	(let ((x (eventqueue_size EVENT_QUEUE));; limit handling to the current size of the queue
+		  (i 0))
+		(printf "handling %d events\n" x)
+		(dotimes (i x)
+			(handle_event (eventqueue_pop EVENT_QUEUE)))
+		void)))
+
+;; OSC receive function. Stores messages in a queue to be accessed by the main thread.
+(bind-func receive
+  (lambda (address:i8* types:i8* args:i8*)
+  	(printf "received %s\n" types)
+  	(let ((e:event* (event_create (now) address types args)))
+  		(eventqueue_push EVENT_QUEUE e))
+  	void))
 
 ;; OSC start the receive server.
 (io:osc:start-server 9880 "receive" (llvm:get-native-function "receive"))
 
+(handle_events)
 
 
 
 
 ;; current thread: 477732107089896007, current pid: 46621
 ;; current thread: 11686591936744189465, current pid: 46621
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -11,7 +11,16 @@
 (sys:load (string-append *study-3-dir* "/interface-manager.xtm"))
 
 
+(define update-loop
+  (lambda (time delta-t)
+  	(handle_events)
+    (draw)
+    (callback (+ time (* *second* delta-t) 0.5)
+              'update-loop
+              (+ time (* *second* delta-t)) 
+              delta-t)))
 
+(update-loop (now) 1/10)
 
 
 

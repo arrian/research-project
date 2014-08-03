@@ -1,4 +1,4 @@
-(define code (sys:open-dylib "research-project/code.dylib"))
+(define code (sys:open-dylib "research-project/code-lib/bin/code.dylib"))
 
 ;;Types
 
@@ -58,4 +58,22 @@
 (bind-lib code codegraph_print [void,codegraph*]*)
 
 
+;; Event Queue
+(bind-alias event i8)
+(bind-alias eventqueue i8)
+
+(bind-lib code eventqueue_create [eventqueue*]*)
+(bind-lib code eventqueue_destroy [void,eventqueue*]*)
+
+(bind-lib code event_create [event*,i64,i8*,i8*,i8*]*)
+(bind-lib code event_destroy [void,event*]*)
+
+(bind-lib code eventqueue_push [void,eventqueue*,event*]*)
+(bind-lib code eventqueue_pop [event*,eventqueue*]*)
+(bind-lib code eventqueue_size [i64,eventqueue*]*)
+
+(bind-lib code event_get_time [i64,event*]*)
+(bind-lib code event_get_address [i8*,event*]*)
+(bind-lib code event_get_type [i8*,event*]*)
+(bind-lib code event_get_data [i8*,event*]*)
 

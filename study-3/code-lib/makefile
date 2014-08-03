@@ -4,11 +4,11 @@ all:
 	$(MAKE) clean
 	$(MAKE) code-lib
 
-code-lib: bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o
-	g++ bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o -dynamiclib -o bin/code.dylib
+code-lib: bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o bin/event-queue.o
+	g++ bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o bin/event-queue.o -dynamiclib -o bin/code.dylib
 
-test: bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o bin/main.o
-	g++ bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o bin/main.o -o bin/code-test
+test: bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o bin/event-queue.o bin/main.o
+	g++ bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o bin/event-queue.o bin/main.o -o bin/code-test
 	./bin/code-test
 
 bin/main.o:
@@ -25,6 +25,9 @@ bin/code-diff.o:
 
 bin/code-graph.o:
 	g++ $(CXXFLAGS) -c -o bin/code-graph.o code-graph.cpp
+
+bin/event-queue.o:
+	g++ $(CXXFLAGS) -c -o bin/event-queue.o event-queue.cpp
 
 clean:
 	rm -f ./bin/*.o
