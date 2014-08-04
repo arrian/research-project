@@ -19,7 +19,7 @@
     (poly_scene_add_child POLY_SCENE (poly_scene_label_create "test text here more text" 30))
     (poly_scene_add_child POLY_SCENE (poly_ui_input_create "test text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\n"))
     ))
-    
+
 (scene_create)
 
 (bind-func draw

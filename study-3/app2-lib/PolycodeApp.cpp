@@ -161,6 +161,25 @@ void poly_scene_label_destroy(poly_scene_label* label)
 	delete reinterpret_cast<SceneLabel*>(label);
 }
 
+void poly_scene_label_set_text(poly_scene_label* label, char* text)
+{
+	reinterpret_cast<SceneLabel*>(label)->setText(text);
+}
+
+poly_scene_primitive* poly_scene_primitive_create_cube(float xSize, float ySize, float zSize)
+{
+	return reinterpret_cast<poly_scene_primitive*>(new ScenePrimitive(0, xSize, ySize, zSize));
+}
+
+poly_scene_primitive* poly_scene_primitive_create_circle(float xSize, float ySize, float segments)
+{
+	return reinterpret_cast<poly_scene_primitive*>(new ScenePrimitive(8, xSize, ySize, segments));
+}
+
+void poly_scene_primitive_destroy(poly_scene_primitive* primitive)
+{
+	delete reinterpret_cast<ScenePrimitive*>(primitive);
+}
 
 
 

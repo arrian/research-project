@@ -8,6 +8,10 @@
 (sys:load (string-append *study-3-dir* "/timing-manager.xtm"))
 (sys:load (string-append *study-3-dir* "/code-manager.xtm"))
 (sys:load (string-append *study-3-dir* "/visual-manager.xtm"))
+
+
+(sys:load (string-append *study-3-dir* "/widget.xtm"))
+
 (sys:load (string-append *study-3-dir* "/interface-manager.xtm"))
 
 
@@ -21,6 +25,11 @@
               delta-t)))
 
 (update-loop (now) 1/10)
+
+
+(widget_list_add "name" "code" 0 (now))
+
+
 
 
 

@@ -8,48 +8,60 @@
 (bind-type Widget <String*,String*,i8*,i64,i64>)
 
 (bind-func widget_get_name
-  (lambda (cbw:Widget*)
-    (tref cbw 0)))
+  (lambda (w:Widget*)
+    (tref w 0)))
 
 (bind-func widget_set_name
-  (lambda (cbw:Widget* name:String*)
-    (tset! cbw 0 name)))
+  (lambda (w:Widget* name:String*)
+    (tset! w 0 name)))
 
 (bind-func widget_get_code
-  (lambda (cbw:Widget*)
-    (tref cbw 1)))
+  (lambda (w:Widget*)
+    (tref w 1)))
 
 (bind-func widget_set_code
-  (lambda (cbw:Widget* code:String*)
-    (tset! cbw 1 code)))
+  (lambda (w:Widget* code:String*)
+    (tset! w 1 code)))
 
 (bind-func widget_get_graph
-  (lambda (cbw:Widget*)
-    (tref cbw 2)))
+  (lambda (w:Widget*)
+    (tref w 2)))
 
 (bind-func widget_set_graph
-  (lambda (cbw:Widget* graph:i8*)
-    (tset! cbw 2 graph)))
+  (lambda (w:Widget* graph:i8*)
+    (tset! w 2 graph)))
 
 (bind-func widget_get_next_time
-  (lambda (cbw:Widget*)
-    (tref cbw 3)))
+  (lambda (w:Widget*)
+    (tref w 3)))
 
 (bind-func widget_set_next_time
-  (lambda (cbw:Widget* time:i64)
-    (tset! cbw 3 time)))
+  (lambda (w:Widget* time:i64)
+    (tset! w 3 time)))
 
 (bind-func widget_get_initial_time
-  (lambda (cbw:Widget*)
-    (tref cbw 4)))
+  (lambda (w:Widget*)
+    (tref w 4)))
 
 (bind-func widget_set_intial_time
-  (lambda (cbw:Widget* time:i64)
-    (tset! cbw 4 time)))
+  (lambda (w:Widget* time:i64)
+    (tset! w 4 time)))
 
 ;; Update the widget for the inactive state (eg. code editing, coder cursor selection, errors during compilation)
 (bind-func widget_update_inactive
-  (lambda (w:Widget*)
+  (lambda (w:Widget* code:i8*)
+    (widget_set_code w (Str code))
+
+
+    ;; temp label stuff. TODO: remove
+    (if (null? (widget_get_graph w)) (let ((label (poly_scene_label_create (string_cstr (widget_get_code w)) 30))
+      (cube (poly_scene_primitive_create_cube 20.0 2.0 1.0)))
+        (poly_scene_add_child POLY_SCENE cube)
+        (poly_scene_add_child POLY_SCENE label)
+        (widget_set_graph w label)
+      ))
+
+
     (println "name:" (widget_get_name w) "code:" (widget_get_code w))
     0))
 
@@ -91,7 +103,7 @@
 
 (bind-func widget_list_update_inactive
   (lambda (code:i8*)
-    (map (lambda (w) (widget_update_inactive w)) WIDGET_LIST)
+    (map (lambda (w) (widget_update_inactive w code)) WIDGET_LIST)
     void))
 
 (widget_list_update_inactive "(bind-val WIDGET_LIST List:<Widget*,List*>*)" 1.0)
@@ -107,7 +119,7 @@
 
 ;; Testing
 
-(widget_list_add (random (list "test1" "test2" "test3" "test4" "test5" "test6" "test7")) (random (list "(test1)" "(test2)" "(test3)" "(test4)" "(test5)" "(test6)" "(test7)")) (random 100 200) (random 0 100))
+;; (widget_list_add (random (list "test1" "test2" "test3" "test4" "test5" "test6" "test7")) (random (list "(test1)" "(test2)" "(test3)" "(test4)" "(test5)" "(test6)" "(test7)")) (random 100 200) (random 0 100))
 
 
 

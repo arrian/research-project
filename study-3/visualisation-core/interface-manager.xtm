@@ -27,6 +27,7 @@
 (bind-func handle_code
   (lambda (args:i8*)
   	(printf "code %.80s...\n" args)
+  	(widget_list_update_inactive args)
   	;;(pref args 0)
   	;; (polycode_set_text code_visual "test_string")
   	;; (app_step)

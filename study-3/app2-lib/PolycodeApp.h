@@ -13,6 +13,7 @@ extern "C"
 	struct poly_scene;
 	struct poly_scene_image;
 	struct poly_scene_mesh;
+	struct poly_scene_primitive;
 	struct poly_scene_label;
 	struct poly_ui_input;
 
@@ -32,6 +33,11 @@ extern "C"
 
 	poly_scene_label* poly_scene_label_create(char* text, int size);
 	void poly_scene_label_destroy(poly_scene_label* label);
+	void poly_scene_label_set_text(poly_scene_label* label, char* text);
+	
+	poly_scene_primitive* poly_scene_primitive_create_cube(float xSize, float ySize, float zSize);
+	poly_scene_primitive* poly_scene_primitive_create_circle(float xSize, float ySize, float segments);
+	void poly_scene_primitive_destroy(poly_scene_primitive* primitive);
 	
 // ;;scene mesh
 // (bind-alias poly_scene_mesh i8)
