@@ -25,7 +25,11 @@ public:
 
 	void addChild(CodeTree* code);
 	
-	bool isMatch(CodeTree* code);
+	bool isShallowMatch(CodeTree* code);
+	bool isDeepMatch(CodeTree* code);
+
+	//bool isSubset(CodeTree* );
+	//bool isSuperset(CodeTree* );
 
 	//frame size
 	float width;

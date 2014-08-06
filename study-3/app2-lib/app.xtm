@@ -23,9 +23,10 @@
 (bind-lib polycode poly_scene_image_destroy [void,poly_scene_image*]*)
 
 ;;scene ui input
-(bind-alias poly_ui_input i8)
-(bind-lib polycode poly_ui_input_create [poly_ui_input*,i8*]*)
-(bind-lib polycode poly_ui_input_destroy [void,poly_ui_input*]*)
+(bind-alias poly_scene_multi_label i8)
+(bind-lib polycode poly_scene_multi_label_create [poly_scene_multi_label*,i8*,i32]*)
+(bind-lib polycode poly_scene_multi_label_destroy [void,poly_scene_multi_label*]*)
+(bind-lib polycode poly_scene_multi_label_set_text [void,poly_scene_multi_label*,i8*]*)
 
 ;;scene label
 (bind-alias poly_scene_label i8)
@@ -36,7 +37,7 @@
 ;;scene primitive
 (bind-alias poly_scene_primitive i8)
 (bind-lib polycode poly_scene_primitive_create_cube [poly_scene_primitive*,float,float,float]*);;x size, y size, z size
-(bind-lib polycode poly_scene_primitive_create_circle [poly_scene_primitive*,float,float,float]*);;x size, y size, segments
+(bind-lib polycode poly_scene_primitive_create_circle [poly_scene_primitive*,float,float,i32]*);;x size, y size, segments
 (bind-lib polycode poly_scene_primitive_destroy [void,poly_scene_primitive*]*)
 
 

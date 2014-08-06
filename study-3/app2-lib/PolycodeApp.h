@@ -3,6 +3,7 @@
 #include <iostream>
 #include <Polycode.h>
 #include "PolyGLFWCore.h"
+#include "PolySceneMultiLabel.h"
 
 using namespace Polycode;
 
@@ -15,7 +16,7 @@ extern "C"
 	struct poly_scene_mesh;
 	struct poly_scene_primitive;
 	struct poly_scene_label;
-	struct poly_ui_input;
+	struct poly_scene_multi_label;
 
 	poly_core* poly_core_create(char* title, int width, int height, char* resources);
 	void poly_core_update(poly_core* core);
@@ -28,15 +29,16 @@ extern "C"
 	poly_scene_image* poly_scene_image_create(char* path);
 	void poly_scene_image_destroy(poly_scene_image* image);
 
-	poly_ui_input* poly_ui_input_create(char* text);
-	void poly_ui_input_destroy(poly_ui_input* input);
+	poly_scene_multi_label* poly_scene_multi_label_create(char* text, int size);
+	void poly_scene_multi_label_destroy(poly_scene_multi_label* input);
+	void poly_scene_multi_label_set_text(poly_scene_multi_label* label, char* text);
 
 	poly_scene_label* poly_scene_label_create(char* text, int size);
 	void poly_scene_label_destroy(poly_scene_label* label);
 	void poly_scene_label_set_text(poly_scene_label* label, char* text);
 	
 	poly_scene_primitive* poly_scene_primitive_create_cube(float xSize, float ySize, float zSize);
-	poly_scene_primitive* poly_scene_primitive_create_circle(float xSize, float ySize, float segments);
+	poly_scene_primitive* poly_scene_primitive_create_circle(float xSize, float ySize, int segments);
 	void poly_scene_primitive_destroy(poly_scene_primitive* primitive);
 	
 // ;;scene mesh
@@ -54,13 +56,18 @@ int main(int argc, char* argv[])
 	poly_core* core = poly_core_create("Test Window", width, height, "../resources/default.pak");
 	poly_scene* scene = poly_scene_create(width, height);
 
-	poly_scene_add_child(scene, (poly_entity*) poly_scene_label_create("test text", 30));
+	poly_scene_multi_label* label = poly_scene_multi_label_create("test text\nnext line here\nanother line\n\na line after an empty line", 20);
+
+	//poly_scene_add_child(scene, (poly_entity*) poly_scene_label_create("test text", 30));
 	//poly_scene_add_child(scene, (poly_entity*) poly_scene_image_create("../resources/gradient.png"));
-	poly_scene_add_child(scene, (poly_entity*) poly_ui_input_create("test text\nnext line here"));
+	poly_scene_add_child(scene, (poly_entity*) label);
+
+	//poly_scene_add_child(scene, (poly_entity*) poly_scene_primitive_create_cube(30.0, 30.0, 20.0));
 
 	while(true)
 	{
 		poly_core_update(core);
+		poly_scene_multi_label_set_text(label, "1 fa flsdjklsadf ;sjlkadf asljdf jklasdf  here\n2 multiple linenew textasdkfljasd;lfdks fa flsdjklsadf ;sjlkadf asljdf jklasdf jklasdf s\n3 new tnew textasdkfljasd;lfdks fa flsdjklsadf ;sjlkadf asljdf jklasdf new textasdkfljasd;lfdks fa here\n4 multiple lines\n5 new text here\n6 multiple lines\n7 new text here\n8 multiple lines\n9 new text here\n10 multiple lines\n");
 	}
 
 	return 0;

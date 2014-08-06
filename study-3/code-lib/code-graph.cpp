@@ -79,11 +79,16 @@ void CodeGraph::update(CodeTree* code)
 	}
 }
 
-bool CodeGraph::isMatch(CodeTree* code)
+bool CodeGraph::isShallowMatch(CodeTree* code)
 {
 	// std::cout << "MATCH" << std::endl;
 	// std::cout << code->code << std::endl << "------------- vs -------------" << std::endl << this->code << std::endl;
 	return code->code == this->code;//change to approximately equals
+}
+
+bool CodeGraph::isDeepMatch(CodeTree* code)
+{
+
 }
 
 void CodeGraph::cool()

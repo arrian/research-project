@@ -1,9 +1,25 @@
 #include "PolyGLFWCore.h"
 
+void glfwErrorCallback(int code, const char* message)
+{
+	std::cout << "------glfw error " << code << ": " << message << std::endl;
+}
+
+void glErrorCallback(GLenum source,
+					 GLenum type,
+					 GLuint id,
+					 GLenum severity,
+					 GLsizei length,
+					 const GLchar* message,
+					 void* userParam)
+{
+	std::cout << "------gl error " << id << ": " << message << std::endl;
+}
+
 GLFWCore::GLFWCore(String title, int xRes, int yRes, bool fullScreen, bool vSync, int aaLevel, int anisotropyLevel, int frameRate, int monitorIndex, bool retinaSupport)
 	: Core(xRes, yRes, fullScreen, vSync, aaLevel, anisotropyLevel, frameRate, monitorIndex)
 {
-	//glfwSetErrorCallback(error_callback);
+	glfwSetErrorCallback(glfwErrorCallback);
     if (!glfwInit()) throw std::runtime_error("failed to init glfw");
     window = glfwCreateWindow(xRes, yRes, title.getSTLString().c_str(), NULL, NULL);
     if (!window)
@@ -24,6 +40,7 @@ GLFWCore::GLFWCore(String title, int xRes, int yRes, bool fullScreen, bool vSync
 
 	renderer->Init();
     //glfwSetKeyCallback(window, key_callback);
+    //glDebugMessageCallback(glErrorCallback, NULL);
 
     CoreServices::getInstance()->installModule(new GLSLShaderModule());	
 }

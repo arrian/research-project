@@ -4,8 +4,8 @@
 
 (define *study-3-dir* "research-project/visualisation-core")
 
-(sys:load (string-append *study-3-dir* "/event-manager.xtm"))
-(sys:load (string-append *study-3-dir* "/timing-manager.xtm"))
+;; (sys:load (string-append *study-3-dir* "/event-manager.xtm"))
+;; (sys:load (string-append *study-3-dir* "/timing-manager.xtm"))
 (sys:load (string-append *study-3-dir* "/code-manager.xtm"))
 (sys:load (string-append *study-3-dir* "/visual-manager.xtm"))
 
@@ -28,9 +28,6 @@
 
 
 (widget_list_add "name" "code" 0 (now))
-
-
-
 
 
 

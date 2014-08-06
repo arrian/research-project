@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <cstddef>
 #include <fstream>
 #include <streambuf>
@@ -10,7 +11,7 @@
 #include <stack>
 #include <locale>
 
-#include "code-diff.h"
+//#include "code-diff.h"
 
 /**
  * What should this code be classified as.
@@ -44,13 +45,13 @@ public:
 	CodeType type;
 	std::string code;
 	bool isActive;
-	CodeDiff* diff;
+	//CodeDiff* diff;
 	StringList tokens;
 
 	CodeForest children;
 
 	CodeTree(std::string code, CodeType type);//construct using ROOT
-	CodeTree(CodeDiff* code);
+	//CodeTree(CodeDiff* code);
 
 	~CodeTree();
 

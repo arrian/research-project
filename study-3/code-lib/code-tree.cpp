@@ -17,14 +17,14 @@ CodeTree::CodeTree(std::string code)
 	type = getType();
 }
 
-CodeTree::CodeTree(CodeDiff* diff)
-  : code(diff->newCode),
-    diff(diff),
-    tokens(tokenise(diff->newCode)),
-    type(UNKNOWN)
-{ 
-	parse();
-}
+// CodeTree::CodeTree(CodeDiff* diff)
+//   : code(diff->newCode),
+//     diff(diff),
+//     tokens(tokenise(diff->newCode)),
+//     type(UNKNOWN)
+// { 
+// 	parse();
+// }
 
 CodeTree::CodeTree(StringList tokens)
   : tokens(tokens),

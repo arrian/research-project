@@ -54,13 +54,13 @@
 
 
     ;; temp label stuff. TODO: remove
-    (if (null? (widget_get_graph w)) (let ((label (poly_scene_label_create (string_cstr (widget_get_code w)) 30))
-      (cube (poly_scene_primitive_create_cube 20.0 2.0 1.0)))
-        (poly_scene_add_child POLY_SCENE cube)
-        (poly_scene_add_child POLY_SCENE label)
-        (widget_set_graph w label)
-      ))
-
+    ;; (if (null? (widget_get_graph w)) (let ((label (poly_scene_multi_label_create (string_cstr (widget_get_code w)) 20))
+    ;;   (circle (poly_scene_primitive_create_circle 20.0 20.0 10)))
+    ;;     (poly_scene_add_child POLY_SCENE circle)
+    ;;     (poly_scene_add_child POLY_SCENE label)
+    ;;     (widget_set_graph w label)
+    ;;   ))
+    ;;(poly_scene_multi_label_set_text (widget_get_graph w) (string_cstr (widget_get_code w)))
 
     (println "name:" (widget_get_name w) "code:" (widget_get_code w))
     0))
