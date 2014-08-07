@@ -3,9 +3,6 @@
 ;; This manager handles all source code management including active code, 
 ;; currently edited code and the relationship between these two code states.
 
-
-(sys:load "research-project/visualisation-core/code-cache.xtm")
-
 ;; Defines the time to cache code changes.
 (bind-val CACHE_TIME i64 100000)
 
@@ -37,6 +34,15 @@
 	void))
 
 
+;;;;;;;;;;;;
+
+(bind-val CODE_MANAGER code_manager* 0)
+
+(bind-func code_manager_init
+  (lambda ()
+      (set! CODE_MANAGER (code_manager_create ""))))
+
+(code_manager_init)
 
 
 

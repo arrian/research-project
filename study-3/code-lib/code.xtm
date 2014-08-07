@@ -2,60 +2,60 @@
 
 ;;Types
 
-(bind-alias codetree i8)
-(bind-alias codeforest i8)
-(bind-alias codegraph i8)
+;; (bind-alias codetree i8)
+;; (bind-alias codeforest i8)
+;; (bind-alias codegraph i8)
 
-;;Code Tree Bindings
+;; ;;Code Tree Bindings
 
-(bind-lib code codetree_create [codetree*,i8*]*)
-(bind-lib code codetree_destroy [void,codetree*]*)
+;; (bind-lib code codetree_create [codetree*,i8*]*)
+;; (bind-lib code codetree_destroy [void,codetree*]*)
 
-(bind-lib code codetree_get_children_count [i32,codetree*]*)
-(bind-lib code codetree_get_child [codetree*,codetree*,i32]*)
-(bind-lib code codetree_get_children [codeforest*,codetree*]*)
-(bind-lib code codetree_get_tag [i8*,codetree*]*)
-(bind-lib code codetree_get_type [i32,codetree*]*)
-(bind-lib code codetree_get_code [i8*,codetree*]*)
-(bind-lib code codetree_is_active [i1,codetree*]*)
+;; (bind-lib code codetree_get_children_count [i32,codetree*]*)
+;; (bind-lib code codetree_get_child [codetree*,codetree*,i32]*)
+;; (bind-lib code codetree_get_children [codeforest*,codetree*]*)
+;; (bind-lib code codetree_get_tag [i8*,codetree*]*)
+;; (bind-lib code codetree_get_type [i32,codetree*]*)
+;; (bind-lib code codetree_get_code [i8*,codetree*]*)
+;; (bind-lib code codetree_is_active [i1,codetree*]*)
 
-(bind-lib code codetree_find [codetree*,codetree*,i8*]*)
-;;(bind-lib code codetree_find_all [codeforest*,codetree*,i8*]*)
+;; (bind-lib code codetree_find [codetree*,codetree*,i8*]*)
+;; ;;(bind-lib code codetree_find_all [codeforest*,codetree*,i8*]*)
 
-(bind-lib code codetree_print [void,codetree*]*)
-(bind-lib code codetree_print_top_level [void,codetree*]*)
+;; (bind-lib code codetree_print [void,codetree*]*)
+;; (bind-lib code codetree_print_top_level [void,codetree*]*)
 
-(bind-lib code codeforest_count [i32,codeforest*]*)
-(bind-lib code codeforest_get [i32,codeforest*]*)
-(bind-lib code codeforest_print [void,codeforest*]*)
+;; (bind-lib code codeforest_count [i32,codeforest*]*)
+;; (bind-lib code codeforest_get [i32,codeforest*]*)
+;; (bind-lib code codeforest_print [void,codeforest*]*)
 
-;;Code Force Graph Bindings
+;; ;;Code Force Graph Bindings
 
-(bind-lib code codegraph_create [codegraph*,codetree*]*)
-(bind-lib code codegraph_destroy [void,codegraph*]*)
+;; (bind-lib code codegraph_create [codegraph*,codetree*]*)
+;; (bind-lib code codegraph_destroy [void,codegraph*]*)
 
-(bind-lib code codegraph_add_child [void,codegraph*,codetree*]*)
+;; (bind-lib code codegraph_add_child [void,codegraph*,codetree*]*)
 
-(bind-lib code codegraph_update [void,codegraph*,codetree*]*)
-(bind-lib code codegraph_step [void,codegraph*,float]*)
+;; (bind-lib code codegraph_update [void,codegraph*,codetree*]*)
+;; (bind-lib code codegraph_step [void,codegraph*,float]*)
 
-(bind-lib code codegraph_get_x [float,codegraph*]*)
-(bind-lib code codegraph_get_y [float,codegraph*]*)
-(bind-lib code codegraph_get_size [float,codegraph*]*)
+;; (bind-lib code codegraph_get_x [float,codegraph*]*)
+;; (bind-lib code codegraph_get_y [float,codegraph*]*)
+;; (bind-lib code codegraph_get_size [float,codegraph*]*)
 
-(bind-lib code codegraph_get_tag [i8*,codegraph*]*)
-(bind-lib code codegraph_get_type [i32,codegraph*]*)
-(bind-lib code codegraph_get_code [i8*,codegraph*]*)
+;; (bind-lib code codegraph_get_tag [i8*,codegraph*]*)
+;; (bind-lib code codegraph_get_type [i32,codegraph*]*)
+;; (bind-lib code codegraph_get_code [i8*,codegraph*]*)
 
-(bind-lib code codegraph_get_time_added [i32,codegraph*]*)
-(bind-lib code codegraph_get_time_activated [i32,codegraph*]*)
-;; (bind-lib code codegraph_get_is_active [i64,codegraph*]*)
+;; (bind-lib code codegraph_get_time_added [i32,codegraph*]*)
+;; (bind-lib code codegraph_get_time_activated [i32,codegraph*]*)
+;; ;; (bind-lib code codegraph_get_is_active [i64,codegraph*]*)
 
-(bind-lib code codegraph_get_child_count [i32,codegraph*]*)
-(bind-lib code codegraph_get_child [codegraph*,codegraph*,i32]*)
-;;(bind-lib code codegraph_get_code [codetree*,codegraph*]*)
+;; (bind-lib code codegraph_get_child_count [i32,codegraph*]*)
+;; (bind-lib code codegraph_get_child [codegraph*,codegraph*,i32]*)
+;; ;;(bind-lib code codegraph_get_code [codetree*,codegraph*]*)
 
-(bind-lib code codegraph_print [void,codegraph*]*)
+;; (bind-lib code codegraph_print [void,codegraph*]*)
 
 
 ;; Event Queue
@@ -76,4 +76,33 @@
 (bind-lib code event_get_address [i8*,event*]*)
 (bind-lib code event_get_type [i8*,event*]*)
 (bind-lib code event_get_data [i8*,event*]*)
+
+;; Simple Graph
+(bind-alias code_manager i8)
+(bind-alias code_graph i8)
+(bind-alias code_element i8)
+
+(bind-lib code code_manager_create [code_manager*,i8*]*)
+(bind-lib code code_manager_update [void,code_manager*,i8*]*)
+(bind-lib code code_manager_evaluate [void,code_manager*,i8*]*)
+(bind-lib code code_manager_select [void,code_manager*,i32]*)
+(bind-lib code code_manager_error [void,code_manager*,i8*]*)
+(bind-lib code code_manager_step [void,code_manager*,float]*)
+(bind-lib code code_manager_get_graph_count [i32,code_manager*]*)
+(bind-lib code code_manager_get_graph [code_graph*,code_manager*,i32]*)
+
+(bind-lib code code_graph_get_element_count [i32,code_graph*]*)
+(bind-lib code code_graph_get_element [code_element*,code_graph*,i32]*)
+(bind-lib code code_graph_get_user_data [i8*,code_graph*]*)
+(bind-lib code code_graph_set_user_data [void,code_graph*,i8*]*)
+
+(bind-lib code code_element_get_size [double,code_element*]*)
+(bind-lib code code_element_get_x [double,code_element*]*)
+(bind-lib code code_element_get_y [double,code_element*]*)
+(bind-lib code code_element_get_r [double,code_element*]*)
+(bind-lib code code_element_get_g [double,code_element*]*)
+(bind-lib code code_element_get_b [double,code_element*]*)
+(bind-lib code code_element_is_valid [i1,code_element*]*)
+(bind-lib code code_element_get_user_data [i8*,code_element*]*)
+(bind-lib code code_element_set_user_data [void,code_element*,i8*]*)
 

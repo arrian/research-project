@@ -47,28 +47,35 @@
   (lambda (w:Widget* time:i64)
     (tset! w 4 time)))
 
-;; Update the widget for the inactive state (eg. code editing, coder cursor selection, errors during compilation)
-(bind-func widget_update_inactive
-  (lambda (w:Widget* code:i8*)
-    (widget_set_code w (Str code))
+(bind-func widget_update
+  (lambda (w:Widget* graph:code_graph*)
+    ;;(poly_entity_set_position graph 0.0 -50.0)
+    ;;(widget_set_code w (Str code))
+    (printf "%p\n" (code_graph_get_user_data graph))
+    (let ((i 0)
+          (segments 9))
 
+      (dotimes (i (code_graph_get_element_count graph))
+        (let ((e:code_element* (code_graph_get_element graph i)))
+          (if (null? (code_element_get_user_data e)) 
+            (let ((circle (poly_scene_primitive_create_circle (code_element_get_size e) (code_element_get_size e) segments))) 
+              (code_element_set_user_data e circle) 
+              (poly_scene_add_child POLY_SCENE circle)
+              ))
 
-    ;; temp label stuff. TODO: remove
-    ;; (if (null? (widget_get_graph w)) (let ((label (poly_scene_multi_label_create (string_cstr (widget_get_code w)) 20))
-    ;;   (circle (poly_scene_primitive_create_circle 20.0 20.0 10)))
-    ;;     (poly_scene_add_child POLY_SCENE circle)
-    ;;     (poly_scene_add_child POLY_SCENE label)
-    ;;     (widget_set_graph w label)
-    ;;   ))
-    ;;(poly_scene_multi_label_set_text (widget_get_graph w) (string_cstr (widget_get_code w)))
-
-    (println "name:" (widget_get_name w) "code:" (widget_get_code w))
+          (let ((circle (code_element_get_user_data e)))
+              (poly_entity_set_position circle (code_element_get_x e) (code_element_get_y e))
+              (if (= (i32toi1 1) (code_element_is_valid e)) 
+                (poly_scene_primitive_set_circle_options circle (code_element_get_size e) (code_element_get_size e) segments) 
+                (poly_scene_primitive_set_circle_options circle 0.5 0.5 3))
+              (poly_entity_set_color circle (code_element_get_r e) (code_element_get_g e) (code_element_get_b e) 1.0)
+              (printf "valid: %d\n" (code_element_is_valid e))
+            )
+            
+          )
+        ))
+    ;; (println "name:" (widget_get_name w) "code:" (widget_get_code w))
     0))
-
-;; Update the widget for the active state (eg. callback times, instrument played)
-;; (bind-func widget_update_active
-;;   (lambda (w:Widget* phase:double)
-;;     ))
 
 (bind-func widget_print
   (lambda (w:Widget*)
@@ -88,8 +95,9 @@
 
 (bind-func widget_list_add
   (lambda (name:i8* code:i8* time_next time_initial)
-    (set! WIDGET_LIST (cons (Widget (Str name) (Str code) null time_next time_initial)
-                        WIDGET_LIST))))
+    (let ((w (Widget (Str name) (Str code) null time_next time_initial)))
+    (set! WIDGET_LIST (cons w WIDGET_LIST))
+    w)))
 
 (bind-func widget_list_remove
   (lambda (name)
@@ -101,12 +109,20 @@
 ;;   (lambda ()
 ;;     ))
 
-(bind-func widget_list_update_inactive
-  (lambda (code:i8*)
-    (map (lambda (w) (widget_update_inactive w code)) WIDGET_LIST)
+(bind-func widget_list_update
+  (lambda ()
+    (let ((i 0))
+      (dotimes (i (code_manager_get_graph_count CODE_MANAGER))
+          (let ((graph (code_manager_get_graph CODE_MANAGER i)))
+              (if (null? (code_graph_get_user_data graph)) 
+                (begin 
+                  (code_graph_set_user_data graph (bitcast (widget_list_add "test" "(test)" 0 0) i8*))
+                  ;;(poly_scene_add_child POLY_SCENE graph)
+                  ))
+              (widget_update (bitcast (code_graph_get_user_data graph) Widget*) graph))))
     void))
 
-(widget_list_update_inactive "(bind-val WIDGET_LIST List:<Widget*,List*>*)" 1.0)
+;; (widget_list_update "(bind-val WIDGET_LIST List:<Widget*,List*>*)" 1.0)
 
 
 ;;Needs beat, duration and widget index (TODO: should default to -1)
@@ -120,6 +136,7 @@
 ;; Testing
 
 ;; (widget_list_add (random (list "test1" "test2" "test3" "test4" "test5" "test6" "test7")) (random (list "(test1)" "(test2)" "(test3)" "(test4)" "(test5)" "(test6)" "(test7)")) (random 100 200) (random 0 100))
+
 
 
 

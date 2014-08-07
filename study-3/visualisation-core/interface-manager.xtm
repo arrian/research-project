@@ -2,7 +2,7 @@
 ;;
 ;; This manager handles all interfacing between Extempore and the source code editor.
 
-(sys:load "research-project/code-lib/code.xtm")
+
 
 (bind-val EVENT_QUEUE eventqueue* 0)
 
@@ -27,7 +27,8 @@
 (bind-func handle_code
   (lambda (args:i8*)
   	(printf "code %.80s...\n" args)
-  	(widget_list_update_inactive args)
+    (code_manager_update CODE_MANAGER args)
+  	(widget_list_update)
   	;;(pref args 0)
   	;; (polycode_set_text code_visual "test_string")
   	;; (app_step)
@@ -37,7 +38,20 @@
   	void))
   	
 	;;(printf "code %.80s...\n" args)
-	
+
+(bind-func handle_evaluate
+  (lambda (args:i8*)
+    ;; (printf "code %.80s...\n" args)
+    ;;(widget_list_update_active args)
+    (code_manager_evaluate CODE_MANAGER args)
+    (widget_list_update)
+    ;;(pref args 0)
+    ;; (polycode_set_text code_visual "test_string")
+    ;; (app_step)
+    ;;(update_code args (now))
+    ;; (test_init_code_visual)
+    ;; (test_init_code_visual)
+    void))
 
 
 ;; Handles the /interface/keyboard address.
@@ -59,8 +73,9 @@
 			((= (strcmp address "/interface/code") 0) (handle_code (event_get_data e)))
 			((= (strcmp address "/interface/keyboard") 0) (handle_keyboard data))
 			((= (strcmp address "/interface/error") 0) (handle_error data))
+      ((= (strcmp address "/interface/evaluate") 0) (handle_evaluate (event_get_data e)))
 			(else void))
-		;; (printf "%s\n" address)
+		(printf "%s\n" address)
       	void)))
 
 ;; Handles routing of addresses for messages in the queue.

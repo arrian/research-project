@@ -75,6 +75,7 @@ void CodeManager::evaluate(std::string code)
 	{
 		for(int j = 0; j < graphs.size(); j++)
 		{
+			std::cout << "comparing " << graphs[j]->code << std::endl << " with " << tree.children[i]->code << std::endl;
 			if(CodeSimple(graphs[j]->code).isFirstLineMatch(tree.children[i]->code))
 			{
 				graphs[j]->evaluate(tree.children[i]->code);
@@ -123,4 +124,124 @@ void CodeManager::step(float dt)
 		graphs[j]->step(dt);
 	}
 }
+
+
+
+
+//////////////////////////////////////
+
+code_manager* code_manager_create(char* code)
+{
+	return reinterpret_cast<code_manager*>(new CodeManager(code));
+}
+
+void code_manager_update(code_manager* manager, char* code)
+{
+	reinterpret_cast<CodeManager*>(manager)->update(code);
+}
+
+void code_manager_evaluate(code_manager* manager, char* code)
+{
+	reinterpret_cast<CodeManager*>(manager)->evaluate(code);
+}
+
+void code_manager_select(code_manager* manager, int selection)
+{
+	reinterpret_cast<CodeManager*>(manager)->select(selection);
+}
+
+void code_manager_error(code_manager* manager, char* message)
+{
+	reinterpret_cast<CodeManager*>(manager)->error(message);
+}
+
+void code_manager_step(code_manager* manager, float dt)
+{
+	reinterpret_cast<CodeManager*>(manager)->step(dt);
+}
+
+int code_manager_get_graph_count(code_manager* manager)
+{
+	return reinterpret_cast<CodeManager*>(manager)->graphs.size();
+}
+
+code_graph* code_manager_get_graph(code_manager* manager, int index)
+{
+	CodeManager* codeManager = reinterpret_cast<CodeManager*>(manager);
+	return reinterpret_cast<code_graph*>(codeManager->graphs[index]);
+}
+
+int code_graph_get_element_count(code_graph* graph)
+{
+	return reinterpret_cast<CodeSimpleGraph*>(graph)->elements.size();
+}
+
+code_element* code_graph_get_element(code_graph* graph, int index)
+{
+	CodeSimpleGraph* codeGraph = reinterpret_cast<CodeSimpleGraph*>(graph);
+	return reinterpret_cast<code_element*>(&codeGraph->elements[index]);
+}
+
+void* code_graph_get_user_data(code_graph* graph)
+{
+	std::cout << "getting graph user data" << reinterpret_cast<CodeSimpleGraph*>(graph)->userData << std::endl;
+	return reinterpret_cast<CodeSimpleGraph*>(graph)->userData;
+}
+
+void* code_graph_set_user_data(code_graph* graph, void* userData)
+{
+	std::cout << "setting graph user data" << userData << std::endl;
+	reinterpret_cast<CodeSimpleGraph*>(graph)->userData = userData;
+}
+
+double code_element_get_size(code_element* element)
+{
+	return reinterpret_cast<CodeElement*>(element)->size;
+}
+
+double code_element_get_x(code_element* element)
+{
+	return reinterpret_cast<CodeElement*>(element)->x;
+}
+
+double code_element_get_y(code_element* element)
+{
+	return reinterpret_cast<CodeElement*>(element)->y;
+}
+
+double code_element_get_r(code_element* element)
+{
+	return reinterpret_cast<CodeElement*>(element)->r;
+}
+
+double code_element_get_g(code_element* element)
+{
+	return reinterpret_cast<CodeElement*>(element)->g;
+}
+
+double code_element_get_b(code_element* element)
+{
+	return reinterpret_cast<CodeElement*>(element)->b;
+}
+
+bool code_element_is_valid(code_element* element)
+{
+	return reinterpret_cast<CodeElement*>(element)->valid;
+}
+
+void* code_element_get_user_data(code_element* element)
+{
+	std::cout << "getting element user data" << reinterpret_cast<CodeElement*>(element)->userData << std::endl;
+	return reinterpret_cast<CodeElement*>(element)->userData;
+}
+
+void code_element_set_user_data(code_element* element, void* userData)
+{
+	std::cout << "setting element user data" << userData << std::endl;
+	reinterpret_cast<CodeElement*>(element)->userData = userData;
+}
+
+
+
+
 

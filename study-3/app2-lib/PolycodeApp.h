@@ -4,6 +4,7 @@
 #include <Polycode.h>
 #include "PolyGLFWCore.h"
 #include "PolySceneMultiLabel.h"
+#include "PolyEntity.h"
 
 using namespace Polycode;
 
@@ -26,6 +27,11 @@ extern "C"
 	void poly_scene_destroy(poly_scene* scene);
 	void poly_scene_add_child(poly_scene* scene, poly_entity* entity);
 
+	void poly_entity_set_position(poly_entity* entity, double x, double y);
+	void poly_entity_set_yaw(poly_entity* entity, double yaw);
+	void poly_entity_add_child(poly_entity* target, poly_entity* entity);
+	void poly_entity_set_color(poly_entity* entity, double r, double g, double b, double a);
+
 	poly_scene_image* poly_scene_image_create(char* path);
 	void poly_scene_image_destroy(poly_scene_image* image);
 
@@ -37,9 +43,10 @@ extern "C"
 	void poly_scene_label_destroy(poly_scene_label* label);
 	void poly_scene_label_set_text(poly_scene_label* label, char* text);
 	
-	poly_scene_primitive* poly_scene_primitive_create_cube(float xSize, float ySize, float zSize);
-	poly_scene_primitive* poly_scene_primitive_create_circle(float xSize, float ySize, int segments);
+	poly_scene_primitive* poly_scene_primitive_create_cube(double xSize, double ySize, double zSize);
+	poly_scene_primitive* poly_scene_primitive_create_circle(double xSize, double ySize, int segments);
 	void poly_scene_primitive_destroy(poly_scene_primitive* primitive);
+	void poly_scene_primitive_set_circle_options(poly_scene_primitive* primitive, double xSize, double ySize, int segments);
 	
 // ;;scene mesh
 // (bind-alias poly_scene_mesh i8)

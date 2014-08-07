@@ -10,6 +10,10 @@
 
 ;;entity
 (bind-alias poly_entity i8)
+(bind-lib polycode poly_entity_set_position [void,poly_entity*,double,double]*)
+(bind-lib polycode poly_entity_set_yaw [void,poly_entity*,double]*)
+(bind-lib polycode poly_entity_add_child [void,poly_entity*,poly_entity*]*)
+(bind-lib polycode poly_entity_set_color [void,poly_entity*,double,double,double,double]*)
 
 ;;scene
 (bind-alias poly_scene i8)
@@ -36,9 +40,10 @@
 
 ;;scene primitive
 (bind-alias poly_scene_primitive i8)
-(bind-lib polycode poly_scene_primitive_create_cube [poly_scene_primitive*,float,float,float]*);;x size, y size, z size
-(bind-lib polycode poly_scene_primitive_create_circle [poly_scene_primitive*,float,float,i32]*);;x size, y size, segments
+(bind-lib polycode poly_scene_primitive_create_cube [poly_scene_primitive*,double,double,double]*);;x size, y size, z size
+(bind-lib polycode poly_scene_primitive_create_circle [poly_scene_primitive*,double,double,i32]*);;x size, y size, segments
 (bind-lib polycode poly_scene_primitive_destroy [void,poly_scene_primitive*]*)
+(bind-lib polycode poly_scene_primitive_set_circle_options [void,poly_scene_primitive*,double,double,i32]*)
 
 
 ;;initialisation

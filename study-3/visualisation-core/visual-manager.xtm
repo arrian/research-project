@@ -4,8 +4,6 @@
 ;; including code drawing, visual elements drawing and
 ;; all visual effects.
 
-(sys:load "research-project/app2-lib/app.xtm")
-
 (define WIDTH 640)
 (define HEIGHT 480)
 ;; (bind-val WIDTH i64 1024)

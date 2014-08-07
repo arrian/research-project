@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 
+
 struct CodeElement
 {
 	double size;
@@ -17,6 +18,8 @@ struct CodeElement
 	double b;
 
 	bool valid;//is this graph ready for destruction or is it valid?
+
+	void* userData;
 };
 
 class CodeSimpleGraph
@@ -24,6 +27,8 @@ class CodeSimpleGraph
 public:
 	std::string code;
 	std::vector<CodeElement> elements;
+
+	void* userData;
 	
 	CodeSimpleGraph(std::string code);
 

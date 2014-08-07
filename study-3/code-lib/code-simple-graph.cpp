@@ -5,15 +5,16 @@
 CodeSimpleGraph::CodeSimpleGraph(std::string code)
 {
 	this->code = code;
+	this->userData = nullptr;
 
 	CodeSimple newCode(code);
 
-	double y = 0.0;
+	double y = -200.0;
 	for(auto line : newCode.lines)
 	{
 		CodeElement element;
 		element.size = (double) line.length();
-		y += element.size;
+		y += 40.0;
 		element.y = y;
 		element.x = 0.0;
 		element.r = 0.8;
@@ -23,6 +24,8 @@ CodeSimpleGraph::CodeSimpleGraph(std::string code)
 		element.userData = nullptr;
 
 		elements.push_back(element);
+
+		std::cout << "init set x of: " << element.x << std::endl;
 	}
 }
 
@@ -30,7 +33,7 @@ void CodeSimpleGraph::update(std::string code)
 {
 	CodeSimple newCode(code);
 
-	double y = 0.0;
+	double y = -200.0;
 	for(int i = 0; i < newCode.lines.size(); i++)
 	{
 		if(elements.size() > i)
@@ -41,12 +44,14 @@ void CodeSimpleGraph::update(std::string code)
 			elements[i].g = 0.8;
 			elements[i].b = 0.8;
 			elements[i].valid = true;
+
+			std::cout << "update old set x of: " << elements[i].x << std::endl;
 		}
 		else
 		{
 			CodeElement element;
 			element.size = (double) newCode.lines[i].length();
-			y += element.size;
+			y += 40.0;
 			element.y = y;
 			element.x = 0.0;
 			element.r = 0.8;
@@ -56,11 +61,14 @@ void CodeSimpleGraph::update(std::string code)
 			element.userData = nullptr;
 
 			elements.push_back(element);
+
+			std::cout << "update new set x of: " << element.x << std::endl;
 		}
 	}
 
 	for(int i = newCode.lines.size(); i < elements.size(); i++)
 	{
+		elements[i].size = 0.2;
 		elements[i].valid = false;
 	}
 }
