@@ -17,10 +17,12 @@
   (lambda (args:i32*)
   	;; (printf "%s\n" args)
   	(let ((i:i32 0))
+      (code_manager_select CODE_MANAGER (unswap32i (pref args 1)))
+      (widget_list_update))
 	  	(printf "selection ")
-	  	(dotimes (i (unswap32i (pref args 0)))
-			(printf "%d " (unswap32i (pref args (+ i 1)))))
-	  	(printf "\n"))
+	  	;; (dotimes (i (unswap32i (pref args 0)))
+			;; (printf "%d " (unswap32i (pref args (+ i 1)))))
+	  	;; (printf "\n")
 	void))
 
 ;; Handles the /interface/code address.

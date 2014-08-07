@@ -89,6 +89,10 @@ void CodeManager::select(int selection)
 	//temp hack
 	CodeTree tree(this->code, ROOT);
 
+	// for(auto graph : this->graphs)
+	// {
+	// 	graph->select();
+	// }
 	int counter = 0;
 	for(int i = 0; i < tree.children.size(); i++)
 	{
@@ -97,7 +101,8 @@ void CodeManager::select(int selection)
 		{
 			CodeSimpleGraph* graph = findGraph(tree.children[i]->code);
 			if(graph) graph->select();
-		}		
+		}
+		counter += current;
 	}
 }
 

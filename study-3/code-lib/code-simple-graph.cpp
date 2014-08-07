@@ -87,6 +87,15 @@ void CodeSimpleGraph::evaluate(std::string code)
 
 void CodeSimpleGraph::select()
 {
+	//temp color change
+	for(auto& element : elements)
+	{
+		element.r = 1.0;
+		element.g = 0.0;
+		element.b = 0.3;
+		element.x = 200.0;
+	}
+	
 	//spin graph here
 }
 
