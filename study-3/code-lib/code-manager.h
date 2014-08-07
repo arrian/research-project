@@ -47,8 +47,10 @@ extern "C"
 
 	int code_graph_get_element_count(code_graph* graph);
 	code_element* code_graph_get_element(code_graph* graph, int index);
-	void* code_graph_get_user_data(code_graph* graph);
-	void* code_graph_set_user_data(code_graph* graph, void* userData);
+	void* code_graph_get_widget(code_graph* graph);
+	void code_graph_set_widget(code_graph* graph, void* widget);
+	void* code_graph_get_entity(code_graph* graph);
+	void code_graph_set_entity(code_graph* graph, void* entity);
 
 	double code_element_get_size(code_element* element);
 	double code_element_get_x(code_element* element);

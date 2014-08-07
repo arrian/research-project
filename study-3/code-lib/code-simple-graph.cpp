@@ -5,7 +5,8 @@
 CodeSimpleGraph::CodeSimpleGraph(std::string code)
 {
 	this->code = code;
-	this->userData = nullptr;
+	this->widget = nullptr;
+	this->entity = nullptr;
 
 	CodeSimple newCode(code);
 

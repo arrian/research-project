@@ -187,16 +187,26 @@ code_element* code_graph_get_element(code_graph* graph, int index)
 	return reinterpret_cast<code_element*>(&codeGraph->elements[index]);
 }
 
-void* code_graph_get_user_data(code_graph* graph)
+void* code_graph_get_widget(code_graph* graph)
 {
-	std::cout << "getting graph user data" << reinterpret_cast<CodeSimpleGraph*>(graph)->userData << std::endl;
-	return reinterpret_cast<CodeSimpleGraph*>(graph)->userData;
+	// std::cout << "getting graph user data" << reinterpret_cast<CodeSimpleGraph*>(graph)->widget << std::endl;
+	return reinterpret_cast<CodeSimpleGraph*>(graph)->widget;
 }
 
-void* code_graph_set_user_data(code_graph* graph, void* userData)
+void code_graph_set_widget(code_graph* graph, void* widget)
 {
-	std::cout << "setting graph user data" << userData << std::endl;
-	reinterpret_cast<CodeSimpleGraph*>(graph)->userData = userData;
+	// std::cout << "setting graph user data" << widget << std::endl;
+	reinterpret_cast<CodeSimpleGraph*>(graph)->widget = widget;
+}
+
+void* code_graph_get_entity(code_graph* graph)
+{
+	return reinterpret_cast<CodeSimpleGraph*>(graph)->entity;
+}
+
+void code_graph_set_entity(code_graph* graph, void* entity)
+{
+	reinterpret_cast<CodeSimpleGraph*>(graph)->entity = entity;
 }
 
 double code_element_get_size(code_element* element)

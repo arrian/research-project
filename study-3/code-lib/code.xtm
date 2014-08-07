@@ -93,8 +93,10 @@
 
 (bind-lib code code_graph_get_element_count [i32,code_graph*]*)
 (bind-lib code code_graph_get_element [code_element*,code_graph*,i32]*)
-(bind-lib code code_graph_get_user_data [i8*,code_graph*]*)
-(bind-lib code code_graph_set_user_data [void,code_graph*,i8*]*)
+(bind-lib code code_graph_get_widget [i8*,code_graph*]*)
+(bind-lib code code_graph_set_widget [void,code_graph*,i8*]*)
+(bind-lib code code_graph_get_entity [i8*,code_graph*]*)
+(bind-lib code code_graph_set_entity [void,code_graph*,i8*]*)
 
 (bind-lib code code_element_get_size [double,code_element*]*)
 (bind-lib code code_element_get_x [double,code_element*]*)

@@ -7,6 +7,9 @@ all:
 code-lib: bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o bin/event-queue.o
 	g++ bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o bin/event-queue.o -dynamiclib -o bin/code.dylib
 
+code-simple-lib:
+	g++ $(CXXFLAGS) code-simple-graph.cpp code-manager.cpp code-line.cpp code-tree.cpp event-queue.cpp -dynamiclib -o ./bin/code.dylib
+
 test: bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o bin/event-queue.o bin/main.o
 	g++ bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o bin/event-queue.o bin/main.o -o bin/code-test
 	./bin/code-test

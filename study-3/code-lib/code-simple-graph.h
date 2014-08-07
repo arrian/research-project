@@ -28,7 +28,8 @@ public:
 	std::string code;
 	std::vector<CodeElement> elements;
 
-	void* userData;
+	void* widget;
+	void* entity;
 	
 	CodeSimpleGraph(std::string code);
 

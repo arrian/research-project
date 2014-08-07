@@ -51,7 +51,7 @@
   (lambda (w:Widget* graph:code_graph*)
     ;;(poly_entity_set_position graph 0.0 -50.0)
     ;;(widget_set_code w (Str code))
-    (printf "%p\n" (code_graph_get_user_data graph))
+    (printf "%p\n" (code_graph_get_widget graph))
     (let ((i 0)
           (segments 9))
 
@@ -59,9 +59,8 @@
         (let ((e:code_element* (code_graph_get_element graph i)))
           (if (null? (code_element_get_user_data e)) 
             (let ((circle (poly_scene_primitive_create_circle (code_element_get_size e) (code_element_get_size e) segments))) 
-              (code_element_set_user_data e circle) 
-              (poly_scene_add_child POLY_SCENE circle)
-              ))
+                (code_element_set_user_data e circle)
+                (poly_entity_add_child (code_graph_get_entity graph) circle)))
 
           (let ((circle (code_element_get_user_data e)))
               (poly_entity_set_position circle (code_element_get_x e) (code_element_get_y e))
@@ -114,12 +113,20 @@
     (let ((i 0))
       (dotimes (i (code_manager_get_graph_count CODE_MANAGER))
           (let ((graph (code_manager_get_graph CODE_MANAGER i)))
-              (if (null? (code_graph_get_user_data graph)) 
+              (if (null? (code_graph_get_widget graph)) 
                 (begin 
-                  (code_graph_set_user_data graph (bitcast (widget_list_add "test" "(test)" 0 0) i8*))
-                  ;;(poly_scene_add_child POLY_SCENE graph)
-                  ))
-              (widget_update (bitcast (code_graph_get_user_data graph) Widget*) graph))))
+                  (code_graph_set_widget graph (bitcast (widget_list_add "test" "(test)" 0 0) i8*))
+                  (let ((entity (poly_scene_primitive_create_circle 20.0 20.0 4)))
+                      (code_graph_set_entity graph entity)
+                      
+                      (poly_scene_add_child POLY_SCENE entity)
+                    )))
+                  
+
+              (widget_update (bitcast (code_graph_get_widget graph) Widget*) graph)
+              (poly_entity_set_color (code_graph_get_entity graph) 1.0 1.0 0.0 1.0)
+              (poly_entity_set_position (code_graph_get_entity graph) (+ -600.0 (* 30.0 (i32tod i))) 0.0)
+              )))
     void))
 
 ;; (widget_list_update "(bind-val WIDGET_LIST List:<Widget*,List*>*)" 1.0)
