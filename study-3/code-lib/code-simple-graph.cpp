@@ -10,7 +10,7 @@ CodeSimpleGraph::CodeSimpleGraph(std::string code)
 
 	CodeSimple newCode(code);
 
-	double y = -200.0;
+	double y = 0.0;
 	for(auto line : newCode.lines)
 	{
 		CodeElement element;
@@ -34,7 +34,7 @@ void CodeSimpleGraph::update(std::string code)
 {
 	CodeSimple newCode(code);
 
-	double y = -200.0;
+	double y = 0.0;
 	for(int i = 0; i < newCode.lines.size(); i++)
 	{
 		if(elements.size() > i)
@@ -94,7 +94,7 @@ void CodeSimpleGraph::select()
 		element.r = 1.0;
 		element.g = 0.0;
 		element.b = 0.3;
-		element.x = 200.0;
+		element.x = 100.0;
 	}
 	
 	//spin graph here

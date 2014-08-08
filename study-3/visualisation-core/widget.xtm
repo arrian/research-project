@@ -64,10 +64,14 @@
 
           (let ((circle (code_element_get_user_data e)))
               (poly_entity_set_position circle (code_element_get_x e) (code_element_get_y e))
+              (poly_entity_set_color circle (code_element_get_r e) (code_element_get_g e) (code_element_get_b e) 1.0)
               (if (= (i32toi1 1) (code_element_is_valid e)) 
                 (poly_scene_primitive_set_circle_options circle (code_element_get_size e) (code_element_get_size e) segments) 
-                (poly_scene_primitive_set_circle_options circle 0.5 0.5 3))
-              (poly_entity_set_color circle (code_element_get_r e) (code_element_get_g e) (code_element_get_b e) 1.0)
+                (begin
+                  (code_element_set_user_data e null)
+                  (poly_scene_primitive_destroy circle)))
+                  ;; (poly_scene_primitive_set_circle_options circle 10.0 10.0 4)
+
               (printf "valid: %d\n" (code_element_is_valid e))
             )
             
@@ -122,7 +126,6 @@
                       (poly_scene_add_child POLY_SCENE entity)
                     )))
                   
-
               (widget_update (bitcast (code_graph_get_widget graph) Widget*) graph)
               (poly_entity_set_color (code_graph_get_entity graph) 1.0 1.0 0.0 1.0)
               (poly_entity_set_position (code_graph_get_entity graph) (+ -600.0 (* 30.0 (i32tod i))) 0.0)

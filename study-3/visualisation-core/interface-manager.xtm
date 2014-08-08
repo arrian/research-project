@@ -1,8 +1,7 @@
 ;; Interface Manager
 ;;
-;; This manager handles all interfacing between Extempore and the source code editor.
-
-
+;; This manager handles all interfacing between Extempore and the 
+;; source code editor.
 
 (bind-val EVENT_QUEUE eventqueue* 0)
 
@@ -12,73 +11,77 @@
 
 (eventqueue_init)
 
-;; Handles the /interface/selection address.
+;; Handles the /interface/selection address. Accepts an unlimited number
+;; of arguments. The first argument is an integer defining the number remaining
+;; argument integers. The remaining argument integers define the selection bounds
+;; in the format 'start end start end ...'.
 (bind-func handle_selection
   (lambda (args:i32*)
   	;; (printf "%s\n" args)
   	(let ((i:i32 0))
       (code_manager_select CODE_MANAGER (unswap32i (pref args 1)))
       (widget_list_update))
-	  	(printf "selection ")
+	  	;; (printf "selection ")
 	  	;; (dotimes (i (unswap32i (pref args 0)))
-			;; (printf "%d " (unswap32i (pref args (+ i 1)))))
-	  	;; (printf "\n")
+			;;   (printf "%d " (unswap32i (pref args (+ i 1)))))
+	  	;;   (printf "\n")
 	void))
 
-;; Handles the /interface/code address.
+;; Handles the /interface/code address. Accepts one argument that is the 
+;; current 
 (bind-func handle_code
   (lambda (args:i8*)
-  	(printf "code %.80s...\n" args)
+  	;; (printf "code %.80s...\n" args)
     (code_manager_update CODE_MANAGER args)
   	(widget_list_update)
-  	;;(pref args 0)
-  	;; (polycode_set_text code_visual "test_string")
-  	;; (app_step)
-  	;;(update_code args (now))
-  	;; (test_init_code_visual)
-  	;; (test_init_code_visual)
   	void))
   	
 	;;(printf "code %.80s...\n" args)
 
+;; Handles the /interface/evaluate address. Accepts one argument that is the 
+;; code evaluated.
 (bind-func handle_evaluate
   (lambda (args:i8*)
-    ;; (printf "code %.80s...\n" args)
-    ;;(widget_list_update_active args)
     (code_manager_evaluate CODE_MANAGER args)
     (widget_list_update)
-    ;;(pref args 0)
-    ;; (polycode_set_text code_visual "test_string")
-    ;; (app_step)
-    ;;(update_code args (now))
-    ;; (test_init_code_visual)
-    ;; (test_init_code_visual)
     void))
 
-
-;; Handles the /interface/keyboard address.
+;; Handles the /interface/keyboard address. Accepts one argument that is the
+;; key pressed.
 (bind-func handle_keyboard
   (lambda (args:i32*)
-	void))
+	  void))
 
-;; Handles the /interface/error address.
+;; Handles the /interface/error address. Accepts one argument that is 
+;; the error message.
 (bind-func handle_error
-  (lambda (args:i32*)
-	void))
+  (lambda (args:i8*)
+    (code_manager_error CODE_MANAGER args)
+    (widget_list_update)
+    void))
+
+;; Handles the /interface/focus address. Accepts one argument that is the
+;; name of the file focussed.
+(bind-func handle_focus
+  (lambda (args:i8*)
+    ;; (code_manager_focus CODE_MANAGER args)
+    (widget_list_update)
+    void))
 
 (bind-func handle_event
   (lambda (e:event*)
   	(let ((data (bitcast (event_get_data e) i32*))
-  		  (address (event_get_address e)))
+  		    (address (event_get_address e)))
     	;; (printf "handling %p\n" (event_get_data e))
-		(cond ((= (strcmp address "/interface/selection") 0) (handle_selection data))
-			((= (strcmp address "/interface/code") 0) (handle_code (event_get_data e)))
-			((= (strcmp address "/interface/keyboard") 0) (handle_keyboard data))
-			((= (strcmp address "/interface/error") 0) (handle_error data))
-      ((= (strcmp address "/interface/evaluate") 0) (handle_evaluate (event_get_data e)))
-			(else void))
-		(printf "%s\n" address)
-      	void)))
+		  (cond ((= (strcmp address "/interface/selection") 0) (handle_selection data));; args: count start end start end... . eg. 4 0 3 10 13
+      			((= (strcmp address "/interface/code") 0) (handle_code (event_get_data e)));; args: code
+      			((= (strcmp address "/interface/evaluate") 0) (handle_evaluate (event_get_data e))) ;; args: evaluated_code
+            ;; ((= (strcmp address "/interface/keyboard") 0) (handle_keyboard data));; unused
+      			((= (strcmp address "/interface/error") 0) (handle_error (event_get_data e))) ;; args: message
+            ((= (strcmp address "/interface/focus") 0) (handle_focus (event_get_data e))) ;; args: file_name
+  			    (else void))
+		  (printf "%s\n" address)
+      void)))
 
 ;; Handles routing of addresses for messages in the queue.
 (bind-func handle_events
@@ -104,14 +107,4 @@
 (io:osc:start-server 9880 "receive" (llvm:get-native-function "receive"))
 
 (handle_events)
-
-
-
-;; current thread: 477732107089896007, current pid: 46621
-;; current thread: 11686591936744189465, current pid: 46621
-
-
-
-
-
 
