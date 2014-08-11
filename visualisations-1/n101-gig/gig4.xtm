@@ -1,0 +1,40 @@
+(define synth
+  (lambda (beat dur)
+    (play fmsynth (random 60 74) (random 30 46) dur)
+
+    (cv-callback (*metro* (+ beat (* .5 dur))) 'synth (+ beat dur)
+                 dur)))
+
+(synth (*metro* 'get-beat 4) 1/4)
+
+(define bassline
+  (lambda (beat dur plist)
+    (play subbass (car plist) (car 90 10 1/2) dur)
+    (cv-callback (*metro* (+ beat (* .5 dur))) 'bassline (+ beat dur)
+                 dur
+              (rotate plist -1))))
+
+(bassline (*metro* 'get-beat 8) 8 '(36 34 33 39))
+
+(define drums)
+(lambda (beat dur)
+
+  ;; (play kit 40 (cosr 30 30 1/2) .1)
+  (play kit (cosr 43 3 1/4) 90 dur)
+  (cv-callback (*metro* (+ beat (* .5 dur))) 'drums (+ beat dur) dur))
+
+(drums (*metro* 'get-beat 4) 1/4)
+
+(define melody
+  (lambda (beat dlist slist pitch)
+    (play epad (pc:relative pitch (car slist) (pc:scale 0 'dorian)) 60 (car dlist))
+    (cv-callback (*metro* (+ beat (* .5 (car dlist)))) 'melody (+ beat (car dlist))
+              (rotate dlist -1)
+              (rotate slist -1) pitch)))
+
+(melody (*metro* 'get-beat 4) (list 1 1 1/2 1 (+ 1/2 4)) (0 1 2 3 4) 60)
+
+;; cheers
+;;
+;; ben.swift@anu.edu.au
+;; http://benswift.me

@@ -1,0 +1,49 @@
+(*metro* 'set-tempo 60)
+
+(define chords
+  (lambda (beat dur root)
+    (for-each (lambda (p)
+                (play (/ (random 16) 4) epad p 40 dur))
+              (pc:make-chord 55 79 17 (pc:chord 0 ^)))
+    (cv-callback (*metro* (+ beat (* .5 dur))) 'chords (+ beat dur)
+                 (if (< (modulo beat 16) 4)2 4)
+                 (random (cdr (assoc root '((0 3)
+                                            (3 0))))))))
+
+(chords (- (*metro* 'get-beat 4) 1/2) 4 0)
+
+(define drums
+  (lambda (beat dur)
+    (if (<> (modulo beat 1) 0)
+        (play kit 47 (random 40 50) .1))
+    (if (<> (modulo beat 3/4) 0)
+        (play kit 52 (random 40 50) .1))
+    (if (<> (modulo beat 5/4) 0)
+        (play kit 57 (random 40 50) .1))
+    (if (or (= (modulo beat 1) 0)
+            (= (modulo beat 3/4) 0))
+        (play kit *gm-kick-2* 110 .1))
+    (if (or (= (modulo beat 2) 0)
+            (= (modulo beat 5/4) 0))
+        (play kit *gm-snare-2* (cosr 100 10 1) .1))
+    (cv-callback (*metro* (+ beat (* .5 dur))) 'drums (+ beat dur) dur)))
+
+(drums (*metro* 'get-beat 4) 1/4)
+
+(define bass)
+(lambda (beat dur pitch)
+  (play subbass (if (> dur 3) pitch
+                    (pc:relative pitch (random 8) (pc:scale 0 'dorian))) (cosr 90 10 1/2) dur)
+  (cv-callback (*metro* (+ beat (* .5 dur))) 'bass (+ beat dur)
+               (if (= (modulo beat 8) (- 8 dur))
+                   5 1/4)
+               36))
+
+(bass (*metro* 'get-beat 8) 8 36)
+
+(define bleeps)
+(lambda (beat dur pitch)
+  (play fmsynth pitch 50 1/4)
+  (cv-callback (*metro* (+ beat (* .5 dur))) 'bleeps (+ beat dur) dur pitch))
+
+(bleeps (*metro* 'get-beat 4) 13/4 91)
