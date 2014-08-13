@@ -48,11 +48,16 @@ extern "C"
 	void poly_scene_primitive_destroy(poly_scene_primitive* primitive);
 	void poly_scene_primitive_set_circle_options(poly_scene_primitive* primitive, double xSize, double ySize, int segments);
 	
-// ;;scene mesh
-// (bind-alias poly_scene_mesh i8)
-// (bind-lib polycode poly_scene_mesh_create [poly_scene_mesh*]*)
-// (bind-lib polycode poly_scene_mesh_destroy [void,poly_scene_mesh*]*)
+	//Attractors - requires a physics enabled scene
 
+	struct poly_attractor;
+	poly_attractor* poly_attractor_add(poly_scene* scene, poly_attractor* attractor, double x, double y, double size);
+	void poly_attractor_remove(poly_attractor* attractor);
+	// void poly_attractor_pulse_size(double next, double final);
+	// void poly_attractor_pulse_color(double nr, double ng, double nb, double na, double fr, double fg, double fb, double fa);
+	void poly_attractor_target_size(poly_attractor* a, double size);
+	void poly_attractor_target_color(poly_attractor* att, double r, double g, double b, double a);
+	void poly_attractor_impulse(poly_attractor* a, double x, double y);
 }
 
 int main(int argc, char* argv[])
@@ -63,18 +68,41 @@ int main(int argc, char* argv[])
 	poly_core* core = poly_core_create("Test Window", width, height, "../resources/default.pak");
 	poly_scene* scene = poly_scene_create(width, height);
 
-	poly_scene_multi_label* label = poly_scene_multi_label_create("test text\nnext line here\nanother line\n\na line after an empty line", 20);
+// poly_attractor_add(scene, nullptr, 100.0, 100.0, 100.0);
+
+	// poly_scene_multi_label* label = poly_scene_multi_label_create("test text\nnext line here\nanother line\n\na line after an empty line", 20);
 
 	//poly_scene_add_child(scene, (poly_entity*) poly_scene_label_create("test text", 30));
 	//poly_scene_add_child(scene, (poly_entity*) poly_scene_image_create("../resources/gradient.png"));
-	poly_scene_add_child(scene, (poly_entity*) label);
+	//poly_scene_add_child(scene, (poly_entity*) label);
 
 	//poly_scene_add_child(scene, (poly_entity*) poly_scene_primitive_create_cube(30.0, 30.0, 20.0));
 
+	int i = 0;
+	std::vector<poly_attractor*> attractors;
+	int iterations = 0;
+	int maxSize = 40.0;
+	int maxEntities = 1;
+
+	poly_attractor* a = poly_attractor_add(scene, nullptr, RANDOM_NUMBER * maxSize, RANDOM_NUMBER * maxSize,  RANDOM_NUMBER * maxSize);	
+	poly_attractor_target_size(a, 100.0);
+	poly_attractor_target_color(a, 0.0, 1.0, 0.0, 1.0);
+
 	while(true)
 	{
+		std::cout << iterations << std::endl;
 		poly_core_update(core);
-		poly_scene_multi_label_set_text(label, "1 fa flsdjklsadf ;sjlkadf asljdf jklasdf  here\n2 multiple linenew textasdkfljasd;lfdks fa flsdjklsadf ;sjlkadf asljdf jklasdf jklasdf s\n3 new tnew textasdkfljasd;lfdks fa flsdjklsadf ;sjlkadf asljdf jklasdf new textasdkfljasd;lfdks fa here\n4 multiple lines\n5 new text here\n6 multiple lines\n7 new text here\n8 multiple lines\n9 new text here\n10 multiple lines\n");
+		// if(i < maxEntities) 
+		// {
+		// 	attractors.push_back();
+		// 	i++;
+		// }
+		// if(iterations % 10 == 0 && attractors.size() > 0) poly_attractor_target_size(attractors[attractors.size() - 1], 100.0);
+		// if(iterations % 10 == 0 && attractors.size() > 0) poly_attractor_target_color(attractors[attractors.size() - 1], 0.0, 1.0, 0.0, 1.0);
+
+		//usleep(100);
+		iterations++;
+		// poly_scene_multi_label_set_text(label, "1 fa flsdjklsadf ;sjlkadf asljdf jklasdf  here\n2 multiple linenew textasdkfljasd;lfdks fa flsdjklsadf ;sjlkadf asljdf jklasdf jklasdf s\n3 new tnew textasdkfljasd;lfdks fa flsdjklsadf ;sjlkadf asljdf jklasdf new textasdkfljasd;lfdks fa here\n4 multiple lines\n5 new text here\n6 multiple lines\n7 new text here\n8 multiple lines\n9 new text here\n10 multiple lines\n");
 	}
 
 	return 0;

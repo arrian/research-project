@@ -72,7 +72,7 @@
   (lambda (e:event*)
   	(let ((data (bitcast (event_get_data e) i32*))
   		    (address (event_get_address e)))
-    	;; (printf "handling %p\n" (event_get_data e))
+    	(printf "handling %s\n" address)
 		  (cond ((= (strcmp address "/interface/selection") 0) (handle_selection data));; args: count start end start end... . eg. 4 0 3 10 13
       			((= (strcmp address "/interface/code") 0) (handle_code (event_get_data e)));; args: code
       			((= (strcmp address "/interface/evaluate") 0) (handle_evaluate (event_get_data e))) ;; args: evaluated_code
@@ -80,7 +80,7 @@
       			((= (strcmp address "/interface/error") 0) (handle_error (event_get_data e))) ;; args: message
             ((= (strcmp address "/interface/focus") 0) (handle_focus (event_get_data e))) ;; args: file_name
   			    (else void))
-		  (printf "%s\n" address)
+		  (printf "handled %s\n" address)
       void)))
 
 ;; Handles routing of addresses for messages in the queue.
@@ -98,9 +98,10 @@
 ;; OSC receive function. Stores messages in a queue to be accessed by the main thread.
 (bind-func receive
   (lambda (address:i8* types:i8* args:i8*)
-  	;; (printf "received %s\n" types)
+  	(printf "received %s\n" address)
   	(let ((e:event* (event_create (now) address types args)))
   		(eventqueue_push EVENT_QUEUE e))
+    (printf "pushed %s\n" address)
   	void))
 
 ;; OSC start the receive server.
