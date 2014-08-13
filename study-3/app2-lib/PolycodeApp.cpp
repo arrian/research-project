@@ -20,6 +20,8 @@ struct Attractor
 	int type;
 	int segments;
 
+	bool isStatic;
+
 	// Transitions
 
 	//Size
@@ -39,7 +41,7 @@ struct Attractor
 	unsigned long long transitionTime;
 
 
-	Attractor(double x, double y, PhysicsScene2D* scene, Attractor* parent, double size, Color color, int type, int segments)
+	Attractor(double x, double y, PhysicsScene2D* scene, Attractor* parent, double size, Color color, int type, int segments, bool isStatic)
 	{
 		this->scene = scene;
 		this->parent = parent;
@@ -54,6 +56,8 @@ struct Attractor
 
 		this->currentSize = size;
 
+		this->isStatic = isStatic;
+
 		this->entity = new ScenePrimitive(type, size, size, segments);
 		entity->setPosition(x, y);
 		entity->setColor(color);
@@ -61,9 +65,15 @@ struct Attractor
 		createEntity();
 	}
 
+	~Attractor()
+	{
+		destroyEntity();
+		delete this->entity;
+	}
+
 	void createEntity()
 	{
-		this->physicsEntity = this->scene->addPhysicsChild(this->entity, PhysicsScene2DEntity::ENTITY_CIRCLE, false);		
+		this->physicsEntity = this->scene->addPhysicsChild(this->entity, PhysicsScene2DEntity::ENTITY_CIRCLE, isStatic);		
 	}
 
 	void destroyEntity()
@@ -105,6 +115,10 @@ struct Attractor
 			std::cout << newSize << std::endl;
 			this->currentSize = newSize;
 			reinterpret_cast<ScenePrimitive*>(this->entity)->setPrimitiveOptions(type, newSize, newSize, segments);
+
+			//save forces
+			destroyEntity();
+			createEntity();
 		}
 		if(!finishedColorTransition)
 		{
@@ -125,29 +139,28 @@ struct Attractor
 			this->entity->setColor(newColor);
 		}
 
-		if(!finishedSizeTransition || !finishedColorTransition)//recreate physics
-		{
-			destroyEntity();
-			createEntity();
-		}
-
 		this->physicsEntity->applyForce(attract());
 	}
 
 	Vector2 attract() 
 	{
-		double G = 1000.0;
+		double G = 500.0;
 		
-		Vector2 pos = Vector2(0.0,0.0);    
+		// std::cout << this->parent << std::endl;
+
+		Vector2 pos;
+		if(this->parent) pos = this->parent->entity->getPosition2D();
+		else pos = Vector2(0.0,0.0);
+
 		Vector2 moverPos = this->entity->getPosition2D();
 		
 		Vector2 force = pos - moverPos;
 		double distance = force.length();
 
-		distance = std::max(1.0, std::min(distance, 10.0));
+		distance = std::max(1.0, std::min(distance, 5.0));
 		force.Normalize();
 		
-		double strength = (G * 1 * 10.0) / (distance * distance); 
+		double strength = (G * 10.0) / (distance * distance); 
 		return force * strength;
 	}
 
@@ -163,11 +176,6 @@ struct Attractor
 			throw std::runtime_error("quadratic ease out got a strange result");
 		}
 
-		// if(result > 1000.0)
-		// {
-		// 	std::cout << "quadtratic ease out result was too high" << std::endl;
-		// 	return 1.0;
-		// }
 		return result;
 	}
 
@@ -196,13 +204,16 @@ poly_core* poly_core_create(char* title, int width, int height, char* resources)
 
 void poly_core_update(poly_core* core)
 {
+	reinterpret_cast<Core*>(core)->updateAndRender();
+}
+
+void poly_attractors_update()
+{
 	for(int i = 0; i < attractorsGlobal.size(); i++)
 	{
 		Attractor* attractor = attractorsGlobal[i];
 		attractor->update();
 	}
-
-	reinterpret_cast<Core*>(core)->updateAndRender();
 }
 
 void poly_core_destroy(poly_core* core)
@@ -215,6 +226,23 @@ poly_scene* poly_scene_create(int width, int height)
 	//Scene* scene = new Scene(Scene::SCENE_2D);
 	PhysicsScene2D* scene = new PhysicsScene2D(5.0, 20);//0.1,60
 	scene->setGravity(Vector2(0.0, 0.0));
+
+	// Setup physics bounds
+	double thickness = 10.0;
+	ScenePrimitive* top = new ScenePrimitive(0, width, thickness, 1.0);
+	top->setPosition(0.0, - height / 2.0);
+	ScenePrimitive* bottom = new ScenePrimitive(0, width, thickness, 1.0);
+	bottom->setPosition(0.0, height / 2.0);
+	ScenePrimitive* left = new ScenePrimitive(0, thickness, height, 1.0);
+	left->setPosition(- width / 2.0, 0.0);
+	ScenePrimitive* right = new ScenePrimitive(0, thickness, height, 1.0);
+	right->setPosition(width / 2.0, 0.0);
+
+	scene->addPhysicsChild(top, PhysicsScene2DEntity::ENTITY_RECT, true);
+	scene->addPhysicsChild(bottom, PhysicsScene2DEntity::ENTITY_RECT, true);
+	scene->addPhysicsChild(left, PhysicsScene2DEntity::ENTITY_RECT, true);
+	scene->addPhysicsChild(right, PhysicsScene2DEntity::ENTITY_RECT, true);
+
 
 	scene->getActiveCamera()->setOrthoSize(width, height);
 	return reinterpret_cast<poly_scene*>(scene);
@@ -229,6 +257,12 @@ void poly_scene_add_child(poly_scene* scene, poly_entity* entity)
 {
 	//reinterpret_cast<Scene*>(scene)->addChild(reinterpret_cast<Entity*>(entity));
 	reinterpret_cast<PhysicsScene2D*>(scene)->addPhysicsChild(reinterpret_cast<Entity*>(entity), PhysicsScene2DEntity::ENTITY_CIRCLE, false);
+}
+
+void poly_scene_physics_set_gravity(poly_scene* s, double gx, double gy)
+{
+	PhysicsScene2D* scene = reinterpret_cast<PhysicsScene2D*>(s);
+	scene->setGravity(Vector2(gx, gy));
 }
 
 void poly_entity_set_position(poly_entity* entity, double x, double y)
@@ -314,25 +348,23 @@ void poly_scene_primitive_set_circle_options(poly_scene_primitive* primitive, do
 	reinterpret_cast<ScenePrimitive*>(primitive)->setPrimitiveOptions(8, xSize, ySize, segments);
 }
 
-poly_attractor* poly_attractor_add(poly_scene* s, poly_attractor* a, double x, double y, double size)
+poly_attractor* poly_attractor_add(poly_scene* s, poly_attractor* a, double x, double y, double size, bool isStatic)
 {
 	PhysicsScene2D* scene = reinterpret_cast<PhysicsScene2D*>(s);
-	Color color(RANDOM_NUMBER, RANDOM_NUMBER * 0.5 + 0.5, 1.0, 1.0);
+	double grey = RANDOM_NUMBER;
+	Color color(grey, grey, grey, 1.0);
 	int type = 8;//circle
 	int segments = 6;
 
-	Attractor* attractor = new Attractor(x, y, scene, nullptr, size, color, type, segments);
+	Attractor* attractor = new Attractor(x, y, scene, nullptr, size, color, type, segments, isStatic);
 	attractorsGlobal.push_back(attractor);
 	return reinterpret_cast<poly_attractor*>(attractor);
 }
 
-void poly_attractor_remove(poly_scene* s, poly_attractor* a)
+void poly_attractor_remove(poly_attractor* a)
 {
-	PhysicsScene2D* scene = reinterpret_cast<PhysicsScene2D*>(s);
 	Attractor* attractor = reinterpret_cast<Attractor*>(a);
-	scene->removePhysicsChild(attractor->entity);
 	attractorsGlobal.erase(std::remove(attractorsGlobal.begin(), attractorsGlobal.end(), attractor), attractorsGlobal.end());
-	delete attractor->entity;
 	delete attractor;
 }
 
@@ -352,6 +384,7 @@ void poly_attractor_impulse(poly_attractor* a, double x, double y)
 {
 	Attractor* attractor = reinterpret_cast<Attractor*>(a);
 }
+
 
 
 

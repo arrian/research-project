@@ -26,6 +26,7 @@ extern "C"
 	poly_scene* poly_scene_create(int width, int height);
 	void poly_scene_destroy(poly_scene* scene);
 	void poly_scene_add_child(poly_scene* scene, poly_entity* entity);
+	void poly_scene_physics_set_gravity(poly_scene* scene, double gx, double gy);
 
 	void poly_entity_set_position(poly_entity* entity, double x, double y);
 	void poly_entity_set_yaw(poly_entity* entity, double yaw);
@@ -49,9 +50,10 @@ extern "C"
 	void poly_scene_primitive_set_circle_options(poly_scene_primitive* primitive, double xSize, double ySize, int segments);
 	
 	//Attractors - requires a physics enabled scene
+	void poly_attractors_update();
 
 	struct poly_attractor;
-	poly_attractor* poly_attractor_add(poly_scene* scene, poly_attractor* attractor, double x, double y, double size);
+	poly_attractor* poly_attractor_add(poly_scene* scene, poly_attractor* attractor, double x, double y, double size, bool isStatic);
 	void poly_attractor_remove(poly_attractor* attractor);
 	// void poly_attractor_pulse_size(double next, double final);
 	// void poly_attractor_pulse_color(double nr, double ng, double nb, double na, double fr, double fg, double fb, double fa);
@@ -83,28 +85,36 @@ int main(int argc, char* argv[])
 	int iterations = 0;
 	int maxSize = 20.0;
 	int maxEntities = 100;
+	bool updateAttractors = true;
 
-	poly_attractor* a = poly_attractor_add(scene, nullptr, RANDOM_NUMBER * maxSize, RANDOM_NUMBER * maxSize,  RANDOM_NUMBER * maxSize);	
-	poly_attractor_target_size(a, 100.0);
+	poly_attractor* a = poly_attractor_add(scene, nullptr, 0.0, 0.0,  RANDOM_NUMBER * maxSize, true);	
+	
 	poly_attractor_target_color(a, 0.0, 1.0, 0.0, 1.0);
 
 	while(true)
 	{
-		std::cout << iterations << std::endl;
+		// std::cout << iterations << std::endl;
 		poly_core_update(core);
+		if(updateAttractors) poly_attractors_update();
 
-		if(i < maxEntities && iterations % 20 == 0) 
+		if(i < maxEntities && iterations % 1 == 0) //20
 		{
-			attractors.push_back(poly_attractor_add(scene, nullptr, RANDOM_NUMBER * width, RANDOM_NUMBER * height,  RANDOM_NUMBER * maxSize + 20.0));	
+			attractors.push_back(poly_attractor_add(scene, nullptr, RANDOM_NUMBER * width - width / 2.0, RANDOM_NUMBER * height - height / 2.0,  RANDOM_NUMBER * maxSize + 20.0, false));	
 			i++;
 		}
 
-		if(attractors.size() > 0 && iterations % 50 == 0)
+		if(attractors.size() > 0 && iterations % 2 == 0 && iterations > 1000)
 		{
-			poly_attractor_target_size(attractors[int(RANDOM_NUMBER * double(attractors.size() - 1))], 200.0);
-		} 
+			// poly_attractor_target_size(attractors[int(RANDOM_NUMBER * double(attractors.size() - 1))], 200.0);
+			poly_attractor_target_color(attractors[int(RANDOM_NUMBER * double(attractors.size() - 1))], RANDOM_NUMBER, RANDOM_NUMBER / 2.0, RANDOM_NUMBER / 2.0, 1.0);
+		}
+
+		if(iterations == 500)
+		{
+			poly_attractor_target_size(a, 200.0);
+		}
 		
-		usleep(10000);
+		usleep(100);
 		iterations++;
 	}
 

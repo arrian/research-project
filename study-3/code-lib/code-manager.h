@@ -9,6 +9,7 @@
 
 //#include "code-graph.h"
 
+
 class CodeManager
 {
 public:
@@ -52,29 +53,29 @@ extern "C"
 	void* code_graph_get_entity(code_graph* graph);
 	void code_graph_set_entity(code_graph* graph, void* entity);
 
-	double code_element_get_size(code_element* element);
-	double code_element_get_x(code_element* element);
-	double code_element_get_y(code_element* element);
-	double code_element_get_r(code_element* element);
-	double code_element_get_g(code_element* element);
-	double code_element_get_b(code_element* element);
+	// double code_element_get_size(code_element* element);
+	// double code_element_get_x(code_element* element);
+	// double code_element_get_y(code_element* element);
+	// double code_element_get_r(code_element* element);
+	// double code_element_get_g(code_element* element);
+	// double code_element_get_b(code_element* element);
 	bool code_element_is_valid(code_element* element);
 	void* code_element_get_user_data(code_element* element);
 	void code_element_set_user_data(code_element* element, void* userData);
 }
 
-void printX(code_manager* manager)
-{
-	for(int i = 0; i < code_manager_get_graph_count(manager); i++)
-	{
-		code_graph* graph = code_manager_get_graph(manager, i);
-		for(int j = 0; j < code_graph_get_element_count(graph); j++)
-		{
-			code_element* element = code_graph_get_element(graph, j);
-			std::cout << "found y of: " << code_element_get_y(element) << std::endl;
-		}
-	}
-}
+// void printX(code_manager* manager)
+// {
+// 	for(int i = 0; i < code_manager_get_graph_count(manager); i++)
+// 	{
+// 		code_graph* graph = code_manager_get_graph(manager, i);
+// 		for(int j = 0; j < code_graph_get_element_count(graph); j++)
+// 		{
+// 			code_element* element = code_graph_get_element(graph, j);
+// 			std::cout << "found y of: " << code_element_get_y(element) << std::endl;
+// 		}
+// 	}
+// }
 
 int main(int argc, char* argv[])
 {	
@@ -83,7 +84,7 @@ int main(int argc, char* argv[])
 	std::string code2 = "(test function\n here2)\n\n(another test \nfunction2)\n(another2 test \nfunction2)\n";
 	manager.update(code2);
 
-	printX(reinterpret_cast<code_manager*>(&manager));
+	// printX(reinterpret_cast<code_manager*>(&manager));
 
 	std::cout << manager.graphs.size() << std::endl;
 

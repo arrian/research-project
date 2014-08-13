@@ -2,6 +2,7 @@
 ;;
 ;; Main entry point for study 3.
 
+
 (define *study-3-dir* "research-project/visualisation-core")
 
 ;; (sys:load (string-append *study-3-dir* "/event-manager.xtm"))
@@ -18,8 +19,6 @@
 
 (sys:load (string-append *study-3-dir* "/interface-manager.xtm"))
 
-
-
 (define update-loop
   (lambda (time delta-t)
   	(handle_events)
@@ -29,7 +28,12 @@
               (+ time (* *second* delta-t)) 
               delta-t)))
 
-(update-loop (now) 1/10)
+(update-loop (now) 1/30)
+
+
+
+
+
 
 
 

@@ -4,8 +4,8 @@
 ;; including code drawing, visual elements drawing and
 ;; all visual effects.
 
-(define WIDTH 640)
-(define HEIGHT 480)
+(define WIDTH 500);;640
+(define HEIGHT 800);;480
 ;; (bind-val WIDTH i64 1024)
 ;; (bind-val HEIGHT i64 768)
 
@@ -22,7 +22,10 @@
 
 (bind-func draw
   (lambda ()
+  	;; (printf "updating polycore\n")
+    (poly_attractors_update)
     (poly_core_update POLY_CORE)
+    ;; (printf "updated polycore\n")
     void))
 
 ;; (define draw-loop
