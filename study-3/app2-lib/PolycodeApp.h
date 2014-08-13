@@ -81,8 +81,8 @@ int main(int argc, char* argv[])
 	int i = 0;
 	std::vector<poly_attractor*> attractors;
 	int iterations = 0;
-	int maxSize = 40.0;
-	int maxEntities = 1;
+	int maxSize = 20.0;
+	int maxEntities = 100;
 
 	poly_attractor* a = poly_attractor_add(scene, nullptr, RANDOM_NUMBER * maxSize, RANDOM_NUMBER * maxSize,  RANDOM_NUMBER * maxSize);	
 	poly_attractor_target_size(a, 100.0);
@@ -92,17 +92,20 @@ int main(int argc, char* argv[])
 	{
 		std::cout << iterations << std::endl;
 		poly_core_update(core);
-		// if(i < maxEntities) 
-		// {
-		// 	attractors.push_back();
-		// 	i++;
-		// }
-		// if(iterations % 10 == 0 && attractors.size() > 0) poly_attractor_target_size(attractors[attractors.size() - 1], 100.0);
-		// if(iterations % 10 == 0 && attractors.size() > 0) poly_attractor_target_color(attractors[attractors.size() - 1], 0.0, 1.0, 0.0, 1.0);
 
-		//usleep(100);
+		if(i < maxEntities && iterations % 20 == 0) 
+		{
+			attractors.push_back(poly_attractor_add(scene, nullptr, RANDOM_NUMBER * width, RANDOM_NUMBER * height,  RANDOM_NUMBER * maxSize + 20.0));	
+			i++;
+		}
+
+		if(attractors.size() > 0 && iterations % 50 == 0)
+		{
+			poly_attractor_target_size(attractors[int(RANDOM_NUMBER * double(attractors.size() - 1))], 200.0);
+		} 
+		
+		usleep(10000);
 		iterations++;
-		// poly_scene_multi_label_set_text(label, "1 fa flsdjklsadf ;sjlkadf asljdf jklasdf  here\n2 multiple linenew textasdkfljasd;lfdks fa flsdjklsadf ;sjlkadf asljdf jklasdf jklasdf s\n3 new tnew textasdkfljasd;lfdks fa flsdjklsadf ;sjlkadf asljdf jklasdf new textasdkfljasd;lfdks fa here\n4 multiple lines\n5 new text here\n6 multiple lines\n7 new text here\n8 multiple lines\n9 new text here\n10 multiple lines\n");
 	}
 
 	return 0;

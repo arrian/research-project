@@ -50,23 +50,26 @@ struct Attractor
 		this->type = type;
 		this->segments = segments;
 
-		this->transitionTime = 10000;
+		this->transitionTime = 1000;
+
+		this->currentSize = size;
 
 		this->entity = new ScenePrimitive(type, size, size, segments);
 		entity->setPosition(x, y);
 		entity->setColor(color);
 
-		createPhysicsEntity();
+		createEntity();
 	}
 
-	void createPhysicsEntity()
+	void createEntity()
 	{
-		this->physicsEntity = this->scene->addPhysicsChild(this->entity, PhysicsScene2DEntity::ENTITY_CIRCLE, false);
+		this->physicsEntity = this->scene->addPhysicsChild(this->entity, PhysicsScene2DEntity::ENTITY_CIRCLE, false);		
 	}
 
-	void destroyPhysicsEntity()
+	void destroyEntity()
 	{
-		scene->removePhysicsChild(reinterpret_cast<Entity*>(this->physicsEntity));
+		scene->removePhysicsChild(this->entity);
+		this->physicsEntity = nullptr;
 	}
 
 	void setTargetSize(double size)
@@ -93,13 +96,13 @@ struct Attractor
 			unsigned long long end = sizeStartTime + transitionTime;
 			double newSize;
 
-			if(now > end)
+			if(now >= end)
 			{
 				this->finishedSizeTransition = true;
 				newSize = targetSize;
 			}
-			else newSize = quadraticEaseOut(now, sizeStartTime, sizeStartTime + transitionTime, initialSize, targetSize);
-
+			else newSize = quadraticEaseOut(int(now - sizeStartTime), initialSize, targetSize - initialSize, transitionTime);
+			std::cout << newSize << std::endl;
 			this->currentSize = newSize;
 			reinterpret_cast<ScenePrimitive*>(this->entity)->setPrimitiveOptions(type, newSize, newSize, segments);
 		}
@@ -108,15 +111,15 @@ struct Attractor
 			unsigned long long end = colorStartTime + transitionTime;
 			Color newColor;
 
-			if(now > end)
+			if(now >= end)
 			{
 				this->finishedColorTransition = true;
 				newColor = targetColor;
 			}
-			else newColor = Color(quadraticEaseOut(now, colorStartTime, colorStartTime + transitionTime, initialColor.r, targetColor.r),
-								  quadraticEaseOut(now, colorStartTime, colorStartTime + transitionTime, initialColor.g, targetColor.g),
-								  quadraticEaseOut(now, colorStartTime, colorStartTime + transitionTime, initialColor.b, targetColor.b),
-								  quadraticEaseOut(now, colorStartTime, colorStartTime + transitionTime, initialColor.a, targetColor.a));
+			else newColor = Color(quadraticEaseOut(now - colorStartTime, initialColor.r, targetColor.r - initialColor.r, transitionTime),
+								  quadraticEaseOut(now - colorStartTime, initialColor.g, targetColor.g - initialColor.g, transitionTime),
+								  quadraticEaseOut(now - colorStartTime, initialColor.b, targetColor.b - initialColor.b, transitionTime),
+								  quadraticEaseOut(now - colorStartTime, initialColor.a, targetColor.a - initialColor.a, transitionTime));
 
 			this->currentColor = newColor;
 			this->entity->setColor(newColor);
@@ -124,27 +127,47 @@ struct Attractor
 
 		if(!finishedSizeTransition || !finishedColorTransition)//recreate physics
 		{
-			destroyPhysicsEntity();
-			createPhysicsEntity();
+			destroyEntity();
+			createEntity();
 		}
+
+		this->physicsEntity->applyForce(attract());
 	}
 
-	//hacky easing
-	double quadraticEaseOut(unsigned long long now, unsigned long long startTime, unsigned long long endTime, double startValue, double endValue)
+	Vector2 attract() 
 	{
-		double changeValue = endValue - startValue;
-		double changeTime = double(endTime - startTime);
-		double currentTime = double(now - startTime);
+		double G = 1000.0;
+		
+		Vector2 pos = Vector2(0.0,0.0);    
+		Vector2 moverPos = this->entity->getPosition2D();
+		
+		Vector2 force = pos - moverPos;
+		double distance = force.length();
 
-		std::cout << "changeValue: " << changeValue << " changeTime: " << changeTime << " currentTime: " << currentTime << std::endl;
-		// std::cout << "in object: " << this << " quad ease was: " << result << " change time " << changeTime << " current time " << double(now - startTime) << std::endl;
+		distance = std::max(1.0, std::min(distance, 10.0));
+		force.Normalize();
+		
+		double strength = (G * 1 * 10.0) / (distance * distance); 
+		return force * strength;
+	}
 
+	double quadraticEaseOut(int current, double startValue, double changeValue, int duration)
+	{
+		//if(duration == 0) return startValue;
+		double td = double(current) / double(duration);
+		double result = -changeValue * td * (td - 2.0) + startValue;
 
-		currentTime /= changeTime;
+		if(result > 1000.0) 
+		{
+			std::cout << "current: " << current << " startValue: " << startValue << " changeValue: " << changeValue << " duration: " << duration << std::endl;
+			throw std::runtime_error("quadratic ease out got a strange result");
+		}
 
-
-		double result = -changeValue * currentTime * (currentTime - 2.0) + startValue;
-
+		// if(result > 1000.0)
+		// {
+		// 	std::cout << "quadtratic ease out result was too high" << std::endl;
+		// 	return 1.0;
+		// }
 		return result;
 	}
 
@@ -190,7 +213,7 @@ void poly_core_destroy(poly_core* core)
 poly_scene* poly_scene_create(int width, int height)
 {
 	//Scene* scene = new Scene(Scene::SCENE_2D);
-	PhysicsScene2D* scene = new PhysicsScene2D(5.0, 60);//0.1,60
+	PhysicsScene2D* scene = new PhysicsScene2D(5.0, 20);//0.1,60
 	scene->setGravity(Vector2(0.0, 0.0));
 
 	scene->getActiveCamera()->setOrthoSize(width, height);
@@ -294,7 +317,7 @@ void poly_scene_primitive_set_circle_options(poly_scene_primitive* primitive, do
 poly_attractor* poly_attractor_add(poly_scene* s, poly_attractor* a, double x, double y, double size)
 {
 	PhysicsScene2D* scene = reinterpret_cast<PhysicsScene2D*>(s);
-	Color color(RANDOM_NUMBER, RANDOM_NUMBER * 0.5 + 0.5, 1.0, RANDOM_NUMBER);
+	Color color(RANDOM_NUMBER, RANDOM_NUMBER * 0.5 + 0.5, 1.0, 1.0);
 	int type = 8;//circle
 	int segments = 6;
 
