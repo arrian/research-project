@@ -53,12 +53,12 @@ extern "C"
 	void* code_graph_get_entity(code_graph* graph);
 	void code_graph_set_entity(code_graph* graph, void* entity);
 
-	// double code_element_get_size(code_element* element);
-	// double code_element_get_x(code_element* element);
-	// double code_element_get_y(code_element* element);
-	// double code_element_get_r(code_element* element);
-	// double code_element_get_g(code_element* element);
-	// double code_element_get_b(code_element* element);
+	double code_element_get_size(code_element* element);
+	double code_element_get_x(code_element* element);
+	double code_element_get_y(code_element* element);
+	double code_element_get_r(code_element* element);
+	double code_element_get_g(code_element* element);
+	double code_element_get_b(code_element* element);
 	bool code_element_is_valid(code_element* element);
 	void* code_element_get_user_data(code_element* element);
 	void code_element_set_user_data(code_element* element, void* userData);

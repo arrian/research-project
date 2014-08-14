@@ -77,6 +77,18 @@
 (bind-lib code event_get_type [i8*,event*]*)
 (bind-lib code event_get_data [i8*,event*]*)
 
+(bind-alias list i8)
+
+(bind-lib code list_create [list*]*)
+(bind-lib code list_destroy [void,list*]*)
+
+(bind-lib code list_add [void,list*,i8*]*)
+(bind-lib code list_get [i8*,list*,i64]*)
+(bind-lib code list_remove [void,list*,i64]*)
+(bind-lib code list_remove_end [void,list*,i64]*)
+
+(bind-lib code list_size [i64,list*]*)
+	
 ;; Simple Graph
 (bind-alias code_manager i8)
 (bind-alias code_graph i8)
@@ -98,13 +110,35 @@
 (bind-lib code code_graph_get_entity [i8*,code_graph*]*)
 (bind-lib code code_graph_set_entity [void,code_graph*,i8*]*)
 
-;; (bind-lib code code_element_get_size [double,code_element*]*)
-;; (bind-lib code code_element_get_x [double,code_element*]*)
-;; (bind-lib code code_element_get_y [double,code_element*]*)
-;; (bind-lib code code_element_get_r [double,code_element*]*)
-;; (bind-lib code code_element_get_g [double,code_element*]*)
-;; (bind-lib code code_element_get_b [double,code_element*]*)
+(bind-lib code code_element_get_size [double,code_element*]*)
+(bind-lib code code_element_get_x [double,code_element*]*)
+(bind-lib code code_element_get_y [double,code_element*]*)
+(bind-lib code code_element_get_r [double,code_element*]*)
+(bind-lib code code_element_get_g [double,code_element*]*)
+(bind-lib code code_element_get_b [double,code_element*]*)
 (bind-lib code code_element_is_valid [i1,code_element*]*)
 (bind-lib code code_element_get_user_data [i8*,code_element*]*)
 (bind-lib code code_element_set_user_data [void,code_element*,i8*]*)
+
+
+;; (bind-val CODE_GRAPH_LIST List:<code_graph*,List*>*)
+
+;; (bind-func widget_list_init
+;;   (lambda ()
+;;     (let ((n:List:<Widget*,List*>* null))
+;;       (set! WIDGET_LIST n))))
+
+;; (widget_list_init)
+
+;; Doesn't seem to work?
+;; (bind-func code_manager_get_graphs
+;;   (lambda (manager:code_manager*)
+;;   	(let ((i 0)
+;;   		  (graphs:List:<code_graph*,List*>* null))
+;;   		(set! CODE_GRAPH_LIST graphs)
+;;   		(dotimes (i (code_manager_get_graph_count manager))
+;;   			(set! CODE_GRAPH_LIST (cons (code_manager_get_graph manager i) CODE_GRAPH_LIST)))
+;;   		1)))
+
+
 

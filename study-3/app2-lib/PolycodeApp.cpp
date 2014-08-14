@@ -352,20 +352,22 @@ poly_attractor* poly_attractor_add(poly_scene* s, poly_attractor* a, double x, d
 {
 	PhysicsScene2D* scene = reinterpret_cast<PhysicsScene2D*>(s);
 	double grey = RANDOM_NUMBER;
-	Color color(grey, grey, grey, 1.0);
+	Color color(RANDOM_NUMBER, RANDOM_NUMBER, RANDOM_NUMBER, 1.0);//grey
 	int type = 8;//circle
 	int segments = 6;
 
-	Attractor* attractor = new Attractor(x, y, scene, nullptr, size, color, type, segments, isStatic);
+	Attractor* attractor = new Attractor(x, y, scene, reinterpret_cast<Attractor*>(a), size, color, type, segments, isStatic);
 	attractorsGlobal.push_back(attractor);
 	return reinterpret_cast<poly_attractor*>(attractor);
 }
 
 void poly_attractor_remove(poly_attractor* a)
 {
+	std::cout << "entered remove" << std::endl;
 	Attractor* attractor = reinterpret_cast<Attractor*>(a);
 	attractorsGlobal.erase(std::remove(attractorsGlobal.begin(), attractorsGlobal.end(), attractor), attractorsGlobal.end());
 	delete attractor;
+	std::cout << "exited remove" << std::endl;
 }
 
 void poly_attractor_target_size(poly_attractor* a, double size)

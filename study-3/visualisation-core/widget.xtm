@@ -5,7 +5,7 @@
 ;; 2 code graph pointer
 ;; 3 next callback time (now-based)
 ;; 4 initial callback time (now-based)
-(bind-type Widget <String*,String*,code_graph*,i64,i64,poly_attractor*>)
+(bind-type Widget <String*,String*,code_graph*,i64,i64,poly_attractor*,list*>)
 
 (bind-func widget_get_name
   (lambda (w:Widget*)
@@ -55,16 +55,71 @@
   (lambda (w:Widget* attractor:poly_attractor*)
     (tset! w 5 attractor)))
 
-(bind-func widget_update
-  (lambda (w:Widget* graph:code_graph*)
-    (let ((i 0))
+(bind-func widget_set_attractors_list
+  (lambda (w:Widget*)
+    (tset! w 6 (list_create))
+    ))
+
+(bind-func widget_get_attractors_list
+  (lambda (w:Widget*)
+    (tref w 6)
+    ))
+
+(bind-func widget_add_new
+  (lambda (w:Widget* count:i64)
+    (let ((i:i64 0))
+        (dotimes (i count)
+          (list_add (widget_get_attractors_list w) (poly_attractor_add POLY_SCENE (widget_get_attractor w) (random 0.0 300.0) (random 0.0 300.0) 30.0 0))
+          )
+      )
+    void))
+
+(bind-func widget_remove_old ;; remove old attractors
+  (lambda (w:Widget* count:i64)
+      (let ((i:i64 0)
+            (lst (widget_get_attractors_list w)))
+        (dotimes (i count)
+          (printf "removing old nodes")
+            ;;(poly_attractor_target_color (list_get lst i) (random 0.7 1.0) (random 0.1) (random 0.1) 0.7)
+          ))
+    void))
+;; (poly_attractor_remove (list_get lst (- (- (list_size lst) 1) i)))
+;; (list_remove lst (- (- (list_size lst) 1) i))
+            ;; 
+
+
+(bind-func widget_sync
+  (lambda (w:Widget*)
+    (let ((i:i32 0)
+          (graph (widget_get_graph w)))
       (dotimes (i (code_graph_get_element_count graph))
-        (let ((e:code_element* (code_graph_get_element graph i)))
-          (if (null? (code_element_get_user_data e)) 
-            (let ((circle (poly_attractor_add POLY_SCENE (code_graph_get_entity graph) (random 0.0 300.0) (random 0.0 300.0) 10.0 0)));;(poly_scene_primitive_create_circle (code_element_get_size e) (code_element_get_size e) segments) 
-                (code_element_set_user_data e circle)
-                )))))
-    0))
+            (let ((e:code_element* (code_graph_get_element graph i)))
+              (poly_attractor_target_size (list_get (widget_get_attractors_list w) (i32toi64 i)) (* 3.0 (code_element_get_size e)))
+              ;;(poly_attractor_target_color (list_get (widget_get_attractors_list w) (i32toi64 i)) (code_element_get_r e) (code_element_get_g e) (code_element_get_b e) 1.0)
+              )))
+    void))
+
+(bind-func widget_update
+  (lambda (w:Widget*)
+    (let ((i:i32 0)
+          (graph (widget_get_graph w))
+          (attractor (widget_get_attractor w))
+          (attractors (widget_get_attractors_list w)))
+      (let ((element_count:i32 (code_graph_get_element_count graph))
+            (attractors_count:i32 (i64toi32 (list_size attractors))))
+              (cond ((> element_count attractors_count) (widget_add_new w (i32toi64 (- element_count attractors_count))))
+              ((< element_count attractors_count) (widget_remove_old w (i32toi64 (- attractors_count element_count))))
+              (else void))
+              (widget_sync w)
+        0))))
+
+    ;;   (dotimes (i (code_graph_get_element_count graph))
+    ;;     (let ((e:code_element* (code_graph_get_element graph i)))
+    ;;       (if (null? (code_element_get_user_data e)) 
+    ;;         (let ((circle (poly_attractor_add POLY_SCENE attractor (random 0.0 300.0) (random 0.0 300.0) 10.0 0)));;(poly_scene_primitive_create_circle (code_element_get_size e) (code_element_get_size e) segments) 
+    ;;             (code_element_set_user_data e circle)
+    ;;             )))))
+    ;; 0))
 
 (bind-func widget_print
   (lambda (w:Widget*)
@@ -82,11 +137,21 @@
 
 (widget_list_init)
 
+(bind-func widget_list_index
+  (lambda (index:i32 lst:List:<Widget*,List*>*)
+      (if (<= index 0) (car lst) (widget_list_index (- index 1) (cdr lst)))))
+
 (bind-func widget_list_add
-  (lambda (name:i8* code:i8* time_next time_initial attractor)
-    (let ((w (Widget (Str name) (Str code) null time_next time_initial attractor)))
-    (set! WIDGET_LIST (cons w WIDGET_LIST))
-    w)))
+  (lambda (name:i8* code:i8* time_next time_initial graph attractor)
+      (let ((w (Widget (Str name) (Str code) graph time_next time_initial attractor (list_create))))
+          (set! WIDGET_LIST (cons w WIDGET_LIST))
+        w)))
+
+(bind-func widget_list_remove_pointer
+  (lambda (winput)
+    (set! WIDGET_LIST (filter (lambda (w)
+                            (not (equal winput w)))
+                          WIDGET_LIST))))
 
 (bind-func widget_list_remove
   (lambda (name)
@@ -94,23 +159,77 @@
                             (not (equal name (widget_get_name w))))
                           WIDGET_LIST))))
 
+(bind-func widget_list_add_new
+  (lambda (count:i32)
+    (let ((i:i32 0))
+        (dotimes (i count)
+            (let ((attractor (poly_attractor_add POLY_SCENE null 0.0 (- 250.0 (* 150.0 (i64tod (length WIDGET_LIST)))) 50.0 1)))
+                (widget_list_add "" "()" 0 0 null attractor)
+                (poly_attractor_target_color attractor 0.0 1.0 0.0 0.7)
+              )
+          ))
+    void))
+
+(bind-func widget_list_remove_old
+  (lambda (count:i32)
+      (let ((i:i32 0))
+        (dotimes (i count)
+            (let ((w (widget_list_index i WIDGET_LIST)))
+                (let ((lst (widget_get_attractors_list w))
+                      (j 0))
+                    (dotimes (j (list_size lst))
+                        (poly_attractor_remove (list_get lst j))
+                      ))
+                (poly_attractor_remove (widget_get_attractor w))
+                (widget_list_remove_pointer w)
+            )))
+    void))
+
+                ;; (printf "number %d length %d count %d\n" i (length WIDGET_LIST) count)
+                ;; (poly_attractor_target_color (widget_get_attractor (widget_list_index i WIDGET_LIST)) 1.0 0.0 0.0 0.1)
+
+
+
+(bind-func widget_list_sync
+  (lambda ()
+      (let ((i:i32 0))
+          (dotimes (i (i64toi32 (length WIDGET_LIST)))
+              (widget_set_graph (widget_list_index i WIDGET_LIST) (code_manager_get_graph CODE_MANAGER i))))
+    void))
+
 (bind-func widget_list_update
   (lambda ()
-    (let ((i 0))
-      (dotimes (i (code_manager_get_graph_count CODE_MANAGER))
-          (let ((graph (code_manager_get_graph CODE_MANAGER i)))
-              (if (null? (code_graph_get_widget graph)) 
-                (begin 
-                  (code_graph_set_widget graph (bitcast (widget_list_add "test" "(test)" 0 0 ) i8*))
-                  (let ((entity (poly_attractor_add POLY_SCENE null 0.0 (+ -250.0 (* 60.0 (i32tod i))) 50.0 1)));;(bind-lib polycode poly_attractor_add [poly_attractor*,poly_scene*,poly_attractor*,double,double,double,i1]*);;scene,parent,x,y,size,isStatic
-                      (poly_attractor_target_color entity 0.0 1.0 0.0 0.7)
-                      (code_graph_set_entity graph entity)
-                      (printf "graph entity: %p\n" (code_graph_get_entity graph))
-                    )))
-                  
-              (widget_update (bitcast (code_graph_get_widget graph) Widget*) graph)
-              )))
+    (let ((i:i32 0)
+          (graph_count:i32 (code_manager_get_graph_count CODE_MANAGER))
+          (widget_count:i32 (i64toi32 (length WIDGET_LIST))))
+              (cond ((> graph_count widget_count) (widget_list_add_new (- graph_count widget_count)))
+                    ((< graph_count widget_count) (widget_list_remove_old (- widget_count graph_count)))
+                    (else void))
+              (widget_list_sync)
+              (map (lambda (w:Widget*) (widget_update w)) WIDGET_LIST))
     void))
+
+
+
+
+
+
+
+    ;; (let ((i 0))
+    ;;   (dotimes (i (code_manager_get_graph_count CODE_MANAGER))
+    ;;       (let ((graph (code_manager_get_graph CODE_MANAGER i)))
+    ;;           (if (null? (code_graph_get_widget graph)) 
+    ;;             (begin 
+    ;;               (code_graph_set_widget graph (bitcast (widget_list_add "test" "(test)" 0 0 ) i8*))
+    ;;               (let ((entity (poly_attractor_add POLY_SCENE null 0.0 (+ -250.0 (* 60.0 (i32tod i))) 50.0 1)));;(bind-lib polycode poly_attractor_add [poly_attractor*,poly_scene*,poly_attractor*,double,double,double,i1]*);;scene,parent,x,y,size,isStatic
+    ;;                   (poly_attractor_target_color entity 0.0 1.0 0.0 0.7)
+    ;;                   (code_graph_set_entity graph entity)
+    ;;                   (printf "graph entity: %p\n" (code_graph_get_entity graph))
+    ;;                 )))
+                  
+    ;;           (widget_update (bitcast (code_graph_get_widget graph) Widget*) graph)
+    ;;           )))
+    ;; void))
 
 ;; (widget_list_update "(bind-val WIDGET_LIST List:<Widget*,List*>*)" 1.0)
 

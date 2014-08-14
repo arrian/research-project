@@ -26,7 +26,7 @@ CodeSimpleGraph::CodeSimpleGraph(std::string code)
 
 		elements.push_back(element);
 
-		std::cout << "init set x of: " << element.x << std::endl;
+		// std::cout << "init set x of: " << element.x << std::endl;
 	}
 }
 
@@ -46,7 +46,7 @@ void CodeSimpleGraph::update(std::string code)
 			elements[i].b = 0.8;
 			elements[i].valid = true;
 
-			std::cout << "update old set x of: " << elements[i].x << std::endl;
+			// std::cout << "update old set x of: " << elements[i].x << std::endl;
 		}
 		else
 		{
@@ -63,7 +63,7 @@ void CodeSimpleGraph::update(std::string code)
 
 			elements.push_back(element);
 
-			std::cout << "update new set x of: " << element.x << std::endl;
+			// std::cout << "update new set x of: " << element.x << std::endl;
 		}
 	}
 

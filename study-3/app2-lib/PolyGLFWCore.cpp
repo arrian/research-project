@@ -70,32 +70,40 @@ unsigned int GLFWCore::getTicks()
 
 bool GLFWCore::Update()
 {
+	// std::cout << "entered update()" << std::endl;
 	if(!running) return false;
+	// std::cout << "is running" << std::endl;
 	doSleep();
+	// std::cout << "did sleep" << std::endl;
 	
 	if(modeChangeInfo.needResolutionChange) {
 		_setVideoMode(modeChangeInfo.xRes, modeChangeInfo.yRes, modeChangeInfo.fullScreen, modeChangeInfo.vSync, modeChangeInfo.aaLevel, modeChangeInfo.anisotropyLevel);
 		modeChangeInfo.needResolutionChange = false;
 	}
-							
+	// std::cout << "updating core" << std::endl;
 	updateCore();
+	// std::cout << "updated core" << std::endl;
 	checkEvents();
+	// std::cout << "checked the events" << std::endl;
 	return running;
 }
 
 void GLFWCore::Render()
 {
 	lockMutex(CoreServices::getRenderMutex());
-	
+	// std::cout << "locked the mutex" << std::endl;
 	if(!paused) {	
+		// std::cout << "beginning render" << std::endl;
 		renderer->BeginRender();
 	}
-
+	// std::cout << "rendering..." << std::endl;
 	services->Render();
-
+	// std::cout << "rendered" << std::endl;
 	if(!paused) {		
+		// std::cout << "ending render" << std::endl;
 		renderer->EndRender();
 		glfwSwapBuffers(window);
+		// std::cout << "swapped the buffers" << std::endl;
 	}
 	
 	unlockMutex(CoreServices::getRenderMutex());
