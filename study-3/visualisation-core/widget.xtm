@@ -356,7 +356,7 @@
 (bind-func widget_test_add_child
   (lambda ()
       (widget_add_child WIDGET_TEST 
-          (attractor_create 0 POLY_SCENE (widget_get_attractor WIDGET_TEST) 0 (random -200.0 200.0) (random -200.0 200.0) (random 30.0 60.0) (random) 1.0 (random 0.8) 1.0))
+          (attractor_create 0 POLY_SCENE (widget_get_attractor WIDGET_TEST) 0 (random -200.0 200.0) (random -200.0 200.0) (random 5.0 10.0) (random) 1.0 (random 0.8) 1.0))
     ))
 
 (widget_test_add_child)
@@ -366,3 +366,17 @@
     (widget_update WIDGET_TEST)
     ;; (widget_destroy WIDGET_TEST)
     void))
+
+;;;;;;;;;;;
+
+(bind-func apply_random_forces
+  (lambda ()
+      (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (random -30000.0 30000.0) (random 0.0 3000.0)) 0) (widget_get_children WIDGET_TEST))
+    void))
+
+(apply_random_forces)
+
+
+
+
+
