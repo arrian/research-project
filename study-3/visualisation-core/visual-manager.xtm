@@ -20,13 +20,22 @@
 
 (scene_create)
 
+;; (bind-func draw
+;;   (lambda ()
+;;     (poly_attractors_update)
+;;     (poly_core_update POLY_CORE)
+;;     void))
+
+(bind-func update
+  (lambda ()
+    void))
+
 (bind-func draw
   (lambda ()
-  	;; (printf "updating polycore\n")
-    (poly_attractors_update)
+    (update)
     (poly_core_update POLY_CORE)
-    ;; (printf "updated polycore\n")
     void))
+
 
 ;; (define draw-loop
 ;;   (lambda (time delta-t)

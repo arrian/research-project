@@ -2,6 +2,7 @@
 ;;
 ;; Main entry point for study 3.
 
+(sys:load "libs/core/adt.xtm");; ???? are lists not part of the extempore standard libs now
 
 (define *study-3-dir* "research-project/visualisation-core")
 
@@ -21,7 +22,7 @@
 
 (define update-loop
   (lambda (time delta-t)
-  	(handle_events)
+  	;;(handle_events)
     (draw)
     (callback (+ time (* *second* delta-t) 0.5)
               'update-loop

@@ -12,6 +12,7 @@ extern "C"
 {
 	struct poly_core;
 	struct poly_entity;
+	struct poly_physics_entity;
 	struct poly_scene;
 	struct poly_scene_image;
 	struct poly_scene_mesh;
@@ -26,12 +27,18 @@ extern "C"
 	poly_scene* poly_scene_create(int width, int height);
 	void poly_scene_destroy(poly_scene* scene);
 	void poly_scene_add_child(poly_scene* scene, poly_entity* entity);
+
 	void poly_scene_physics_set_gravity(poly_scene* scene, double gx, double gy);
+	poly_physics_entity* poly_scene_physics_add_child(poly_scene* scene, poly_entity* entity, bool is_static);
+	void poly_scene_physics_remove_child(poly_scene* scene, poly_entity* entity);
+	void poly_physics_entity_apply_force(poly_physics_entity* entity, double x, double y);
 
 	void poly_entity_set_position(poly_entity* entity, double x, double y);
 	void poly_entity_set_yaw(poly_entity* entity, double yaw);
 	void poly_entity_add_child(poly_entity* target, poly_entity* entity);
 	void poly_entity_set_color(poly_entity* entity, double r, double g, double b, double a);
+	double poly_entity_get_x(poly_entity* entity);
+	double poly_entity_get_y(poly_entity* entity);
 
 	poly_scene_image* poly_scene_image_create(char* path);
 	void poly_scene_image_destroy(poly_scene_image* image);

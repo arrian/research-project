@@ -1,34 +1,274 @@
 ;; Widget that handles the active and inactive state of specific code.
 
-(sys:load "libs/core/adt.xtm")
+;; (sys:load "libs/core/adt.xtm")
 
-;; Some nicer type defs
-(bind-type Time <i64,i8*>);;time manager
-(bind-type Code <i64,i8*>);;code graph
-(bind-type Entity <i64,i8*>);;attractor
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Globals
+
+(bind-val TRANSITION_TIME i64 400)
+(bind-val CIRCLE_TYPE i64 8)
+(bind-val CIRCLE_SEGMENTS i64 6)
+(bind-val ATTRACTION_FACTOR double 500.0)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Utility
+
+(bind-func maxd
+  (lambda (a:double b:double)
+    (if (>= a b) a b)))
+
+(bind-func mind
+  (lambda (a:double b:double)
+    (if (<= a b) a b)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Color
+(bind-type Color <double,double,double,double>);;r,g,b,a
+
+(bind-func color_set_rgba
+  (lambda (c:Color* r:double g:double b:double a:double)
+      (tset! c 0 r)
+      (tset! c 1 g)
+      (tset! c 2 b)
+      (tset! c 3 a)
+    void))
+
+(bind-func color_set_color
+  (lambda (c:Color* from:Color*)
+      (tset! c 0 (tref from 0))
+      (tset! c 1 (tref from 1))
+      (tset! c 2 (tref from 2))
+      (tset! c 3 (tref from 3))
+    ))
+
+(bind-func color_set_r
+  (lambda (c:Color* r:double)
+      (tset! c 0 r)))
+
+(bind-func color_set_g
+  (lambda (c:Color* g:double)
+      (tset! c 1 g)))
+
+(bind-func color_set_b
+  (lambda (c:Color* b:double)
+      (tset! c 2 b)))
+
+(bind-func color_set_a
+  (lambda (c:Color* a:double)
+      (tset! c 3 a)))
+
+(bind-func color_get_r
+  (lambda (c:Color*)
+      (tref c 0)))
+
+(bind-func color_get_g
+  (lambda (c:Color*)
+      (tref c 1)))
+
+(bind-func color_get_b
+  (lambda (c:Color*)
+      (tref c 2)))
+
+(bind-func color_get_a
+  (lambda (c:Color*)
+      (tref c 3)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(bind-type SizeTransition <i1,double,double,double,i64,i64>);;finished,initial_size,current_size,target_size,start_time,transition_time
+
+(bind-func size_transition_is_complete
+  (lambda (st:SizeTransition*)
+      (tref st 0)))
+
+(bind-func size_get_target
+  (lambda (st:SizeTransition*)
+      (tref st 3)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(bind-type ColorTransition <i1,Color*,Color*,Color*,i64,i64>);;finished,initial_color,current_color,target_color,start_time,transition_time
+
+(bind-func color_transition_is_complete
+  (lambda (ct:ColorTransition*)
+      (tref ct 0)))
+
+(bind-func color_get_current
+  (lambda (ct:ColorTransition*)
+      (tref ct 2)))
+
+(bind-func color_get_target
+  (lambda (ct:ColorTransition*)
+      (tref ct 3)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Essential widget stuff
+(bind-alias Time i8);;time manager
+(bind-alias Code i8);;code graph
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(bind-type Attractor <i64,i8*,Attractor*,i8*,i8*,i64,i64,i1,SizeTransition*,ColorTransition*>);;id,scene,parent,entity,physics_entity,type,segments,is_static,size_transition,color_transition
+
+(bind-func attractor_get_scene
+  (lambda (a:Attractor*)
+      (tref a 1)))
+
+(bind-func attractor_get_parent
+  (lambda (a:Attractor*)
+      (tref a 2)))
+
+(bind-func attractor_get_entity
+  (lambda (a:Attractor*)
+    (tref a 3)))
+
+(bind-func attractor_get_physics_entity
+  (lambda (a:Attractor*)
+    (tref a 4)))
+
+(bind-func attractor_is_static
+  (lambda (a:Attractor*)
+    (tref a 7)))
+
+(bind-func attractor_get_size
+  (lambda (a:Attractor*)
+    (tref a 8)))
+
+(bind-func attractor_get_color
+  (lambda (a:Attractor*)
+    (tref a 9)))
+
+(bind-func attractor_set_target_size
+  (lambda (a:Attractor* s)
+    (let ((size (attractor_get_size a)))
+        (tset! size 0 0);;set finished false
+        (tset! size 1 (tref size 2));;set initial size to current
+        (tset! size 3 s);;set target size
+        (tset! size 4 (now)));;set start time to now
+    void))
+
+(bind-func attractor_set_target_color
+  (lambda (a:Attractor* r g b alpha)
+    (let ((color (attractor_get_color a)))
+        (let ((initial (tref color 1))
+              (current (tref color 2))
+              (target (tref color 3)))
+            (color_set_color initial current)
+            (color_set_rgba target r g b alpha)
+            (tset! color 0 #f);;set finished false
+            (tset! color 4 (now));;set start time to now
+          ))
+    void))
+
+(bind-func attractor_create
+  (lambda (id scene parent static x:double y:double size:double r g b a)
+      (let ((entity (poly_scene_primitive_create_circle size size (i64toi32 CIRCLE_SEGMENTS))))
+          (poly_entity_set_position entity x y)
+          (poly_entity_set_color entity r g b a)
+          (let ((physics_entity (poly_scene_physics_add_child scene entity static)))
+                (let ((sizet (SizeTransition #t size size size (now) TRANSITION_TIME))
+                      (colort (ColorTransition #t (Color r g b a) (Color r g b a) (Color r g b a) (now) TRANSITION_TIME)))
+                    (Attractor id scene parent entity physics_entity CIRCLE_TYPE CIRCLE_SEGMENTS static sizet colort))))))
+
+(bind-func attractor_update_size
+  (lambda (a:Attractor*)
+      (if (size_transition_is_complete (attractor_get_size a))
+          (begin 
+            void) 
+          (begin 
+            (let ((target (size_get_target (attractor_get_size a))))
+                (poly_scene_primitive_set_circle_options (attractor_get_entity a) target target (i64toi32 CIRCLE_SEGMENTS))
+                (poly_scene_physics_remove_child (attractor_get_scene a) (attractor_get_entity a))
+                (poly_scene_physics_add_child (attractor_get_scene a) (attractor_get_entity a) (attractor_is_static a))
+              )
+            void)
+          )))
+
+(bind-func attractor_update_color
+  (lambda (a:Attractor*)
+      (if (color_transition_is_complete (attractor_get_color a)) 
+            (begin 
+              void)
+            (begin 
+              (let ((target (color_get_target (attractor_get_color a))))
+                  (poly_entity_set_color (attractor_get_entity a) 
+                            (color_get_r target) (color_get_g target) (color_get_b target) (color_get_a target))
+                )
+              void)
+            )))
+
+(bind-func attractor_update_attraction
+  (lambda (a:Attractor*)
+    (let ((parent (attractor_get_parent a)))
+      (if (null? parent) 
+          (begin 
+            ;; (printf "parent was null\n")
+            void)
+          (begin
+            (let ((px (poly_entity_get_x (attractor_get_entity parent)))
+                  (py (poly_entity_get_y (attractor_get_entity parent)))
+                  (mx (poly_entity_get_x (attractor_get_entity a)))
+                  (my (poly_entity_get_y (attractor_get_entity a)))
+                  (x 0.0)
+                  (y 0.0))
+                (let ((fx (- px mx))
+                      (fy (- py my)))
+                    (let ((flength (sqrt (+ (* fx fx) (* fy fy)))))
+                      (let ((distance (maxd 1.0 (mind 5.0 flength)))
+                            (fxn (/ fx flength))
+                            (fyn (/ fy flength)))
+                          (let ((strength (/ (* ATTRACTION_FACTOR 10.0) (* distance distance))))
+                              ;; (printf "applied force\n")
+                              (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* fxn strength) (* fyn strength)))))))
+            void)))))
+
+(bind-func attractor_update
+  (lambda (a:Attractor*)
+      (attractor_update_size a)
+      (attractor_update_color a)
+      (attractor_update_attraction a)
+    void))
+
+(bind-func attractor_destroy
+  (lambda (a:Attractor*)
+      (poly_scene_physics_remove_child (attractor_get_scene a) (attractor_get_entity a))
+      (poly_scene_primitive_destroy (attractor_get_entity a))
+      ;;destroy constructed tuple here
+    ))
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;custom entity list functionality
 
-(bind-alias EntityList List:<Entity*,List*>)
+(bind-alias AttractorList List:<Attractor*,List*>)
 
-(bind-func entity_list_clear:[EntityList*,EntityList*]*
-  (lambda (el:EntityList*)
+(bind-func entity_list_clear:[AttractorList*,AttractorList*]*
+  (lambda (al:AttractorList*)
     null))
 
-(bind-func entity_list_add:[EntityList*,EntityList*,Entity*]*
-  (lambda (el:EntityList* e:Entity*)
-      (cons e el)))
+(bind-func entity_list_add:[AttractorList*,AttractorList*,Attractor*]*
+  (lambda (al:AttractorList* a:Attractor*)
+      (cons a al)))
 
-(bind-func entity_list_remove:[EntityList*,EntityList*,Entity*]*
-  (lambda (el:EntityList* e:Entity*)
-      (cond ((= e (car el)) (cdr el))
-            (else (cons (car el) (entity_list_remove (cdr el) e))))))
+(bind-func entity_list_remove:[AttractorList*,AttractorList*,Attractor*]*
+  (lambda (al:AttractorList* a:Attractor*)
+      (cond ((= a (car al)) (cdr al))
+            (else (cons (car al) (entity_list_remove (cdr al) a))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(bind-type Widget <String*,Code*,Entity*,EntityList*>);; name, code, main entity, child entities
+(bind-type Widget <String*,Code*,Attractor*,AttractorList*>);; name, code, main entity, child entities
+
+(bind-func widget_create
+  (lambda (name:String* code:Code* x:double y:double size:double)
+      (let ((attractor (attractor_create 0 POLY_SCENE null 1 x y size 1.0 0.0 0.0 1.0)))
+          (Widget name code attractor null))))
 
 (bind-func widget_get_name
   (lambda (w:Widget*)
@@ -38,7 +278,7 @@
   (lambda (w:Widget*)
       (tref w 1)))
 
-(bind-func widget_get_entity
+(bind-func widget_get_attractor
   (lambda (w:Widget*)
       (tref w 2)))
 
@@ -46,8 +286,26 @@
   (lambda (w:Widget*)
       (tref w 3)))
 
+(bind-func widget_add_child
+  (lambda (w:Widget* a:Attractor*)
+      (tset! w 3 (cons a (tref w 3)))
+    void))
+
 (bind-func widget_update
   (lambda (w:Widget*)
+    (attractor_update (widget_get_attractor w))
+    (map (lambda (a) (attractor_update a) 0) (widget_get_children w))
+    void))
+
+(bind-func widget_print
+  (lambda (w:Widget*)
+    (println (widget_get_name w))
+    void))
+
+(bind-func widget_destroy
+  (lambda (w:Widget*)
+      (attractor_destroy (widget_get_attractor w))
+      (map (lambda (a) (attractor_destroy a) 0) (widget_get_children w))
     void))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -69,307 +327,42 @@
       (cond ((= w (car wl)) (cdr wl))
             (else (cons (car wl) (widget_list_remove (cdr wl) w))))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;; ;;Testing
-;; (bind-val TEST_WIDGET Widget* 0)
-
-;; (bind-func test_widget_create
-;;   (lambda ()
-;;       (set! TEST_WIDGET (Widget (Str "test") null null null))))
-
-;; (test_widget_create)
-
-;; (bind-func test_widget
-;;   (lambda ()
-;;     (printf "%s\n" (string_cstr (widget_get_name TEST_WIDGET)))
-;;     ))
-
-;; (test_widget)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-;; 0 name
-;; 1 code
-;; 2 code graph pointer
-;; 3 next callback time (now-based)
-;; 4 initial callback time (now-based)
-(bind-type Widget <String*,String*,code_graph*,i64,i64,poly_attractor*,list*>)
-
-(bind-func widget_get_name
-  (lambda (w:Widget*)
-    (tref w 0)))
-
-(bind-func widget_set_name
-  (lambda (w:Widget* name:String*)
-    (tset! w 0 name)))
-
-(bind-func widget_get_code
-  (lambda (w:Widget*)
-    (tref w 1)))
-
-(bind-func widget_set_code
-  (lambda (w:Widget* code:String*)
-    (tset! w 1 code)))
-
-(bind-func widget_get_graph
-  (lambda (w:Widget*)
-    (tref w 2)))
-
-(bind-func widget_set_graph
-  (lambda (w:Widget* graph:code_graph*)
-    (tset! w 2 graph)))
-
-(bind-func widget_get_next_time
-  (lambda (w:Widget*)
-    (tref w 3)))
-
-(bind-func widget_set_next_time
-  (lambda (w:Widget* time:i64)
-    (tset! w 3 time)))
-
-(bind-func widget_get_initial_time
-  (lambda (w:Widget*)
-    (tref w 4)))
-
-(bind-func widget_set_intial_time
-  (lambda (w:Widget* time:i64)
-    (tset! w 4 time)))
-
-(bind-func widget_get_attractor
-  (lambda (w:Widget*)
-    (tref w 5)))
-
-(bind-func widget_set_attractor
-  (lambda (w:Widget* attractor:poly_attractor*)
-    (tset! w 5 attractor)))
-
-(bind-func widget_set_attractors_list
-  (lambda (w:Widget*)
-    (tset! w 6 (list_create))
+(bind-func widget_list_print
+  (lambda (wl:WidgetList*)
+    (map (lambda (w) (widget_print w) 0) wl)
     ))
 
-(bind-func widget_get_attractors_list
-  (lambda (w:Widget*)
-    (tref w 6)
-    ))
 
-(bind-func widget_add_new
-  (lambda (w:Widget* count:i64)
-    (let ((i:i64 0))
-        (dotimes (i count)
-          (list_add (widget_get_attractors_list w) (poly_attractor_add POLY_SCENE (widget_get_attractor w) (random 0.0 300.0) (random 0.0 300.0) 30.0 0))
-          ))
-    void))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(bind-func widget_remove_old ;; remove old attractors
-  (lambda (w:Widget* count:i64)
-      (let ((i:i64 0)
-            (lst (widget_get_attractors_list w)))
-        (dotimes (i count)
-          (printf "removing old nodes")
-            ;;(poly_attractor_target_color (list_get lst i) (random 0.7 1.0) (random 0.1) (random 0.1) 0.7)
-          ))
-    void))
-;; (poly_attractor_remove (list_get lst (- (- (list_size lst) 1) i)))
-;; (list_remove lst (- (- (list_size lst) 1) i))
-            ;; 
+;; Custom callback 
 
-
-(bind-func widget_sync
-  (lambda (w:Widget*)
-    (let ((i:i32 0)
-          (graph (widget_get_graph w)))
-      (dotimes (i (code_graph_get_element_count graph))
-            (let ((e:code_element* (code_graph_get_element graph i)))
-              (poly_attractor_target_size (list_get (widget_get_attractors_list w) (i32toi64 i)) (* 3.0 (code_element_get_size e)))
-              ;;(poly_attractor_target_color (list_get (widget_get_attractors_list w) (i32toi64 i)) (code_element_get_r e) (code_element_get_g e) (code_element_get_b e) 1.0)
-              )))
-    void))
-
-(bind-func widget_update
-  (lambda (w:Widget*)
-    (let ((i:i32 0)
-          (graph (widget_get_graph w))
-          (attractor (widget_get_attractor w))
-          (attractors (widget_get_attractors_list w)))
-      (let ((element_count:i32 (code_graph_get_element_count graph))
-            (attractors_count:i32 (i64toi32 (list_size attractors))))
-              (cond ((> element_count attractors_count) (widget_add_new w (i32toi64 (- element_count attractors_count))))
-              ((< element_count attractors_count) (widget_remove_old w (i32toi64 (- attractors_count element_count))))
-              (else void))
-              (widget_sync w)
-        0))))
-
-    ;;   (dotimes (i (code_graph_get_element_count graph))
-    ;;     (let ((e:code_element* (code_graph_get_element graph i)))
-    ;;       (if (null? (code_element_get_user_data e)) 
-    ;;         (let ((circle (poly_attractor_add POLY_SCENE attractor (random 0.0 300.0) (random 0.0 300.0) 10.0 0)));;(poly_scene_primitive_create_circle (code_element_get_size e) (code_element_get_size e) segments) 
-    ;;             (code_element_set_user_data e circle)
-    ;;             )))))
-    ;; 0))
-
-(bind-func widget_print
-  (lambda (w:Widget*)
-    (println "name:" (widget_get_name w) "code:" (widget_get_code w))
-    void))
-
-;;;;;;;;;;;;;;;;;;;
-                                                   
-(bind-val WIDGET_LIST List:<Widget*,List*>*)
-
-(bind-func widget_list_init
-  (lambda ()
-    (let ((n:List:<Widget*,List*>* null))
-      (set! WIDGET_LIST n))))
-
-(widget_list_init)
-
-(bind-func widget_list_index
-  (lambda (index:i32 lst:List:<Widget*,List*>*)
-      (if (<= index 0) (car lst) (widget_list_index (- index 1) (cdr lst)))))
-
-(bind-func widget_list_add
-  (lambda (name:i8* code:i8* time_next time_initial graph attractor)
-      (let ((w (Widget (Str name) (Str code) graph time_next time_initial attractor (list_create))))
-          (set! WIDGET_LIST (cons w WIDGET_LIST))
-        w)))
-
-(bind-func widget_list_remove_pointer
-  (lambda (winput)
-    (set! WIDGET_LIST (filter (lambda (w)
-                            (not (equal winput w)))
-                          WIDGET_LIST))))
-
-(bind-func widget_list_remove
-  (lambda (name)
-    (set! WIDGET_LIST (filter (lambda (w)
-                            (not (equal name (widget_get_name w))))
-                          WIDGET_LIST))))
-
-(bind-func widget_list_add_new
-  (lambda (count:i32)
-    (let ((i:i32 0))
-        (dotimes (i count)
-            (let ((attractor (poly_attractor_add POLY_SCENE null 0.0 (- 250.0 (* 150.0 (i64tod (length WIDGET_LIST)))) 50.0 1)))
-                (widget_list_add "" "()" 0 0 null attractor)
-                (poly_attractor_target_color attractor 0.0 1.0 0.0 0.7)
-              )
-          ))
-    void))
-
-(bind-func widget_list_remove_old
-  (lambda (count:i32)
-      (let ((i:i32 0))
-        (dotimes (i count)
-            (let ((w (widget_list_index i WIDGET_LIST)))
-                (let ((lst (widget_get_attractors_list w))
-                      (j 0))
-                    (dotimes (j (list_size lst))
-                        (poly_attractor_remove (list_get lst j))
-                      ))
-                (poly_attractor_remove (widget_get_attractor w))
-                (widget_list_remove_pointer w)
-            )))
-    void))
-
-                ;; (printf "number %d length %d count %d\n" i (length WIDGET_LIST) count)
-                ;; (poly_attractor_target_color (widget_get_attractor (widget_list_index i WIDGET_LIST)) 1.0 0.0 0.0 0.1)
-
-
-
-(bind-func widget_list_sync
-  (lambda ()
-      (let ((i:i32 0))
-          (dotimes (i (i64toi32 (length WIDGET_LIST)))
-              (widget_set_graph (widget_list_index i WIDGET_LIST) (code_manager_get_graph CODE_MANAGER i))))
-    void))
-
-(bind-func widget_list_update
-  (lambda ()
-    (let ((i:i32 0)
-          (graph_count:i32 (code_manager_get_graph_count CODE_MANAGER))
-          (widget_count:i32 (i64toi32 (length WIDGET_LIST))))
-              (cond ((> graph_count widget_count) (widget_list_add_new (- graph_count widget_count)))
-                    ((< graph_count widget_count) (widget_list_remove_old (- widget_count graph_count)))
-                    (else void))
-              (widget_list_sync)
-              (map (lambda (w:Widget*) (widget_update w)) WIDGET_LIST))
-    void))
-
-
-
-
-
-
-
-    ;; (let ((i 0))
-    ;;   (dotimes (i (code_manager_get_graph_count CODE_MANAGER))
-    ;;       (let ((graph (code_manager_get_graph CODE_MANAGER i)))
-    ;;           (if (null? (code_graph_get_widget graph)) 
-    ;;             (begin 
-    ;;               (code_graph_set_widget graph (bitcast (widget_list_add "test" "(test)" 0 0 ) i8*))
-    ;;               (let ((entity (poly_attractor_add POLY_SCENE null 0.0 (+ -250.0 (* 60.0 (i32tod i))) 50.0 1)));;(bind-lib polycode poly_attractor_add [poly_attractor*,poly_scene*,poly_attractor*,double,double,double,i1]*);;scene,parent,x,y,size,isStatic
-    ;;                   (poly_attractor_target_color entity 0.0 1.0 0.0 0.7)
-    ;;                   (code_graph_set_entity graph entity)
-    ;;                   (printf "graph entity: %p\n" (code_graph_get_entity graph))
-    ;;                 )))
-                  
-    ;;           (widget_update (bitcast (code_graph_get_widget graph) Widget*) graph)
-    ;;           )))
-    ;; void))
-
-;; (widget_list_update "(bind-val WIDGET_LIST List:<Widget*,List*>*)" 1.0)
-
-
-;;Needs beat, duration and widget index (TODO: should default to -1)
 (define cv-callback
   (lambda (time cb-sym . args)
       ;; (widget_update_active (widget_list_find (symbol->string cb-sym)) (real->integer time))
       (apply callback 
         (cons time (cons cb-sym args)))))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Testing
+(bind-val WIDGET_TEST Widget* 0)
 
-;; (widget_list_add (random (list "test1" "test2" "test3" "test4" "test5" "test6" "test7")) (random (list "(test1)" "(test2)" "(test3)" "(test4)" "(test5)" "(test6)" "(test7)")) (random 100 200) (random 0 100))
+(bind-func widget_test_init
+  (lambda ()
+      (set! WIDGET_TEST (widget_create (Str "test widget") null 0.0 0.0 50.0))))
 
+(widget_test_init)
 
+(bind-func widget_test_add_child
+  (lambda ()
+      (widget_add_child WIDGET_TEST 
+          (attractor_create 0 POLY_SCENE (widget_get_attractor WIDGET_TEST) 0 (random -200.0 200.0) (random -200.0 200.0) (random 30.0 60.0) (random) 1.0 (random 0.8) 1.0))
+    ))
 
+(widget_test_add_child)
 
+(bind-func update
+  (lambda ()
+    (widget_update WIDGET_TEST)
+    ;; (widget_destroy WIDGET_TEST)
+    void))

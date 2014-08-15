@@ -14,12 +14,22 @@
 (bind-lib polycode poly_entity_set_yaw [void,poly_entity*,double]*)
 (bind-lib polycode poly_entity_add_child [void,poly_entity*,poly_entity*]*)
 (bind-lib polycode poly_entity_set_color [void,poly_entity*,double,double,double,double]*)
+(bind-lib polycode poly_entity_get_x [double,poly_entity*]*)
+(bind-lib polycode poly_entity_get_y [double,poly_entity*]*)
+
+;;2D physics entity
+(bind-alias poly_physics_entity i8)
+(bind-lib polycode poly_physics_entity_apply_force [void,poly_physics_entity*,double,double]*)
 
 ;;scene
 (bind-alias poly_scene i8)
 (bind-lib polycode poly_scene_create [poly_scene*,i32,i32]*)
 (bind-lib polycode poly_scene_destroy [void,poly_scene*]*)
 (bind-lib polycode poly_scene_add_child [void,poly_scene*,poly_entity*]*)
+
+;;2D physics scene
+(bind-lib polycode poly_scene_physics_add_child [poly_physics_entity*,poly_scene*,poly_entity*,i1]*)
+(bind-lib polycode poly_scene_physics_remove_child [void,poly_scene*,poly_entity*]*)
 
 ;;scene image
 (bind-alias poly_scene_image i8)

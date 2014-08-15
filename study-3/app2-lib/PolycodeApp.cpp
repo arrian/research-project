@@ -265,6 +265,23 @@ void poly_scene_physics_set_gravity(poly_scene* s, double gx, double gy)
 	scene->setGravity(Vector2(gx, gy));
 }
 
+poly_physics_entity* poly_scene_physics_add_child(poly_scene* s, poly_entity* e, bool is_static)
+{
+	PhysicsScene2D* scene = reinterpret_cast<PhysicsScene2D*>(s);
+	return reinterpret_cast<poly_physics_entity*>(scene->addPhysicsChild(reinterpret_cast<Entity*>(e), PhysicsScene2DEntity::ENTITY_CIRCLE, is_static));
+}
+
+void poly_scene_physics_remove_child(poly_scene* s, poly_entity* e)
+{
+	PhysicsScene2D* scene = reinterpret_cast<PhysicsScene2D*>(s);
+	scene->removePhysicsChild(reinterpret_cast<Entity*>(e));	
+}
+
+void poly_physics_entity_apply_force(poly_physics_entity* e, double x, double y)
+{
+	reinterpret_cast<PhysicsScene2DEntity*>(e)->applyForce(Vector2(x, y));
+}
+
 void poly_entity_set_position(poly_entity* entity, double x, double y)
 {
 	reinterpret_cast<Entity*>(entity)->setPosition(x, y);
@@ -283,6 +300,16 @@ void poly_entity_add_child(poly_entity* target, poly_entity* entity)
 void poly_entity_set_color(poly_entity* entity, double r, double g, double b, double a)
 {
 	reinterpret_cast<Entity*>(entity)->setColor(r, g, b, a);
+}
+
+double poly_entity_get_x(poly_entity* entity)
+{
+	return reinterpret_cast<Entity*>(entity)->getPosition2D().x;
+}
+
+double poly_entity_get_y(poly_entity* entity)
+{
+	return reinterpret_cast<Entity*>(entity)->getPosition2D().y;
 }
 
 poly_scene_image* poly_scene_image_create(char* path)
