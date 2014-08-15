@@ -27,9 +27,9 @@
 			[
 				"*.d",
 				"*.pl"
-			],	
+			],
 			"follow_symlinks": false,
-			"path": "/usr/local/Cellar/extempore/0.52"
+			"path": "/usr/local/Cellar/extempore/0.57"
 		},
 		{
 			"file_exclude_patterns":
@@ -37,7 +37,7 @@
 				"*.make",
 				"*.cmake",
 				"*.marks"
-			],	
+			],
 			"follow_symlinks": false,
 			"path": "/Users/arrian/Dev/polycode/Core"
 		},
@@ -47,10 +47,9 @@
 				"*.make",
 				"*.cmake",
 				"*.marks"
-			],	
+			],
 			"follow_symlinks": false,
 			"path": "/Users/arrian/Dev/polycode/Modules/Contents"
 		}
 	]
 }
-
