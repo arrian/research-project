@@ -6,7 +6,7 @@
 
 ;; Globals
 
-(bind-val TRANSITION_TIME i64 400)
+(bind-val TRANSITION_TIME i64 20000)
 (bind-val CIRCLE_TYPE i64 8)
 (bind-val CIRCLE_SEGMENTS i64 6)
 (bind-val ATTRACTION_FACTOR double 500.0)
@@ -21,7 +21,16 @@
 
 (bind-func mind
   (lambda (a:double b:double)
-    (if (<= a b) a b)))
+    (if (< a b) a b)))
+
+(bind-func transition_ease_out_quadratic
+  (lambda (current:i64 start_value:double change_value:double duration:i64)
+    (printf "entered transition\n")
+    (println current start_value change_value duration)
+    (if (= duration 0) 
+        (+ start_value change_value)
+        (let ((td (/ (i64tod current) (i64tod duration))))
+            (+ (* (- 0.0 change_value) td (- td 2.0)) start_value)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -46,35 +55,35 @@
 
 (bind-func color_set_r
   (lambda (c:Color* r:double)
-      (tset! c 0 r)))
+    (tset! c 0 r)))
 
 (bind-func color_set_g
   (lambda (c:Color* g:double)
-      (tset! c 1 g)))
+    (tset! c 1 g)))
 
 (bind-func color_set_b
   (lambda (c:Color* b:double)
-      (tset! c 2 b)))
+    (tset! c 2 b)))
 
 (bind-func color_set_a
   (lambda (c:Color* a:double)
-      (tset! c 3 a)))
+    (tset! c 3 a)))
 
 (bind-func color_get_r
   (lambda (c:Color*)
-      (tref c 0)))
+    (tref c 0)))
 
 (bind-func color_get_g
   (lambda (c:Color*)
-      (tref c 1)))
+    (tref c 1)))
 
 (bind-func color_get_b
   (lambda (c:Color*)
-      (tref c 2)))
+    (tref c 2)))
 
 (bind-func color_get_a
   (lambda (c:Color*)
-      (tref c 3)))
+    (tref c 3)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -82,11 +91,45 @@
 
 (bind-func size_transition_is_complete
   (lambda (st:SizeTransition*)
-      (tref st 0)))
+    (tref st 0)))
+
+(bind-func size_get_current
+  (lambda (st:SizeTransition*)
+    (tref st 2)))
 
 (bind-func size_get_target
   (lambda (st:SizeTransition*)
-      (tref st 3)))
+    (tref st 3)))
+
+(bind-func size_set_target
+  (lambda (st:SizeTransition* s)
+    (tset! st 0 #f)
+    (tset! st 1 (tref st 2))
+    (tset! st 3 s)
+    (tset! st 4 (now))
+    void))
+
+(bind-func size_update
+  (lambda (st:SizeTransition*)
+    (let ((current_time (now))
+          (transition_time (tref st 5)));;
+      (printf "have start time %d and transition time %d\n" (tref st 4) transition_time)
+      (if (size_transition_is_complete st)
+          void ;;no update needed 
+          (begin
+            (if (> current_time (+ (tref st 4) transition_time))
+              (begin ;;finish the transition
+                (printf "finished the transition\n")
+                (tset! st 0 #t)
+                (tset! st 2 (tref st 3))
+                void)
+              (begin ;;update the current size
+                (printf "updating the transition\n")
+                (tset! st 2 (transition_ease_out_quadratic (- current_time (tref st 4)) (tref st 1) (- (tref st 3) (tref st 1)) transition_time))
+                void))
+            void)))))
+
+;;transition_ease_out_quadratic
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -104,9 +147,25 @@
   (lambda (ct:ColorTransition*)
       (tref ct 3)))
 
+(bind-func color_set_target
+  (lambda (ct:ColorTransition* r g b a)
+    (let ((initial (tref ct 1))
+          (current (tref ct 2))
+          (target (tref ct 3)))
+            (color_set_color initial current)
+            (color_set_rgba target r g b a)
+            (tset! ct 0 #f)
+            (tset! ct 4 (now))
+            void)))
+
+(bind-func color_update
+  (lambda (ct:ColorTransition*)
+
+    void))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Essential widget stuff
+;; C stuff to be replaced by xtlang when possible
 (bind-alias Time i8);;time manager
 (bind-alias Code i8);;code graph
 
@@ -142,27 +201,27 @@
   (lambda (a:Attractor*)
     (tref a 9)))
 
+(bind-func attractor_get_x
+  (lambda (a:Attractor*)
+    (poly_entity_get_x (attractor_get_entity a))))
+
+(bind-func attractor_get_y
+  (lambda (a:Attractor*)
+    (poly_entity_get_y (attractor_get_entity a))))
+
 (bind-func attractor_set_target_size
   (lambda (a:Attractor* s)
-    (let ((size (attractor_get_size a)))
-        (tset! size 0 0);;set finished false
-        (tset! size 1 (tref size 2));;set initial size to current
-        (tset! size 3 s);;set target size
-        (tset! size 4 (now)));;set start time to now
+    (size_set_target (attractor_get_size a) s)
     void))
 
 (bind-func attractor_set_target_color
   (lambda (a:Attractor* r g b alpha)
-    (let ((color (attractor_get_color a)))
-        (let ((initial (tref color 1))
-              (current (tref color 2))
-              (target (tref color 3)))
-            (color_set_color initial current)
-            (color_set_rgba target r g b alpha)
-            (tset! color 0 #f);;set finished false
-            (tset! color 4 (now));;set start time to now
-          ))
+    (color_set_target (attractor_get_color a) r g b alpha)
     void))
+
+(bind-func attractor_set_physics_entity
+  (lambda (a:Attractor* pe)
+    (tset! a 4 pe)))
 
 (bind-func attractor_create
   (lambda (id scene parent static x:double y:double size:double r g b a)
@@ -177,36 +236,32 @@
 (bind-func attractor_update_size
   (lambda (a:Attractor*)
       (if (size_transition_is_complete (attractor_get_size a))
+          void
           (begin 
-            void) 
-          (begin 
-            (let ((target (size_get_target (attractor_get_size a))))
-                (poly_scene_primitive_set_circle_options (attractor_get_entity a) target target (i64toi32 CIRCLE_SEGMENTS))
+            (size_update (attractor_get_size a))
+            (let ((current (size_get_current (attractor_get_size a))))
+                (poly_scene_primitive_set_circle_options (attractor_get_entity a) current current (i64toi32 CIRCLE_SEGMENTS))
                 (poly_scene_physics_remove_child (attractor_get_scene a) (attractor_get_entity a))
-                (poly_scene_physics_add_child (attractor_get_scene a) (attractor_get_entity a) (attractor_is_static a))
-              )
-            void)
-          )))
+                (attractor_set_physics_entity a (poly_scene_physics_add_child (attractor_get_scene a) (attractor_get_entity a) (attractor_is_static a)))
+                )
+            void))))
 
 (bind-func attractor_update_color
   (lambda (a:Attractor*)
+      (color_update (attractor_get_color a))
       (if (color_transition_is_complete (attractor_get_color a)) 
-            (begin 
-              void)
+            void
             (begin 
               (let ((target (color_get_target (attractor_get_color a))))
                   (poly_entity_set_color (attractor_get_entity a) 
-                            (color_get_r target) (color_get_g target) (color_get_b target) (color_get_a target))
-                )
-              void)
-            )))
+                            (color_get_r target) (color_get_g target) (color_get_b target) (color_get_a target)))
+              void))))
 
 (bind-func attractor_update_attraction
   (lambda (a:Attractor*)
     (let ((parent (attractor_get_parent a)))
       (if (null? parent) 
           (begin 
-            ;; (printf "parent was null\n")
             void)
           (begin
             (let ((px (poly_entity_get_x (attractor_get_entity parent)))
@@ -222,7 +277,6 @@
                             (fxn (/ fx flength))
                             (fyn (/ fy flength)))
                           (let ((strength (/ (* ATTRACTION_FACTOR 10.0) (* distance distance))))
-                              ;; (printf "applied force\n")
                               (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* fxn strength) (* fyn strength)))))))
             void)))))
 
@@ -356,7 +410,7 @@
 (bind-func widget_test_add_child
   (lambda ()
       (widget_add_child WIDGET_TEST
-          (attractor_create 0 POLY_SCENE (widget_get_attractor WIDGET_TEST) 0 (random -200.0 200.0) (random -200.0 200.0) (random 20.0 40.0) (random) 1.0 (random 0.8) 1.0))
+          (attractor_create 0 POLY_SCENE (widget_get_attractor WIDGET_TEST) 0 (random -200.0 200.0) (random -200.0 200.0) (random 20.0 40.0) (random 0.9 1.0) (random 0.0 0.5) (random 0.0 0.2) 1.0))
     ))
 
 (widget_test_add_child)
@@ -366,16 +420,54 @@
 (bind-func update
   (lambda ()
     (widget_update WIDGET_TEST)
+    (if (= (% (now) 5) 0) 
+      (begin
+        ;; (apply_random_color)
+        ;; (apply_random_forces)
+        ;; (apply_random_size)
+        void))
     void))
 
 ;;;;;;;;;;;
 
 (bind-func apply_random_forces
   (lambda ()
-      (map (lambda (a) (attractor_set_target_color a (random 0.5 1.0) (random) 0.0 1.0) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (random -30000.0 30000.0) (random -30000.0 30000.0)) 0) (widget_get_children WIDGET_TEST))
+      (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (random -80000.0 30000.0) (random -30000.0 30000.0)) 0) (widget_get_children WIDGET_TEST))
     void))
 
 (apply_random_forces)
+
+;;;;;;;;;;;;;;;;
+
+(bind-func apply_random_color
+  (lambda ()
+      (map (lambda (a) (attractor_set_target_color a (random 0.5 1.0) (random) 0.0 (random 0.6 1.0)) 0) (widget_get_children WIDGET_TEST))
+    void))
+
+(apply_random_color)
+
+(bind-func apply_evaluate_color
+  (lambda ()
+      (map (lambda (a) (attractor_set_target_color a (random 0.1 0.8) (random 0.8 1.0) (random 0.0 0.4) 1.0) 0) (widget_get_children WIDGET_TEST))
+    void))
+
+(apply_evaluate_color)
+
+(bind-func apply_error_color
+  (lambda ()
+      (map (lambda (a) (attractor_set_target_color a (random 0.8 1.0) (random 0.2 0.5) (random 0.1 0.2) 1.0) 0) (widget_get_children WIDGET_TEST))
+    void))
+
+(apply_error_color)
+
+(bind-func apply_edit_color
+  (lambda ()
+        (map (lambda (a) 
+          (let ((grey (random 0.4 1.0)))
+            (attractor_set_target_color a grey grey grey (random 0.7 1.0))) 0) (widget_get_children WIDGET_TEST))
+    void))
+
+(apply_edit_color)
 
 ;;;;;;;;;;
 
@@ -386,10 +478,39 @@
 
 (apply_random_gravity)
 
-;;;;;;;;;;;;;;;;;
-;; (bind-func test_destroy
-;;   (lambda ()
-;;       (widget_destroy WIDGET_TEST2)
-;;     ))
+(bind-func apply_zero_gravity
+  (lambda ()
+    (poly_scene_physics_set_gravity POLY_SCENE 0.0 0.0)))
+
+(apply_zero_gravity)
+
+;;;;;;;;;;;;;;
+
+(bind-func apply_random_size
+  (lambda ();;attractor_set_target_size
+      (attractor_set_target_size (nth (widget_get_children WIDGET_TEST) (random 0 (- (length (widget_get_children WIDGET_TEST)) 1)))
+                                 (random 20.0 30.0))))
+
+(apply_random_size)
+
+(bind-func apply_size
+  (lambda (size:double);;attractor_set_target_size
+      (map (lambda (a) (attractor_set_target_size a size) 0) (widget_get_children WIDGET_TEST))))
+
+(apply_size 10.0)
+(apply_size 50.0)
 
 
+
+;;;;;;;;;;;;
+
+(bind-func apply_outwards_force
+  (lambda ()
+      (let ((x (attractor_get_x (widget_get_attractor WIDGET_TEST)))
+            (y (attractor_get_y (widget_get_attractor WIDGET_TEST)))
+            (force 50.0)
+            (q x))
+          (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- 0.0 (- x (attractor_get_x a)))) (* force (- 0.0 (- y (attractor_get_y a))))) 0) (widget_get_children WIDGET_TEST))    
+        )))
+
+(apply_outwards_force)
