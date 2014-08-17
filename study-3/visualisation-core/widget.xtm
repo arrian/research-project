@@ -11,6 +11,13 @@
 (bind-val CIRCLE_SEGMENTS i64 6)
 (bind-val ATTRACTION_FACTOR double 500.0)
 
+(bind-func set_attraction_factor
+  (lambda (factor:double)
+    (set! ATTRACTION_FACTOR factor)
+    ))
+
+(set_attraction_factor 500.0)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Utility
@@ -403,7 +410,7 @@
 
 (bind-func widget_test_init
   (lambda ()
-      (set! WIDGET_TEST (widget_create (Str "test widget") null 0.0 0.0 50.0))))
+      (set! WIDGET_TEST (widget_create (Str "test widget") null 0.0 0.0 100.0))))
 
 (widget_test_init)
 
@@ -419,7 +426,7 @@
 
 (bind-func update
   (lambda ()
-    (widget_update WIDGET_TEST)
+    (if (not (= WIDGET_TEST null)) (widget_update WIDGET_TEST))
     (if (= (% (now) 5) 0) 
       (begin
         ;; (apply_random_color)
@@ -432,7 +439,7 @@
 
 (bind-func apply_random_forces
   (lambda ()
-      (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (random -80000.0 30000.0) (random -30000.0 30000.0)) 0) (widget_get_children WIDGET_TEST))
+      (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (random -30000.0 30000.0) (random -30000.0 30000.0)) 0) (widget_get_children WIDGET_TEST))
     void))
 
 (apply_random_forces)
@@ -498,7 +505,7 @@
       (map (lambda (a) (attractor_set_target_size a size) 0) (widget_get_children WIDGET_TEST))))
 
 (apply_size 10.0)
-(apply_size 50.0)
+(apply_size 40.0)
 
 
 
@@ -508,9 +515,65 @@
   (lambda ()
       (let ((x (attractor_get_x (widget_get_attractor WIDGET_TEST)))
             (y (attractor_get_y (widget_get_attractor WIDGET_TEST)))
-            (force 50.0)
-            (q x))
+            (force 50.0))
           (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- 0.0 (- x (attractor_get_x a)))) (* force (- 0.0 (- y (attractor_get_y a))))) 0) (widget_get_children WIDGET_TEST))    
         )))
 
 (apply_outwards_force)
+
+;;;;;;;;;;;;;;;;;;;;;;;
+(bind-func apply_inwards_force
+  (lambda ()
+      (let ((x (attractor_get_x (widget_get_attractor WIDGET_TEST)))
+            (y (attractor_get_y (widget_get_attractor WIDGET_TEST)))
+            (force 50.0))
+          (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- x (attractor_get_x a))) (* force (- y (attractor_get_y a)))) 0) (widget_get_children WIDGET_TEST))    
+        )))
+
+(apply_inwards_force)
+
+;;;;;;;;;;;;;;;;;;;;;;;
+
+(bind-func apply_circular_force
+  (lambda ()
+      (let ((x (attractor_get_x (widget_get_attractor WIDGET_TEST)))
+            (y (attractor_get_y (widget_get_attractor WIDGET_TEST)))
+            (force 50.0))
+          (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- 0.0 (- y (attractor_get_y a)))) (* force (- x (attractor_get_x a)))) 0) (widget_get_children WIDGET_TEST))    
+        )))
+
+(apply_circular_force)
+
+;;;;;;;;;;;;;;;;;;
+
+(bind-func apply_range_color
+  (lambda ()
+      (let ((x (attractor_get_x (widget_get_attractor WIDGET_TEST)))
+            (y (attractor_get_y (widget_get_attractor WIDGET_TEST)))
+            (multiplier 1.0))
+          (map (lambda (a) 
+            (let ((dx (- x (attractor_get_x a)))
+                  (dy (- y (attractor_get_y a)))
+                  (d (sqrt (+ (* dx dx) (* dy dy)))))
+              (if (= d 0.0) (set! d 0.001))
+              (if (< d 0.0) (set! d (- 0.0 d)))
+              (attractor_set_target_color a (random (/ dx d)) (random (/ dy d)) (random (/ dx d)) 1.0)
+              ) 0) (widget_get_children WIDGET_TEST))
+        )))
+
+(apply_range_color)
+
+;;;;;;;;;;;;;;
+
+
+(bind-func recreate
+  (lambda ()
+    (widget_destroy WIDGET_TEST)
+    (widget_test_init)
+    void))
+
+(recreate)
+
+
+
+

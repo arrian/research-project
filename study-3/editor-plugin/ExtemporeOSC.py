@@ -11,6 +11,8 @@ import pythonosc
 from pythonosc import osc_message_builder
 from pythonosc import udp_client
 
+MAX_LENGTH = 2048
+
 class ExtemporeOscCommand(sublime_plugin.EventListener):
 
 	def __init__(self):
@@ -23,7 +25,7 @@ class ExtemporeOscCommand(sublime_plugin.EventListener):
 		focus = view.file_name()
 		if focus is None:
 			focus = "null"
-		self.send("/interface/focus", focus)
+		self.send(view, "/interface/focus", focus)
 
 	def on_selection_modified(self, view):
 		# print("selection modified")
@@ -32,28 +34,36 @@ class ExtemporeOscCommand(sublime_plugin.EventListener):
 			selections.append(sel.begin());
 			if sel.begin() != sel.end():
 				selections.append(sel.end());
-		self.send("/interface/selection", len(selections), *selections);
+		self.send(view, "/interface/selection", len(selections), *selections);
 
 	def on_modified(self, view):
-		self.send("/interface/code", view.substr(sublime.Region(0, view.size())));
+		result = view.substr(sublime.Region(0, view.size()))
+		self.send(view, "/interface/code", result[:MAX_LENGTH]);
 
 	def on_pre_save(self, view):
-		self.send("/interface/save", "test")
+		self.send(view, "/interface/save", "test")
 
 	def on_text_command(self, view, command_name, args):
 		if command_name == "extempore_connect":
-			self.send("/interface/connect", 0)
+			self.send(view, "/interface/connect", 0)
 		elif command_name == "extempore_disconnect":
-			self.send("/interface/disconnect", 0)
+			self.send(view, "/interface/disconnect", 0)
 		elif command_name == "extempore_evaluate":
 			result = self.evaluate_hack(view)
-			print(result)
-			self.send("/interface/evaluate", result)
+			# print(result)
+			self.send(view, "/interface/evaluate", result)
 		# print(command_name)
 		return None
 
-	def send(self, address, *args):
-		print("sending")
+	def send(self, view, address, *args):
+
+		# only send for extempore files
+		if view.file_name() is not None and not view.file_name().endswith(".xtm"):
+			return
+			
+		# print(view.file_name())
+		# print("sending to %s - temp disabled" % address)
+		# return
 		msg = pythonosc.osc_message_builder.OscMessageBuilder(address = address)
 		for arg in args:
 			msg.add_arg(arg)
@@ -63,9 +73,12 @@ class ExtemporeOscCommand(sublime_plugin.EventListener):
 
 	def evaluate_hack(self, view):
 		v = view
+		result = ''
 		if v.sel()[0].empty():
-			return self.evaluate_hack_top_level_definition(view)
-		return v.substr(v.sel()[0])
+			result = self.evaluate_hack_top_level_definition(view)
+		else:
+			result = v.substr(v.sel()[0])
+		return result[:MAX_LENGTH] # trim string to max length of 2048
 
 	def evaluate_hack_top_level_definition(self, view): 
 		v = view
