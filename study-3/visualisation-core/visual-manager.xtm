@@ -4,8 +4,8 @@
 ;; including code drawing, visual elements drawing and
 ;; all visual effects.
 
-(define WIDTH 500);;640
-(define HEIGHT 800);;480
+(define WIDTH 640);;640
+(define HEIGHT 480);;480
 ;; (bind-val WIDTH i64 1024)
 ;; (bind-val HEIGHT i64 768)
 

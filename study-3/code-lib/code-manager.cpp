@@ -1,84 +1,69 @@
 #include "code-manager.h"
 
-#include "code-tree.h"//for initial top level splitting
+int getIdentifier()
+{  
+    static int IDENTIFIER = 0;
+    return ++IDENTIFIER;
+}
 
-CodeManager::CodeManager(std::string code)
+CodeManager::CodeManager()
+	: code(""),
+	  evaluation("")
 {
-	this->code = code;
-	CodeTree tree(code, ROOT);
-
-	for(int i = 0; i < tree.children.size(); i++)
-	{
-		graphs.push_back(new CodeSimpleGraph(tree.children[i]->code));
-	}
 }
 
 CodeManager::~CodeManager()
 {
-	for(int i = 0; i < graphs.size(); i++)
-	{
-		delete graphs[i];
-	}
-	graphs.clear();
-}
-
-CodeSimpleGraph* CodeManager::findGraph(std::string code)
-{
-	for(int j = 0; j < graphs.size(); j++)
-	{
-		if(CodeSimple(graphs[j]->code).isFirstLineMatch(code))
-		{
-			// std::cout << "found first line match - " << code << " - " << graphs[j]->code << std::endl;
-			return graphs[j];
-		}
-	}
-	return nullptr;
 }
 
 void CodeManager::update(std::string code)
 {
-	bool found = false;
-	CodeTree tree(code, ROOT);
+	int lineCounter = 0;
+	CodeState* foundState = nullptr;
+	int foundCounter = 0;
 
-	std::vector<CodeSimpleGraph*> unfoundGraphs;
+	int charCounter = 0;
 
-	for(int j = 0; j < graphs.size(); j++)
+	std::vector<CodeState> newStates;
+
+	std::istringstream codestream(code);
+	std::string line;
+	while(std::getline(codestream, line))
 	{
-		unfoundGraphs.push_back(graphs[j]);
-	}
-
-	for(int i = 0; i < tree.children.size(); i++)
-	{
-		found = false;
-		CodeSimpleGraph* graph = findGraph(tree.children[i]->code);
-		if(graph)
+		if(line.find_first_not_of(' ') != std::string::npos)//check if anything but whitespace
 		{
-			graph->update(tree.children[i]->code);
-			unfoundGraphs.erase(std::remove(unfoundGraphs.begin(), unfoundGraphs.end(), graph), unfoundGraphs.end());
-			continue;
+			if(!foundState) foundState = updateState(line, foundCounter, charCounter);
+			else updateLine(foundState, line, foundCounter, charCounter);
+			foundCounter++;
 		}
-		graphs.push_back(new CodeSimpleGraph(tree.children[i]->code));
-	}
+		else
+		{
+			newStates.push_back(*foundState);
+			foundState = nullptr;
+			foundCounter = 0;
+		}
 
-	for(int j = 0; j < unfoundGraphs.size(); j++)
-	{
-		// std::cout << "removing " << unfoundGraphs[j]->code << std::endl;
-		graphs.erase(std::remove(graphs.begin(), graphs.end(), unfoundGraphs[j]), graphs.end());
+	    charCounter += line.length();
+	    lineCounter++;
 	}
+	if(foundState) newStates.push_back(*foundState);
+	states = newStates;
 }
 
 void CodeManager::evaluate(std::string code)
 {
-	CodeTree tree(code, ROOT);
+	std::istringstream codestream(code);
+	std::string line;
 
-	for(int i = 0; i < tree.children.size(); i++)
+	if(std::getline(codestream, line))
 	{
-		for(int j = 0; j < graphs.size(); j++)
+		CodeState* state = find(line);
+		if(state)
 		{
-			std::cout << "comparing " << graphs[j]->code << std::endl << " with " << tree.children[i]->code << std::endl;
-			if(CodeSimple(graphs[j]->code).isFirstLineMatch(tree.children[i]->code))
+			state->isActive = true;
+			for(auto & line : state->lines)
 			{
-				graphs[j]->evaluate(tree.children[i]->code);
+				line.isActive = true;
 			}
 		}
 	}
@@ -86,68 +71,126 @@ void CodeManager::evaluate(std::string code)
 
 void CodeManager::select(int selection)
 {
-	//temp hack
-	CodeTree tree(this->code, ROOT);
-
-	// for(auto graph : this->graphs)
-	// {
-	// 	graph->select();
-	// }
-	int counter = 0;
-	for(int i = 0; i < tree.children.size(); i++)
+	for(auto & state : states)
 	{
-		int current = tree.children[i]->code.length();
-		if(selection >= counter && selection <= counter + current)
+		state.isSelected = false;
+		for(auto & line : state.lines)
 		{
-			CodeSimpleGraph* graph = findGraph(tree.children[i]->code);
-			if(graph) graph->select();
+			line.isSelected = false;
+			int start = line.startChar;
+			int end = line.startChar + line.code.length();
+			if(selection >= start && selection <= end)
+			{
+				state.isSelected = true;
+				line.isSelected = true;
+			}
 		}
-		counter += current;
 	}
+	
 }
 
 void CodeManager::error(std::string message)
 {
-	CodeTree tree(this->evaluation, ROOT);
 
-	for(int i = 0; i < tree.children.size(); i++)
-	{
-		for(int j = 0; j < graphs.size(); j++)
-		{
-			if(CodeSimple(graphs[j]->code).isFirstLineMatch(tree.children[i]->code))
-			{
-				graphs[j]->error(message);
-			}
-		}
-	}
 }
 
-void CodeManager::step(float dt)
+CodeState* CodeManager::updateState(std::string line, int index, int charCount)
 {
-	for(int j = 0; j < graphs.size(); j++)
+	CodeState* state = find(line);
+	if(!state)
 	{
-		graphs[j]->step(dt);
+		CodeState newState;
+		newState.id = getIdentifier();
+		newState.isSelected = false;
+		newState.isActive = false;
+		newState.isError = false;
+
+		states.push_back(newState);
+		state = &states[states.size() - 1];
+	}
+	updateLine(state, line, index, charCount);
+	return state;
+}
+
+void CodeManager::updateLine(CodeState* state, std::string line, int index, int charCount)
+{
+	if(state->lines.size() < (index + 1))//not enough lines in code state
+	{
+		CodeLine codeLine;
+		codeLine.id = getIdentifier();
+		codeLine.startChar = charCount;
+		codeLine.code = line;
+		codeLine.isSelected = false;
+		codeLine.isActive = false;
+		codeLine.isError = false;
+
+		state->lines.push_back(codeLine);
+	}
+	else//have enough lines in the code state... need to update existing
+	{
+		CodeLine* codeLine = &state->lines[index];
+		codeLine->startChar = charCount;
+		codeLine->code = line;
+		codeLine->isActive = false;//edited line... force inactive
 	}
 }
 
+CodeState* CodeManager::find(std::string line)
+{
+	for(auto & state : states)
+	{
+		if(state.lines.size() > 0 && similar(line, state.lines[0].code)) return &state;
+	}
+	return nullptr;
+}
+
+bool CodeManager::similar(std::string str1, std::string str2)
+{
+	std::cout << "checking similarity of" << str1 << " and " << str2 << std::endl;
+
+    std::vector<std::string> words1, words2;
+    std::string temp;
+
+    std::stringstream stringstream1(str1);
+    while (stringstream1 >> temp)
+        words1.push_back(temp);
+
+    std::stringstream stringstream2(str2);
+    while (stringstream2 >> temp)
+        words2.push_back(temp);
+
+    int indenticalCount = 0;
+    int length = std::min(words1.size(), words2.size());
+
+    for(int i = 0; i < length; i++) if(words1[i] == words2[i]) indenticalCount++;
+
+    if(length == 0) return false;
+    double ratio = (double)indenticalCount / length;
+    if(ratio > 0.6) std::cout << "similar" << std::endl;
+    return ratio > 0.6;
+}
 
 
 
 //////////////////////////////////////
-
-code_manager* code_manager_create(char* code)
+code_manager* code_manager_create()
 {
-	return reinterpret_cast<code_manager*>(new CodeManager(code));
+	return reinterpret_cast<code_manager*>(new CodeManager());
+}
+
+void code_manager_destroy(code_manager* manager)
+{
+	delete reinterpret_cast<CodeManager*>(manager);
 }
 
 void code_manager_update(code_manager* manager, char* code)
 {
-	reinterpret_cast<CodeManager*>(manager)->update(code);
+	reinterpret_cast<CodeManager*>(manager)->update(std::string(code));
 }
 
 void code_manager_evaluate(code_manager* manager, char* code)
 {
-	reinterpret_cast<CodeManager*>(manager)->evaluate(code);
+	reinterpret_cast<CodeManager*>(manager)->evaluate(std::string(code));
 }
 
 void code_manager_select(code_manager* manager, int selection)
@@ -157,106 +200,73 @@ void code_manager_select(code_manager* manager, int selection)
 
 void code_manager_error(code_manager* manager, char* message)
 {
-	reinterpret_cast<CodeManager*>(manager)->error(message);
+	reinterpret_cast<CodeManager*>(manager)->error(std::string(message));
 }
 
-void code_manager_step(code_manager* manager, float dt)
+int code_manager_states_count(code_manager* manager)
 {
-	reinterpret_cast<CodeManager*>(manager)->step(dt);
+	return reinterpret_cast<CodeManager*>(manager)->states.size();
 }
 
-int code_manager_get_graph_count(code_manager* manager)
+code_state* code_manager_states_get(code_manager* manager, int index)
 {
-	return reinterpret_cast<CodeManager*>(manager)->graphs.size();
+	return reinterpret_cast<code_state*>(&reinterpret_cast<CodeManager*>(manager)->states[index]);
 }
 
-code_graph* code_manager_get_graph(code_manager* manager, int index)
+int code_state_id_get(code_state* state)
 {
-	CodeManager* codeManager = reinterpret_cast<CodeManager*>(manager);
-	return reinterpret_cast<code_graph*>(codeManager->graphs[index]);
+	return reinterpret_cast<CodeState*>(state)->id;
 }
 
-int code_graph_get_element_count(code_graph* graph)
+int code_state_lines_count(code_state* state)
 {
-	return reinterpret_cast<CodeSimpleGraph*>(graph)->elements.size();
+	return reinterpret_cast<CodeState*>(state)->lines.size();
 }
 
-code_element* code_graph_get_element(code_graph* graph, int index)
+code_line* code_state_lines_get(code_state* state, int index)
 {
-	CodeSimpleGraph* codeGraph = reinterpret_cast<CodeSimpleGraph*>(graph);
-	return reinterpret_cast<code_element*>(&codeGraph->elements[index]);
+	return reinterpret_cast<code_line*>(&reinterpret_cast<CodeState*>(state)->lines[index]);
 }
 
-void* code_graph_get_widget(code_graph* graph)
+bool code_state_is_selected(code_state* state)
 {
-	// std::cout << "getting graph user data" << reinterpret_cast<CodeSimpleGraph*>(graph)->widget << std::endl;
-	return reinterpret_cast<CodeSimpleGraph*>(graph)->widget;
+	return reinterpret_cast<CodeState*>(state)->isSelected;
 }
 
-void code_graph_set_widget(code_graph* graph, void* widget)
+bool code_state_is_active(code_state* state)
 {
-	// std::cout << "setting graph user data" << widget << std::endl;
-	reinterpret_cast<CodeSimpleGraph*>(graph)->widget = widget;
+	return reinterpret_cast<CodeState*>(state)->isActive;
 }
 
-void* code_graph_get_entity(code_graph* graph)
+bool code_state_is_error(code_state* state)
 {
-	return reinterpret_cast<CodeSimpleGraph*>(graph)->entity;
+	return reinterpret_cast<CodeState*>(state)->isError;
 }
 
-void code_graph_set_entity(code_graph* graph, void* entity)
+int code_line_id_get(code_line* line)
 {
-	reinterpret_cast<CodeSimpleGraph*>(graph)->entity = entity;
+	return reinterpret_cast<CodeLine*>(line)->id;
 }
 
-double code_element_get_size(code_element* element)
+// char* code_line_get_code(code_line* line)
+// {
+		// return reinterpret_cast<CodeLine*>(line).code.c_str();	
+// }
+
+bool code_line_is_selected(code_line* line)
 {
-	return reinterpret_cast<CodeElement*>(element)->size;
+	return reinterpret_cast<CodeLine*>(line)->isSelected;
 }
 
-double code_element_get_x(code_element* element)
+bool code_line_is_active(code_line* line)
 {
-	return reinterpret_cast<CodeElement*>(element)->x;
+	return reinterpret_cast<CodeLine*>(line)->isActive;
 }
 
-double code_element_get_y(code_element* element)
+bool code_line_is_error(code_line* line)
 {
-	return reinterpret_cast<CodeElement*>(element)->y;
+	return reinterpret_cast<CodeLine*>(line)->isError;
 }
-
-double code_element_get_r(code_element* element)
-{
-	return reinterpret_cast<CodeElement*>(element)->r;
-}
-
-double code_element_get_g(code_element* element)
-{
-	return reinterpret_cast<CodeElement*>(element)->g;
-}
-
-double code_element_get_b(code_element* element)
-{
-	return reinterpret_cast<CodeElement*>(element)->b;
-}
-
-bool code_element_is_valid(code_element* element)
-{
-	return reinterpret_cast<CodeElement*>(element)->valid;
-}
-
-void* code_element_get_user_data(code_element* element)
-{
-	std::cout << "getting element user data" << reinterpret_cast<CodeElement*>(element)->userData << std::endl;
-	return reinterpret_cast<CodeElement*>(element)->userData;
-}
-
-void code_element_set_user_data(code_element* element, void* userData)
-{
-	std::cout << "setting element user data" << userData << std::endl;
-	reinterpret_cast<CodeElement*>(element)->userData = userData;
-}
-
-
 
 
 

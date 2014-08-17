@@ -455,7 +455,7 @@
 
 (bind-func apply_evaluate_color
   (lambda ()
-      (map (lambda (a) (attractor_set_target_color a (random 0.1 0.8) (random 0.8 1.0) (random 0.0 0.4) 1.0) 0) (widget_get_children WIDGET_TEST))
+      (map (lambda (a) (attractor_set_target_color a (random 0.3 0.8) (random 0.8 1.0) (random 0.0 0.5) 1.0) 0) (widget_get_children WIDGET_TEST))
     void))
 
 (apply_evaluate_color)
@@ -543,25 +543,6 @@
         )))
 
 (apply_circular_force)
-
-;;;;;;;;;;;;;;;;;;
-
-(bind-func apply_range_color
-  (lambda ()
-      (let ((x (attractor_get_x (widget_get_attractor WIDGET_TEST)))
-            (y (attractor_get_y (widget_get_attractor WIDGET_TEST)))
-            (multiplier 1.0))
-          (map (lambda (a) 
-            (let ((dx (- x (attractor_get_x a)))
-                  (dy (- y (attractor_get_y a)))
-                  (d (sqrt (+ (* dx dx) (* dy dy)))))
-              (if (= d 0.0) (set! d 0.001))
-              (if (< d 0.0) (set! d (- 0.0 d)))
-              (attractor_set_target_color a (random (/ dx d)) (random (/ dy d)) (random (/ dx d)) 1.0)
-              ) 0) (widget_get_children WIDGET_TEST))
-        )))
-
-(apply_range_color)
 
 ;;;;;;;;;;;;;;
 

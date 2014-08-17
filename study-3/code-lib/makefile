@@ -10,6 +10,9 @@ code-lib: bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o bi
 code-simple-lib:
 	g++ $(CXXFLAGS) code-simple-graph.cpp code-manager.cpp code-line.cpp code-tree.cpp list.cpp event-queue.cpp -dynamiclib -o ./bin/code.dylib
 
+code-simple-test:
+	g++ $(CXXFLAGS) code-simple-graph.cpp code-manager.cpp code-line.cpp code-tree.cpp list.cpp event-queue.cpp -o ./bin/code-test
+
 test: bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o bin/event-queue.o bin/main.o
 	g++ bin/code-tree.o bin/code-history.o bin/code-diff.o bin/code-graph.o bin/event-queue.o bin/main.o -o bin/code-test
 	./bin/code-test
