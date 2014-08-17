@@ -314,12 +314,12 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(bind-type Widget <String*,Code*,Attractor*,AttractorList*>);; name, code, main entity, child entities
+(bind-type Widget <i64,Code*,Attractor*,AttractorList*,i1>);; id, code, main entity, child entities, should destroy
 
 (bind-func widget_create
-  (lambda (name:String* code:Code* x:double y:double size:double)
+  (lambda (id:i64 code:Code* x:double y:double size:double)
       (let ((attractor (attractor_create 0 POLY_SCENE null 1 x y size 1.0 0.0 0.0 1.0)))
-          (Widget name code attractor null))))
+          (Widget id code attractor null #f))))
 
 (bind-func widget_get_name
   (lambda (w:Widget*)
@@ -336,6 +336,10 @@
 (bind-func widget_get_children
   (lambda (w:Widget*)
       (tref w 3)))
+
+(bind-func widget_set_destroy
+  (lambda (w:Widget* destroy:i1)
+      (tset! 4 destroy)))
 
 (bind-func widget_add_child
   (lambda (w:Widget* a:Attractor*)
@@ -385,10 +389,32 @@
     (map (lambda (w) (widget_print w) 0) wl)
     ))
 
+(bind-func widget_list_find
+  (lambda (wl:WidgetList* id:i64)
+      (filter (lambda (w) (equal id (widget_get_id))) wl)))
+
 (bind-func widget_list_update
   (lambda (wl:WidgetList*)
-    ))
+      (let ((i 0))
+          (map (lambda (w) (widget_set_destroy w #t)) wl)
+          (dotimes (i (code_manager_states_count CODE_MANAGER))
+              (let ((state (code_manager_states_get CODE_MANAGER i))
+                    (id (code_state_id_get state))
+                    (found (widget_list_find wl id)))
+                  (if (null? found) 
+                    (widget_create id null 0.0 0.0 100.0)
+                    (map (lambda (w) 
+                      (begin
+                        (widget_update w)
+                        (widget_set_destroy w #f))) 
+                      found)))))))
 
+
+(bind-func widget_list_remove
+  (lambda (name)
+    (set! WIDGET_LIST (filter (lambda (w)
+                            (not (equal name (widget_get_name w))))
+                          WIDGET_LIST))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -401,6 +427,20 @@
         (cons time (cons cb-sym args)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(bind-val WIDGET_LIST_TEST WidgetList* 0)
+
+(bind-func widget_list_test_init
+  (lambda ()
+      (set! WIDGET_LIST_TEST null)))
+
+(widget_list_test_init)
+
+(bind-func update
+  (lambda ()
+      (widget_list_update WIDGET_LIST_TEST)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (bind-val WIDGET_TEST Widget* 0)
 
@@ -420,16 +460,16 @@
 
 ;;;;;;;;;;;
 
-(bind-func update
-  (lambda ()
-    (if (not (= WIDGET_TEST null)) (widget_update WIDGET_TEST))
-    (if (= (% (now) 5) 0) 
-      (begin
-        ;; (apply_random_color)
-        ;; (apply_random_forces)
-        ;; (apply_random_size)
-        void))
-    void))
+;; (bind-func update
+;;   (lambda ()
+;;     (if (not (= WIDGET_TEST null)) (widget_update WIDGET_TEST))
+;;     (if (= (% (now) 5) 0) 
+;;       (begin
+;;         ;; (apply_random_color)
+;;         ;; (apply_random_forces)
+;;         ;; (apply_random_size)
+;;         void))
+;;     void))
 
 ;;;;;;;;;;;
 

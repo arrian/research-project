@@ -3,48 +3,11 @@
 ;; This manager handles all source code management including active code, 
 ;; currently edited code and the relationship between these two code states.
 
-;; Defines the time to cache code changes.
-(bind-val CACHE_TIME i64 100000)
-
-;; Defines the maximum size of the code cache
-(bind-val CACHE_SIZE i64 100)
-
-;; The time that the latest code was added to the cache
-(bind-val CACHE_TIME_CURRENT i64 0)
-
-(bind-func add_code
-  (lambda (code time:i64)
-  	(codecache_list_add time code)))
-
-;; Get the current code
-(bind-func get_code
-  (lambda ()
-	(codecache_get_text (codecache_list_find CACHE_TIME_CURRENT))))
-
-;; Get the code diff from a specific time in history 
-(bind-func get_code_diff
-  (lambda (from:i64)
-	void))
-
-;; Supplies updated code for the specified time.
-(bind-func update_code
-  (lambda (code:i8* time:i64)
-  	(if (>= time CACHE_TIME_CURRENT) (set! CACHE_TIME_CURRENT time))
-  	(add_code code time)
-	void))
-
-
-;;;;;;;;;;;;
-
 (bind-val CODE_MANAGER code_manager* 0)
 
 (bind-func code_manager_init
   (lambda ()
-      (set! CODE_MANAGER (code_manager_create ""))))
+      (set! CODE_MANAGER (code_manager_create))))
 
 (code_manager_init)
-
-
-
-
 

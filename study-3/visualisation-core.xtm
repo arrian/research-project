@@ -6,10 +6,8 @@
 
 (define *study-3-dir* "research-project/visualisation-core")
 
-
 (sys:load "research-project/app2-lib/app.xtm")
 (sys:load "research-project/code-lib/code.xtm")
-;; (sys:load "research-project/visualisation-core/code-cache.xtm")
 
 (sys:load (string-append *study-3-dir* "/code-manager.xtm"))
 (sys:load (string-append *study-3-dir* "/visual-manager.xtm"))
