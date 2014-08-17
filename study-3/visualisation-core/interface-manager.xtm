@@ -19,7 +19,7 @@
   (lambda (args:i32*)
   	;; (printf "%s\n" args)
   	(let ((i:i32 0))
-      (code_manager_select CODE_MANAGER (unswap32i (pref args 1))))
+      (code_manager_select CODE_MANAGER (i32toi64 (unswap32i (pref args 1)))))
 	  	;; (printf "selection ")
 	  	;; (dotimes (i (unswap32i (pref args 0)))
 			;;   (printf "%d " (unswap32i (pref args (+ i 1)))))

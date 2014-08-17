@@ -321,7 +321,7 @@
       (let ((attractor (attractor_create 0 POLY_SCENE null 1 x y size 1.0 0.0 0.0 1.0)))
           (Widget id code attractor null #f))))
 
-(bind-func widget_get_name
+(bind-func widget_get_id
   (lambda (w:Widget*)
       (tref w 0)))
 
@@ -339,7 +339,7 @@
 
 (bind-func widget_set_destroy
   (lambda (w:Widget* destroy:i1)
-      (tset! 4 destroy)))
+      (tset! w 4 destroy)))
 
 (bind-func widget_add_child
   (lambda (w:Widget* a:Attractor*)
@@ -347,7 +347,7 @@
     void))
 
 (bind-func widget_update
-  (lambda (w:Widget*)
+  (lambda (w:Widget* state:code_state*)
     (attractor_update (widget_get_attractor w))
     (map (lambda (a) (attractor_update a) 0) (widget_get_children w))
     void))
@@ -386,12 +386,11 @@
 
 (bind-func widget_list_print
   (lambda (wl:WidgetList*)
-    (map (lambda (w) (widget_print w) 0) wl)
-    ))
+    (map (lambda (w) (widget_print w) 0) wl)))
 
 (bind-func widget_list_find
   (lambda (wl:WidgetList* id:i64)
-      (filter (lambda (w) (equal id (widget_get_id))) wl)))
+      (filter (lambda (w) (equal id (widget_get_id w))) wl)))
 
 (bind-func widget_list_update
   (lambda (wl:WidgetList*)
@@ -402,19 +401,13 @@
                     (id (code_state_id_get state))
                     (found (widget_list_find wl id)))
                   (if (null? found) 
-                    (widget_create id null 0.0 0.0 100.0)
-                    (map (lambda (w) 
-                      (begin
-                        (widget_update w)
-                        (widget_set_destroy w #f))) 
-                      found)))))))
-
-
-(bind-func widget_list_remove
-  (lambda (name)
-    (set! WIDGET_LIST (filter (lambda (w)
-                            (not (equal name (widget_get_name w))))
-                          WIDGET_LIST))))
+                    (begin (set! wl (cons (widget_create id null (random 0.0 300.0) (random 0.0 300.0) 100.0) wl)) void)
+                    (begin (map (lambda (w) 
+                                  (begin
+                                    (widget_update w state)
+                                    (widget_set_destroy w #f))) 
+                                  found) void))))
+          wl)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -438,7 +431,7 @@
 
 (bind-func update
   (lambda ()
-      (widget_list_update WIDGET_LIST_TEST)))
+      (set! WIDGET_LIST_TEST (widget_list_update WIDGET_LIST_TEST))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -446,7 +439,7 @@
 
 (bind-func widget_test_init
   (lambda ()
-      (set! WIDGET_TEST (widget_create (Str "test widget") null 0.0 0.0 100.0))))
+      (set! WIDGET_TEST (widget_create 0 null 0.0 0.0 100.0))))
 
 (widget_test_init)
 

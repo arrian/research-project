@@ -146,7 +146,7 @@ CodeState* CodeManager::find(std::string line)
 
 bool CodeManager::similar(std::string str1, std::string str2)
 {
-	std::cout << "checking similarity of" << str1 << " and " << str2 << std::endl;
+	//std::cout << "checking similarity of" << str1 << " and " << str2 << std::endl;
 
     std::vector<std::string> words1, words2;
     std::string temp;
@@ -166,7 +166,7 @@ bool CodeManager::similar(std::string str1, std::string str2)
 
     if(length == 0) return false;
     double ratio = (double)indenticalCount / length;
-    if(ratio > 0.6) std::cout << "similar" << std::endl;
+    //if(ratio > 0.6) std::cout << "similar" << std::endl;
     return ratio > 0.6;
 }
 
