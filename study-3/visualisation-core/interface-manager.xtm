@@ -19,8 +19,7 @@
   (lambda (args:i32*)
   	;; (printf "%s\n" args)
   	(let ((i:i32 0))
-      (code_manager_select CODE_MANAGER (unswap32i (pref args 1)))
-      (widget_list_update))
+      (code_manager_select CODE_MANAGER (unswap32i (pref args 1))))
 	  	;; (printf "selection ")
 	  	;; (dotimes (i (unswap32i (pref args 0)))
 			;;   (printf "%d " (unswap32i (pref args (+ i 1)))))
@@ -33,7 +32,6 @@
   (lambda (args:i8*)
   	;; (printf "code %.80s...\n" args)
     (code_manager_update CODE_MANAGER args)
-  	(widget_list_update)
   	void))
   	
 	;;(printf "code %.80s...\n" args)
@@ -43,7 +41,6 @@
 (bind-func handle_evaluate
   (lambda (args:i8*)
     (code_manager_evaluate CODE_MANAGER args)
-    (widget_list_update)
     void))
 
 ;; Handles the /interface/keyboard address. Accepts one argument that is the
@@ -57,7 +54,6 @@
 (bind-func handle_error
   (lambda (args:i8*)
     (code_manager_error CODE_MANAGER args)
-    (widget_list_update)
     void))
 
 ;; Handles the /interface/focus address. Accepts one argument that is the
@@ -65,7 +61,6 @@
 (bind-func handle_focus
   (lambda (args:i8*)
     ;; (code_manager_focus CODE_MANAGER args)
-    (widget_list_update)
     void))
 
 (bind-func handle_event

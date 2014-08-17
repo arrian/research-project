@@ -19,24 +19,25 @@
 (bind-lib code event_get_type [i8*,event*]*)
 (bind-lib code event_get_data [i8*,event*]*)
 
-(bind-alias list i8)
+;; Code Line
+(bind-alias code_line i8)
+(bind-lib code code_line_id_get [i64,code_line*]*)
+;; (bind-lib code code_line_get_code [i8*,code_line*]*)
+(bind-lib code code_line_is_selected [i1,code_line*]*)
+(bind-lib code code_line_is_active [i1,code_line*]*)
+(bind-lib code code_line_is_error [i1,code_line*]*)
 
-(bind-lib code list_create [list*]*)
-(bind-lib code list_destroy [void,list*]*)
-
-(bind-lib code list_add [void,list*,i8*]*)
-(bind-lib code list_get [i8*,list*,i64]*)
-(bind-lib code list_remove [void,list*,i64]*)
-(bind-lib code list_remove_end [void,list*,i64]*)
-
-(bind-lib code list_size [i64,list*]*)
+;; Code State
+(bind-alias code_state i8)
+(bind-lib code code_state_id_get [i64,code_state*]*)
+(bind-lib code code_state_lines_count [i64,code_state*]*)
+(bind-lib code code_state_lines_get [code_line*,code_state*,i64]*)
+(bind-lib code code_state_is_selected [i1,code_state*]*)
+(bind-lib code code_state_is_active [i1,code_state*]*)
+(bind-lib code code_state_is_error [i1,code_state*]*)
 
 ;; Code Manager
-
 (bind-alias code_manager i8)
-(bind-alias code_state i8)
-(bind-alias code_line i8)
-
 (bind-lib code code_manager_create [code_manager*]*)
 (bind-lib code code_manager_destroy [void,code_manager*]*)
 
@@ -48,21 +49,5 @@
 (bind-lib code code_manager_states_count [i64,code_manager*]*)
 (bind-lib code code_manager_states_get [code_state*,code_manager*,i64]*)
 
-;; Code State
-
-(bind-lib code code_state_id_get [i64,code_state*]*)
-(bind-lib code code_state_lines_count [i64,code_state*]*)
-(bind-lib code code_state_lines_get [code_line*,code_state*,i64]*)
-(bind-lib code code_state_is_selected [i1,code_state*]*)
-(bind-lib code code_state_is_active [i1,code_state*]*)
-(bind-lib code code_state_is_error [i1,code_state*]*)
-
-;; Code Line
-
-(bind-lib code code_line_id_get [i64,code_line*]*)
-;; (bind-lib code code_line_get_code [i8*,code_line*]*)
-(bind-lib code code_line_is_selected [i1,code_line*]*)
-(bind-lib code code_line_is_active [i1,code_line*]*)
-(bind-lib code code_line_is_error [i1,code_line*]*)
 
 

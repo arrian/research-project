@@ -1,31 +1,15 @@
 ;; Visual Manager
-;;
-;; This manager handles all visualisation requirements 
-;; including code drawing, visual elements drawing and
-;; all visual effects.
 
-(define WIDTH 640);;640
-(define HEIGHT 480);;480
-;; (bind-val WIDTH i64 1024)
-;; (bind-val HEIGHT i64 768)
+(define WIDTH 640)
+(define HEIGHT 480)
 
 (poly_core_init WIDTH HEIGHT)
 
 (bind-func scene_create
   (lambda ()
-    ;;(poly_scene_add_child POLY_SCENE (poly_scene_image_create "research-project/resources/gradient.png"))
-    ;;(poly_scene_add_child POLY_SCENE (poly_scene_label_create "test text here more text" 30))
-    ;;(poly_scene_add_child POLY_SCENE (poly_ui_input_create "test text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\n"))
     void))
 
 (scene_create)
-
-;; (bind-func draw
-;;   (lambda ()
-;;     (poly_attractors_update)
-;;     (poly_core_update POLY_CORE)
-;;     void))
-
 
 (bind-func update
   (lambda ()
@@ -36,57 +20,3 @@
     (update)
     (poly_core_update POLY_CORE)
     void))
-
-
-;; (define draw-loop
-;;   (lambda (time delta-t)
-;;     (draw)
-;;     (callback (+ time (* *second* delta-t) 0.5)
-;;               'draw-loop
-;;               (+ time (* *second* delta-t)) 
-;;               delta-t)))
-
-;; (draw-loop (now) 1/10)
-
-
-;; Draws the code fitting it into the given width and height.
-;; (bind-func draw_code
-;;   (lambda (code x:double y:double width:double height:double)
-    	
-;;     void))
-
-;; ;; Draws the code graph scaling it by the supplied value.
-;; (bind-func draw_graph
-;;   (lambda (graph x:double y:double scale:double)
-
-;;     void))
-
-
-;; (bind-func draw
-;;   (lambda (state)
-
-;;     void))
-
-
-;; ;; Debug Drawing
-;; (bind-func debug_draw_interface_manager
-;;   (lambda ()
-;;     ))
-
-;; (bind-func debug_draw_event_manager
-;;   (lambda ()
-;;     ))
-
-;; (bind-func debug_draw_timing_manager
-;;   (lambda ()
-;;     ))
-
-;; (bind-func debug_draw_code_manager
-;;   (lambda ()
-;;     ))
-
-;; (bind-func debug_draw_visual_manager
-;;   (lambda ()
-;;     ))
-
-

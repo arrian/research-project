@@ -6,23 +6,20 @@
 
 (define *study-3-dir* "research-project/visualisation-core")
 
-;; (sys:load (string-append *study-3-dir* "/event-manager.xtm"))
-;; (sys:load (string-append *study-3-dir* "/timing-manager.xtm"))
 
 (sys:load "research-project/app2-lib/app.xtm")
 (sys:load "research-project/code-lib/code.xtm")
-(sys:load "research-project/visualisation-core/code-cache.xtm")
+;; (sys:load "research-project/visualisation-core/code-cache.xtm")
 
 (sys:load (string-append *study-3-dir* "/code-manager.xtm"))
 (sys:load (string-append *study-3-dir* "/visual-manager.xtm"))
+(sys:load (string-append *study-3-dir* "/interface-manager.xtm"))
 
 (sys:load (string-append *study-3-dir* "/widget.xtm"))
 
-(sys:load (string-append *study-3-dir* "/interface-manager.xtm"))
-
 (define update-loop
   (lambda (time delta-t)
-  	;;(handle_events)
+  	(handle_events)
     (draw)
     (callback (+ time (* *second* delta-t) 0.5)
               'update-loop
@@ -30,13 +27,6 @@
               delta-t)))
 
 (update-loop (now) 1/30)
-
-
-
-
-
-
-
 
 
 
