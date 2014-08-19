@@ -255,8 +255,8 @@ void poly_scene_destroy(poly_scene* scene)
 
 void poly_scene_add_child(poly_scene* scene, poly_entity* entity)
 {
-	//reinterpret_cast<Scene*>(scene)->addChild(reinterpret_cast<Entity*>(entity));
-	reinterpret_cast<PhysicsScene2D*>(scene)->addPhysicsChild(reinterpret_cast<Entity*>(entity), PhysicsScene2DEntity::ENTITY_CIRCLE, false);
+	reinterpret_cast<Scene*>(scene)->addChild(reinterpret_cast<Entity*>(entity));
+	//reinterpret_cast<PhysicsScene2D*>(scene)->addPhysicsChild(reinterpret_cast<Entity*>(entity), PhysicsScene2DEntity::ENTITY_CIRCLE, false);
 }
 
 void poly_scene_physics_set_gravity(poly_scene* s, double gx, double gy)

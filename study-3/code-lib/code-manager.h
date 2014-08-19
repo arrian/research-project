@@ -82,7 +82,7 @@ extern "C"
 
 	//Code Line
 	int code_line_id_get(code_line* line);
-	// char* code_line_get_code(code_line* line);
+	const char* code_line_get_code(code_line* line);
 	bool code_line_is_selected(code_line* line);
 	bool code_line_is_active(code_line* line);
 	bool code_line_is_error(code_line* line);
@@ -124,6 +124,13 @@ int main(int argc, char* argv[])
 	if(manager.states[0].isActive) std::cout << "is active" << std::endl;
 
 	printStates(&manager);
+
+	std::cout << "------------------" << std::endl;
+	
+	std::string code3 = "(single function)\n";
+	manager.update(code3);
+	printStates(&manager);
+
 }
 
 

@@ -1,0 +1,177 @@
+
+
+;; Globals ;;;;;;;;;;;;;;;;;;
+
+(bind-val CIRCLE_TYPE i64 8)
+(bind-val CIRCLE_SEGMENTS i64 6)
+(bind-val ATTRACTION_FACTOR double 500.0)
+
+(bind-func set_attraction_factor
+  (lambda (factor:double)
+    (set! ATTRACTION_FACTOR factor)))
+
+(set_attraction_factor 500.0)
+
+;; Utility ;;;;;;;;;;;;;;;;;;;
+
+(bind-func maxd
+  (lambda (a:double b:double)
+    (if (>= a b) a b)))
+
+(bind-func mind
+  (lambda (a:double b:double)
+    (if (< a b) a b)))
+
+;; Attractor ;;;;;;;;;;;;;;;;;
+
+;;id,scene,parent,entity,physics_entity,type,segments,is_static,size_transition,color_transition,should_destroy
+(bind-type Attractor <i64,i8*,Attractor*,i8*,i8*,i64,i64,i1,SizeTransition*,ColorTransition*,i1>)
+
+(bind-func attractor_get_id
+  (lambda (a:Attractor*)
+    (tref a 0)))
+
+(bind-func attractor_get_scene
+  (lambda (a:Attractor*)
+    (tref a 1)))
+
+(bind-func attractor_get_parent
+  (lambda (a:Attractor*)
+    (tref a 2)))
+
+(bind-func attractor_get_entity
+  (lambda (a:Attractor*)
+    (tref a 3)))
+
+(bind-func attractor_get_physics_entity
+  (lambda (a:Attractor*)
+    (tref a 4)))
+
+(bind-func attractor_is_static
+  (lambda (a:Attractor*)
+    (tref a 7)))
+
+(bind-func attractor_get_size
+  (lambda (a:Attractor*)
+    (tref a 8)))
+
+(bind-func attractor_get_color
+  (lambda (a:Attractor*)
+    (tref a 9)))
+
+(bind-func attractor_get_destroy
+  (lambda (a:Attractor*)
+    (tref a 10)))
+
+(bind-func attractor_get_x
+  (lambda (a:Attractor*)
+    (poly_entity_get_x (attractor_get_entity a))))
+
+(bind-func attractor_get_y
+  (lambda (a:Attractor*)
+    (poly_entity_get_y (attractor_get_entity a))))
+
+(bind-func attractor_set_target_size
+  (lambda (a:Attractor* s)
+    (size_set_target (attractor_get_size a) s)
+    a))
+
+(bind-func attractor_set_target_color
+  (lambda (a:Attractor* r g b alpha)
+    (color_set_target (attractor_get_color a) r g b alpha)
+    a))
+
+(bind-func attractor_set_physics_entity
+  (lambda (a:Attractor* pe)
+    (tset! a 4 pe)))
+
+(bind-func attractor_set_destroy
+  (lambda (a:Attractor* destroy)
+    (tset! a 10 destroy)))
+
+(bind-func attractor_create
+  (lambda (id scene parent static x:double y:double size:double r g b a)
+      (let ((entity (poly_scene_primitive_create_circle size size (i64toi32 CIRCLE_SEGMENTS))))
+          (poly_entity_set_position entity x y)
+          (poly_entity_set_color entity r g b a)
+          (let ((physics_entity (poly_scene_physics_add_child scene entity static)))
+                (let ((sizet (SizeTransition #t size size size (now) TRANSITION_TIME))
+                      (colort (ColorTransition #t (Color r g b a) (Color r g b a) (Color r g b a) (now) TRANSITION_TIME)))
+                    (Attractor id scene parent entity physics_entity CIRCLE_TYPE CIRCLE_SEGMENTS static sizet colort #f))))))
+
+(bind-func attractor_update_size
+  (lambda (a:Attractor*)
+      (if (size_transition_is_complete (attractor_get_size a))
+          a
+          (begin 
+            (size_update (attractor_get_size a))
+            (let ((current (size_get_current (attractor_get_size a))))
+                (poly_scene_primitive_set_circle_options (attractor_get_entity a) current current (i64toi32 CIRCLE_SEGMENTS))
+                (poly_scene_physics_remove_child (attractor_get_scene a) (attractor_get_entity a))
+                (attractor_set_physics_entity a (poly_scene_physics_add_child (attractor_get_scene a) (attractor_get_entity a) (attractor_is_static a)))
+                )
+            a))))
+
+(bind-func attractor_update_color
+  (lambda (a:Attractor*)
+      (color_update (attractor_get_color a))
+      (if (color_transition_is_complete (attractor_get_color a)) 
+            a
+            (begin 
+              (let ((target (color_get_target (attractor_get_color a))))
+                  (poly_entity_set_color (attractor_get_entity a) 
+                            (color_get_r target) (color_get_g target) (color_get_b target) (color_get_a target)))
+              a))))
+
+(bind-func attractor_update_attraction
+  (lambda (a:Attractor*)
+    (let ((parent (attractor_get_parent a)))
+      (if (null? parent) 
+          (begin 
+            a)
+          (begin
+            (let ((px (poly_entity_get_x (attractor_get_entity parent)))
+                  (py (poly_entity_get_y (attractor_get_entity parent)))
+                  (mx (poly_entity_get_x (attractor_get_entity a)))
+                  (my (poly_entity_get_y (attractor_get_entity a)))
+                  (x 0.0)
+                  (y 0.0))
+                (let ((fx (- px mx))
+                      (fy (- py my)))
+                    (let ((flength (sqrt (+ (* fx fx) (* fy fy)))))
+                      (let ((distance (maxd 1.0 (mind 5.0 flength)))
+                            (fxn (/ fx flength))
+                            (fyn (/ fy flength)))
+                          (let ((strength (/ (* ATTRACTION_FACTOR 10.0) (* distance distance))))
+                              (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* fxn strength) (* fyn strength)))))))
+            a)))))
+
+(bind-func attractor_update
+  (lambda (a:Attractor*)
+      (attractor_update_size a)
+      (attractor_update_color a)
+      (attractor_update_attraction a)
+      a))
+
+(bind-func attractor_destroy
+  (lambda (a:Attractor*)
+      (poly_scene_physics_remove_child (attractor_get_scene a) (attractor_get_entity a))
+      (poly_scene_primitive_destroy (attractor_get_entity a))
+      a))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(bind-alias AttractorList List:<Attractor*,List*>)
+
+(bind-func entity_list_clear:[AttractorList*,AttractorList*]*
+  (lambda (al:AttractorList*)
+    null))
+
+(bind-func entity_list_add:[AttractorList*,AttractorList*,Attractor*]*
+  (lambda (al:AttractorList* a:Attractor*)
+      (cons a al)))
+
+(bind-func entity_list_remove:[AttractorList*,AttractorList*,Attractor*]*
+  (lambda (al:AttractorList* a:Attractor*)
+      (cond ((= a (car al)) (cdr al))
+            (else (cons (car al) (entity_list_remove (cdr al) a))))))

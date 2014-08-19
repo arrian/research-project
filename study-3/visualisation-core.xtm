@@ -13,6 +13,8 @@
 (sys:load (string-append *study-3-dir* "/visual-manager.xtm"))
 (sys:load (string-append *study-3-dir* "/interface-manager.xtm"))
 
+(sys:load (string-append *study-3-dir* "/transition.xtm"))
+(sys:load (string-append *study-3-dir* "/attractor.xtm"))
 (sys:load (string-append *study-3-dir* "/widget.xtm"))
 
 (define update-loop

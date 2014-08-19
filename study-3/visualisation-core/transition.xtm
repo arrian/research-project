@@ -1,0 +1,177 @@
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Globals ;;;;;;;;;;;;;;;;;;
+
+(bind-val TRANSITION_TIME i64 20000)
+
+;; Utility ;;;;;;;;;;;;;;;;;;
+
+(bind-func transition_ease_out_quadratic
+  (lambda (current:i64 start_value:double change_value:double duration:i64)
+    (if (= duration 0) 
+        (+ start_value change_value)
+        (let ((td (/ (i64tod current) (i64tod duration))))
+            (+ (* (- 0.0 change_value) td (- td 2.0)) start_value)))))
+
+;; Color ;;;;;;;;;;;;;;;;;;;;
+
+(bind-type Color <double,double,double,double>);;r,g,b,a
+
+(bind-func color_set_rgba
+  (lambda (c:Color* r:double g:double b:double a:double)
+      (tset! c 0 r)
+      (tset! c 1 g)
+      (tset! c 2 b)
+      (tset! c 3 a)
+    void))
+
+(bind-func color_set_color
+  (lambda (c:Color* from:Color*)
+      (tset! c 0 (tref from 0))
+      (tset! c 1 (tref from 1))
+      (tset! c 2 (tref from 2))
+      (tset! c 3 (tref from 3))
+    ))
+
+(bind-func color_set_r
+  (lambda (c:Color* r:double)
+    (tset! c 0 r)))
+
+(bind-func color_set_g
+  (lambda (c:Color* g:double)
+    (tset! c 1 g)))
+
+(bind-func color_set_b
+  (lambda (c:Color* b:double)
+    (tset! c 2 b)))
+
+(bind-func color_set_a
+  (lambda (c:Color* a:double)
+    (tset! c 3 a)))
+
+(bind-func color_get_r
+  (lambda (c:Color*)
+    (tref c 0)))
+
+(bind-func color_get_g
+  (lambda (c:Color*)
+    (tref c 1)))
+
+(bind-func color_get_b
+  (lambda (c:Color*)
+    (tref c 2)))
+
+(bind-func color_get_a
+  (lambda (c:Color*)
+    (tref c 3)))
+
+;; Size Transition ;;;;;;;;;;;;;;;
+
+(bind-type SizeTransition <i1,double,double,double,i64,i64>);;finished,initial_size,current_size,target_size,start_time,transition_time
+
+(bind-func size_transition_is_complete
+  (lambda (st:SizeTransition*)
+    (tref st 0)))
+
+(bind-func size_get_current
+  (lambda (st:SizeTransition*)
+    (tref st 2)))
+
+(bind-func size_get_target
+  (lambda (st:SizeTransition*)
+    (tref st 3)))
+
+(bind-func size_set_target
+  (lambda (st:SizeTransition* s)
+    (tset! st 0 #f)
+    (tset! st 1 (tref st 2))
+    (tset! st 3 s)
+    (tset! st 4 (now))
+    void))
+
+(bind-func size_update
+  (lambda (st:SizeTransition*)
+    (let ((current_time (now))
+          (transition_time (tref st 5)))
+      (if (size_transition_is_complete st)
+          void ;;no update needed 
+          (begin
+            (if (> current_time (+ (tref st 4) transition_time))
+              (begin ;;finish the transition
+                (tset! st 0 #t)
+                (tset! st 2 (tref st 3))
+                void)
+              (begin ;;update the current size
+                (tset! st 2 (transition_ease_out_quadratic (- current_time (tref st 4)) (tref st 1) (- (tref st 3) (tref st 1)) transition_time))
+                void))
+            void)))))
+
+;; Color Transition ;;;;;;;;;;;;;;;;;
+
+(bind-type ColorTransition <i1,Color*,Color*,Color*,i64,i64>);;finished,initial_color,current_color,target_color,start_time,transition_time
+
+(bind-func color_transition_is_complete
+  (lambda (ct:ColorTransition*)
+      (tref ct 0)))
+
+(bind-func color_get_initial
+  (lambda (ct:ColorTransition*)
+      (tref ct 1)))
+
+(bind-func color_get_current
+  (lambda (ct:ColorTransition*)
+      (tref ct 2)))
+
+(bind-func color_get_target
+  (lambda (ct:ColorTransition*)
+      (tref ct 3)))
+
+(bind-func color_get_start
+  (lambda (ct:ColorTransition*)
+      (tref ct 4)))
+
+(bind-func color_set_target
+  (lambda (ct:ColorTransition* r g b a)
+    (let ((initial (tref ct 1))
+          (current (tref ct 2))
+          (target (tref ct 3)))
+            (color_set_color initial current)
+            (color_set_rgba target r g b a)
+            (tset! ct 0 #f)
+            (tset! ct 4 (now))
+            void)))
+
+(bind-func color_update
+  (lambda (ct:ColorTransition*)
+  	(let ((current_time (now))
+  		  (transition_time (tref ct 5)))
+  			(if (color_transition_is_complete ct) 
+  				void 
+  				(begin
+  					(if (> current_time (+ (tref ct 4) transition_time)) 
+  						(begin
+  							(tset! ct 0 #t)
+  							(color_set_color (color_get_current ct) (color_get_target ct))
+  							void)
+  						(begin
+  							(let ((initial (color_get_initial ct))
+  								  (rinitial (color_get_r initial))
+  								  (ginitial (color_get_g initial))
+  								  (binitial (color_get_b initial))
+  								  (ainitial (color_get_a initial))
+  								  (target (color_get_target ct))
+  								  (rchange (color_get_r (- (color_get_r target) rinitial)))
+  								  (gchange (color_get_g (- (color_get_g target) ginitial)))
+  								  (bchange (color_get_b (- (color_get_b target) binitial)))
+  								  (achange (color_get_a (- (color_get_a target) ainitial)))
+  								  (current current_time (color_get_start ct)))
+		  							(color_set_rgba (color_get_current ct)
+		  								(transition_ease_out_quadratic current rinitial rchange transition_time)
+		  								(transition_ease_out_quadratic current ginitial gchange transition_time)
+		  								(transition_ease_out_quadratic current binitial bchange transition_time)
+		  								(transition_ease_out_quadratic current ainitial achange transition_time))))
+  							void))))
+    void))
+
+

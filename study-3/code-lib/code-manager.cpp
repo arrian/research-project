@@ -248,10 +248,10 @@ int code_line_id_get(code_line* line)
 	return reinterpret_cast<CodeLine*>(line)->id;
 }
 
-// char* code_line_get_code(code_line* line)
-// {
-		// return reinterpret_cast<CodeLine*>(line).code.c_str();	
-// }
+const char* code_line_get_code(code_line* line)
+{
+	return reinterpret_cast<CodeLine*>(line)->code.c_str();	
+}
 
 bool code_line_is_selected(code_line* line)
 {
