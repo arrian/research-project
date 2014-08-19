@@ -56,14 +56,6 @@
 (bind-lib polycode poly_scene_primitive_destroy [void,poly_scene_primitive*]*)
 (bind-lib polycode poly_scene_primitive_set_circle_options [void,poly_scene_primitive*,double,double,i32]*)
 
-;;attractor
-(bind-alias poly_attractor i8)
-(bind-lib polycode poly_attractors_update [void]*)
-(bind-lib polycode poly_attractor_add [poly_attractor*,poly_scene*,poly_attractor*,double,double,double,i1]*);;scene,parent,x,y,size,isStatic
-(bind-lib polycode poly_attractor_remove [void,poly_attractor*])
-(bind-lib polycode poly_attractor_target_size [void,poly_attractor*,double])
-(bind-lib polycode poly_attractor_target_color [void,poly_attractor*,double,double,double,double]*);;attractor,r,g,b,a
-
 ;;initialisation
 (bind-val POLY_CORE poly_core* 0)
 (bind-val POLY_SCENE poly_scene* 0)

@@ -117,16 +117,16 @@ int main(int argc, char* argv[])
 
 	std::cout << "------------------" << std::endl;
 
-	std::string code2 = "(test function\n here2)\n\n(another test \nfunction2)\n\n(another2 test \nfunction2)\n";
+	std::string code2 = "(test function\n here)\n\n(another3 test \nfunction)\n\n\n\n\n";
 	manager.update(code2);
 
-	manager.evaluate("(test function\n here2)");
-	if(manager.states[0].isActive) std::cout << "is active" << std::endl;
+	// manager.evaluate("(test function\n here2)");
+	// if(manager.states[0].isActive) std::cout << "is active" << std::endl;
 
 	printStates(&manager);
 
 	std::cout << "------------------" << std::endl;
-	
+
 	std::string code3 = "(single function)\n";
 	manager.update(code3);
 	printStates(&manager);
