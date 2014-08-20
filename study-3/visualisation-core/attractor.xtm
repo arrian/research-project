@@ -59,7 +59,7 @@
   (lambda (a:Attractor*)
     (tref a 9)))
 
-(bind-func attractor_get_destroy
+(bind-func attractor_should_destroy
   (lambda (a:Attractor*)
     (tref a 10)))
 
@@ -95,9 +95,9 @@
           (poly_entity_set_position entity x y)
           (poly_entity_set_color entity r g b a)
           (let ((physics_entity (poly_scene_physics_add_child scene entity static)))
-                (let ((sizet (SizeTransition #t size size size (now) TRANSITION_TIME))
-                      (colort (ColorTransition #t (Color r g b a) (Color r g b a) (Color r g b a) (now) TRANSITION_TIME)))
-                    (Attractor id scene parent entity physics_entity CIRCLE_TYPE CIRCLE_SEGMENTS static sizet colort #f))))))
+                (let ((sizet (SizeTransition_h #t size size size (now) TRANSITION_TIME))
+                      (colort (ColorTransition_h #t (Color_h r g b a) (Color_h r g b a) (Color_h r g b a) (now) TRANSITION_TIME)))
+                    (Attractor_h id scene parent entity physics_entity CIRCLE_TYPE CIRCLE_SEGMENTS static sizet colort #f))))))
 
 (bind-func attractor_update_size
   (lambda (a:Attractor*)
@@ -114,13 +114,23 @@
 
 (bind-func attractor_update_color
   (lambda (a:Attractor*)
-      (color_update (attractor_get_color a))
+      (printf "entered update color\n")
+      (attractor_get_color a)
+      (printf "get color was success\n")
+      (color_transition_is_complete (attractor_get_color a))
+      (printf "get color transition is complete was success\n")
       (if (color_transition_is_complete (attractor_get_color a)) 
             a
             (begin 
-              (let ((target (color_get_target (attractor_get_color a))))
+              (printf "transition not complete\n")
+              (color_update (attractor_get_color a))
+              (printf "finished color transition update\n")
+              (let ((current (color_get_current (attractor_get_color a))))
+                  (printf "got current color\n")
                   (poly_entity_set_color (attractor_get_entity a) 
-                            (color_get_r target) (color_get_g target) (color_get_b target) (color_get_a target)))
+                            (color_get_r current) (color_get_g current) (color_get_b current) (color_get_a current))
+                  (printf "set the entity color\n")
+                  )
               a))))
 
 (bind-func attractor_update_attraction
@@ -148,13 +158,18 @@
 
 (bind-func attractor_update
   (lambda (a:Attractor*)
+      (printf "updating attractor size\n")
       (attractor_update_size a)
+      (printf "updating attractor color\n")
       (attractor_update_color a)
+      (printf "updating attractor attraction\n")
       (attractor_update_attraction a)
+      (printf "updating attractor done\n")
       a))
 
 (bind-func attractor_destroy
   (lambda (a:Attractor*)
+      (printf "destroying attractor\n")
       (poly_scene_physics_remove_child (attractor_get_scene a) (attractor_get_entity a))
       (poly_scene_primitive_destroy (attractor_get_entity a))
       a))

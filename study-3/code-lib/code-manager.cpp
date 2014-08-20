@@ -1,6 +1,7 @@
 #include "code-manager.h"
 
 #include <iostream>
+#include <algorithm>
 
 int getLineIdentifier()
 {  
@@ -26,7 +27,7 @@ CodeManager::~CodeManager()
 
 void CodeManager::update(std::string code)
 {
-	std::cout << "entering code update with " << std::string(code.begin(), code.begin() + 30) << std::endl; 
+	std::cout << "entering code update with " << code.substr(0, std::min(40, int(code.length() - 1))) << std::endl; 
 	int lineCounter = 0;
 	CodeState* foundState = nullptr;
 	int foundCounter = 0;
@@ -78,7 +79,7 @@ void CodeManager::update(std::string code)
 
 void CodeManager::evaluate(std::string code)
 {
-	std::cout << "entering code evaluate with " << std::string(code.begin(), code.begin() + 30) << std::endl; 
+	std::cout << "entering code evaluate with " << code.substr(0, std::min(40, int(code.length() - 1))) << std::endl; 
 	std::istringstream codestream(code);
 	std::string line;
 

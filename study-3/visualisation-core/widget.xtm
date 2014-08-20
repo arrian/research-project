@@ -6,10 +6,11 @@
   (lambda (id:i64 x:double y:double size:double)
     (let ((attractor (attractor_create 0 POLY_SCENE null 1 x y size 1.0 0.0 0.0 1.0)))
         (printf "creating widget\n")
-        (Widget id attractor null #f))))
+        (Widget_h id attractor null #f))))
 
 (bind-func widget_get_id
   (lambda (w:Widget*)
+    ;; (printf "getting widget id for %d with pointer %p\n" (tref w 0) w)
     (tref w 0)))
 
 (bind-func widget_get_attractor
@@ -19,6 +20,11 @@
 (bind-func widget_get_children
   (lambda (w:Widget*)
     (tref w 2)))
+
+;; Defines if this widget has been marked for destruction
+(bind-func widget_should_destroy
+  (lambda (w:Widget*)
+    (tref w 3)))
 
 (bind-func widget_set_destroy
   (lambda (w:Widget* destroy:i1)
@@ -43,49 +49,55 @@
   (lambda (w:Widget* state:code_state*)
     (let ((i 0)
           (children (widget_get_children w)))
+        ;; (printf "entered widget update\n")
         (attractor_update (widget_get_attractor w))
-        (map (lambda (a) (attractor_set_destroy a #t)) children)
+        ;; (printf "finished attractor update\n")
+        (for-each (lambda (a) (attractor_set_destroy a #t)) children)
+        ;; (printf "updated the attractors\n")
         (dotimes (i (code_state_lines_count state))
             (let ((line (code_state_lines_get state i))
                   (id (code_line_id_get line))
                   (found (widget_find_children w id)))
+                ;; (printf "checking if the widget has the correct children\n")
                 (if (null? found)
                   (begin
+                    ;; (printf "creating new child\n")
                     (set! children (cons (attractor_create id POLY_SCENE (widget_get_attractor w) #f (random -300.0 300.0) (random -300.0 300.0) 40.0 0.0 1.0 0.0 1.0) children))
                     void)
                   (begin
-                    (map (lambda (a) 
+                    (for-each (lambda (a) 
                       (begin
+                        ;; (printf "marking child as safe from deletion\n")
                         (attractor_set_destroy a #f)
+                        ;; (printf "updating child here\n")
                         (attractor_update a)))
                       found) 
                     void))))
-        (widget_set_children w children)
-        w)))
+        ;; (printf "finished creating children and marking them for deletion\n")
+        (for-each attractor_destroy (filter attractor_should_destroy children));;destroy all children marked for deletion
+        ;; (printf "destroyed children\n")
+        (widget_set_children w (filter (lambda (a) (not (attractor_should_destroy a))) children));;set the children to the attractors that have not been destroyed
+        ;; (printf "exited widget update\n")
+        void)))
 
 (bind-func widget_print
   (lambda (w:Widget*)
-    (println (widget_get_id w))
-    w))
+    (printf "widget %d: %p\n" (widget_get_id w) w)
+    void))
 
-(bind-func widget_destroy
+(bind-func widget_destroy:[Widget*,Widget*]*
   (lambda (w:Widget*)
       (attractor_destroy (widget_get_attractor w))
-      (map attractor_destroy (widget_get_children w))
-    w))
+      (for-each attractor_destroy (widget_get_children w))
+    null))
 
 ;; Widget List ;;;;;;;;;;;;;;;;;;;;;
-
 (bind-alias WidgetList List:<Widget*,List*>)
 
 (bind-func widget_list_clear:[WidgetList*,WidgetList*]*
   (lambda (wl:WidgetList*)
-    (map widget_destroy wl)
+    (for-each widget_destroy wl)
     null))
-
-(bind-func widget_list_add
-  (lambda (wl:WidgetList* w:Widget*)
-      (cons w wl)))
 
 (bind-func widget_list_remove
   (lambda (wl:WidgetList* w:Widget*)
@@ -95,30 +107,76 @@
 
 (bind-func widget_list_print
   (lambda (wl:WidgetList*)
-    (map widget_print wl)))
+    (for-each widget_print wl)
+    (printf "-----------\n")))
+;; (printf "\n-----------\nlist:\nlength: %d\nvalues:\n" (length wl))
 
 (bind-func widget_list_find
   (lambda (wl:WidgetList* id:i64)
-      (filter (lambda (w) (equal id (widget_get_id w))) wl)))
+    (printf "**************finding widgets with the id %d\n" id)
+    (printf "widget list before find\n")(widget_list_print wl)
+    (let ((result (filter (lambda (w) (= id (widget_get_id w))) wl)))
+      (printf "widget list after find\n")(widget_list_print wl)
+      result)))
+
+(bind-func widget_list_update_by_id)
+  (lambda (wl:WidgetList* id:i64 )
+      (for-each (lambda (w) ))
+    ))
 
 (bind-func widget_list_update
   (lambda (wl:WidgetList*)
       (let ((i 0)
-            (rwl wl))
-          (map (lambda (w) (widget_set_destroy w #t)) wl)
-          (dotimes (i (code_manager_states_count CODE_MANAGER))
+            (nw:WidgetList* null)
+            (state_count (code_manager_states_count CODE_MANAGER)))
+          (printf "---------------------------------------entered list update\n")
+          (printf "widget list at start: ")(widget_list_print wl)
+          (printf "got state count of %d\n" state_count)
+          ;; (printf "entered widget list update\n")
+          ;;(for-each (lambda (w) (widget_set_destroy w #t)) wl)
+          (printf "finished marking widgets for destruction\n")
+          (dotimes (i state_count)
+              (printf "state iteration %d of %d\n" i state_count)
+              (printf "widget list at state iteration: ")(widget_list_print wl)
               (let ((state (code_manager_states_get CODE_MANAGER i))
                     (id (code_state_id_get state))
                     (found (widget_list_find wl id)))
-                  (if (null? found) 
-                    (begin (set! rwl (cons (widget_create id (random 0.0 300.0) (random 0.0 300.0) 100.0) rwl)) void)
-                    (begin (map (lambda (w) 
-                                  (begin
-                                    (widget_update w state)
-                                    (widget_set_destroy w #f)
-                                    )) 
-                                  found) void))))
-          rwl)))
+                  (printf "id is %d\n" id)
+                  (printf "widget list found after find: ")(widget_list_print found)
+                  (printf "widget list after find: ")(widget_list_print wl)
+                  (if (= 0 (length found)) ;;null? found
+                    (begin 
+                      (printf "######## no widgets found\n")
+                      (printf "widget list before add: ")(widget_list_print nw)
+                      (set! nw (cons (widget_create id (random -200.0 200.0) (random -200.0 200.0) 100.0) nw)) 
+                      (printf "widget list after add: ")(widget_list_print nw)
+                      (printf "######## finished no widgets found\n")
+                      void)
+                    (begin 
+                      (printf "########## widget found... updating\n")
+                      (printf "widget list before update: ")(widget_list_print wl)
+                      ;; (printf "widget list found before update: ")(widget_list_print found)
+                      ;; (for-each (lambda (w) 
+                      ;;             (begin
+                      ;;               ;;(widget_update w state)
+                      ;;               ;;(widget_set_destroy w #f)
+                      ;;               0)) 
+                      ;;             found)
+                      (printf "widget list after update: ")(widget_list_print wl)
+                      (printf "widget list found after update: ")(widget_list_print found)
+                      (printf "########## finished widget found\n")
+                      void))))
+          ;; (printf "updated list... now looking for widgets marked for deletion\n")
+          ;;(for-each widget_destroy (filter widget_should_destroy rwl));;destroy widgets marked for deletion
+          ;; (printf "destroyed widgets marked for deletion\n")
+          (printf "new widget list at end: ")(widget_list_print nw)
+          (printf "old widget list at end: ")(widget_list_print wl)
+          (let ((result (append wl nw)))
+              (printf "finalised widget list: \n")(widget_list_print result)
+              (printf "--------------------------------------------\n")
+              result)
+          ;;(filter (lambda (w) (not (widget_should_destroy w))) rwl);;only return widgets that have not been destroyed
+          )))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -142,12 +200,33 @@
 
 (widget_list_test_init)
 
-
 (bind-func update
   (lambda ()
-      (set! WIDGET_LIST_TEST (widget_list_update WIDGET_LIST_TEST))
-      void))
+    (memzone 1000000;;10000000
+      ;; (widget_list_update WIDGET_LIST_TEST))
+      (set! WIDGET_LIST_TEST (widget_list_update WIDGET_LIST_TEST)))
+      (printf "exited widget list update?\n")
+      void)
+  )
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Leaking all over the place!
+;; (bind-func update
+  
+;;   (lambda ()
+;;     ;; (memzone 10000000 0
+;;       (let ((i 0))
+;;         (dotimes (i 10000)
+;;           (lambda () 0))
+;;         void)
+;;       ;; )
+;;     ))
+
+;; (update)
+
+;; On the http://benswift.me/2013/03/20/building-extempore-on-osx-linux/ page:
+;; brew install /path/to/extempore/extras/extempore-llvm.rb  <----- where is this?
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

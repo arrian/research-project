@@ -118,9 +118,9 @@ int main(int argc, char* argv[])
 	std::cout << "------------------" << std::endl;
 
 	std::string code2 = "(test function\n here)\n\n(another3 test \nfunction)\n\n\n\n\n";
-	manager.update(code2);
+	manager.update(code1);
 
-	// manager.evaluate("(test function\n here2)");
+	manager.evaluate(code1);
 	// if(manager.states[0].isActive) std::cout << "is active" << std::endl;
 
 	printStates(&manager);
@@ -128,7 +128,7 @@ int main(int argc, char* argv[])
 	std::cout << "------------------" << std::endl;
 
 	std::string code3 = "(single function)\n";
-	manager.update(code3);
+	manager.update(code1);
 	printStates(&manager);
 
 }
