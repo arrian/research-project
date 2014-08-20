@@ -93,6 +93,7 @@ void printStates(CodeManager* manager)
 	for(auto & state : manager->states)
 	{
 		std::cout << "state: " << state.id << std::endl;
+		std::cout << "line count: " << state.lines.size() << std::endl;
 		for(auto & line : state.lines)
 		{
 			std::cout << line.code.length() << std::endl;

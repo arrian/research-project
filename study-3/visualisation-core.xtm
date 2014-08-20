@@ -4,6 +4,14 @@
 
 (sys:load "libs/core/adt.xtm");; ???? are lists not part of the extempore standard libs now
 
+(bind-func cons:[List:<!a,List*>*,!a,List:<!a,List*>*]*
+  (lambda (x y)
+    (let ((obj (halloc)));; custom heap allocation implementation
+      (tset! obj 0 x)
+      (tset! obj 1 y)
+      obj)))
+
+
 (define *study-3-dir* "research-project/visualisation-core")
 
 (sys:load "research-project/app2-lib/app.xtm")

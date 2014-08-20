@@ -114,22 +114,15 @@
 
 (bind-func attractor_update_color
   (lambda (a:Attractor*)
-      (printf "entered update color\n")
       (attractor_get_color a)
-      (printf "get color was success\n")
       (color_transition_is_complete (attractor_get_color a))
-      (printf "get color transition is complete was success\n")
       (if (color_transition_is_complete (attractor_get_color a)) 
             a
             (begin 
-              (printf "transition not complete\n")
               (color_update (attractor_get_color a))
-              (printf "finished color transition update\n")
               (let ((current (color_get_current (attractor_get_color a))))
-                  (printf "got current color\n")
                   (poly_entity_set_color (attractor_get_entity a) 
                             (color_get_r current) (color_get_g current) (color_get_b current) (color_get_a current))
-                  (printf "set the entity color\n")
                   )
               a))))
 
@@ -158,13 +151,13 @@
 
 (bind-func attractor_update
   (lambda (a:Attractor*)
-      (printf "updating attractor size\n")
+      ;; (printf "updating attractor size\n")
       (attractor_update_size a)
-      (printf "updating attractor color\n")
+      ;; (printf "updating attractor color\n")
       (attractor_update_color a)
-      (printf "updating attractor attraction\n")
+      ;; (printf "updating attractor attraction\n")
       (attractor_update_attraction a)
-      (printf "updating attractor done\n")
+      ;; (printf "updating attractor done\n")
       a))
 
 (bind-func attractor_destroy
