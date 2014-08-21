@@ -43,6 +43,7 @@ public:
 	void update(std::string code);//updates the offline code
 	void evaluate(std::string code);//updates the online code
 	void select(int selection);//simple selection
+	void select(int selection, int selectionEnd);//simple selection
 	void error(std::string message);//error from evaluation
 
 	std::vector<CodeState> states;
@@ -69,6 +70,7 @@ extern "C"
 	void code_manager_update(code_manager* manager, char* code);
 	void code_manager_evaluate(code_manager* manager, char* code);
 	void code_manager_select(code_manager* manager, int selection);
+	void code_manager_select_2(code_manager* manager, int selectionStart, int selectionEnd);
 	void code_manager_error(code_manager* manager, char* message);
 
 	int code_manager_states_count(code_manager* manager);

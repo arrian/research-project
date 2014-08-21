@@ -74,6 +74,11 @@ poly_physics_entity* poly_scene_physics_add_child(poly_scene* s, poly_entity* e,
 	return reinterpret_cast<poly_physics_entity*>(scene->addPhysicsChild(reinterpret_cast<Entity*>(e), PhysicsScene2DEntity::ENTITY_CIRCLE, is_static));
 }
 
+void poly_physics_entity_set_collision_group_index(poly_physics_entity* e, int groupIndex)
+{
+	reinterpret_cast<PhysicsScene2DEntity*>(e)->setCollisionGroupIndex(groupIndex);
+}
+
 void poly_scene_physics_remove_child(poly_scene* s, poly_entity* e)
 {
 	PhysicsScene2D* scene = reinterpret_cast<PhysicsScene2D*>(s);

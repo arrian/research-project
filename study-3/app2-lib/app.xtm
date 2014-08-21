@@ -20,6 +20,7 @@
 ;;2D physics entity
 (bind-alias poly_physics_entity i8)
 (bind-lib polycode poly_physics_entity_apply_force [void,poly_physics_entity*,double,double]*)
+(bind-lib polycode poly_physics_entity_set_collision_group_index [void,poly_physics_entity*,i64]*)
 
 ;;scene
 (bind-alias poly_scene i8)

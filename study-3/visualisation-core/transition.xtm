@@ -3,8 +3,8 @@
 
 ;; Globals ;;;;;;;;;;;;;;;;;;
 
-(bind-val TRANSITION_TIME i64 20000)
-(bind-val TRANSITION_TIME_LONG i64 200000)
+(bind-val TRANSITION_TIME i64 15000)
+(bind-val TRANSITION_TIME_LONG i64 150000)
 
 
 ;; Utility ;;;;;;;;;;;;;;;;;;
@@ -152,7 +152,13 @@
 (bind-func color_set_target_long
   (lambda (ct:ColorTransition* r g b a)
       (color_set_target ct r g b a)
-      (color_set_duration ct TRANSITION_TIME_LONG)
+      (color_set_duration ct (random (/ TRANSITION_TIME_LONG 2) TRANSITION_TIME_LONG))
+    ))
+
+(bind-func color_set_target_duration
+  (lambda (ct:ColorTransition* r g b a duration)
+      (color_set_target ct r g b a)
+      (color_set_duration ct duration)
     ))
 
 (bind-func color_update

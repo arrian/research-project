@@ -32,6 +32,7 @@ extern "C"
 	poly_physics_entity* poly_scene_physics_add_child(poly_scene* scene, poly_entity* entity, bool is_static);
 	void poly_scene_physics_remove_child(poly_scene* scene, poly_entity* entity);
 	void poly_physics_entity_apply_force(poly_physics_entity* entity, double x, double y);
+	void poly_physics_entity_set_collision_group_index(poly_physics_entity* entity, int groupIndex);
 
 	void poly_entity_set_position(poly_entity* entity, double x, double y);
 	void poly_entity_set_yaw(poly_entity* entity, double yaw);

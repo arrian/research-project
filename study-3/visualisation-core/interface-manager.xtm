@@ -19,12 +19,18 @@
   (lambda (args:i32*)
   	;; (printf "%s\n" args)
   	(let ((i:i32 0))
-      (code_manager_select CODE_MANAGER (i32toi64 (unswap32i (pref args 1)))))
-	  	;; (printf "selection ")
-	  	;; (dotimes (i (unswap32i (pref args 0)))
-			;;   (printf "%d " (unswap32i (pref args (+ i 1)))))
-	  	;;   (printf "\n")
+      (if (> (unswap32i (pref args 0)) 1) 
+        (code_manager_select_2 CODE_MANAGER (i32toi64 (unswap32i (pref args 1))) (i32toi64 (unswap32i (pref args 2))))
+        (code_manager_select CODE_MANAGER (i32toi64 (unswap32i (pref args 1))))
+        )
+      )
 	void))
+
+;;(code_manager_select CODE_MANAGER (i32toi64 (unswap32i (pref args 1))))
+      ;; (printf "selection ")
+      ;; (dotimes (i (unswap32i (pref args 0)))
+      ;;   (printf "%d " (unswap32i (pref args (+ i 1)))))
+      ;;   (printf "\n")
 
 ;; Handles the /interface/code address. Accepts one argument that is the 
 ;; current 

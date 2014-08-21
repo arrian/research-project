@@ -101,6 +101,11 @@ void CodeManager::evaluate(std::string code)
 
 void CodeManager::select(int selection)
 {
+	select(selection, selection);
+}
+
+void CodeManager::select(int selectionStart, int selectionEnd)
+{
 	std::cout << "entering code select" << std::endl; 
 	for(auto & state : states)
 	{
@@ -110,7 +115,7 @@ void CodeManager::select(int selection)
 			line.isSelected = false;
 			int start = line.startChar;
 			int end = line.startChar + line.code.length();
-			if(selection >= start && selection <= end)
+			if(start < selectionEnd && end > selectionStart)
 			{
 				std::cout << state.id << " is selected in code manager" << std::endl; 
 				state.isSelected = true;
@@ -181,6 +186,8 @@ CodeState* CodeManager::find(std::string line)
 
 bool CodeManager::similar(std::string str1, std::string str2)
 {
+	bool prefix = (0==str1.compare(0, std::min(str1.length(), str2.length()), str2,0,std::min(str1.length(),str2.length())));
+	if(prefix) return true;
 	//std::cout << "checking similarity of" << str1 << " and " << str2 << std::endl;
 
     std::vector<std::string> words1, words2;
@@ -232,6 +239,11 @@ void code_manager_evaluate(code_manager* manager, char* code)
 void code_manager_select(code_manager* manager, int selection)
 {
 	reinterpret_cast<CodeManager*>(manager)->select(selection);
+}
+
+void code_manager_select_2(code_manager* manager, int selectionStart, int selectionEnd)
+{
+	reinterpret_cast<CodeManager*>(manager)->select(selectionStart, selectionEnd);
 }
 
 void code_manager_error(code_manager* manager, char* message)

@@ -4,7 +4,7 @@
 
 (bind-func widget_create
   (lambda (id:i64 x:double y:double size:double)
-    (let ((attractor (attractor_create 0 POLY_SCENE null 1 x y size 1.0 0.0 0.0 1.0)))
+    (let ((attractor (attractor_create id POLY_SCENE null 1 x y size 1.0 0.0 0.0 1.0)))
         (printf "creating widget\n")
         (Widget_h id attractor null #f))))
 
@@ -12,7 +12,6 @@
   (lambda (w:Widget*)
     ;; (printf "getting widget id for %d with pointer %p\n" (tref w 0) w)
     (tref w 0)))
-
 
 (bind-func widget_get_attractor
   (lambda (w:Widget*)
@@ -60,15 +59,18 @@
                 (attractor_set_destroy a #f)
                 (set! found #t)
                 (attractor_update a)
-                (let ((size (mind 40.0 (/ (i64tod (strlen (code_line_get_code line))) 1.0))))
+                (let ((size (/ (i64tod (strlen (code_line_get_code line))) 1.0)))
                   (if (and (<> size (size_get_current (attractor_get_size a))) 
                            (size_transition_is_complete (attractor_get_size a))) 
                       (begin 
                         (attractor_set_target_size a size)
                         (attractor_set_target_color a 1.0 1.0 0.0 1.0))
                     ))
-                (if (and (color_transition_is_complete (attractor_get_color a)) (> (random) 0.8)) 
-                      (attractor_set_target_color_long a (random 0.0 0.5) (random 0.7 1.0) (random) (random 0.6 1.0)))
+                (if (color_transition_is_complete (attractor_get_color a)) 
+                      (begin 
+                        (if (code_line_is_selected line) 
+                          (attractor_set_target_color_duration a (random 0.6 1.0) (random 0.0 0.5) 0.0 1.0 (random 10000 50000))
+                          (attractor_set_target_color_duration a (random 0.0 0.5) (random 0.7 1.0) (random) (random 0.6 1.0) (random 10000 50000)))))
                 void)
               (begin 
                 void)))
@@ -77,7 +79,7 @@
           (begin 
             children)
           (begin
-            (cons (attractor_create id POLY_SCENE (widget_get_attractor w) #f (random -500.0 -200.0) (random -400.0 400.0) 20.0 (random 0.5 1.0) (random) 0.0 (random 0.6 1.0)) children);;0.0 1.0 0.0 1.0
+            (cons (attractor_create id POLY_SCENE (widget_get_attractor w) #f (random -500.0 -200.0) (random -400.0 400.0) 10.0 (random 0.5 1.0) (random) 0.0 (random 0.6 1.0)) children);;0.0 1.0 0.0 1.0
             )
           )
       )))
@@ -159,15 +161,15 @@
               (set! found #t)
               (if (code_state_is_selected state) 
                 (begin 
-                  (printf "id %d is selected\n" id)
+                  ;; (printf "id %d is selected\n" id)
                   (widget_apply_circular_force w)
                   (widget_apply_inwards_force w)
-                  (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) (attractor_set_target_color (widget_get_attractor w) 1.0 1.0 1.0 1.0))
+                  (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) (attractor_set_target_color (widget_get_attractor w) 1.0 0.5 0.0 1.0))
                   )
                 (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) 
                   (if (code_state_is_active state) 
                     (attractor_set_target_color_long (widget_get_attractor w) (random 0.0 0.7) (random 0.8 1.0) (random 0.0 0.5) 1.0)
-                    (attractor_set_target_color (widget_get_attractor w) 0.5 0.5 0.5 0.5))))
+                    (attractor_set_target_color (widget_get_attractor w) 0.4 0.4 0.4 0.4))))
               (widget_update w state)
               void)
             (begin void)

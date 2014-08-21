@@ -85,6 +85,11 @@
     (color_set_target (attractor_get_color a) r g b alpha)
     a))
 
+(bind-func attractor_set_target_color_duration
+  (lambda (a:Attractor* r g b alpha duration)
+    (color_set_target_duration (attractor_get_color a) r g b alpha duration)
+    a))
+
 (bind-func attractor_set_target_color_long
   (lambda (a:Attractor* r g b alpha)
     (color_set_target_long (attractor_get_color a) r g b alpha)
@@ -104,6 +109,10 @@
           (poly_entity_set_position entity x y)
           (poly_entity_set_color entity r g b a)
           (let ((physics_entity (poly_scene_physics_add_child scene entity static)))
+                (if (null? parent) ;;collision group
+                  (poly_physics_entity_set_collision_group_index physics_entity id)
+                  (poly_physics_entity_set_collision_group_index physics_entity (attractor_get_id parent))
+                  )
                 (let ((sizet (SizeTransition_h #t size size size (now) TRANSITION_TIME))
                       (colort (ColorTransition_h #t (Color_h r g b a) (Color_h r g b a) (Color_h r g b a) (now) TRANSITION_TIME)))
                     (Attractor_h id scene parent entity physics_entity CIRCLE_TYPE CIRCLE_SEGMENTS static sizet colort null #f))))))

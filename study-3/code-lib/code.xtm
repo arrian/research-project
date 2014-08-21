@@ -44,6 +44,7 @@
 (bind-lib code code_manager_update [void,code_manager*,i8*]*)
 (bind-lib code code_manager_evaluate [void,code_manager*,i8*]*)
 (bind-lib code code_manager_select [void,code_manager*,i64]*)
+(bind-lib code code_manager_select_2 [void,code_manager*,i64,i64]*)
 (bind-lib code code_manager_error [void,code_manager*,i8*]*)
 
 (bind-lib code code_manager_states_count [i64,code_manager*]*)
