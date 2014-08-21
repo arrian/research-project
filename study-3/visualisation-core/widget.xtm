@@ -13,6 +13,7 @@
     ;; (printf "getting widget id for %d with pointer %p\n" (tref w 0) w)
     (tref w 0)))
 
+
 (bind-func widget_get_attractor
   (lambda (w:Widget*)
     (tref w 1)))
@@ -53,28 +54,30 @@
       (let ((found #f)
             (id (code_line_id_get line))
             (children (widget_get_children w)))
-        ;; (printf "updating line\n")
-        ;; (printf "children size %d\n" (length children))
         (for-each (lambda (a) 
-            ;; (printf "comparing id %d with %d\n" id (attractor_get_id a))
             (if (= id (attractor_get_id a)) 
               (begin
-                ;; (printf "updating attraction for %d\n" id)
                 (attractor_set_destroy a #f)
                 (set! found #t)
                 (attractor_update a)
+                (let ((size (mind 40.0 (/ (i64tod (strlen (code_line_get_code line))) 1.0))))
+                  (if (and (<> size (size_get_current (attractor_get_size a))) 
+                           (size_transition_is_complete (attractor_get_size a))) 
+                      (begin 
+                        (attractor_set_target_size a size)
+                        (attractor_set_target_color a 1.0 1.0 0.0 1.0))
+                    ))
+                (if (and (color_transition_is_complete (attractor_get_color a)) (> (random) 0.8)) 
+                      (attractor_set_target_color_long a (random 0.0 0.5) (random 0.7 1.0) (random) (random 0.6 1.0)))
                 void)
               (begin 
-                ;; (printf "found different id\n")
                 void)))
           children)
-        (if (found);;(found)
+        (if (found)
           (begin 
-            ;; (printf "%d found\n" id)
             children)
           (begin
-            (apply_random_color)
-            (cons (attractor_create id POLY_SCENE (widget_get_attractor w) #f (random -300.0 0.0) (random -300.0 300.0) 20.0 0.0 1.0 0.0 1.0) children)
+            (cons (attractor_create id POLY_SCENE (widget_get_attractor w) #f (random -500.0 -200.0) (random -400.0 400.0) 20.0 (random 0.5 1.0) (random) 0.0 (random 0.6 1.0)) children);;0.0 1.0 0.0 1.0
             )
           )
       )))
@@ -103,6 +106,21 @@
       (for-each attractor_destroy (widget_get_children w))
     null))
 
+(bind-func widget_apply_inwards_force
+  (lambda (w:Widget*)
+      (let ((x (attractor_get_x (widget_get_attractor w)))
+            (y (attractor_get_y (widget_get_attractor w)))
+            (force 50.0))
+          (for-each (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- x (attractor_get_x a))) (* force (- y (attractor_get_y a)))) 0) (widget_get_children w)))))
+
+(bind-func widget_apply_circular_force
+  (lambda (w:Widget*)
+      (let ((x (attractor_get_x (widget_get_attractor w)))
+            (y (attractor_get_y (widget_get_attractor w)))
+            (force 50.0))
+          (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- 0.0 (- y (attractor_get_y a)))) (* force (- x (attractor_get_x a)))) 0) (widget_get_children w))    
+        )))
+
 ;; Widget List ;;;;;;;;;;;;;;;;;;;;;
 (bind-alias WidgetList List:<Widget*,List*>)
 
@@ -127,19 +145,29 @@
 
 (bind-func random_discrete
   (lambda ()
-    (- (* 60.0 (i64tod (random 1 9))) 200.0)))
+    (- (* 150.0 (i64tod (random 1 6))) 400.0)))
 
 (bind-func widget_list_update_state
   (lambda (wl:WidgetList* state:code_state*)
       (let ((found #f)
             (id (code_state_id_get state)))
-        ;;(printf "start of update state:\n")(widget_list_print wl)
         (for-each (lambda (w) 
           (if (equal id (widget_get_id w))
             (begin
-              ;; (printf "found widget with id %d : %d\n" id (widget_get_id w))
+
               (widget_set_destroy w #f)
               (set! found #t)
+              (if (code_state_is_selected state) 
+                (begin 
+                  (printf "id %d is selected\n" id)
+                  (widget_apply_circular_force w)
+                  (widget_apply_inwards_force w)
+                  (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) (attractor_set_target_color (widget_get_attractor w) 1.0 1.0 1.0 1.0))
+                  )
+                (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) 
+                  (if (code_state_is_active state) 
+                    (attractor_set_target_color_long (widget_get_attractor w) (random 0.0 0.7) (random 0.8 1.0) (random 0.0 0.5) 1.0)
+                    (attractor_set_target_color (widget_get_attractor w) 0.5 0.5 0.5 1.0))))
               (widget_update w state)
               void)
             (begin void)
@@ -148,8 +176,7 @@
         (if (found)
               wl
               (begin
-                ;; (printf "creating new widget\n")
-                (cons (widget_create id 100.0 (random_discrete) 60.0) wl)
+                (cons (widget_create id 500.0 (random_discrete) 60.0) wl)
                 )))))
 
 (bind-func widget_list_update
@@ -159,10 +186,8 @@
             (state_count (code_manager_states_count CODE_MANAGER)))
           (for-each (lambda (w) (widget_set_destroy w #t)) nw)
           (dotimes (i state_count)
-              ;; (printf "iterating states %d of %d\n" i state_count)
               (let ((state (code_manager_states_get CODE_MANAGER i)))
                   (set! nw (widget_list_update_state nw state))))
-          ;; (printf "end of update:\n")(widget_list_print nw)
           (for-each widget_destroy (filter widget_should_destroy nw))
           (filter widget_should_not_destroy nw))))
 
@@ -263,13 +288,13 @@
 
 ;; ;; (apply_random_color)
 
-(bind-func apply_random_color
-  (lambda ()
-      (for-each (lambda (w) (for-each (lambda (a) (attractor_set_target_color a (random 0.5 1.0) (random) 0.0 (random 0.6 1.0)) 0) (widget_get_children w))) WIDGET_LIST_TEST)
-      (for-each (lambda (w) (for-each (lambda (a) (attractor_set_target_size a (random 10.0 40.0)) 0) (widget_get_children w))) WIDGET_LIST_TEST)
-    void))
+;; (bind-func apply_random_color
+;;   (lambda ()
+;;       (for-each (lambda (w) (for-each (lambda (a) (attractor_set_target_color a (random 0.5 1.0) (random) 0.0 (random 0.6 1.0)) 0) (widget_get_children w))) WIDGET_LIST_TEST)
+;;       (for-each (lambda (w) (for-each (lambda (a) (attractor_set_target_size a (random 10.0 40.0)) 0) (widget_get_children w))) WIDGET_LIST_TEST)
+;;     void))
 
-(apply_random_color)
+;; (apply_random_color)
 
 ;; (bind-func apply_evaluate_color
 ;;   (lambda ()
@@ -341,14 +366,23 @@
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;
 ;; (bind-func apply_inwards_force
-;;   (lambda ()
-;;       (let ((x (attractor_get_x (widget_get_attractor WIDGET_TEST)))
-;;             (y (attractor_get_y (widget_get_attractor WIDGET_TEST)))
-;;             (force 50.0))
-;;           (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- x (attractor_get_x a))) (* force (- y (attractor_get_y a)))) 0) (widget_get_children WIDGET_TEST))    
-;;         )))
+  ;; (lambda ()
+  ;;     (let ((x (attractor_get_x (widget_get_attractor WIDGET_TEST)))
+  ;;           (y (attractor_get_y (widget_get_attractor WIDGET_TEST)))
+  ;;           (force 50.0))
+  ;;         (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- x (attractor_get_x a))) (* force (- y (attractor_get_y a)))) 0) (widget_get_children WIDGET_TEST))    
+  ;;       )))
 
 ;; ;; (apply_inwards_force)
+
+;; (bind-func widget_apply_inwards_force
+;;   (lambda (w:Widget*)
+;;       (let ((x (attractor_get_x (widget_get_attractor w)))
+;;             (y (attractor_get_y (widget_get_attractor w)))
+;;             (force 50.0))
+;;           (for-each (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- x (attractor_get_x a))) (* force (- y (attractor_get_y a)))) 0) (widget_get_children w)))))
+
+;; (apply_inwards_force)
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;
 

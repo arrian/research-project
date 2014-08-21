@@ -45,12 +45,12 @@ void CodeManager::update(std::string code)
 		{
 			if(!foundState) 
 			{
-				foundState = updateState(line, foundCounter, charCounter);
+				foundState = updateState(line, foundCounter, lineCounter, charCounter);
 				std::cout << "updated state" << std::endl;
 			}
 			else 
 			{
-				updateLine(foundState, line, foundCounter, charCounter);
+				updateLine(foundState, line, foundCounter, lineCounter, charCounter);
 				std::cout << "updated line" << std::endl;
 			}
 			foundCounter++;
@@ -112,6 +112,7 @@ void CodeManager::select(int selection)
 			int end = line.startChar + line.code.length();
 			if(selection >= start && selection <= end)
 			{
+				std::cout << state.id << " is selected in code manager" << std::endl; 
 				state.isSelected = true;
 				line.isSelected = true;
 			}
@@ -126,7 +127,7 @@ void CodeManager::error(std::string message)
 
 }
 
-CodeState* CodeManager::updateState(std::string line, int index, int charCount)
+CodeState* CodeManager::updateState(std::string line, int index, int lineCount, int charCount)
 {
 	CodeState* state = find(line);
 	if(!state)
@@ -140,11 +141,11 @@ CodeState* CodeManager::updateState(std::string line, int index, int charCount)
 		states.push_back(newState);
 		state = &states[states.size() - 1];
 	}
-	updateLine(state, line, index, charCount);
+	updateLine(state, line, index, lineCount, charCount);
 	return state;
 }
 
-void CodeManager::updateLine(CodeState* state, std::string line, int index, int charCount)
+void CodeManager::updateLine(CodeState* state, std::string line, int index, int lineCount, int charCount)
 {
 	if(state->lines.size() < (index + 1))//not enough lines in code state
 	{
@@ -152,6 +153,7 @@ void CodeManager::updateLine(CodeState* state, std::string line, int index, int 
 		codeLine.id = getLineIdentifier();
 		codeLine.startChar = charCount;
 		codeLine.code = line;
+		codeLine.codePrevious = "";
 		codeLine.isSelected = false;
 		codeLine.isActive = false;
 		codeLine.isError = false;
@@ -162,6 +164,7 @@ void CodeManager::updateLine(CodeState* state, std::string line, int index, int 
 	{
 		CodeLine* codeLine = &state->lines[index];
 		codeLine->startChar = charCount;
+		codeLine->codePrevious = codeLine->code;
 		codeLine->code = line;
 		codeLine->isActive = false;//edited line... force inactive
 	}

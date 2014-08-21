@@ -4,6 +4,8 @@
 ;; Globals ;;;;;;;;;;;;;;;;;;
 
 (bind-val TRANSITION_TIME i64 20000)
+(bind-val TRANSITION_TIME_LONG i64 200000)
+
 
 ;; Utility ;;;;;;;;;;;;;;;;;;
 
@@ -131,6 +133,10 @@
   (lambda (ct:ColorTransition*)
       (tref ct 4)))
 
+(bind-func color_set_duration
+  (lambda (ct:ColorTransition* duration)
+    (tset! ct 5 duration)))
+
 (bind-func color_set_target
   (lambda (ct:ColorTransition* r g b a)
     (let ((initial (tref ct 1))
@@ -140,20 +146,27 @@
             (color_set_rgba target r g b a)
             (tset! ct 0 #f)
             (tset! ct 4 (now))
+            (color_set_duration ct TRANSITION_TIME)
             void)))
+
+(bind-func color_set_target_long
+  (lambda (ct:ColorTransition* r g b a)
+      (color_set_target ct r g b a)
+      (color_set_duration ct TRANSITION_TIME_LONG)
+    ))
 
 (bind-func color_update
   (lambda (ct:ColorTransition*)
   	(let ((current_time (now))
   		  (transition_time (tref ct 5)))
-  		(printf "entered color update\n")
+  		;; (printf "entered color update\n")
   			(if (color_transition_is_complete ct) 
   				void 
   				(begin
-  					(printf "color update transition not complete\n")
+  					;; (printf "color update transition not complete\n")
   					(if (> current_time (+ (tref ct 4) transition_time)) 
   						(begin
-  							(printf "current time was more than transition time\n")
+  							;; (printf "current time was more than transition time\n")
   							(tset! ct 0 #t)
   							(color_set_color (color_get_current ct) (color_get_target ct))
   							void)
@@ -169,13 +182,13 @@
   								  (bchange (- (color_get_b target) binitial))
   								  (achange (- (color_get_a target) ainitial))
   								  (current (- current_time (color_get_start ct))))
-  								(printf "current time was less than transition time\n")
+  								;; (printf "current time was less than transition time\n")
 		  							(color_set_rgba (color_get_current ct)
 		  								(transition_ease_out_quadratic current rinitial rchange transition_time)
 		  								(transition_ease_out_quadratic current ginitial gchange transition_time)
 		  								(transition_ease_out_quadratic current binitial bchange transition_time)
 		  								(transition_ease_out_quadratic current ainitial achange transition_time))
-		  							(printf "done setting new color\n")
+		  							;; (printf "done setting new color\n")
 		  							void
 		  							))
   							void))))

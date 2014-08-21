@@ -11,8 +11,10 @@
 struct CodeLine
 {
 	int id;//unique identifier for this code line
+	int lineCount;//global line index
 	int startChar;//global start character index
 	std::string code;
+	std::string codePrevious;
 
 	bool isSelected;//is this code line selected?
 	bool isActive;
@@ -48,8 +50,8 @@ public:
 	std::string evaluation;//most recent evaluation... code most likely to cause error	
 
 
-	CodeState* updateState(std::string line, int index, int charCount);//returns the updated state
-	void updateLine(CodeState* state, std::string line, int index, int charCount);
+	CodeState* updateState(std::string line, int index, int lineCount, int charCount);//returns the updated state
+	void updateLine(CodeState* state, std::string line, int index, int lineCount, int charCount);
 	CodeState* find(std::string line);
 	bool similar(std::string str1, std::string str2);
 };

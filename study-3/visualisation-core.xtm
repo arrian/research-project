@@ -23,7 +23,6 @@
 
 (sys:load (string-append *study-3-dir* "/transition.xtm"))
 (sys:load (string-append *study-3-dir* "/attractor.xtm"))
-(sys:load (string-append *study-3-dir* "/widget.xtm"))
 
 (define update-loop
   (lambda (time delta-t)
@@ -35,6 +34,8 @@
               delta-t)))
 
 (update-loop (now) 1/30)
+
+(sys:load (string-append *study-3-dir* "/widget.xtm"))
 
 
 

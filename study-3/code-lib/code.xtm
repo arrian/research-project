@@ -22,7 +22,7 @@
 ;; Code Line
 (bind-alias code_line i8)
 (bind-lib code code_line_id_get [i64,code_line*]*)
-;; (bind-lib code code_line_get_code [i8*,code_line*]*)
+(bind-lib code code_line_get_code [i8*,code_line*]*)
 (bind-lib code code_line_is_selected [i1,code_line*]*)
 (bind-lib code code_line_is_active [i1,code_line*]*)
 (bind-lib code code_line_is_error [i1,code_line*]*)

@@ -24,8 +24,8 @@
 
 ;; Attractor ;;;;;;;;;;;;;;;;;
 
-;;id,scene,parent,entity,physics_entity,type,segments,is_static,size_transition,color_transition,should_destroy
-(bind-type Attractor <i64,i8*,Attractor*,i8*,i8*,i64,i64,i1,SizeTransition*,ColorTransition*,i1>)
+;;id,scene,parent,entity,physics_entity,type,segments,is_static,size_transition,color_transition,queued_color_transition,should_destroy
+(bind-type Attractor <i64,i8*,Attractor*,i8*,i8*,i64,i64,i1,SizeTransition*,ColorTransition*,ColorTransition*,i1>)
 
 (bind-func attractor_get_id
   (lambda (a:Attractor*)
@@ -59,9 +59,13 @@
   (lambda (a:Attractor*)
     (tref a 9)))
 
-(bind-func attractor_should_destroy
+(bind-func attractor_get_color_2
   (lambda (a:Attractor*)
     (tref a 10)))
+
+(bind-func attractor_should_destroy
+  (lambda (a:Attractor*)
+    (tref a 11)))
 
 (bind-func attractor_get_x
   (lambda (a:Attractor*)
@@ -81,13 +85,18 @@
     (color_set_target (attractor_get_color a) r g b alpha)
     a))
 
+(bind-func attractor_set_target_color_long
+  (lambda (a:Attractor* r g b alpha)
+    (color_set_target_long (attractor_get_color a) r g b alpha)
+    a))
+
 (bind-func attractor_set_physics_entity
   (lambda (a:Attractor* pe)
     (tset! a 4 pe)))
 
 (bind-func attractor_set_destroy
   (lambda (a:Attractor* destroy)
-    (tset! a 10 destroy)))
+    (tset! a 11 destroy)))
 
 (bind-func attractor_create
   (lambda (id scene parent static x:double y:double size:double r g b a)
@@ -97,7 +106,7 @@
           (let ((physics_entity (poly_scene_physics_add_child scene entity static)))
                 (let ((sizet (SizeTransition_h #t size size size (now) TRANSITION_TIME))
                       (colort (ColorTransition_h #t (Color_h r g b a) (Color_h r g b a) (Color_h r g b a) (now) TRANSITION_TIME)))
-                    (Attractor_h id scene parent entity physics_entity CIRCLE_TYPE CIRCLE_SEGMENTS static sizet colort #f))))))
+                    (Attractor_h id scene parent entity physics_entity CIRCLE_TYPE CIRCLE_SEGMENTS static sizet colort null #f))))))
 
 (bind-func attractor_update_size
   (lambda (a:Attractor*)
@@ -151,13 +160,9 @@
 
 (bind-func attractor_update
   (lambda (a:Attractor*)
-      ;; (printf "updating attractor size\n")
       (attractor_update_size a)
-      ;; (printf "updating attractor color\n")
       (attractor_update_color a)
-      ;; (printf "updating attractor attraction\n")
       (attractor_update_attraction a)
-      ;; (printf "updating attractor done\n")
       a))
 
 (bind-func attractor_destroy

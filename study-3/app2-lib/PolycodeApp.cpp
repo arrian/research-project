@@ -32,20 +32,20 @@ poly_scene* poly_scene_create(int width, int height)
 	scene->setGravity(Vector2(0.0, 0.0));
 
 	// Setup physics bounds
-	double thickness = 10.0;
-	ScenePrimitive* top = new ScenePrimitive(0, width, thickness, 1.0);
-	top->setPosition(0.0, - height / 2.0);
-	ScenePrimitive* bottom = new ScenePrimitive(0, width, thickness, 1.0);
-	bottom->setPosition(0.0, height / 2.0);
-	ScenePrimitive* left = new ScenePrimitive(0, thickness, height, 1.0);
-	left->setPosition(- width / 2.0, 0.0);
-	ScenePrimitive* right = new ScenePrimitive(0, thickness, height, 1.0);
-	right->setPosition(width / 2.0, 0.0);
+	// double thickness = 10.0;
+	// ScenePrimitive* top = new ScenePrimitive(0, width, thickness, 1.0);
+	// top->setPosition(0.0, - height / 2.0);
+	// ScenePrimitive* bottom = new ScenePrimitive(0, width, thickness, 1.0);
+	// bottom->setPosition(0.0, height / 2.0);
+	// ScenePrimitive* left = new ScenePrimitive(0, thickness, height, 1.0);
+	// left->setPosition(- width / 2.0, 0.0);
+	// ScenePrimitive* right = new ScenePrimitive(0, thickness, height, 1.0);
+	// right->setPosition(width / 2.0, 0.0);
 
-	scene->addPhysicsChild(top, PhysicsScene2DEntity::ENTITY_RECT, true);
-	scene->addPhysicsChild(bottom, PhysicsScene2DEntity::ENTITY_RECT, true);
-	scene->addPhysicsChild(left, PhysicsScene2DEntity::ENTITY_RECT, true);
-	scene->addPhysicsChild(right, PhysicsScene2DEntity::ENTITY_RECT, true);
+	// scene->addPhysicsChild(top, PhysicsScene2DEntity::ENTITY_RECT, true);
+	// scene->addPhysicsChild(bottom, PhysicsScene2DEntity::ENTITY_RECT, true);
+	// scene->addPhysicsChild(left, PhysicsScene2DEntity::ENTITY_RECT, true);
+	// scene->addPhysicsChild(right, PhysicsScene2DEntity::ENTITY_RECT, true);
 
 	scene->getActiveCamera()->setOrthoSize(width, height);
 	return reinterpret_cast<poly_scene*>(scene);
