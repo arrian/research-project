@@ -58,7 +58,7 @@ class ExtemporeOscCommand(sublime_plugin.EventListener):
 	def send(self, view, address, *args):
 
 		# only send for extempore files
-		if view.file_name() is not None and not view.file_name().endswith(".xtm"):
+		if view.file_name() is None or not view.file_name().endswith(".xtm"):
 			return
 			
 		# print(view.file_name())

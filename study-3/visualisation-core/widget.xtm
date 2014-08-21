@@ -167,7 +167,7 @@
                 (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) 
                   (if (code_state_is_active state) 
                     (attractor_set_target_color_long (widget_get_attractor w) (random 0.0 0.7) (random 0.8 1.0) (random 0.0 0.5) 1.0)
-                    (attractor_set_target_color (widget_get_attractor w) 0.5 0.5 0.5 1.0))))
+                    (attractor_set_target_color (widget_get_attractor w) 0.5 0.5 0.5 0.5))))
               (widget_update w state)
               void)
             (begin void)
@@ -222,7 +222,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Leaking all over the place!
 ;; (bind-func update
   
 ;;   (lambda ()
@@ -235,9 +234,6 @@
 ;;     ))
 
 ;; (update)
-
-;; On the http://benswift.me/2013/03/20/building-extempore-on-osx-linux/ page:
-;; brew install /path/to/extempore/extras/extempore-llvm.rb  <----- where is this?
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
