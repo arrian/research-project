@@ -1,5 +1,4 @@
 
-
 ;; Globals ;;;;;;;;;;;;;;;;;;
 
 (bind-val CIRCLE_TYPE i64 8)
@@ -90,11 +89,6 @@
     (color_set_target_duration (attractor_get_color a) r g b alpha duration)
     a))
 
-(bind-func attractor_set_position
-  (lambda (a:Attractor* x:double y:double)
-    ;; (poly_entity_set_position (attractor_get_entity a) x y)
-    void))
-
 (bind-func attractor_set_physics_entity
   (lambda (a:Attractor* pe)
     (tset! a 4 pe)))
@@ -102,6 +96,13 @@
 (bind-func attractor_set_destroy
   (lambda (a:Attractor* destroy)
     (tset! a 11 destroy)))
+
+(bind-func attractor_set_position
+  (lambda (a:Attractor* x:double y:double)
+    (poly_entity_set_position (attractor_get_entity a) x y)
+    (poly_scene_physics_remove_child (attractor_get_scene a) (attractor_get_entity a))
+    (attractor_set_physics_entity a (poly_scene_physics_add_child (attractor_get_scene a) (attractor_get_entity a) (attractor_is_static a)))
+    void))
 
 (bind-func attractor_create
   (lambda (id scene parent static x:double y:double size:double r g b a)
@@ -122,7 +123,6 @@
       (if (size_transition_is_complete (attractor_get_size a))
           a
           (begin 
-            ;; (printf "%d updating size\n" (attractor_get_id a))
             (size_update (attractor_get_size a))
             (let ((current (size_get_current (attractor_get_size a))))
                 (poly_scene_primitive_set_circle_options (attractor_get_entity a) current current (i64toi32 CIRCLE_SEGMENTS))

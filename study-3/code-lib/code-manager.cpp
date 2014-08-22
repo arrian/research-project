@@ -58,7 +58,6 @@ void CodeManager::update(std::string code)
 			newStates.push_back(*foundState);
 			foundState = nullptr;
 			foundCounter = 0;
-			stateCounter++;
 		}
 
 	    charCounter += line.length() + 1;
@@ -186,9 +185,9 @@ CodeState* CodeManager::find(std::string line)
 
 bool CodeManager::similar(std::string str1, std::string str2)
 {
-	bool prefix = (0==str1.compare(0, std::min(str1.length(), str2.length()), str2,0,std::min(str1.length(),str2.length())));
-	if(prefix) return true;
-	//std::cout << "checking similarity of" << str1 << " and " << str2 << std::endl;
+	//checking if prefix
+	//bool prefix = (0==str1.compare(0, std::min(str1.length(), str2.length()), str2,0,std::min(str1.length(),str2.length())));
+	//if(prefix) return true;
 
     std::vector<std::string> words1, words2;
     std::string temp;
