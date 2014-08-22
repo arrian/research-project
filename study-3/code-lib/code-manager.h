@@ -27,6 +27,7 @@ struct CodeLine
 struct CodeState
 {
 	int id;//unique identifier for this code state
+	int index;//global index of the state. eg. first function will be 0
 	std::vector<CodeLine> lines;
 
 	bool isSelected;//is this code state selected
@@ -51,7 +52,7 @@ public:
 	std::string evaluation;//most recent evaluation... code most likely to cause error	
 
 
-	CodeState* updateState(std::string line, int index, int lineCount, int charCount);//returns the updated state
+	CodeState* updateState(std::string line, int index, int stateCount, int lineCount, int charCount);//returns the updated state
 	void updateLine(CodeState* state, std::string line, int index, int lineCount, int charCount);
 	CodeState* find(std::string line);
 	bool similar(std::string str1, std::string str2);
@@ -79,6 +80,7 @@ extern "C"
 	//Code State
 	int code_state_id_get(code_state* state);
 	int code_state_lines_count(code_state* state);
+	int code_state_get_index(code_state* state);
 	code_line* code_state_lines_get(code_state* state, int index);
 	bool code_state_is_selected(code_state* state);
 	bool code_state_is_active(code_state* state);

@@ -1,4 +1,4 @@
-(define code (sys:open-dylib "research-project/code-lib/bin/code.dylib"))
+(define code (sys:open-dylib *code-lib*));;"research-project/code-lib/bin/code.dylib"))
 
 ;; Event Queue
 (bind-alias event i8)
@@ -31,6 +31,7 @@
 (bind-alias code_state i8)
 (bind-lib code code_state_id_get [i64,code_state*]*)
 (bind-lib code code_state_lines_count [i64,code_state*]*)
+(bind-lib code code_state_get_index [i64,code_state*]*)
 (bind-lib code code_state_lines_get [code_line*,code_state*,i64]*)
 (bind-lib code code_state_is_selected [i1,code_state*]*)
 (bind-lib code code_state_is_active [i1,code_state*]*)

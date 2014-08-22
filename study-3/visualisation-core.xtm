@@ -11,18 +11,21 @@
       (tset! obj 1 y)
       obj)))
 
+(define *study-3-dir* "/Users/Arrian/Dev/research-project/study-3")
 
-(define *study-3-dir* "research-project/visualisation-core")
+(define *code-lib* (string-append *study-3-dir* "/code-lib/bin/code.dylib"))
+(sys:load (string-append *study-3-dir* "/code-lib/code.xtm"))
 
-(sys:load "research-project/app2-lib/app.xtm")
-(sys:load "research-project/code-lib/code.xtm")
+(define *app-lib* (string-append *study-3-dir* "/app2-lib/bin/app.dylib"))
+(define *app-lib-resources* (string-append *study-3-dir* "/resources/default.pak"))
+(sys:load (string-append *study-3-dir* "/app2-lib/app.xtm"))
 
-(sys:load (string-append *study-3-dir* "/code-manager.xtm"))
-(sys:load (string-append *study-3-dir* "/visual-manager.xtm"))
-(sys:load (string-append *study-3-dir* "/interface-manager.xtm"))
+(sys:load (string-append *study-3-dir* "/visualisation-core/code-manager.xtm"))
+(sys:load (string-append *study-3-dir* "/visualisation-core/visual-manager.xtm"))
+(sys:load (string-append *study-3-dir* "/visualisation-core/interface-manager.xtm"))
 
-(sys:load (string-append *study-3-dir* "/transition.xtm"))
-(sys:load (string-append *study-3-dir* "/attractor.xtm"))
+(sys:load (string-append *study-3-dir* "/visualisation-core/transition.xtm"))
+(sys:load (string-append *study-3-dir* "/visualisation-core/attractor.xtm"))
 
 (define update-loop
   (lambda (time delta-t)
@@ -35,7 +38,7 @@
 
 (update-loop (now) 1/30)
 
-(sys:load (string-append *study-3-dir* "/widget.xtm"))
+(sys:load (string-append *study-3-dir* "/visualisation-core/widget.xtm"))
 
 
 

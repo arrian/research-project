@@ -1,9 +1,9 @@
 ;; Visual Manager
 
-(define WIDTH 640)
-(define HEIGHT 480)
+(define WIDTH 1920);;640)
+(define HEIGHT 1080);;480)
 
-(poly_core_init WIDTH HEIGHT)
+(poly_core_init WIDTH HEIGHT *app-lib-resources*)
 
 (bind-func scene_create
   (lambda ()

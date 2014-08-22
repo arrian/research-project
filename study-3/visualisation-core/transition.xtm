@@ -6,7 +6,6 @@
 (bind-val TRANSITION_TIME i64 15000)
 (bind-val TRANSITION_TIME_LONG i64 150000)
 
-
 ;; Utility ;;;;;;;;;;;;;;;;;;
 
 (bind-func transition_ease_out_quadratic
@@ -25,16 +24,14 @@
       (tset! c 0 r)
       (tset! c 1 g)
       (tset! c 2 b)
-      (tset! c 3 a)
-    void))
+      (tset! c 3 a)))
 
 (bind-func color_set_color
   (lambda (c:Color* from:Color*)
       (tset! c 0 (tref from 0))
       (tset! c 1 (tref from 1))
       (tset! c 2 (tref from 2))
-      (tset! c 3 (tref from 3))
-    ))
+      (tset! c 3 (tref from 3))))
 
 (bind-func color_set_r
   (lambda (c:Color* r:double)
@@ -149,17 +146,10 @@
             (color_set_duration ct TRANSITION_TIME)
             void)))
 
-(bind-func color_set_target_long
-  (lambda (ct:ColorTransition* r g b a)
-      (color_set_target ct r g b a)
-      (color_set_duration ct (random (/ TRANSITION_TIME_LONG 2) TRANSITION_TIME_LONG))
-    ))
-
 (bind-func color_set_target_duration
   (lambda (ct:ColorTransition* r g b a duration)
       (color_set_target ct r g b a)
-      (color_set_duration ct duration)
-    ))
+      (color_set_duration ct duration)))
 
 (bind-func color_update
   (lambda (ct:ColorTransition*)
@@ -195,8 +185,7 @@
 		  								(transition_ease_out_quadratic current binitial bchange transition_time)
 		  								(transition_ease_out_quadratic current ainitial achange transition_time))
 		  							;; (printf "done setting new color\n")
-		  							void
-		  							))
+		  							void))
   							void))))
     void))
 

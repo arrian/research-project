@@ -1,5 +1,20 @@
 ;; Widget to handle the active and inactive state of specific code.
 
+;; Utility ;;;;;;;;;;;;;;;;;
+
+
+
+(bind-func get_x_for_index
+  (lambda (index)
+    (printf "%d\n" index)
+    (- (* 150.0 (i64tod (/ index 5))) 500.0)))
+
+(bind-func get_y_for_index
+  (lambda (index)
+    (- (* 150.0 (i64tod (% index 5))) 500.0)))
+
+;; Widget ;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (bind-type Widget <i64,Attractor*,AttractorList*,i1>);; id, main entity, child entities, should destroy
 
 (bind-func widget_create
@@ -10,7 +25,6 @@
 
 (bind-func widget_get_id
   (lambda (w:Widget*)
-    ;; (printf "getting widget id for %d with pointer %p\n" (tref w 0) w)
     (tref w 0)))
 
 (bind-func widget_get_attractor
@@ -63,6 +77,7 @@
                   (if (and (<> size (size_get_current (attractor_get_size a))) 
                            (size_transition_is_complete (attractor_get_size a))) 
                       (begin 
+                        ;; (printf "target size: %f, current size: %f, setting size of %d with text %s\n" id (code_line_get_code line))
                         (attractor_set_target_size a size)
                         (attractor_set_target_color a 1.0 1.0 0.0 1.0))
                     ))
@@ -79,7 +94,7 @@
           (begin 
             children)
           (begin
-            (cons (attractor_create id POLY_SCENE (widget_get_attractor w) #f (random -500.0 -200.0) (random -400.0 400.0) 10.0 (random 0.5 1.0) (random) 0.0 (random 0.6 1.0)) children);;0.0 1.0 0.0 1.0
+            (cons (attractor_create id POLY_SCENE (widget_get_attractor w) #f (random -500.0 -200.0) (random -400.0 400.0) 10.0 (random 0.5 1.0) (random) 0.0 (random 0.6 1.0)) children)
             )
           )
       )))
@@ -88,6 +103,15 @@
   (lambda (w:Widget* state:code_state*)
     (let ((i 0)
           (line_count (code_state_lines_count state)))
+
+        ;; updating attractor position
+        (let ((x (get_x_for_index (code_state_get_index state)))
+              (y (get_y_for_index (code_state_get_index state))))
+              (begin
+                (if (or (<> x (attractor_get_x (widget_get_attractor w)))
+                        (<> y (attractor_get_y (widget_get_attractor w)))) 
+                  (attractor_set_position (widget_get_attractor w) x y))))
+
         (attractor_update (widget_get_attractor w))
         (for-each (lambda (a) (attractor_set_destroy a #t)) (widget_get_children w))
         (dotimes (i line_count)
@@ -168,24 +192,25 @@
                   )
                 (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) 
                   (if (code_state_is_active state) 
-                    (attractor_set_target_color_long (widget_get_attractor w) (random 0.0 0.7) (random 0.8 1.0) (random 0.0 0.5) 1.0)
+                    (attractor_set_target_color_duration (widget_get_attractor w) (random 0.0 0.7) (random 0.8 1.0) (random 0.0 0.5) 1.0 150000)
                     (attractor_set_target_color (widget_get_attractor w) 0.4 0.4 0.4 0.4))))
               (widget_update w state)
               void)
             (begin void)
             )
           ) wl)
-        (if (found)
+        (let ((x (get_x_for_index (code_state_get_index state)))
+              (y (get_y_for_index (code_state_get_index state))))
+            (if (found)
               wl
-              (begin
-                (cons (widget_create id 500.0 (random_discrete) 60.0) wl)
-                )))))
+              (cons (widget_create id x y 60.0) wl))))))
 
 (bind-func widget_list_update
   (lambda (wl:WidgetList*)
       (let ((i 0)
             (nw:WidgetList* wl)
             (state_count (code_manager_states_count CODE_MANAGER)))
+          (widget_list_print wl)
           (for-each (lambda (w) (widget_set_destroy w #t)) nw)
           (dotimes (i state_count)
               (let ((state (code_manager_states_get CODE_MANAGER i)))
@@ -222,7 +247,7 @@
       (set! WIDGET_LIST_TEST (widget_list_update WIDGET_LIST_TEST)))
       void))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; (bind-func update
   

@@ -1,5 +1,5 @@
 
-(define polycode (sys:open-dylib "research-project/app2-lib/bin/app.dylib"))
+(define polycode (sys:open-dylib *app-lib*));;"research-project/app2-lib/bin/app.dylib"))
 
 ;;core
 (bind-alias poly_core i8)
@@ -62,49 +62,13 @@
 (bind-val POLY_SCENE poly_scene* 0)
 
 (bind-func poly_core_init
-  (lambda (width height)
-      (set! POLY_CORE (poly_core_create "Extempore" width height "/Users/Arrian/Dev/research-project/study-3/resources/default.pak"))
+  (lambda (width height resources)
+      (set! POLY_CORE (poly_core_create "Extempore" width height resources));;"/Users/Arrian/Dev/research-project/study-3/resources/default.pak"
       (set! POLY_SCENE (poly_scene_create width height))))
-
-;;(poly_core_init 640 480)
 
 (bind-func poly_core_dest
   (lambda ()
       (poly_core_destroy POLY_CORE)
       (set! POLY_CORE null)
       (set! POLY_SCENE null)
-      void
-    ))
-
-;; (poly_core_dest)
-
-;; Testing ;;
-
-;; (bind-func scene_create
-;;   (lambda ()
-;;     (poly_scene_add_child POLY_SCENE (poly_scene_label_create "test text here more text" 30))
-;;     (poly_scene_add_child POLY_SCENE (poly_ui_input_create "test text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\ntest text here\nmore text on the next line\n"))
-;;     ))
-;;     ;; (poly_scene_add_child POLY_SCENE (poly_scene_image_create "research-project/resources/gradient.png"))
-    
-    
-
-;; (scene_create)
-
-;; (bind-func draw
-;;   (lambda ()
-;;     (poly_core_update POLY_CORE)
-;;     void))
-
-;; (define draw-loop
-;;   (lambda (time delta-t)
-;;     (draw)
-;;     (callback (+ time (* *second* delta-t) 0.5)
-;;               'draw-loop
-;;               (+ time (* *second* delta-t)) 
-;;               delta-t)))
-
-;; (draw-loop (now) 1/40)
-
-
-
+      void))

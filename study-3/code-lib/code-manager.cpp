@@ -27,11 +27,11 @@ CodeManager::~CodeManager()
 
 void CodeManager::update(std::string code)
 {
-	std::cout << "entering code update with " << code.substr(0, std::min(40, int(code.length() - 1))) << std::endl; 
+	// std::cout << "entering code update with " << code.substr(0, std::min(40, int(code.length() - 1))) << std::endl; 
+	int stateCounter = 0;
 	int lineCounter = 0;
 	CodeState* foundState = nullptr;
 	int foundCounter = 0;
-
 	int charCounter = 0;
 
 	std::vector<CodeState> newStates;
@@ -40,46 +40,38 @@ void CodeManager::update(std::string code)
 	std::string line;
 	while(std::getline(codestream, line))
 	{
-		std::cout << "get line " << line << std::endl;
 		if(line.find_first_not_of(" \n\t\r") != std::string::npos)//check if anything but whitespace
 		{
 			if(!foundState) 
 			{
-				foundState = updateState(line, foundCounter, lineCounter, charCounter);
-				std::cout << "updated state" << std::endl;
+				foundState = updateState(line, foundCounter, stateCounter, lineCounter, charCounter);
+				stateCounter++;
 			}
 			else 
 			{
 				updateLine(foundState, line, foundCounter, lineCounter, charCounter);
-				std::cout << "updated line" << std::endl;
 			}
 			foundCounter++;
 		}
 		else if(foundState)
 		{
-			std::cout << "finishing state " << foundState->id << std::endl;
 			newStates.push_back(*foundState);
 			foundState = nullptr;
 			foundCounter = 0;
+			stateCounter++;
 		}
 
-	    charCounter += line.length();
+	    charCounter += line.length() + 1;
+	    // std::cout << line << " with length " << line.length() << std::endl;
 	    lineCounter++;
 	}
 	if(foundState) newStates.push_back(*foundState);
 	states = newStates;
-
-	std::cout << "exiting code update with states size of " << states.size() << " and lines ";
-	for(auto & state : states)
-	{
-		std::cout << ", " << state.lines.size();
-	}
-	std::cout << "..." << std::endl;
 }
 
 void CodeManager::evaluate(std::string code)
 {
-	std::cout << "entering code evaluate with " << code.substr(0, std::min(40, int(code.length() - 1))) << std::endl; 
+	// std::cout << "entering code evaluate with " << code.substr(0, std::min(40, int(code.length() - 1))) << std::endl; 
 	std::istringstream codestream(code);
 	std::string line;
 
@@ -96,7 +88,7 @@ void CodeManager::evaluate(std::string code)
 		}
 	}
 
-	std::cout << "exiting code evaluate" << std::endl; 
+	// std::cout << "exiting code evaluate" << std::endl; 
 }
 
 void CodeManager::select(int selection)
@@ -106,7 +98,7 @@ void CodeManager::select(int selection)
 
 void CodeManager::select(int selectionStart, int selectionEnd)
 {
-	std::cout << "entering code select" << std::endl; 
+	// std::cout << "entering code select" << std::endl; 
 	for(auto & state : states)
 	{
 		state.isSelected = false;
@@ -117,13 +109,16 @@ void CodeManager::select(int selectionStart, int selectionEnd)
 			int end = line.startChar + line.code.length();
 			if(start < selectionEnd && end > selectionStart)
 			{
-				std::cout << state.id << " is selected in code manager" << std::endl; 
+				// std::cout << "selected " << selectionStart << " to " << selectionEnd << std::endl;
+				// std::cout << "on line " << line.code << " with index " << start << " to " << end << std::endl;
+
+				// std::cout << state.id << " is selected in code manager" << std::endl; 
 				state.isSelected = true;
 				line.isSelected = true;
 			}
 		}
 	}
-	std::cout << "exiting code select" << std::endl; 
+	// std::cout << "exiting code select" << std::endl; 
 	
 }
 
@@ -132,19 +127,24 @@ void CodeManager::error(std::string message)
 
 }
 
-CodeState* CodeManager::updateState(std::string line, int index, int lineCount, int charCount)
+CodeState* CodeManager::updateState(std::string line, int index, int stateCount, int lineCount, int charCount)
 {
 	CodeState* state = find(line);
 	if(!state)
 	{
 		CodeState newState;
 		newState.id = getStateIdentifier();
+		newState.index = stateCount;
 		newState.isSelected = false;
 		newState.isActive = false;
 		newState.isError = false;
 
 		states.push_back(newState);
 		state = &states[states.size() - 1];
+	}
+	else
+	{
+		state->index = stateCount;
 	}
 	updateLine(state, line, index, lineCount, charCount);
 	return state;
@@ -212,8 +212,6 @@ bool CodeManager::similar(std::string str1, std::string str2)
     return ratio > 0.6;
 }
 
-
-
 //////////////////////////////////////
 code_manager* code_manager_create()
 {
@@ -227,7 +225,7 @@ void code_manager_destroy(code_manager* manager)
 
 void code_manager_update(code_manager* manager, char* code)
 {
-	printf("entered code manager update c binding\n");
+	// printf("entered code manager update c binding\n");
 	reinterpret_cast<CodeManager*>(manager)->update(std::string(code));
 }
 
@@ -269,6 +267,11 @@ int code_state_id_get(code_state* state)
 int code_state_lines_count(code_state* state)
 {
 	return reinterpret_cast<CodeState*>(state)->lines.size();
+}
+
+int code_state_get_index(code_state* state)
+{
+	return reinterpret_cast<CodeState*>(state)->index;
 }
 
 code_line* code_state_lines_get(code_state* state, int index)

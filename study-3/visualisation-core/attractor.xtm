@@ -10,7 +10,7 @@
   (lambda (factor:double)
     (set! ATTRACTION_FACTOR factor)))
 
-(set_attraction_factor 500.0)
+;; (set_attraction_factor 500.0)
 
 ;; Utility ;;;;;;;;;;;;;;;;;;;
 
@@ -90,10 +90,10 @@
     (color_set_target_duration (attractor_get_color a) r g b alpha duration)
     a))
 
-(bind-func attractor_set_target_color_long
-  (lambda (a:Attractor* r g b alpha)
-    (color_set_target_long (attractor_get_color a) r g b alpha)
-    a))
+(bind-func attractor_set_position
+  (lambda (a:Attractor* x:double y:double)
+    ;; (poly_entity_set_position (attractor_get_entity a) x y)
+    void))
 
 (bind-func attractor_set_physics_entity
   (lambda (a:Attractor* pe)
@@ -122,6 +122,7 @@
       (if (size_transition_is_complete (attractor_get_size a))
           a
           (begin 
+            ;; (printf "%d updating size\n" (attractor_get_id a))
             (size_update (attractor_get_size a))
             (let ((current (size_get_current (attractor_get_size a))))
                 (poly_scene_primitive_set_circle_options (attractor_get_entity a) current current (i64toi32 CIRCLE_SEGMENTS))
