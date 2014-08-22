@@ -3,7 +3,7 @@
 
 (bind-val CIRCLE_TYPE i64 8)
 (bind-val CIRCLE_SEGMENTS i64 6)
-(bind-val ATTRACTION_FACTOR double 500.0)
+(bind-val ATTRACTION_FACTOR double 1000.0)
 
 (bind-func set_attraction_factor
   (lambda (factor:double)
@@ -20,6 +20,10 @@
 (bind-func mind
   (lambda (a:double b:double)
     (if (< a b) a b)))
+
+(bind-func get_collision_category_for_id
+  (lambda (index)
+    (dtoi64 (pow 2.0 (i64tod (% index 16))))))
 
 ;; Attractor ;;;;;;;;;;;;;;;;;
 
@@ -109,11 +113,12 @@
       (let ((entity (poly_scene_primitive_create_circle size size (i64toi32 CIRCLE_SEGMENTS))))
           (poly_entity_set_position entity x y)
           (poly_entity_set_color entity r g b a)
-          (let ((physics_entity (poly_scene_physics_add_child scene entity static)))
-                (if (null? parent) ;;collision group
-                  (poly_physics_entity_set_collision_group_index physics_entity id)
-                  (poly_physics_entity_set_collision_group_index physics_entity (attractor_get_id parent))
-                  )
+          (let ((physics_entity (poly_scene_physics_add_child scene entity static))
+                (collision_group (if (null? parent) id (attractor_get_id parent))))
+
+                (poly_physics_entity_set_collision_group_index physics_entity (get_collision_category_for_id collision_group))
+                (poly_physics_entity_set_collision_mask physics_entity (get_collision_category_for_id collision_group))
+
                 (let ((sizet (SizeTransition_h #t size size size (now) TRANSITION_TIME))
                       (colort (ColorTransition_h #t (Color_h r g b a) (Color_h r g b a) (Color_h r g b a) (now) TRANSITION_TIME)))
                     (Attractor_h id scene parent entity physics_entity CIRCLE_TYPE CIRCLE_SEGMENTS static sizet colort null #f))))))

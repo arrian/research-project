@@ -20,6 +20,20 @@
 ;;2D physics entity
 (bind-alias poly_physics_entity i8)
 (bind-lib polycode poly_physics_entity_apply_force [void,poly_physics_entity*,double,double]*)
+;; (bind-lib polycode poly_physics_entity_apply_torque [void,poly_physics_entity*,double]*)
+;; (bind-lib polycode poly_physics_entity_apply_impulse [void,poly_physics_entity*,double,double]*)
+
+(bind-lib polycode poly_physics_entity_set_velocity [void,poly_physics_entity*,double,double]*)
+(bind-lib polycode poly_physics_entity_get_velocity_x [double,poly_physics_entity*]*)
+(bind-lib polycode poly_physics_entity_get_velocity_y [double,poly_physics_entity*]*)
+
+(bind-lib polycode poly_physics_entity_set_density [void,poly_physics_entity*,double]*)
+(bind-lib polycode poly_physics_entity_get_density [double,poly_physics_entity*]*)
+(bind-lib polycode poly_physics_entity_set_friction [void,poly_physics_entity*,double]*)
+(bind-lib polycode poly_physics_entity_get_friction [double,poly_physics_entity*]*)
+
+(bind-lib polycode poly_physics_entity_set_collision_category [void,poly_physics_entity*,i64]*)
+(bind-lib polycode poly_physics_entity_set_collision_mask [void,poly_physics_entity*,i64]*)
 (bind-lib polycode poly_physics_entity_set_collision_group_index [void,poly_physics_entity*,i64]*)
 
 ;;scene

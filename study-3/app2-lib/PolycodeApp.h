@@ -31,8 +31,20 @@ extern "C"
 	void poly_scene_physics_set_gravity(poly_scene* scene, double gx, double gy);
 	poly_physics_entity* poly_scene_physics_add_child(poly_scene* scene, poly_entity* entity, bool is_static);
 	void poly_scene_physics_remove_child(poly_scene* scene, poly_entity* entity);
+
 	void poly_physics_entity_apply_force(poly_physics_entity* entity, double x, double y);
-	void poly_physics_entity_set_collision_group_index(poly_physics_entity* entity, int groupIndex);
+	void poly_physics_entity_apply_torque(poly_physics_entity* entity, double torque);
+	void poly_physics_entity_apply_impulse(poly_physics_entity* entity, double x, double y);
+	void poly_physics_entity_set_velocity(poly_physics_entity* entity, double x, double y);
+	double poly_physics_entity_get_velocity_x(poly_physics_entity* entity);
+	double poly_physics_entity_get_velocity_y(poly_physics_entity* entity);
+	void poly_physics_entity_set_density(poly_physics_entity* entity, double density);
+	double poly_physics_entity_get_density(poly_physics_entity* entity);
+	void poly_physics_entity_set_friction(poly_physics_entity* entity, double friction);
+	double poly_physics_entity_get_friction(poly_physics_entity* entity);
+	void poly_physics_entity_set_collision_category(poly_physics_entity* entity, int category);
+	void poly_physics_entity_set_collision_mask(poly_physics_entity* entity, int mask);
+	void poly_physics_entity_set_collision_group_index(poly_physics_entity* entity, int group);
 
 	void poly_entity_set_position(poly_entity* entity, double x, double y);
 	void poly_entity_set_yaw(poly_entity* entity, double yaw);
