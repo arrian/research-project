@@ -1,11 +1,5 @@
 ;; Widget to handle the active and inactive state of specific code.
 
-(bind-func test_ortho_size
-  (lambda (width height)
-    (poly_scene_set_ortho_size POLY_SCENE width height)))
-
-;; (test_ortho_size 200 200)
-
 ;; Utility ;;;;;;;;;;;;;;;;;
 
 (bind-func get_x_for_index
