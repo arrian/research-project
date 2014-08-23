@@ -27,6 +27,7 @@ extern "C"
 	poly_scene* poly_scene_create(int width, int height);
 	void poly_scene_destroy(poly_scene* scene);
 	void poly_scene_add_child(poly_scene* scene, poly_entity* entity);
+	void poly_scene_set_ortho_size(poly_scene* scene, int width, int height);
 
 	void poly_scene_physics_set_gravity(poly_scene* scene, double gx, double gy);
 	poly_physics_entity* poly_scene_physics_add_child(poly_scene* scene, poly_entity* entity, bool is_static);
@@ -68,6 +69,8 @@ extern "C"
 	poly_scene_primitive* poly_scene_primitive_create_circle(double xSize, double ySize, int segments);
 	void poly_scene_primitive_destroy(poly_scene_primitive* primitive);
 	void poly_scene_primitive_set_circle_options(poly_scene_primitive* primitive, double xSize, double ySize, int segments);
+
+	void poly_scene_mesh_set_material(poly_scene_mesh* mesh, char* materialName);
 }
 
 int main(int argc, char* argv[])

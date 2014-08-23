@@ -20,3 +20,10 @@
     (update)
     (poly_core_update POLY_CORE)
     void))
+
+
+(bind-func set_ortho_size
+  (lambda (width height)
+    (poly_scene_set_ortho_size POLY_SCENE width height)))
+
+;; (set_ortho_size 3000 3000)

@@ -61,6 +61,11 @@ void poly_scene_add_child(poly_scene* scene, poly_entity* entity)
 	reinterpret_cast<Scene*>(scene)->addChild(reinterpret_cast<Entity*>(entity));
 }
 
+void poly_scene_set_ortho_size(poly_scene* scene, int width, int height)
+{
+	reinterpret_cast<PhysicsScene2D*>(scene)->getActiveCamera()->setOrthoSize(width, height);
+}
+
 void poly_scene_physics_set_gravity(poly_scene* s, double gx, double gy)
 {
 	PhysicsScene2D* scene = reinterpret_cast<PhysicsScene2D*>(s);
@@ -234,5 +239,10 @@ void poly_scene_primitive_destroy(poly_scene_primitive* primitive)
 void poly_scene_primitive_set_circle_options(poly_scene_primitive* primitive, double xSize, double ySize, int segments)
 {
 	reinterpret_cast<ScenePrimitive*>(primitive)->setPrimitiveOptions(8, xSize, ySize, segments);
+}
+
+void poly_scene_mesh_set_material(poly_scene_mesh* mesh, char* materialName)
+{
+	reinterpret_cast<SceneMesh*>(mesh)->setMaterialByName(materialName);
 }
 

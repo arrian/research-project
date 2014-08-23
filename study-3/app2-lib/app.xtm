@@ -41,6 +41,7 @@
 (bind-lib polycode poly_scene_create [poly_scene*,i32,i32]*)
 (bind-lib polycode poly_scene_destroy [void,poly_scene*]*)
 (bind-lib polycode poly_scene_add_child [void,poly_scene*,poly_entity*]*)
+(bind-lib polycode poly_scene_set_ortho_size [void,poly_scene*,i64,i64]*)
 
 ;;2D physics scene
 (bind-lib polycode poly_scene_physics_set_gravity [void,poly_scene*,double,double]*)
@@ -70,6 +71,10 @@
 (bind-lib polycode poly_scene_primitive_create_circle [poly_scene_primitive*,double,double,i32]*);;x size, y size, segments
 (bind-lib polycode poly_scene_primitive_destroy [void,poly_scene_primitive*]*)
 (bind-lib polycode poly_scene_primitive_set_circle_options [void,poly_scene_primitive*,double,double,i32]*)
+
+;;scene mesh
+(bind-alias poly_scene_mesh i8)
+(bind-lib polycode poly_scene_mesh_set_material [void,poly_scene_mesh*,i8*]*)
 
 ;;initialisation
 (bind-val POLY_CORE poly_core* 0)
