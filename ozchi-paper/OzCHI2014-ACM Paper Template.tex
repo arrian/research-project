@@ -1,73 +1,19 @@
-% This is "sig-alternate.tex" V1.9 April 2009
-% This file should be compiled with V2.4 of "sig-alternate.cls" April 2009
-%
-% This example file demonstrates the use of the 'sig-alternate.cls'
-% V2.4 LaTeX2e document class file. It is for those submitting
-% articles to ACM Conference Proceedings WHO DO NOT WISH TO
-% STRICTLY ADHERE TO THE SIGS (PUBS-BOARD-ENDORSED) STYLE.
-% The 'sig-alternate.cls' file will produce a similar-looking,
-% albeit, 'tighter' paper resulting in, invariably, fewer pages.
-%
-% ----------------------------------------------------------------------------------------------------------------
-% This .tex file (and associated .cls V2.4) produces:
-%       1) The Permission Statement
-%       2) The Conference (location) Info information
-%       3) The Copyright Line with ACM data
-%       4) NO page numbers
-%
-% as against the acm_proc_article-sp.cls file which
-% DOES NOT produce 1) thru' 3) above.
-%
-% Using 'sig-alternate.cls' you have control, however, from within
-% the source .tex file, over both the CopyrightYear
-% (defaulted to 200X) and the ACM Copyright Data
-% (defaulted to X-XXXXX-XX-X/XX/XX).
-% e.g.
-% \CopyrightYear{2007} will cause 2007 to appear in the copyright line.
-% \crdata{0-12345-67-8/90/12} will cause 0-12345-67-8/90/12 to appear in the copyright line.
-%
-% ---------------------------------------------------------------------------------------------------------------
-% This .tex source is an example which *does* use
-% the .bib file (from which the .bbl file % is produced).
-% REMEMBER HOWEVER: After having produced the .bbl file,
-% and prior to final submission, you *NEED* to 'insert'
-% your .bbl file into your source .tex file so as to provide
-% ONE 'self-contained' source file.
-%
-% ================= IF YOU HAVE QUESTIONS =======================
-% Questions regarding the SIGS styles, SIGS policies and
-% procedures, Conferences etc. should be sent to
-% Adrienne Griscti (griscti@acm.org)
-%
-% Technical questions _only_ to
-% Gerald Murray (murray@hq.acm.org)
-% ===============================================================
-%
-% For tracking purposes - this is V1.9 - April 2009
-
 \documentclass{sig-alternate}
 
-\begin{document}
-%
-% --- Author Metadata here ---
-\conferenceinfo{OZCHI}{'14, Dec 2-5, 2014, Sydney, Australia}
-%\CopyrightYear{2014} % Allows default copyright year (20XX) to be over-ridden - IF NEED BE.
-%\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
-% --- End of Author Metadata ---
+\usepackage{color}
 
-\title{Visualising the Coding Process\titlenote{(Produces the permission block, and
-copyright information). For use with
-SIG-ALTERNATE.CLS. Supported by ACM.}}
+\begin{document}
+\conferenceinfo{OZCHI}{'14, Dec 2-5, 2014, Sydney, Australia}
+
+\title{Visualising the Coding Process}
 
 \numberofauthors{3} 
 \author{
-\alignauthor
-Arrian Purcell\\
+\alignauthor Arrian Purcell\\
        \affaddr{Australian National University}\\
        \affaddr{Canberra, Australia}\\
        \email{u5015666@anu.edu.au}
-\alignauthor
-Henry Gardner\\
+\alignauthor Henry Gardner\\
        \affaddr{Australian National University}\\
        \affaddr{Canberra, Australia}\\
        \email{henry.gardner@anu.edu.au}
@@ -80,433 +26,503 @@ Henry Gardner\\
 \maketitle
 \begin{abstract}
 
+Past software visualisations have typically focussed on visualising the software structures, the runtime behaviour or the source code. Within these categories, the process involved in developing the software is often overlooked. We explore the utility of software visualisations in communicating the programming process within a live coding performance context.
 
+One field study and one controlled laboratory experiment were conducted in order to examine the effectiveness of visusalisations in communicating the software development process and communicating the programmer's intention. The field study investigated existing mental models of a programmer and an audience within the live coding context informing the mapping of software development process concepts to visual elements. The controlled laboratory experiment examined the effectiveness in aligning the audience's mental model with that of the programmer.
 
-This paper provides a sample of a \LaTeX\ document which conforms,
-somewhat loosely, to the formatting guidelines for
-ACM SIG Proceedings. It is an {\em alternate} style which produces
-a {\em tighter-looking} paper and was designed in response to
-concerns expressed, by authors, over page-budgets.
-It complements the document \textit{Author's (Alternate) Guide to
-Preparing ACM SIG Proceedings Using \LaTeX$2_\epsilon$\ and Bib\TeX}.
-This source file has been written with the intention of being
-compiled under \LaTeX$2_\epsilon$\ and BibTeX.
+The effectiveness of the visualisations developed is demonstrated in communicating the software development process and potential is shown for visualisations to further communicate the programmer's intention. The ongoing challenge is to match the audience's mental model with that of the programmer to further align the audience's understanding with that of the programmer.
 
-The developers have tried to include every imaginable sort
-of ``bells and whistles", such as a subtitle, footnotes on
-title, subtitle and authors, as well as in the text, and
-every optional component (e.g. Acknowledgments, Additional
-Authors, Appendices), not to mention examples of
-equations, theorems, tables and figures.
-
-To make best use of this sample document, run it through \LaTeX\
-and BibTeX, and compare this source code with the printed
-output produced by the dvi file. A compiled PDF version
-is available on the web page to help you with the
-`look and feel'.
 \end{abstract}
 
 \category{H.5}{Information Interfaces and Presentation}{Miscellaneous}
 
-\terms{Theory}
+% \terms{Theory}
 
 \keywords{live coding, software visualisation}
 
 \section{Introduction}
-The \textit{proceedings} are the records of a conference.
-ACM seeks to give these conference by-products a uniform,
-high-quality appearance.  To do this, ACM has some rigid
-requirements for the format of the proceedings documents: there
-is a specified format (balanced  double columns), a specified
-set of fonts (Arial or Helvetica and Times Roman) in
-certain specified sizes (for instance, 9 point for body copy),
-a specified live area (18 $\times$ 23.5 cm [7" $\times$ 9.25"]) centered on
-the page, specified size of margins (1.9 cm [0.75"]) top, (2.54 cm [1"]) bottom
-and (1.9 cm [.75"]) left and right; specified column width
-(8.45 cm [3.33"]) and gutter size (.83 cm [.33"]).
 
-The good news is, with only a handful of manual
-settings\footnote{Two of these, the {\texttt{\char'134 numberofauthors}}
-and {\texttt{\char'134 alignauthor}} commands, you have
-already used; another, {\texttt{\char'134 balancecolumns}}, will
-be used in your very last run of \LaTeX\ to ensure
-balanced column heights on the last page.}, the \LaTeX\ document
-class file handles all of this for you.
+Many approaches to visualising software focus on the structure, behaviour or representation of software.  {\color{red}[introduce study + topic]}
 
-The remainder of this document is concerned with showing, in
-the context of an ``actual'' document, the \LaTeX\ commands
-specifically available for denoting the structure of a
-proceedings paper, rather than with giving rigorous descriptions
-or explanations of such commands.
+{\color{red}[discuss previous work here]}
 
-\section{The {\secit Body} of The Paper}
-Typically, the body of a paper is organized
-into a hierarchical structure, with numbered or unnumbered
-headings for sections, subsections, sub-subsections, and even
-smaller sections.  The command \texttt{{\char'134}section} that
-precedes this paragraph is part of such a
-hierarchy.\footnote{This is the second footnote.  It
-starts a series of three footnotes that add nothing
-informational, but just give an idea of how footnotes work
-and look. It is a wordy one, just so you see
-how a longish one plays out.} \LaTeX\ handles the numbering
-and placement of these headings for you, when you use
-the appropriate heading commands around the titles
-of the headings.  If you want a sub-subsection or
-smaller part to be unnumbered in your output, simply append an
-asterisk to the command name.  Examples of both
-numbered and unnumbered headings will appear throughout the
-balance of this sample document.
+{\color{red}[discuss reason behind these studies]}
 
-Because the entire article is contained in
-the \textbf{document} environment, you can indicate the
-start of a new paragraph with a blank line in your
-input file; that is why this sentence forms a separate paragraph.
+\section{Field Study}
 
-\subsection{Type Changes and {\subsecit Special} Characters}
-We have already seen several typeface changes in this sample.  You
-can indicate italicized words or phrases in your text with
-the command \texttt{{\char'134}textit}; emboldening with the
-command \texttt{{\char'134}textbf}
-and typewriter-style (for instance, for computer code) with
-\texttt{{\char'134}texttt}.  But remember, you do not
-have to indicate typestyle changes when such changes are
-part of the \textit{structural} elements of your
-article; for instance, the heading of this subsection will
-be in a sans serif\footnote{A third footnote, here.
-Let's make this a rather short one to
-see how it looks.} typeface, but that is handled by the
-document class file. Take care with the use
-of\footnote{A fourth, and last, footnote.}
-the curly braces in typeface changes; they mark
-the beginning and end of
-the text that is to be in the different typeface.
+A field study was conducted to investigate the existing audience live coding mental model of the programming process. An audience was surveyed following a live coding performance regarding their understanding and enjoyment throughout the performance.
 
-You can use whatever symbols, accented characters, or
-non-English characters you need anywhere in your document;
-you can find a complete list of what is
-available in the \textit{\LaTeX\
-User's Guide}\cite{Lamport:LaTeX}.
+\subsection{Results}
 
-\subsection{Math Equations}
-You may want to display math equations in three distinct styles:
-inline, numbered or non-numbered display.  Each of
-the three are discussed in the next sections.
+A total of thirteen survey responses were received. Of these, $77\%$ regularly listen to music and $54\%$ perform regularly. $38\%$ of the respondents have high exposure to programming through work, study or their hobbies, as opposed to $31\%$ who have no experience with it. Of the respondents, $69\%$ had never been to a live coding performance before.
 
-\subsubsection{Inline (In-text) Equations}
-A formula that appears in the running text is called an
-inline or in-text formula.  It is produced by the
-\textbf{math} environment, which can be
-invoked with the usual \texttt{{\char'134}begin. . .{\char'134}end}
-construction or with the short form \texttt{\$. . .\$}. You
-can use any of the symbols and structures,
-from $\alpha$ to $\omega$, available in
-\LaTeX\cite{Lamport:LaTeX}; this section will simply show a
-few examples of in-text equations in context. Notice how
-this equation: \begin{math}\lim_{n\rightarrow \infty}x=0\end{math},
-set here in in-line math style, looks slightly different when
-set in display style.  (See next section).
+Enjoyment was measured according to the relative change in enjoyment through the performance from the beginning to the end. $46\%$ of survey respondents had high enjoyment throughout the performance. The results suggest an overall high level of enjoyment of the performance. No respondents chose low enjoyment throughout the performance.
 
-\subsubsection{Display Equations}
-A numbered display equation -- one set off by vertical space
-from the text and centered horizontally -- is produced
-by the \textbf{equation} environment. An unnumbered display
-equation is produced by the \textbf{displaymath} environment.
+Similarly, understanding was measured according to the relative change in understanding through the performance from the beginning to the end. $31\%$ of survey respondents had no change to understanding through the performance. Overall, understanding is spread out more than enjoyment with only $15\%$ suggesting that they could understand the relationship between the visuals and the music throughout the performance. There is no statistically significant relationship ($p > .05$) between music listening habits and understanding nor is there a statistically significant relationship ($p > .05$) between coding experience and understanding.
 
-Again, in either environment, you can use any of the symbols
-and structures available in \LaTeX; this section will just
-give a couple of examples of display equations in context.
-First, consider the equation, shown as an inline equation above:
-\begin{equation}\lim_{n\rightarrow \infty}x=0\end{equation}
-Notice how it is formatted somewhat differently in
-the \textbf{displaymath}
-environment.  Now, we'll enter an unnumbered equation:
-\begin{displaymath}\sum_{i=0}^{\infty} x + 1\end{displaymath}
-and follow it with another numbered equation:
-\begin{equation}\sum_{i=0}^{\infty}x_i=\int_{0}^{\pi+2} f\end{equation}
-just to demonstrate \LaTeX's able handling of numbering.
+Notably, within the relationship between enjoyment and understanding, three respondents who had high enjoyment throughout the performance were the only respondents who had a pattern of low to high understanding. However, the relationship between enjoyment and understanding is not statistically significant ($p > .05$).
 
-\subsection{Citations}
-Citations to articles \cite{bowman:reasoning,
-clark:pct, braams:babel, herlihy:methodology},
-conference proceedings \cite{clark:pct} or
-books \cite{salas:calculus, Lamport:LaTeX} listed
-in the Bibliography section of your
-article will occur throughout the text of your article.
-You should use BibTeX to automatically produce this bibliography;
-you simply need to insert one of several citation commands with
-a key of the item cited in the proper location in
-the \texttt{.tex} file \cite{Lamport:LaTeX}.
-The key is a short reference you invent to uniquely
-identify each work; in this sample document, the key is
-the first author's surname and a
-word from the title.  This identifying key is included
-with each item in the \texttt{.bib} file for your article.
+$69\%$ of respondents stated that the visuals provided a sense of liveness to the performance. The remained $31\%$ stated that they had no effect on their sense of liveness. There were no responses stating that the visuals negatively impacted the sense of liveness.
+In terms of confusion, $38\%$ suggested that no aspects of the visuals were confusing, though $31\%$ did not respond to the question.
 
-The details of the construction of the \texttt{.bib} file
-are beyond the scope of this sample document, but more
-information can be found in the \textit{Author's Guide},
-and exhaustive details in the \textit{\LaTeX\ User's
-Guide}\cite{Lamport:LaTeX}.
+\subsection{Discussion}
 
-This article shows only the plainest form
-of the citation command, using \texttt{{\char'134}cite}.
-This is what is stipulated in the SIGS style specifications.
-No other citation format is endorsed or supported.
+{\color{red}[split results into results + discussion]}
 
-\subsection{Tables}
-Because tables cannot be split across pages, the best
-placement for them is typically the top of the page
-nearest their initial cite.  To
-ensure this proper ``floating'' placement of tables, use the
-environment \textbf{table} to enclose the table's contents and
-the table caption.  The contents of the table itself must go
-in the \textbf{tabular} environment, to
-be aligned properly in rows and columns, with the desired
-horizontal and vertical rules.  Again, detailed instructions
-on \textbf{tabular} material
-is found in the \textit{\LaTeX\ User's Guide}.
+\section{Design}
 
-Immediately following this sentence is the point at which
-Table 1 is included in the input file; compare the
-placement of the table here with the table in the printed
-dvi output of this document.
+Two sets of visualisations were developed based on the results of the initial survey. The first set focussed on increasing audience retention and interest through maximising aesthetic appeal. The second set attempted to communicate and highlight the actions of the programmer. These two approaches will be referred to as the `aesthetic' condition and the `didactic' condition respectively.
 
-\begin{table}
-\centering
-\caption{Frequency of Special Characters}
-\begin{tabular}{|c|c|l|} \hline
-Non-English or Math&Frequency&Comments\\ \hline
-\O & 1 in 1,000& For Swedish names\\ \hline
-$\pi$ & 1 in 5& Common in math\\ \hline
-\$ & 4 in 5 & Used in business\\ \hline
-$\Psi^2_1$ & 1 in 40,000& Unexplained usage\\
-\hline\end{tabular}
-\end{table}
+{\color{red}[discuss design considerations, mappings and justify in the literature]}
 
-To set a wider table, which takes up the whole width of
-the page's live area, use the environment
-\textbf{table*} to enclose the table's contents and
-the table caption.  As with a single-column table, this wide
-table will ``float" to a location deemed more desirable.
-Immediately following this sentence is the point at which
-Table 2 is included in the input file; again, it is
-instructive to compare the placement of the
-table here with the table in the printed dvi
-output of this document.
+{\color{red}[representative images of the visualisations]}
 
+\section{User Study}
 
-\begin{table*}
-\centering
-\caption{Some Typical Commands}
-\begin{tabular}{|c|c|l|} \hline
-Command&A Number&Comments\\ \hline
-\texttt{{\char'134}alignauthor} & 100& Author alignment\\ \hline
-\texttt{{\char'134}numberofauthors}& 200& Author enumeration\\ \hline
-\texttt{{\char'134}table}& 300 & For tables\\ \hline
-\texttt{{\char'134}table*}& 400& For wider tables\\ \hline\end{tabular}
-\end{table*}
-% end the environment with {table*}, NOTE not {table}!
+The two sets of visualisations developed were examined in a live coding context to determine effective presentational and educational features. The goal of this study was to determine the usability, differences and desirability of the two approaches to further inform future live coding visualisations.
 
-\subsection{Figures}
-Like tables, figures cannot be split across pages; the
-best placement for them
-is typically the top or the bottom of the page nearest
-their initial cite.  To ensure this proper ``floating'' placement
-of figures, use the environment
-\textbf{figure} to enclose the figure and its caption.
+The set of didactic visualisations predominantly focussed on the relationship between the live coding active processes and their behaviour. The visualisations prominently displaying the names of the active functions with visual indication of the number of functions running and their callback time. Bright colours and solid shapes were used to ensure constant visibility and communicate the intention of the underlying code. Overall, four visualisations were presented with each introduced depending on the number of active functions. It was predicted that taking a more educational approach would see a reduction in audience confusion through the performance.
 
-This sample document contains examples of \textbf{.eps}
-and \textbf{.ps} files to be displayable with \LaTeX.  More
-details on each of these is found in the \textit{Author's Guide}.
+The set of aesthetic visualisations focussed less on the programmatic aspects of the live coding performance, rather intending to provide additional visual interest to the projected code thereby prolonging attention. More variety was used in visual structure and colour. Again, four visualisations were presented, varying the visualisation based on the number of active functions. It was predicted that focussing on the aesthetic nature of the visualisations would assist in audience retention and result in a consistency of interest through the performance.
+
+\subsection{Results}
+
+Understanding and enjoyment were evaluated against the didactic and aesthetic visualisations. Results and statistical analysis of the differences between the aesthetic and didactic conditions follows. Note that for the following statistical analysis a significance level of $0.05$ was used with the chi-squared test for independence.
+
+\subsubsection{Understanding}
+
+Overall, $37\%$ participants stated specifically that the didactic visualisations helped them to understand the code, whereas $12\%$ participants stated that the aesthetic visualisations assisted in understanding the code. A significant difference between the visualisations effect on understanding was found ($\chi^2=7.1986,df=2,p=0.02734$).
+
+\subsubsection{Enjoyment}
+Overall, for both visualisations, a large proportion ($> 50\%$) of the participants stated that the visualisations helped their enjoyment of the performance. Of the participants, $76\%$ stated that the aesthetic visualisations helped their enjoyment compared to $56\%$ participants that stated the didactic visualisations helped their enjoyment. No significant difference between the two visualisations effect on enjoyment was found ($\chi^2=3.7733,df=2,p=0.1516$).
+
+\subsubsection{Change in Understanding}
 
 \begin{figure}
 \centering
-\epsfig{file=fly.eps}
-\caption{A sample black and white graphic (.eps format).}
+\epsfig{file=aesthetic-understanding-final.eps, width=3.4in}
+\caption{Audience understanding during the performances with the aesthetic condition.}
 \end{figure}
 
 \begin{figure}
 \centering
-\epsfig{file=fly.eps, height=1in, width=1in}
-\caption{A sample black and white graphic (.eps format)
-that has been resized with the \texttt{epsfig} command.}
+\epsfig{file=didactic-understanding-final.eps, width=3.4in}
+\caption{Audience understanding during the performances with the didactic condition.}
 \end{figure}
 
+Participants were asked to rate their understanding during the beginning, middle and end of the performance.
 
-As was the case with tables, you may want a figure
-that spans two columns.  To do this, and still to
-ensure proper ``floating'' placement of tables, use the environment
-\textbf{figure*} to enclose the figure and its caption.
-and don't forget to end the environment with
-{figure*}, not {figure}!
+During the didactic and aesthetic performances, $49\%$ and $44\%$ of the participants respectively stated that their understanding remained the same throughout the performance.
 
-\begin{figure*}
-\centering
-\epsfig{file=flies.eps}
-\caption{A sample black and white graphic (.eps format)
-that needs to span two columns of text.}
-\end{figure*}
+During the didactic performance, $10\%$ of the audience had an understanding that tended downwards (eg. high to low) compared to $20\%$ of the audience during the aesthetic performance meaning fewer audience members had a reduction in understanding through the didactic performance.
 
-Note that either {\textbf{.ps}} or {\textbf{.eps}} formats are
-used; use
-the \texttt{{\char'134}epsfig} or \texttt{{\char'134}psfig}
-commands as appropriate for the different file types.
+\subsubsection{Change in Enjoyment}
 
 \begin{figure}
 \centering
-% \psfig{file=rosette.ps, height=1in, width=1in,}
-\caption{A sample black and white graphic (.ps format) that has
-been resized with the \texttt{psfig} command.}
-\vskip -6pt
+\epsfig{file=aesthetic-enjoyment-final.eps, width=3.4in}
+\caption{Audience enjoyment during the performances with the aesthetic condition.}
 \end{figure}
 
-\subsection{Theorem-like Constructs}
-Other common constructs that may occur in your article are
-the forms for logical constructs like theorems, axioms,
-corollaries and proofs.  There are
-two forms, one produced by the
-command \texttt{{\char'134}newtheorem} and the
-other by the command \texttt{{\char'134}newdef}; perhaps
-the clearest and easiest way to distinguish them is
-to compare the two in the output of this sample document:
+\begin{figure}
+\centering
+\epsfig{file=didactic-enjoyment-final.eps, width=3.4in}
+\caption{Audience enjoyment during the performances with the didactic condition.}
+\end{figure}
 
-This uses the \textbf{theorem} environment, created by
-the\linebreak\texttt{{\char'134}newtheorem} command:
-\newtheorem{theorem}{Theorem}
-\begin{theorem}
-Let $f$ be continuous on $[a,b]$.  If $G$ is
-an antiderivative for $f$ on $[a,b]$, then
-\begin{displaymath}\int^b_af(t)dt = G(b) - G(a).\end{displaymath}
-\end{theorem}
+Participants were asked to rate their enjoyment during the beginning middle and end of the performance.
 
-The other uses the \textbf{definition} environment, created
-by the \texttt{{\char'134}newdef} command:
-\newdef{definition}{Definition}
-\begin{definition}
-If $z$ is irrational, then by $e^z$ we mean the
-unique number which has
-logarithm $z$: \begin{displaymath}{\log e^z = z}\end{displaymath}
-\end{definition}
+During the didactic performance, $15\%$ of the audience stated that enjoyment increased during the beginning remaining steady for the remainder whereas $24\%$ of the audience said the same during the aesthetic performance.
 
-Two lists of constructs that use one of these
-forms is given in the
-\textit{Author's  Guidelines}.
- 
-There is one other similar construct environment, which is
-already set up
-for you; i.e. you must \textit{not} use
-a \texttt{{\char'134}newdef} command to
-create it: the \textbf{proof} environment.  Here
-is a example of its use:
-\begin{proof}
-Suppose on the contrary there exists a real number $L$ such that
-\begin{displaymath}
-\lim_{x\rightarrow\infty} \frac{f(x)}{g(x)} = L.
-\end{displaymath}
-Then
-\begin{displaymath}
-l=\lim_{x\rightarrow c} f(x)
-= \lim_{x\rightarrow c}
-\left[ g{x} \cdot \frac{f(x)}{g(x)} \right ]
-= \lim_{x\rightarrow c} g(x) \cdot \lim_{x\rightarrow c}
-\frac{f(x)}{g(x)} = 0\cdot L = 0,
-\end{displaymath}
-which contradicts our assumption that $l\neq 0$.
-\end{proof}
+During the didactic performance, $22\%$ of the audience stated that their enjoyment decreased during the start of the performance whereas only $2\%$ stated the same for the aesthetic performance.
 
-Complete rules about using these environments and using the
-two different creation commands are in the
-\textit{Author's Guide}; please consult it for more
-detailed instructions.  If you need to use another construct,
-not listed therein, which you want to have the same
-formatting as the Theorem
-or the Definition\cite{salas:calculus} shown above,
-use the \texttt{{\char'134}newtheorem} or the
-\texttt{{\char'134}newdef} command,
-respectively, to create it.
+Approximately $30\%$ of the audience during both the aesthetic and didactic performances stated that their enjoyment remained steady throughout.
 
-\subsection*{A {\secit Caveat} for the \TeX\ Expert}
-Because you have just been given permission to
-use the \texttt{{\char'134}newdef} command to create a
-new form, you might think you can
-use \TeX's \texttt{{\char'134}def} to create a
-new command: \textit{Please refrain from doing this!}
-Remember that your \LaTeX\ source code is primarily intended
-to create camera-ready copy, but may be converted
-to other forms -- e.g. HTML. If you inadvertently omit
-some or all of the \texttt{{\char'134}def}s recompilation will
-be, to say the least, problematic.
+\subsubsection{Liveness}
+
+Participants were asked to discuss how each visualisation influenced or impacted the liveness of the performance. Concepts identified included positive and negative valence towards the didactic visualisations, positive and negative valence towards the aesthetic visualisations and the relevance of visual source code. 
+
+within the discussion included the positive and negative aspects of the didactic visualisations, the positive and negative aspects of the aesthetic visualisations, source code discussion and statements indicating an understanding between the visuals and the source code.
+
+Overall, $54\%$ of the audience indicated negative valence towards the didactic visualisation regarding liveness referencing a variety of reasons including that the ``visuals only responded to what was typed'', that the ``musical forms didn't occur at the most expected times'' and that the visualisations ``perhaps made the performance seem too polished''.
+
+On the other hand, $34\%$ of the audience indicated positive valence towards the didactic visualisations suggesting that ``it was easier to follow this visualisation than the code'', ``the visualisations clearly showed the changes being made to the code'' and that these visualisations ``helped more with communicating that the performance was live''.
+
+$40\%$ of the audience had negative valence towards the aesthetic visualisation its effect on the sense of liveness. Reasons cited include that the ``influence is not clear'' between the code and the visuals, that ``the visualisation did not make much sense'' and that the ``visualisations did nothing to suggest that the performance was live''.
+
+$32\%$ had positive valence towards the aesthetic visualisation. A variety of the response included that these visuals were ``less dominating and more complementary'' and that ``the visualisations helped to show when a piece of code started working''.
+
+A relatively large proportion ($28\%$) of the audience discussed the importance of the source code to the sense of liveness of the performance such as that the ``code showed what the musician was doing physically''. A further $5\%$ of the audience demonstrated a deeper understanding of the live coding process such as ``changing values produced changes in tone and speed of the music pitch''.
+
+\subsection{Discussion}
+
+Overall enjoyment of the visualisations was high. This was the case for both the aesthetic and didactic visualisations.
+
+The enjoyment of the aesthetic visualisation was higher and generally increased during the earlier stages of the performances suggesting that the aesthetic visualisations held the audience's attention consistently for a longer period.
+
+The didactic visualisation had a more constant decrease in enjoyment throughout the performance. Audience suggested improvements offer some insight with some stating that the visualisations were competing with the projected code. One audience member stated that they ``found them distracting'' and that they ``preferred just to read the code''. Given that more than half of the audience stated that both visualisations contributed positively to enjoyment, there is indication that the didactic visualisations contributed more to audience fatigue through the performance with decreased effectiveness during the later stages of the performances.
+
+As expected, the didactic visualisations had a clear educational benefit over the aesthetic visualisations, contributing to increased understanding throughout the performance. Nevertheless, features of the visualisation still confused the audience. For example, one audience member stated that ``it felt harder to understand the code'' during the didactic performance than the aesthetic performance. Similarly, a number of audience members discussed the need for a better relationship between the visualisation and the music.
+
+There was indication that the experience of the live coder and the experience of the audience was fundamentally different. For example, many members of the audience stated that they drifted between focussing on the music, focussing on the visualisations and focussing on the code. However, the live coder stated in the interview that his focus was dedicated purely to the code and the music rarely drifting. In one particular section of the interview, the live coder stated: ``I definitely wasn't paying attention to them on the day. In fact I tuned them out as best I can because I am just trying to focus on the code''. This conflicted with some members of the audience. For example, one stated that ``you could see the code being written and the visualisations helped to show when a piece of code started working''. 
+
+The strategy for audience members for either understanding or enjoying the performance proved to be different to that of the live coder. Regarding distractions, one audience member stated that ``the visualisations were interesting but distracting''. In comparison, when asked if the visualisations were distracting the live coder stated: ``Ah, no. In general I'm just so focussed on the code''. This difference may be due to the varying experience levels or the pressure of the situation.
 
 \section{Conclusions}
-This paragraph will end the body of this sample document.
-Remember that you might still have Acknowledgments or
-Appendices; brief samples of these
-follow.  There is still the Bibliography to deal with; and
-we will make a disclaimer about that here: with the exception
-of the reference to the \LaTeX\ book, the citations in
-this paper are to articles which have nothing to
-do with the present subject and are used as
-examples only.
-%\end{document}  % This is where a 'short' article might terminate
+An application of the visualisation of code to live coding has been examined. Results indicate the importance of providing visuals that complement the live coding performance. Visualisations targeted at the education of the audience showed a qualitative increase in understanding throughout the performance whereas visualisations targeted at the aesthetics of the music and performance indicated audience retention and a reduced fatigue effect over the didactic visualisations.
 
-%ACKNOWLEDGMENTS are optional
-\section{Acknowledgments}
-This section is optional; it is a location for you
-to acknowledge grants, funding, editing assistance and
-what have you.  In the present case, for example, the
-authors would like to thank Gerald Murray of ACM for
-his help in codifying this \textit{Author's Guide}
-and the \textbf{.cls} and \textbf{.tex} files that it describes.
+There was indication throughout audience feedback and the follow-up interview that the visualisations had potential. Desirable features within both visualisations could be further utilised building on the ideas developed including reacting instantly to code changes within the visualisations and providing a more effective visualisation of the relationship of code to music. These developments will provide a baseline for future visualisations.
 
-%
-% The following two commands are all you need in the
-% initial runs of your .tex file to
-% produce the bibliography for the citations in your paper.
+One question to come from this study is the need to understand why the audience and the coder report such different experiences. Differences between the interview with the live coder and the audience feedback indicated a division between the goals of the audience and the coder.
+
+
+% The \textit{proceedings} are the records of a conference.
+% ACM seeks to give these conference by-products a uniform,
+% high-quality appearance.  To do this, ACM has some rigid
+% requirements for the format of the proceedings documents: there
+% is a specified format (balanced  double columns), a specified
+% set of fonts (Arial or Helvetica and Times Roman) in
+% certain specified sizes (for instance, 9 point for body copy),
+% a specified live area (18 $\times$ 23.5 cm [7" $\times$ 9.25"]) centered on
+% the page, specified size of margins (1.9 cm [0.75"]) top, (2.54 cm [1"]) bottom
+% and (1.9 cm [.75"]) left and right; specified column width
+% (8.45 cm [3.33"]) and gutter size (.83 cm [.33"]).
+
+% The good news is, with only a handful of manual
+% settings\footnote{Two of these, the {\texttt{\char'134 numberofauthors}}
+% and {\texttt{\char'134 alignauthor}} commands, you have
+% already used; another, {\texttt{\char'134 balancecolumns}}, will
+% be used in your very last run of \LaTeX\ to ensure
+% balanced column heights on the last page.}, the \LaTeX\ document
+% class file handles all of this for you.
+
+% The remainder of this document is concerned with showing, in
+% the context of an ``actual'' document, the \LaTeX\ commands
+% specifically available for denoting the structure of a
+% proceedings paper, rather than with giving rigorous descriptions
+% or explanations of such commands.
+
+% \section{The {\secit Body} of The Paper}
+% Typically, the body of a paper is organized
+% into a hierarchical structure, with numbered or unnumbered
+% headings for sections, subsections, sub-subsections, and even
+% smaller sections.  The command \texttt{{\char'134}section} that
+% precedes this paragraph is part of such a
+% hierarchy.\footnote{This is the second footnote.  It
+% starts a series of three footnotes that add nothing
+% informational, but just give an idea of how footnotes work
+% and look. It is a wordy one, just so you see
+% how a longish one plays out.} \LaTeX\ handles the numbering
+% and placement of these headings for you, when you use
+% the appropriate heading commands around the titles
+% of the headings.  If you want a sub-subsection or
+% smaller part to be unnumbered in your output, simply append an
+% asterisk to the command name.  Examples of both
+% numbered and unnumbered headings will appear throughout the
+% balance of this sample document.
+
+% Because the entire article is contained in
+% the \textbf{document} environment, you can indicate the
+% start of a new paragraph with a blank line in your
+% input file; that is why this sentence forms a separate paragraph.
+
+% \subsection{Type Changes and {\subsecit Special} Characters}
+% We have already seen several typeface changes in this sample.  You
+% can indicate italicized words or phrases in your text with
+% the command \texttt{{\char'134}textit}; emboldening with the
+% command \texttt{{\char'134}textbf}
+% and typewriter-style (for instance, for computer code) with
+% \texttt{{\char'134}texttt}.  But remember, you do not
+% have to indicate typestyle changes when such changes are
+% part of the \textit{structural} elements of your
+% article; for instance, the heading of this subsection will
+% be in a sans serif\footnote{A third footnote, here.
+% Let's make this a rather short one to
+% see how it looks.} typeface, but that is handled by the
+% document class file. Take care with the use
+% of\footnote{A fourth, and last, footnote.}
+% the curly braces in typeface changes; they mark
+% the beginning and end of
+% the text that is to be in the different typeface.
+
+% You can use whatever symbols, accented characters, or
+% non-English characters you need anywhere in your document;
+% you can find a complete list of what is
+% available in the \textit{\LaTeX\
+% User's Guide}\cite{Lamport:LaTeX}.
+
+% \subsection{Math Equations}
+% You may want to display math equations in three distinct styles:
+% inline, numbered or non-numbered display.  Each of
+% the three are discussed in the next sections.
+
+% \subsubsection{Inline (In-text) Equations}
+% A formula that appears in the running text is called an
+% inline or in-text formula.  It is produced by the
+% \textbf{math} environment, which can be
+% invoked with the usual \texttt{{\char'134}begin. . .{\char'134}end}
+% construction or with the short form \texttt{\$. . .\$}. You
+% can use any of the symbols and structures,
+% from $\alpha$ to $\omega$, available in
+% \LaTeX\cite{Lamport:LaTeX}; this section will simply show a
+% few examples of in-text equations in context. Notice how
+% this equation: \begin{math}\lim_{n\rightarrow \infty}x=0\end{math},
+% set here in in-line math style, looks slightly different when
+% set in display style.  (See next section).
+
+% \subsubsection{Display Equations}
+% A numbered display equation -- one set off by vertical space
+% from the text and centered horizontally -- is produced
+% by the \textbf{equation} environment. An unnumbered display
+% equation is produced by the \textbf{displaymath} environment.
+
+% Again, in either environment, you can use any of the symbols
+% and structures available in \LaTeX; this section will just
+% give a couple of examples of display equations in context.
+% First, consider the equation, shown as an inline equation above:
+% \begin{equation}\lim_{n\rightarrow \infty}x=0\end{equation}
+% Notice how it is formatted somewhat differently in
+% the \textbf{displaymath}
+% environment.  Now, we'll enter an unnumbered equation:
+% \begin{displaymath}\sum_{i=0}^{\infty} x + 1\end{displaymath}
+% and follow it with another numbered equation:
+% \begin{equation}\sum_{i=0}^{\infty}x_i=\int_{0}^{\pi+2} f\end{equation}
+% just to demonstrate \LaTeX's able handling of numbering.
+
+% \subsection{Citations}
+% Citations to articles \cite{bowman:reasoning,
+% clark:pct, braams:babel, herlihy:methodology},
+% conference proceedings \cite{clark:pct} or
+% books \cite{salas:calculus, Lamport:LaTeX} listed
+% in the Bibliography section of your
+% article will occur throughout the text of your article.
+% You should use BibTeX to automatically produce this bibliography;
+% you simply need to insert one of several citation commands with
+% a key of the item cited in the proper location in
+% the \texttt{.tex} file \cite{Lamport:LaTeX}.
+% The key is a short reference you invent to uniquely
+% identify each work; in this sample document, the key is
+% the first author's surname and a
+% word from the title.  This identifying key is included
+% with each item in the \texttt{.bib} file for your article.
+
+% The details of the construction of the \texttt{.bib} file
+% are beyond the scope of this sample document, but more
+% information can be found in the \textit{Author's Guide},
+% and exhaustive details in the \textit{\LaTeX\ User's
+% Guide}\cite{Lamport:LaTeX}.
+
+% This article shows only the plainest form
+% of the citation command, using \texttt{{\char'134}cite}.
+% This is what is stipulated in the SIGS style specifications.
+% No other citation format is endorsed or supported.
+
+% \subsection{Tables}
+% Because tables cannot be split across pages, the best
+% placement for them is typically the top of the page
+% nearest their initial cite.  To
+% ensure this proper ``floating'' placement of tables, use the
+% environment \textbf{table} to enclose the table's contents and
+% the table caption.  The contents of the table itself must go
+% in the \textbf{tabular} environment, to
+% be aligned properly in rows and columns, with the desired
+% horizontal and vertical rules.  Again, detailed instructions
+% on \textbf{tabular} material
+% is found in the \textit{\LaTeX\ User's Guide}.
+
+% Immediately following this sentence is the point at which
+% Table 1 is included in the input file; compare the
+% placement of the table here with the table in the printed
+% dvi output of this document.
+
+% \begin{table}
+% \centering
+% \caption{Frequency of Special Characters}
+% \begin{tabular}{|c|c|l|} \hline
+% Non-English or Math&Frequency&Comments\\ \hline
+% \O & 1 in 1,000& For Swedish names\\ \hline
+% $\pi$ & 1 in 5& Common in math\\ \hline
+% \$ & 4 in 5 & Used in business\\ \hline
+% $\Psi^2_1$ & 1 in 40,000& Unexplained usage\\
+% \hline\end{tabular}
+% \end{table}
+
+% To set a wider table, which takes up the whole width of
+% the page's live area, use the environment
+% \textbf{table*} to enclose the table's contents and
+% the table caption.  As with a single-column table, this wide
+% table will ``float" to a location deemed more desirable.
+% Immediately following this sentence is the point at which
+% Table 2 is included in the input file; again, it is
+% instructive to compare the placement of the
+% table here with the table in the printed dvi
+% output of this document.
+
+
+% \begin{table*}
+% \centering
+% \caption{Some Typical Commands}
+% \begin{tabular}{|c|c|l|} \hline
+% Command&A Number&Comments\\ \hline
+% \texttt{{\char'134}alignauthor} & 100& Author alignment\\ \hline
+% \texttt{{\char'134}numberofauthors}& 200& Author enumeration\\ \hline
+% \texttt{{\char'134}table}& 300 & For tables\\ \hline
+% \texttt{{\char'134}table*}& 400& For wider tables\\ \hline\end{tabular}
+% \end{table*}
+% end the environment with {table*}, NOTE not {table}!
+
+% \subsection{Figures}
+% Like tables, figures cannot be split across pages; the
+% best placement for them
+% is typically the top or the bottom of the page nearest
+% their initial cite.  To ensure this proper ``floating'' placement
+% of figures, use the environment
+% \textbf{figure} to enclose the figure and its caption.
+
+% This sample document contains examples of \textbf{.eps}
+% and \textbf{.ps} files to be displayable with \LaTeX.  More
+% details on each of these is found in the \textit{Author's Guide}.
+
+% \begin{figure}
+% \centering
+% \epsfig{file=fly.eps}
+% \caption{A sample black and white graphic (.eps format).}
+% \end{figure}
+
+% \begin{figure}
+% \centering
+% \epsfig{file=fly.eps, height=1in, width=1in}
+% \caption{A sample black and white graphic (.eps format)
+% that has been resized with the \texttt{epsfig} command.}
+% \end{figure}
+
+
+% As was the case with tables, you may want a figure
+% that spans two columns.  To do this, and still to
+% ensure proper ``floating'' placement of tables, use the environment
+% \textbf{figure*} to enclose the figure and its caption.
+% and don't forget to end the environment with
+% {figure*}, not {figure}!
+
+% \begin{figure*}
+% \centering
+% \epsfig{file=flies.eps}
+% \caption{A sample black and white graphic (.eps format)
+% that needs to span two columns of text.}
+% \end{figure*}
+
+% Note that either {\textbf{.ps}} or {\textbf{.eps}} formats are
+% used; use
+% the \texttt{{\char'134}epsfig} or \texttt{{\char'134}psfig}
+% commands as appropriate for the different file types.
+
+% \begin{figure}
+% \centering
+% % \psfig{file=rosette.ps, height=1in, width=1in,}
+% \caption{A sample black and white graphic (.ps format) that has
+% been resized with the \texttt{psfig} command.}
+% \vskip -6pt
+% \end{figure}
+
+% \subsection{Theorem-like Constructs}
+% Other common constructs that may occur in your article are
+% the forms for logical constructs like theorems, axioms,
+% corollaries and proofs.  There are
+% two forms, one produced by the
+% command \texttt{{\char'134}newtheorem} and the
+% other by the command \texttt{{\char'134}newdef}; perhaps
+% the clearest and easiest way to distinguish them is
+% to compare the two in the output of this sample document:
+
+% This uses the \textbf{theorem} environment, created by
+% the\linebreak\texttt{{\char'134}newtheorem} command:
+% \newtheorem{theorem}{Theorem}
+% \begin{theorem}
+% Let $f$ be continuous on $[a,b]$.  If $G$ is
+% an antiderivative for $f$ on $[a,b]$, then
+% \begin{displaymath}\int^b_af(t)dt = G(b) - G(a).\end{displaymath}
+% \end{theorem}
+
+% The other uses the \textbf{definition} environment, created
+% by the \texttt{{\char'134}newdef} command:
+% \newdef{definition}{Definition}
+% \begin{definition}
+% If $z$ is irrational, then by $e^z$ we mean the
+% unique number which has
+% logarithm $z$: \begin{displaymath}{\log e^z = z}\end{displaymath}
+% \end{definition}
+
+% Two lists of constructs that use one of these
+% forms is given in the
+% \textit{Author's  Guidelines}.
+ 
+% There is one other similar construct environment, which is
+% already set up
+% for you; i.e. you must \textit{not} use
+% a \texttt{{\char'134}newdef} command to
+% create it: the \textbf{proof} environment.  Here
+% is a example of its use:
+% \begin{proof}
+% Suppose on the contrary there exists a real number $L$ such that
+% \begin{displaymath}
+% \lim_{x\rightarrow\infty} \frac{f(x)}{g(x)} = L.
+% \end{displaymath}
+% Then
+% \begin{displaymath}
+% l=\lim_{x\rightarrow c} f(x)
+% = \lim_{x\rightarrow c}
+% \left[ g{x} \cdot \frac{f(x)}{g(x)} \right ]
+% = \lim_{x\rightarrow c} g(x) \cdot \lim_{x\rightarrow c}
+% \frac{f(x)}{g(x)} = 0\cdot L = 0,
+% \end{displaymath}
+% which contradicts our assumption that $l\neq 0$.
+% \end{proof}
+
+% Complete rules about using these environments and using the
+% two different creation commands are in the
+% \textit{Author's Guide}; please consult it for more
+% detailed instructions.  If you need to use another construct,
+% not listed therein, which you want to have the same
+% formatting as the Theorem
+% or the Definition\cite{salas:calculus} shown above,
+% use the \texttt{{\char'134}newtheorem} or the
+% \texttt{{\char'134}newdef} command,
+% respectively, to create it.
+
+% \subsection*{A {\secit Caveat} for the \TeX\ Expert}
+% Because you have just been given permission to
+% use the \texttt{{\char'134}newdef} command to create a
+% new form, you might think you can
+% use \TeX's \texttt{{\char'134}def} to create a
+% new command: \textit{Please refrain from doing this!}
+% Remember that your \LaTeX\ source code is primarily intended
+% to create camera-ready copy, but may be converted
+% to other forms -- e.g. HTML. If you inadvertently omit
+% some or all of the \texttt{{\char'134}def}s recompilation will
+% be, to say the least, problematic.
+
+% \section{Conclusions}
+% This paragraph will end the body of this sample document.
+% Remember that you might still have Acknowledgments or
+% Appendices; brief samples of these
+% follow.  There is still the Bibliography to deal with; and
+% we will make a disclaimer about that here: with the exception
+% of the reference to the \LaTeX\ book, the citations in
+% this paper are to articles which have nothing to
+% do with the present subject and are used as
+% examples only.
+
+\nocite{*} % Arrian temp
+
 \bibliographystyle{abbrv}
-\bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
+\bibliography{sigproc}  % sigproc.bib
 % You must have a proper ".bib" file
 %  and remember to run:
 % latex bibtex latex latex
 % to resolve all references
 %
 % ACM needs 'a single self-contained file'!
-%
-%APPENDICES are optional
-%\balancecolumns
-\appendix
-%Appendix A
-\section{Headings in Appendices}
-The rules about hierarchical headings discussed above for
-the body of the article are different in the appendices.
-In the \textbf{appendix} environment, the command
-\textbf{section} is used to
-indicate the start of each Appendix, with alphabetic order
-designation (i.e. the first is A, the second B, etc.) and
-a title (if you include one).  So, if you need
-hierarchical structure
-\textit{within} an Appendix, start with \textbf{subsection} as the
-highest level. Here is an outline of the body of this
-document in Appendix-appropriate form:
-\subsection{Introduction}
-\subsection{The Body of the Paper}
-\subsubsection{Type Changes and  Special Characters}
-\subsubsection{Math Equations}
-\paragraph{Inline (In-text) Equations}
-\paragraph{Display Equations}
-\subsubsection{Citations}
-\subsubsection{Tables}
-\subsubsection{Figures}
-\subsubsection{Theorem-like Constructs}
-\subsubsection*{A Caveat for the \TeX\ Expert}
-\subsection{Conclusions}
-\subsection{Acknowledgments}
-\subsection{References}
-Generated by bibtex from your ~.bib file.  Run latex,
-then bibtex, then latex twice (to resolve references)
-to create the ~.bbl file.  Insert that ~.bbl file into
-the .tex source file and comment out
-the command \texttt{{\char'134}thebibliography}.
 
-%\balancecolumns % GM June 2007
+
+%line 391%
 \end{document}
