@@ -1,7 +1,9 @@
 %%
 %% Template thesis.tex
 %%
+
 \documentclass[11pt]{book}
+
 \usepackage[palatino]{anuthesis}
 \usepackage{graphicx}
 \usepackage{thesis}
@@ -28,6 +30,7 @@
 \date{\today}
 
 \renewcommand{\thepage}{\roman{page}}
+% \renewcommand{\bibname}{References}
 
 \makeindex
 \begin{document}
@@ -94,7 +97,8 @@
 \backmatter
 
 \bibliographystyle{acmnew-xref}
-\bibliography{thesis}
+% \renewcommand{\bibname}{References}% give the bibliography the title 'references'
+\bibliography{thesis}%%bibliography
 
 \printindex
 
