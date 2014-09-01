@@ -60,130 +60,133 @@
 
 \section{Introduction}
 
-``Show us your screens... Code should be seen as well as heard'', says
-the draft manifesto of the international organisation ``TOPLAP''
-\cite{Toplap} which is devoted to the decade-old arts performance
-practice ``live coding''. Live coding is a performance practice where
-computer code is created in front of a live audience to generate
-computer music, video and visualisations in real time. The ``show us
-your screens'' exhortation underscores the need for authenticity to
-distinguish this artform from aligned performance art genres such as
-VJ'ing.
+% this first sentence could possibly be the abstract - along with the
+% rhetorical question of ``what, exactly, are we showing?''
 
-Live computer music is the primary product of live coding. Where they
-exist, live coded graphics and video are launched and orchestrated
-directly by commands from the computer keyboard for artistic impact.
-Commonly, non-expert live coding audience members spend much of their
-time staring at raw computer code (text-based or visual programming
-languages) and, until now, no formal study has ever been undertaken to
-gauge an audience's understanding of that computer code and whether,
-from an audience perspective, code really should be ``seen as well as
-heard''.
+``Show us your screens\ldots Code should be seen as well as heard'',
+declares the draft manifesto of ``TOPLAP''~\cite{Toplap}, an
+international organisation devoted to the artistic performance
+practice of ``live coding''. In live coding, computer code is written
+in front of a live audience to generate music and visuals in real
+time. The ``show us your screens'' rhetoric underscores the need for
+authenticity to distinguish this artform from similar (but non-live)
+computational arts practices.
 
-Traditional approaches to visualising code focus on historic source
-code changes, the behaviour of algorithms or the structure of the
-source code rather than the \textit{process of programming} (see
-\cite{Novais2013}). Furthermore, within the space of artistic live
-coding most of the academic treatment of visualisations have adopted a
-design or survey approach \cite{McLean2010b,Magnusson2013} and have
-not subjected alternatives to rigorous evaluation.
+But what is the benefit of the live coder showing their screen? In a
+live coding performance, non-expert live coding audience members spend
+much of their time staring at raw (usually text-based) computer code.
+Until now, little empirical study has been undertaken to gauge an
+audience's understanding of that computer code and whether, from an
+audience perspective, code really should be ``seen as well as heard''.
 
-In this paper, we set out to evaluate the audience reception to the
-display of code during live coding performances and to see whether
-code-driven visualisations might improve both the audience enjoyment
-and the audience understanding of these performances.
+Traditional approaches to source code visualisation (\cite[see][for a
+review]{Novais2013}) often focus on structure of the source code (e.g.
+visualising complex object/class relationships) rather than the
+\emph{process} of programming. In a process-oriented activity such as
+live coding, different code visualisation techniques are
+necessary~\cite{McLean2010b,Magnusson2013}. However, these academic
+treatments of code visualisation in live coding adopt a survey-based
+approach, and the techniques discussed have not been subject to
+empirical evaluation.
 
-\section{Field Study}
+In this paper, we examine the audience's experience of the displayed
+code during live coding performances and to see whether code-driven
+visualisations might improve both the audience enjoyment and the
+audience understanding of these performances. This exploration takes
+place initially through the results of an exploratory field study at a
+contemporary arts festival, and subsequently through a lab-based
+followup user study.
 
-On one evening of the (name withheld for blind reviewing) arts
-festival in (withheld), a survey was presented to the audience of a
-live coding computer music performance. The survey was designed to
-gain an impression of the audience's response to the performance and
-to the projection of the computer code (a Scheme based language with
-syntax highlighting). Alongside demographic and open-ended questions,
-audience members were solicited to indicate which of a number of
-curves best represented their personal ``enjoyment'' and
-``understanding'' of the performer's actions in typing the computer
-code through the performance. These curves were analysed based on
-their binning into ``high'', ``medium'', and ``low'' categories for
-the ``beginning'', ``middle'' and ``end'' of the performance. Other
-survey questions addressed the sense of ``liveness'' of the
-performance \cite{Auslander} and whether the code-projections were
-found to be confusing.
+\section{Exploratory Field Study}
 
-Of the 13 survey responses received, 6 indicated a high level of
-enjoyment throughout the whole performance with the remaining 7
-responses mostly indicating alternating levels of enjoyment. No
-responses indicated a low level of enjoyment throughout the
+After a livecoding performance at the [name withheld for blind
+peer-review] arts festival in [place and date withheld], audience
+members were asked to fill out a survey regarding their perception of
+and response to the projection of the computer code during the
+performance. Each audience member was asked to indicate which of a
+number of curves/trajectories best represented their \emph{enjoyment}
+and \emph{understanding} of the performer's actions in typing the code
+through the performance. These trajectories allowed for ``high'',
+``medium'', and ``low'' levels of enjoyment/understanding for the
+(self-determined) ``beginning'', ``middle'' and ``end'' of the
+performance. Other survey questions addressed their sense of
+``liveness'' of the performance \cite{Auslander} and whether the
+projected code was confusing.
+
+\subsection{Field Study Results}
+
+Of the thirteen survey responses received, six audience members showed
+a high level of enjoyment throughout the whole performance, while the
+remaining seven responses showed alternating levels of enjoyment. No
+audience members indicated a low level of enjoyment throughout the
 performance.
 
-Only 2 of the 13 respondents indicated that they understood the
-relationship between the code projections and the music throughout the
-performance. Although a Chi-square analysis revealed no significant
-relationship between ``enjoyment'' and ``understanding'' per se, it
-was remarkable that 3 of the 6 respondents who indicated a high level
-of ``enjoyment'' throughout the performance, also indicated a pattern
-of ``understanding'' that increased from low to high as the
-performance progressed. Nine of the 13 respondents stated that the
-code projections provided a sense of liveness to the performance and
-the remainder stated that viewing the code had no effect on their
-sense of liveness. Four respondents felt that the code projections
-were confusing, 5 stated that they were not, and 4 did not answer the
-question.
+Only two of the thirteen respondents indicated that they understood
+the relationship between the code projections and the music throughout
+the performance. Three of the six respondents who reported a high
+level of enjoyment throughout the performance also indicated an
+increase in understanding (from low to high) as the performance
+progressed, although a Chi-square analysis revealed no significant
+relationship between enjoyment and understanding due to the small
+sample size. Nine of the thirteen respondents stated that the code
+projection provided a sense of liveness to the performance and the
+remainder stated that viewing the code had no effect on their sense of
+liveness. Four respondents felt that the code projections were
+confusing, five felt that they were not confusing, and four did not
+answer the question.
 
 Taken as a whole, the results of this small field study were
-salutatory for the notion of ``seeing as well as hearing'' code during
-a live coding performance, especially as far as the general public is
-concerned. The best that can be said for the code projections is that
-a majority of the audience felt that they made the performance seem
-more ``live''. However a minority stated that they found the
-projections confusing and only a very small number of respondents
-claimed to have actually understood what the programmer was doing. We
-were quite intrigued by the small cohort of respondents whose
-understanding increased through the performance and whose enjoyment
-remained high, and we wished to test whether augmenting code
-projections with additional visualisations might increase this pattern
-of understanding, and enjoyment across an audience.
+salutatory for the benefit of ``seeing as well as hearing'' code
+during a live coding performance, especially as far as the general
+public is concerned. The majority of the audience felt that they made
+the performance seem more ``live''. However, a minority stated that
+they found the projections confusing and only a very small number of
+respondents claimed to have actually understood what the programmer
+was doing. We were quite intrigued by the small cohort of respondents
+whose understanding increased through the performance and whose
+enjoyment remained high, and we wished to test whether augmenting code
+projections with additional visualisations might increase the
+understanding and enjoyment of the audience in live coding.
 
-\section{Design}
+\section{Lab Study}
 
 \begin{figure}
 \centering
-\epsfig{file=aesthetic-vis.eps, width=3.4in}
-\caption{Example aesthetic visualisation. This and all subsequent figures are \textit{best viewed in colour}.}
+\epsfig{file=aesthetic-vis.eps, width=\columnwidth}
+\caption{An example aesthetic visualisation (all
+  figures best viewed in colour).}
 \label{fig:aesthetic-visualisation}
 \end{figure}
 
 \begin{figure}
 \centering
-\epsfig{file=didactic-vis.eps, width=3.4in}
-\caption{Example didactic visualisation.}
+\epsfig{file=didactic-vis.eps, width=\columnwidth}
+\caption{An example didactic visualisation.}
 \label{fig:didactic-visualisation}
 \end{figure}
 
 Two sets of visualisations were developed based on the results of the
-initial survey and the literature. The first set (the ``didactic''
-visualisations) attempted to communicate the actions of the programmer
-and the main software components that were created and modified by the
-programmer over time (see Figure~\ref{fig:didactic-visualisation}).
-The second set (the ``aesthetic'' visualisations) focussed on
-increasing audience retention and user experience by maximising
-aesthetic appeal \cite{Cawthon2007} reacting to musical changes
-triggered by the programmer (see
-Figure~\ref{fig:aesthetic-visualisation}).
+initial survey and the literature TODO in what way?. The first set
+(the ``didactic'' visualisations) attempted to communicate the actions
+of the programmer and the main software components that were created
+and modified by the programmer over time (see
+Figure~\ref{fig:didactic-visualisation}). The second set (the
+``aesthetic'' visualisations) focussed on increasing audience
+retention and user experience (TODO how?) by maximising aesthetic
+appeal~\cite{Cawthon2007} reacting to musical changes triggered by the
+programmer (see Figure~\ref{fig:aesthetic-visualisation}).
 
-The ``didactic'' visualisations predominantly focussed on the
-relationship between the active software processes and their
-behaviour. They prominently displaying the \textit{names} of the
-active functions together with indications of the number of functions
-running and their callback times. Bright colours and solid shapes were
-used to ensure constant visibility and to communicate the intention of
-the underlying code. Overall, up-to four visualisations were presented
-with each introduced depending on the number of active functions. It
-was hypothesised that taking a didactic approach to visualising the
-live-coding process would result in enhanced audience
-``understanding'', and a reduction in audience ``confusion'' through
-the performance.
+The ``didactic'' visualisations primarily focussed on the relationship
+between the active software processes and their behaviour. They
+prominently display the \emph{names} of the active functions
+together with indications of the number of functions running and their
+callback times. Bright colours and solid shapes were used to ensure
+constant visibility and to communicate the intention of the underlying
+code. Overall, up-to four visualisations were presented with each
+introduced depending on the number of active functions. It was
+hypothesised that taking a didactic approach to visualising the
+live-coding process would result in enhanced audience understanding,
+and a reduction in audience confusion through the performance.
 
 The set of ``aesthetic'' visualisations focussed less on the
 programmatic aspects of the live coding performance, rather intending
@@ -198,12 +201,14 @@ with each other over the entire projected scene. It was predicted that
 focussing on the aesthetic nature of the visualisations would assist
 in audience retention and result in a consistency of interest through
 the performance.
-% (\cite{Cawthon2007} (ALSO CITE MClEAN?) (HOW EXACTLY DID YOU MAXIMISE AESTHETIC APPEAL? HOW WERE THE AESTHETIC VISUALISATIONS DIVEN? WERE THEY IN SYNCH WITH THE METRONOME?)
+% \cite{Cawthon2007} (ALSO CITE MClEAN?) (HOW EXACTLY DID YOU MAXIMISE AESTHETIC APPEAL? HOW WERE THE AESTHETIC VISUALISATIONS DIVEN? WERE THEY IN SYNCH WITH THE METRONOME?)
 
-\section{User Study}
+\subsection{Lab Study Experimental Design}
+
+% todo crossed design, or whatever. between-groups. latin square?
 
 Our visualisations were presented to the audiences of two live coding
-performances. Each performance was run as two, ten-minute, improvised
+performances. Each performance was run as two ten-minute, improvised
 computer music pieces with each piece demonstrating one of the two
 visualisation types. The experiment was run twice, with
 non-overlapping audience members. The order of presentations of the
@@ -220,9 +225,9 @@ Over the course of each performance, the audience members completed a
 survey consisting of four sections. These included demographic
 information, their opinion of the first piece, their opinion of the
 second piece and some overall questions. Questions regarding each
-piece predominantly focussed on reporting levels of ``enjoyment'' and
+piece primarily focussed on reporting levels of ``enjoyment'' and
 ``understanding'' related to the visualisation while the final section
-focussed on eliciting potential improvements.
+solicited suggestions for improvements to the visualisation.
 % The experiment and survey design were endorsed by Ethics Protocol (details omitted for blind review).
 
 Subsequent to the audience experiment a video-cued-recall interview
@@ -230,7 +235,7 @@ was conducted with the live coder. One performance was examined
 critically and comparisons were drawn between the live coder's
 statements and the results of the audience surveys.
 
-\subsection{Results}
+\subsection{Lab Study Results}
 
 A total of 41 audience survey responses were received with a split of
 19 and 22 participants in each of the performances. Of this survey
@@ -240,36 +245,36 @@ before.
 
 Audience ``enjoyment'' and ``understanding'' were evaluated for the
 two sets of visualisations as described below. A significance level of
-$0.05$ was used with a chi-squared analysis.
+$0.05$ was used for the Chi-squared analysis.
 
-\subsubsection{``Enjoyment''}
+\subsubsection{Enjoyment}
 
 \begin{figure}
-  \centering \epsfig{file=aesthetic-enjoyment-final.eps, width=3.4in}
+  \centering \epsfig{file=aesthetic-enjoyment-final.eps, width=\columnwidth}
   \caption{Audience reported enjoyment level during the beginning,
     middle and end of the performance with the ``aesthetic''
     condition. For this and all subsequent graphs of this type, line
     width indicates proportion of the audience reporting high, medium
     or low and link colour between the three performance stages
-    indicates the reported level at the \textit{beginning} of the
+    indicates the reported level at the \emph{beginning} of the
     performance.}
 \label{fig:aesthetic-enjoyment}
 \end{figure}
 
 \begin{figure}
 \centering
-\epsfig{file=didactic-enjoyment-final.eps, width=3.4in}
+\epsfig{file=didactic-enjoyment-final.eps, width=\columnwidth}
 \caption{Audience reported enjoyment during the beginning, middle and
   end of the performance with the ``didactic'' condition.}
 \label{fig:didactic-enjoyment}
 \end{figure}
 
-Overall, a large proportion of the participants stated that both
-visualisations helped their ``enjoyment'' of the performance: $76\%$
-stated that the ``aesthetic'' visualisations helped their
-``enjoyment'' and $56\%$ stated that the ``didactic'' visualisations
-helped their ``enjoyment''. No significant difference between the
-visualisation types on ``enjoyment'' was found
+Overall, a the majority of the participants stated that both
+visualisations had a positive effect on their ``enjoyment'' of the
+performance: $76\%$ stated that the ``aesthetic'' visualisations
+helped their ``enjoyment'' and $56\%$ stated that the ``didactic''
+visualisations helped their ``enjoyment''. No significant difference
+between the visualisation types on ``enjoyment'' was found
 ($\chi^2=3.7733,df=2,p=0.1516$).
 
 Participants were asked to rate their ``enjoyment'' during the
@@ -277,18 +282,18 @@ Participants were asked to rate their ``enjoyment'' during the
 performances (see Figure~\ref{fig:aesthetic-enjoyment} and
 Figure~\ref{fig:didactic-enjoyment}). During the ``didactic''
 performance, $15\%$ of the audience stated that their ``enjoyment''
-\textit{increased} from the beginning of the performance and was
-\textit{steady} thereafter. By contrast, $24\%$ of the audience
+\emph{increased} from the beginning of the performance and was
+steady thereafter. By contrast, $24\%$ of the audience
 reported this pattern of ``enjoyment'' during the ``aesthetic''
 performance. Approximately $30\%$ of the audience of all
 (``aesthetic'' and ``didactic'') performances stated that their
-enjoyment remained \textit{steady throughout}.
+enjoyment remained steady throughout.
 
-\subsubsection{``Understanding''}
+\subsubsection{Understanding}
 
 \begin{figure}
 \centering
-\epsfig{file=aesthetic-understanding-final.eps, width=3.4in}
+\epsfig{file=aesthetic-understanding-final.eps, width=\columnwidth}
 \caption{Audience reported understanding during the beginning, middle
   and end of the performance with the ``aesthetic'' condition.}
 \label{fig:aesthetic-understanding}
@@ -296,17 +301,17 @@ enjoyment remained \textit{steady throughout}.
 
 \begin{figure}
 \centering
-\epsfig{file=didactic-understanding-final.eps, width=3.4in}
+\epsfig{file=didactic-understanding-final.eps, width=\columnwidth}
 \caption{Audience reported understanding during the beginning, middle
   and end of the performance with the ``didactic'' condition.}
 \label{fig:didactic-understanding}
 \end{figure}
 
 In response to a specific survey question, $37\%$ of participants
-stated that, overall, the ``didactic'' visualisations \textit{helped
+stated that, overall, the ``didactic'' visualisations \emph{helped
   them to understand the code} whereas, by contrast, $12\%$
 participants stated that, overall, the ``aesthetic'' visualisations
-\textit{helped them to understand the code}. This was a significant
+\emph{helped them to understand the code}. This was a significant
 difference between these responses ($\chi^2=7.1986,df=2,p=0.02734$).
 
 Participants were asked to rate their ``understanding'' during the
@@ -314,10 +319,10 @@ Participants were asked to rate their ``understanding'' during the
 performance (see Figure~\ref{fig:aesthetic-understanding} and
 Figure~\ref{fig:didactic-understanding}). During the ``didactic'' and
 ``aesthetic'' performances, $49\%$ and $44\%$ of the participants
-stated, respectively, that their ``understanding'' \textit{remained
+stated, respectively, that their ``understanding'' \emph{remained
   the same} throughout the performances. During the ``didactic''
 performance, $10\%$ of the audience reported a level of
-``understanding'' that \textit{trended downwards} (eg. high to low)
+``understanding'' that \emph{trended downwards} (eg. high to low)
 compared to $20\%$ of the audience during the aesthetic performance.
 However, this reported advantage of the ``didactic'' visualisations
 was offset by the reported audience ``understanding'' at the beginning
@@ -373,7 +378,7 @@ distracting''. By contrast, when asked if the visualisations were
 distracting the live coder stated: ``Ah, no. In general I'm just so
 focussed on the code''.
 
-\section{Conclusions}
+\section{Conclusion}
 
 In the first systematic study of its type, we have identified an
 opportunity for real-time code visualisations to help improve the
@@ -399,7 +404,8 @@ visualisation types could be combined together to produce live coding
 driven visualisations which targeted both the aesthetics as well as a
 greater understanding of the live coding process. These visualisations
 could then be compared with the baseline ``no-visualisation''
-condition in an audience experiment.
+condition in an audience experiment. TODO also vary the visuals over
+the course of a performance?
 
 Over 60 years ago, the media theorist Marshall McLuhan stated that
 ``The business of art is no longer the communication of thoughts or
@@ -408,7 +414,7 @@ participation in an experience. The whole tendency of modern
 communication... is towards participation in a process, rather than
 apprehension of concepts.'' \cite{McLuhan} Our hope is that future
 development of the research described in this paper will bring
-audiences into the \textit{process of live coding} in such a way that
+audiences into the \emph{process of live coding} in such a way that
 they might feel to be active (virtual) collaborators of a
 highly-skilled live-coding artist.
 
