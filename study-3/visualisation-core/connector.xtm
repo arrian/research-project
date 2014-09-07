@@ -1,0 +1,32 @@
+
+
+(bind-type Connector <Attractor*,Attractor*>);;source, target
+
+(bind-func connector_get_source
+  (lambda (c:Connector*)
+  	(tref c 0)
+    ))
+
+(bind-func connector_get_target
+  (lambda (c:Connector*)
+  	(tref c 1)
+    ))
+
+(bind-func connector_set_source
+  (lambda (c:Connector* a:Attractor*)
+  	(tset! c 0 a)
+    ))
+
+(bind-func connector_set_target
+  (lambda (c:Connector* a:Attractor*)
+  	(tset! c 1 a)
+    ))
+
+
+(bind-func connector_clear
+  (lambda (c:Connector*)
+    ))
+
+
+
+

@@ -27,3 +27,5 @@
 
 # should be a symlink to wherever the samples are
 /sample-libs
+
+study-3/old/app-lib

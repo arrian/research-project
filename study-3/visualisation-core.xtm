@@ -41,4 +41,3 @@
 (sys:load (string-append *study-3-dir* "/visualisation-core/widget.xtm"))
 
 
-

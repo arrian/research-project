@@ -1,0 +1,50 @@
+
+(bind-func asdffunc-name
+  (lambda ()
+    asdfasdf
+    asdfasdf
+    asdfasdfa))
+
+
+(bind-func testing
+  (lambda ()
+    (play inst 60 80 dur)
+    (play drum 60 80 dur)
+    (play synth 60 80 dur)
+    (play inst 60 80 dur)
+    jsdlkfgjlksdfgjsdfgjklsdfgjsdfjgng
+    (dotimes (function [start] num))))
+
+(bind-func test3
+  (lambda ()
+    (play inst 60 80 dur)
+    (play inst 60 80 dur)
+    (play inst 60 80 dur)
+    ))
+
+(bind-func asdftest
+  (lambda ()
+      (play testing this function chan 60 80 dur)
+      (play inst 60 80 dur)
+      (play inst 60 80 dur)
+      (play inst 60 80 dur)
+      (play testing the size of this  60 80 dur)))
+
+
+(bind-func randoml:[!a,List:<!a,List*>*]*
+  (lambda (ls)
+      (nth ls (random (- (length ls) 1)))))
+
+
+(bind-func testfunction
+  (lambda ()
+    (poly_entity_set_color (attractor_get_entity (randoml (widget_get_children (randoml WIDGET_LIST_TEST)))) 1.0 1.0 1.0 1.0)
+    ;;(poly_scene_mesh_set_material (attractor_get_entity (randoml (widget_get_children (randoml WIDGET_LIST_TEST)))) "asdfasdf")
+    void))
+
+(testfunction)
+
+(bind-func anothertestfunction
+  (lambda ()
+    (play inst 60 80 dur)))
+

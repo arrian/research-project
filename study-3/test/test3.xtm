@@ -1,0 +1,6 @@
+
+(bind-func func-name
+  (lambda ()
+    ))
+
+
