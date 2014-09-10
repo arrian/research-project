@@ -7,9 +7,9 @@
 #include "Polycode2DPhysics.h"
 #include "PolyPhysicsScreenEntity.h"
 
-poly_core* poly_core_create(char* title, int width, int height, char* resources)
+poly_core* poly_core_create(char* title, float width, float height, bool fullscreen, char* resources)
 {
-	GLFWCore* core = new GLFWCore(title, width, height);
+	ExtemporeCore* core = new ExtemporeCore(title, (int) width, (int) height, fullscreen);
 	CoreServices::getInstance()->getResourceManager()->addArchive(resources);//"../resources/default.pak"
 	CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
 	return reinterpret_cast<poly_core*>(core);
@@ -25,28 +25,10 @@ void poly_core_destroy(poly_core* core)
 	delete reinterpret_cast<Core*>(core);
 }
 
-poly_scene* poly_scene_create(int width, int height)
+poly_scene* poly_scene_create(float width, float height)
 {
-	//Scene* scene = new Scene(Scene::SCENE_2D);
 	PhysicsScene2D* scene = new PhysicsScene2D(5.0, 20);//0.1,60
 	scene->setGravity(Vector2(0.0, 0.0));
-
-	// Setup physics bounds
-	// double thickness = 10.0;
-	// ScenePrimitive* top = new ScenePrimitive(0, width, thickness, 1.0);
-	// top->setPosition(0.0, - height / 2.0);
-	// ScenePrimitive* bottom = new ScenePrimitive(0, width, thickness, 1.0);
-	// bottom->setPosition(0.0, height / 2.0);
-	// ScenePrimitive* left = new ScenePrimitive(0, thickness, height, 1.0);
-	// left->setPosition(- width / 2.0, 0.0);
-	// ScenePrimitive* right = new ScenePrimitive(0, thickness, height, 1.0);
-	// right->setPosition(width / 2.0, 0.0);
-
-	// scene->addPhysicsChild(top, PhysicsScene2DEntity::ENTITY_RECT, true);
-	// scene->addPhysicsChild(bottom, PhysicsScene2DEntity::ENTITY_RECT, true);
-	// scene->addPhysicsChild(left, PhysicsScene2DEntity::ENTITY_RECT, true);
-	// scene->addPhysicsChild(right, PhysicsScene2DEntity::ENTITY_RECT, true);
-
 	scene->getActiveCamera()->setOrthoSize(width, height);
 	return reinterpret_cast<poly_scene*>(scene);
 }

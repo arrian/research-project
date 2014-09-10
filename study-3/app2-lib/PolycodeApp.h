@@ -2,7 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <Polycode.h>
-#include "PolyGLFWCore.h"
+#include "PolyExtemporeCore.h"
 #include "PolySceneMultiLabel.h"
 #include "PolyEntity.h"
 
@@ -20,11 +20,11 @@ extern "C"
 	struct poly_scene_label;
 	struct poly_scene_multi_label;
 
-	poly_core* poly_core_create(char* title, int width, int height, char* resources);
+	poly_core* poly_core_create(char* title, float width, float height, bool fullscreen, char* resources);
 	void poly_core_update(poly_core* core);
 	void poly_core_destroy(poly_core* core);
 
-	poly_scene* poly_scene_create(int width, int height);
+	poly_scene* poly_scene_create(float width, float height);
 	void poly_scene_destroy(poly_scene* scene);
 	void poly_scene_add_child(poly_scene* scene, poly_entity* entity);
 	void poly_scene_set_ortho_size(poly_scene* scene, int width, int height);
@@ -75,13 +75,13 @@ extern "C"
 
 int main(int argc, char* argv[])
 {
-	int width = 640;
-	int height = 480;
+	float width = 640.0;
+	float height = 480.0;
 
 	char windowName[] = "Test Window";
 	char resourcePath[] = "../resources/default.pak";
 
-	poly_core* core = poly_core_create(windowName, width, height, resourcePath);
+	poly_core* core = poly_core_create(windowName, width, height, false, resourcePath);
 	poly_scene* scene = poly_scene_create(width, height);
 
 	int i = 0;
@@ -96,6 +96,8 @@ int main(int argc, char* argv[])
 		
 		usleep(100);
 		iterations++;
+
+		if(iterations > 100) break;
 	}
 
 	return 0;

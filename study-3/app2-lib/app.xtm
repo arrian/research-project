@@ -3,7 +3,7 @@
 
 ;;core
 (bind-alias poly_core i8)
-(bind-lib polycode poly_core_create [poly_core*,i8*,i32,i32,i8*]*)
+(bind-lib polycode poly_core_create [poly_core*,i8*,float,float,i1,i8*]*)
 ;;(bind-lib polycode poly_core_should_close [i1,poly_core*]*)
 (bind-lib polycode poly_core_update [void,poly_core*]*)
 (bind-lib polycode poly_core_destroy [void,poly_core*]*)
@@ -38,7 +38,7 @@
 
 ;;scene
 (bind-alias poly_scene i8)
-(bind-lib polycode poly_scene_create [poly_scene*,i32,i32]*)
+(bind-lib polycode poly_scene_create [poly_scene*,float,float]*)
 (bind-lib polycode poly_scene_destroy [void,poly_scene*]*)
 (bind-lib polycode poly_scene_add_child [void,poly_scene*,poly_entity*]*)
 (bind-lib polycode poly_scene_set_ortho_size [void,poly_scene*,i64,i64]*)
@@ -82,7 +82,7 @@
 
 (bind-func poly_core_init
   (lambda (width height resources)
-      (set! POLY_CORE (poly_core_create "Extempore" width height resources));;"/Users/Arrian/Dev/research-project/study-3/resources/default.pak"
+      (set! POLY_CORE (poly_core_create "Extempore" width height 0 resources));;"/Users/Arrian/Dev/research-project/study-3/resources/default.pak"
       (set! POLY_SCENE (poly_scene_create width height))))
 
 (bind-func poly_core_dest
