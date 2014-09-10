@@ -1,0 +1,44 @@
+Meeting 18
+
+
+Study
+
+With visualisations and without
+
+Video
+-advantages:
+	-repeatable
+	-more specific detail. eg. indicate at what point the programmer added an instrument
+	-reach larger audience?
+-disadvantages:
+	-no sense of liveness?
+	-
+
+Performance
+-advantages:
+	-liveness, live audience
+	-
+-disadvantages:
+	-
+
+
+
+Mappings - Understanding
+
+Basic
+Identify a function
+Start writing a new function
+Text selection
+
+Intermediate
+Start editing a function
+Activate a function
+Deactivate a function
+
+Advanced
+Identify errors
+Identify function mapping to sound output
+Identify programmer goals (eg. debug, new concept)
+
+Mappings - Enjoyment?
+

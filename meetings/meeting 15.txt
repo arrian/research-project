@@ -1,0 +1,19 @@
+Meeting 15
+
+How can I design the experiment to make analysis of the data easier?
+How can I design the experiment for an ANOVA test?
+
+Design of the experiment will be offline. Ben will record some videos and we will gather a group of people to view the visualisations in a preprepared video with associated questions. We will run the video on Ben asking the same questions as the audience and examine the differences with the goal of asking did we achieve mental model alignment between the two groups. 
+
+Reasoning behind this:
+-live performance puts an incredible amount of pressure on the performer and does not allow us to focus on asking the right questions
+-videos will provide value to the live coder following the experiment and value to the transparency and replicability of the research process
+-given the time limitation it is the best approach
+
+
+————————
+
+ozchi short paper
+-study 2 raises some interesting questions
+-prepare over the weekend
+-

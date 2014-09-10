@@ -1,0 +1,31 @@
+Meeting 16
+
+
+OzCHI paper second in priority to study - put some work in over the past few days
+Should I include any of the work-in-progress?
+
+Visualisation modifications
+
+Study:
+-potentially offline
+-also opportunity at anu open day
+
+-will examine if the audience understands what ben is doing
+	-can they determine the purpose of evaluation and the relationship between active and inactive
+	-does this knowledge contribute to their enjoyment of the performances over the previous
+
+
+
+OZCHI Paper————
+literature discussion - 2 paragraphs, design parameters, scoping out the parameters
+
+there is potential for the visualisations to communicate the intention of the programmer
+challenge is to match the mental model
+
+two studies
+	-field study
+	-one designed experiment - order balanced, 2x2, aesthetic vs didactic
+
+
+
+
