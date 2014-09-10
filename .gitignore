@@ -29,3 +29,4 @@
 /sample-libs
 
 study-3/old/app-lib
+study-3/code-lib/bin/*.dSYM

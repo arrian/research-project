@@ -1,43 +1,78 @@
 %!TEX root = thesis.tex
 
 \chapter{Introduction}
-\label{cha:intro}
 
-[from live coding paper]
+-introduce the topic...\\
+-discuss visualisations\\
+-discuss live coding\\
 
-``Show us your screens\ldots Code should be seen as well as heard'',
-declares the draft manifesto of ``TOPLAP''~\cite{Toplap}, an
-international organisation devoted to the artistic performance
-practice of ``live coding''. In live coding, computer code is written
-in front of a live audience to generate music and visuals in real
-time. The ``show us your screens'' rhetoric underscores the need for
-authenticity to distinguish this artform from similar (but non-live)
-computational arts practices.
+This thesis proposes that ``code visualisation improves observer understanding and enjoyment''. More specifically, this thesis investigates the question ``can the application of visualisation techniques to live coding enhance audience experience by increasing understanding and enjoyment?''.\\
 
-But what is the benefit of the live coder showing their screen? In a
-live coding performance, non-expert live coding audience members spend
-much of their time staring at raw (usually text-based) computer code.
-Until now, little empirical study has been undertaken to gauge an
-audience's understanding of that computer code and whether, from an
-audience perspective, code really should be ``seen as well as heard''.
+Definitions...\\
+-define live coding, understanding and enjoyment\\
+-define visualisation techniques\\
+-define the programmer and observer relationship\\
+-define audience experience\\
 
-Traditional approaches to source code visualisation
-(see~\cite{Novais2013} for a review) often focus on structure of the
-source code (e.g. visualising complex object/class relationships)
-rather than the \emph{process} of programming. In a process-oriented
-activity such as live coding, different code visualisation techniques
-are necessary~\cite{McLean2010b,Magnusson2013}. However, these
-academic treatments of code visualisation in live coding adopt a
-survey-based approach, and the techniques discussed have not been
-subject to empirical evaluation.
+\section{History}
 
-In this paper, we examine the audience's experience of the displayed
-code during live coding performances and to see whether code-driven
-visualisations might improve both the audience enjoyment and the
-audience understanding of these performances. This exploration takes
-place initially through the results of an exploratory field study at a
-contemporary arts festival, and subsequently through a lab-based
-follow-up user study.
+For most of its history source code has been displayed as simple text due to the expressiveness of this format and despite its inefficiencies. It is only recently, due to ever increasing programming language complexity and increasing computational power, that code annotations and syntax highlighting have become more commonplace. Nevertheless, these visual enhancements rarely provide information beyond the basic grammar of the language they are intended to augment. The limitations of this approach are becoming ever more apparent as programming languages and interactive programming environments move towards the need for real-time comprehension and a need to understand the source code within the context of a running program.\\
+
+The problem of understanding code within a running environment is complex. The fact that programming concepts are fundamentally different to human understandable concepts~\cite{Biggerstaff1994} presents challenges in communicating the complex nature and intention of the program. The fundamental complexity lies within the translation from code to the brain; the programming concepts to the human understandable concepts.\\
+
+The human brain is highly proficient in pattern recognition and there is evidence to suggest that visualisations can take advantage of this proficiency to enhance understanding. It would be informative to investigate this translation using visual representations to translate and assist in the understanding of program concepts.\\
+
+
+% \section{Theoretical Framework}
+
+
+\section{Structure}
+
+The structure of this thesis is as follows:\\
+-initial field study\\
+-design and visualisation approach\\
+-first user study\\
+-refinements\\
+-second user study\\
+-conclusion\\
+
+% -----------------------------------
+
+% [from live coding paper]
+
+% ``Show us your screens\ldots Code should be seen as well as heard'',
+% declares the draft manifesto of ``TOPLAP''~\cite{Toplap}, an
+% international organisation devoted to the artistic performance
+% practice of ``live coding''. In live coding, computer code is written
+% in front of a live audience to generate music and visuals in real
+% time. The ``show us your screens'' rhetoric underscores the need for
+% authenticity to distinguish this artform from similar (but non-live)
+% computational arts practices.
+
+% But what is the benefit of the live coder showing their screen? In a
+% live coding performance, non-expert live coding audience members spend
+% much of their time staring at raw (usually text-based) computer code.
+% Until now, little empirical study has been undertaken to gauge an
+% audience's understanding of that computer code and whether, from an
+% audience perspective, code really should be ``seen as well as heard''.
+
+% Traditional approaches to source code visualisation
+% (see~\cite{Novais2013} for a review) often focus on structure of the
+% source code (e.g. visualising complex object/class relationships)
+% rather than the \emph{process} of programming. In a process-oriented
+% activity such as live coding, different code visualisation techniques
+% are necessary~\cite{McLean2010b,Magnusson2013}. However, these
+% academic treatments of code visualisation in live coding adopt a
+% survey-based approach, and the techniques discussed have not been
+% subject to empirical evaluation.
+
+% In this paper, we examine the audience's experience of the displayed
+% code during live coding performances and to see whether code-driven
+% visualisations might improve both the audience enjoyment and the
+% audience understanding of these performances. This exploration takes
+% place initially through the results of an exploratory field study at a
+% contemporary arts festival, and subsequently through a lab-based
+% follow-up user study.
 
 
 % -----------------------
@@ -105,148 +140,7 @@ follow-up user study.
 % -will be using Iive coding as a platform and case study for this (will discuss later)
 % -will develop and test code visualisations on audiences with audiences of varied levels of experience with programming, addressing code comprehension
 
-\section{Background}
-
-\subsection{History}
-
-For most of its history source code has been displayed as simple text due to the expressiveness of this format and despite its inefficiencies. It is only recently, due to ever increasing programming language complexity and increasing computational power, that code annotations and syntax highlighting have become more commonplace. Nevertheless, these visual enhancements rarely provide information beyond the basic grammar of the language they are intended to augment. The limitations of this approach are becoming ever more apparent as programming languages and interactive programming environments move towards the need for real-time comprehension and a need to understand the source code within the context of a running program.\\
-
-The problem of understanding code within a running environment is complex. The fact that programming concepts are fundamentally different to human understandable concepts~\cite{Biggerstaff1994} presents challenges in communicating the complex nature and intention of the program. The fundamental complexity lies within the translation from code to the brain; the programming concepts to the human understandable concepts.\\
-
-The human brain is highly proficient in pattern recognition~\cite{ware2013information} and there is evidence to suggest that visualisations can take advantage of this proficiency to enhance understanding~\cite{najjar1998principles}. It would be informative to investigate this translation using visual representations to translate and assist in the understanding of program concepts.\\
-
-\subsection{Visualisations}
 
 
-\subsection{Live Coding}
-
--live coding is a platform for bridging these two domain visualisations 
--what is live coding?
--method of programming in front of an audience for artistic or informative purposes
--the live coder displays their screen to an audience, showing their code as they are working on it building a functional program
--makes use of interactive programming environments 
--program running while changes are being made 
--often focusses on improvisation - the programmer often has to think on their feet
-
--what does live coding achieve?
--gives the audience insight into the programming process - i’ll be taking advantage of this
 
 
-\section{Theoretical Framework}
-\label{sec:framework}
-
-
-\subsection{Taxonomy}
-
-
--Goal: categorising existing visualisations
--Gaps in existing models: elaboration of dynamic software visualisation taxonomies, taxonomy of music visualisation
-
--High level features:
-	-Shape
-	-Size
-	-Orientation
-	-Dimensionality
-	-Colour
--‘Rethinking Visualisation: A High Level Taxonomy' discusses lower level taxonomy including - spacial relationships, numeric trends, patterns, connectivity and filtering
-
--distinction between scientific visualisation and information visualisation (Infovis discussed in Rethinking Visualization: A High-Level Taxonomy)
--Information visualisation vs Scientific visualisation - “infovis when spacial representation is chosen, scivis when spacial representation is given”
--Taxonomy developed within this article consists of {discrete, continuous} vs display attributes (eg. given, constrained, chosen) per the design model
--Discussed in A Principled Taxonomy of Software Visualisation (1993)
--Myers (1986) classifies using level of abstraction vs level of animation. (Visual Programming, Programming by Example… A Taxonomy) Also uses {static, dynamic} vs {code, data}. Minimal discussion of dynamic visualisations; no elaboration.
-
--Most effective visualisation technique might be \"Self-illustrating phenomena\" \\
-
-Both code and music present a wide variety of visualisation techniques. These techniques will be summarised below.
-
-
-\subsubsection{Code Visualisation}
-
-% \paragraph{Code Augmentation}
-Visuals based on Code Augmentation (eg. infographics, annotations, sparklines)\\
-Visuals based on Code Augmentation
--infographics
--annotations (visual code annotations for cyberphysical programming)
--sparklines (Visual Monitoring of Numeric Variables Embedded in Source Code)
--etc
-
-% \paragraph{Code Abstraction}
-Visuals based on Abstraction (eg. scheme bricks, gource, code flow)\\
-
-Visuals based on Abstraction
--scheme bricks
--gource
--code flow
--etc
-% \paragraph{Software Domain Visualisations}
-Domain Visualisations (eg. fluid source code views, indentation, class diagrams)\\
-
-Domain Visualisations
--understood by the domain, not necessarily useful for observers
--eg. eclipse, visual studio code displays, auto updating class diagrams etc
--fluid source code views (Fluid Source Code Views for Just In-Time Comprehension)
--class diagrams
--debugging
--tracing
-
-\subsubsection{Music Visualisation}
--music is similar to software in a number of ways
--often has standardised notation
--expression may diverge from notation
--visual representation is by default static
--can be visualised using dynamic methods
--understanding can augmented with visualisation techniques
-
-% \paragraph{Generative Visualisations}
-Generative Visualisations (eg. frequency wave, VLC/iTunes visualisations)\\
-
-Generative Visualisations
--\"generates animated imagery based on a piece of music\"
--eg. change with loudness and frequency spectrum
--VLC, iTunes etc.
--visualisations that respond to music
-
-% \paragraph{Associative or Emotive Visualisations}
-Associative or Emotive Visualisations (eg. video art, sampled video)\\
-
-Associative or Emotive Visualisations
--includes areas such as synaesthesia (Movies from Music)
--eg. video art, sampled video with sampled music
--extension/exploration of Emotion-based Music Visualisation using Photos
--Classifications including: sublime, sad, touching, easy, light, happy, exciting, grand
-
-
-% \paragraph{Music Domain Visualisations}
-Domain Visualisations (eg. ableton, sheet music)\\
-
-Domain Visualisations
--understood by the domain, not necessarily useful for observers (A Visualisation of Music)
--could include music creation tools, for example abelton etc.
--graphic representations that have one-to-one mapping
--direct visualisation
--eg. sheet music (again, A Visualisation of Music)
-
-\subsubsection{Methodology Visualisation}
-
-
-\subsection{Design}
-
--NOTE: make it clear that this is not intended to be a visual programming language environment. The intention of this project is to assist in code comprehension 
-
-\subsubsection{Cognitive Dimensions of Notation}
-$http://en.wikipedia.org/wiki/Cognitive_dimensions$
-
-\subsubsection{Visual Primitives}
-
-structural units include line, shape, color, form, motion, texture, pattern, direction, orientation, scale, angle, space and proportion.
-
-deutsch limit (max 50 visual elements onscreen)
-
-\subsubsection{Mapping Methodology}
-
-
-%%% Local Variables: 
-%%% mode: latex
-%%% TeX-master: "thesis"
-%%% End: 
