@@ -17,9 +17,9 @@
 (define *code-lib* (string-append *study-3-dir* "/code-lib/bin/code.dylib"))
 (sys:load (string-append *study-3-dir* "/code-lib/code.xtm"))
 
-(define *app-lib* (string-append *study-3-dir* "/app2-lib/bin/app.dylib"))
+(define *app-lib* (string-append *study-3-dir* "/app-lib/bin/app.dylib"))
 (define *app-lib-resources* (string-append *study-3-dir* "/resources/default.pak"))
-(sys:load (string-append *study-3-dir* "/app2-lib/app.xtm"))
+(sys:load (string-append *study-3-dir* "/app-lib/app.xtm"))
 
 (sys:load (string-append *study-3-dir* "/visualisation-core/code-manager.xtm"))
 (sys:load (string-append *study-3-dir* "/visualisation-core/visual-manager.xtm"))

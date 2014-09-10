@@ -30,3 +30,5 @@
 
 study-3/old/app-lib
 study-3/code-lib/bin/*.dSYM
+study-3/app-lib/deps/*
+app-test
