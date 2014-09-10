@@ -28,10 +28,13 @@
 (sys:load (string-append *study-3-dir* "/visualisation-core/transition.xtm"))
 (sys:load (string-append *study-3-dir* "/visualisation-core/attractor.xtm"))
 
+(gl:set-context *gl-ctx*)
+
 (define update-loop
   (lambda (time delta-t)
     (handle_events)
     (draw)
+    (gl:swap-buffers *gl-ctx*)
     (callback (+ time (* *second* delta-t) 0.5)
               'update-loop
               (+ time (* *second* delta-t)) 

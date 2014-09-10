@@ -24,7 +24,6 @@
   (lambda ()
     (update)
     (poly_core_update POLY_CORE)
-    (gl:swap-buffers *gl-ctx*)
     void))
 
 
