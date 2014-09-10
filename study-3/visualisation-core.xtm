@@ -4,6 +4,14 @@
 
 (sys:load "libs/core/adt.xtm");; ???? are lists not part of the extempore standard libs now
 
+(define width 1440.0)
+(define height 900.0)
+(bind-val width float width)
+(bind-val height float height)
+(define fullscreen #t)
+
+(define *gl-ctx* (gl:make-ctx ":0.0" fullscreen 0.0 0.0 width height))
+
 (bind-func cons:[List:<!a,List*>*,!a,List:<!a,List*>*]*
   (lambda (x y)
     (let ((obj (halloc)));; custom heap allocation implementation
@@ -30,8 +38,9 @@
 
 (define update-loop
   (lambda (time delta-t)
-  	(handle_events)
+    (handle_events)
     (draw)
+    (gl:swap-buffers *gl-ctx*)
     (callback (+ time (* *second* delta-t) 0.5)
               'update-loop
               (+ time (* *second* delta-t)) 
