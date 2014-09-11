@@ -14,6 +14,12 @@
 \usepackage[titletoc]{appendix}
 \usepackage{float}
 
+\setlength{\parindent}{15pt}
+
+\usepackage{color}
+\newcommand{\citetemp}[1]{{\color{red}[temp #1]}}
+% usage example: \citetemp{ref}
+
 
 \title{Understanding through Code Visualisation}
 \author{Arrian Purcell}
@@ -46,6 +52,9 @@
 \pagestyle{headings}
 \markboth{Contents}{Contents}
 \tableofcontents
+
+% \listoffigures
+% \listoftables
 
 \mainmatter
 

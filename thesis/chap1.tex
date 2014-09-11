@@ -1,81 +1,86 @@
 %!TEX root = thesis.tex
 
 \chapter{Literature Review}
-\label{cha:literaturereview}
 
-Software visualisation is building momentum within the space of live coding. This section seeks to identify the reason for this momentum and identify the potential for visualisations.
+Software visualisation is building momentum within the space of live coding. This section seeks to identify the reason for this momentum and identify the purpose and potential for visualisations within this field.
 
-\section{Source Code}
+\section{Software}
 
-Understanding changing software is one of the most important questions within the space of software engineering practice~\cite{Tao2012}. It is the nature of software to change~\cite{Purushothaman2005} and there is a need for not only the programmer to understand the software but also a knowledge transfer to take place with others involved in the software process.\\
--why is this an important question? evidence.\\
--what other questions are there?\\
+Understanding changing software is one of the most important goals within the space of software engineering practice~\cite{Tao2012}. It is the nature of software to change~\cite{Purushothaman2005} and there is a need for not only the programmer to understand the software but also a knowledge transfer to take place between those creating the software and those observing the software as it changes~\citetemp{ref}.
 
-Computer science benefits from source code visualsations through...\\
--why do they need source code visualisations? evidence.\\
+Programming languages are the formal languages of software. These programming languages are typically represented by source code, generally in a plain text format~\cite{Badros2000}. \ldots Plain text format is limited requiring an interpretation step (parsing and compilation) to acheive a functional program~\cite{Badros2000}.
 
-Software engineering practice benefits from source code visualisation through...\\
--why do they need source code visualisations? evidence.\\
--why will source code visualisations make software engineering practice more effective? evidence.\\
--understanding software is harder while it is changing. \cite{Eisenbarth2003}\\
--understanding software feature implementation is one of the fundamental challenges to comprehending the code.\cite{Eisenbarth2003}\\
+The concept of alternative source code representations is not new. Alternative source code representations include static diagrams and visual languages. These vary greatly in the relation to the source code with some representations presenting a highly simplified code representation when compared to the complete source code representation.
 
+Although it is the nature of software to change, static diagrams have traditionally been used to represent software systems. These diagrams typically show the structure (class diagrams) or function (state diagrams) of a software system at a specific moment in time.\\
+-usefulness of these diagrams lies in ability to represent fundamental structures within the program\\
+-usefulness declines as they become more precise and less abstract -- must be generated continuously to keep up with the changing software.
+
+Visual languages are targetted at the programmer, providing an alternative method of interaction with the software development process. However, visual languages often limit the programmer, providing only a limited subset of a full-featured text-based language.
 
 \section{Visualisation}
 
-Diagrams have traditionally been used to represent software systems. These diagrams are commonly a static representation of the software. However, change is a fundamental characteristic of software~\cite{Purushothaman2005}.\\
-
+Visualisation 
+What is the purpose of visualisations?
 The reason for visualising code must first be identified in order to successfully evaluate visualisation techniques.\\
 -why must we identify the reason?\\
 -how does the reason for visualising code help to evaluate visualisation techniques?\\
--why do we need to evaluate visualisation techniques?\\
+-why do we need to evaluate visualisation techniques?
+
+% some foundational softvis references
+Software visualisation is the process of representing the characteristics of computer programs visually~\cite{Stasko1992}. The advantage of providing a visual representation over the more traditional text-based representation is that the text-based approach does not take full advantage of the human visual information processing capability~\cite{Myers1989}.
+
+Initial efforts to classify software visualisations identified the two axes: whether the visualisation illustrated the code, the data or the algorithm and whether the visualisation was static or dynamic~\cite{Myers1989}. Following taxonomies characterised software visualisations according to the aspect of the program, the abstractness of the visualisation, the animation and the automation of the visualisation~\cite{Stasko1992}.
+
 
 Traditional software visualisation falls into a variety of categories. Each visualisation category corresponds to a reason for visualising the code.\\
 -what are the categories?\\
--what reason for visualising the code do the categories correspond to?\\
+-what reason for visualising the code do the categories correspond to?
 
 The (abstract/graphical/animated) approach provides the basis for effective visualisations. Effective visulisations...\\
 -what do effective visualisations do?\\
 -what do effective visualisations achieve?\\
-Effective software visualisations contribute to making software easier to understand, reflecting the software's history through the lifecycle, facilitating the transfer of knowledge from the programmer to the observer, making important structures visible and managing software complexity~\cite{Baecker1995}.\\
+Effective software visualisations contribute to making software easier to understand, reflecting the software's history through the lifecycle, facilitating the transfer of knowledge from the programmer to the observer, making important structures visible and managing software complexity~\cite{Baecker1995}.
 
-Visualisations have the capacity to present information more effectively than traditional programming languages. Nevertheless, software visualisations still require significant development to benefit in the understanding of the complexity of software ~\cite{Baecker1995}.\\
+Visualisations have the capacity to present information more effectively than traditional programming languages. Nevertheless, software visualisations still require significant development to benefit in the understanding of the complexity of software ~\cite{Baecker1995}.
 
 \section{Live Coding}
 
-Live coding can be broadly defined as writing a program while it runs~\cite{Ward2004}. More specifically, live coding is identified as the artistic process of musical and visual expression through programming~\cite{Collins2003}.\\
+Live coding can be broadly defined as writing a program while it runs~\cite{Ward2004}. More specifically, live coding is identified as the artistic process of musical and visual expression through programming~\cite{Collins2003}.
 
-Live coding is in a unique position to combine both source code and traditional visualisation techniques~\cite{McLean2010a}. This is due to the approach of live coding to the process of developing software involving effective sensory communication, a history of exposing audiences to the coding process, fast software iteration and refinement, and an ability to retain an audience's attention. These approaches involved are outlined below.\\
--how can it combine source code and traditional visualisation techniques?\\
+Live coding is in a unique position to combine both source code and traditional visualisation techniques~\cite{McLean2010a}. This is due to the approach of live coding to the process of developing software involving effective sensory communication, a goal of exposing audiences to the coding process, fast software iteration and refinement, and an ability to retain an audience's attention. These approaches involved are outlined below.\\
+-how can it combine source code and traditional visualisation techniques?
 
 Live coding is built around communicating visually and audibly the software process. It provides a space in which effective means of developing visualisations is provided. \\
 -what kind of space is live coding?\\
--what are the effective means of developing visualisations?\\
+-what are the effective means of developing visualisations?
 
 Live coding has a history exposing audiences to code.\\
 -what is the history of live coding?\\
 -how does live coding expose the audience to code?\\
+-a human is visible making creative descisions demonstrating a link between human actions and artistic output \cite{Mclean}.
 
 Visualisations can be quickly refined within live coding.\\
--how can visualisations be quickly refined?\\
+-how can visualisations be quickly refined?
 
 Live coding can retain audience attention.\\
 -how does live coding maintain attention?\\
--can retain attention through the output (music), the process (programming) or the field (technology).\\
-
+-can retain attention through the output (music), the process (programming) or the field (technology).
 
 Live coding is a good application space for visualisations.\\
--why is it a good application space?\\
+-why is it a good application space?
 
 Live coding is a good case study for visualisations.\\
 -why is it a good case study?\\
--why is it good for visualisations?\\
+-why is it good for visualisations?
 
 Why live code?\\
 -what does liveness mean? \cite{Auslander}\\
 -what does it contribute?\\
 -relation to improvisation?\\
--computational creativity. \cite{Mclean}\\
+-computational creativity. \cite{Mclean}
+
+During live coding performances, audiences can feel excluded due to an inability to understand the projected source code~\cite{McLean2010a}.
 
 \section{Understanding and Enjoyment}
 
@@ -85,33 +90,36 @@ There is currently a search for visualisations that increase understanding and e
 -why does he identify enjoyment?\\
 -what is enjoyment?\\
 -how can these two factors contribute to effective visualisations?\\
--the concept assignment problem. \cite{Biggerstaff1994} (this paper may also be useful for explaining what understanding is in the context of software)\\
+-the concept assignment problem. \cite{Biggerstaff1994} (this paper may also be useful for explaining what understanding is in the context of software)
 
 Understanding involves a number of factors.\\
 -what factors?\\
--how do these factors relate to visualisations?\\
+-how do these factors relate to visualisations?
+
+-understanding software is harder while it is changing. \cite{Eisenbarth2003}\\
+-understanding software feature implementation is one of the fundamental challenges to comprehending the code.\cite{Eisenbarth2003}
 
 Similarly, enjoyment involves a number of factors.\\
 -what factors?\\
 -how do these factors relate to understanding?\\
--how do these factors relate to visualistions?\\
+-how do these factors relate to visualistions?
 
 Duality of understanding and enjoyment...\\
 -enjoyment is not completely separable from understanding. (not dual?)\\
 -why can we not separate the two?\\
 -what is the duality?\\
--how does this relate to visualisations?\\
+-how does this relate to visualisations?
 
 
 \section{Didacticism and Aestheticism}
 
 The duality of the concepts of understanding versus enjoyment are commonly associated with the duality of the concepts of didacticism vs aestheticism.\\
--what is the duality of didacticism vs aestheticism?\\
+-what is the duality of didacticism vs aestheticism?
 
 Didacticism...\\
 -what is didacticism?\\
 -how does it relate to visualisations?\\
--how does it relate to education?\\
+-how does it relate to education?
 
 Aestheticism...\\
 -what is aestheticism?\\
@@ -124,439 +132,5 @@ Live coding has much potential to improve the aesthetics of
 
 Didacticism vs aestheticism...\\
 -can we combine the two?\\
--can we completely separate the two?\\
-
-
-
-
-
-
-
-% Research Project - Article Summaries
-
-% A principled approach to developing new languages for live coding
-% \begin{itemize}
-% \item Focusses on musicians entering the field of live coding
-% \item Discuss domain specific languages (e.g. spreadsheets in accounting)
-% \item Approaching live coding as a way to extend the musician rather than the programmer becoming a musician
-% \item Interfacing with external hardware
-% \item Cognitive ergonomics of language design
-% \item Declarative constraint propagation
-% \item Direct manipulation over indirect manipulation allows audience to perceive relationship between action and effect
-% \item Use supercollider as the live coding platform
-% \item Critical technical practice
-% \end{itemize}
-
-% Algorithms as Scores: Coding Live Music
-% \begin{itemize}
-% \item considers live coding as a new branch of musical score
-% \item Kadinsky and Klee representing synchronic process (painting) as diachronic process (music)
-% \item graphical representations of music
-% \item graphical scores as special representation of an algorithm
-% \item Claudia Molitor’s 3D Score Series - engaging with score
-% \item Basically describes the history and modern live coding practice
-% \end{itemize}
-
-% An Approach to Musical Live Coding
-% \begin{itemize}
-% \item aa-cell performances
-% \item does remapping a function to a random function produce measurable results
-% \item Overview of the live coding environment and practice
-% \end{itemize}
-
-% Visual Music Instrument
-% \begin{itemize}
-% \item synæsthetic composition, computational expression and the dynamics of performance are important research axes
-% \item History of live visual performances
-% \item painted composition is closer to a single musical instance than it is to musical composition.
-% \item music is abstract, visuals are moving that direction too
-% \item Visual Music Instrument Design
-% \end{itemize}
-
-% A Principled Taxonomy of Software Visualisation
-% \begin{itemize}
-% \item Discusses visualisation of algorithm
-% \item level of abstraction vs level of animation
-% \item aspect vs abstractness vs animation vs automation
-% \item data vs code
-% \item static vs animated
-% \item No demonstrable gains from software visualisation seen
-% \item Very old article
-% \end{itemize}
-
-% A Model-Based Visualisation Taxonomy
-% \begin{itemize}
-% \item scientific visualisation vs information visualisation
-% \item model based visualisation taxonomy divides groups into continuous and discrete models
-% \item continuous model divides into 3 dimensions including dependent variables, data type, and number of independent variables
-% \item discrete model divides into connected and unconnected data types
-% \end{itemize}
-
-%  A Taxonomy of Glyph Placement Strategies for Multidimensional Data Visualisation
-%  \begin{itemize}
-% \item shows taxonomy of glyph placement strategies
-% \item not immediately relevant
-% \end{itemize}
-
-% A Taxonomy of Program Visualisation Systems
-% \begin{itemize}
-% \item Scope (Code, Data state, Control state, Behaviour)
-% \item Abstraction Level (Direct representation, Structural representation, synthesised representation)
-% \item Specification method (Predefinition, Annotation, Declaration, Manipulation)
-% \item Interface (Simple objects, Composite objects, visual events, dimensionality, multiple worlds, control interaction, image interaction)
-% \item Presentation (Analytical, Explanatory, Orchestration)
-% \end{itemize}
-
-% Improvising Synesthesia
-% \begin{itemize}
-% \item introduction of the term comprovisation
-% \item has been no visual creative process in which the artistic process is available to the audience
-% \item improvisation of visual art
-% \end{itemize}
-
-% Live Coding Towards Computational Creativity
-% \begin{itemize}
-% \item describes what live coding is and potential future directions in terms of computational creativity
-% \item includes live coder survey (http://doc.gold.ac.uk/∼ma503am/writing/icccx/
-% \end{itemize}
-
-% Painterly Interface for Audiovisual Performance
-% \begin{itemize}
-% \item Describes the history of audio visual performance (incl. Castel’s Ocular Harpsichord, Thomas Wilfred’s Clavilux, Oskar Fischinger’s Lumigraph, Charles Dockum’s MobilColor Projector, )
-% \end{itemize}
-
-% AVVX - A Vector Graphics Tool for Audiovisual Performances
-% \begin{itemize}
-% \item Survey for ease of use and utility of the AVVX engine
-% \end{itemize}
-
-% Content-based Mood Classification for Photos and Music
-% \begin{itemize}
-% \item Variety of emotion classifications:
-% \begin{itemize}
-% 	\item Thayer’s model: stress vs energy
-% 	\item Russell’s model: pleasantness vs alertness
-% 	\item Tellegen-Watson-Clark model: positive affect vs negative affect
-% 	\item Reisenzeins model: pleasantness vs alertness
-% 	\end{itemize}
-% \item Classified images and music as: aggressive, euphoric, melancholic, calm
-% \item Found that a combination of dimensional models and category-based models provided the most useful results
-% \end{itemize}
-
-% Dimensions in Program Synthesis
-% \begin{itemize}
-% \item Three dimensions in program synthesis: User intent, search space (expressiveness vs efficiency), search technique (eg. brute-force)
-% \end{itemize}
-
-% Dimensions of Software Architecture for Program Understanding
-% \begin{itemize}
-% \item Three dimensions of software architecture that affect user involvement: level of abstraction, degree of domain specific knowledge, degree of automation
-% \end{itemize}
-
-% Gathering Audience Feedback on an Audiovisual Performance
-% \begin{itemize}
-% \item Modes of engagement: Perceptive, interpretive and reflective
-% \end{itemize}
-
-% The Programming Language as a Musical Instrument
-% \begin{itemize}
-% \item Discusses differences between software engineering and live coding as a musical practice
-% \item Utilitarian design focus helps live coders see beyond the narrow focus of live coding performance itself and see the underlying software engineering focus including requirements analysis, design, reuse, debugging, maintenance etc.
-% \end{itemize}
-
-% Rethinking Visualization: A High-Level Taxonomy
-% \begin{itemize}
-% \item Old method of categorisation: Scientific vs Information (incl. factors such as scientific vs non\item scientific, physical vs abstract, spacialisation given vs specialisation chosen)
-% \item Introduce \'model based\' visualisation techniques
-% \item “our main objective is to provide insight into how different research areas relate, not to provide guidelines for visualisation design."
-% \item Terminology - Object of study, Data, Design model, User model (see image in article for relationship)
-% \item Taxonomy developed within this article consists of {discrete, continuous} vs display attributes (eg. given, constrained, chosen) per the design model
-% \item Continuous model visualisation is broken down according to the number if independent and dependent variables and the type of the dependent variables (incl. scale, vector and tensor)
-% \item Discrete model visualisations are broken down into wether the data structure or data values are visualised
-
-% \item Article discusses lower level taxonomy including - spacial relationships, numeric trends, patterns, connectivity, filtering
-% \end{itemize}
-
-% Heuristics for Information Visualization Evaluation
-% \begin{itemize}
-% \item suggests that between 3 and 5 heuristics for evaluation would be enough
-% \end{itemize}
-
-
-
-
-
-
-
-
-
-% \section{Outline}
-% \label{sec:outline}
-% Historic Programming Approach (history of coding - eg. communication of an idea into code)
-% Programming for the Modern World (discussion of cyberphysical programming, live coding, collaboration etc...)
-% Historic Visualisation Approach (history of visualisations)
-% Visualisations as Communication (discussion of code visualisations)
-
-
-
-
-
-
-
-
-
-
-
-
-
-% \subsection{Music vs Visualisation}
-
-% In addition, there has been a move towards manipulation of the visuals in synchronisation with the ....
-
-% \section{Source Code Visualisation}
-% \label{sec:musicvisualisation}
-
-% \section{Music Visualisation}
-% \label{sec:musicvisualisation}
-
-% \section{Live Coding}
-% \label{sec:livecoding}
-
-% (focus on developing a narrative concerning what needs to be done within live coding to achieve the software engineering goals and what needs to be done to develop successful visualisations within the field of live coding)
-% \\\\
-% Live coding describes the process of exposing the programming process to a live audience. -talk more about what live coding is
-% \\\\
-% Live coding history... . -talk more about history of live coding
-% \\\\
-% There exists much discussion within the live coding research body (eg. ...) about the potential for live visual manipulation and examination of the current progress within the field to achieve this.
-
-
-
-% \subsection{Taxonomy}
-
-% \subsection{Live Performance}
-
-
-% \section{Software Engineering Practice}
-% \label{sec:softwareengineering}
-
-% As the field of live coding develops, the relevance of both the application of software engineering practice to the field and the relevance of live coding to the field of software engineering has become highly apparent...
-
-% % \subsection{Application of Software Engineering to Live Coding}
-% The application of software engineering to live coding...
-% (\cite{Blackwell2005} paper incl. requirements analysis, design, coding, project management, reuse, debugging, documentation, comprehension and maintenance)
-
-% \subsection{Design}
-% Design...
-% \subsection{Coding}
-% Coding...
-% \subsection{Comprehension}
-% Comprehension...
-
-% \subsection{Application of Live Coding to Software Engineering}
-% The application of live coding to software engineering...
-
-% \subsection{Visualisation Framework}
-
-% \subsection{Code Understanding}
-
-
-% \subsubsection{Multidisciplinary Cohesion}
-
-
-
-
-
-
-
-
-% -----
-% The Early History of Software Visualization (Baecker, Ronald chapter of book) discusses the purpose of software visualisation as enhancing program representation, presentation and appearance. Discusses further that programmers have always used visualisation tools (eg. diagrams) to aid in illustrating program function, structure and process. States further that any of typography, symbols, images, diagrams and animation can present information more concisely than formal/natural programming languages. 
-
-% The Early History of Software Visualisation (Baecker) gives the major \'threads\' of activity in the development of software visualsation as (1) the presentation of source code, (2) representation of data structures, (3) animation of program behaviour and (4) systems for software visualisation and (5) animation of concurrency.
-% ---------
-
-% Exposing the Programming Process discusses the focus of visualsations on the execution of the program rather than the development of the program.
-
-% Found demonstrating the following concepts useful for teaching programming:
-% - use of an IDE
-% - incremental development
-% - testing
-% - refactoring
-% - error handling
-% - use of online documentation
-% - model-based programming
-
-% ---------
-% Seven Basic Principles of Software Engineering (Boehm, 1983) discusses the following principles:
-% (1) manage using a phased life-cycle plan
-% (2) perform continuous validation
-% (3) maintain disciplined product control
-% (4) use modern programming practices
-% (5) maintain clear accountability for results
-% (6) use better and fewer people
-% (7) maintain a commitment to improve the process
-
-% ------------
-
-% -"A person understands a program because he is able to relate the structures of the program and its environment to his conceptual knowledge about the world." - Program Understanding and the Concept Assignment Problem, Biggerstaff et al
-
-% -"A person understands a program when he is able to explain the program, its structure, its behavior, its effects on its operational context, and its relationships to its application domain in terms that are qualitatively different from the tokens used to construct the source code of the program." - Program Understanding...
-
-% -------------
-
-% Toward a Perceptual Science of Multidimensional Data Visualization: Bertin and Beyond discusses that info visualisations can be constructed by mapping one data dimension to brightness, colors or orientations, however, it goes on to say that in practice this does not work very well. \"Humans can only perceive a limited number of data dimensions\".
-
-% Discusses fundamental graphic primitives/procedures as invariants, components, correspondences and marks. Components define variational concepts. Invariants relate components. Marks (three types/ \"implantations\" incl. point, line and area) are graphical representations on the visualisation that represent invariants. Correspondences are the relationships between and among components.
-
-% Discusses that there are two \"Functionally different classes of visual variable\" including planar and retinal variables. Planar includes any spatial information and retinal variables include things such as size, color, shape, orientation, texture and brightness (which can use marks to be displayed).
-
-% (Check source) Bertin states that it is only possible to effectively map three graphic variables including two planar dimensions and one retinal dimension.
-
-% Bertin also did not discuss motion within his variables. Investigation of this in the context of temporal visualisation would be enlightening.
-
-% ------------
-% Cleveland and Mcgill accuracy vs genericity. Hierarchy of effective visualisation elements in terms of the accuracy they provide or how they allow generalisation.
-
-% --------------
-% Model:
-% Quadrant model...
-% Didactic vs Aesthetic (Intent) and Generic vs Specific (Coverage)
-
-% \section{The Role of the Programmer}
-
-
-
-
-
-
-
-% ----------------------------------------------------
-
-% \subsection{Taxonomy}
-
-
-% -Goal: categorising existing visualisations
-% -Gaps in existing models: elaboration of dynamic software visualisation taxonomies, taxonomy of music visualisation
-
-% -High level features:
-% 	-Shape
-% 	-Size
-% 	-Orientation
-% 	-Dimensionality
-% 	-Colour
-% -‘Rethinking Visualisation: A High Level Taxonomy' discusses lower level taxonomy including - spacial relationships, numeric trends, patterns, connectivity and filtering
-
-% -distinction between scientific visualisation and information visualisation (Infovis discussed in Rethinking Visualization: A High-Level Taxonomy)
-% -Information visualisation vs Scientific visualisation - “infovis when spacial representation is chosen, scivis when spacial representation is given”
-% -Taxonomy developed within this article consists of {discrete, continuous} vs display attributes (eg. given, constrained, chosen) per the design model
-% -Discussed in A Principled Taxonomy of Software Visualisation (1993)
-% -Myers (1986) classifies using level of abstraction vs level of animation. (Visual Programming, Programming by Example… A Taxonomy) Also uses {static, dynamic} vs {code, data}. Minimal discussion of dynamic visualisations; no elaboration.
-
-% -Most effective visualisation technique might be \"Self-illustrating phenomena\" \\
-
-% Both code and music present a wide variety of visualisation techniques. These techniques will be summarised below.
-
-
-% \subsubsection{Code Visualisation}
-
-% % \paragraph{Code Augmentation}
-% Visuals based on Code Augmentation (eg. infographics, annotations, sparklines)\\
-% Visuals based on Code Augmentation
-% -infographics
-% -annotations (visual code annotations for cyberphysical programming)
-% -sparklines (Visual Monitoring of Numeric Variables Embedded in Source Code)
-% -etc
-
-% % \paragraph{Code Abstraction}
-% Visuals based on Abstraction (eg. scheme bricks, gource, code flow)\\
-
-% Visuals based on Abstraction
-% -scheme bricks
-% -gource
-% -code flow
-% -etc
-% % \paragraph{Software Domain Visualisations}
-% Domain Visualisations (eg. fluid source code views, indentation, class diagrams)\\
-
-% Domain Visualisations
-% -understood by the domain, not necessarily useful for observers
-% -eg. eclipse, visual studio code displays, auto updating class diagrams etc
-% -fluid source code views (Fluid Source Code Views for Just In-Time Comprehension)
-% -class diagrams
-% -debugging
-% -tracing
-
-% \subsubsection{Music Visualisation}
-% -music is similar to software in a number of ways
-% -often has standardised notation
-% -expression may diverge from notation
-% -visual representation is by default static
-% -can be visualised using dynamic methods
-% -understanding can augmented with visualisation techniques
-
-% % \paragraph{Generative Visualisations}
-% Generative Visualisations (eg. frequency wave, VLC/iTunes visualisations)\\
-
-% Generative Visualisations
-% -\"generates animated imagery based on a piece of music\"
-% -eg. change with loudness and frequency spectrum
-% -VLC, iTunes etc.
-% -visualisations that respond to music
-
-% % \paragraph{Associative or Emotive Visualisations}
-% Associative or Emotive Visualisations (eg. video art, sampled video)\\
-
-% Associative or Emotive Visualisations
-% -includes areas such as synaesthesia (Movies from Music)
-% -eg. video art, sampled video with sampled music
-% -extension/exploration of Emotion-based Music Visualisation using Photos
-% -Classifications including: sublime, sad, touching, easy, light, happy, exciting, grand
-
-
-% % \paragraph{Music Domain Visualisations}
-% Domain Visualisations (eg. ableton, sheet music)\\
-
-% Domain Visualisations
-% -understood by the domain, not necessarily useful for observers (A Visualisation of Music)
-% -could include music creation tools, for example abelton etc.
-% -graphic representations that have one-to-one mapping
-% -direct visualisation
-% -eg. sheet music (again, A Visualisation of Music)
-
-% \subsubsection{Methodology Visualisation}
-
-
-% \subsection{Design}
-
-% -NOTE: make it clear that this is not intended to be a visual programming language environment. The intention of this project is to assist in code comprehension 
-
-% \subsubsection{Cognitive Dimensions of Notation}
-% $http://en.wikipedia.org/wiki/Cognitive_dimensions$
-
-% \subsubsection{Visual Primitives}
-
-% structural units include line, shape, color, form, motion, texture, pattern, direction, orientation, scale, angle, space and proportion.
-
-% deutsch limit (max 50 visual elements onscreen)
-
-% \subsubsection{Mapping Methodology}
-
-
-
-% --------------------------
-% \subsection{Live Coding}
-
-% -live coding is a platform for bridging these two domain visualisations 
-% -what is live coding?
-% -method of programming in front of an audience for artistic or informative purposes
-% -the live coder displays their screen to an audience, showing their code as they are working on it building a functional program
-% -makes use of interactive programming environments 
-% -program running while changes are being made 
-% -often focusses on improvisation - the programmer often has to think on their feet
-
-% -what does live coding achieve?
-% -gives the audience insight into the programming process - i’ll be taking advantage of this
-
-
+-can we completely separate the two?
 
