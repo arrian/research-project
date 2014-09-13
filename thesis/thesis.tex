@@ -7,13 +7,13 @@
 \usepackage{acmnew-xref}%edited `Bibliography' title to `References'
 
 %% Custom Arrian Stuff
-\usepackage{graphicx}
-\usepackage{subcaption}
-\usepackage[margin=1.0in]{geometry}
-\setlength\parindent{0pt}
+% \usepackage{graphicx}
+% \usepackage{subcaption}
+% \usepackage[margin=1.0in]{geometry}
+% \setlength\parindent{0pt}
 \usepackage[titletoc]{appendix}
-\usepackage{float}
-\setlength{\parindent}{15pt}
+% \usepackage{float}
+% \setlength{\parindent}{15pt}
 
 \usepackage{color}
 \newcommand{\citetemp}[1]{{\color{red}[#1]}}
@@ -50,7 +50,8 @@
 \cleardoublepage
 \pagestyle{headings}
 \markboth{Contents}{Contents}
-\tableofcontents
+% \tableofcontents
+{\tableofcontents \let\cleardoublepage\clearpage \listoffigures \listoftables}
 
 % \listoffigures
 % \listoftables

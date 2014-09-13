@@ -4,11 +4,23 @@
 
 Software visualisation is building momentum within the space of live coding. This section seeks to identify the reason for this momentum and identify the purpose and potential for visualisations within this field.
 
+% • Provide a context for the research 
+% • Justify the research 
+% • Ensure the research hasn't been done before (or that it is not just a "replication 
+% study") 
+% • Show where the research fits into the existing body of knowledge 
+% • Enable the researcher to learn from previous theory on the subject 
+% • Illustrate how the subject has been studied previously 
+% • Highlight flaws in previous research 
+% • Outline gaps in previous research 
+% • Show that the work is adding to the understanding and knowledge of the field 
+% • Help refine, refocus or even change the topic 
+
 \section{Software}
 
 Understanding changing software is one of the most important goals within the space of software engineering practice~\cite{Tao2012}. It is the nature of software to change~\cite{Purushothaman2005} and there is a need for not only the programmer to understand the software but also a knowledge transfer to take place between those creating the software and those observing the software as it changes~\citetemp{x}.
 
-Programming languages are the formal languages of software. These programming languages are typically represented by source code, generally in a plain text format~\cite{Badros2000}. Plain text format is limited requiring an interpretation step (parsing and compilation) to acheive a functioning program~\cite{Badros2000}.
+Programming languages are the formal languages of software. These programming languages are typically represented by source code, generally in a plain text format. Plain text format is limited requiring an interpretation step (parsing and compilation) to acheive a functioning program~\cite{Badros2000}.
 
 The concept of alternative source code representations is not new. Alternative source code representations include diagrams~\citetemp{x} and, more recently, visual languages~\citetemp{x}. These vary greatly in the relation to the source code with some representations presenting a highly simplified code representation when compared to the complete source code representation~\citetemp{x}.
 
@@ -16,52 +28,57 @@ Although it is the nature of software to change, static diagrams have traditiona
 
 Visual languages provide an alternative method of interaction with the software development process. However, visual languages are often not suited to general purpose programming~\cite{Myers1989}, providing only a subset of a full-featured text-based language.
 
+The limitations of text-based languages have been identified...
+-studies hint at the need for alternative representations of software and evaluation of their effectiveness.
+
+There has not been extensive examination of the effectiveness of alternative representations of software...
+
 \section{Visualisation}
 
-Visualisation is widely understood as ``the use of computer-supported, interactive, visual representations of data to amplify cognition''~\cite{Card1999}. Further extensions of this definition discuss the need to transfer knowledge~\cite{Burkhard}.
+Visualisation is widely understood as ``the use of computer-supported, interactive, visual representations of data to amplify cognition''~\cite{Card1999}. Further extensions of this definition discuss the need to transfer knowledge~\cite{Burkhard}. These definitions are summarised in Figure~\ref{fig:model-of-visualisation}.
+
+\begin{figure}
+  \centering \includegraphics[width=\columnwidth]{../images/diagrams/wijk-model-of-visualisation.pdf}
+  \caption{Generic model of visualisation \protect\cite{VanWijk2005}.}
+\label{fig:model-of-visualisation}
+\end{figure} 
 
 % some foundational softvis references
 Software visualisation is the process of representing the characteristics of computer programs visually~\cite{Stasko1992} in order to improve understanding~\cite{Diehl2007}. The advantage of providing a visual representation over the more traditional text-based representation is that the text-based approach does not take full advantage of the human visual information processing capability~\cite{Myers1989}.
 
-% From ozchi paper
-Traditional approaches to source code visualisation
-(see~\cite{Novais2013} for a review) often focus on structure of the
-source code (e.g. visualising complex object/class relationships)
-rather than the \emph{process} of programming. In a process-oriented
-activity such as live coding, different code visualisation techniques
-are necessary~\cite{McLean2010b,Magnusson2013}. However, these
-academic treatments of code visualisation in live coding adopt a
-survey-based approach, and the techniques discussed have not been
-subject to empirical evaluation.
-
 Initial efforts to classify software visualisations identified two axes: whether the visualisation illustrated the code, the data or the algorithm and whether the visualisation was static or dynamic~\cite{Myers1989}. Following taxonomies characterised software visualisations according to the aspect of the program, the abstractness of the visualisation, the animation and the automation of the visualisation~\cite{Stasko1992}.
 
-% Old stuff - temp
-The Early History of Software Visualization (Baecker, Ronald chapter of book) discusses the purpose of software visualisation as enhancing program representation, presentation and appearance. Discusses further that programmers have always used visualisation tools (eg. diagrams) to aid in illustrating program function, structure and process. States further that any of typography, symbols, images, diagrams and animation can present information more concisely than formal/natural programming languages. 
-
-% Old stuff - temp
-The Early History of Software Visualisation (Baecker) gives the major `threads' of activity in the development of software visualsation as (1) the presentation of source code, (2) representation of data structures, (3) animation of program behaviour and (4) systems for software visualisation and (5) animation of concurrency.
-
-% Old stuff - temp
-Toward a Perceptual Science of Multidimensional Data Visualization: Bertin and Beyond discusses that info visualisations can be constructed by mapping one data dimension to brightness, colors or orientations, however, it goes on to say that in practice this does not work very well. ``Humans can only perceive a limited number of data dimensions''.
-
-% Old stuff - temp
-Discusses fundamental graphic primitives/procedures as invariants, components, correspondences and marks. Components define variational concepts. Invariants relate components. Marks (three types/``implantations'' including point, line and area) are graphical representations on the visualisation that represent invariants. Correspondences are the relationships between and among components.
-
-% Old stuff - temp
-Discusses that there are two ``Functionally different classes of visual variable'' including planar and retinal variables. Planar includes any spatial information and retinal variables include things such as size, color, shape, orientation, texture and brightness (which can use marks to be displayed).
-
-% Old stuff - temp
-Traditional software visualisation falls into a variety of categories. Each visualisation category corresponds to a reason for visualising the code.\\
--what are the categories?\\
--what reason for visualising the code do the categories correspond to?
-
-% Old stuff - temp
-The (abstract/graphical/animated) approach provides the basis for effective visualisations. Effective visulisations...\\
--what do effective visualisations do?\\
--what do effective visualisations achieve?\\
+% From ozchi paper
+Traditional approaches to software visualisation (see~\cite{Novais2013} for a review) often focus on structure of the source code (e.g. visualising complex object/class relationships) rather than the \emph{process} of programming. In a process-oriented activity such as live coding, different code visualisation techniques are necessary~\cite{McLean2010b,Magnusson2013}. However, these academic treatments of code visualisation in live coding adopt a survey-based approach, and the techniques discussed have not been subject to empirical evaluation.
 
 Visualisations have the capacity to present information more effectively than traditional programming languages. Nevertheless, software visualisations still require significant development to benefit in the understanding of the complexity of software ~\cite{Baecker1995}. Effective software visualisations contribute to making software easier to understand, reflecting the software's history through the lifecycle, facilitating the transfer of knowledge from the programmer to the observer, making important structures visible and managing software complexity~\cite{Baecker1995}.
+
+% \section{Visual Mapping (notes)}
+
+% % Old stuff - temp
+% The Early History of Software Visualization (Baecker, Ronald chapter of book) discusses the purpose of software visualisation as enhancing program representation, presentation and appearance. Discusses further that programmers have always used visualisation tools (eg. diagrams) to aid in illustrating program function, structure and process. States further that any of typography, symbols, images, diagrams and animation can present information more concisely than formal/natural programming languages.
+
+% % Old stuff - temp
+% The major `threads' of activity in the development of software visualsation as (1) the presentation of source code, (2) representation of data structures, (3) animation of program behaviour and (4) systems for software visualisation and (5) animation of concurrency~\cite{Baecker1995}.
+
+% % Old stuff - temp
+% Information visualisations can be constructed by mapping one data dimension to brightness, colors or orientations, however, it goes on to say that in practice this does not work very well. In particular, ``humans can only perceive a limited number of data dimensions''~\cite{Green}.
+
+% % Old stuff - temp
+% Discusses fundamental graphic primitives/procedures as invariants, components, correspondences and marks. Components define variational concepts. Invariants relate components. Marks (three types/``implantations'' including point, line and area) are graphical representations on the visualisation that represent invariants. Correspondences are the relationships between and among components.
+
+% % Old stuff - temp
+% There are two ``functionally different classes of visual variable''~\citetemp{x} including planar and retinal variables. Planar includes any spatial information and retinal variables include things such as size, color, shape, orientation, texture and brightness (which can use marks to be displayed).
+
+% % Old stuff - temp
+% Traditional software visualisation falls into a variety of categories. Each visualisation category corresponds to a reason for visualising the code.\\
+% -what are the categories?\\
+% -what reason for visualising the code do the categories correspond to?
+
+% % Old stuff - temp
+% The (abstract/graphical/animated) approach provides the basis for effective visualisations. Effective visulisations...\\
+% -what do effective visualisations do?\\
+% -what do effective visualisations achieve?
 
 \section{Live Coding}
 
@@ -85,17 +102,17 @@ Lastly, live coding allows for direct manipulation and refinement of the running
 % -how does live coding maintain attention?\\
 % -can retain attention through the output (music), the process (programming) or the field (technology).
 
-% Old stuff - temp
-Live coding is a good application space for visualisations. Visualisations are the natural progression of the medium following musical performance and there is yet to be significant contribution to the field.
+% % Old stuff - temp
+% Live coding is a good application space for visualisations. Visualisations are the natural progression of the medium following musical performance and there is yet to be significant contribution to the field.
 
-% Old stuff - temp
-Live coding is a good case study for visualisations. The live coding style of performance provides the basis for evaluation of the effectiveness of visualisation techniques.\\
--why is it a good case study?\\
--why is it good for visualisations?
+% % Old stuff - temp
+% Live coding is a good case study for visualisations. The live coding style of performance provides the basis for evaluation of the effectiveness of visualisation techniques.\\
+% -why is it a good case study?\\
+% -why is it good for visualisations?
 
 \section{Enjoyment and Understanding}
 
-There is currently a search for software visualisations that increase enjoyment and understanding~\cite{McLean2010a}. Here enjoyment refers to the perceived benefit gained from observing the visualisations regardless of the level of understanding. Understanding refers to the ability of an observer or audience to comprehend the abstract thinking process of the programmer. 
+There is currently a search for software visualisations that increase enjoyment and understanding~\cite{McLean2010a}. Here enjoyment refers to the perceived benefit gained from observing the visualisations regardless of the level of understanding. Understanding refers to the ability of an observer or audience to comprehend the abstract thinking process of the programmer.
 
 Enjoyment is the most common reaction to the positive effect of media~\cite{Vorderer2004}. Enjoyment is one of the fundamental goals of the media entertainment industry and is usually characterised by ``pleasurable affective response to a stimulus''~\cite{Brock2004}. Enjoyment results in increased attention to the stimulus and better learning outcomes.\\
 -how do these factors relate to understanding?\\
@@ -111,9 +128,10 @@ Understanding and enjoyment are often considered opposite concepts when implemen
 -what is the duality?\\
 -how does this relate to visualisations?
 
+
 \section{Didacticism and Aestheticism}
 
-Enjoyment and understanding are often closely associate with the concepts of didacticism and aestheticism. 
+Enjoyment and understanding are often closely associate with the concepts of didacticism and aestheticism.
 
 Didacticism refers to the ultimate goal of teaching. This approach mirrors the concept of understanding from the previous section. A didactic approach intends to increase the level of understanding.\\
 -what is didacticism?\\
@@ -134,4 +152,11 @@ The artistic nature of the live coding field cannot be ignored when evaluating t
 Software visualisations within the space of live coding have the potential to manipulate these two variables. For example, by increasing visual interest it may be possible to increase aesthetic appeal while reducing didactic appeal due to increased complexity and confusion~\citetemp{x}.
 
 Questions raised within the literature suggest that it may be possible to combine or balance the goals of didacticism and aestheticism in order to manipulate understanding and enjoyment~\citetemp{x}. On the other hand, it may be that these two concepts cannot be completely separated. This will be further examined in the following sections.
+
+The educational aspects of software visualsations have been examined in some studies~\citetemp{x,x} though few have applied these visualisations to areas outside of the commercial software development areas.
+
+There has been an initial examination of the aesthetics in graph drawing~\citetemp{x} and within the space of software graph visualsations~\citetemp{x}, though no studies have examined the effectiveness of process-driven software visualisations. This is particularly the case for the examination of live coded visualisations and the effect on audiences.
+
+Some frameworks for both aesthetic evaluation of visualisations
+~\citetemp{x} and didactic evaluation of visualisations~\citetemp{x} have been developed though a thorough evaluation of the combination of the two concepts has not been considered~\citetemp{x}.
 
