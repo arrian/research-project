@@ -14,6 +14,19 @@
 \usepackage[titletoc]{appendix}
 % \usepackage{float}
 % \setlength{\parindent}{15pt}
+% {\renewcommand{\arraystretch}{1.5}
+
+% for `inspirational' quotes - from http://tex.stackexchange.com/questions/53377/inspirational-quote-at-start-of-chapter
+\makeatletter
+\renewcommand{\@chapapp}{}% Not necessary...
+\newenvironment{chapquote}[2][2em]
+  {\setlength{\@tempdima}{#1}%
+   \def\chapquote@author{#2}%
+   \parshape 1 \@tempdima \dimexpr\textwidth-2\@tempdima\relax%
+   \itshape}
+  {\par\normalfont\hfill--\ \chapquote@author\hspace*{\@tempdima}\par\bigskip}
+\makeatother
+
 
 \usepackage{color}
 \newcommand{\citetemp}[1]{{\color{red}[#1]}}

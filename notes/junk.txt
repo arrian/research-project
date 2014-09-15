@@ -426,4 +426,33 @@
 % -gives the audience insight into the programming process - i’ll be taking advantage of this
 
 
+% --------------------------------
+
+
+% \section{Visual Mapping (notes)}
+
+% % Old stuff - temp
+% The Early History of Software Visualization (Baecker, Ronald chapter of book) discusses the purpose of software visualisation as enhancing program representation, presentation and appearance. Discusses further that programmers have always used visualisation tools (eg. diagrams) to aid in illustrating program function, structure and process. States further that any of typography, symbols, images, diagrams and animation can present information more concisely than formal/natural programming languages.
+
+% % Old stuff - temp
+% The major `threads' of activity in the development of software visualsation as (1) the presentation of source code, (2) representation of data structures, (3) animation of program behaviour and (4) systems for software visualisation and (5) animation of concurrency~\cite{Baecker1995}.
+
+% % Old stuff - temp
+% Information visualisations can be constructed by mapping one data dimension to brightness, colors or orientations, however, it goes on to say that in practice this does not work very well. In particular, ``humans can only perceive a limited number of data dimensions''~\cite{Green}.
+
+% % Old stuff - temp
+% Discusses fundamental graphic primitives/procedures as invariants, components, correspondences and marks. Components define variational concepts. Invariants relate components. Marks (three types/``implantations'' including point, line and area) are graphical representations on the visualisation that represent invariants. Correspondences are the relationships between and among components.
+
+% % Old stuff - temp
+% There are two ``functionally different classes of visual variable''~\citetemp{x} including planar and retinal variables. Planar includes any spatial information and retinal variables include things such as size, color, shape, orientation, texture and brightness (which can use marks to be displayed).
+
+% % Old stuff - temp
+% Traditional software visualisation falls into a variety of categories. Each visualisation category corresponds to a reason for visualising the code.\\
+% -what are the categories?\\
+% -what reason for visualising the code do the categories correspond to?
+
+% % Old stuff - temp
+% The (abstract/graphical/animated) approach provides the basis for effective visualisations. Effective visulisations...\\
+% -what do effective visualisations do?\\
+% -what do effective visualisations achieve?
 
