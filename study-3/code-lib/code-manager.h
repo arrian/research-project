@@ -46,11 +46,17 @@ public:
 	void select(int selection);//simple selection
 	void select(int selection, int selectionEnd);//simple selection
 	void error(std::string message);//error from evaluation
+	void cursor(int selection, int screenMin, int screenMax, int xPosition, int yPosition);
 
 	std::vector<CodeState> states;
 	std::string code;//most recent code
 	std::string evaluation;//most recent evaluation... code most likely to cause error	
 
+	//Metrics
+	int screenMin;
+	int screenMax;
+	int xPosition;
+	int yPosition;
 
 	CodeState* updateState(std::string line, int index, int stateCount, int lineCount, int charCount);//returns the updated state
 	void updateLine(CodeState* state, std::string line, int index, int lineCount, int charCount);
@@ -73,6 +79,7 @@ extern "C"
 	void code_manager_select(code_manager* manager, int selection);
 	void code_manager_select_2(code_manager* manager, int selectionStart, int selectionEnd);
 	void code_manager_error(code_manager* manager, char* message);
+	void code_manager_cursor(code_manager* manager, int cursorPosition, int screenMin, int screenMax, int xPosition, int yPosition);
 
 	int code_manager_states_count(code_manager* manager);
 	code_state* code_manager_states_get(code_manager* manager, int index);

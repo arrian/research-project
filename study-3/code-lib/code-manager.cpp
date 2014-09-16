@@ -126,6 +126,16 @@ void CodeManager::error(std::string message)
 
 }
 
+void cursor(int selection, int screenMin, int screenMax, int xPosition, int yPosition)
+{
+	select(selection);
+
+	this->screenMin = screenMin;
+	this->screenMax = screenMax;
+	this->xPosition = xPosition;
+	this->yPosition = yPosition;
+}
+
 CodeState* CodeManager::updateState(std::string line, int index, int stateCount, int lineCount, int charCount)
 {
 	CodeState* state = find(line);
@@ -246,6 +256,11 @@ void code_manager_select_2(code_manager* manager, int selectionStart, int select
 void code_manager_error(code_manager* manager, char* message)
 {
 	reinterpret_cast<CodeManager*>(manager)->error(std::string(message));
+}
+
+void code_manager_cursor(code_manager* manager, int cursorPosition, int screenMin, int screenMax, int xPosition, int yPosition)
+{
+	reinterpret_cast<CodeManager*>(manager)->cursor(cursorPosition, screenMin, screenMax, xPosition, yPosition);
 }
 
 int code_manager_states_count(code_manager* manager)

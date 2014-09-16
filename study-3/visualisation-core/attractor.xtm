@@ -136,7 +136,7 @@
                 (poly_scene_physics_remove_child (attractor_get_scene a) (attractor_get_entity a))
                 (attractor_set_physics_entity a (poly_scene_physics_add_child (attractor_get_scene a) (attractor_get_entity a) (attractor_is_static a)))
                 (poly_physics_entity_set_velocity (attractor_get_physics_entity a) vx vy);;-100.0 0.0)
-                (printf "%f %f \n" vx vy)
+                ;; (printf "%f %f \n" vx vy)
                 )
             a))))
 

@@ -4,7 +4,7 @@
 
 (bind-func get_x_for_index
   (lambda (index)
-    (printf "%d\n" index)
+    ;; (printf "%d\n" index)
     (- 0.0 (- (* 250.0 (i64tod (/ index 3))) 750.0))))
 
 (bind-func get_y_for_index
@@ -18,7 +18,7 @@
 (bind-func widget_create
   (lambda (id:i64 x:double y:double size:double index:i64)
     (let ((attractor (attractor_create id POLY_SCENE null 1 x y size 1.0 0.0 0.0 1.0)))
-        (printf "creating widget\n")
+        ;; (printf "creating widget\n")
         (Widget_h id attractor null #f index))))
 
 (bind-func widget_get_id

@@ -26,6 +26,16 @@
       )
 	void))
 
+;; cursor_pos pos_screen_min pos_screen_max pos_x pos_y
+(bind-func handle_cursor
+  (lambda (args:i32*)
+    (code_manager_cursor CODE_MANAGER (i32toi64 (unswap32i (pref args 0)))
+                                      (i32toi64 (unswap32i (pref args 1))) 
+                                      (i32toi64 (unswap32i (pref args 2)))
+                                      (i32toi64 (unswap32i (pref args 3)))
+                                      (i32toi64 (unswap32i (pref args 4))))
+    void))
+
 ;;(code_manager_select CODE_MANAGER (i32toi64 (unswap32i (pref args 1))))
       ;; (printf "selection ")
       ;; (dotimes (i (unswap32i (pref args 0)))
@@ -80,6 +90,7 @@
             ;; ((= (strcmp address "/interface/keyboard") 0) (handle_keyboard data));; unused
       			((= (strcmp address "/interface/error") 0) (handle_error (event_get_data e))) ;; args: message
             ((= (strcmp address "/interface/focus") 0) (handle_focus (event_get_data e))) ;; args: file_name
+            ((= (strcmp address "/interface/cursor") 0) (handle_cursor data))
   			    (else void))
 		  ;; (printf "handled %s\n" address)
       void)))
