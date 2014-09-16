@@ -126,7 +126,7 @@ void CodeManager::error(std::string message)
 
 }
 
-void cursor(int selection, int screenMin, int screenMax, int xPosition, int yPosition)
+void CodeManager::cursor(int selection, int screenMin, int screenMax, int xPosition, int yPosition)
 {
 	select(selection);
 
