@@ -16,7 +16,11 @@
 				"*.blg",
 				"*.toc",
 				"*.gz",
-				"*.aux",
+				"*.aux",		
+				"*.ilg",
+				"*.ind",
+				"*.lof",
+				"*.lot",
 				"*.fdb_latexmk"
 			],
 			"follow_symlinks": true,
