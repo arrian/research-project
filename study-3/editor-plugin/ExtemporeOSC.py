@@ -11,7 +11,7 @@ import pythonosc
 from pythonosc import osc_message_builder
 from pythonosc import udp_client
 
-MAX_LENGTH = 2048
+MAX_LENGTH = 8192
 
 class ExtemporeOscCommand(sublime_plugin.EventListener):
 
@@ -27,6 +27,15 @@ class ExtemporeOscCommand(sublime_plugin.EventListener):
 			focus = "null"
 		self.send(view, "/interface/focus", focus)
 
+	# def on_selection_modified(self, view):
+	# 	# print("selection modified")
+	# 	selections = []
+	# 	for sel in view.sel():
+	# 		selections.append(sel.begin());
+	# 		if sel.begin() != sel.end():
+	# 			selections.append(sel.end());
+	# 	self.send(view, "/interface/selection", len(selections), *selections);
+
 	def on_selection_modified(self, view):
 		# print("selection modified")
 		selections = []
@@ -34,7 +43,8 @@ class ExtemporeOscCommand(sublime_plugin.EventListener):
 			selections.append(sel.begin());
 			if sel.begin() != sel.end():
 				selections.append(sel.end());
-		self.send(view, "/interface/selection", len(selections), *selections);
+		region = view.visible_region()
+		self.send(view, "/interface/cursor", selections[0], region.begin(), region.end(), 500, 500);
 
 	def on_modified(self, view):
 		result = view.substr(sublime.Region(0, view.size()))
@@ -58,7 +68,7 @@ class ExtemporeOscCommand(sublime_plugin.EventListener):
 	def send(self, view, address, *args):
 
 		# only send for extempore files
-		if view.file_name() is None or not view.file_name().endswith(".xtm"):
+		if view.file_name() is None or not view.file_name().endswith(".xtm"):# or not "test" in view.file_name():
 			return
 			
 		# print(view.file_name())
