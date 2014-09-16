@@ -7,18 +7,12 @@
 \usepackage{acmnew-xref}%edited `Bibliography' title to `References'
 
 %% Custom Arrian Stuff
-% \usepackage{graphicx}
-% \usepackage{subcaption}
-% \usepackage[margin=1.0in]{geometry}
-% \setlength\parindent{0pt}
 \usepackage[titletoc]{appendix}
-% \usepackage{float}
-% \setlength{\parindent}{15pt}
-% {\renewcommand{\arraystretch}{1.5}
+\usepackage{acronym}
 
 % for `inspirational' quotes - from http://tex.stackexchange.com/questions/53377/inspirational-quote-at-start-of-chapter
 \makeatletter
-\renewcommand{\@chapapp}{}% Not necessary...
+% \renewcommand{\@chapapp}{}% Not necessary...
 \newenvironment{chapquote}[2][2em]
   {\setlength{\@tempdima}{#1}%
    \def\chapquote@author{#2}%
@@ -33,6 +27,12 @@
 % usage example: \citetemp{ref}
 
 
+% Acronyms
+\acrodef{IDE}[IDE]{integrated development environment}
+
+
+% The Thesis
+
 \title{Art and Understanding through Code Visualisation}
 \author{Arrian Purcell}
 \date{\today}
@@ -41,6 +41,7 @@
 
 \makeindex
 \begin{document}
+
 
 \pagestyle{empty}
 \thispagestyle{empty}
