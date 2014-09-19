@@ -65,18 +65,34 @@ struct Line
 	}
 };
 
+struct Code
+{
+	std::string code;
+	int startLine;
+	int startIndex;
+
+	Code(std::string code, int startLine, int startIndex)
+	{
+		this->code = code;
+		this->startLine = startLine;
+		this->startIndex = startIndex;
+	}
+};
+
 struct Function
 {
 	int id;//unique identifier for this function
 	int index;//global index of the function. eg. first function will be 0
 	std::vector<Line> lines;
+	Code code;
 
 	bool isSelected;//is this code function selected
 	bool isActive;//has this function been evaluated
 	bool isKilled;//is this function of the form '(define function)...'
 	bool isError;//has an error ocurred during evaluation
 
-	Function(std::string code, int startLine, int startIndex)
+	Function(Code code)
+		: code(code)
 	{
 		this->id = getFunctionIdentifier();
 		this->isSelected = false;
@@ -84,10 +100,10 @@ struct Function
 		this->isKilled = false;
 		this->isError = false;
 
-		int currentLine = startLine;
-		int currentIndex = startIndex;
+		int currentLine = code.startLine;
+		int currentIndex = code.startIndex;
 		char_separator<char> sep("\n\r");
-		tokenizer<char_separator<char>> tokens(code, sep);
+		tokenizer<char_separator<char>> tokens(code.code, sep);
 		for (const auto& t : tokens) {
 			currentLine++;
 			currentIndex++;
@@ -123,18 +139,25 @@ struct Function
 		return result;
 	}
 
+	bool equal(Code code)
+	{
+		return this->code.code == code.code;
+	}
+
 	/**
 	 * Returns true if the function was successfully updated.
 	 */
-	bool update(std::string code, int startLine, int startIndex)
+	bool update(Code code)
 	{
-		if(getName() != getName(code)) return false;//TODO: could have a smarter heuristic here
+		if(getName() != getName(code.code)) return false;//TODO: could have a smarter heuristic here
 
-		int currentLine = startLine;
-		int currentIndex = startIndex;
+		std:vector<Line> newLines;
+		this->code = code;
+		int currentLine = code.startLine;
+		int currentIndex = code.startIndex;
 		int count = 0;
 		char_separator<char> sep("\n\r");
-		tokenizer<char_separator<char>> tokens(code, sep);
+		tokenizer<char_separator<char>> tokens(code.code, sep);
 		for (const auto& t : tokens)
 		{
 			currentLine++;
@@ -143,28 +166,71 @@ struct Function
 			if(lines.size() < count)
 			{
 				Line line(t.substr(0, t.find(";")), );
-				lines.push_back(line);
+				newLines.push_back(line);
 			}
 			else
 			{
 				lines[count - 1].update(t.substr(0, t.find(";")), currentLine, currentIndex);
+				newLines.push_back(lines[count - 1]);
 			}
 		}
+
+		lines = newLines;
 		
 		return true;//was updated
 	}
 };
 
-
-
 class CodeManager
 {
 public:
-	CodeManager();
-	~CodeManager();
+	CodeManager()
+	{
+		this->code = "";
+		this->evaluation = "";
+	}
 
-	void update(std::string code);//updates the offline code
-	void evaluate(std::string code);//updates the online code
+	~CodeManager() {}
+
+	//updates the offline code
+	void update(std::string code)
+	{
+		std::vector<Function> newFunctions;
+		std::vector<Code> split = splitFunctions(code);
+		for(auto & c : split)
+		{
+			bool done = false;
+
+			for(auto & f : functions)
+			{
+				done = f.update(c);//attempt an update on all existing functions
+				if(done) 
+				{
+					newFunctions.push_back(f);
+					break;
+				}
+			}
+
+			if(!done) newFunctions.push_back(Function(c));
+		}
+
+		functions = newFunctions;
+	}
+
+	//updates the online code
+	void evaluate(std::string code)
+	{
+		std::vector<Code> split = splitFunctions(code);
+		
+		for(auto & c : split)
+		{
+			for(auto & f : functions)
+			{
+				if(f.equal(c)) f.isActive = true;
+				//TODO: also set lines to active
+			}
+		}
+	}
 	void select(int selection);//simple selection
 	void select(int selection, int selectionEnd);
 	void error(std::string message);//error from evaluation
@@ -176,17 +242,24 @@ public:
 	std::string evaluation;//most recent evaluation
 	std::string message;//most recent evaluation message
 
-	std::vector<std::string> splitFunctions(std::string code)
+	std::vector<Code> splitFunctions(std::string code)
 	{
-		std::vector<std::string> results;
+		std::vector<Code> results;
 		int initial = 0;
 		int count = 0;
 		int depth = 0;
+		int lineCount = 0;
 		for(int i = 0; i < code.length(); i++)
 		{
-			if(code[i] == "(")
+			count++;
+			if(code[i] == "\n") lineCount++;
+			else if(code[i] == "(")
 			{
-				if(depth == 0) initial = i;
+				if(depth == 0) 
+				{
+					initial = i;
+					count = 1;
+				}
 				depth++;
 			}
 			else if(code[i] == ")") 
@@ -194,24 +267,23 @@ public:
 				depth--;
 				if(depth <= 0)
 				{
-					count++;
-					results.push_back(code.substr(intial, count));
+					results.push_back(Code(code.substr(intial, count), lineCount, i));
 					depth = 0;
 					count = 0;
 				}
 			}
-			else count++;
 		}
+		return results;
 	}
 
-	Function* updateFunction(std::string line, int index, int functionCount, int lineCount, int charCount);//returns the updated function
-	void updateLine(Function* function, std::string line, int index, int lineCount, int charCount);
-	Function* find(std::string line);
-	bool similar(std::string str1, std::string str2);
+	// Function* updateFunction(std::string line, int index, int functionCount, int lineCount, int charCount);//returns the updated function
+	// void updateLine(Function* function, std::string line, int index, int lineCount, int charCount);
+	// Function* find(std::string line);
+	// bool similar(std::string str1, std::string str2);
 
-	bool similar(Function* function1, Function* function2);
-	void update(Function* target, Function* with);
-	Function* find(std::string name);
+	// bool similar(Function* function1, Function* function2);
+	// void update(Function* target, Function* with);
+	// Function* find(std::string name);
 
 };
 
