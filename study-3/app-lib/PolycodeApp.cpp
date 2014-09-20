@@ -6,6 +6,7 @@
 #include "PolycodeApp.h"
 #include "Polycode2DPhysics.h"
 #include "PolyPhysicsScreenEntity.h"
+#include "PolySceneLine.h"
 
 poly_core* poly_core_create(char* title, float width, float height, bool fullscreen, char* resources)
 {
@@ -221,6 +222,16 @@ void poly_scene_primitive_destroy(poly_scene_primitive* primitive)
 void poly_scene_primitive_set_circle_options(poly_scene_primitive* primitive, double xSize, double ySize, int segments)
 {
 	reinterpret_cast<ScenePrimitive*>(primitive)->setPrimitiveOptions(8, xSize, ySize, segments);
+}
+
+poly_scene_line* poly_scene_line_create(poly_entity* e1, poly_entity* e2)
+{
+	return reinterpret_cast<poly_scene_line*>(new SceneLine(reinterpret_cast<Entity*>(e1), reinterpret_cast<Entity*>(e2)));
+}
+
+void poly_scene_line_destroy(poly_scene_line* line)
+{
+	delete reinterpret_cast<SceneLine*>(line);
 }
 
 void poly_scene_mesh_set_material(poly_scene_mesh* mesh, char* materialName)

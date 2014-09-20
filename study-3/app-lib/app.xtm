@@ -72,6 +72,11 @@
 (bind-lib polycode poly_scene_primitive_destroy [void,poly_scene_primitive*]*)
 (bind-lib polycode poly_scene_primitive_set_circle_options [void,poly_scene_primitive*,double,double,i32]*)
 
+;;scene line
+(bind-alias poly_scene_line i8)
+(bind-lib polycode poly_scene_line_create [void,poly_entity*,poly_entity*]*)
+(bind-lib polycode poly_scene_line_destroy [void,poly_scene_line*]*)
+
 ;;scene mesh
 (bind-alias poly_scene_mesh i8)
 (bind-lib polycode poly_scene_mesh_set_material [void,poly_scene_mesh*,i8*]*)

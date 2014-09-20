@@ -1,31 +1,17 @@
 
+(bind-type Connector <poly_scene_line*,Attractor*,Attractor*>);;source, target
 
-(bind-type Connector <Attractor*,Attractor*>);;source, target
+(bind-func connector_create
+  (lambda (a1:Attractor* a2:Attractor*)
+    (let ((connector (Connector null a1 a2)))
+      (poly_scene_line_create (attractor_get_entity a1) (attractor_get_entity a2))
+      ;;  (tset! connector 0 )
+        connector)))
 
-(bind-func connector_get_source
-  (lambda (c:Connector*)
-  	(tref c 0)
-    ))
+(bind-func connector_destroy
+  (lambda (connector:Connector*)
+    (poly_scene_line_destroy (tref connector 0))))
 
-(bind-func connector_get_target
-  (lambda (c:Connector*)
-  	(tref c 1)
-    ))
-
-(bind-func connector_set_source
-  (lambda (c:Connector* a:Attractor*)
-  	(tset! c 0 a)
-    ))
-
-(bind-func connector_set_target
-  (lambda (c:Connector* a:Attractor*)
-  	(tset! c 1 a)
-    ))
-
-
-(bind-func connector_clear
-  (lambda (c:Connector*)
-    ))
 
 
 

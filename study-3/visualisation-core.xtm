@@ -27,6 +27,7 @@
 
 (sys:load (string-append *study-3-dir* "/visualisation-core/transition.xtm"))
 (sys:load (string-append *study-3-dir* "/visualisation-core/attractor.xtm"))
+(sys:load (string-append *study-3-dir* "/visualisation-core/connector.xtm"))
 
 (gl:set-context *gl-ctx*)
 

@@ -15,16 +15,16 @@
 ;; of arguments. The first argument is an integer defining the number remaining
 ;; argument integers. The remaining argument integers define the selection bounds
 ;; in the format 'start end start end ...'.
-(bind-func handle_selection
-  (lambda (args:i32*)
-  	;; (printf "%s\n" args)
-  	(let ((i:i32 0))
-      (if (> (unswap32i (pref args 0)) 1) 
-        (code_manager_select_2 CODE_MANAGER (i32toi64 (unswap32i (pref args 1))) (i32toi64 (unswap32i (pref args 2))))
-        (code_manager_select CODE_MANAGER (i32toi64 (unswap32i (pref args 1))))
-        )
-      )
-	void))
+;; (bind-func handle_selection
+;;   (lambda (args:i32*)
+;;   	;; (printf "%s\n" args)
+;;   	(let ((i:i32 0))
+;;       (if (> (unswap32i (pref args 0)) 1) 
+;;         (code_manager_select_2 CODE_MANAGER (i32toi64 (unswap32i (pref args 1))) (i32toi64 (unswap32i (pref args 2))))
+;;         (code_manager_select CODE_MANAGER (i32toi64 (unswap32i (pref args 1))))
+;;         )
+;;       )
+;; 	void))
 
 ;; cursor_pos pos_screen_min pos_screen_max pos_x pos_y
 (bind-func handle_cursor
@@ -84,7 +84,8 @@
   	(let ((data (bitcast (event_get_data e) i32*))
   		    (address (event_get_address e)))
     	;; (printf "handling %s\n" address)
-		  (cond ((= (strcmp address "/interface/selection") 0) (handle_selection data));; args: count start end start end... . eg. 4 0 3 10 13
+		  (cond 
+            ;; ((= (strcmp address "/interface/selection") 0) (handle_selection data));; args: count start end start end... . eg. 4 0 3 10 13
       			((= (strcmp address "/interface/code") 0) (handle_code (event_get_data e)));; args: code
       			((= (strcmp address "/interface/evaluate") 0) (handle_evaluate (event_get_data e))) ;; args: evaluated_code
             ;; ((= (strcmp address "/interface/keyboard") 0) (handle_keyboard data));; unused

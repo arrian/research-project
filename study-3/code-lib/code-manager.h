@@ -4,11 +4,39 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <boost/tokenizer.hpp>
+
+using namespace boost;
+
+#define DEFINE "define"
+#define BIND_FUNC "bind-func"
+
+int getLineIdentifier()
+{  
+    static int LINE_IDENTIFIER = 0;
+    return ++LINE_IDENTIFIER;
+}
+
+int getFunctionIdentifier()
+{  
+    static int STATE_IDENTIFIER = 0;
+    return ++STATE_IDENTIFIER;
+}
+
+
+struct Screen
+{
+	int selection;
+	int screenMin;
+	int screenMax;
+	int xPosition;
+	int yPosition;
+};
 
 /**
  * A single line in code.
  */
-struct CodeLine
+struct Line
 {
 	int id;//unique identifier for this code line
 	int lineCount;//global line index
@@ -19,56 +47,263 @@ struct CodeLine
 	bool isSelected;//is this code line selected?
 	bool isActive;
 	bool isError;
+
+	Line(std::string code, int line, int index)
+	{
+		this->id = getLineIdentifier();
+		this->codePrevious = "";
+		this->isSelected = false;
+		this->isActive = false;
+		this->isError = false;
+		this->code = code;
+		this->lineCount = line;
+		this->startChar = index;
+	}
+
+	void update(std::string code, int line, int index)
+	{
+		this->code = code;
+		this->lineCount = line;
+		this->startChar = index;	
+	}
 };
 
-/**
- * Code concept. eg. a function
- */
-struct CodeState
+struct Code
 {
-	int id;//unique identifier for this code state
-	int index;//global index of the state. eg. first function will be 0
-	std::vector<CodeLine> lines;
+	std::string code;
+	int startLine;
+	int startIndex;
 
-	bool isSelected;//is this code state selected
-	bool isActive;
-	bool isError;
+	Code(std::string code, int startLine, int startIndex)
+	{
+		this->code = code;
+		this->startLine = startLine;
+		this->startIndex = startIndex;
+	}
+};
+
+struct Function
+{
+	int id;//unique identifier for this function
+	int index;//global index of the function. eg. first function will be 0
+	std::vector<Line> lines;
+	Code code;
+
+	bool isSelected;//is this code function selected
+	bool isActive;//has this function been evaluated
+	bool isKilled;//is this function of the form '(define function)...'
+	bool isError;//has an error ocurred during evaluation
+
+	Function(Code code)
+		: code(code)
+	{
+		this->id = getFunctionIdentifier();
+		this->isSelected = false;
+		this->isActive = false;
+		this->isKilled = false;
+		this->isError = false;
+
+		int currentLine = code.startLine;
+		int currentIndex = code.startIndex;
+		char_separator<char> sep("\n\r");
+		tokenizer<char_separator<char>> tokens(code.code, sep);
+		for (const auto& t : tokens) {
+			currentLine++;
+			currentIndex++;
+			if(t.empty()) continue;
+
+			Line line(t.substr(0, t.find(";")), currentLine, currentIndex);
+			lines.push_back(line);
+
+			currentIndex += t.size();//this index will be off by at least 1. TODO: fix
+		}
+	}
+
+	std::string getName()
+	{
+		if(lines.size() > 0) return getName(lines[0].code);
+		return "";
+	}
+
+	std::string getName(std::string code)
+	{
+		std::string result = "";
+		char_separator<char> sep(" ():\n\t\r");
+		tokenizer<char_separator<char>> tokens(code, sep);
+		for (const auto& t : tokens)
+		{
+			if(t == DEFINE || t == BIND_FUNC) result += t + " ";
+			else
+			{
+				result += t;
+				return result;
+			}
+		}
+		return result;
+	}
+
+	bool equal(Code code)
+	{
+		return this->code.code == code.code;
+	}
+
+	/**
+	 * Returns true if the function was successfully updated.
+	 */
+	bool update(Code code)
+	{
+		if(getName() != getName(code.code)) return false;//TODO: could have a smarter heuristic here
+
+		std::vector<Line> newLines;
+		this->code = code;
+		int currentLine = code.startLine;
+		int currentIndex = code.startIndex;
+		int count = 0;
+		char_separator<char> sep("\n\r");
+		tokenizer<char_separator<char>> tokens(code.code, sep);
+		for (const auto& t : tokens)
+		{
+			currentLine++;
+			currentIndex += t.size();
+			count++;
+			if(lines.size() < count)
+			{
+				Line line(t.substr(0, t.find(";")), currentLine, currentIndex);
+				newLines.push_back(line);
+			}
+			else
+			{
+				lines[count - 1].update(t.substr(0, t.find(";")), currentLine, currentIndex);
+				newLines.push_back(lines[count - 1]);
+			}
+		}
+
+		lines = newLines;
+		
+		return true;//was updated
+	}
 };
 
 class CodeManager
 {
 public:
-	CodeManager();
-	~CodeManager();
+	CodeManager()
+	{
+		this->code = "";
+		this->evaluation = "";
+	}
 
-	void update(std::string code);//updates the offline code
-	void evaluate(std::string code);//updates the online code
-	void select(int selection);//simple selection
-	void select(int selection, int selectionEnd);//simple selection
-	void error(std::string message);//error from evaluation
-	void cursor(int selection, int screenMin, int screenMax, int xPosition, int yPosition);
+	~CodeManager() {}
 
-	std::vector<CodeState> states;
+	//updates the offline code
+	void update(std::string code)
+	{
+		std::vector<Function> newFunctions;
+		std::vector<Code> split = splitFunctions(code);
+		for(auto & c : split)
+		{
+			bool done = false;
+
+			for(auto & f : functions)
+			{
+				done = f.update(c);//attempt an update on all existing functions
+				if(done) 
+				{
+					newFunctions.push_back(f);
+					break;
+				}
+			}
+
+			if(!done) newFunctions.push_back(Function(c));
+		}
+
+		functions = newFunctions;
+	}
+
+	//updates the online code
+	void evaluate(std::string code)
+	{
+		std::vector<Code> split = splitFunctions(code);
+		
+		for(auto & c : split)
+		{
+			for(auto & f : functions)
+			{
+				if(f.equal(c)) f.isActive = true;
+				//TODO: also set lines to active
+			}
+		}
+	}
+	void select(int selection){}//simple selection
+	void select(int selection, int selectionEnd){}
+	void error(std::string message){}//error from evaluation
+	void cursor(int selection, int screenMin, int screenMax, int xPosition, int yPosition)
+	{
+		screen.selection = selection;
+		screen.screenMin = screenMin;
+		screen.screenMax = screenMax;
+		screen.xPosition = xPosition;
+		screen.yPosition = yPosition;
+	}
+
+	Screen screen;
+	std::vector<Function> functions;
 	std::string code;//most recent code
-	std::string evaluation;//most recent evaluation... code most likely to cause error	
+	std::string evaluation;//most recent evaluation
+	std::string message;//most recent evaluation message
 
-	//Metrics
-	int screenMin;
-	int screenMax;
-	int xPosition;
-	int yPosition;
+	std::vector<Code> splitFunctions(std::string code)
+	{
+		std::vector<Code> results;
+		int initial = 0;
+		int count = 0;
+		int depth = 0;
+		int lineCount = 0;
+		for(int i = 0; i < code.length(); i++)
+		{
+			count++;
+			if(code[i] == '\n') lineCount++;
+			else if(code[i] == '(')
+			{
+				if(depth == 0) 
+				{
+					initial = i;
+					count = 1;
+				}
+				depth++;
+			}
+			else if(code[i] == ')') 
+			{
+				depth--;
+				if(depth <= 0)
+				{
+					results.push_back(Code(code.substr(initial, count), lineCount, i));
+					depth = 0;
+					count = 0;
+				}
+			}
+		}
+		return results;
+	}
 
-	CodeState* updateState(std::string line, int index, int stateCount, int lineCount, int charCount);//returns the updated state
-	void updateLine(CodeState* state, std::string line, int index, int lineCount, int charCount);
-	CodeState* find(std::string line);
-	bool similar(std::string str1, std::string str2);
+	// Function* updateFunction(std::string line, int index, int functionCount, int lineCount, int charCount);//returns the updated function
+	// void updateLine(Function* function, std::string line, int index, int lineCount, int charCount);
+	// Function* find(std::string line);
+	// bool similar(std::string str1, std::string str2);
+
+	// bool similar(Function* function1, Function* function2);
+	// void update(Function* target, Function* with);
+	// Function* find(std::string name);
+
 };
+
 
 extern "C" 
 {
 	struct code_manager;//used by interface-manager
-	struct code_state;//corresponds to widget
-	struct code_line;//corresponds to widget child attractor
+	struct function;//corresponds to widget
+	struct line;//corresponds to widget child attractor
+	struct screen;
 
 	//Code Manager
 	code_manager* code_manager_create();
@@ -76,76 +311,36 @@ extern "C"
 
 	void code_manager_update(code_manager* manager, char* code);
 	void code_manager_evaluate(code_manager* manager, char* code);
-	void code_manager_select(code_manager* manager, int selection);
-	void code_manager_select_2(code_manager* manager, int selectionStart, int selectionEnd);
 	void code_manager_error(code_manager* manager, char* message);
 	void code_manager_cursor(code_manager* manager, int cursorPosition, int screenMin, int screenMax, int xPosition, int yPosition);
 
-	int code_manager_states_count(code_manager* manager);
-	code_state* code_manager_states_get(code_manager* manager, int index);
+	int code_manager_functions_count(code_manager* manager);
+	function* code_manager_functions_get(code_manager* manager, int index);
 	
+	int code_manager_get_cursor_selection(code_manager* manager);
+	int code_manager_get_cursor_x(code_manager* manager);
+	int code_manager_get_cursor_y(code_manager* manager);
+	int code_manager_get_screen_min(code_manager* manager);//minimum visible character
+	int code_manager_get_screen_max(code_manager* manager);//maximum visible character
+
 	//Code State
-	int code_state_id_get(code_state* state);
-	int code_state_lines_count(code_state* state);
-	int code_state_get_index(code_state* state);
-	code_line* code_state_lines_get(code_state* state, int index);
-	bool code_state_is_selected(code_state* state);
-	bool code_state_is_active(code_state* state);
-	bool code_state_is_error(code_state* state);
+	int function_get_id(function* f);
+	int function_lines_count(function* f);
+	int function_get_index(function* f);
+	line* function_lines_get(function* f, int index);
+	bool function_is_selected(function* f);
+	bool function_is_active(function* f);
+	bool function_is_error(function* f);
 
 	//Code Line
-	int code_line_id_get(code_line* line);
-	const char* code_line_get_code(code_line* line);
-	bool code_line_is_selected(code_line* line);
-	bool code_line_is_active(code_line* line);
-	bool code_line_is_error(code_line* line);
+	int line_get_id(line* l);
+	const char* line_get_code(line* l);
+	bool line_is_selected(line* l);
+	bool line_is_active(line* l);
+	bool line_is_error(line* l);
 }
 
-void printStates(CodeManager* manager)
-{
-	for(auto & state : manager->states)
-	{
-		std::cout << "state: " << state.id << std::endl;
-		std::cout << "line count: " << state.lines.size() << std::endl;
-		for(auto & line : state.lines)
-		{
-			std::cout << line.code.length() << std::endl;
-		}
-		
-	}
-}
 
-int main(int argc, char* argv[])
-{
-	CodeManager manager;
-
-	bool similar(std::string str1, std::string str2);
-
-	if(manager.similar("test2 test2", "test1 test2 test5")) std::cout << "similar" << std::endl;
-	else std::cout << "different" << std::endl;
-
-	std::string code1 = "(test function\n here)\n\n(another3 test \nfunction)\n";
-	manager.update(code1);
-
-	printStates(&manager);
-
-	std::cout << "------------------" << std::endl;
-
-	std::string code2 = "(test function\n here)\n\n(another3 test \nfunction)\n\n\n\n\n";
-	manager.update(code1);
-
-	manager.evaluate(code1);
-	// if(manager.states[0].isActive) std::cout << "is active" << std::endl;
-
-	printStates(&manager);
-
-	std::cout << "------------------" << std::endl;
-
-	std::string code3 = "(single function)\n";
-	manager.update(code1);
-	printStates(&manager);
-
-}
 
 
 

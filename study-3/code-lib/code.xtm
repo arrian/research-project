@@ -19,23 +19,23 @@
 (bind-lib code event_get_type [i8*,event*]*)
 (bind-lib code event_get_data [i8*,event*]*)
 
-;; Code Line
-(bind-alias code_line i8)
-(bind-lib code code_line_id_get [i64,code_line*]*)
-(bind-lib code code_line_get_code [i8*,code_line*]*)
-(bind-lib code code_line_is_selected [i1,code_line*]*)
-(bind-lib code code_line_is_active [i1,code_line*]*)
-(bind-lib code code_line_is_error [i1,code_line*]*)
+;; Line
+(bind-alias line i8)
+(bind-lib code line_get_id [i64,line*]*)
+(bind-lib code line_get_code [i8*,line*]*)
+(bind-lib code line_is_selected [i1,line*]*)
+(bind-lib code line_is_active [i1,line*]*)
+(bind-lib code line_is_error [i1,line*]*)
 
-;; Code State
-(bind-alias code_state i8)
-(bind-lib code code_state_id_get [i64,code_state*]*)
-(bind-lib code code_state_lines_count [i64,code_state*]*)
-(bind-lib code code_state_get_index [i64,code_state*]*)
-(bind-lib code code_state_lines_get [code_line*,code_state*,i64]*)
-(bind-lib code code_state_is_selected [i1,code_state*]*)
-(bind-lib code code_state_is_active [i1,code_state*]*)
-(bind-lib code code_state_is_error [i1,code_state*]*)
+;; Function
+(bind-alias function i8)
+(bind-lib code function_get_id [i64,function*]*)
+(bind-lib code function_lines_count [i64,function*]*)
+(bind-lib code function_get_index [i64,function*]*)
+(bind-lib code function_lines_get [line*,function*,i64]*)
+(bind-lib code function_is_selected [i1,function*]*)
+(bind-lib code function_is_active [i1,function*]*)
+(bind-lib code function_is_error [i1,function*]*)
 
 ;; Code Manager
 (bind-alias code_manager i8)
@@ -44,13 +44,20 @@
 
 (bind-lib code code_manager_update [void,code_manager*,i8*]*)
 (bind-lib code code_manager_evaluate [void,code_manager*,i8*]*)
-(bind-lib code code_manager_select [void,code_manager*,i64]*)
-(bind-lib code code_manager_select_2 [void,code_manager*,i64,i64]*)
+;; (bind-lib code code_manager_select [void,code_manager*,i64]*)
+;; (bind-lib code code_manager_select_2 [void,code_manager*,i64,i64]*)
 (bind-lib code code_manager_error [void,code_manager*,i8*]*)
 (bind-lib code code_manager_cursor [void,code_manager*,i64,i64,i64,i64,i64]*)
 
-(bind-lib code code_manager_states_count [i64,code_manager*]*)
-(bind-lib code code_manager_states_get [code_state*,code_manager*,i64]*)
+(bind-lib code code_manager_functions_count [i64,code_manager*]*)
+(bind-lib code code_manager_functions_get [function*,code_manager*,i64]*)
 
+;; Screen
+(bind-alias code_manager i8)
+(bind-lib code code_manager_get_cursor_selection [i64,code_manager*]*)
+(bind-lib code code_manager_get_cursor_x [i64,code_manager*]*)
+(bind-lib code code_manager_get_cursor_y [i64,code_manager*]*)
+(bind-lib code code_manager_get_screen_min [i64,code_manager*]*)
+(bind-lib code code_manager_get_screen_max [i64,code_manager*]*)
 
 
