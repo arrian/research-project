@@ -24,16 +24,6 @@ void code_manager_evaluate(code_manager* manager, char* code)
 	reinterpret_cast<CodeManager*>(manager)->evaluate(std::string(code));
 }
 
-// void code_manager_select(code_manager* manager, int selection)
-// {
-// 	reinterpret_cast<CodeManager*>(manager)->select(selection);
-// }
-
-// void code_manager_select_2(code_manager* manager, int selectionStart, int selectionEnd)
-// {
-// 	reinterpret_cast<CodeManager*>(manager)->select(selectionStart, selectionEnd);
-// }
-
 void code_manager_error(code_manager* manager, char* message)
 {
 	reinterpret_cast<CodeManager*>(manager)->error(std::string(message));

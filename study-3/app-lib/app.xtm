@@ -4,7 +4,6 @@
 ;;core
 (bind-alias poly_core i8)
 (bind-lib polycode poly_core_create [poly_core*,i8*,float,float,i1,i8*]*)
-;;(bind-lib polycode poly_core_should_close [i1,poly_core*]*)
 (bind-lib polycode poly_core_update [void,poly_core*]*)
 (bind-lib polycode poly_core_destroy [void,poly_core*]*)
 

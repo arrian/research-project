@@ -29,6 +29,8 @@
 (sys:load (string-append *study-3-dir* "/visualisation-core/attractor.xtm"))
 (sys:load (string-append *study-3-dir* "/visualisation-core/connector.xtm"))
 
+(sys:load (string-append *study-3-dir* "/visualisation-core/widget.xtm"))
+
 (gl:set-context *gl-ctx*)
 
 (define update-loop
@@ -43,6 +45,6 @@
 
 (update-loop (now) 1/30)
 
-(sys:load (string-append *study-3-dir* "/visualisation-core/widget.xtm"))
+
 
 
