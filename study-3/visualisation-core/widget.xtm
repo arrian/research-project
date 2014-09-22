@@ -2,14 +2,24 @@
 
 ;; Utility ;;;;;;;;;;;;;;;;;
 
+(bind-val VERTICAL_COUNT i64 3)
+(bind-val SPACING double 250.0)
+(bind-val OFFSET_X double 750.0)
+(bind-val OFFSET_Y double 250.0)
+(bind-val EPSILON double 0.3)
+
 (bind-func get_x_for_index
   (lambda (index)
-    ;; (printf "%d\n" index)
-    (- 0.0 (- (* 250.0 (i64tod (/ index 3))) 750.0))))
+    (- 0.0 (- (* SPACING (i64tod (/ index VERTICAL_COUNT))) OFFSET_X))))
 
 (bind-func get_y_for_index
   (lambda (index)
-    (- 0.0 (- (* 250.0 (i64tod (% index 3))) 250.0))))
+    (- 0.0 (- (* SPACING (i64tod (% index VERTICAL_COUNT))) OFFSET_Y))))
+
+(bind-func is_close
+  (lambda (d1:double d2:double)
+    (and (<= d1 (+ d2 EPSILON)) (>= d1 (- d2 EPSILON)))
+    ))
 
 ;; Widget ;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -52,6 +62,7 @@
 
 (bind-func widget_add_child
   (lambda (w:Widget* a:Attractor*)
+    (connector_create (widget_get_attractor w) a)
     (tset! w 2 (cons a (tref w 2)))
     w))
 
@@ -72,11 +83,63 @@
   (lambda (w:Widget* id:i64)
       (filter (lambda (a) (equal id (attractor_get_id a))) (widget_get_children w))))
 
+(bind-func widget_apply_inwards_force
+  (lambda (w:Widget*)
+      (let ((x (attractor_get_x (widget_get_attractor w)))
+            (y (attractor_get_y (widget_get_attractor w)))
+            (force 50.0))
+          (for-each (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- x (attractor_get_x a))) (* force (- y (attractor_get_y a)))) 0) (widget_get_children w)))))
+
+(bind-func widget_apply_outwards_force
+  (lambda (w:Widget*)
+      (let ((x (attractor_get_x (widget_get_attractor w)))
+            (y (attractor_get_y (widget_get_attractor w)))
+            (force 500.0))
+          (for-each (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- 0.0 (- x (attractor_get_x a)))) (* force (- 0.0 (- y (attractor_get_y a))))) 0) (widget_get_children w)))))
+
+(bind-func widget_apply_circular_force
+  (lambda (w:Widget*)
+      (let ((x (attractor_get_x (widget_get_attractor w)))
+            (y (attractor_get_y (widget_get_attractor w)))
+            (force 50.0))
+          (for-each (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- 0.0 (- y (attractor_get_y a)))) (* force (- x (attractor_get_x a)))) 0) (widget_get_children w)))))
+
+(bind-func widget_set_friction
+  (lambda (w:Widget* friction:double)
+    (for-each (lambda (a) (poly_physics_entity_set_friction (attractor_get_physics_entity a) friction)) (widget_get_children w))
+    void))
+
+(bind-func widget_set_linear_damping
+  (lambda (w:Widget* damping:double)
+    (for-each (lambda (a) (poly_physics_entity_set_linear_damping (attractor_get_physics_entity a) damping)) (widget_get_children w))
+    void))
+
+(bind-func widget_set_angular_damping
+  (lambda (w:Widget* damping:double)
+    (for-each (lambda (a) (poly_physics_entity_set_angular_damping (attractor_get_physics_entity a) damping)) (widget_get_children w))
+    void))
+
+(bind-func widget_slow
+  (lambda (w:Widget*)
+    (widget_set_linear_damping w 100.0)
+    (widget_set_angular_damping w 100.0)
+    void))
+
+(bind-func widget_fast
+  (lambda (w:Widget*)
+    (widget_set_linear_damping w 0.0)
+    (widget_set_angular_damping w 0.0)
+    void))
+
 (bind-func widget_update_line
   (lambda (w:Widget* line:line*)
       (let ((found #f)
             (id (line_get_id line))
             (children (widget_get_children w)))
+        ;; (widget_apply_inwards_force w)
+        (widget_slow w)
+        (widget_apply_inwards_force w)
+        (widget_apply_circular_force w)
         (for-each (lambda (a) 
             (if (= id (attractor_get_id a)) 
               (begin
@@ -84,10 +147,9 @@
                 (set! found #t)
                 (attractor_update a)
                 (let ((size (/ (i64tod (strlen (line_get_code line))) 1.0)))
-                  (if (and (<> size (size_get_current (attractor_get_size a))) 
-                           (size_transition_is_complete (attractor_get_size a))) 
+                  (if (and (not (is_close size (size_get_current (attractor_get_size a))))
+                      (size_transition_is_complete (attractor_get_size a)));;(<> size (size_get_current (attractor_get_size a)))
                       (begin 
-                        ;; (printf "target size: %f, current size: %f, setting size of %d with text %s\n" id (line_get_code line))
                         (attractor_set_target_size a size)
                         (attractor_set_target_color a 1.0 1.0 0.0 1.0))
                     ))
@@ -138,28 +200,6 @@
       (for-each attractor_destroy (widget_get_children w))
     null))
 
-(bind-func widget_apply_inwards_force
-  (lambda (w:Widget*)
-      (let ((x (attractor_get_x (widget_get_attractor w)))
-            (y (attractor_get_y (widget_get_attractor w)))
-            (force 50.0))
-          (for-each (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- x (attractor_get_x a))) (* force (- y (attractor_get_y a)))) 0) (widget_get_children w)))))
-
-(bind-func widget_apply_outwards_force
-  (lambda (w:Widget*)
-      (let ((x (attractor_get_x (widget_get_attractor w)))
-            (y (attractor_get_y (widget_get_attractor w)))
-            (force 50.0))
-          (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- 0.0 (- x (attractor_get_x a)))) (* force (- 0.0 (- y (attractor_get_y a))))) 0) (widget_get_children w)))))
-
-(bind-func widget_apply_circular_force
-  (lambda (w:Widget*)
-      (let ((x (attractor_get_x (widget_get_attractor w)))
-            (y (attractor_get_y (widget_get_attractor w)))
-            (force 50.0))
-          (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- 0.0 (- y (attractor_get_y a)))) (* force (- x (attractor_get_x a)))) 0) (widget_get_children w)))))
-
-
 ;; Widget List ;;;;;;;;;;;;;;;;;;;;;
 (bind-alias WidgetList List:<Widget*,List*>)
 
@@ -208,12 +248,11 @@
                     (attractor_set_target_color (widget_get_attractor w) 0.4 0.4 0.4 0.4))))
               (widget_update w state)
               void)
-            (begin void)
-            )
-          ) wl)
-            (if (found)
-              wl
-              (cons (widget_create id (get_x_for_index (function_get_index state)) (get_y_for_index (function_get_index state)) 60.0 (function_get_index state)) wl)))))
+            (begin void))) 
+        wl)
+        (if (found)
+          wl
+          (cons (widget_create id (get_x_for_index (function_get_index state)) (get_y_for_index (function_get_index state)) 60.0 (function_get_index state)) wl)))))
 
 (bind-func widget_list_update
   (lambda (wl:WidgetList*)

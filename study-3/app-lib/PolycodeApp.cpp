@@ -117,6 +117,26 @@ double poly_physics_entity_get_friction(poly_physics_entity* e)
 	return reinterpret_cast<PhysicsScene2DEntity*>(e)->getFriction();
 }
 
+void poly_physics_entity_set_linear_damping(poly_physics_entity* e, double damping)
+{
+	reinterpret_cast<PhysicsScene2DEntity*>(e)->setLinearDamping(damping);
+}
+
+double poly_physics_entity_get_linear_damping(poly_physics_entity* e)
+{
+	return reinterpret_cast<PhysicsScene2DEntity*>(e)->getLinearDamping();
+}
+
+void poly_physics_entity_set_angular_damping(poly_physics_entity* e, double damping)
+{
+	reinterpret_cast<PhysicsScene2DEntity*>(e)->setAngularDamping(damping);
+}
+
+double poly_physics_entity_get_angular_damping(poly_physics_entity* e)
+{
+	return reinterpret_cast<PhysicsScene2DEntity*>(e)->getAngularDamping();
+}
+
 void poly_physics_entity_set_collision_category(poly_physics_entity* e, int category)
 {
 	reinterpret_cast<PhysicsScene2DEntity*>(e)->setCollisionCategory(category);

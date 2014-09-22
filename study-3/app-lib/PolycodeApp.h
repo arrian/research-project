@@ -44,6 +44,10 @@ extern "C"
 	double poly_physics_entity_get_density(poly_physics_entity* entity);
 	void poly_physics_entity_set_friction(poly_physics_entity* entity, double friction);
 	double poly_physics_entity_get_friction(poly_physics_entity* entity);
+	void poly_physics_entity_set_linear_damping(poly_physics_entity* entity, double damping);
+	double poly_physics_entity_get_linear_damping(poly_physics_entity* entity);
+	void poly_physics_entity_set_angular_damping(poly_physics_entity* entity, double damping);
+	double poly_physics_entity_get_angular_damping(poly_physics_entity* entity);
 	void poly_physics_entity_set_collision_category(poly_physics_entity* entity, int category);
 	void poly_physics_entity_set_collision_mask(poly_physics_entity* entity, int mask);
 	void poly_physics_entity_set_collision_group_index(poly_physics_entity* entity, int group);

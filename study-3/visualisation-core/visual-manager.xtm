@@ -7,7 +7,6 @@
 (define fullscreen #t)
 
 (define *gl-ctx* (gl:make-ctx ":0.0" fullscreen 0.0 0.0 WIDTH HEIGHT))
-(gl:set-context *gl-ctx*)
 
 (poly_core_init WIDTH HEIGHT *app-lib-resources*)
 
@@ -32,7 +31,7 @@
   (lambda (width height)
     (poly_scene_set_ortho_size POLY_SCENE width height)))
 
-(set_ortho_size 2000 2000)
+(set_ortho_size 1500 1500)
 
 
 

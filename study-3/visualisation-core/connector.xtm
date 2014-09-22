@@ -12,8 +12,3 @@
   (lambda (connector:Connector*)
     (poly_scene_line_destroy (tref connector 0))))
 
-
-
-
-
-

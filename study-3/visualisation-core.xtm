@@ -31,6 +31,8 @@
 
 (sys:load (string-append *study-3-dir* "/visualisation-core/widget.xtm"))
 
+(gl:set-context *gl-ctx*)
+
 (define update-loop
   (lambda (time delta-t)
     (handle_events)
