@@ -1,14 +1,75 @@
 (bind-type Connector <poly_scene_line*,Attractor*,Attractor*>);;source, target
 
+(bind-func connector_get_line
+  (lambda (c:Connector*)
+    (tref c 0)))
+
 (bind-func connector_create
   (lambda (a1:Attractor* a2:Attractor*)
-    (let ((connector (Connector null a1 a2)))
-      (poly_scene_line_create (attractor_get_entity a1) (attractor_get_entity a2))
+    (let ((connector (Connector (poly_scene_line_create (attractor_get_entity a1) (attractor_get_entity a2)) a1 a2)))
       (tset! connector 1 a1)
       (tset! connector 2 a2)
+      (poly_entity_set_color (connector_get_line connector) 1.0 1.0 1.0 1.0)
+      (poly_scene_add_child POLY_SCENE (connector_get_line connector))
       connector)))
 
 (bind-func connector_destroy
   (lambda (connector:Connector*)
     (poly_scene_line_destroy (tref connector 0))))
+
+(bind-func connector_set_points
+  (lambda (connector:Connector* x1 y1 x2 y2)
+  	(poly_scene_line_set_points (connector_get_line connector) x1 y1 x2 y2)
+    void))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+(bind-val CONNECTOR_TEXT Connector* 0)
+(bind-val CONNECTOR_FUNCTION Connector* 0)
+
+(bind-func connector_text_hide
+  (lambda ()
+  	(if (<> CONNECTOR_TEXT 0) (connector_destroy CONNECTOR_TEXT))
+  	(set! CONNECTOR_TEXT 0)
+    void))
+
+(bind-func connector_text_set_points
+  (lambda (x1 y1 x2 y2)
+  	(if (= CONNECTOR_TEXT 0)
+  		(set! CONNECTOR_TEXT (connector_create x1 y1 x2 y2))
+  		(connector_set_points CONNECTOR_TEXT x1 y1 x2 y2))
+    void))
+
+(bind-func connector_function_hide
+  (lambda ()
+  	(if (<> CONNECTOR_FUNCTION 0) (connector_destroy CONNECTOR_FUNCTION))
+  	(set! CONNECTOR_FUNCTION 0)
+    void))
+
+(bind-func connector_function_set_points
+  (lambda (x1 y1 x2 y2)
+  	(if (= CONNECTOR_FUNCTION 0)
+  		(set! CONNECTOR_FUNCTION (connector_create x1 y1 x2 y2))
+  		(connector_set_points CONNECTOR_FUNCTION x1 y1 x2 y2))
+    void))
+
+;; (bind-alias ConnectorList List:<Connector*,List*>)
+
+;; (bind-val CONNECTOR_LIST ConnectorList* 0)
+
+;; (bind-func connector_list_init
+;;   (lambda ()
+;;     (let ((n:List:<Connector*,List*>* null))
+;;       (set! CONNECTOR_LIST n))))
+
+;; (connector_list_init)
+
+
+;; (bind-func test
+;;   (lambda ()
+;;   	(connector_create (attractor_create 0 POLY_SCENE null #t (random 300.0) (random 300.0) 100.0 1.0 (random) 0.0 1.0) (attractor_create 1 POLY_SCENE null #t (random 300.0) (random 300.0) 100.0 (random) 1.0 0.0 1.0))
+;;     void))
+
+;; (test)
 

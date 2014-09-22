@@ -75,8 +75,10 @@ extern "C"
 	void poly_scene_primitive_destroy(poly_scene_primitive* primitive);
 	void poly_scene_primitive_set_circle_options(poly_scene_primitive* primitive, double xSize, double ySize, int segments);
 
-	poly_scene_line* poly_scene_line_create(poly_entity* e1, poly_entity* e2);
+	//poly_scene_line* poly_scene_line_create(poly_entity* e1, poly_entity* e2);
+	poly_scene_line* poly_scene_line_create(double x1, double y1, double x2, double y2);
 	void poly_scene_line_destroy(poly_scene_line* line);
+	void poly_scene_line_set_points(poly_scene_line* line, double x1, double y1, double x2, double y2);
 	
 	void poly_scene_mesh_set_material(poly_scene_mesh* mesh, char* materialName);
 }

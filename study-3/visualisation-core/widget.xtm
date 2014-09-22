@@ -7,6 +7,7 @@
 (bind-val OFFSET_X double 750.0)
 (bind-val OFFSET_Y double 250.0)
 (bind-val EPSILON double 0.3)
+(bind-val SCALE double 2.0)
 
 (bind-func get_x_for_index
   (lambda (index)
@@ -62,7 +63,7 @@
 
 (bind-func widget_add_child
   (lambda (w:Widget* a:Attractor*)
-    (connector_create (widget_get_attractor w) a)
+    ;; (connector_create (widget_get_attractor w) a)
     (tset! w 2 (cons a (tref w 2)))
     w))
 
@@ -137,19 +138,20 @@
             (id (line_get_id line))
             (children (widget_get_children w)))
         ;; (widget_apply_inwards_force w)
-        (widget_slow w)
+        ;; (widget_fast w)
         (widget_apply_inwards_force w)
-        (widget_apply_circular_force w)
+        ;; (widget_apply_circular_force w)
         (for-each (lambda (a) 
             (if (= id (attractor_get_id a)) 
               (begin
                 (attractor_set_destroy a #f)
                 (set! found #t)
                 (attractor_update a)
-                (let ((size (/ (i64tod (strlen (line_get_code line))) 1.0)))
+                (let ((size (* SCALE (/ (i64tod (strlen (line_get_code line))) 1.0))))
                   (if (and (not (is_close size (size_get_current (attractor_get_size a))))
                       (size_transition_is_complete (attractor_get_size a)));;(<> size (size_get_current (attractor_get_size a)))
                       (begin 
+                        (attractor_set_target_color (widget_get_attractor w) 1.0 0.0 0.0 1.0);;show which function is being edited
                         (attractor_set_target_size a size)
                         (attractor_set_target_color a 1.0 1.0 0.0 1.0))
                     ))
@@ -166,7 +168,9 @@
           (begin 
             children)
           (begin
-            (cons (attractor_create id POLY_SCENE (widget_get_attractor w) #f (random -500.0 -200.0) (random -400.0 400.0) 10.0 (random 0.5 1.0) (random) 0.0 (random 0.6 1.0)) children)
+            (let ((attractor (attractor_create id POLY_SCENE (widget_get_attractor w) #f (code_manager_get_cursor_x CODE_MANAGER) (code_manager_get_cursor_y CODE_MANAGER) 10.0 (random 0.5 1.0) (random) 0.0 (random 0.6 1.0))))
+              (connector_create (widget_get_attractor w) attractor)
+              (cons attractor children))
             )
           )
       )))
