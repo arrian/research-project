@@ -62,6 +62,7 @@ struct Line
 
 	void update(std::string code, int line, int index)
 	{
+		if(this->code != code) isActive = false;
 		this->code = code;
 		this->lineCount = line;
 		this->startChar = index;	
@@ -177,6 +178,7 @@ struct Function
 			else
 			{
 				lines[count - 1].update(t.substr(0, t.find(";")), currentLine, currentIndex);
+				// lines[count - 1].isActive = false;
 				newLines.push_back(lines[count - 1]);
 			}
 		}
@@ -232,7 +234,18 @@ public:
 		{
 			for(auto & f : functions)
 			{
-				if(f.equal(c)) f.isActive = true;
+				if(f.equal(c)) 
+				{
+					f.isActive = true;
+
+					for(auto l : f.lines)
+					{
+						l.isActive = true;
+						std::cout << "is active" << std::endl;
+					}
+				}
+
+				
 				//TODO: also set lines to active
 			}
 		}

@@ -244,14 +244,22 @@ void poly_scene_primitive_set_circle_options(poly_scene_primitive* primitive, do
 	reinterpret_cast<ScenePrimitive*>(primitive)->setPrimitiveOptions(8, xSize, ySize, segments);
 }
 
-poly_scene_line* poly_scene_line_create(poly_entity* e1, poly_entity* e2)
+//poly_scene_line* poly_scene_line_create(poly_entity* e1, poly_entity* e2)
+poly_scene_line* poly_scene_line_create(double x1, double y1, double x2, double y2)
 {
-	return reinterpret_cast<poly_scene_line*>(new SceneLine(reinterpret_cast<Entity*>(e1), reinterpret_cast<Entity*>(e2)));
+	// return reinterpret_cast<poly_scene_line*>(new SceneLine(reinterpret_cast<Entity*>(e1), reinterpret_cast<Entity*>(e2)));
+	return reinterpret_cast<poly_scene_line*>(new SceneLine(Vector3(x1, y1, 0), Vector3(x2, y2, 0)));
 }
 
 void poly_scene_line_destroy(poly_scene_line* line)
 {
 	delete reinterpret_cast<SceneLine*>(line);
+}
+
+void poly_scene_line_set_points(poly_scene_line* line, double x1, double y1, double x2, double y2)
+{
+	reinterpret_cast<SceneLine*>(line)->setStart(Vector3(x1,y1,0));
+	reinterpret_cast<SceneLine*>(line)->setEnd(Vector3(x2,y2,0));
 }
 
 void poly_scene_mesh_set_material(poly_scene_mesh* mesh, char* materialName)

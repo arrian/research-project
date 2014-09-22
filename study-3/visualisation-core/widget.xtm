@@ -140,6 +140,7 @@
         ;; (widget_apply_inwards_force w)
         ;; (widget_fast w)
         (widget_apply_inwards_force w)
+        (if (line_is_active line) (printf "active\n"));;temp
         ;; (widget_apply_circular_force w)
         (for-each (lambda (a) 
             (if (= id (attractor_get_id a)) 
@@ -151,15 +152,18 @@
                   (if (and (not (is_close size (size_get_current (attractor_get_size a))))
                       (size_transition_is_complete (attractor_get_size a)));;(<> size (size_get_current (attractor_get_size a)))
                       (begin 
-                        (attractor_set_target_color (widget_get_attractor w) 1.0 0.0 0.0 1.0);;show which function is being edited
+                        (attractor_set_target_color (widget_get_attractor w) 1.0 1.0 0.0 1.0);;show which function is being edited
                         (attractor_set_target_size a size)
                         (attractor_set_target_color a 1.0 1.0 0.0 1.0))
                     ))
                 (if (color_transition_is_complete (attractor_get_color a)) 
                       (begin 
-                        (if (line_is_selected line) 
-                          (attractor_set_target_color_duration a (random 0.6 1.0) (random 0.0 0.5) 0.0 1.0 (random 10000 50000))
-                          (attractor_set_target_color_duration a (random 0.0 0.5) (random 0.7 1.0) (random) (random 0.6 1.0) (random 10000 50000)))))
+                        
+                        (cond
+                            ((line_is_selected line) (attractor_set_target_color_duration a (random 0.6 1.0) (random 0.0 0.5) 0.0 1.0 (random 10000 50000))) 
+                            ((line_is_active line) (attractor_set_target_color_duration a (random 0.0 0.5) (random 0.7 1.0) (random) (random 0.6 1.0) (random 10000 50000)))
+                            (else (attractor_set_target_color_duration a (random 0.8 1.0) (random 0.8 1.0) (random 0.8 1.0) 0.8 (random 10000 50000))))
+                        ))
                 void)
               (begin 
                 void)))
@@ -168,8 +172,8 @@
           (begin 
             children)
           (begin
-            (let ((attractor (attractor_create id POLY_SCENE (widget_get_attractor w) #f (code_manager_get_cursor_x CODE_MANAGER) (code_manager_get_cursor_y CODE_MANAGER) 10.0 (random 0.5 1.0) (random) 0.0 (random 0.6 1.0))))
-              (connector_create (widget_get_attractor w) attractor)
+            (let ((attractor (attractor_create id POLY_SCENE (widget_get_attractor w) #f (i64tod (code_manager_get_cursor_x CODE_MANAGER)) (i64tod (code_manager_get_cursor_y CODE_MANAGER)) 10.0 (random 0.5 1.0) (random) 0.0 (random 0.6 1.0))))
+              ;; (connector_create (widget_get_attractor w) attractor)
               (cons attractor children))
             )
           )
@@ -242,14 +246,20 @@
               (if (function_is_selected state) 
                 (begin 
                   ;; (printf "id %d is selected\n" id)
-                  (widget_apply_circular_force w)
-                  (widget_apply_inwards_force w)
+                  ;; (widget_apply_circular_force w)
+                  ;; (widget_apply_inwards_force w)
                   (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) (attractor_set_target_color (widget_get_attractor w) 1.0 0.5 0.0 1.0))
                   )
                 (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) 
                   (if (function_is_active state) 
-                    (attractor_set_target_color_duration (widget_get_attractor w) (random 0.0 0.7) (random 0.8 1.0) (random 0.0 0.5) 1.0 150000)
-                    (attractor_set_target_color (widget_get_attractor w) 0.4 0.4 0.4 0.4))))
+                    (begin
+                      (widget_fast w)
+                      (widget_apply_circular_force w)
+                      ;; (widget_apply_inwards_force w)
+                      (attractor_set_target_color_duration (widget_get_attractor w) 0.5 (random 0.8 1.0) 0.3 1.0 15000))
+                    (begin
+                      (widget_slow w)
+                      (attractor_set_target_color (widget_get_attractor w) 0.4 0.4 0.4 0.4)))))
               (widget_update w state)
               void)
             (begin void))) 
