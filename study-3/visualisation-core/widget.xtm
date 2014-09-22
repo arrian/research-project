@@ -18,7 +18,7 @@
 (bind-func widget_create
   (lambda (id:i64 x:double y:double size:double index:i64)
     (let ((attractor (attractor_create id POLY_SCENE null 1 x y size 1.0 0.0 0.0 1.0)))
-        ;; (printf "creating widget\n")
+        (printf "creating widget %d at %d,%d\n" id x y)
         (Widget_h id attractor null #f index))))
 
 (bind-func widget_get_id
@@ -145,13 +145,20 @@
             (force 50.0))
           (for-each (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- x (attractor_get_x a))) (* force (- y (attractor_get_y a)))) 0) (widget_get_children w)))))
 
+(bind-func widget_apply_outwards_force
+  (lambda (w:Widget*)
+      (let ((x (attractor_get_x (widget_get_attractor w)))
+            (y (attractor_get_y (widget_get_attractor w)))
+            (force 50.0))
+          (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- 0.0 (- x (attractor_get_x a)))) (* force (- 0.0 (- y (attractor_get_y a))))) 0) (widget_get_children w)))))
+
 (bind-func widget_apply_circular_force
   (lambda (w:Widget*)
       (let ((x (attractor_get_x (widget_get_attractor w)))
             (y (attractor_get_y (widget_get_attractor w)))
             (force 50.0))
-          (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- 0.0 (- y (attractor_get_y a)))) (* force (- x (attractor_get_x a)))) 0) (widget_get_children w))    
-        )))
+          (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- 0.0 (- y (attractor_get_y a)))) (* force (- x (attractor_get_x a)))) 0) (widget_get_children w)))))
+
 
 ;; Widget List ;;;;;;;;;;;;;;;;;;;;;
 (bind-alias WidgetList List:<Widget*,List*>)
@@ -250,52 +257,6 @@
       (set! WIDGET_LIST_TEST (widget_list_update WIDGET_LIST_TEST)))
       void))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; (bind-func update
-  
-;;   (lambda ()
-;;     ;; (memzone 10000000 0
-;;       (let ((i 0))
-;;         (dotimes (i 10000)
-;;           (lambda () 0))
-;;         void)
-;;       ;; )
-;;     ))
-
-;; (update)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; (bind-val WIDGET_TEST Widget* 0)
-
-;; (bind-func widget_test_init
-;;   (lambda ()
-;;       (set! WIDGET_TEST (widget_create 0 0.0 0.0 100.0))))
-
-;; (widget_test_init)
-
-;; (bind-func widget_test_add_child
-;;   (lambda ()
-;;       (widget_add_child WIDGET_TEST
-;;           (attractor_create 0 POLY_SCENE (widget_get_attractor WIDGET_TEST) 0 (random -200.0 200.0) (random -200.0 200.0) (random 20.0 40.0) (random 0.9 1.0) (random 0.0 0.5) (random 0.0 0.2) 1.0))
-;;     ))
-
-;; (widget_test_add_child)
-
-;;;;;;;;;;;
-
-;; (bind-func update
-;;   (lambda ()
-;;     (if (not (= WIDGET_TEST null)) (widget_update WIDGET_TEST))
-;;     (if (= (% (now) 5) 0) 
-;;       (begin
-;;         ;; (apply_random_color)
-;;         ;; (apply_random_forces)
-;;         ;; (apply_random_size)
-;;         void))
-;;     void))
-
 ;;;;;;;;;;;
 
 ;; (bind-func apply_random_forces
@@ -304,46 +265,6 @@
 ;;     void))
 
 ;; ;; (apply_random_forces)
-
-;; ;;;;;;;;;;;;;;;;
-
-;; (bind-func apply_random_color
-;;   (lambda ()
-;;       (map (lambda (a) (attractor_set_target_color a (random 0.5 1.0) (random) 0.0 (random 0.6 1.0)) 0) (widget_get_children WIDGET_TEST))
-;;     void))
-
-;; ;; (apply_random_color)
-
-;; (bind-func apply_random_color
-;;   (lambda ()
-;;       (for-each (lambda (w) (for-each (lambda (a) (attractor_set_target_color a (random 0.5 1.0) (random) 0.0 (random 0.6 1.0)) 0) (widget_get_children w))) WIDGET_LIST_TEST)
-;;       (for-each (lambda (w) (for-each (lambda (a) (attractor_set_target_size a (random 10.0 40.0)) 0) (widget_get_children w))) WIDGET_LIST_TEST)
-;;     void))
-
-;; (apply_random_color)
-
-;; (bind-func apply_evaluate_color
-;;   (lambda ()
-;;       (map (lambda (a) (attractor_set_target_color a (random 0.3 0.8) (random 0.8 1.0) (random 0.0 0.5) 1.0) 0) (widget_get_children WIDGET_TEST))
-;;     void))
-
-;; ;; (apply_evaluate_color)
-
-;; (bind-func apply_error_color
-;;   (lambda ()
-;;       (map (lambda (a) (attractor_set_target_color a (random 0.8 1.0) (random 0.2 0.5) (random 0.1 0.2) 1.0) 0) (widget_get_children WIDGET_TEST))
-;;     void))
-
-;; ;; (apply_error_color)
-
-;; (bind-func apply_edit_color
-;;   (lambda ()
-;;     (map (lambda (a) 
-;;       (let ((grey (random 0.4 1.0)))
-;;         (attractor_set_target_color a grey grey grey (random 0.7 1.0))) 0) (widget_get_children WIDGET_TEST))
-;;     void))
-
-;; ;; (apply_edit_color)
 
 ;; ;;;;;;;;;;
 
@@ -368,71 +289,6 @@
 ;;                                  (random 20.0 30.0))))
 
 ;; ;; (apply_random_size)
-
-;; (bind-func apply_size
-;;   (lambda (size:double);;attractor_set_target_size
-;;       (map (lambda (a) (attractor_set_target_size a size) 0) (widget_get_children WIDGET_TEST))))
-
-;; ;; (apply_size 10.0)
-;; ;; (apply_size 40.0)
-
-
-
-;; ;;;;;;;;;;;;
-
-;; (bind-func apply_outwards_force
-;;   (lambda ()
-;;       (let ((x (attractor_get_x (widget_get_attractor WIDGET_TEST)))
-;;             (y (attractor_get_y (widget_get_attractor WIDGET_TEST)))
-;;             (force 50.0))
-;;           (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- 0.0 (- x (attractor_get_x a)))) (* force (- 0.0 (- y (attractor_get_y a))))) 0) (widget_get_children WIDGET_TEST))    
-;;         )))
-
-;; ;; (apply_outwards_force)
-
-;; ;;;;;;;;;;;;;;;;;;;;;;;
-;; (bind-func apply_inwards_force
-  ;; (lambda ()
-  ;;     (let ((x (attractor_get_x (widget_get_attractor WIDGET_TEST)))
-  ;;           (y (attractor_get_y (widget_get_attractor WIDGET_TEST)))
-  ;;           (force 50.0))
-  ;;         (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- x (attractor_get_x a))) (* force (- y (attractor_get_y a)))) 0) (widget_get_children WIDGET_TEST))    
-  ;;       )))
-
-;; ;; (apply_inwards_force)
-
-;; (bind-func widget_apply_inwards_force
-;;   (lambda (w:Widget*)
-;;       (let ((x (attractor_get_x (widget_get_attractor w)))
-;;             (y (attractor_get_y (widget_get_attractor w)))
-;;             (force 50.0))
-;;           (for-each (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- x (attractor_get_x a))) (* force (- y (attractor_get_y a)))) 0) (widget_get_children w)))))
-
-;; (apply_inwards_force)
-
-;; ;;;;;;;;;;;;;;;;;;;;;;;
-
-;; (bind-func apply_circular_force
-;;   (lambda ()
-;;       (let ((x (attractor_get_x (widget_get_attractor WIDGET_TEST)))
-;;             (y (attractor_get_y (widget_get_attractor WIDGET_TEST)))
-;;             (force 50.0))
-;;           (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- 0.0 (- y (attractor_get_y a)))) (* force (- x (attractor_get_x a)))) 0) (widget_get_children WIDGET_TEST))    
-;;         )))
-
-;; ;; (apply_circular_force)
-
-;; ;;;;;;;;;;;;;;
-
-
-;; (bind-func recreate
-;;   (lambda ()
-;;     (widget_destroy WIDGET_TEST)
-;;     (widget_test_init)
-;;     void))
-
-;; ;; (recreate)
-
 
 
 
