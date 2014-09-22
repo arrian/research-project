@@ -5,7 +5,6 @@
     asdfasdf
     asdfasdfa))
 
-
 (bind-func testing
   (lambda ()
     (play inst 60 80 dur)
@@ -21,6 +20,7 @@
     (play inst 60 80 dur)
     (play inst 60 80 dur)
     ))
+
 
 (bind-func asdftest
   (lambda ()

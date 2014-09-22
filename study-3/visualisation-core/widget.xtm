@@ -43,7 +43,7 @@
 
 (bind-func widget_create
   (lambda (id:i64 x:double y:double size:double index:i64)
-    (let ((attractor (attractor_create id POLY_SCENE null 1 x y size 1.0 0.0 0.0 1.0)))
+    (let ((attractor (attractor_create id POLY_SCENE null #t x y size 1.0 0.0 0.0 1.0)))
         (printf "creating widget %d at %d,%d\n" id x y)
         (Widget_h id attractor null #f index))))
 
@@ -103,7 +103,7 @@
   (lambda (w:Widget*)
       (let ((x (attractor_get_x (widget_get_attractor w)))
             (y (attractor_get_y (widget_get_attractor w)))
-            (force (* 0.1 (size_get_current (attractor_get_size (widget_get_attractor w))))))
+            (force (* 0.8 (size_get_current (attractor_get_size (widget_get_attractor w))))))
           (for-each (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- x (attractor_get_x a))) (* force (- y (attractor_get_y a)))) 0) (widget_get_children w)))))
 
 (bind-func widget_apply_outwards_force
@@ -256,12 +256,14 @@
         (for-each (lambda (w) 
           (if (equal id (widget_get_id w))
             (begin
+              ;; (printf "test\n")
               (widget_set_destroy w #f)
               (set! found #t)
               (if (function_is_selected state) 
                 (begin 
                   ;; (printf "id %d is selected\n" id)
                   ;; (widget_apply_circular_force w)
+                  ;; (poly_physics_entity_set_velocity (attractor_get_physics_entity (widget_get_attractor w)) 1000.0 1000.0)
                   (widget_apply_inwards_force w)
                   (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) (attractor_set_target_color_variate (widget_get_attractor w) YELLOW TRANSITION_TIME))
                   )

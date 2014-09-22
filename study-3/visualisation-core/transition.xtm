@@ -74,6 +74,7 @@
 (bind-val DARK_GREEN Color* 0)
 (bind-val BLUE Color* 0)
 (bind-val PURPLE Color* 0)
+(bind-val PINK Color* 0)
 (bind-val WHITE Color* 0)
 (bind-val BLACK Color* 0)
 (bind-val GREY Color* 0)
@@ -86,7 +87,8 @@
     (set! GREEN (Color 0.3 1.0 0.3 0.9))
     (set! DARK_GREEN (Color 0.0 0.6 0.0 0.9))
     (set! BLUE (Color 0.2 0.3 1.0 0.9))
-    (set! PURPLE (Color 0.7 0.0 1.0 0.9))
+    (set! PURPLE (Color 0.5 0.0 1.0 0.9))
+    (set! PINK (Color 1.0 0.0 1.0 0.9))
     (set! WHITE (Color 1.0 1.0 1.0 0.9))
     (set! BLACK (Color 0.0 0.0 0.0 0.9))
     (set! GREY (Color 0.5 0.5 0.5 0.9))))
@@ -95,11 +97,12 @@
 
 (bind-func color_by_index
   (lambda (index:i64)
-    (cond ((= (% index 5) 0) GREEN)
-          ((= (% index 5) 1) ORANGE)
-          ((= (% index 5) 2) BLUE)
-          ((= (% index 5) 3) YELLOW)
-          (else PURPLE))))
+    (cond ((= (% index 6) 0) BLUE)
+          ((= (% index 6) 1) GREEN)
+          ((= (% index 6) 2) ORANGE)
+          ((= (% index 6) 3) YELLOW)
+          ((= (% index 6) 4) PURPLE)
+          (else PINK))))
 
 ;; Size Transition ;;;;;;;;;;;;;;;
 

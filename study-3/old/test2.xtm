@@ -7,6 +7,7 @@
 
 (speaker (*metro* 'get-beat 4) 1/4 0)
 
+
 (define drums
   (lambda (beat dur)
     (play kit (cosr 43 3 1/8) (cosr 60 30 1) .1)

@@ -47,7 +47,7 @@ public:
 	
 	void Render();
 							
-	void setVideoMode(int xRes, int yRes, bool fullScreen, bool vSync, int aaLevel, int anisotropyLevel);		
+	void setVideoMode(int xRes, int yRes, bool fullScreen, bool vSync, int aaLevel, int anisotropyLevel, bool retinaSupport = true);		
 	void resizeTo(int xRes, int yRes);
 	void createThread(Threaded *target);		
 	
@@ -86,12 +86,15 @@ public:
 
     Number getBackingXRes();
     Number getBackingYRes();
+
+    bool systemUpdate();
+    String saveFilePicker(std::vector<CoreFileExtension> extensions) { return ""; }
     				
 protected:	
 
 	// GLFWwindow* window;
 	
-	void _setVideoMode(int xRes, int yRes, bool fullScreen, bool vSync, int aaLevel, int anisotropyLevel);
+	// void _setVideoMode(int xRes, int yRes, bool fullScreen, bool vSync, int aaLevel, int anisotropyLevel);
 
 	uint64_t initTime;
     bool retinaSupport;

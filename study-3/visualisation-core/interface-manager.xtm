@@ -48,6 +48,7 @@
   (lambda (args:i8*)
   	;; (printf "code %.80s...\n" args)
     (code_manager_update CODE_MANAGER args)
+    ;; (poly_scene_multi_label_set_text TEXT args)
   	void))
   	
 	;;(printf "code %.80s...\n" args)

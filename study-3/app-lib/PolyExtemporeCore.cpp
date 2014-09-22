@@ -41,7 +41,7 @@ bool ExtemporeCore::Update()
 	doSleep();
 	
 	if(modeChangeInfo.needResolutionChange) {
-		_setVideoMode(modeChangeInfo.xRes, modeChangeInfo.yRes, modeChangeInfo.fullScreen, modeChangeInfo.vSync, modeChangeInfo.aaLevel, modeChangeInfo.anisotropyLevel);
+		setVideoMode(modeChangeInfo.xRes, modeChangeInfo.yRes, modeChangeInfo.fullScreen, modeChangeInfo.vSync, modeChangeInfo.aaLevel, modeChangeInfo.anisotropyLevel);
 		modeChangeInfo.needResolutionChange = false;
 	}
 	updateCore();
@@ -63,7 +63,7 @@ void ExtemporeCore::Render()
 	unlockMutex(CoreServices::getRenderMutex());
 }
 
-void ExtemporeCore::setVideoMode(int xRes, int yRes, bool fullScreen, bool vSync, int aaLevel, int anisotropyLevel)
+void ExtemporeCore::setVideoMode(int xRes, int yRes, bool fullScreen, bool vSync, int aaLevel, int anisotropyLevel, bool retinaSupport)
 {
 	std::cout << "set video mode called" << std::endl;
 }
@@ -207,9 +207,24 @@ Number ExtemporeCore::getBackingYRes()
 	return getYRes();
 }
 
-void ExtemporeCore::_setVideoMode(int xRes, int yRes, bool fullScreen, bool vSync, int aaLevel, int anisotropyLevel)
+bool ExtemporeCore::systemUpdate()
 {
-	std::cout << "called _setVideoMode" << std::endl;
+	if(!running) return false;
+	doSleep();
+	
+	// if(modeChangeInfo.needResolutionChange) {
+	// 	_setVideoMode(modeChangeInfo.xRes, modeChangeInfo.yRes, modeChangeInfo.fullScreen, modeChangeInfo.vSync, modeChangeInfo.aaLevel, modeChangeInfo.anisotropyLevel);
+	// 	modeChangeInfo.needResolutionChange = false;
+	// }
+							
+	updateCore();
+	checkEvents();
+	return running;
 }
+
+// void ExtemporeCore::setVideoMode(int xRes, int yRes, bool fullScreen, bool vSync, int aaLevel, int anisotropyLevel, bool retinaSupport)
+// {
+// 	std::cout << "called _setVideoMode" << std::endl;
+// }
 
 
