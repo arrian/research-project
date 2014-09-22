@@ -7,11 +7,10 @@ A second lab study was conducted to test the impact of additional
 visual feedback (beyond the raw source code) on audience understanding
 and enjoyment in live coding.
 
-It was hypothesised that the didactic visualisation approach would result in
+It was hypothesised that the didactic visualisation (see Section~\ref{sec:didactic-visualisation}) approach would result in
 enhanced audience understanding, and a reduction in audience confusion
-through the performance. In contrast, we predicted that the aesthetic
-visualisations would positively influence audience enjoyment, both
-overall and over the course of the performance.
+through the performance. In contrast, it was predicted that the aesthetic
+visualisations (see Section~\ref{sec:aesthetic-visualisation}) would positively influence audience enjoyment, both overall and over the course of the performance.
 
 %%%%%%%%%%%%%%%% Inital Report for study
 
@@ -20,8 +19,6 @@ overall and over the course of the performance.
 % The set of didactic visualisations predominantly focussed on the relationship between the live coding active processes and their behaviour. The visualisations prominently displaying the names of the active functions with visual indication of the number of functions running and their callback time. Bright colours and solid shapes were used to ensure constant visibility and communicate the intention of the underlying code. Overall, four visualisations were presented with each introduced depending on the number of active functions. It was predicted that taking a more educational approach would see a reduction in audience confusion through the performance.\\
 
 % The set of aesthetic visualisations focussed less on the programmatic aspects of the live coding performance, rather intending to provide additional visual interest to the projected code thereby prolonging attention. More variety was used in visual structure and colour. Again, four visualisations were presented, varying the visualisation based on the number of active functions. It was predicted that focussing on the aesthetic nature of the visualisations would assist in audience retention and result in a consistency of interest through the performance.
-
-\section{Rationale}
 
 
 \section{Method}
@@ -52,17 +49,13 @@ the live coder using a video of the performance.
 
 \section{Participants}
 
-A total of 41 participants took part in the study. Over the two performances, 19 participants observed the first performance and 22 participants observed the second performance. The demographic makeup of the audiences was similar.
+Of the 41 participants that took part in the study over the two performances, 19 participants observed the first performance and 22 participants observed the second performance. The demographic makeup of the audiences was similar.
 
-$66\%$ of the participants stated that they were male (see Figure \ref{genderdistribution}) and most participants were aged between 18 and 32 ($76\%$, see Figure \ref{agedistribution}). As the study was conducted within the Computer Science Department, a large proportion of the participants were experienced with programming with $90\%$ having current or previous experience with it (see Figure \ref{programmingdistribution}). Nevertheless, only $15\%$ of participants had previous experience with any of the Lisp style of languages (see Figure \ref{lispdistribution}), the style used within the performance.
+$66\%$ of the participants were male (see Figure \ref{genderdistribution}) and most participants were aged between 18 and 32 ($76\%$, see Figure \ref{agedistribution}). As the study was conducted within the Computer Science Department, a large proportion of the participants were experienced with programming with $90\%$ having current or previous experience with it (see Figure \ref{programmingdistribution}). Nevertheless, only $15\%$ of participants had previous experience with any of the Lisp style of languages (see Figure \ref{lispdistribution}), the style used within the performance.
 
-Of the participants, $68\%$ stated that they listened to a large amount of music (see Figure \ref{musicdistribution}) though only about $15\%$ of participants stated that they played an instrument or sung regularly (see Figure \ref{instrumentdistribution}). Only $22\%$ of participants had seen a live coding performance before.
+Of the participants, $68\%$ stated that they listened to a large amount of music (see Figure \ref{musicdistribution}) though only about $15\%$ of participants stated that they played an instrument or sung regularly (see Figure \ref{instrumentdistribution}). $78\%$ of the participants had never seen a live coding performance before.
 
 \section{Results}
-
-Of the $41$ audience participants $66\%$ were male, $76\%$ were aged
-between 18 and 32 and $78\%$ of the participants had never seen a live
-coding performance before.
 
 The audience-reported enjoyment and understanding responses from the
 questionnaire were evaluated for the two visualisation conditions as
@@ -71,7 +64,7 @@ Chi-squared analysis.
 
 \subsection{Enjoyment}
 
-
+\afterpage{
 \begin{figure}
   \centering
   \includegraphics[width=\columnwidth]{../study-2/results/graphs/didactic-enjoyment-final}
@@ -86,7 +79,7 @@ Chi-squared analysis.
     middle and end of the performance for the \textbf{aesthetic} condition.}
   \label{fig:aesthetic-enjoyment}
 \end{figure}
-
+\clearpage}
 
 Overall, the majority of the participants reported that both
 visualisation conditions had a positive effect on their
@@ -110,6 +103,7 @@ enjoyment remained steady throughout.
 
 \subsection{Understanding}
 
+\afterpage{
 \begin{figure}
   \centering
   \includegraphics[width=\columnwidth]{../study-2/results/graphs/didactic-understanding-final}
@@ -126,6 +120,8 @@ enjoyment remained steady throughout.
   \label{fig:aesthetic-understanding}
 \end{figure}
 
+\clearpage
+}
 
 In response to a specific survey question, $37\%$ of participants
 stated that overall, the didactic visualisations ``helped them to
@@ -178,7 +174,6 @@ $32\%$ had positive valence towards the aesthetic visualisation. A variety of th
 
 A relatively large proportion ($28\%$) of the audience discussed the importance of the source code to the sense of liveness of the performance such as that the ``code showed what the musician was doing physically''. A further $5\%$ of the audience demonstrated a deeper understanding of the live coding process such as ``changing values produced changes in tone and speed of the music pitch''.
 
-
 \subsection{Improvements}
 
 The audience was asked to indicate possible improvements to the visualisations. 40\% of the audience suggested improvements that indicate a desire to see a better relationship between the visualisations and the music, with suggestions such as matching the visualisations to musical rhythms or pitch. For example, one audience member stated that the visualisations should ``perhaps have a stronger correlation with hush tones and defined shapes, baselines with wide and soft shapes with animations that follow the beat more consistently''.
@@ -186,13 +181,6 @@ The audience was asked to indicate possible improvements to the visualisations. 
 Other members of the audience stated that they would like to see a better relationship between the code and the visuals. For example, one audience member stated that ``it would be really cool once you edit a code line and then activate it for it to morph into a visualisation for as long as this line of code is active''. Another audience member stated that ``it would be better to not just relate the function to the sound but relate every beat to the sound or to the code responsible for that beat''.
 
 Other suggestions included increasing the readability of source code, increased immediacy of actions, increasing uniformity between the visualisations and the use of images to assist with the understanding of high level concepts.
-
-
-
-
-
-
-
 
 
 
@@ -274,6 +262,8 @@ distracting''. When asked if the visualisations were distracting the
 live coder stated: ``Ah, no. In general I'm just so focussed on the
 code''.
 
+Results of this study indicate that there is a need for further refinement and evaluation of visualisations... 
+
 
 % The enjoyment of the aesthetic visualisation was higher and generally increased during the earlier stages of the performances suggesting that the aesthetic visualisations held the audience's attention consistently for a longer period (see Figure \ref{aestheticenjoymentchange}).\\
 
@@ -286,32 +276,4 @@ code''.
 % The strategy for audience members for either understanding or enjoying the performance proved to be different to that of the live coder. Regarding distractions, one audience member stated that ``the visualisations were interesting but distracting''. In comparison, when asked if the visualisations were distracting the live coder stated: ``Ah, no. In general I'm just so focussed on the code''. This difference may be due to the varying experience levels or the pressure of the situation.\\
 
 % \section{Conclusion}
-
-
-% In this first empirical study of audience perception of code
-% visualisation in live coding, we have identified an opportunity for
-% real-time code visualisations to help improve the audience experience
-% of a live coding computer music performance. With few exceptions, our
-% initial survey of a live coding performance at an arts festival
-% revealed a generally low to medium level of audience understanding
-% throughout that performance (although almost half the survey
-% respondents indicated a high level of enjoyment throughout).
-
-% In a subsequent lab study, a comparison of two prototype code
-% visualisations indicated that both visualisations seemed to help with
-% enjoyment. Significantly more audience members reported that our
-% didactic visualisations helped with understanding but overall trends
-% for both enjoyment and understanding throughout the performances were
-% complex. There are indications of a higher cognitive load for the
-% didactic visualisations than the aesthetic visualisations and this may
-% have influenced audience responses to them.
-
-% In a future extension of this work, design lessons from both
-% visualisation types could be combined together to produce live coding
-% driven visualisations which targeted both the aesthetics as well as a
-% greater understanding of the live coding process. These visualisations
-% could then be compared with the baseline ``no visualisation''
-% condition in an audience experiment. There are also opportunities to
-% vary the nature of the visualisations over the course of a
-% performance.
 
