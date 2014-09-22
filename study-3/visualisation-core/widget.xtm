@@ -1,13 +1,28 @@
 ;; Widget to handle the active and inactive state of specific code.
 
-;; Utility ;;;;;;;;;;;;;;;;;
-
-(bind-val VERTICAL_COUNT i64 3)
+(bind-val VERTICAL_COUNT i64 4)
 (bind-val SPACING double 250.0)
 (bind-val OFFSET_X double 750.0)
-(bind-val OFFSET_Y double 250.0)
+(bind-val OFFSET_Y double 350.0)
 (bind-val EPSILON double 0.3)
 (bind-val SCALE double 2.0)
+(bind-val WIDGET_SIZE double 100.0)
+
+(bind-func set
+  (lambda ()
+    (set! SCALE 1.5)
+    ))
+
+(set)
+
+(bind-func set2
+  (lambda ()
+    (set! VERTICAL_COUNT 4)
+    ))
+
+(set2)
+
+;; Utility ;;;;;;;;;;;;;;;;;
 
 (bind-func get_x_for_index
   (lambda (index)
@@ -88,7 +103,7 @@
   (lambda (w:Widget*)
       (let ((x (attractor_get_x (widget_get_attractor w)))
             (y (attractor_get_y (widget_get_attractor w)))
-            (force 50.0))
+            (force (* 0.1 (size_get_current (attractor_get_size (widget_get_attractor w))))))
           (for-each (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (* force (- x (attractor_get_x a))) (* force (- y (attractor_get_y a)))) 0) (widget_get_children w)))))
 
 (bind-func widget_apply_outwards_force
@@ -140,7 +155,7 @@
         ;; (widget_apply_inwards_force w)
         ;; (widget_fast w)
         (widget_apply_inwards_force w)
-        (if (line_is_active line) (printf "active\n"));;temp
+        ;; (if (line_is_active line) (printf "active\n"));;temp
         ;; (widget_apply_circular_force w)
         (for-each (lambda (a) 
             (if (= id (attractor_get_id a)) 
@@ -152,17 +167,17 @@
                   (if (and (not (is_close size (size_get_current (attractor_get_size a))))
                       (size_transition_is_complete (attractor_get_size a)));;(<> size (size_get_current (attractor_get_size a)))
                       (begin 
-                        (attractor_set_target_color (widget_get_attractor w) 1.0 1.0 0.0 1.0);;show which function is being edited
+                        (attractor_set_target_color_variate (widget_get_attractor w) RED TRANSITION_TIME);;1.0 1.0 0.0 1.0);;show which function is being edited
                         (attractor_set_target_size a size)
-                        (attractor_set_target_color a 1.0 1.0 0.0 1.0))
+                        (attractor_set_target_color_variate a RED TRANSITION_TIME))
                     ))
                 (if (color_transition_is_complete (attractor_get_color a)) 
                       (begin 
                         
                         (cond
-                            ((line_is_selected line) (attractor_set_target_color_duration a (random 0.6 1.0) (random 0.0 0.5) 0.0 1.0 (random 10000 50000))) 
-                            ((line_is_active line) (attractor_set_target_color_duration a (random 0.0 0.5) (random 0.7 1.0) (random) (random 0.6 1.0) (random 10000 50000)))
-                            (else (attractor_set_target_color_duration a (random 0.8 1.0) (random 0.8 1.0) (random 0.8 1.0) 0.8 (random 10000 50000))))
+                            ((line_is_selected line) (attractor_set_target_color_variate a YELLOW (random 10000 50000))) 
+                            ((line_is_active line) (attractor_set_target_color_variate a (color_by_index (widget_get_index w)) (random 10000 50000)));;was GREEN
+                            (else (attractor_set_target_color_variate a WHITE (random 10000 50000))))
                         ))
                 void)
               (begin 
@@ -247,8 +262,8 @@
                 (begin 
                   ;; (printf "id %d is selected\n" id)
                   ;; (widget_apply_circular_force w)
-                  ;; (widget_apply_inwards_force w)
-                  (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) (attractor_set_target_color (widget_get_attractor w) 1.0 0.5 0.0 1.0))
+                  (widget_apply_inwards_force w)
+                  (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) (attractor_set_target_color_variate (widget_get_attractor w) YELLOW TRANSITION_TIME))
                   )
                 (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) 
                   (if (function_is_active state) 
@@ -256,17 +271,17 @@
                       (widget_fast w)
                       (widget_apply_circular_force w)
                       ;; (widget_apply_inwards_force w)
-                      (attractor_set_target_color_duration (widget_get_attractor w) 0.5 (random 0.8 1.0) 0.3 1.0 15000))
+                      (attractor_set_target_color_variate (widget_get_attractor w) (color_by_index (widget_get_index w)) 15000));;was DARK_GREEN
                     (begin
                       (widget_slow w)
-                      (attractor_set_target_color (widget_get_attractor w) 0.4 0.4 0.4 0.4)))))
+                      (attractor_set_target_color_variate (widget_get_attractor w) GREY 150000)))))
               (widget_update w state)
               void)
             (begin void))) 
         wl)
         (if (found)
           wl
-          (cons (widget_create id (get_x_for_index (function_get_index state)) (get_y_for_index (function_get_index state)) 60.0 (function_get_index state)) wl)))))
+          (cons (widget_create id (get_x_for_index (function_get_index state)) (get_y_for_index (function_get_index state)) WIDGET_SIZE (function_get_index state)) wl)))))
 
 (bind-func widget_list_update
   (lambda (wl:WidgetList*)

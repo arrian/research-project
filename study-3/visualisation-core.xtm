@@ -11,6 +11,14 @@
       (tset! obj 1 y)
       obj)))
 
+(bind-func maxd
+  (lambda (a:double b:double)
+    (if (>= a b) a b)))
+
+(bind-func mind
+  (lambda (a:double b:double)
+    (if (< a b) a b)))
+
 ;; (define *study-3-dir* "/Users/ben/Code/xtm/arrian-research-project/study-3")
 (define *study-3-dir* "/Users/Arrian/Dev/research-project/study-3")
 

@@ -83,6 +83,20 @@ struct Code
 		this->startLine = startLine;
 		this->startIndex = startIndex;
 	}
+
+	bool isDeactivatedDefine()
+	{
+		if(std::count(code.begin(), code.end(), '\n') > 0) return false;
+		int i = 0;
+		std::string define = "(define ";
+		while(i < define.length() && i < code.length())
+		{
+			if(define[i] != code[i]) return false;
+			i++;
+		}
+		if(i <= define.length() && code[code.length() - 1] == ')') return true;
+		return false;
+	}
 };
 
 struct Function
@@ -148,15 +162,51 @@ struct Function
 
 	bool equal(Code code)
 	{
-		return this->code.code == code.code;
+		if(this->code.code == code.code) return true;
+
+		if(lines.size() > 0 && lines[0].code == code.code) return true;//only first line is match
+
+		return false;
 	}
+
+	/**
+	 * Returns true if this function is a calling function. 
+	 * eg. the function (example 10) for (define example...)
+	 */
+	bool isCaller(Code code)
+	{
+		std::string name = getName(code.code);
+		unsigned pos = name.find_last_of(" ");
+		// std::cout << "comparing " << getName() << " with " << name.substr(pos + 1) << std::endl;
+		if(pos != std::string::npos) return getName() == name.substr(pos + 1);
+
+		return false;
+	}
+
+	bool nameEquals(std::string name)
+	{
+		// std::cout << "comparing " << getName() << " and " << getName(name) << std::endl;
+		return (getName() == getName(name));
+	}
+
+	bool isDeactivated(Code code)
+	{
+		if(lines.size() == 0) return true;
+
+		for(int i = 0; i < lines[0].code.length(); i++)
+		{
+			if(lines[0].code[i] == ')') return true;
+		}
+		return false;
+	}
+
 
 	/**
 	 * Returns true if the function was successfully updated.
 	 */
 	bool update(Code code)
 	{
-		if(getName() != getName(code.code)) return false;//TODO: could have a smarter heuristic here
+		if(!nameEquals(getName(code.code))) return false;//TODO: could have a smarter heuristic here
 
 		std::vector<Line> newLines;
 		this->code = code;
@@ -234,19 +284,16 @@ public:
 		{
 			for(auto & f : functions)
 			{
-				if(f.equal(c)) 
+				if(f.equal(c) || (c.isDeactivatedDefine() && f.isCaller(c))) 
 				{
-					f.isActive = true;
+					bool activeState = !c.isDeactivatedDefine();
+					f.isActive = activeState;
 
-					for(auto l : f.lines)
+					for(auto & l : f.lines)
 					{
-						l.isActive = true;
-						std::cout << "is active" << std::endl;
+						l.isActive = activeState;
 					}
 				}
-
-				
-				//TODO: also set lines to active
 			}
 		}
 	}
@@ -294,10 +341,22 @@ public:
 				depth--;
 				if(depth <= 0)
 				{
-					results.push_back(Code(index, code.substr(initial, count), lineCount, i));
 					depth = 0;
-					count = 0;
-					index++;
+					// if(results.size() > 0 && results.back().isDeactivatedDefine()) std::cout << "was isDeactivated" << std::endl;
+					if(results.size() > 0 && results.back().isDeactivatedDefine())
+					{
+						// std::cout << "l = " << code.length() << " si = " << results.back().startIndex << " cl = " << results.back().code.length() << " count = " << count << std::endl; 
+						results.back().code += code.substr(results.back().startIndex + results.back().code.length(), count);
+					}
+					else
+					{
+						results.push_back(Code(index, code.substr(initial, count), lineCount, initial));
+						if(results.back().isDeactivatedDefine()) depth = 1;
+
+						index++;
+					}
+
+					count = 0;					
 				}
 			}
 		}
@@ -358,13 +417,10 @@ extern "C"
 	bool line_is_error(line* l);
 }
 
-void evaluate_and_print(code_manager* manager, char* code)
+void evaluate_and_print(code_manager* manager)
 {
-	code_manager_update(manager, code);
-	code_manager_evaluate(manager, code);
-
 	printf("functions: %d\n", code_manager_functions_count(manager));
-	printf("function 1: %s\n", line_get_code(function_lines_get(code_manager_functions_get(manager, 0), 0)));
+	for(int i = 0; i < code_manager_functions_count(manager); i++) printf("function %d with id %d: %s\n", i, function_get_id(code_manager_functions_get(manager, i)), line_get_code(function_lines_get(code_manager_functions_get(manager, i), 0)));
 
 }
 
@@ -372,14 +428,27 @@ int main(int argc, char* argv[])
 {
 	code_manager* manager = code_manager_create();
 
-	evaluate_and_print(manager, "(test function here)");
-	evaluate_and_print(manager, "(test function here2)");
-	evaluate_and_print(manager, "(test function here3)");
-	evaluate_and_print(manager, "(test3 function here)");
-	evaluate_and_print(manager, "(test function here)(test function here)");
-	evaluate_and_print(manager, "(test (((((((function)))) here))));;testing comments");
+	// evaluate_and_print(manager, "(test function here)");
+	// evaluate_and_print(manager, "(test function here2)");
+	// evaluate_and_print(manager, "(test function here3)");
+	// evaluate_and_print(manager, "(test3 function here)");
+	// evaluate_and_print(manager, "(test function here)(test function here)");
+	// evaluate_and_print(manager, "(test (((((((function)))) here))));;testing comments");
 
-	evaluate_and_print(manager, "(define speaker\n  (lambda (beat dur i)\n    (play speech (* 10 (+ i 1)) (cosr 50 20 1/2) dur 2)\n    (callback (*metro* (+ beat (* .5 dur))) 'speaker (+ beat dur)\n              dur\n              (if (< i 6) (+ i 1) 0))))\n\n(speaker (*metro* 'get-beat 4) 1/4 0)\n\n\n(define drums\n  (lambda (beat dur)\n    (play kit (cosr 43 3 1/8) (cosr 60 30 1) .1)\n    (play kit (cosr 53 7 1/7) (cosr 60 30 1) .1)\n    (play kit *gm-open-hi-hat* (cosr 70 10 2) .1 1)\n    (if (= (modulo beat 1) 0) (play kit *gm-kick* 110 .1 1))\n    (if (= (modulo beat 2) 1) (play kit *gm-snare-2* 110 .1 1))\n    (callback (*metro* (+ beat (* .5 dur))) 'drums (+ beat dur) dur)))\n\n(drums (*metro* 'get-beat 4) 1/4)\n\n\n\n\n;; cheers\n;;\n;; ben.swift@anu.edu.au\n;; http://benswift.me\n\n");
+	// evaluate_and_print(manager, "(define speaker\n  (lambda (beat dur i)\n    (play speech (* 10 (+ i 1)) (cosr 50 20 1/2) dur 2)\n    (callback (*metro* (+ beat (* .5 dur))) 'speaker (+ beat dur)\n              dur\n              (if (< i 6) (+ i 1) 0))))\n\n(speaker (*metro* 'get-beat 4) 1/4 0)\n\n\n(define drums\n  (lambda (beat dur)\n    (play kit (cosr 43 3 1/8) (cosr 60 30 1) .1)\n    (play kit (cosr 53 7 1/7) (cosr 60 30 1) .1)\n    (play kit *gm-open-hi-hat* (cosr 70 10 2) .1 1)\n    (if (= (modulo beat 1) 0) (play kit *gm-kick* 110 .1 1))\n    (if (= (modulo beat 2) 1) (play kit *gm-snare-2* 110 .1 1))\n    (callback (*metro* (+ beat (* .5 dur))) 'drums (+ beat dur) dur)))\n\n(drums (*metro* 'get-beat 4) 1/4)\n\n\n\n\n;; cheers\n;;\n;; ben.swift@anu.edu.au\n;; http://benswift.me\n\n");
+	code_manager_update(manager, "(define function)\ntesting)(more here)\n(testing more)");
+	evaluate_and_print(manager);
+	code_manager_update(manager, "(define function\ntesting)(more here)\n(testing more)");
+	evaluate_and_print(manager);
+
+
+	Code code1(0, "(define test \nfunction)", 0, 0);
+	Code code2(1, "(test2 function)", 0, 0);
+
+	Function func(code2);
+
+	if(func.isCaller(code1)) std::cout << "is caller" << std::endl;
+	else std::cout << "not caller" << std::endl;
 
 	return 0;
 }

@@ -65,6 +65,42 @@
   (lambda (c:Color*)
     (tref c 3)))
 
+;; Utility Colors
+
+(bind-val RED Color* 0)
+(bind-val ORANGE Color* 0)
+(bind-val YELLOW Color* 0)
+(bind-val GREEN Color* 0)
+(bind-val DARK_GREEN Color* 0)
+(bind-val BLUE Color* 0)
+(bind-val PURPLE Color* 0)
+(bind-val WHITE Color* 0)
+(bind-val BLACK Color* 0)
+(bind-val GREY Color* 0)
+
+(bind-func color_init
+  (lambda ()
+    (set! RED (Color 0.8 0.0 0.0 0.9))
+    (set! ORANGE (Color 1.0 0.5 0.0 0.9))
+    (set! YELLOW (Color 1.0 1.0 0.0 0.9))
+    (set! GREEN (Color 0.3 1.0 0.3 0.9))
+    (set! DARK_GREEN (Color 0.0 0.6 0.0 0.9))
+    (set! BLUE (Color 0.2 0.3 1.0 0.9))
+    (set! PURPLE (Color 0.7 0.0 1.0 0.9))
+    (set! WHITE (Color 1.0 1.0 1.0 0.9))
+    (set! BLACK (Color 0.0 0.0 0.0 0.9))
+    (set! GREY (Color 0.5 0.5 0.5 0.9))))
+
+(color_init)
+
+(bind-func color_by_index
+  (lambda (index:i64)
+    (cond ((= (% index 5) 0) GREEN)
+          ((= (% index 5) 1) ORANGE)
+          ((= (% index 5) 2) BLUE)
+          ((= (% index 5) 3) YELLOW)
+          (else PURPLE))))
+
 ;; Size Transition ;;;;;;;;;;;;;;;
 
 (bind-type SizeTransition <i1,double,double,double,i64,i64>);;finished,initial_size,current_size,target_size,start_time,transition_time
@@ -145,6 +181,21 @@
             (tset! ct 4 (now))
             (color_set_duration ct TRANSITION_TIME)
             void)))
+
+(bind-func color_set_target_color
+  (lambda (ct:ColorTransition* c:Color*)
+    (color_set_target ct (color_get_r c) (color_get_g c) (color_get_b c) (color_get_a c))
+    void))
+
+(bind-func color_set_target_color_variate
+  (lambda (ct:ColorTransition* c:Color* duration)
+    (color_set_target ct 
+              (random (maxd 0.0 (- (color_get_r c) 0.1)) (mind 1.0 (+ (color_get_r c) 0.3)))
+              (random (maxd 0.0 (- (color_get_g c) 0.1)) (mind 1.0 (+ (color_get_g c) 0.3)))
+              (random (maxd 0.0 (- (color_get_b c) 0.1)) (mind 1.0 (+ (color_get_b c) 0.3)))
+              (color_get_a c))
+    (color_set_duration ct duration)
+    void))
 
 (bind-func color_set_target_duration
   (lambda (ct:ColorTransition* r g b a duration)

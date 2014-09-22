@@ -13,14 +13,6 @@
 
 ;; Utility ;;;;;;;;;;;;;;;;;;;
 
-(bind-func maxd
-  (lambda (a:double b:double)
-    (if (>= a b) a b)))
-
-(bind-func mind
-  (lambda (a:double b:double)
-    (if (< a b) a b)))
-
 (bind-func get_collision_category_for_id
   (lambda (index)
     (dtoi64 (pow 2.0 (i64tod (% index 16))))))
@@ -88,10 +80,15 @@
     (color_set_target (attractor_get_color a) r g b alpha)
     a))
 
-(bind-func attractor_set_target_color_duration
-  (lambda (a:Attractor* r g b alpha duration)
-    (color_set_target_duration (attractor_get_color a) r g b alpha duration)
+(bind-func attractor_set_target_color_variate
+  (lambda (a:Attractor* c:Color* duration)
+    (color_set_target_color_variate (attractor_get_color a) c duration)
     a))
+
+;; (bind-func attractor_set_target_color_duration
+;;   (lambda (a:Attractor* r g b alpha duration)
+;;     (color_set_target_duration (attractor_get_color a) r g b alpha duration)
+;;     a))
 
 (bind-func attractor_set_physics_entity
   (lambda (a:Attractor* pe)
