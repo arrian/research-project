@@ -193,9 +193,9 @@
 (bind-func color_set_target_color_variate
   (lambda (ct:ColorTransition* c:Color* duration)
     (color_set_target ct 
-              (random (maxd 0.0 (- (color_get_r c) 0.1)) (mind 1.0 (+ (color_get_r c) 0.3)))
-              (random (maxd 0.0 (- (color_get_g c) 0.1)) (mind 1.0 (+ (color_get_g c) 0.3)))
-              (random (maxd 0.0 (- (color_get_b c) 0.1)) (mind 1.0 (+ (color_get_b c) 0.3)))
+              (random (max 0.0 (- (color_get_r c) 0.1)) (min 1.0 (+ (color_get_r c) 0.3)))
+              (random (max 0.0 (- (color_get_g c) 0.1)) (min 1.0 (+ (color_get_g c) 0.3)))
+              (random (max 0.0 (- (color_get_b c) 0.1)) (min 1.0 (+ (color_get_b c) 0.3)))
               (color_get_a c))
     (color_set_duration ct duration)
     void))

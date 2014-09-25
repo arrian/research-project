@@ -11,14 +11,6 @@
       (tset! obj 1 y)
       obj)))
 
-(bind-func maxd
-  (lambda (a:double b:double)
-    (if (>= a b) a b)))
-
-(bind-func mind
-  (lambda (a:double b:double)
-    (if (< a b) a b)))
-
 (bind-func get_user_name
   (lambda ()
     (getenv "USER")))

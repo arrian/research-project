@@ -166,7 +166,7 @@
                 (let ((fx (- px mx))
                       (fy (- py my)))
                     (let ((flength (sqrt (+ (* fx fx) (* fy fy)))))
-                      (let ((distance (maxd 1.0 (mind 5.0 flength)))
+                      (let ((distance (max 1.0 (min 5.0 flength)))
                             (fxn (/ fx flength))
                             (fyn (/ fy flength)))
                           (let ((strength (/ (* ATTRACTION_FACTOR 10.0) (* distance distance))))
