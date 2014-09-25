@@ -19,8 +19,17 @@
   (lambda (a:double b:double)
     (if (< a b) a b)))
 
-;; (define *study-3-dir* "/Users/ben/Code/xtm/arrian-research-project/study-3")
-(define *study-3-dir* "/Users/Arrian/Dev/research-project/study-3")
+(bind-func get_user_name
+  (lambda ()
+    (getenv "USER")))
+
+(define *study-3-dir*
+  (let ((user (cptr->string (get_user_name))))
+    (cond ((string=? user "ben")
+           "/Users/ben/Code/xtm/arrian-research-project/study-3")
+          ((string=? user "arrian")
+            "/Users/Arrian/Dev/research-project/study-3")
+          (else "unknown"))))
 
 (define *code-lib* (string-append *study-3-dir* "/code-lib/bin/code.dylib"))
 (sys:load (string-append *study-3-dir* "/code-lib/code.xtm"))
