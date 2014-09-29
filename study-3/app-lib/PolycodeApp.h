@@ -72,6 +72,7 @@ extern "C"
 	
 	poly_scene_primitive* poly_scene_primitive_create_cube(double xSize, double ySize, double zSize);
 	poly_scene_primitive* poly_scene_primitive_create_circle(double xSize, double ySize, int segments);
+	poly_scene_primitive* poly_scene_primitive_create_line_circle(double xSize, double ySize, int segments);
 	void poly_scene_primitive_destroy(poly_scene_primitive* primitive);
 	void poly_scene_primitive_set_circle_options(poly_scene_primitive* primitive, double xSize, double ySize, int segments);
 

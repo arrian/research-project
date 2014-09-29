@@ -235,6 +235,11 @@ poly_scene_primitive* poly_scene_primitive_create_circle(double xSize, double yS
 	return reinterpret_cast<poly_scene_primitive*>(new ScenePrimitive(8, xSize, ySize, segments));
 }
 
+poly_scene_primitive* poly_scene_primitive_create_line_circle(double xSize, double ySize, int segments)
+{
+	return reinterpret_cast<poly_scene_primitive*>(new ScenePrimitive(11, xSize, ySize, segments));
+}
+
 void poly_scene_primitive_destroy(poly_scene_primitive* primitive)
 {
 	std::cout << "primitive destroy with " << primitive << std::endl;

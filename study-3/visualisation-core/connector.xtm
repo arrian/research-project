@@ -20,6 +20,8 @@
 ;;   	(poly_scene_line_set_points (connector_get_line connector) x1 y1 x2 y2)
 ;;     void))
 
+
+
 (bind-val PROGRAMMER_IMAGE_X double 800.0)
 (bind-val PROGRAMMER_IMAGE_Y_OFFSET double 100.0);;offset the image vertically so it doesn't perfectly align with the hexagon rows
 
@@ -51,12 +53,16 @@
 
 (bind-val CONNECTOR_CODE poly_scene_line* 0)
 
+(bind-val CONNECTOR_CIRCLE_RADIUS double 100.0)
+;; (bind-val CONNECTOR_CIRCLE poly_scene_primitive* 0)
+
 (bind-func connector_init
   (lambda ()
     (set! PROGRAMMER_IMAGE (poly_scene_image_create (string_cstr (string_cat_h PATH (Str_h "/resources/man.png")))))
     (poly_scene_add_child POLY_SCENE PROGRAMMER_IMAGE)
     (set! CONNECTOR_HEXAGON null)
     (set! CONNECTOR_CODE null)
+    ;; (set! CONNECTOR_CIRCLE null)
     void))
 
 (connector_init)
@@ -66,18 +72,26 @@
     (poly_entity_set_position PROGRAMMER_IMAGE PROGRAMMER_IMAGE_X (+ PROGRAMMER_IMAGE_Y_OFFSET programmer_y))
     (if (null? CONNECTOR_HEXAGON) 
       (begin
-        (set! CONNECTOR_HEXAGON (poly_scene_line_create (programmer_get_x) (programmer_get_y) hex_x hex_y))
+        (set! CONNECTOR_HEXAGON (poly_scene_line_create (programmer_get_x) (programmer_get_y) (+ hex_x (/ CONNECTOR_CIRCLE_RADIUS 2.0)) hex_y))
         (poly_scene_add_child POLY_SCENE CONNECTOR_HEXAGON)
         void)
-      (poly_scene_line_set_points CONNECTOR_HEXAGON (programmer_get_x) (programmer_get_y) hex_x hex_y))
+      (poly_scene_line_set_points CONNECTOR_HEXAGON (programmer_get_x) (programmer_get_y) (+ hex_x (/ CONNECTOR_CIRCLE_RADIUS 2.0)) hex_y))
     (if (null? CONNECTOR_CODE) 
       (begin 
-        (set! CONNECTOR_CODE (poly_scene_line_create hex_x hex_y code_x code_y)) 
+        (set! CONNECTOR_CODE (poly_scene_line_create (- hex_x (/ CONNECTOR_CIRCLE_RADIUS 2.0)) hex_y code_x code_y)) 
         (poly_scene_add_child POLY_SCENE CONNECTOR_CODE)
         void)
-      (poly_scene_line_set_points CONNECTOR_CODE hex_x hex_y code_x code_y))
+      (poly_scene_line_set_points CONNECTOR_CODE (- hex_x (/ CONNECTOR_CIRCLE_RADIUS 2.0)) hex_y code_x code_y))
+    ;; (if (null? CONNECTOR_CIRCLE) 
+    ;;   (begin 
+    ;;     (set! CONNECTOR_CIRCLE (poly_scene_primitive_create_line_circle CONNECTOR_CIRCLE_RADIUS CONNECTOR_CIRCLE_RADIUS 16)) 
+    ;;     (poly_scene_add_child POLY_SCENE CONNECTOR_CIRCLE)
+    ;;     void))
+    ;; (poly_entity_set_position CONNECTOR_CIRCLE hex_x hex_y)
+
     (poly_entity_set_color CONNECTOR_HEXAGON 1.0 1.0 1.0 1.0)
     (poly_entity_set_color CONNECTOR_CODE 1.0 1.0 1.0 1.0)
+    ;; (poly_entity_set_color CONNECTOR_CIRCLE 1.0 1.0 1.0 0.0)
     
     void))
 
@@ -85,8 +99,10 @@
   (lambda ()
       (if (null? CONNECTOR_HEXAGON) void (poly_scene_line_destroy CONNECTOR_HEXAGON))
       (if (null? CONNECTOR_CODE) void (poly_scene_line_destroy CONNECTOR_CODE))
+      ;; (if (null? CONNECTOR_CIRCLE) void (poly_scene_primitive_destroy CONNECTOR_CIRCLE))
       (set! CONNECTOR_HEXAGON null)
       (set! CONNECTOR_CODE null)
-    ))
+      ;; (set! CONNECTOR_CIRCLE null)
+      ))
 
 (connector_hide)
