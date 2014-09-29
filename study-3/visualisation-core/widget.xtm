@@ -258,7 +258,7 @@
               (if (function_is_selected state) 
                 (begin 
                   ;; (printf "id %d is selected\n" id)
-                  (connector_update (attractor_get_x (widget_get_attractor w)) (attractor_get_y (widget_get_attractor w)) 100.0 100.0 (attractor_get_y (widget_get_attractor w)))
+                  (connector_update (attractor_get_x (widget_get_attractor w)) (attractor_get_y (widget_get_attractor w)) (- (i64tod (code_manager_get_cursor_x CODE_MANAGER)) (ftod (/ WIDTH 2.0))) (+ (i64tod (- 0 (code_manager_get_cursor_y CODE_MANAGER))) (ftod (/ HEIGHT 2.0))) (attractor_get_y (widget_get_attractor w)))
                   ;; (widget_apply_circular_force w)
                   ;; (poly_physics_entity_set_velocity (attractor_get_physics_entity (widget_get_attractor w)) 1000.0 1000.0)
                   ;; (widget_apply_inwards_force w)
