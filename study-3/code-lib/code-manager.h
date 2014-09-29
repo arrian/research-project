@@ -582,12 +582,16 @@ int main(int argc, char* argv[])
 	// printf("functions: %d\n", code_manager_functions_count(manager));
 
 	// testing deactivated defines
-	code_manager_update(manager, "(define test \nfunction)");
-	printf("functions: %d\n", code_manager_functions_count(manager));
-	code_manager_update(manager, "(define test)\n\nfunction)\n\n(define blah)");
-	printf("functions: %d\n", code_manager_functions_count(manager));
+	// code_manager_update(manager, "(define test \nfunction)");
+	// printf("functions: %d\n", code_manager_functions_count(manager));
+	// code_manager_update(manager, "(define test)\n\nfunction)\n\n(define blah)");
+	// printf("functions: %d\n", code_manager_functions_count(manager));
 
-
+	//bug 1: clears everything after bracket goes to new line
+	code_manager_update(manager, "(bleeps2 (*metro* 'get-beat 13) 8 60)");
+	printf("functions: %d\n", code_manager_functions_count(manager));
+	code_manager_update(manager, "(bleeps2 (*metro* 'get-beat 13) 8 60\n)");
+	printf("functions: %d\n", code_manager_functions_count(manager));
 	return 0;
 }
 

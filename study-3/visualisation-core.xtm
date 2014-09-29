@@ -48,6 +48,11 @@
 (sys:load (string-append *study-3-dir* "/visualisation-core/visual-manager.xtm"))
 (sys:load (string-append *study-3-dir* "/visualisation-core/interface-manager.xtm"))
 
+(sys:load (string-append *study-3-dir* "/visualisation-core/transition.xtm"))
+(sys:load (string-append *study-3-dir* "/visualisation-core/attractor.xtm"))
+(sys:load (string-append *study-3-dir* "/visualisation-core/connector.xtm"))
+(sys:load (string-append *study-3-dir* "/visualisation-core/widget.xtm"))
+
 (gl:set-context *gl-ctx*)
 
 (define update-loop
@@ -61,11 +66,6 @@
               delta-t)))
 
 (update-loop (now) 1/30)
-
-(sys:load (string-append *study-3-dir* "/visualisation-core/transition.xtm"))
-(sys:load (string-append *study-3-dir* "/visualisation-core/attractor.xtm"))
-(sys:load (string-append *study-3-dir* "/visualisation-core/connector.xtm"))
-(sys:load (string-append *study-3-dir* "/visualisation-core/widget.xtm"))
 
 
 
