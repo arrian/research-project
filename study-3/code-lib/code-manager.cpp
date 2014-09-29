@@ -81,6 +81,7 @@ int function_get_id(function* f)
 
 int function_lines_count(function* f)
 {
+	if(!reinterpret_cast<Function*>(f)->isDefine()) return 0;//we only care about visualising the important stuff
 	return reinterpret_cast<Function*>(f)->lines.size();
 }
 
@@ -107,6 +108,11 @@ bool function_is_active(function* f)
 bool function_is_error(function* f)
 {
 	return reinterpret_cast<Function*>(f)->isError;
+}
+
+bool function_is_define(function* f)
+{
+	return reinterpret_cast<Function*>(f)->isDefine();
 }
 
 int function_get_next(function* f, int now)

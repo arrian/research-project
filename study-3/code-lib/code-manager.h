@@ -16,6 +16,8 @@ using namespace boost;
 #define BIND_TYPE "bind-type"
 #define SYS_LOAD "sys:load"
 
+#define CALLER_OFFSET 10
+
 int getLineIdentifier()
 {  
     static int LINE_IDENTIFIER = 0;
@@ -108,46 +110,19 @@ struct Code
 		if(i <= define.length() && code[code.length() - 1] == ')') return true;
 		return false;
 	}
+
+	bool isDefine()
+	{
+		int i = 0;
+		std::string define = "(define ";
+		while(i < define.length() && i < code.length())
+		{
+			if(define[i] != code[i]) return false;
+			i++;
+		}
+		return true;
+	}
 };
-
-// struct Trigger
-// {
-// 	int id;
-// 	int index;
-// 	bool created;
-// 	long long int next;
-
-// 	double beat;
-// 	double duration;
-
-// 	// Code code;
-
-// 	bool isSelected;//is this code line selected?
-// 	bool isActive;
-
-// 	Trigger()
-// 	{
-// 		this->id = getTriggerIdentifier();
-// 		this->index = 0;
-
-// 		this->created = false;
-
-// 		this->isSelected = false;
-// 		this->isActive = false;
-// 	}
-
-// 	void update(Code code)
-// 	{
-// 		// this->code = code;
-
-// 	}
-
-// 	void update(long double next, double beat, double duration)
-// 	{
-
-// 	}
-
-// };
 
 struct Function
 {
@@ -192,7 +167,7 @@ struct Function
 
 	void callback(int next)
 	{
-		std::cout << "callback " << getName() << " at " << next << std::endl;
+		// std::cout << "callback " << getName() << " at " << next << std::endl;
 		this->next.push_back(next);
 	}
 
@@ -270,6 +245,10 @@ struct Function
 		return false;
 	}
 
+	bool isDefine()
+	{
+		return code.isDefine();
+	}
 
 	/**
 	 * Returns true if the function was successfully updated.
@@ -277,12 +256,6 @@ struct Function
 	bool update(Code code)
 	{
 		if(!nameEquals(getName(code.code))) return false;//TODO: could have a smarter heuristic here
-		
-		// if(isCaller(code))
-		// {
-		// 	trigger.update(code);
-		// 	return true;
-		// }
 
 		std::vector<Line> newLines;
 		this->code = code;
@@ -364,6 +337,29 @@ public:
 			}
 
 			if(!done) newFunctions.push_back(Function(c));
+		}
+
+		//reassign the index to line up define with caller:
+		int index = 0;
+		for(auto & f : newFunctions)
+		{
+			if(f.isDefine())
+			{
+				f.index = index;
+				index++;
+			}
+			else
+			{
+				//inefficient. will leave due to time constraints
+				for(auto & g : newFunctions)
+				{
+					if(f.isCaller(g.code))
+					{
+						f.index = g.index + CALLER_OFFSET;
+						break;
+					}
+				}
+			}
 		}
 
 		functions = newFunctions;
@@ -533,6 +529,7 @@ extern "C"
 	bool function_is_selected(function* f);
 	bool function_is_active(function* f);
 	bool function_is_error(function* f);
+	bool function_is_define(function* f);
 	int function_get_next(function* f, int now);//get callback time
 
 	//Code Line

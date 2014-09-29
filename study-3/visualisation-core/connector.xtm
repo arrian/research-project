@@ -1,27 +1,3 @@
-;; (bind-type Connector <poly_scene_line*,Attractor*,Attractor*>);;source, target
-
-;; (bind-func connector_get_line
-;;   (lambda (c:Connector*)
-;;     (tref c 0)))
-
-;; (bind-func connector_create
-;;   (lambda (x1 y1 x2 y2)
-;;     (let ((connector (Connector (poly_scene_line_create x1 y1 x2 y2) null null)))
-;;       (poly_entity_set_color (connector_get_line connector) 1.0 1.0 1.0 1.0)
-;;       (poly_scene_add_child POLY_SCENE (connector_get_line connector))
-;;       connector)))
-
-;; (bind-func connector_destroy
-;;   (lambda (connector:Connector*)
-;;     (poly_scene_line_destroy (tref connector 0))))
-
-;; (bind-func connector_set_points
-;;   (lambda (connector:Connector* x1 y1 x2 y2)
-;;   	(poly_scene_line_set_points (connector_get_line connector) x1 y1 x2 y2)
-;;     void))
-
-
-
 (bind-val PROGRAMMER_IMAGE_X double 800.0)
 (bind-val PROGRAMMER_IMAGE_Y_OFFSET double 100.0);;offset the image vertically so it doesn't perfectly align with the hexagon rows
 

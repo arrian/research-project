@@ -98,12 +98,16 @@
 
 (bind-func color_by_index
   (lambda (index:i64)
-    (cond ((= (% index 6) 0) BLUE)
-          ((= (% index 6) 1) GREEN)
-          ((= (% index 6) 2) ORANGE)
-          ((= (% index 6) 3) YELLOW)
-          ((= (% index 6) 4) PURPLE)
-          (else PINK))))
+    (cond ((= (% index 10) 0) BLUE)
+          ((= (% index 10) 1) GREEN)
+          ((= (% index 10) 2) ORANGE)
+          ((= (% index 10) 3) YELLOW)
+          ((= (% index 10) 4) PURPLE)
+          ((= (% index 10) 5) DARK_GREEN)
+          ((= (% index 10) 6) RED)
+          ((= (% index 10) 7) PINK)
+          ((= (% index 10) 8) PURPLE)
+          (else BLUE))))
 
 ;; Size Transition ;;;;;;;;;;;;;;;
 
