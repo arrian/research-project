@@ -1,0 +1,41 @@
+
+
+;; (bind-func widget_print
+;;   (lambda (w:Widget*)
+;;     (printf "test widget %d: %p\n%f,%f\n" (widget_get_id w) w (attractor_get_x (widget_get_attractor w)) (attractor_get_y (widget_get_attractor w)))
+;;     (println (length (widget_get_children w)))
+;;     void))
+
+;; (bind-func print_wl
+;; 	(lambda() 
+;; 	(let ((i 0))
+;; 		(widget_list_print WIDGET_LIST_TEST)
+;; 		(printf "function count: %d" (code_manager_functions_count CODE_MANAGER))
+	
+;; 		(dotimes (i (code_manager_functions_count CODE_MANAGER))
+;; 	              (let ((state (code_manager_functions_get CODE_MANAGER i)))
+;; 	                  (printf "id: %d\nlines count: %d\n" (function_get_id state) (function_lines_count state)))))
+;; 	void))
+
+;; (print_wl)
+
+;; (play-note (now) fmsynth (random 36 46) 100 (/ 44100 80))
+
+;; (play-note (now) epad (random 36 46) 100 (/ 44100 10))
+
+;; (play-note (now) synth (random '(20 70)) 100 (random (/ 44100 1)))
+
+;;temp test instruments;;;;;;;;
+(sys:load "libs/core/audio_dsp.xtm")
+(sys:load "libs/core/instruments.xtm")
+(define-instrument fmsynth fmsynth_note_c fmsynth_fx)
+(define-instrument synth synth_note_c synth_fx)
+(define-instrument epad epad_note_c epad_fx)
+(bind-func all:DSP
+  (lambda (in time chan dat)
+    (+ (fmsynth in time chan dat)
+       (synth in time chan dat)
+       (epad in time chan dat))))
+(dsp:set! all)
+;;;;;;;;;;;;;;;;
+

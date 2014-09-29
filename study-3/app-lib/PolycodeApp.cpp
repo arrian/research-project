@@ -11,7 +11,8 @@
 poly_core* poly_core_create(char* title, float width, float height, bool fullscreen, char* resources)
 {
 	ExtemporeCore* core = new ExtemporeCore(title, (int) width, (int) height, fullscreen);
-	CoreServices::getInstance()->getResourceManager()->addArchive(resources);//"../resources/default.pak"
+	// CoreServices::getInstance()->getResourceManager()->addArchive(resources);//"../resources/default.pak"
+	CoreServices::getInstance()->getResourceManager()->addDirResource(resources, false);
 	CoreServices::getInstance()->getResourceManager()->addDirResource("default", false);
 	return reinterpret_cast<poly_core*>(core);
 }
@@ -185,7 +186,7 @@ double poly_entity_get_y(poly_entity* entity)
 
 poly_scene_image* poly_scene_image_create(char* path)
 {
-	return reinterpret_cast<poly_scene_image*>(new SceneImage(path));
+	return reinterpret_cast<poly_scene_image*>(new SceneImage(String(path)));
 }
 
 void poly_scene_image_destroy(poly_scene_image* image)

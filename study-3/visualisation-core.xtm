@@ -6,6 +6,7 @@
 ;; (sys:load "libs/core/vu-meter.xtm")
 (sys:load "libs/core/math.xtm")
 
+
 (bind-func cons:[List:<!a,List*>*,!a,List:<!a,List*>*]*
   (lambda (x y)
     (let ((obj (halloc)));; custom heap allocation
@@ -39,7 +40,8 @@
 (sys:load (string-append *study-3-dir* "/code-lib/code.xtm"))
 
 (define *app-lib* (string-append *study-3-dir* "/app-lib/bin/app.dylib"))
-(define *app-lib-resources* (string-append *study-3-dir* "/resources/default.pak"))
+;; (define *app-lib-resources* (string-append *study-3-dir* "/resources/default.pak"))
+(define *app-lib-resources* (string-append *study-3-dir* "/resources"))
 (sys:load (string-append *study-3-dir* "/app-lib/app.xtm"))
 
 (sys:load (string-append *study-3-dir* "/visualisation-core/code-manager.xtm"))

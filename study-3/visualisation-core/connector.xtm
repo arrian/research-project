@@ -21,7 +21,7 @@
 ;;     void))
 
 (bind-val PROGRAMMER_IMAGE_X double 800.0)
-(bind-val PROGRAMMER_IMAGE_Y_OFFSET double 100.0);;offset the image vertically so it doesn'y perfectly align with the hexagon rows
+(bind-val PROGRAMMER_IMAGE_Y_OFFSET double 100.0);;offset the image vertically so it doesn't perfectly align with the hexagon rows
 
 (bind-func set_programmer_x
   (lambda (x:double)
@@ -53,18 +53,16 @@
 
 (bind-func connector_init
   (lambda ()
-    (set! PROGRAMMER_IMAGE (poly_scene_image_create (string_cstr (string_cat_h PATH (Str "/resources/man.png")))))
+    (set! PROGRAMMER_IMAGE (poly_scene_image_create (string_cstr (string_cat_h PATH (Str_h "/resources/man.png")))))
     (poly_scene_add_child POLY_SCENE PROGRAMMER_IMAGE)
     (set! CONNECTOR_HEXAGON null)
     (set! CONNECTOR_CODE null)
-    ;; (printf "%s" (string_cstr (string_cat PATH (Str "/resources/man.png"))))
     void))
 
 (connector_init)
 
 (bind-func connector_update
   (lambda (hex_x:double hex_y:double code_x:double code_y:double programmer_y:double)
-    ;; (printf "testing %f %f %f %f\n" hex_x hex_y code_x code_y)
     (poly_entity_set_position PROGRAMMER_IMAGE PROGRAMMER_IMAGE_X (+ PROGRAMMER_IMAGE_Y_OFFSET programmer_y))
     (if (null? CONNECTOR_HEXAGON) 
       (begin
