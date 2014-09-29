@@ -211,20 +211,9 @@ bool ExtemporeCore::systemUpdate()
 {
 	if(!running) return false;
 	doSleep();
-	
-	// if(modeChangeInfo.needResolutionChange) {
-	// 	_setVideoMode(modeChangeInfo.xRes, modeChangeInfo.yRes, modeChangeInfo.fullScreen, modeChangeInfo.vSync, modeChangeInfo.aaLevel, modeChangeInfo.anisotropyLevel);
-	// 	modeChangeInfo.needResolutionChange = false;
-	// }
-							
+						
 	updateCore();
 	checkEvents();
 	return running;
 }
-
-// void ExtemporeCore::setVideoMode(int xRes, int yRes, bool fullScreen, bool vSync, int aaLevel, int anisotropyLevel, bool retinaSupport)
-// {
-// 	std::cout << "called _setVideoMode" << std::endl;
-// }
-
 

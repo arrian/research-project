@@ -237,6 +237,16 @@ struct Function
 		
 		return true;//was updated
 	}
+
+	bool contains(int index)
+	{
+		return (index >= code.startIndex && index <= code.startIndex + code.code.length());
+	}
+
+	void setSelected(bool selected)
+	{
+		this->isSelected = selected;
+	}
 };
 
 class CodeManager
@@ -302,6 +312,10 @@ public:
 	void error(std::string message){}//error from evaluation
 	void cursor(int selection, int screenMin, int screenMax, int xPosition, int yPosition)
 	{
+		for(auto & f : functions)
+		{
+			f.setSelected(f.contains(selection));
+		}
 		screen.selection = selection;
 		screen.screenMin = screenMin;
 		screen.screenMax = screenMax;
@@ -323,10 +337,20 @@ public:
 		int depth = 0;
 		int lineCount = 0;
 		int index = 0;
+		bool commented = false;
 		for(int i = 0; i < code.length(); i++)
 		{
 			count++;
-			if(code[i] == '\n') lineCount++;
+			if(code[i] == '\n')
+			{
+				commented = false;
+				lineCount++;
+			}
+			else if(code[i] == ';' || commented)
+			{
+				commented = true;
+				continue;
+			}
 			else if(code[i] == '(')
 			{
 				if(depth == 0) 
@@ -436,19 +460,24 @@ int main(int argc, char* argv[])
 	// evaluate_and_print(manager, "(test (((((((function)))) here))));;testing comments");
 
 	// evaluate_and_print(manager, "(define speaker\n  (lambda (beat dur i)\n    (play speech (* 10 (+ i 1)) (cosr 50 20 1/2) dur 2)\n    (callback (*metro* (+ beat (* .5 dur))) 'speaker (+ beat dur)\n              dur\n              (if (< i 6) (+ i 1) 0))))\n\n(speaker (*metro* 'get-beat 4) 1/4 0)\n\n\n(define drums\n  (lambda (beat dur)\n    (play kit (cosr 43 3 1/8) (cosr 60 30 1) .1)\n    (play kit (cosr 53 7 1/7) (cosr 60 30 1) .1)\n    (play kit *gm-open-hi-hat* (cosr 70 10 2) .1 1)\n    (if (= (modulo beat 1) 0) (play kit *gm-kick* 110 .1 1))\n    (if (= (modulo beat 2) 1) (play kit *gm-snare-2* 110 .1 1))\n    (callback (*metro* (+ beat (* .5 dur))) 'drums (+ beat dur) dur)))\n\n(drums (*metro* 'get-beat 4) 1/4)\n\n\n\n\n;; cheers\n;;\n;; ben.swift@anu.edu.au\n;; http://benswift.me\n\n");
-	code_manager_update(manager, "(define function)\ntesting)(more here)\n(testing more)");
-	evaluate_and_print(manager);
-	code_manager_update(manager, "(define function\ntesting)(more here)\n(testing more)");
-	evaluate_and_print(manager);
+	// code_manager_update(manager, "(define function)\ntesting)(more here)\n(testing more)");
+	// evaluate_and_print(manager);
+	// code_manager_update(manager, "(define function\ntesting)(more here)\n(testing more)");
+	// evaluate_and_print(manager);
 
 
-	Code code1(0, "(define test \nfunction)", 0, 0);
-	Code code2(1, "(test2 function)", 0, 0);
+	// Code code1(0, "(define test \nfunction)", 0, 0);
+	// Code code2(1, "(test2 function)", 0, 0);
 
-	Function func(code2);
+	// Function func(code2);
 
-	if(func.isCaller(code1)) std::cout << "is caller" << std::endl;
-	else std::cout << "not caller" << std::endl;
+	// if(func.isCaller(code1)) std::cout << "is caller" << std::endl;
+	// else std::cout << "not caller" << std::endl;
+
+	// testing commenting
+	code_manager_update(manager, "(define test \nfunction)");
+	code_manager_update(manager, ";;(define test \n;;function)");
+	printf("functions: %d\n", code_manager_functions_count(manager));
 
 	return 0;
 }

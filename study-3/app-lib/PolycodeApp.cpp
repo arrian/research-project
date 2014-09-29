@@ -31,6 +31,7 @@ poly_scene* poly_scene_create(float width, float height)
 	PhysicsScene2D* scene = new PhysicsScene2D(5.0, 20);//0.1,60
 	scene->setGravity(Vector2(0.0, 0.0));
 	scene->getActiveCamera()->setOrthoSize(width, height);
+	// scene->getActiveCamera()->setPostFilterByName("Blur");
 	return reinterpret_cast<poly_scene*>(scene);
 }
 

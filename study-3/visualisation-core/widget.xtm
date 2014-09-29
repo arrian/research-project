@@ -5,22 +5,22 @@
 (bind-val OFFSET_X double 750.0)
 (bind-val OFFSET_Y double 350.0)
 (bind-val EPSILON double 0.3)
-(bind-val SCALE double 2.0)
+(bind-val SCALE double 1.5)
 (bind-val WIDGET_SIZE double 100.0)
 
-(bind-func set
-  (lambda ()
-    (set! SCALE 1.5)
-    ))
+;; (bind-func set
+;;   (lambda ()
+;;     (set! SCALE 1.5)
+;;     ))
 
-(set)
+;; (set)
 
-(bind-func set2
-  (lambda ()
-    (set! VERTICAL_COUNT 4)
-    ))
+;; (bind-func set2
+;;   (lambda ()
+;;     (set! VERTICAL_COUNT 4)
+;;     ))
 
-(set2)
+;; (set2)
 
 ;; Utility ;;;;;;;;;;;;;;;;;
 
@@ -78,7 +78,6 @@
 
 (bind-func widget_add_child
   (lambda (w:Widget* a:Attractor*)
-    ;; (connector_create (widget_get_attractor w) a)
     (tset! w 2 (cons a (tref w 2)))
     w))
 
@@ -137,14 +136,14 @@
 
 (bind-func widget_slow
   (lambda (w:Widget*)
-    (widget_set_linear_damping w 100.0)
-    (widget_set_angular_damping w 100.0)
+    (widget_set_linear_damping w 80.0)
+    (widget_set_angular_damping w 80.0)
     void))
 
 (bind-func widget_fast
   (lambda (w:Widget*)
     (widget_set_linear_damping w 0.0)
-    (widget_set_angular_damping w 0.0)
+    (widget_set_angular_damping w 20.0)
     void))
 
 (bind-func widget_update_line
@@ -152,10 +151,7 @@
       (let ((found #f)
             (id (line_get_id line))
             (children (widget_get_children w)))
-        ;; (widget_apply_inwards_force w)
-        ;; (widget_fast w)
         (widget_apply_inwards_force w)
-        ;; (if (line_is_active line) (printf "active\n"));;temp
         ;; (widget_apply_circular_force w)
         (for-each (lambda (a) 
             (if (= id (attractor_get_id a)) 
@@ -187,8 +183,8 @@
           (begin 
             children)
           (begin
-            (let ((attractor (attractor_create id POLY_SCENE (widget_get_attractor w) #f (i64tod (code_manager_get_cursor_x CODE_MANAGER)) (i64tod (code_manager_get_cursor_y CODE_MANAGER)) 10.0 (random 0.5 1.0) (random) 0.0 (random 0.6 1.0))))
-              ;; (connector_create (widget_get_attractor w) attractor)
+            ;; (let ((attractor (attractor_create id POLY_SCENE (widget_get_attractor w) #f (i64tod (code_manager_get_cursor_x CODE_MANAGER)) (i64tod (code_manager_get_cursor_y CODE_MANAGER)) 10.0 (random 0.5 1.0) (random) 0.0 (random 0.6 1.0))))
+            (let ((attractor (attractor_create id POLY_SCENE (widget_get_attractor w) #f (attractor_get_x (widget_get_attractor w)) (attractor_get_y (widget_get_attractor w)) 10.0 (random 0.5 1.0) (random) 0.0 (random 0.6 1.0))))
               (cons attractor children))
             )
           )
@@ -262,21 +258,25 @@
               (if (function_is_selected state) 
                 (begin 
                   ;; (printf "id %d is selected\n" id)
+                  (connector_update (attractor_get_x (widget_get_attractor w)) (attractor_get_y (widget_get_attractor w)) 100.0 100.0 (attractor_get_y (widget_get_attractor w)))
                   ;; (widget_apply_circular_force w)
                   ;; (poly_physics_entity_set_velocity (attractor_get_physics_entity (widget_get_attractor w)) 1000.0 1000.0)
-                  (widget_apply_inwards_force w)
-                  (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) (attractor_set_target_color_variate (widget_get_attractor w) YELLOW TRANSITION_TIME))
-                  )
+                  ;; (widget_apply_inwards_force w)
+                  ;; (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) (attractor_set_target_color_variate (widget_get_attractor w) YELLOW TRANSITION_TIME))
+                  ()
+                  void)
                 (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) 
                   (if (function_is_active state) 
                     (begin
                       (widget_fast w)
                       (widget_apply_circular_force w)
                       ;; (widget_apply_inwards_force w)
-                      (attractor_set_target_color_variate (widget_get_attractor w) (color_by_index (widget_get_index w)) 15000));;was DARK_GREEN
+                      (attractor_set_target_color_variate (widget_get_attractor w) (color_by_index (widget_get_index w)) 15000)
+                      void);;was DARK_GREEN
                     (begin
                       (widget_slow w)
-                      (attractor_set_target_color_variate (widget_get_attractor w) GREY 150000)))))
+                      (attractor_set_target_color_variate (widget_get_attractor w) GREY 150000)
+                      void))))
               (widget_update w state)
               void)
             (begin void))) 
@@ -320,45 +320,8 @@
 
 (widget_list_test_init)
 
-
 (bind-func update
   (lambda ()
     (memzone 1000000
       (set! WIDGET_LIST_TEST (widget_list_update WIDGET_LIST_TEST)))
       void))
-
-;;;;;;;;;;;
-
-;; (bind-func apply_random_forces
-;;   (lambda ()
-;;       (map (lambda (a) (poly_physics_entity_apply_force (attractor_get_physics_entity a) (random -30000.0 30000.0) (random -30000.0 30000.0)) 0) (widget_get_children WIDGET_TEST))
-;;     void))
-
-;; ;; (apply_random_forces)
-
-;; ;;;;;;;;;;
-
-;; (bind-func apply_random_gravity
-;;   (lambda ()
-;;       (poly_scene_physics_set_gravity POLY_SCENE (random -30.0 30.0) (random -30.0 30.0))
-;;     void))
-
-;; ;; (apply_random_gravity)
-
-;; (bind-func apply_zero_gravity
-;;   (lambda ()
-;;     (poly_scene_physics_set_gravity POLY_SCENE 0.0 0.0)))
-
-;; ;; (apply_zero_gravity)
-
-;; ;;;;;;;;;;;;;;
-
-;; (bind-func apply_random_size
-;;   (lambda ();;attractor_set_target_size
-;;       (attractor_set_target_size (nth (widget_get_children WIDGET_TEST) (random 0 (- (length (widget_get_children WIDGET_TEST)) 1)))
-;;                                  (random 20.0 30.0))))
-
-;; ;; (apply_random_size)
-
-
-

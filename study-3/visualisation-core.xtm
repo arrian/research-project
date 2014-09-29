@@ -3,6 +3,8 @@
 ;; Main entry point for study 3.
 
 (sys:load "libs/core/adt.xtm")
+;; (sys:load "libs/core/vu-meter.xtm")
+(sys:load "libs/core/math.xtm")
 
 (bind-func cons:[List:<!a,List*>*,!a,List:<!a,List*>*]*
   (lambda (x y)
@@ -11,17 +13,27 @@
       (tset! obj 1 y)
       obj)))
 
-(bind-func get_user_name
+(bind-val PATH String* 0)
+
+(bind-func get_user
   (lambda ()
     (getenv "USER")))
 
-(define *study-3-dir*
-  (let ((user (cptr->string (get_user_name))))
-    (cond ((string=? user "ben")
-           "/Users/ben/Code/xtm/arrian-research-project/study-3")
-          ((string=? user "arrian")
-            "/Users/Arrian/Dev/research-project/study-3")
-          (else "unknown"))))
+(bind-func set_path
+  (lambda ()
+    (cond ((= (strcmp (get_user) "ben") 0)
+           (set! PATH (Str_h "/Users/ben/Code/xtm/arrian-research-project/study-3")))
+          ((= (strcmp (get_user) "arrian") 0)
+            (set! PATH (Str_h "/Users/Arrian/Dev/research-project/study-3")))
+          (else (set! PATH (Str_h "unknown"))))))
+
+(set_path)
+
+(bind-func get_path
+  (lambda ()
+    (string_cstr PATH)))
+
+(define *study-3-dir* (cptr->string (get_path)))
 
 (define *code-lib* (string-append *study-3-dir* "/code-lib/bin/code.dylib"))
 (sys:load (string-append *study-3-dir* "/code-lib/code.xtm"))
