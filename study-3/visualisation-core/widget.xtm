@@ -39,13 +39,13 @@
 
 ;; Widget ;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(bind-type Widget <i64,Attractor*,AttractorList*,i1,i64>);; id, main entity, child entities, should destroy,state_index
+(bind-type Widget <i64,Attractor*,AttractorList*,i1,i64,i64>);; id, main entity, child entities, should destroy,state_index,next_callback_time
 
 (bind-func widget_create
   (lambda (id:i64 x:double y:double size:double index:i64)
     (let ((attractor (attractor_create id POLY_SCENE null #t x y size 1.0 0.0 0.0 1.0)))
         (printf "creating widget %d at %d,%d\n" id x y)
-        (Widget_h id attractor null #f index))))
+        (Widget_h id attractor null #f index -1))))
 
 (bind-func widget_get_id
   (lambda (w:Widget*)
@@ -71,6 +71,14 @@
 (bind-func widget_get_index
   (lambda (w:Widget*)
     (tref w 4)))
+
+(bind-func widget_set_next_time
+  (lambda (w:Widget* next:i64)
+    (tset! w 5 next)))
+
+(bind-func widget_get_next_time
+  (lambda (w:Widget*)
+    (tref w 5)))
 
 (bind-func widget_set_destroy
   (lambda (w:Widget* destroy:i1)
@@ -193,7 +201,23 @@
 (bind-func widget_update
   (lambda (w:Widget* state:function*)
     (let ((i 0)
-          (line_count (function_lines_count state)))
+          (line_count (function_lines_count state))
+          (time:i64 (- (function_get_next state (now)) (now))))
+        ;;(attractor_set_target_size (widget_get_attractor w) 100.0)
+        
+        (if (and (< (i64toi32 time) 10000) (> (i64toi32 time) 0) (size_transition_is_complete (attractor_get_size (widget_get_attractor w)))) 
+          (begin
+            ;; (printf "%d\n" time)
+            (attractor_set_target_size (widget_get_attractor w) 200.0)
+            (tset! (attractor_get_size (widget_get_attractor w)) 5 10000)
+            void))
+
+        (if (and (> (i64toi32 time) 10000) (size_transition_is_complete (attractor_get_size (widget_get_attractor w)))) 
+          (begin
+            ;; (printf "%d\n" time)
+            (attractor_set_target_size (widget_get_attractor w) 100.0)
+            (tset! (attractor_get_size (widget_get_attractor w)) 5 1000)
+            void))
 
         ;; updating attractor position
         (if (<> (widget_get_index w) (function_get_index state)) 
@@ -252,31 +276,25 @@
         (for-each (lambda (w) 
           (if (equal id (widget_get_id w))
             (begin
-              ;; (printf "test\n")
               (widget_set_destroy w #f)
               (set! found #t)
-              (if (function_is_selected state) 
-                (begin 
-                  ;; (printf "id %d is selected\n" id)
-                  (connector_update (attractor_get_x (widget_get_attractor w)) (attractor_get_y (widget_get_attractor w)) (- (i64tod (code_manager_get_cursor_x CODE_MANAGER)) (ftod (/ WIDTH 2.0))) (+ (i64tod (- 0 (code_manager_get_cursor_y CODE_MANAGER))) (ftod (/ HEIGHT 2.0))) (attractor_get_y (widget_get_attractor w)))
-                  ;; (widget_apply_circular_force w)
-                  ;; (poly_physics_entity_set_velocity (attractor_get_physics_entity (widget_get_attractor w)) 1000.0 1000.0)
-                  ;; (widget_apply_inwards_force w)
-                  ;; (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) (attractor_set_target_color_variate (widget_get_attractor w) YELLOW TRANSITION_TIME))
-                  ()
-                  void)
-                (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) 
+              (if (function_is_active state)
+                (begin
+                  (widget_apply_circular_force w)
+                  (widget_fast w))
+                (widget_slow w))
+              (if (color_transition_is_complete (attractor_get_color (widget_get_attractor w))) 
                   (if (function_is_active state) 
                     (begin
-                      (widget_fast w)
-                      (widget_apply_circular_force w)
-                      ;; (widget_apply_inwards_force w)
                       (attractor_set_target_color_variate (widget_get_attractor w) (color_by_index (widget_get_index w)) 15000)
-                      void);;was DARK_GREEN
+                      void)
                     (begin
-                      (widget_slow w)
                       (attractor_set_target_color_variate (widget_get_attractor w) GREY 150000)
-                      void))))
+                      void)))
+              (if (function_is_selected state) 
+                (begin 
+                  (connector_update (attractor_get_x (widget_get_attractor w)) (attractor_get_y (widget_get_attractor w)) (- (i64tod (code_manager_get_cursor_x CODE_MANAGER)) (ftod (/ WIDTH 2.0))) (+ (i64tod (- 0 (code_manager_get_cursor_y CODE_MANAGER))) (ftod (/ HEIGHT 2.0))) (attractor_get_y (widget_get_attractor w)))
+                  void))
               (widget_update w state)
               void)
             (begin void))) 
@@ -302,11 +320,11 @@
 
 ;; Custom callback 
 
-(define cv-callback
-  (lambda (time cb-sym . args)
-      ;; (widget_update_active (widget_list_find (symbol->string cb-sym)) (real->integer time))
-      (apply callback 
-        (cons time (cons cb-sym args)))))
+;; (define cv-callback
+;;   (lambda (time cb-sym . args)
+;;       ;; (widget_update_active (widget_list_find (symbol->string cb-sym)) (real->integer time))
+;;       (apply callback 
+;;         (cons time (cons cb-sym args)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

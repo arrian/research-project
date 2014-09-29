@@ -36,6 +36,7 @@
 (bind-lib code function_is_selected [i1,function*]*)
 (bind-lib code function_is_active [i1,function*]*)
 (bind-lib code function_is_error [i1,function*]*)
+(bind-lib code function_get_next [i64,function*,i64]*);;returns -1 if no next time
 
 ;; Code Manager
 (bind-alias code_manager i8)
@@ -48,6 +49,7 @@
 ;; (bind-lib code code_manager_select_2 [void,code_manager*,i64,i64]*)
 (bind-lib code code_manager_error [void,code_manager*,i8*]*)
 (bind-lib code code_manager_cursor [void,code_manager*,i64,i64,i64,i64,i64]*)
+(bind-lib code code_manager_callback [void,code_manager*,i8*,i64]*)
 
 (bind-lib code code_manager_functions_count [i64,code_manager*]*)
 (bind-lib code code_manager_functions_get [function*,code_manager*,i64]*)

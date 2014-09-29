@@ -11,3 +11,29 @@
 
 (code_manager_init)
 
+(bind-func callback_wrapper
+  (lambda (name:i8* next:i64)
+    (code_manager_callback CODE_MANAGER name next)))
+
+(define cv-callback
+  (lambda (time cb-sym beat dur . args)
+  	(println 'test)
+  	(callback_wrapper (symbol->string cb-sym) (real->integer (*metro* (+ beat dur))))
+      (apply callback 
+             (append (list time cb-sym beat dur) args))))
+
+
+
+
+
+
+
+;; (define speaker
+;;   (lambda (beat dur i)
+;;     (play speech (* 10 (+ i 1)) (cosr 50 20 1/2) dur 2)
+;;     (callback (*metro* (+ beat (* .5 dur))) 'speaker (+ beat dur)
+;;               dur
+;;               testing event more stff adding some stuff to the end here
+;;               (if (< i 6) (+ i 1) 0))))
+
+;; (speaker (*metro* 'get-beat 4) 1/4 0)

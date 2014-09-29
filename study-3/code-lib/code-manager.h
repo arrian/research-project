@@ -10,6 +10,11 @@ using namespace boost;
 
 #define DEFINE "define"
 #define BIND_FUNC "bind-func"
+#define BIND_VAL "bind-val"
+#define BIND_LIB "bind-lib"
+#define BIND_ALIAS "bind-alias"
+#define BIND_TYPE "bind-type"
+#define SYS_LOAD "sys:load"
 
 int getLineIdentifier()
 {  
@@ -18,6 +23,12 @@ int getLineIdentifier()
 }
 
 int getFunctionIdentifier()
+{  
+    static int STATE_IDENTIFIER = 0;
+    return ++STATE_IDENTIFIER;
+}
+
+int getTriggerIdentifier()
 {  
     static int STATE_IDENTIFIER = 0;
     return ++STATE_IDENTIFIER;
@@ -99,6 +110,45 @@ struct Code
 	}
 };
 
+// struct Trigger
+// {
+// 	int id;
+// 	int index;
+// 	bool created;
+// 	long long int next;
+
+// 	double beat;
+// 	double duration;
+
+// 	// Code code;
+
+// 	bool isSelected;//is this code line selected?
+// 	bool isActive;
+
+// 	Trigger()
+// 	{
+// 		this->id = getTriggerIdentifier();
+// 		this->index = 0;
+
+// 		this->created = false;
+
+// 		this->isSelected = false;
+// 		this->isActive = false;
+// 	}
+
+// 	void update(Code code)
+// 	{
+// 		// this->code = code;
+
+// 	}
+
+// 	void update(long double next, double beat, double duration)
+// 	{
+
+// 	}
+
+// };
+
 struct Function
 {
 	int id;//unique identifier for this function
@@ -110,6 +160,9 @@ struct Function
 	bool isActive;//has this function been evaluated
 	bool isKilled;//is this function of the form '(define function)...'
 	bool isError;//has an error ocurred during evaluation
+
+	//Only for triggers
+	std::vector<int> next;
 
 	Function(Code code)
 		: code(code)
@@ -137,6 +190,12 @@ struct Function
 		}
 	}
 
+	void callback(int next)
+	{
+		std::cout << "callback " << getName() << " at " << next << std::endl;
+		this->next.push_back(next);
+	}
+
 	std::string getName()
 	{
 		if(lines.size() > 0) return getName(lines[0].code);
@@ -150,7 +209,7 @@ struct Function
 		tokenizer<char_separator<char>> tokens(code, sep);
 		for (const auto& t : tokens)
 		{
-			if(t == DEFINE || t == BIND_FUNC) result += t + " ";
+			if(t == DEFINE || t == BIND_FUNC || t == BIND_LIB || t == BIND_VAL || t == BIND_ALIAS || t == BIND_TYPE || t == SYS_LOAD) result += t + " ";
 			else
 			{
 				result += t;
@@ -158,6 +217,17 @@ struct Function
 			}
 		}
 		return result;
+	}
+
+	int getNext(int now)
+	{
+		while(next.size() > 0)
+		{
+			int value = next.front();
+			if(value >= now) return value;
+			else next.erase(next.begin());
+		}
+		return -1;
 	}
 
 	bool equal(Code code)
@@ -207,6 +277,12 @@ struct Function
 	bool update(Code code)
 	{
 		if(!nameEquals(getName(code.code))) return false;//TODO: could have a smarter heuristic here
+		
+		// if(isCaller(code))
+		// {
+		// 	trigger.update(code);
+		// 	return true;
+		// }
 
 		std::vector<Line> newLines;
 		this->code = code;
@@ -260,6 +336,14 @@ public:
 
 	~CodeManager() {}
 
+	void callback(std::string name, int next)
+	{
+		for(auto & f : functions)
+		{
+			if(f.nameEquals(name)) f.callback(next);
+		}
+	}
+
 	//updates the offline code
 	void update(std::string code)
 	{
@@ -298,6 +382,7 @@ public:
 				{
 					bool activeState = !c.isDeactivatedDefine();
 					f.isActive = activeState;
+					f.next.clear();
 
 					for(auto & l : f.lines)
 					{
@@ -338,15 +423,26 @@ public:
 		int lineCount = 0;
 		int index = 0;
 		bool commented = false;
+		bool foundDeactivatedDefine = false;
+		bool emptyLine = false;
 		for(int i = 0; i < code.length(); i++)
 		{
 			count++;
+
 			if(code[i] == '\n')
 			{
+				if(emptyLine) foundDeactivatedDefine = false;
+				emptyLine = true;
 				commented = false;
 				lineCount++;
+				continue;
 			}
-			else if(code[i] == ';' || commented)
+			else
+			{
+				emptyLine = false;
+			}
+
+			if(code[i] == ';' || commented)
 			{
 				commented = true;
 				continue;
@@ -367,7 +463,7 @@ public:
 				{
 					depth = 0;
 					// if(results.size() > 0 && results.back().isDeactivatedDefine()) std::cout << "was isDeactivated" << std::endl;
-					if(results.size() > 0 && results.back().isDeactivatedDefine())
+					if(results.size() > 0 && (results.back().isDeactivatedDefine() || foundDeactivatedDefine))
 					{
 						// std::cout << "l = " << code.length() << " si = " << results.back().startIndex << " cl = " << results.back().code.length() << " count = " << count << std::endl; 
 						results.back().code += code.substr(results.back().startIndex + results.back().code.length(), count);
@@ -375,7 +471,11 @@ public:
 					else
 					{
 						results.push_back(Code(index, code.substr(initial, count), lineCount, initial));
-						if(results.back().isDeactivatedDefine()) depth = 1;
+						if(results.back().isDeactivatedDefine())
+						{
+							foundDeactivatedDefine = true;
+							i++;//skip the following newline
+						}
 
 						index++;
 					}
@@ -414,6 +514,7 @@ extern "C"
 	void code_manager_evaluate(code_manager* manager, char* code);
 	void code_manager_error(code_manager* manager, char* message);
 	void code_manager_cursor(code_manager* manager, int cursorPosition, int screenMin, int screenMax, int xPosition, int yPosition);
+	void code_manager_callback(code_manager* manager, char* name, int next);
 
 	int code_manager_functions_count(code_manager* manager);
 	function* code_manager_functions_get(code_manager* manager, int index);
@@ -432,6 +533,7 @@ extern "C"
 	bool function_is_selected(function* f);
 	bool function_is_active(function* f);
 	bool function_is_error(function* f);
+	int function_get_next(function* f, int now);//get callback time
 
 	//Code Line
 	int line_get_id(line* l);
@@ -475,9 +577,16 @@ int main(int argc, char* argv[])
 	// else std::cout << "not caller" << std::endl;
 
 	// testing commenting
+	// code_manager_update(manager, "(define test \nfunction)");
+	// code_manager_update(manager, ";;(define test \n;;function)");
+	// printf("functions: %d\n", code_manager_functions_count(manager));
+
+	// testing deactivated defines
 	code_manager_update(manager, "(define test \nfunction)");
-	code_manager_update(manager, ";;(define test \n;;function)");
 	printf("functions: %d\n", code_manager_functions_count(manager));
+	code_manager_update(manager, "(define test)\n\nfunction)\n\n(define blah)");
+	printf("functions: %d\n", code_manager_functions_count(manager));
+
 
 	return 0;
 }

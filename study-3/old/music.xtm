@@ -1,8 +1,14 @@
 (define bleeps
 	(lambda (beat dur pitch)
-  (print (now) (*metro* beat))
-  (play fmsynth pitch 100 1/4)
-  (cv-callback (*metro* (+ beat (* .5 dur))) 'bleeps (+ beat dur) dur pitch)))
+		(play fmsynth pitch 100 1/4)
+		(cv-callback (*metro* (+ beat (* .5 dur))) 'bleeps (+ beat dur) dur pitch)))
 
 (bleeps (*metro* 'get-beat 4) 4 84)
+
+(define bleeps2
+	(lambda (beat dur pitch)
+		(play fmsynth pitch 100 1/4)
+		(cv-callback (*metro* (+ beat (* .5 dur))) 'bleeps2 (+ beat dur) dur pitch)))
+
+(bleeps2 (*metro* 'get-beat 3) 8 40)
 

@@ -43,7 +43,7 @@
 
 (bind-func programmer_get_x
   (lambda ()
-      (poly_entity_get_x PROGRAMMER_IMAGE)))
+      (- (poly_entity_get_x PROGRAMMER_IMAGE) 60.0)))
 
 (bind-func programmer_get_y
   (lambda ()
@@ -58,8 +58,7 @@
 
 (bind-func connector_init
   (lambda ()
-    (set! PROGRAMMER_IMAGE (poly_scene_image_create (string_cstr (string_cat_h PATH (Str_h "/resources/man.png")))))
-    (poly_scene_add_child POLY_SCENE PROGRAMMER_IMAGE)
+    (set! PROGRAMMER_IMAGE null)    
     (set! CONNECTOR_HEXAGON null)
     (set! CONNECTOR_CODE null)
     ;; (set! CONNECTOR_CIRCLE null)
@@ -69,13 +68,20 @@
 
 (bind-func connector_update
   (lambda (hex_x:double hex_y:double code_x:double code_y:double programmer_y:double)
+    (if (null? PROGRAMMER_IMAGE) 
+      (begin
+        (set! PROGRAMMER_IMAGE (poly_scene_image_create (string_cstr (string_cat_h PATH (Str_h "/resources/man.png")))))
+        (poly_scene_add_child POLY_SCENE PROGRAMMER_IMAGE)
+        void))
     (poly_entity_set_position PROGRAMMER_IMAGE PROGRAMMER_IMAGE_X (+ PROGRAMMER_IMAGE_Y_OFFSET programmer_y))
+
     (if (null? CONNECTOR_HEXAGON) 
       (begin
         (set! CONNECTOR_HEXAGON (poly_scene_line_create (programmer_get_x) (programmer_get_y) (+ hex_x (/ CONNECTOR_CIRCLE_RADIUS 2.0)) hex_y))
         (poly_scene_add_child POLY_SCENE CONNECTOR_HEXAGON)
         void)
       (poly_scene_line_set_points CONNECTOR_HEXAGON (programmer_get_x) (programmer_get_y) (+ hex_x (/ CONNECTOR_CIRCLE_RADIUS 2.0)) hex_y))
+    
     (if (null? CONNECTOR_CODE) 
       (begin 
         (set! CONNECTOR_CODE (poly_scene_line_create (- hex_x (/ CONNECTOR_CIRCLE_RADIUS 2.0)) hex_y code_x code_y)) 

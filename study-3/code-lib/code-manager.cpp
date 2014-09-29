@@ -34,6 +34,11 @@ void code_manager_cursor(code_manager* manager, int cursorPosition, int screenMi
 	reinterpret_cast<CodeManager*>(manager)->cursor(cursorPosition, screenMin, screenMax, xPosition, yPosition);
 }
 
+void code_manager_callback(code_manager* manager, char* name, int next)
+{
+	reinterpret_cast<CodeManager*>(manager)->callback(std::string(name), next);
+}
+
 int code_manager_functions_count(code_manager* manager)
 {
 	return reinterpret_cast<CodeManager*>(manager)->functions.size();
@@ -102,6 +107,11 @@ bool function_is_active(function* f)
 bool function_is_error(function* f)
 {
 	return reinterpret_cast<Function*>(f)->isError;
+}
+
+int function_get_next(function* f, int now)
+{
+	return reinterpret_cast<Function*>(f)->getNext(now);
 }
 
 int line_get_id(line* l)
