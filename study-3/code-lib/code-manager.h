@@ -343,6 +343,7 @@ public:
 		int index = 0;
 		for(auto & f : newFunctions)
 		{
+			f.index = -1;
 			if(f.isDefine())
 			{
 				f.index = index;
@@ -359,6 +360,11 @@ public:
 						break;
 					}
 				}
+			}
+			if(f.index == -1)
+			{
+				f.index = index;
+				index++;
 			}
 		}
 
