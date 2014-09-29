@@ -49,6 +49,14 @@
   (lambda ()
       (poly_entity_get_y PROGRAMMER_IMAGE)))
 
+(bind-val PROGRAMMER_POSITION_TRANSITION PositionTransition* 0)
+
+(bind-func programmer_position_transition_init
+  (lambda ()
+    (set! PROGRAMMER_POSITION_TRANSITION (position_create 0.0 0.0))))
+
+(programmer_position_transition_init)
+
 (bind-val CONNECTOR_HEXAGON poly_scene_line* 0)
 
 (bind-val CONNECTOR_CODE poly_scene_line* 0)
@@ -68,12 +76,18 @@
 
 (bind-func connector_update
   (lambda (hex_x:double hex_y:double code_x:double code_y:double programmer_y:double)
+    (if (or (position_transition_is_complete PROGRAMMER_POSITION_TRANSITION) (<> (position_get_target_y PROGRAMMER_POSITION_TRANSITION) (+ PROGRAMMER_IMAGE_Y_OFFSET programmer_y)))
+      (position_set_target PROGRAMMER_POSITION_TRANSITION PROGRAMMER_IMAGE_X (+ PROGRAMMER_IMAGE_Y_OFFSET programmer_y))
+      (begin
+        (position_update PROGRAMMER_POSITION_TRANSITION)
+        void))
+
     (if (null? PROGRAMMER_IMAGE) 
       (begin
         (set! PROGRAMMER_IMAGE (poly_scene_image_create (string_cstr (string_cat_h PATH (Str_h "/resources/man.png")))))
         (poly_scene_add_child POLY_SCENE PROGRAMMER_IMAGE)
         void))
-    (poly_entity_set_position PROGRAMMER_IMAGE PROGRAMMER_IMAGE_X (+ PROGRAMMER_IMAGE_Y_OFFSET programmer_y))
+    (poly_entity_set_position PROGRAMMER_IMAGE (position_get_current_x PROGRAMMER_POSITION_TRANSITION) (position_get_current_y PROGRAMMER_POSITION_TRANSITION))
 
     (if (null? CONNECTOR_HEXAGON) 
       (begin

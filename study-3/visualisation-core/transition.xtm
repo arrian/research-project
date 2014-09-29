@@ -3,6 +3,7 @@
 
 ;; Globals ;;;;;;;;;;;;;;;;;;
 
+(bind-val TRANSITION_TIME_SHORT i64 10000)
 (bind-val TRANSITION_TIME i64 15000)
 (bind-val TRANSITION_TIME_LONG i64 150000)
 
@@ -243,4 +244,42 @@
   							void))))
     void))
 
+;; Position Transition ;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(bind-type PositionTransition <SizeTransition*,SizeTransition*>)
+
+(bind-func position_transition_is_complete
+  (lambda (p:PositionTransition*)
+    (and (size_transition_is_complete (tref p 0)) (size_transition_is_complete (tref p 1)))))
+
+(bind-func position_create
+  (lambda (x:double y:double)
+    (PositionTransition (SizeTransition_h #t x x x (now) TRANSITION_TIME_LONG) (SizeTransition_h #t y y y (now) TRANSITION_TIME_LONG))))
+
+(bind-func position_set_target
+  (lambda (p:PositionTransition* x:double y:double)
+      (size_set_target (tref p 0) x)
+      (size_set_target (tref p 1) y)
+    ))
+
+(bind-func position_get_current_x
+  (lambda (p:PositionTransition*)
+    (size_get_current (tref p 0))))
+
+(bind-func position_get_current_y
+  (lambda (p:PositionTransition*)
+    (size_get_current (tref p 1))))
+
+(bind-func position_get_target_y
+  (lambda (p:PositionTransition*)
+    (size_get_target (tref p 1))))
+
+(bind-func position_update
+  (lambda (p:PositionTransition*)
+    (if (position_transition_is_complete p) 
+          void
+          (begin
+            (size_update (tref p 0))
+            (size_update (tref p 1))
+            void))))
 
