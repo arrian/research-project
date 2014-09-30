@@ -6,7 +6,7 @@
     (set! PROGRAMMER_IMAGE_X x)
     void))
 
-(set_programmer_x 1000.0)
+(set_programmer_x 1200.0)
 
 (bind-func set_programmer_y_offset
   (lambda (y:double)

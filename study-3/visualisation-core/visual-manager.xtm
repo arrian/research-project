@@ -31,7 +31,7 @@
   (lambda (width height)
     (poly_scene_set_ortho_size POLY_SCENE width height)))
 
-(set_ortho_size 1500 1500)
+(set_ortho_size 2200 2200)
 
 
 

@@ -2,23 +2,16 @@
 
 ;; (bind-val VERTICAL_COUNT i64 4)
 (bind-val VERTICAL_COUNT i64 10)
-(bind-val SPACING double 250.0)
+(bind-val SPACING double 350.0)
 (bind-val OFFSET_X double 750.0)
-(bind-val OFFSET_Y double 350.0)
+(bind-val OFFSET_Y double 650.0)
 (bind-val EPSILON double 0.3)
-(bind-val SCALE double 1.5)
-(bind-val WIDGET_SIZE double 100.0)
-
-;; (bind-func set
-;;   (lambda ()
-;;     (set! SCALE 1.5)
-;;     ))
-
-;; (set)
+(bind-val SCALE double 2.0)
+(bind-val WIDGET_SIZE double 150.0)
 
 ;; (bind-func set2
 ;;   (lambda ()
-;;     (set! VERTICAL_COUNT 4)
+;;     (set! OFFSET_Y 650.0)
 ;;     ))
 
 ;; (set2)
@@ -151,7 +144,7 @@
 
 (bind-func widget_fast
   (lambda (w:Widget*)
-    (widget_set_linear_damping w 0.3)
+    (widget_set_linear_damping w 0.0)
     (widget_set_angular_damping w 20.0)
     void))
 
