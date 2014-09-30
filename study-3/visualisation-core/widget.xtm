@@ -205,7 +205,7 @@
           (line_count (function_lines_count state))
           (time:i64 (- (function_get_next state (now)) (now))))
         ;;(attractor_set_target_size (widget_get_attractor w) 100.0)
-        
+        ;; (printf "updating widget %d\n" (widget_get_index w))
         (if (and (< (i64toi32 time) 10000) (> (i64toi32 time) 0) (size_transition_is_complete (attractor_get_size (widget_get_attractor w)))) 
           (begin
             ;; (printf "%d\n" time)
@@ -290,7 +290,7 @@
                       (attractor_set_target_color_variate (widget_get_attractor w) (color_by_index (widget_get_index w)) 15000)
                       void)
                     (begin
-                      (attractor_set_target_color_variate (widget_get_attractor w) GREY 150000)
+                      (attractor_set_target_color_variate (widget_get_attractor w) WHITE 150000)
                       void)))
               (if (function_is_selected state) 
                 (begin 

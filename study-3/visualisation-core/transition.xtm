@@ -90,7 +90,7 @@
     (set! BLUE (Color 0.2 0.3 1.0 0.9))
     (set! PURPLE (Color 0.5 0.0 1.0 0.9))
     (set! PINK (Color 1.0 0.0 1.0 0.9))
-    (set! WHITE (Color 1.0 1.0 1.0 0.9))
+    (set! WHITE (Color 1.0 1.0 1.0 0.8))
     (set! BLACK (Color 0.0 0.0 0.0 0.9))
     (set! GREY (Color 0.5 0.5 0.5 0.9))))
 
