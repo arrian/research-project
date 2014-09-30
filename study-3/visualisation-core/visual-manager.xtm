@@ -1,7 +1,7 @@
 ;; Visual Manager
 
 (define WIDTH 1440.0)
-(define HEIGHT 900.0)
+(define HEIGHT 1050.0)
 (bind-val WIDTH float WIDTH)
 (bind-val HEIGHT float HEIGHT)
 (define fullscreen #t)
