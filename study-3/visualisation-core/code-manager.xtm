@@ -17,11 +17,12 @@
 
 (define cv-callback
   (lambda (time cb-sym beat dur . args)
-  	(println 'test)
   	(callback_wrapper (symbol->string cb-sym) (real->integer (*metro* (+ beat dur))))
-      (apply callback 
-             (append (list time cb-sym beat dur) args))))
+    (apply callback
+           (append (list time cb-sym beat dur) args))))
 
+(ipc:bind-func "utility" 'callback_wrapper)
+(ipc:define "utility" 'cv-callback cv-callback)
 
 
 
