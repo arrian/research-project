@@ -1,0 +1,13 @@
+Todo Mappings:
+
+Show all keypresses
+Link to code
+Link to cursor
+Sound mapping
+Fix bugs
+	-pulsing yellow hexagons
+	-code function metrics
+Pulse with music
+Fix evaluate
+Fix function bounds
+Fix commenting out

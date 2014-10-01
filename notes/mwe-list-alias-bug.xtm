@@ -1,0 +1,7 @@
+(sys:load "libs/core/adt.xtm")
+
+(bind-type TypeA <i64>)
+(bind-alias TypeAList List:<TypeA*,List*>)
+(bind-type TypeB <i64,TypeAList*>)
+
+(bind-type TypeC <i64,TypeB*>)
