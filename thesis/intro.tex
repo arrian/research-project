@@ -59,6 +59,15 @@ Introductory discussion/summary...\\
 
 % (3) Where is the future of programming? It is esentially the same as it was when it was first created. (Focus on higher abstractions in some fields? Move towards less abstraction...) Yet today it claims to be interactive/responsive etc...
 
+% From OzCHI paper:
+% In this thesis, we examine the audience's experience of the displayed
+% code during live coding performances and to see whether code-driven
+% visualisations might improve both the audience enjoyment and the
+% audience understanding of these performances. This exploration takes
+% place initially through the results of an exploratory field study at a
+% contemporary arts festival, and subsequently through a lab-based
+% follow-up user study.
+
 
 \section{Background}
 
@@ -91,6 +100,30 @@ A number of existing code visualisations show an interactive visualisation Exist
 -lighttable - inline feedback (developed due to the idea that code is unobservable, indirect and incidentally complex) \\
 -code annotations~\cite{Swift2013}
 
+\subsection{Software?}
+{\color{red} maybe remove this section as it is discussed in-depth in the next section...}
+
+% Random stuff from early in the project:
+
+% -code is often difficult to quickly understand
+% -some observers may lack the experience to understand the software or the programming process
+
+% Additionally, how we program does not achieve the goals we set out to achieve (from $https://www.youtube.com/watch?v=1f13TTu_X9k$, taken from presentation reimagining programming languages):
+% -programming is unobservable (looking at the system through a keyhole)
+% -programming is indirect (no direct feedback)
+% -programming is incidentally complex (complexity not inherent in the problem that we need to solve)
+
+
+% -how can we improve source code comprehension?
+% -how can we aid understanding of the programming process?
+% -better yet, how can we better communicate the programmers intention?
+
+% -techniques such as modelling or code documentation aren’t dynamic or flexible
+% -don’t allow for close to realtime understanding
+% -an effective technique is the use of visualisations
+% -it would be valuable to use visualisations as a means to communicate the programmer’s intention
+
+
 \subsection{Live Coding}
 
 Commercial sotware environments...
@@ -102,87 +135,21 @@ Live coding...
 
 Some of the most important and influential live coding environments over the last decade have included SuperCollider~\cite{McCartney}, ChucK~\cite{Wang2008} and Extempore~\cite{Sorensen}. These environments have a growing following as the field of live coding matures.
 
-\section{Structure}
-
-A process of design iteration and evaluation was conducted. Three studies were administered, including one field studies and two laboratory studies.
-
-The structure of this thesis consists of Chapter~\ref{chap:literature-review} summarising the literature including the basis for and the direction of this thesis. Following this, Chapter~\ref{chap:exploratory-field-study} discusses the initial exploratory field study conducted to investigate existing perception and understanding of the live coding process. Chapter~\ref{chap:visualisation-design} discusses the first iteration of the visualisation prototype developed following the results of the exploratory field study. Chapter~\ref{chap:user-study} summarises the first user study conducted with the visualisation prototype. Chapter~\ref{chap:visualisation-refinement} discusses refinement of the visualisation prototype motivated by the results of the first user study. Chapter~\ref{chap:follow-up-user-study} discusses the follow-up user study conducted to analyse the refined visualisations. Chapter~\ref{chap:summary} summarises the results of the user studies, contributions, limitations and future work. Finally, Chapter~\ref{chap:conclusion} provides some final words to conclude the thesis.
-
-
-
-
-% -----------------------------------
-
-% [from live coding paper]
-
-% ``Show us your screens\ldots Code should be seen as well as heard'',
-% declares the draft manifesto of ``TOPLAP''~\cite{Toplap}, an
-% international organisation devoted to the artistic performance
-% practice of ``live coding''. In live coding, computer code is written
-% in front of a live audience to generate music and visuals in real
-% time. The ``show us your screens'' rhetoric underscores the need for
-% authenticity to distinguish this artform from similar (but non-live)
-% computational arts practices.
-
-% But what is the benefit of the live coder showing their screen? In a
-% live coding performance, non-expert live coding audience members spend
-% much of their time staring at raw (usually text-based) computer code.
-% Until now, little empirical study has been undertaken to gauge an
-% audience's understanding of that computer code and whether, from an
-% audience perspective, code really should be ``seen as well as heard''.
-
-% Traditional approaches to source code visualisation
-% (see~\cite{Novais2013} for a review) often focus on structure of the
-% source code (e.g. visualising complex object/class relationships)
-% rather than the \emph{process} of programming. In a process-oriented
-% activity such as live coding, different code visualisation techniques
-% are necessary~\cite{McLean2010a,Magnusson2013}. However, these
-% academic treatments of code visualisation in live coding adopt a
-% survey-based approach, and the techniques discussed have not been
-% subject to empirical evaluation.
-
-% In this paper, we examine the audience's experience of the displayed
-% code during live coding performances and to see whether code-driven
-% visualisations might improve both the audience enjoyment and the
-% audience understanding of these performances. This exploration takes
-% place initially through the results of an exploratory field study at a
-% contemporary arts festival, and subsequently through a lab-based
-% follow-up user study.
-
 
 % -------------------
-
-% didactic vs aesthetic
-% industry vs art
-
-% The purpose of software engineering is to bring together ideas from many fields into one - developing good software that is fit for purpose and fit for use. The systems engineering perspective of software engineering. However, one area where software engineering has had little influence and little influence has been taken from is the area of art.
-
+% live coding attempts to bring together:
+% -didactic vs aesthetic
+% -industry vs art
 
 % Often put on separate ends of the spectrum... unless you are building software for multimedia practice - even then though...
 
+\section{Structure}
 
-%%--------------------------------------------
+A process of design iteration and evaluation was conducted. Three studies were administered, including one field studies and two laboratory studies.
+% Discuss the software engineering approach here... applying software development techniques to an arts space. Identify stakeholders etc... Discuss how the project was undertaken regarding timelines and collaboration with the stakeholders...
+% Push the software engy stuff here...
+% eg. The purpose of software engineering is to bring together ideas from many fields into one - developing good software that is fit for purpose and fit for use. The systems engineering perspective of software engineering. However, one area where software engineering has had little influence and little influence has been taken from is the area of art.
 
-% -code is often difficult to quickly understand
-% -some observers may lack the experience to understand the software or the programming process
-
-% Additionally, how we program does not achieve the goals we set out to achieve (from $https://www.youtube.com/watch?v=1f13TTu_X9k$, taken from presentation reimagining programming languages):
-% -programming is unobservable (looking at the system through a keyhole)
-% -programming is indirect (no direct feedback)
-% -programming is incidentally complex (complexity not inherent in the problem that we need to solve)
-
-%%--------------------------------------------
-
-% -how can we improve source code comprehension?
-% -how can we aid understanding of the programming process?
-% -better yet, how can we better communicate the programmers intention?
-
-% -techniques such as modelling or code documentation aren’t dynamic or flexible
-% -don’t allow for close to realtime understanding
-% -an effective technique is the use of visualisations
-% -it would be valuable to use visualisations as a means to communicate the programmer’s intention
-
-%%--------------------------------------------
-
+The structure of this thesis consists of Chapter~\ref{chap:literature-review} summarising the literature including the basis for and the direction of this thesis. Following this, Chapter~\ref{chap:exploratory-field-study} discusses the initial exploratory field study conducted to investigate existing perception and understanding of the live coding process. Chapter~\ref{chap:visualisation-design} discusses the first iteration of the visualisation prototype developed following the results of the exploratory field study. Chapter~\ref{chap:user-study} summarises the first user study conducted with the visualisation prototype. Chapter~\ref{chap:visualisation-refinement} discusses refinement of the visualisation prototype motivated by the results of the first user study. Chapter~\ref{chap:follow-up-user-study} discusses the follow-up user study conducted to analyse the refined visualisations. Chapter~\ref{chap:summary} summarises the results of the user studies, contributions, limitations and future work. Finally, Chapter~\ref{chap:conclusion} provides some final words to conclude the thesis.
 
 
