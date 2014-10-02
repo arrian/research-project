@@ -93,12 +93,13 @@
 
 \input conclusion
 
+\let\cleardoublepage\clearpage % don't leave pages between appendix chapters
 \input appendix
 
 \backmatter
 
-% \bibliographystyle{ieeetr}
-\bibliographystyle{acmnew-xref}%acmnew-xref
+\cleardoublepage % leave page between appendices and references
+\bibliographystyle{acmnew-xref}% \bibliographystyle{ieeetr}
 \bibliography{thesis}
 
 \printindex
