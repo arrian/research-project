@@ -15,6 +15,8 @@ Following the first user study (Chapter~\ref{chap:user-study}), limitations with
 -previous study had visualisation limitations eg. missed timing, no direct feedback from the programmer etc
 
 
+-strategy employed a combination of the aesthetic and didactic visualisations from the previous study...
+
 \section{Design}
 
 \cite{Purchase1996}...
@@ -33,27 +35,28 @@ Following the first user study (Chapter~\ref{chap:user-study}), limitations with
 
 The visualisation technique employed required three major components including an application manager, a code manager and an editor plugin (see the class diagram in Figure~\ref{fig:visualisation-class-diagram}). The following sections detail the implementation of these components.
 
-\subsection{Application Manager}
+\subsection{Visualisation Manager}
 
 -polycode~\cite{Safrin2013}
 
 -opengl
 
-\subsection{Code Manager}
-
--static analysis
-
--dynamic analysis
-
-\subsection{Editor Plugin}
+\subsection{Interface Mananger}
+\label{sec:interface-manager}
 
 -sublime plugin
 
 -emacs plugin
 
-\section{Analysis}
+This was acheived using a text editor plugin sending programmer interactions over an \ac{OSC} protocol. The interactions sent included cursor movement, all source code changes, file focus and source code evaluation.
 
-Both dynamic program analysis and static source code analysis have been used to implement the visualisations (see combined static and dynamic approach taken in \cite{Eisenbarth2003})....
+\subsection{Code Manager}
+
+Both static analysis of source code and the dynamic analysis (see the combined static and dynamic approach taken in~\cite{Eisenbarth2003}) of the running program were combined into this iteration of the visualisation prototype in order to provide the audience with a link between the \ac{SoW} and the \ac{SoC}~\cite{Swift2013}. {\color{red} explain what the \ac{SoW} and the \ac{SoC} actually is and show the link between the \ac{SoW} with dynamic analysis and the \ac{SoC} with static analysis...}
+
+Static analysis of the source code involved parsing the changing source code input by the programmer. Data requiring this static analysis was received from the editor plugin (see~\ref{sec:interface-manager}) and stored as the current \ac{SoC}.
+
+Dynamic analysis of the running program involved providing mechanisms for the programmer to send running state information to be stored as the \ac{SoW}. {\color{red} explain what was provided a little better} A callback hook was provided to be used when creating an instrument during performance. This hook would provide data on the state of the active instruments and would allow links to be determined between the \ac{SoC} and the \ac{SoW}.
 
 \section{Mappings}
 
