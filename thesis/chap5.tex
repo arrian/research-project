@@ -3,17 +3,18 @@
 \chapter{Visualisation Refinement}
 \label{chap:visualisation-refinement}
 
-\begin{chapquote}{Frederick Brooks, \textit{The Mythical Man-Month}}
-``Geometric abstractions are powerful tools. The floor plan of a building helps both architect and client evaluate spaces, traffic flows, views. Contradictions become obvious, omissions can be caught. Scale drawings of mechanical parts and stick-figure models of molecules, although abstractions, serve the same purpose. A geometric reality is captured in a geometric abstraction.''
-\end{chapquote}
+% \begin{chapquote}{Frederick Brooks, \textit{The Mythical Man-Month}}
+% ``Geometric abstractions are powerful tools. The floor plan of a building helps both architect and client evaluate spaces, traffic flows, views. Contradictions become obvious, omissions can be caught. Scale drawings of mechanical parts and stick-figure models of molecules, although abstractions, serve the same purpose. A geometric reality is captured in a geometric abstraction.''
+% \end{chapquote}
 
-Following the first user study (Chapter~\ref{chap:user-study}), limitations with both the visualisations and the evaluation method were identified and steps were taken to correct these limitations. The following section seeks to identify the steps taken to correct these limitations.
+Following the first user study (Chapter~\ref{chap:user-study}), limitations with both the visualisations and the evaluation method were identified and steps were taken to correct these limitations. The following section summarises the steps taken to correct these limitations.
 
 \section{Rationale}
 
 
 ``the aesthetic of fixing nodes and edges to an underlying unit grid was prominent''~\cite{Purchase2014} (also~\cite{Purchase2001,Purchase1996})
 
+The intial user study, although identifying some improvement in enjoyment with the use of 
 -previous study had some apparently conflicting results...
 -previous study did not have a baseline - this was to be remedied
 -previous study had visualisation limitations eg. missed timing, no direct feedback from the programmer etc
@@ -56,7 +57,7 @@ This was acheived using a text editor plugin sending programmer interactions ove
 
 \subsection{Code Manager}
 
-Both static analysis of source code and the dynamic analysis (see the combined static and dynamic approach taken in~\cite{Eisenbarth2003}) of the running program were combined into this iteration of the visualisation prototype in order to provide the audience with a link between the \ac{SoW} and the \ac{SoC}~\cite{Swift2013}. {\color{red} explain what the \ac{SoW} and the \ac{SoC} actually is and show the link between the \ac{SoW} with dynamic analysis and the \ac{SoC} with static analysis...}
+Both static analysis of source code and the dynamic analysis (see~\cite{Eisenbarth2003} and~\cite{Jerding1997}) of the program were combined into this iteration of the visualisation prototype in order to provide the audience with a link between the \ac{SoW} and the \ac{SoC}~\cite{Swift2013}. {\color{red} explain what the \ac{SoW} and the \ac{SoC} actually is and show the link between the \ac{SoW} with dynamic analysis and the \ac{SoC} with static analysis...}
 
 Static analysis of the source code involved parsing the changing source code input by the programmer. Data requiring this static analysis was received from the editor plugin (see~\ref{sec:interface-manager}) and stored as the current \ac{SoC}.
 

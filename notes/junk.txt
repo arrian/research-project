@@ -1,4 +1,13 @@
 
+% -why is liveness important\\
+% -should it be used as a metric\\
+% -what are the gaps in the investigation of liveness
+% -what does it contribute?\\
+% -improvisation?\\
+% -computational creativity. \cite{Mclean}
+% -why ``show your screens''?
+
+
 %  Together these two concepts are foundational to culture. A recent push in hardware towards perfecting and simplifying design as a means to communicate intention more effectively has further blurred the lines between these two concepts. However, although the hardware industry has had a marked benefit from the combination of these two concepts, software process has largely missed out.
 
 
