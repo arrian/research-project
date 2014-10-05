@@ -3,92 +3,63 @@
 \chapter{Introduction}
 \label{chap:introduction}
 
-\begin{chapquote}{Frederick Brooks, \textit{The Mythical Man-Month}}
+\begin{chapquote}{Frederick Brooks, \textit{The Mythical Man-Month}, p.185}
 ``In spite of progress in restricting and simplifying the structures of software, they remain inherently unvisualizable, thus depriving the mind of some of its most powerful conceptual tools. This lack not only impedes the process of design within one mind, it severely hinders communication among minds.''
 \end{chapquote}
 
-Visualisations bridge the gap between understanding and enjoyment. 
-Introductions...\\
-Art and understanding have long been associated.\\
--introduce the topic...\\
+Visualisations bridge the gap between understanding and enjoyment. In software, visualisations have for a long time attempted to provide a higher level of understanding but have rarely been effective in communicating the fundamental processes of software development. The Mythical Man-Month goes so far as to suggest that ``software is invisible and unvisualizable''\cite{Brooks1995} sparking debate as to the effectiveness of all software visualisations commonly used in the understanding and evaluation of software. Nevertheless, within the last two decades, live coding has presented a unique application space for visualisations and the potential for effective communication through visualisation has been identified. These new developments could challenge the long-held belief that ``software is invisible and unvisualizable''.
 
--introduce visualisations...\\
-Software visualisations intend to communicate the software process more effectively.
--introduce live coding...\\
--suggest the problem statement and tie in the quote...\\
-Live coding is a relatively new and developing field intending to further blur the lines between the worlds of art and understanding. Live coding provides exposure of the programming process to an audience, with the audience often having no background in programming.
+The intention of software visualisations is to communicate software effectively. In recent years there has been a push to develop software visualisations further as the audience of software becomes more diverse, multidisciplinary teams within the industry become the standard and multimedia and the arts become more focussed on effective software development. {\color{red} link to live coding...}
 
-As the complexity of software increases, better methods are required for communicating software structure, software changes and, perhaps most importantly, the need for communicating how the programmer performs the task of programming. Software visualisation has a long way to go in effectively communicating software but by visualising software...
+Live coding is a relatively new and developing field intending to further blur the lines between the worlds of art and understanding. Live coding provides exposure of the programming process to an audience, with the audience often having no background in programming. {\color{red} suggest the problem statement and tie in the quote...}
 
-% Live coding is a means of combining the artistic goal of enjoyment and the educational aspects associated with programming. However, due to the nature and maturity of live coding, these goals may be overlooked in the quest to improve the technical aspects of the live coding process.
-
-This thesis investigates the proposition that ``code visualisation improves observer understanding and enjoyment'' in the setting of a live arts practice. More specifically, this thesis investigates the question ``can the application of visualisation techniques to live coding enhance audience experience by increasing understanding and enjoyment?''. These questions were examined through a process of prototype development, user study evaluation and refinement.\\
-
+Live coding is the process of programming in front of an audience for education or entertainment. 
 Definitions...\\
 -define live coding, understanding and enjoyment\\
 -define visualisation techniques\\
 -define the programmer and observer relationship\\
 -define audience experience\\
 
-This thesis will explore the application of software visualisations to the process of live coding.
-Introductory discussion/summary...\\
+As the complexity of software increases, better methods are required for communicating software structure, software changes and, perhaps most importantly, communicating the process of developing software. Live coding is a means of combining the artistic goal of enjoyment and the educational aspects associated with programming with visualisations to effectively communicate software.
+
+This thesis investigates the proposition that ``code visualisation improves observer understanding and enjoyment'' in the setting of a live arts practice. More specifically, this thesis investigates the question ``can the application of visualisation techniques to live coding enhance audience experience by increasing understanding and enjoyment?''. These questions were examined through a process of prototype development, user study evaluation and refinement.\\
+
+% Introductory discussion/summary...\\
+This thesis will explore the application of software visualisations to the process of live coding. A process of design iteration and evaluation was conducted in collaboration with a live coding artist. Three studies were administered, including one field study and two laboratory studies.
+% Discuss the software engineering approach here... applying software development techniques to an arts space. Identify stakeholders etc... Discuss how the project was undertaken regarding timelines and collaboration with the stakeholders...
+% Push the software engy stuff here...
+% eg. The purpose of software engineering is to bring together ideas from many fields into one - developing good software that is fit for purpose and fit for use. The systems engineering perspective of software engineering. However, one area where software engineering has had little influence and little influence has been taken from is the area of art.
 -this thesis will explore code visualisations\\
 -specifically, it will investigate visuals within the combination of the domains of software and music\\
 -will be using live coding as a platform and case study for this (will discuss later)\\
 -will develop and test code visualisations on audiences with audiences of varied levels of experience with programming, addressing code comprehension\\
 
 
-% -some useful quotes to be summarised somewhere... maybe here or in lit review\\
-% ``Software is invisible and unvisualizable. Geometric abstractions are powerful tools. The floor plan of a building helps both architect and client evaluate spaces, traffic flows, views. Contradictions become obvious, omissions can be caught. Scale drawings of mechanical parts and stick-figure models of molecules, although abstractions, serve the same purpose. A geometric reality is captured in a geometric abstraction.''~\cite{Brooks1995}
-
-
-
-% For most of its history source code has been displayed as simple text due to the expressiveness of this format and despite its inefficiencies. It is only recently, due to ever increasing programming language complexity and increasing computational power, that code annotations and syntax highlighting have become more commonplace. Nevertheless, these visual enhancements rarely provide information beyond the basic grammar of the language they are intended to augment. The limitations of this approach are becoming ever more apparent as programming languages and interactive programming environments move towards the need for real-time comprehension and a need to understand the source code within the context of a running program.\\
-
-
-% Software engineering practice and art are often considered opposing ends of the spectrum. 
-
 % This project will examine the relationship between aesthetics and educational aspects of code visualisiatons applied to two fields - an industry based application and a new media art application. 
-
-% Questions:
-% (1) What about the multimedia arts domain? What about the application of aesthetics and consideration for design within the space of software engineering? Both are widely accepted areas
-
-% (2) Why don't we even have the most simple of tools to visualise changing code structure? Too complex? Not helpful? Why must code structures be designed statically?
-
-% (3) Where is the future of programming? It is esentially the same as it was when it was first created. (Focus on higher abstractions in some fields? Move towards less abstraction...) Yet today it claims to be interactive/responsive etc...
-
-% From OzCHI paper:
-% In this thesis, we examine the audience's experience of the displayed
-% code during live coding performances and to see whether code-driven
-% visualisations might improve both the audience enjoyment and the
-% audience understanding of these performances. This exploration takes
-% place initially through the results of an exploratory field study at a
-% contemporary arts festival, and subsequently through a lab-based
-% follow-up user study.
-
 
 \section{Background}
 
-\subsection{History}
+Both visualisation and live coding have a long history of communicating intent. This section seeks to define visualisations, summarise the history of visualisation, how visualisation has begun to be used in the software industry, the contributions of live coding within this space and the potential for visualisations within live coding.
 
-Discuss illustrations and the earliest representations of the world...
+\subsection{Visualisation}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=0.8\textwidth]{../images/playfair-graph.png}
-    \caption{An early example of visualisation showing the balance of trade between England versus Denmark and Norway from 1700 to 1780~\protect\cite{Playfair1786}.}
-    \label{fig:playfair-graph}
-\end{figure}
+Modern visualisation generally has two distinct definitions. The first definition involves representing data graphically while the other definition describes the process of forming mental visual images. {\color{red} Both processes can assist in the communication and understanding of information}
 
-Since its inception, the visualisation of data has revolutionised how information is represented and understood. The earliest examples of visually summarising data through the use of visualisations occurred in William Playfair's \textit{The Commercial and Political Atlas}. Playfair developed a number of graphical representations of data that are very common today (see Figure~\ref{fig:playfair-graph} for an example) including the line chart, the bar chart and the pie chart.
+Since its inception, the visualisation of data has revolutionised how information is represented and understood. The earliest examples of visually summarising data through the use of visualisations occurred in William Playfair's \textit{The Commercial and Political Atlas}. Playfair developed a number of graphical representations of data that are very common today including the line chart, the bar chart and the pie chart.
+
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{../images/playfair-graph.png}
+%     \caption{An early example of visualisation showing the balance of trade between England versus Denmark and Norway from 1700 to 1780~\protect\cite{Playfair1786}.}
+%     \label{fig:playfair-graph}
+% \end{figure}
+%(see Figure~\ref{fig:playfair-graph} for an example)
 
 Discuss progress to computation of data on computers and effect on the direction of visualisation...
 
 Discuss information needs of the modern age...
 
-\subsection{Visualisation}
 
-Visualisation is the process of 
 
 Animated visualisations...
 
@@ -98,8 +69,10 @@ A number of existing code visualisations show an interactive visualisation Exist
 -lighttable - inline feedback (developed due to the idea that code is unobservable, indirect and incidentally complex) \\
 -code annotations~\cite{Swift2013}
 
-\subsection{Software?}
+\subsection{Software}
 {\color{red} maybe remove this section as it is discussed in-depth in the next section...}
+
+For most of its history, source code has been displayed as simple text. This is due to the expressiveness of the text format and despite its inefficiencies. It is only recently, due to ever increasing programming language complexity and increasing computational power, that code annotations and syntax highlighting have become more commonplace. Nevertheless, these visual enhancements rarely provide information beyond the basic grammar of the language they are intended to augment. The limitations of this approach are becoming ever more apparent as programming languages and interactive programming environments move towards the need for real-time comprehension and a need to understand the source code within the context of a running program.
 
 % Random stuff from early in the project:
 
@@ -121,6 +94,7 @@ A number of existing code visualisations show an interactive visualisation Exist
 % -an effective technique is the use of visualisations
 % -it would be valuable to use visualisations as a means to communicate the programmer’s intention
 
+% Software engineering practice and art are often considered opposing ends of the spectrum. 
 
 \subsection{Live Coding}
 
@@ -134,19 +108,12 @@ Live coding...
 Some of the most important and influential live coding environments over the last decade have included SuperCollider~\cite{McCartney}, ChucK~\cite{Wang2008} and Extempore~\cite{Sorensen}. These environments have a growing following as the field of live coding matures.
 
 
-% -------------------
 % live coding attempts to bring together:
 % -didactic vs aesthetic
 % -industry vs art
 
-% Often put on separate ends of the spectrum... unless you are building software for multimedia practice - even then though...
 
 \section{Structure}
-
-A process of design iteration and evaluation was conducted in collaboration with a live coding artist. Three studies were administered, including one field study and two laboratory studies.
-% Discuss the software engineering approach here... applying software development techniques to an arts space. Identify stakeholders etc... Discuss how the project was undertaken regarding timelines and collaboration with the stakeholders...
-% Push the software engy stuff here...
-% eg. The purpose of software engineering is to bring together ideas from many fields into one - developing good software that is fit for purpose and fit for use. The systems engineering perspective of software engineering. However, one area where software engineering has had little influence and little influence has been taken from is the area of art.
 
 The structure of this thesis consists of Chapter~\ref{chap:literature-review} summarising the literature including the basis for and the direction of this thesis. Following this, Chapter~\ref{chap:exploratory-field-study} discusses the initial exploratory field study conducted to investigate existing perception and understanding of the live coding process. Chapter~\ref{chap:visualisation-design} discusses the first iteration of the visualisation prototype developed following the results of the exploratory field study. Chapter~\ref{chap:user-study} summarises the first user study conducted with the visualisation prototype. Chapter~\ref{chap:visualisation-refinement} discusses refinement of the visualisation prototype motivated by the results of the first user study. Chapter~\ref{chap:follow-up-user-study} discusses the follow-up user study conducted to analyse the refined visualisations. Chapter~\ref{chap:summary} summarises the results of the user studies, contributions, limitations and future work. Finally, Chapter~\ref{chap:conclusion} provides some final words to conclude the thesis.
 
