@@ -11,6 +11,12 @@
 \usepackage{acronym}
 \usepackage{pdfpages}
 \usepackage{afterpage}
+\usepackage{amsmath}
+
+% for text numbered as equations
+\makeatletter
+\newcommand{\qlab}[1]{\leavevmode\hfill\refstepcounter{equation}\label{#1}\textup{\tagform@{Question \theequation}}}
+\makeatother
 
 % for `inspirational' quotes - from http://tex.stackexchange.com/questions/53377/inspirational-quote-at-start-of-chapter
 \makeatletter
