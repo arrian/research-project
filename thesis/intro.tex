@@ -13,8 +13,6 @@ Within the last two decades, the introduction of live coding has presented a uni
 
 The intention of software visualisations is to communicate software effectively. In recent years there has been a push to develop software visualisations further as the audience of software becomes more diverse, multidisciplinary teams within the industry become the standard and multimedia and the arts become more focussed on effective software development. {\color{red} link to live coding...}
 
-Live coding is the process of programming in front of an audience for education or entertainment. It is a relatively new and developing field intending to further blur the lines between the worlds of art and programming. Live coding provides exposure of the programming process to a live audience, with the audience often having no background in programming. {\color{red} suggest the problem statement and tie in the quote...}
-
 % Definitions...?\\
 % -define visualisation techniques\\
 % -define the programmer and observer relationship\\
@@ -30,47 +28,6 @@ This thesis will explore the application of software visualisations to the proce
 -specifically, it will investigate visuals within the combination of the domains of software and music\\
 -will be using live coding as a platform and case study for this (will discuss later)\\
 -will develop and test code visualisations on audiences with audiences of varied levels of experience with programming, addressing code comprehension
-
-\section{Background}
-
-Both visualisation and live coding have a long history of communicating intent. This section seeks to define visualisations, summarise the history of visualisation, how visualisation has begun to be used in the software industry, the contributions of live coding within this space and the potential for visualisations within live coding.
-
-\subsection{Visualisation}
-
-Modern visualisation generally has two distinct definitions. The first definition involves representing data graphically while the other definition describes the process of forming mental visual images. {\color{red} Both processes can assist in the communication and understanding of information}
-
-Since its inception, the visualisation of data has revolutionised how information is represented and understood. The earliest examples of visually summarising data through visualisations occurred in William Playfair's \textit{The Commercial and Political Atlas}. Playfair developed a number of graphical representations of data that are very common today including the line chart, the bar chart and the pie chart.
-
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=0.8\textwidth]{../images/playfair-graph.png}
-%     \caption{An early example of visualisation showing the balance of trade between England versus Denmark and Norway from 1700 to 1780~\protect\cite{Playfair1786}.}
-%     \label{fig:playfair-graph}
-% \end{figure}
-%(see Figure~\ref{fig:playfair-graph} for an example)
-
-Discuss progress to computation of data on computers and effect on the direction of visualisation...
-
-Discuss information needs of the modern age...
-
-
-
-Animated visualisations...
-
-A number of existing code visualisations show an interactive visualisation Existing code visualisations and representations...\\
--gource~\cite{Caudwell2010}\\
--code flower\\
--lighttable - inline feedback (developed due to the idea that code is unobservable, indirect and incidentally complex) \\
--code annotations~\cite{Swift2013}
-
-\subsection{Software}
-{\color{red} maybe remove this section as it is discussed in-depth in the next section...}
-
-For most of its history, source code has been displayed as simple text. This is due to the expressiveness of the text format and despite its inefficiencies. It is only recently, due to ever increasing programming language complexity and increasing computational power, that code annotations and syntax highlighting have become more commonplace. Nevertheless, these visual enhancements rarely provide information beyond the basic grammar of the language they are intended to augment. The limitations of this approach are becoming ever more apparent as programming languages and interactive programming environments move towards the need for real-time comprehension and a need to understand the source code within the context of a running program.
-
-% Discuss the software engineering approach here... applying software development techniques to an arts space. Identify stakeholders etc... Discuss how the project was undertaken regarding timelines and collaboration with the stakeholders...
-% Push the software engy stuff here...
-% eg. The purpose of software engineering is to bring together ideas from many fields into one - developing good software that is fit for purpose and fit for use. The systems engineering perspective of software engineering. However, one area where software engineering has had little influence and little influence has been taken from is the area of art.
 
 % Random stuff from early in the project:
 
@@ -92,24 +49,52 @@ For most of its history, source code has been displayed as simple text. This is 
 % -an effective technique is the use of visualisations
 % -it would be valuable to use visualisations as a means to communicate the programmer’s intention
 
-% Software engineering practice and art are often considered opposing ends of the spectrum. 
 
-\subsection{Live Coding}
+ {\color{red} suggest the problem statement and tie in the quote...}
 
-Commercial sotware environments...
--code hotswapping
--etc...
+\section{Background}
 
-Live coding...
--impact on the software development and scientific visualsation environment...
+Both visualisation and live coding have a long history of communicating intent. This section seeks to define visualisations, summarise the history of visualisation, how visualisation has begun to be used in the software industry, the contributions of live coding within this space and the potential for visualisations within live coding.
+
+\subsection{Software}
+{\color{red} maybe remove this section as it is discussed in-depth in the next section...}
+
+For most of its history, source code has been displayed as simple text. This is due to the expressiveness of the text format and despite its inefficiencies. It is only recently, due to ever increasing programming language complexity and increasing computational power, that code annotations and syntax highlighting have become more commonplace. Nevertheless, these visual enhancements rarely provide information beyond the basic grammar of the language they are intended to augment. The limitations of this approach are becoming ever more apparent as programming languages and interactive programming environments move towards the need for real-time comprehension and a need to understand the source code within the context of a running program.
+
+% Discuss the software engineering approach here... applying software development techniques to an arts space. Identify stakeholders etc... Discuss how the project was undertaken regarding timelines and collaboration with the stakeholders...
+% Push the software engy stuff here...
+% eg. The purpose of software engineering is to bring together ideas from many fields into one - developing good software that is fit for purpose and fit for use. The systems engineering perspective of software engineering. However, one area where software engineering has had little influence and little influence has been taken from is the area of art.
+
+Modern software is increasingly supporting the concept of the hotswapping of source code. Hotswapping source code is the process of modifying program source code at runtime to achieve desired behaviour without restarting the system. The ability to hotswap source code is becoming increasingly common within programming languages. Examples of this paradigm exist within Java including HotSwap, JRebel~\cite{ZeroTurnaround2014} and a variety of other custom modifications (e.g.~\cite{Thomas2011}). {\color{red} other languages...}
+
+{\color{red} better link between paragraphs}
+
+One area in width the paradigm of hotswapping source code is central is that of interactive programming, specifically live coding. Live coding is the process of programming in front of an audience for education or entertainment. It is a relatively new and developing field intending to further blur the lines between the worlds of art and programming. Live coding provides exposure of the programming process to a live audience, with the audience often having no background in programming.
 
 Some of the most important and influential live coding environments over the last decade have included SuperCollider~\cite{McCartney}, ChucK~\cite{Wang2008} and Extempore~\cite{Sorensen}. These environments have a growing following as the field of live coding matures.
 
+% -how has the increased dynamic nature of programming created difficulties in understanding.
+% -how has the increased dynamic nature of programming languages made it more difficult to visualise? how has it made it easier?
 
-% live coding attempts to bring together:
-% -didactic vs aesthetic
-% -industry vs art
+\subsection{Visualisation}
 
+Modern visualisation generally has two distinct definitions. The first definition involves representing data graphically while the other definition describes the process of forming mental visual images. {\color{red} Both processes can assist in the communication and understanding of information}
+
+Since its inception, the visualisation of data has revolutionised how information is represented and understood. The earliest examples of summarising data using images occurred in William Playfair's \textit{The Commercial and Political Atlas}. Playfair developed a number of graphical representations of data that are very common today including the line chart, the bar chart and the pie chart.
+
+% -software visualisations
+
+% Discuss progress to computation of data on computers and effect on the direction of visualisation...
+
+% Discuss information needs of the modern age...
+
+Exisiting source code visualisations such as Gource~\cite{Caudwell2010} and code_swarm~\cite{Ogawa2012} show historic source code changes, based off source code respository data. 
+-lighttable - inline feedback (developed due to the idea that code is unobservable, indirect and incidentally complex) \\
+-code annotations~\cite{Swift2013}
+
+% \subsection{Live Coding}
+
+% {\color{red} This section is well discussed in the literature review...}
 
 \section{Structure}
 
