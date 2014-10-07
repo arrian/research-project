@@ -71,13 +71,20 @@ Dynamic analysis of the running program involved providing mechanisms for the pr
 
 \subsection{Mappings}
 
-A number of specific mappings were assigned to the visualisation. These visual mappings related directly to actions taken by the programmer. 
+A number of specific mappings were assigned to the visualisation. These visual mappings related directly to actions taken by the programmer, behaviour of the running program and representation of the static code. 
 
--function count
--function active/inactive state
+Function count was mapped to the number of large visual elements on screen. When adding a new function, a new element was introduced. This mapping was intended to allow the audience to associate the simplified geometric shape to the source code and allow the audience to separate functions visually.
+
+Each large visual element represented the state of active and inactive functions. In live coding, the programmer triggers functions to change between active and inactive states. The mapping represented this though the use of washed out grey and white colours while inactive and vibrant, bright colours while active. In addition, the active functions were animated, with moving visual elements.
+
+Function size and shape was represented visually through the use of ``attractors'' with each line of code mapped to one of the visual elements.
 -function size/shape
+
 -function beat+callback duration
--programmer editing behaviour
+
+To ensure the relationship between the actions of the programmer, the changes to the source code and the changes to the music were easily identified, an icon representing the programmer was displayed closest to the function being edited. This mapping intended to provide the audience with a better overview of the movements of the programmer among the functions than would otherwise be visible through the cursor alone.  
+% -programmer editing behaviour
+
 -programmer typing behaviour
 
 {\color{red} Show a table with images and description of behaviour}
