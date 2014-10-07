@@ -11,16 +11,15 @@ Following the first user study (Chapter~\ref{chap:user-study}), limitations with
 
 \section{Rationale}
 
-
 ``the aesthetic of fixing nodes and edges to an underlying unit grid was prominent''~\cite{Purchase2014} (also~\cite{Purchase2001,Purchase1996})
 
-The intial user study, although identifying some improvement in enjoyment with the use of 
--previous study had some apparently conflicting results...
--previous study did not have a baseline - this was to be remedied
--previous study had visualisation limitations eg. missed timing, no direct feedback from the programmer etc
+The intial user study, although identifying some improvement in enjoyment through the use of visualisations, had conflict results regarding understanding. This visualisation prototype intended to... \more
 
+A number of technical limitations were identified in the previous iteration of the visualisation prototype including incorrect timing and beat, no direct feedback from the programmer and limited... \more
+% -previous study had visualisation limitations eg. missed timing, no direct feedback from the programmer etc
 
--strategy employed a combination of the aesthetic and didactic visualisations from the previous study...
+This visualisation prototype built on a combination of the aesthetic and didactic visualsations evaluated in the previous study, taking visual elements identified as postively contributing to understanding and enjoyment. These included... \more
+% -strategy employed a combination of the aesthetic and didactic visualisations from the previous study...
 
 \more
 
@@ -43,6 +42,7 @@ The intial user study, although identifying some improvement in enjoyment with t
 The visualisation technique employed required three major components including an application manager, a code manager and an editor plugin (see the class diagram in Figure~\ref{fig:visualisation-class-diagram}). The following sections detail the implementation of these components.
 
 \subsection{Visualisation Manager}
+
 
 -polycode~\cite{Safrin2013}
 
@@ -77,15 +77,13 @@ Function count was mapped to the number of large visual elements on screen. When
 
 Each large visual element represented the state of active and inactive functions. In live coding, the programmer triggers functions to change between active and inactive states. The mapping represented this though the use of washed out grey and white colours while inactive and vibrant, bright colours while active. In addition, the active functions were animated, with moving visual elements.
 
-Function size and shape was represented visually through the use of ``attractors'' with each line of code mapped to one of the visual elements.
--function size/shape
+Function size and shape was represented visually through the use of ``attractors'' with each line of code mapped to one of the visual elements. Visual elements would grow and shrink according to the length of the line of source code directly mapping the typing actions of the programmer to visual elements.  
+% -programmer typing behaviour
 
--function beat+callback duration
+% -function beat+callback duration
 
 To ensure the relationship between the actions of the programmer, the changes to the source code and the changes to the music were easily identified, an icon representing the programmer was displayed closest to the function being edited. This mapping intended to provide the audience with a better overview of the movements of the programmer among the functions than would otherwise be visible through the cursor alone.  
 % -programmer editing behaviour
-
--programmer typing behaviour
 
 {\color{red} Show a table with images and description of behaviour}
 
