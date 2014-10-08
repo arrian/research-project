@@ -1,4 +1,11 @@
 
+% Definitions...?\\
+% -define visualisation techniques\\
+% -define the programmer and observer relationship\\
+% -define audience experience\\
+
+
+
 % -why is liveness important\\
 % -should it be used as a metric\\
 % -what are the gaps in the investigation of liveness
