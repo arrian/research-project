@@ -13,16 +13,15 @@ Evaluation of the literature identified the need for visualisations that helped 
 
 \section{Requirements}
 
-In order to systematically and efficiently develop a visualisation design strategy, two stakeholders were identified. The audience was the intended audience and was identified as a critical stakeholder in the ultimate effectiveness of the visualisations developed. The audience evaluated in the initial field study would provide 
+In order to systematically and efficiently develop a visualisation design strategy, two stakeholders were identified. These included the live coder and the intended audience.
 
+Evaluation of the visualisation prototype required application to a live coding performance. To achieve this, the live coder would need to apply the visualisations to a live performance. To this end, discussions with the live coder identified functional requirements including simultaneous display of source code and visualisations and visualisations depicting the progression of the performance accurately. Non-functional requirements identified included performance, as the nature of live coding is realtime, and reliability, as a single failure in the visualisations could cause catastrophic failure within the live coding performance.
 
-% Avoid interfering with the code too much...
-% Using the field study as a type of requirements gathering... what did we learn from the field study?
-% 
+The intended audience was identified as a critical stakeholder in the ultimate effectiveness of the visualisations developed. The audience evaluated in the initial field study would provide the basis for these requirements. 
 
+-discuss audience requirements identified from first study
 
 \section{Risks}
-
 
 In the early stages of the development of a visualisation strategy, a number of risks were identified. A selection of these risks and the associated risk management strategies are outlined below.
 
@@ -36,16 +35,17 @@ Timeline constraints were also identified as a potential risk factor in the deve
 
 % -risk that the visualisations were not the correct strategy to begin with?
 
-% Other risks?
+\more
 
 \section{Design}
 
--minimal prototype of 1000 SLOC of pure xtlang
+The intial iteration of the visualisation prototype consisted of two separate conditions. {\color{red} Where did the idea for these two conditions come from?} Each condition consisted of four visual progressions with the intention of representing the addition and removal of instruments during the live coding performance.
+
+The first visualisation condition was labelled the ``aesthetic'' condition with an intended goal of improving enjoyment during the live coding performance.
+
+The second visualisation condition was labelled the ``didactic'' condition with an intended goal of improving understanding during the live coding performance.
 
 The design of the initial visualsations focussed on the application of the literature on visualisation design to the field of software visualisation and the application to the visualisation of live code.
-
--total of 8 visualisation progressions were developed
--4 progressions for both didactic and aesthetic
 
 -guidelines set out by mclean were used in understanding the application of visualisation to live coding...
 \cite{McLean2010a}...
@@ -54,6 +54,7 @@ The design of the initial visualsations focussed on the application of the liter
 % - what are the guidelines used
 \cite{Ware2013a}...
 
+Cairo was used as the supporting graphics library for visualisations implementation with the final prototype consisting of 1000 \ac{SLOC}. Visualisations were written in pure xtlang, as part of the Extempore live coding environment.
 
 \begin{figure}
   \centering \includegraphics[width=\columnwidth]{../images/diagrams/knowledge-flow-initial.pdf}
@@ -104,6 +105,7 @@ The aesthetic visualisation technique was designed to react to the programmer's 
 
 \section{Summary}
 
+\more
 
 
 
