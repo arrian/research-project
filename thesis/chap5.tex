@@ -11,29 +11,24 @@ Following the first user study (Chapter~\ref{chap:user-study}), limitations with
 
 \section{Rationale}
 
-``the aesthetic of fixing nodes and edges to an underlying unit grid was prominent''~\cite{Purchase2014} (also~\cite{Purchase2001,Purchase1996})
+The intial user study, although identifying some improvement in enjoyment through the use of visualisations, had conflicting results regarding understanding. This visualisation prototype intended to bring together the features identified as positively impacting the audience's ability to understand the code with features indentified as positively impacting enjoyment and audience engagement. This visualisation prototype built on a combination of the aesthetic and didactic visualsations evaluated in the previous study, taking visual elements identified as postively contributing to understanding and enjoyment.
 
-The intial user study, although identifying some improvement in enjoyment through the use of visualisations, had conflict results regarding understanding. This visualisation prototype intended to... \more
+A number of technical limitations were identified in the previous iteration of the visualisation prototype including incorrect timing and beat, no direct feedback from the programmer and limited visual linking between the source code and the visualisation.
 
-A number of technical limitations were identified in the previous iteration of the visualisation prototype including incorrect timing and beat, no direct feedback from the programmer and limited... \more
-% -previous study had visualisation limitations eg. missed timing, no direct feedback from the programmer etc
+The goal of this iteration of the visualisations was to align the mental model of the audience with that of the programmer, representing the state of the code visually and showing the iteraction of the programmer with the source code.
 
-This visualisation prototype built on a combination of the aesthetic and didactic visualsations evaluated in the previous study, taking visual elements identified as postively contributing to understanding and enjoyment. These included... \more
-% -strategy employed a combination of the aesthetic and didactic visualisations from the previous study...
-
--aligning the mental models of audience and programmer
-
-\more
+% ``the aesthetic of fixing nodes and edges to an underlying unit grid was prominent''~\cite{Purchase2014} (also~\cite{Purchase2001,Purchase1996})
 
 \section{Requirements}
 
-Following the user study, some additional audience requirements were identified. These included the need to 
+Following the user study, some additional audience requirements were identified. These included the need to stop the visualisation from obscuring the code, ...
+
+\more
 
 \section{Design}
 
--prototype of 2336 SLOC c++, 1310 SLOC xtm, total of 3646 SLOC
 
-\cite{Purchase1996}...
+% \cite{Purchase1996}...
 
 \begin{figure}
   \centering \includegraphics[width=\columnwidth]{../images/diagrams/knowledge-flow-refined.pdf}
@@ -47,27 +42,20 @@ Following the user study, some additional audience requirements were identified.
 \label{fig:visualisation-class-diagram}
 \end{figure}
 
-The visualisation technique employed required three major components including an application manager, a code manager and an editor plugin (see the class diagram in Figure~\ref{fig:visualisation-class-diagram}). The following sections detail the implementation of these components.
+Three sources of data were to be combined and visualised including the state of the source code, the state of the running program and the manipulation between the two by the live coder. To achieve this, three majore components were required including an application manager, a code manager and an editor plugin (see the class diagram in Figure~\ref{fig:visualisation-class-diagram}). The following sections detail the implementation of these components.
+
+This visualisation was, as with the previous iteration, rendered under the source code. However, \more
+
+The final prototype cosisted of approximately 3600~\ac{SLOC}, consisting of 2300~\ac{SLOC} of C++ and C bindings, and 1300~\ac{SLOC} of xtlang.
 
 \subsection{Visualisation Manager}
 
-
--polycode~\cite{Safrin2013}
-
--opengl
-
-\more
+The visualisation manager handled all visual elements on the screen. The Polycode~\cite{Safrin2013} library was bound to the live coding environment allowing for more advanced two-dimensional graphical manipulations than the previous visualisation iteration through scene graph manipulation. Using this technique, the intention was to represent the state of the source code, the manipulation of the source code and the state of the active source code in the same visual environment.
 
 \subsection{Interface Mananger}
 \label{sec:interface-manager}
 
--sublime plugin
-
--emacs plugin
-
-This was acheived using a text editor plugin sending programmer interactions over an \ac{OSC} protocol. The interactions sent included cursor movement, all source code changes, file focus and source code evaluation.
-
-\more
+To gather information regarding the actions of the programmer, a method of interfacing with the live coder's programming environment was required. This was acheived using a text editor plugin sending programmer interactions over an \ac{OSC} protocol. The interactions sent included cursor movement, all source code changes, file focus and source code evaluation.
 
 \subsection{Code Manager}
 
@@ -79,7 +67,7 @@ Dynamic analysis of the running program involved providing mechanisms for the pr
 
 \subsection{Mappings}
 
-A number of specific mappings were assigned to the visualisation. These visual mappings related directly to actions taken by the programmer, behaviour of the running program and representation of the static code. 
+A number of specific mappings were assigned to the visualisation. These visual mappings related directly to actions taken by the programmer, behaviour of the running program and representation of the source code. 
 
 Function count was mapped to the number of large visual elements on screen. When adding a new function, a new element was introduced. This mapping was intended to allow the audience to associate the simplified geometric shape to the source code and allow the audience to separate functions visually.
 
@@ -97,7 +85,10 @@ To ensure the relationship between the actions of the programmer, the changes to
 
 \subsection{Testing}
 
-Stability was of primary concern during the live performance...
+Stability was of primary concern during the live performance. To ensure no failures occurred during the live performance, a number of testing strategies were adopted. \more
+
+% -unit testing
+% -user testing
 
 \section{Summary}
 
