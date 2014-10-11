@@ -1,36 +1,39 @@
 # Final Presentation
 
 ## Intro [Slide 2]
--my name is...
+-my name is Arrian Purcell
 -my project is titled.. "Art and Understanding through Code Visualisation"
 
-## The Problem [Slide 2]
+## The Problem [Slide 3]
 
 (what is the existing problem that needs to be solved?)
 
 Live coding has a problem:
 -audiences may feel distracted or excluded from the performance
--live coder may feel 
+-live coder may wish to communicate more through there code
 
 -how can we improve source code comprehension?
 -how can we aid understanding of the programming process?
--better yet, how can we better communicate the programmers intention?
+-how can we improve enjoyment of live coding?
+-better yet, how can we align the mental models of the programmer and the audience?
 
--techniques such as modelling or code documentation aren’t dynamic or flexible
+-techniques such as [...] aren’t dynamic or flexible
 -don’t allow for close to realtime understanding
--an effective technique is the use of visualisations
+-difficult for uninformed audiences to get a sense of what is going on
+-visualisations have been identified in the literature as a means to overcome many of these problems
+-nevertheless, there has been few empirical studies evaluating the application of visualisations to live coding
 -it would be valuable to use visualisations as a means to communicate the programmer’s intention
 
-## The Project [Slide 3]
+## The Project [Slide 4]
 
 (what was this project about?)
 
--this project will explore code visualisations
--specifically, it will investigate visuals within the domains of software and music
+-this project explored code visualisations
+-specifically, it investigated visuals within the domains of software and music, in live coding
 -used live coding as a platform and case study for this (will discuss later)
--developed and tested visualisations on audiences with audiences of varied levels of experience with programming, addressing code comprehension
+-developed and tested visualisations on audiences with audiences of varied levels of experience with programming, addressing two dimensions of understanding and enjoyment
 
-## Hypothesis [Slide 4]
+## Hypothesis [Slide 5]
 
 This project investigated the proposition that ``code visualisation improves observer understanding and enjoyment'' in the setting of a live arts practice. 
 
@@ -38,45 +41,52 @@ More specifically, this project investigated the question ``can the application 
 
 These questions were examined through a process of prototype development, user study evaluation and refinement.
 
-## Structure [Slide 5]
+## Structure [Slide 6]
 
--exploratory field study
--prototype 1
--user study
--prototype 2
--follow-up user study
+-exploratory field study - inform the direction of the study
+-prototype 1 - develop a visualisation for evaluation informed by the exploratory field study
+-user study - evaluate the prototype under laboratory conditions
+-prototype 2 - develop the next iteration of the prototype, fixing limitations identified and building on the results of the user study
+-follow-up user study - again evaluate the prototype under laboratory conditions to compare improvements
 
-## Exploratory Field Study [Slide 6]
+## Exploratory Field Study [Slide 7]
 
 -method:
 -results:
+-discussion:
 
 
-## Prototype 1 [Slide 7]
+## Prototype 1 [Slide 8]
 
 -rationale:
+-design:
+-result (images/video)
 
 ## User Study
 
 -method:
 -results:
+-discussion:
 
-## Prototype 2 [Slide 8]
+## Prototype 2 [Slide 9]
 
 -rationale:
+-design:
+-result (images/video)
 
-## Follow-up User Study [Slide 9]
+## Follow-up User Study [Slide 10]
 
 -method:
 -results:
+-discussion:
 
-## Summary [Slide 10]
+## Summary [Slide 11]
 
 -number of iterations of prototype visualisations
 -number of user studies have been conducted
 -results of studies indicate...
 
-## Contributions [Slide 11]
+## Contributions [Slide 12]
 
 -a method of software visualisation has been identified and evaluated
 	-up to now there has been no attempt to evaluate visualsations within the space of live coding
@@ -96,10 +106,13 @@ These questions were examined through a process of prototype development, user s
 		-``the paper describes interesting work''
 		-``an interesting paper, and certainly a novel contribution''
 
-## Future Work [Slide 12]
+## Future Work [Slide 13]
 
+-just the beginning of this examination
+-much potential to identify what audiences really find interesting and worthwhile within the process of live coding
+-
 
-## Conclusion [Slide 13]
+## Conclusion [Slide 14]
 
 ``code visualisation improves observer understanding and enjoyment''
 
@@ -108,7 +121,7 @@ These questions were examined through a process of prototype development, user s
 -can we combine these domain-specific visualisations in a meaningful way?
 -how can we use this to aid in code comprehension?
 
-## Questions [Slide 14]
+## Questions [Slide 15]
 
 Questions?
 
