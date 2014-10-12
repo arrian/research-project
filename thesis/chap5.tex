@@ -42,11 +42,11 @@ Following the user study, some additional audience requirements were identified.
 \label{fig:visualisation-class-diagram}
 \end{figure}
 
-Three sources of data were to be combined and visualised including the state of the source code, the state of the running program and the manipulation between the two by the live coder. To achieve this, three majore components were required including an application manager, a code manager and an editor plugin (see the class diagram in Figure~\ref{fig:visualisation-class-diagram}). The following sections detail the implementation of these components.
+Three sources of data were to be combined and visualised including the state of the source code, the state of the running program and the manipulation between the two by the live coder. To achieve this, three major components were required including an application manager, a code manager and an editor plugin (see the class diagram in Figure~\ref{fig:visualisation-class-diagram}). The following sections detail the implementation of these components.
 
 This visualisation was, as with the previous iteration, rendered under the source code. However, \more
 
-The final prototype cosisted of approximately 3600~\ac{SLOC}, consisting of 2300~\ac{SLOC} of C++ and C bindings, and 1300~\ac{SLOC} of xtlang.
+The final prototype consisted of approximately 3600~\ac{SLOC}, consisting of 2300~\ac{SLOC} of C++ and C bindings, and 1300~\ac{SLOC} of xtlang.
 
 \subsection{Visualisation Manager}
 
@@ -87,13 +87,16 @@ To ensure the relationship between the actions of the programmer, the changes to
 
 Stability was of primary concern during the live performance. To ensure no failures occurred during the live performance, a number of testing strategies were adopted. \more
 
-% -unit testing
-% -user testing
+Unit testing was carried out on each component.
+
+Integration testing... \more
+
+System testing... \more
+
+Finally, evaluation during a user study would act as the acceptance test for the software visualisation method.
 
 \section{Summary}
 
--how does this visualisation fix the issues identified in the previous iteration of the visualisation?
-
-\more
+In summary, this visualisation technique attempted to bring together effective features identified within the aesthetic and didactic visualisations of the previous iteration. The prototype developed included three major components including the visualisation manager, the interface manager and the code manager. Technical limitations with the first iteration of the visualsation prototype were addressed and an attempt was made to communicate the state of the source code, the state of the running program and the manipulation between the two by the live coder. The effectiveness of aligning the mental models of the audience and the live coder was to be evaluated in a follow-up user study.
 
 
