@@ -49,7 +49,7 @@ se <- function(x, na.rm) sd(x, na.rm)/sqrt(length(x))
 
 ## THIS ONE, ARRIAN (tweak to size, etc)
 
-ggplot(melt(summary.df, id.vars=1:5), aes(as.numeric(stage), value*100, colour = variable)) + geom_line(size = 2) + scale_x_continuous(breaks = 1:3, labels = c("beginning", "middle", "end")) + labs(x = "stage of performance", y = "percentage of respondents") + facet_grid(type~var) + scale_colour_manual(values = c("red", "orange", "green"))
+ggplot(melt(summary.df, id.vars=1:5), aes(as.numeric(stage), value*100, colour = variable, linetype = variable)) + geom_line(size = 2) + scale_x_continuous(breaks = 1:3, labels = c("beginning", "middle", "end")) + labs(x = "stage of performance", y = "percentage of respondents") + facet_grid(type~var) + scale_colour_manual(values = c("red", "orange", "green"))
 
 ggsave("option-1.pdf")
 
