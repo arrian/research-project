@@ -1,0 +1,1 @@
+plot = ggplot(dfm, aes(x=Stage, y=value, colour=variable)) + geom_line(aes(group=variable),size=1.5) + geom_point(size=4) + scale_y_continuous(limits=c(-0.7, 0.7),breaks=pretty_breaks(n=6)) + scale_x_discrete(limits=c('Beginning','Middle','End'))+xlab('Performance Stage')+ylab('Reported Level') + scale_colour_discrete(name='Condition') + facet_grid(. ~ facet)

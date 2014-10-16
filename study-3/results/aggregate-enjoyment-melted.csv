@@ -1,0 +1,7 @@
+Group,Level,Condition,Beginning,Middle,End
+High - No Visualisation,High,No Visualisation,0.16,0.32,0.4
+Medium - No Visualisation,Medium,No Visualisation,0.32,0.56,0.4
+Low - No Visualisation,Low,No Visualisation,0.52,0.12,0.2
+High - Visualisation,High,Visualisation,0.254716981,0.490566038,0.405660377
+Medium - Visualisation,Medium,Visualisation,0.452830189,0.405660377,0.490566038
+Low - Visualisation,Low,Visualisation,0.29245283,0.103773585,0.103773585

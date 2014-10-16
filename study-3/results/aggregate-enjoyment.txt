@@ -1,0 +1,43 @@
+With Vis
+
+enjoyment.beginning 
+12 + 11 + 4  = 27 = 0.254716981132    
+19 + 20 + 9  = 48 = 0.452830188679    
+9  + 10 + 12 = 31 = 0.292452830189 
+total 106
+
+enjoyment.middle
+25 + 17 + 10 = 52 = 0.490566037736
+14 + 16 + 13 = 43 = 0.405660377358
+1  + 8  + 2  = 11 = 0.103773584906
+total 106
+
+enjoyment.end
+19 + 13 + 11 = 43 = 0.405660377358
+19 + 24 + 9  = 52 = 0.490566037736
+2  + 4 +  5  = 11 = 0.103773584906
+total 106
+
+
+No Vis
+
+No.visualisation.enjoyment.beginning
+4  = 0.16
+8  = 0.32
+13 = 0.52
+total 25
+
+alisation.enjoyment.middle 
+8  = 0.32                      
+14 = 0.56                      
+3  = 0.12
+total 25                    
+
+alisation.enjoyment.end
+10 = 0.4
+10 = 0.4
+5  = 0.2 
+total 25
+
+
+

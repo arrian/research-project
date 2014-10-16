@@ -1,0 +1,40 @@
+
+With Vis
+
+understanding beginning
+6  4  2  =12 = 0.11650485436893204
+21 17 12 =50 = 0.4854368932038835
+12 18 11 =41 = 0.39805825242718446
+103 total
+
+understanding middle
+8  2  3  =13 = 0.12745098039215685
+21 27 12 =60 = 0.5882352941176471
+9  10 10 =29 = 0.28431372549019607
+102 total
+
+understanding end
+8  6  7  =21 = 0.21
+21 23 11 =55 = 0.55
+8  9  7  =24 = 0.24
+100 total
+
+Without Vis
+
+understanding beginning 
+4  = 0.16
+9  = 0.36
+12 = 0.48
+25 total
+
+understanding middle
+3  = 0.12
+13 = 0.52
+9  = 0.36
+25 total
+
+understanding end
+5  = 0.2
+12 = 0.48
+8  = 0.32
+25 total
