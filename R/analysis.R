@@ -37,11 +37,11 @@ names(traj.df)[12:14] <- c("type", "var", "stage")
 summary.df <- ddply(traj.df, .(type, var, stage), summarize,
                     mean = mean(map.response.to.numeric(response), na.rm = TRUE),
                     se = se(map.response.to.numeric(response), na.rm = TRUE),
-                    low = mean(response == "low", na.rm = TRUE),
-                    med = mean(response == "medium", na.rm = TRUE),
-                    high = mean(response == "high", na.rm = TRUE))
+                    Low = mean(response == "low", na.rm = TRUE),
+                    Medium = mean(response == "medium", na.rm = TRUE),
+                    High = mean(response == "high", na.rm = TRUE))
 map.response.to.numeric <- function(resp){
-    c(low = -1, med = 0, high = 1)[resp]
+    c(Low = -1, Medium = 0, High = 1)[resp]
 }
 se <- function(x, na.rm) sd(x, na.rm)/sqrt(length(x))
 
@@ -49,9 +49,24 @@ se <- function(x, na.rm) sd(x, na.rm)/sqrt(length(x))
 
 ## THIS ONE, ARRIAN (tweak to size, etc)
 
-ggplot(melt(summary.df, id.vars=1:5), aes(as.numeric(stage), value*100, colour = variable, linetype = variable)) + geom_line(size = 2) + scale_x_continuous(breaks = 1:3, labels = c("beginning", "middle", "end")) + labs(x = "stage of performance", y = "percentage of respondents") + facet_grid(type~var) + scale_colour_manual(values = c("red", "orange", "green"))
+library(grid)
 
-ggsave("option-1.pdf")
+condition_dimension_labeller <- function(var, value){
+    value <- as.character(value)
+    if (var=="var") { 
+        value[value=="enjoyment"] <- "Enjoyment"
+        value[value=="understanding"]   <- "Understanding"
+    }
+    else {
+    	value[value=="aesthetic"] <- "Aesthetic Condition"
+        value[value=="didactic"]   <- "Didactic Condition"	
+    }
+    return(value)
+}
+
+ggplot(melt(summary.df, id.vars=1:5), aes(as.numeric(stage), value*100, colour = variable, linetype = variable)) + geom_line(size = 1) + scale_x_continuous(breaks = 1:3, labels = c("Beginning", "Middle", "End")) + labs(x = "Stage of Performance", y = "Audience %", linetype="Reported Level", colour="Reported Level") + facet_grid(type~var, labeller=condition_dimension_labeller) + scale_colour_manual(values = c("#f7756d","#00b0f6","#3ab601")) + theme(panel.margin = unit(1, "lines"), legend.position="top", axis.text.y=element_text(colour="black"), axis.text.x=element_text(colour="black"), legend.key.width=unit(1.5,'cm')) + scale_linetype_manual(values = c("longdash","dotted","solid"))
+
+ggsave("option-1.pdf", width=9, height=5)
 
 ggplot(summary.df, aes(as.numeric(stage), mean, colour = type)) + geom_line(size = 2)  + geom_errorbar(aes(ymin=mean-se, ymax=mean+se), size = 1, width = 0.1) + scale_x_continuous(breaks = 1:3, labels = c("beginning", "middle", "end")) + scale_y_continuous(limits = c(-1, 1), breaks = c(-1, 0, 1), labels = c("low", "medium", "high")) + labs(x = "stage of performance", y = "mean response") + facet_wrap(~var)
 
