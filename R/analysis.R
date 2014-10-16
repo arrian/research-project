@@ -110,3 +110,24 @@ summary2.df <- cbind(summary2.df, as.data.frame(do.call(rbind, strsplit(as.chara
 
 ggplot(summary2.df, aes(as.numeric(stage), value*100, colour = V1, linetype = V2)) + geom_line(size = 2) + scale_x_continuous(breaks = 1:3, labels = c("beginning", "middle", "end"))  + labs(x = "stage of performance", y = "percentage of respondents") + facet_wrap(~var)
 ggsave("option-1.pdf")
+
+## positive/negative ones
+
+sum.df <- melt(ddply(traj.df, c("type", "var", "stage"),
+                     summarize,
+                     low = -100*mean(response == "low", na.rm = TRUE),
+                     high = 100*mean(response == "high", na.rm = TRUE)))
+sum.df$stage <- factor(sum.df$stage, levels = c("beginning", "middle", "end"), ordered = TRUE)
+
+## positive/negative bar plot (need to eval sum.df above)
+
+ggplot() + geom_bar(data = subset(sum.df, value <=0), aes(stage, value, fill = variable), fill = "red", stat = "identity") + geom_bar(data = subset(sum.df, value >0), aes(stage, value, fill = variable), fill = "green", stat = "identity") + scale_y_continuous(breaks = seq(-50,50,25), labels = c("50%", "25%", "0%", "25%", "50%")) + labs(x = "stage of performance", y = "audience %") + facet_grid(type~var) #+ coord_flip()
+
+## ozchi.plot3 <- function(split.var){
+##     df <- melt(ddply(traj.df, c(split.var, "type", "var", "stage"),
+##                      summarize,
+##                      low = -1*sum(response == "low", na.rm = TRUE),
+##                      high = sum(response == "high", na.rm = TRUE)),
+##                id.vars = 1:3)
+##     ggplot() + geom_bar(data = subset(df, value <=0), aes(stage, value, fill = variable), fill = "red", stat = "identity") + geom_bar(data = subset(df, value >0), aes(stage, value, fill = variable), fill = "green", stat = "identity") + labs(x = "stage of performance", y = "number of responses") + facet_grid(paste("var", split.var, sep="~"))
+## }
