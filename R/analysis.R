@@ -1,7 +1,7 @@
 library("ggplot2")
 library("reshape2")
 library("plyr")
-data.df <- read.csv("survey-data.csv")
+data.df <- read.csv("/Users/arrian/Desktop/COMP4540/research-project/R/survey-data.csv")
 names(data.df)[match("how.many.live.coding.performances.have.you.been.to.", names(data.df))] <- "performances.attended"
 names(data.df)[match("how.much.music.do.you.regularly.listen.to.", names(data.df))] <- "music.listening"
 names(data.df)[match("do.you.play.an.instrument.or.sing.", names(data.df))] <- "musical.ability"
@@ -37,11 +37,11 @@ names(traj.df)[12:14] <- c("type", "var", "stage")
 summary.df <- ddply(traj.df, .(type, var, stage), summarize,
                     mean = mean(map.response.to.numeric(response), na.rm = TRUE),
                     se = se(map.response.to.numeric(response), na.rm = TRUE),
-                    Low = mean(response == "low", na.rm = TRUE),
-                    Medium = mean(response == "medium", na.rm = TRUE),
-                    High = mean(response == "high", na.rm = TRUE))
+                    low = mean(response == "low", na.rm = TRUE),
+                    medium = mean(response == "medium", na.rm = TRUE),
+                    high = mean(response == "high", na.rm = TRUE))
 map.response.to.numeric <- function(resp){
-    c(Low = -1, Medium = 0, High = 1)[resp]
+    c(low = -1, medium = 0, high = 1)[resp]
 }
 se <- function(x, na.rm) sd(x, na.rm)/sqrt(length(x))
 
@@ -121,7 +121,9 @@ sum.df$stage <- factor(sum.df$stage, levels = c("beginning", "middle", "end"), o
 
 ## positive/negative bar plot (need to eval sum.df above)
 
-ggplot() + geom_bar(data = subset(sum.df, value <=0), aes(stage, value, fill = variable), fill = "red", stat = "identity") + geom_bar(data = subset(sum.df, value >0), aes(stage, value, fill = variable), fill = "green", stat = "identity") + scale_y_continuous(breaks = seq(-50,50,25), labels = c("50%", "25%", "0%", "25%", "50%")) + labs(x = "stage of performance", y = "audience %") + facet_grid(type~var) #+ coord_flip()
+ggplot() + geom_bar(data = subset(sum.df, value <=0), aes(stage, value, fill = variable), fill = "#f7756d", stat = "identity") + geom_bar(data = subset(sum.df, value >0), aes(stage, value, fill = variable), fill = "#3ab601", stat = "identity") + scale_y_continuous(breaks = seq(-50,50,25), labels = c("50%", "25%", "0%", "25%", "50%")) + labs(x = "Stage of Performance", y = "Audience %") + facet_grid(type~var, labeller=condition_dimension_labeller) + theme(panel.margin = unit(1, "lines"), legend.position="top", axis.text.y=element_text(colour="black"), axis.text.x=element_text(colour="black"), legend.key.width=unit(1.5,'cm'))
+
+ggsave("pos-neg.pdf", width=9, height=5)
 
 ## ozchi.plot3 <- function(split.var){
 ##     df <- melt(ddply(traj.df, c(split.var, "type", "var", "stage"),
