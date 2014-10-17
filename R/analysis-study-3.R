@@ -1,19 +1,19 @@
 library("ggplot2")
 library("reshape2")
 library("plyr")
-data.df <- read.csv("/Users/arrian/Desktop/COMP4540/research-project/R/survey-data.csv")
+data.df <- read.csv("/Users/arrian/Desktop/COMP4540/research-project/R/results-study-3.csv")
 names(data.df)[match("how.many.live.coding.performances.have.you.been.to.", names(data.df))] <- "performances.attended"
 names(data.df)[match("how.much.music.do.you.regularly.listen.to.", names(data.df))] <- "music.listening"
 names(data.df)[match("do.you.play.an.instrument.or.sing.", names(data.df))] <- "musical.ability"
 names(data.df)[match("how.much.experience.do.you.have.with.programming.", names(data.df))] <- "programming.experience"
 names(data.df)[match("do.you.have.much.experience.with.the.Lisp.family.of.programming.languages.", names(data.df))] <- "lisp.experience"
 traj.df <- subset(melt(data.df, id.vars = 1:9, variable.name = "question", value.name = "response"), question %in%
-c("aesthetic.enjoyment.beginning", "aesthetic.enjoyment.middle",
-"aesthetic.enjoyment.end", "aesthetic.understanding.beginning",
-"aesthetic.understanding.middle", "aesthetic.understanding.end",
-"didactic.enjoyment.beginning", "didactic.enjoyment.middle",
-"didactic.enjoyment.end", "didactic.understanding.beginning",
-"didactic.understanding.middle", "didactic.understanding.end"))
+c("unvisualised.enjoyment.beginning", "unvisualised.enjoyment.middle",
+"unvisualised.enjoyment.end", "unvisualised.understanding.beginning",
+"unvisualised.understanding.middle", "unvisualised.understanding.end",
+"visualised.enjoyment.beginning", "visualised.enjoyment.middle",
+"visualised.enjoyment.end", "visualised.understanding.beginning",
+"visualised.understanding.middle", "visualised.understanding.end"))
 ## filthy hacks!
 traj.df$performances.attended <- as.character(traj.df$performances.attended)
 traj.df$performances.attended[traj.df$performances.attended == "first one"] <- "1"
@@ -58,8 +58,8 @@ condition_dimension_labeller <- function(var, value){
         value[value=="understanding"]   <- "Understanding"
     }
     else {
-    	value[value=="aesthetic"] <- "Aesthetic Condition"
-        value[value=="didactic"]   <- "Didactic Condition"	
+    	value[value=="unvisualised"] <- "No Visualisation Condition"
+        value[value=="visualised"]   <- "Visualisation Condition"	
     }
     return(value)
 }
