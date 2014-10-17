@@ -121,7 +121,7 @@ sum.df$stage <- factor(sum.df$stage, levels = c("beginning", "middle", "end"), o
 
 ## positive/negative bar plot (need to eval sum.df above)
 
-ggplot() + geom_bar(data = subset(sum.df, value <=0), aes(stage, value, fill = variable), fill = "#f7756d", stat = "identity") + geom_bar(data = subset(sum.df, value >0), aes(stage, value, fill = variable), fill = "#3ab601", stat = "identity") + scale_y_continuous(breaks = seq(-50,50,25), labels = c("50%", "25%", "0%", "25%", "50%")) + labs(x = "Stage of Performance", y = "Audience %") + facet_grid(type~var, labeller=condition_dimension_labeller) + theme(panel.margin = unit(1, "lines"), legend.position="top", axis.text.y=element_text(colour="black"), axis.text.x=element_text(colour="black"), legend.key.width=unit(1.5,'cm'))
+ggplot() + geom_bar(data = subset(sum.df, value <=0), aes(stage, value, fill = variable), fill = "#FF6669", stat = "identity") + geom_bar(data = subset(sum.df, value >0), aes(stage, value, fill = variable), fill = "#67E38E", stat = "identity") + scale_y_continuous(breaks = seq(-50,50,25), labels = c("50%", "25%", "0%", "25%", "50%")) + labs(x = "Stage of Performance", y = "Audience %") + facet_grid(type~var, labeller=condition_dimension_labeller) + theme(panel.margin = unit(1, "lines"), legend.position="top", axis.text.y=element_text(colour="black"), axis.text.x=element_text(colour="black"), legend.key.width=unit(1.5,'cm'))
 
 ggsave("pos-neg.pdf", width=9, height=5)
 
