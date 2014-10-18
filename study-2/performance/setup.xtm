@@ -1,22 +1,31 @@
-(sys:load "libs/xtm.xtm")
+(sys:load "libs/core/math")
+(sys:load "libs/external/cairo.xtm")
+(sys:load "libs/external/opengl.xtm")
 
 ;; make sure this is the right path for your machine!
 ;;(define *research-project-dir* "/Users/ben/Code/xtm/arrian-research-project")
-(define *research-project-dir* "/Users/arrian/Desktop/COMP4540/research-project")
+(define *research-project-dir* "/Users/arrian/Dev/research-project")
 
-(sys:load (string-append *research-project-dir* "/visualisations-1/lib/callback_widget_array.xtm"))
-(sys:load (string-append *research-project-dir* "/visualisations-1/lib/vu-meter.xtm"))
+(sys:load (string-append *research-project-dir* "/study-2/performance/lib/callback_widget_array.xtm"))
+(sys:load (string-append *research-project-dir* "/study-2/performance/lib/vu-meter.xtm"))
+
+(print-with-colors 'green 'default #t (print "Loaded dependencies"))
 
 ;;;;;;;;;;;;;;;;;;;;
 ;; graphics setup ;;
 ;;;;;;;;;;;;;;;;;;;;
 
-(sys:load "libs/external/cairo.xtm")
+;; (sys:load "libs/external/cairo.xtm")
 
-(define width 1024.0)
-(define height 768.0)
-(bind-val width float 1024.0)
-(bind-val height float 768.0)
+;; (define width 1024.0)
+;; (define height 768.0)
+;; (bind-val width float 1024.0)
+;; (bind-val height float 768.0)
+(define width 1920.0)
+(define height 1080.0)
+(bind-val width float 1920.0)
+(bind-val height float 1080.0)
+
 (bind-val half_width float (/ width 2.0))
 (bind-val half_height float (/ height 2.0))
 (define fullscreen #f)
@@ -59,7 +68,7 @@
 ;;TODO convert draw loop to beat duration 
 
 ;; load the visualisation file (make sure it's the right one!)
-(sys:load (string-append *research-project-dir* "/visualisations-1/visualisation-aesthetic.xtm"));;didactic.xtm"))
+(sys:load (string-append *research-project-dir* "/study-2/performance/visualisation-aesthetic.xtm"));;didactic.xtm"))
 
 ;; create the graphics context
 (define ctx (gl:make-ctx ":0.0" fullscreen 0.0 0.0 width height))
@@ -67,29 +76,70 @@
 ;; start the animation loop (check the args are ok)
 (draw-loop (*metro* 'get-beat 4) 1/40)
 
+(print-with-colors 'green 'default #t (print "Loaded graphics"))
+
 ;;;;;;;;;;;;;;;;;
 ;; audio setup ;;
 ;;;;;;;;;;;;;;;;;
 
+;; ;; set up the drum kit (symlink 'sample-libs' in the research-project
+;; ;; dir to wherever your drum samples are)
+;; (define *user-sample-dir* (string-append *research-project-dir* "/sample-libs"))
+;; (sys:load (string-append *research-project-dir* "/study-2/performance/lib/sampler-maps.xtm"))
+
+;; (define-sampler kit sampler_note_hermite_c sampler_fx)
+;; (sm-load-map kit *808-kit-map*)
+
+;; (bind-func dsp:[SAMPLE,SAMPLE,i64,i64,SAMPLE*]* 100000
+;;   (let ((vu_meter (vu_meter_c 8 1472))) ;; approx 30fps
+;;     (lambda (in time chan dat)
+;;       (+ 
+;;          (vu_meter chan 1 (epad in time chan dat))
+;;          (vu_meter chan 2 (fmsynth in time chan dat))
+;;          (vu_meter chan 0 (kit in time chan dat))
+;;          ))))
+
+;; (ipc:bind-func "utility" 'kit)
+;; (ipc:bind-func "utility" 'epad)
+;; (ipc:bind-func "utility" 'fmsynth)
+;; (ipc:audio-setup "utility")
+;; (dsp:set! dsp)
+
+(sys:load "libs/core/instruments.xtm")
+(print-with-colors 'green 'default #t (print "Loaded instruments"))
+
+(sys:load (string-append *research-project-dir* "/study-2/performance/lib/vu-meter.xtm"))
+
 ;; set up the drum kit (symlink 'sample-libs' in the research-project
 ;; dir to wherever your drum samples are)
 (define *user-sample-dir* (string-append *research-project-dir* "/sample-libs"))
-(sys:load (string-append *research-project-dir* "/visualisations-1/lib/sampler-maps.xtm"))
+(sys:load (string-append *research-project-dir* "/study-2/performance/lib/sampler-maps.xtm"))
 
-(define-sampler kit sampler_note_hermite_c sampler_fx)
-(sm-load-map kit *808-kit-map*)
+
+(sys:load "libs/core/pc_ivl.xtm")
+
+
+;; define the instruments
+
+;; (define-sampler kit sampler_note_hermite_c sampler_fx)
+;; (sm-load-map kit *NI-Dakeat-kit-sample-map*)
+;; (sm-load-map kit *SSO-percussion-sample-map* 1)
+
+(define-instrument epad epad_note_c epad_fx)
+(define-instrument fmsynth fmsynth_note_c fmsynth_fx)
+(define-instrument subbass subbass_note_c subbass_fx)
+(define-instrument organ organ_note_c organ_fx)
 
 (bind-func dsp:[SAMPLE,SAMPLE,i64,i64,SAMPLE*]* 100000
   (let ((vu_meter (vu_meter_c 8 1472))) ;; approx 30fps
     (lambda (in time chan dat)
-      (+ 
-         (vu_meter chan 1 (epad in time chan dat))
+      (+ (vu_meter chan 1 (epad in time chan dat))
          (vu_meter chan 2 (fmsynth in time chan dat))
-         (vu_meter chan 0 (kit in time chan dat))
-         ))))
+         (vu_meter chan 3 (* 2.0 (subbass in time chan dat)))
+         (vu_meter chan 0 (organ in time chan dat))))))
 
-(ipc:bind-func "utility" 'kit)
-(ipc:bind-func "utility" 'epad)
-(ipc:bind-func "utility" 'fmsynth)
-(ipc:audio-setup "utility")
 (dsp:set! dsp)
+
+(print-with-colors 'green 'default #t (print "Loaded audio"))
+
+
