@@ -11,7 +11,7 @@ Understanding changing software has been identified as one of the most important
 
 Programming languages are the formal languages of software. These languages are typically represented by source code in a plain text format. However, plain text format is limited requiring an interpretation step (parsing and compilation) to acheive a functioning program that can be understood by the computer~\cite{Badros2000}. The same occurs while programming. The programmer needs to comprehend the source code in order to make informed changes. In this case, the programmer conducts the interpretation step within the brain rather than the computer through a process of hypothesis creation, confirmation and refinement~\cite{Brooks1983}.
 
-The steps involved in interpreting and comprehending source code have been comprehensively examined within the literature (see ~\cite{Novais2013,McLean2010a,Brooks1995,Desmond,Rajlich2002}). Nevertheless, although many studies discuss the limitations of text-based source code, comparatively few have conducted empirical user studies examining the effectiveness of alternative representations of source code.
+The steps involved in and the issues with interpreting and comprehending source code have been comprehensively examined within the literature (see ~\cite{Novais2013,McLean2010a,Brooks1995,Desmond,Rajlich2002}). Nevertheless, although many studies discuss the limitations of text-based source code, comparatively few have conducted empirical user studies examining the effectiveness of alternative representations of source code.
 
 The concept of alternative source code representations is not new. Alternative representations of the source code include diagrams~\cite{Rumbaugh2004}, visual languages~\cite{Cox2007} and combinations of the two (e.g.~\cite{Lucanin2011}). Modern software development environments may also include tools that allow for alternative representations of code~\cite{Cox2007}. Diagrams, visual languages and modern software development environments vary greatly in the relation to the source code with visualiasations representing many levels of abstraction~\cite{Jerding1997}. Despite the differences in the level of abstraction and goal of the alternative representations, these approaches are all related through their common use of visualisation techniques.
 
@@ -31,9 +31,11 @@ Initial efforts to classify software visualisations identified two axes: whether
 
 Although it is the nature of software to change, static diagrams have traditionally been used to represent software systems visually. These diagrams typically show the structure (class diagrams) or function (state diagrams) of a software system at a specific moment in time~\cite{Rumbaugh2004}. The usefulness of these diagrams lies in their ability to represent fundamental structures within the program more concisely than the source code itself. However, it is not possible to represent a program's behaviour using these types of static diagrams~\cite{Baecker1998} and it is difficult to represent the evolution of the software using nothing but static diagrams.
 
-Visual languages provide an alternative method of interaction with the software development process. However, visual languages are often not suited to general purpose programming~\cite{Myers1989}, providing only a subset of a full-featured text-based language.
+% Visual languages provide an alternative method of interaction with the software development process. However, visual languages are often not suited to general purpose programming~\cite{Myers1989}, providing only a subset of a full-featured text-based language.
 
-Modern software development systems usually consist of an \ac{IDE} to manipulate source code. These systems may feature syntax highlighting, source code annotations and allow the programmer to interact with the running program's source code~\citetemp{x}. These modern \acp{IDE} emphasise the relationship between the source code and the running program but are still fundamentally tools for source code manupulation~\citetemp{x}. Despite the age of some of these tools, only initial steps have been taken in order to implement and evaluate methods of communicating source code intent and mapping to an active program~\citetemp{x}. Other studies hint at the limitations of static diagrams, visual languages and modern software development environments~\citetemp{x} and identify the need for alternative software reprentations and evaluation of their effectiveness~\citetemp{x}. 
+Approaches to dealing with the visualisation of software evolution and realtime feedback have been integrated into modern software development environments. Modern software development systems usually consist of an \ac{IDE} to manipulate source code. These systems may feature syntax highlighting to assist in comprehension~\cite{Chen2005,Reis}, source code annotations, the generation of visualisations based on the source code~\cite{Hendrix2004} and allow the programmer to interact with the running program. These modern \acp{IDE} emphasise the relationship between the source code and the running program but are still fundamentally tools for source code manupulation. 
+
+Only the initial steps have been taken in order to implement and evaluate methods of communicating source code intent outside the field of programmer comprehension. Studies hint at the limitations of static diagrams, visual languages and modern software development environments and identify the need for alternative software reprentations and evaluation of their effectiveness for those with limited programming knowledge and experience. 
 
 Visualisations have the capacity to present information more effectively than traditional programming languages. Nevertheless, software visualisations still require significant development to benefit in the understanding of the complexity of software ~\cite{Baecker1995}. Effective software visualisations contribute to making software easier to understand, reflecting the software's history through the lifecycle, facilitating the transfer of knowledge from the programmer to the observer, making important structures visible and managing software complexity~\cite{Baecker1995}.
 
@@ -56,13 +58,15 @@ The live coding programming practice emphasises the concept of \emph{liveness}, 
 
 A unique oportunity is provided through live coding to combine both source code and software visualisation techniques~\cite{McLean2010a}. This is due to the approach of live coding involving effective sensory communication, a goal of transparency of the coding process, and direct manipulation and refinement of the running program.
 
-Firstly, live coding is built around communicating visually and audibly. This extends beyond the physical process of programming. Human input is visible in the creative process, demonstrating a link between physical actions and artistic output \cite{Mclean}. Studies of live coding regarding the effects of visual and audible communication have indicated...
+Firstly, live coding is built around communicating visually and audibly. This extends beyond the physical process of programming. Human input is visible in the creative process, demonstrating a link between physical actions and artistic output \cite{Mclean}. Studies of live coding regarding the effects of visual and audible communication have indicated... \more
 
-Secondly, live coding has a history exposing audiences to code with the goal of live coding to ensure the transparency of the coding process~\cite{Collins2011,McLean2010a}. It provides a space in which there is a direct mapping from the human interaction with the source code to the musical or visual output~\cite{Mclean}. This relationship allows for visuals to map the interaction with the output~\citetemp{x}.
+Secondly, live coding has a history exposing audiences to code with the goal of live coding to ensure the transparency of the coding process~\cite{Collins2011,McLean2010a}. It provides a space in which there is a direct mapping from the human interaction with the source code to the musical or visual output~\cite{Mclean}. This relationship allows for visuals to map the interaction with the output.
 
-Lastly, live coding allows for direct manipulation and refinement of the running program~\cite{Swift2013}. This provides the capacity for uninterrupted visualisation of the dynamic aspects of the program~\citetemp{x} combined with the static nature of the source code. Similarly, manipulation and refinement of the running program allows for manipulation of the software visualisation~\cite{McLean2010a} to effectively communicate intent~\citetemp{x}.
+Lastly, live coding allows for direct manipulation and refinement of the running program~\cite{Swift2013}. This provides the capacity for uninterrupted visualisation of the dynamic aspects of the program combined with the static nature of the source code. Similarly, manipulation and refinement of the running program allows for manipulation of the software visualisation~\cite{McLean2010a}.
+%- what does this achieve?
+%- how do visualisations apply... what can they achieve within this space
 
-{\color{red} Studies conducted into the communication of the live coding process suggest that audiences may have a sense of exclusion from the live coding performance.}
+% {\color{red} Studies conducted into the communication of the live coding process suggest that audiences may have a sense of exclusion from the live coding performance.}
 
 \section{Programmer and Observer}
 
@@ -119,10 +123,6 @@ Aestheticism refers to the ultimate goal of appealing to the senses. This approa
 
 Software visualisations within the space of live coding have the potential to manipulate these two variables~\cite{Iru,McLean2010a}. For example, by increasing visual interest it may be possible to increase aesthetic appeal. Though increasing aesthetic appeal may reduce didacticism with increased visual complexity causing confusion.
 
-Questions raised within the literature suggest that it may be possible to combine or balance the goals of didacticism and aestheticism in order to manipulate understanding and enjoyment~\citetemp{x}.
-
-% On the other hand, it may be that these two concepts cannot be completely separated.
-
 The educational aspects of software visualisations have been examined in a number of studies~\citetemp{x} though few have applied these visualisations to areas outside of the field of software engineering and fewer still have investigated software visualisations targeted at those with no programming experience.
 
 There has been an initial examination of the aesthetics in graph drawing~\citetemp{x} and within the space of software graph visualsations~\citetemp{x}, though no studies have examined the effectiveness of process-driven software visualisations. This is particularly the case for the examination of live coded visualisations and the effect on audiences.
@@ -132,6 +132,8 @@ Some frameworks for both aesthetic evaluation of visualisations~\cite{Cawthon200
 \section{Future Directions}
 
 The literature raises a number of questions and identifies a number of limitations with the current state of research in the visualisation of live code.
+
+There are suggestions that it may be possible to combine or balance the goals of didacticism and aestheticism in order to manipulate understanding and enjoyment~\citetemp{x}.
 
 Regarding the visualisation of live coding, the most important questions identified include how can visualisations be applied to live coding and what should be used as the metric to measure the success of the application of visualisations. Furthermore, the the limitations of the current methods of software visualisation in general have been identified including how to best visualise the process of programming, how to visualise the evolution of software~\cite{Gall1999} and how to improve understanding and enjoyment of programming.
 
