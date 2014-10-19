@@ -3,10 +3,6 @@
 \chapter{Visualisation Refinement}
 \label{chap:visualisation-refinement}
 
-% \begin{chapquote}{Frederick Brooks, \textit{The Mythical Man-Month}}
-% ``Geometric abstractions are powerful tools. The floor plan of a building helps both architect and client evaluate spaces, traffic flows, views. Contradictions become obvious, omissions can be caught. Scale drawings of mechanical parts and stick-figure models of molecules, although abstractions, serve the same purpose. A geometric reality is captured in a geometric abstraction.''
-% \end{chapquote}
-
 Following the first user study (Chapter~\ref{chap:user-study}), limitations with both the visualisations and the evaluation method were identified and steps were taken to correct these limitations. The following section summarises the steps taken to correct these limitations.
 
 \section{Rationale}
@@ -27,6 +23,15 @@ Following the user study, some additional audience requirements were identified.
 
 \section{Design}
 
+As with the previous visualisation iteration, guidelines were identified, adapted and applied to the design process. A selection of the design guidelines are outlined below:
+
+\begin{itemize}
+\item ``To show relationships between entities, consider linking graphical representations of data objects using lines''~\cite[p.~183]{Ware2013a} \glab{guide:links}
+\item ``Consider using pictorial icons for pedagogical purposes in infographics.''~\cite[p.~320]{Ware2013a} \glab{guide:icons}
+\end{itemize}
+
+
+
 
 
 
@@ -42,7 +47,8 @@ Three sources of data were to be combined and visualised including the state of 
 
 This visualisation was, as with the previous iteration, rendered under the source code. However, \more
 
-The final prototype consisted of approximately 3600~\ac{SLOC}, consisting of 2300~\ac{SLOC} of C++ and C bindings, and 1300~\ac{SLOC} of xtlang.
+
+
 
 % \cite{Heer2006} might be useful for explaining the design of this visualisation...
 
@@ -109,7 +115,7 @@ pulses with the musical output of each function
 
 \section{Development}
 
-
+The final prototype consisted of approximately 3600~\ac{SLOC}, consisting of 2300~\ac{SLOC} of C++ and C bindings, and 1300~\ac{SLOC} of xtlang.
 
 \subsection{Testing}
 
