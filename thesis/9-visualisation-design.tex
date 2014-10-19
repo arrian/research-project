@@ -19,30 +19,22 @@ In order to systematically and efficiently develop a visualisation design strate
 
 Evaluation of the visualisation prototype required application to a live coding performance. To achieve this, the live coder would need to apply the visualisations to a live performance. To this end, discussions with the live coder identified functional requirements including simultaneous display of source code and visualisations and visualisations depicting the progression of the performance accurately. Non-functional requirements identified included performance, as the nature of live coding is realtime, and reliability, as a single failure in the visualisations could cause catastrophic failure within the live coding performance.
 
+Typical live coding performances consist of around four instruments. This is to maintain musical consistency throughout the performance but to also allow for musical progression. It was identified that to accurately visualise a live coding performance, the visuals would also need to have similar progression while also maintaining consistency throughout the performance using a visual palette of colours, shapes and animations.
+
 The intended audience was identified as a critical stakeholder in the ultimate effectiveness of the visualisations developed. The audience evaluated in the initial field study provided the basis for these requirements.
+
+% The source code caused fatigue, however to understand the program, seeing the whole development process (all the code) was necessary.
 
 Requirements identified by the audience during the intial field study indicated that \more
 % -discuss audience requirements identified from first study
 
-\section{Risks}
-
-In the early stages of the development of a visualisation strategy, a number of risks were identified. Discussion of the risk management strategy are outlined below.
-
 Fundamental to live coding is the performance element. Live coding requires a reliable programming environment. Visualisations developed for this environment required that the chance of failure were minimised. To mitigate the chance of a failure in the live coding environment, a test strategy was developed for the visualisations to ensure that they did not cause unrecoverable failures and did not cause memory leaks.
 
-Timeline constraints were also identified as a potential risk factor in the development and evaluation of the visualisations. Mitigation involved developing a flexible, iteration based development plan with estimated milestones.
-% {\color{red} Add timeline in here......}
+% Timeline constraints were also identified as a potential risk factor in the development and evaluation of the visualisations. Mitigation involved developing a flexible, iteration based development plan with estimated milestones.
 
--risk that the visualisations would not provide any benefit or would negatively impact the performance... mitigated by the iteration based approach to developing the visualisations
+-ensure that the visualisations would provide a benefit and would not negatively impact the performance... mitigated by the iteration based approach to developing the visualisations
 
--risk that the visualisations would interfere with the live coder...
-
-% -risk that the visualisations were not the correct strategy to begin with?
-
-\input{images/didactic-visualisations}
-
-\input{images/aesthetic-visualisations}
-
+-ensure that the visualisations would not interfere with the live coder... \more
 
 \section{Design}
 
@@ -52,35 +44,31 @@ Timeline constraints were also identified as a potential risk factor in the deve
 \label{fig:knowledge-flow-initial}
 \end{figure}
 
-The intial iteration of the visualisation prototype consisted of two separate conditions. {\color{red} Where did the idea for these two conditions come from?} Each condition consisted of four visual progressions with the intention of representing the addition and removal of instruments during the live coding performance.
+The intial iteration of the visualisation prototype consisted of two separate conditions. Each condition consisted of four visual progressions with the intention of representing the addition and removal of instruments during the live coding performance. Visualisations employed dynamic analysis of the running program to generate the visuals. The model of knowledge flow from programmer to observer is shown in Figure~\ref{fig:knowledge-flow-initial}.
 
 The first visualisation condition was labelled the ``aesthetic'' condition reflecting the intention to improve enjoyment during the live coding performance. The second visualisation condition was labelled the ``didactic'' condition with an intended goal of improving understanding during the live coding performance.
 
 % The design of the initial visualisations focussed on the application of the literature on visualisation design to the field of software visualisation and the application to the visualisation of live code.
 
+-music visualisation is an extremely rich and open-ended task, so to guide the development of the visualisations for our lab study... \more
+
 -guidelines set out by mclean were used in understanding the application of visualisation to live coding...
-\cite{McLean2010a}...
+\cite{McLean2010a}... \more
 
 -guidelines set out by ware were used in developing the visualisations...
 % - what are the guidelines used
-\cite{Ware2013a}...
+\cite{Ware2013a}... \more
 
-
-
-
-
-Visualisations developed employed dynamic analysis of the running code to generate the visuals. The intended knowledge flow from programmer to observer is shown in Figure~\ref{fig:knowledge-flow-initial}.
-
-Music visualisation is an extremely rich and open-ended task, so to guide the development of the visualisations for our lab study, we used the concepts of understanding and enjoyment from the initial survey to develop two new code visualisations: a \emph{didactic} one and an \emph{aesthetic} one. 
-
-Typical live coding performances consist of around four instruments. This is to maintain musical \more
+Geometrics used included... \more
 
 Colour schemes, although varying slightly throughout the visualisations, consisted of a colour palette of red, orange and blue with red and orange used heavily throughout the visualisations and blue used for emphasis and visual interest.
 
-
+Animations were used when... \more
 
 \subsection{Didactic Visualisation}
 \label{sec:didactic-visualisation}
+
+\input{images/didactic-visualisations}
 
 The didactic visualisation (shown in Figure~\ref{fig:didactic-visualisations}) attempted to communicate \emph{information} about the actions of the programmer, prominently displaying the \emph{names} of the active (source code) functions and the ``time until next execution'' for each function. This ``time until next execution'' known as the ``callback rate'' was a primary feature of the programming environment and an essential part of musical live coding. Bright colours and solid shapes were used to ensure constant visibility and to communicate the intention of the underlying code. 
 
@@ -91,15 +79,15 @@ Phase one, as shown in Figure~\ref{fig:didactic-one}, displayed the name of the 
 \subsection{Aesthetic Visualisation}
 \label{sec:aesthetic-visualisation}
 
-The aesthetic visualisation technique was designed to react to the programmer's activity in a more abstract way, to maximise aesthetic appeal~\cite{Cawthon2007} and to engage the audience's interest. Although still based on the source code and the livecoder's edits, the generation of shapes was driven by instrument volume and synchronised with the musical beat. These were secondary features of the programming language and features resulting from the output of the running program as opposed to the callback rate used in the didactic visualisations.
+\input{images/aesthetic-visualisations}
+
+The aesthetic visualisation technique was designed to react to the programmer's activity in a more abstract way, to maximise aesthetic appeal~\cite{Cawthon2007} and to engage the audience's interest. Although still based on the source code and the livecoder's edits, the generation of shapes was driven by instrument volume and synchronised with the musical beat. These were secondary features of the programming language and features resulting from the output of the running program as opposed to the callback rate, a primary feature, used in the didactic visualisations.
 
 The emphasis for the aesthetic visualisation was on the artistic appeal of the visuals (see Figure~\ref{fig:aesthetic-visualisations}), including more variety in visual structure and colour. As in the didactic condition, the aesthetic visualisations proceeded through four stages, based on the number of active functions (instruments), but these visuals had no textual labels and they moved and interacted with each other over the entire projected scene.
 
-Aesthetic - used output volume as opposed to callback time... a secondary feature, the result of the program output \more
 
-% The source code caused fatigue, however to understand the program, seeing the whole development process was necessary. 
 
-Phase one, as shown in Figure~\ref{fig:aesthetic-one}...
+Phase one, as shown in Figure~\ref{fig:aesthetic-one}, ...
 
 Phase two, as shown in Figure~\ref{fig:aesthetic-two}...
 
