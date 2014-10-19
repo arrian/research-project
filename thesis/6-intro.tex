@@ -7,13 +7,28 @@
 ``In spite of progress in restricting and simplifying the structures of software, they remain inherently unvisualizable, thus depriving the mind of some of its most powerful conceptual tools. This lack not only impedes the process of design within one mind, it severely hinders communication among minds.''
 \end{chapquote}
 
-Visualisations bridge the gap between understanding and enjoyment. \more
 
-In software, visualisations have attempted to provide a higher level of understanding but have rarely been effective in communicating the fundamental processes of software development. The Mythical Man-Month goes so far as to suggest that ``software is invisible and unvisualizable''\cite{Brooks1995} sparking debate as to the effectiveness of all software visualisations used in the understanding of software.
+% what is the problem
+
+% state the problem more clearly
+
+% make visualisation condition and visualisation techniques consistent throughout the thesis
+
+% introduce live coding earlier
+
+% audience experience in introduction
+
+% art & science factors within this project - compromises are necessary to ensure the artistic factors are not removed
+
+% don't reference mclean paper so much. discuss once, use results of discussion for making points
+
+Live coding, the artistic process of coding for an audience, has a problem. Audiences may have very little experience in coding and not be able to comprehend or appreciate the performance. Meeting this challenge could \more
+
+Visualisations may assist in the appreciation and comprehension of live coding performances. In software, visualisations have attempted to provide a higher level of understanding but have rarely been effective in communicating the fundamental processes of software development. The Mythical Man-Month goes so far as to suggest that ``software is invisible and unvisualizable''\cite{Brooks1995} sparking debate as to the effectiveness of all software visualisations used in the understanding of software.
 
 Within the last two decades, the introduction and development of ``live coding'' has presented a unique application space for visualisations and the potential for effective communication directly with audiences. These new developments could challenge the long-held belief that ``software is invisible and unvisualizable''.
 
-The intention of software visualisations is to communicate software effectively. In recent years there has been a push to develop effective software visualisations as the audience of software becomes more diverse, multidisciplinary teams within the industry become the standard, and multimedia and the arts become more focussed on effective software development. Live coding presents a space in which a wide audience and dynamic software is common and presents a space in which visualisations could provide significant benefit to the experience of observers. Live coding is a means of combining the artistic goal of enjoyment and the educational aspects associated with programming with visualisations to effectively communicate software.
+The intention of software visualisations is to communicate software effectively. In recent years there has been a push to develop effective software visualisations as the audience of software becomes more diverse, multidisciplinary teams within the industry become the standard, and multimedia and the arts become more focussed on effective software development. Live coding presents a space in which a wide audience and dynamic software is common and in which visualisations could provide significant benefit to the experience of observers. Live coding is a means of combining the artistic goal of enjoyment and the educational aspects associated with programming with visualisations to effectively communicate software.
 
 This thesis investigates the proposition that ``code visualisation improves the experience of observers'' in the setting of a live arts practice. More specifically, this thesis investigates the question: ``can the application of visualisation techniques to live coding enhance audience experience by increasing understanding and enjoyment?''. These questions were examined through a process of prototype development, user study evaluation and refinement.
 
@@ -31,38 +46,9 @@ Live coding further develops the concept of hotswapping source code, applying it
 
 A number of existing software visualisation techniques exist. Some of the most common software visualisations include static diagrams and syntax highlighting (see Figure~\ref{fig:syntax-highlighting}). These techniques generally model the structure of the program to allow for more effective navigation around structures and take advantage of visual memory.
 
-While diagrams and syntax highlighting provide information regarding the structure of source code, the fundamental nature of software is to change~\cite{Brooks1995}. Understanding these changes requires visualising the software development process. Techniques to visualise the changes occurring during software development process include Gource~\cite{Caudwell2010} (Figure~\ref{fig:gource}) and Code Swarm~\cite{Ogawa2012} (Figure~\ref{fig:code-swarm}). These visualisation techniques show historic source code changes, based on source code respository data.
+While diagrams and syntax highlighting provide information regarding the structure of source code, the fundamental nature of software is to change~\cite{Brooks1995}. Understanding these changes requires visualising the software development process. Techniques to visualise the changes occurring during software development process include Gource~\cite{Caudwell2010} (Figure~\ref{fig:gource}) and Code Swarm~\cite{Ogawa2012} (Figure~\ref{fig:code-swarm}). These visualisation techniques show historic source code changes, based on source code repository data.
 
-\begin{figure}
-\centering
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=.95\linewidth]{../images/code-visualisations/syntax-highlighting.png}
-  \caption{Syntax Highlighting}
-  \label{fig:syntax-highlighting}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=.95\linewidth]{../images/code-visualisations/gource.png}
-  \caption{Gource}
-  \label{fig:gource}
-\end{subfigure}\\
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=.95\linewidth]{../images/code-visualisations/code-swarm.png}
-  \caption{Code Swarm}
-  \label{fig:code-swarm}
-\end{subfigure}%
-\begin{subfigure}{.5\textwidth}
-  \centering
-  \includegraphics[width=.95\linewidth]{../images/code-visualisations/scheme-bricks.png}
-  \caption{Scheme Bricks}
-  \label{fig:scheme-bricks}
-\end{subfigure}
-
-\caption[Existing software visualisations]{Existing software visualisations.}
-\label{fig:code-visualisations}
-\end{figure}
+\input{images/code-visualisations}
 
 Showing historic source code changes allows the process of programming to be understood. However, this information is not immediately useful to programmers or observers. Visualisation of active software has shown potential in providing useful and interesting information, allowing the programmer to take actions based on the visualisations and allowing the observers to make relevant judgement of what actions the programmer is taking. Visualisation techniques such as inline annotations~\cite{Swift2013,Beck2013} provide direct feedback directly useful to both the programmer and observers, and technologies such Light Table~\cite{Kodowa2014} with an inline interactive terminal or \ac{REPL} have further identified how useful visual feedback can be.
 
