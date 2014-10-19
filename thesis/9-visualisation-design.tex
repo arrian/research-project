@@ -50,24 +50,27 @@ The first visualisation condition was labelled the ``aesthetic'' condition refle
 
 % The design of the initial visualisations focussed on the application of the literature on visualisation design to the field of software visualisation and the application to the visualisation of live code.
 
--music visualisation is an extremely rich and open-ended task, so to guide the development of the visualisations for our lab study... \more
+% -music visualisation is an extremely rich and open-ended task, so to guide the development of the visualisations for our lab study... \more
 
--guidelines set out by mclean were used in understanding the application of visualisation to live coding...
-\cite{McLean2010a}... \more
+% -guidelines set out by mclean were used in understanding the application of visualisation to live coding...
+% \cite{McLean2010a}... \more
 
 % -guidelines set out by ware were used in developing the visualisations...
 % % - what are the guidelines used
 % \cite{Ware2013a}... \more
 
-A number of guidelines were adapted to develop these visualisations. These guidelines were taken from a variety of sources and included:
+A number of guidelines from a variety of sources were adapted to develop these visualisations. A selection of these guidelines are listed below:
 \begin{itemize}
 \item ``Design graphic representations of data by taking into account human sensory capabilities in such a way that important data elements and data patterns can be quickly perceived''~\cite[p.~14]{Ware2013a} \glab{guide:sensory-capabilities}
 \item ``If using color saturation to encode numerical quantity, user greater saturation to represent greater numerical quantities''~\cite[p.~117]{Ware2013a} \glab{guide:color-saturation}
 \item ``Use strong preattentive cues before weak ones where ease of search is critical''~\cite[p.~156]{Ware2013a} \glab{guide:preattentive-cues}
+\item ``Visual channels such as colour or size are more dominant and can help to focus the user's attention''~\cite[p.~45]{Borgo2013} \glab{guide:dominant-channels}
 \item ``For maximum popout, a symbol should be the only object in a display that is distinctive on a particular feature channel''~\cite[p.~157]{Ware2013a} \glab{guide:distinctive-feature-channel}
 \item ``Place symbols and glyphs representing related information close together''~\cite[p.~181]{Ware2013a} \glab{guide:close-together}
 \item ``Use words directly on the chart where the number of symbolic objects in each category is relatively few and where space is available''~\cite[p.~321]{Ware2013a} \glab{guide:words-on-chart}
-\item ``Place explanatory text as close as possible to the related parts of a diagram and use a graphical linking method''~\cite[p.~333]{Ware2013a} \glab{guide:close-text}
+\item ``Place explanatory text as close as possible to the related parts of a diagram''~\cite[p.~333]{Ware2013a} \glab{guide:close-text}
+\item ``A one-to-many mapping makes use of redundancies by mapping a data variable to multiple glyph channels. Such a mapping can reduce the risk of information loss by encoding important variables multiple times''~\cite[p.~52]{Borgo2013} \glab{guide:redundancy}
+\item ``Important variables should be enhanced in the visualization\ldots~the mapping should guide the user's focus of attention''~\cite[p.~52]{Borgo2013} \glab{guide:attention}
 \end{itemize}
 
 Geometrics used included... \more
@@ -81,11 +84,11 @@ Animations were used when... \more
 
 \input{images/didactic-visualisations}
 
-The didactic visualisation (shown in Figure~\ref{fig:didactic-visualisations}) attempted to communicate \emph{information} about the actions of the programmer, prominently displaying the \emph{names} of the active (source code) functions and the ``time until next execution'' for each function. This ``time until next execution'' known as the ``callback rate'' was a primary feature of the programming environment and an essential part of musical live coding. Bright colours and solid shapes were used to ensure constant visibility and to communicate the intention of the underlying code. 
+The didactic visualisation (shown in Figure~\ref{fig:didactic-visualisations}) attempted to communicate \emph{information} about the actions of the programmer, prominently displaying the \emph{names} of the active (source code) functions and the ``time until next execution'' for each function. This ``time until next execution'' known as the ``callback rate'' was a primary feature of the programming environment and an essential part of musical live coding. Bright colours and solid shapes were used to ensure constant visibility and to communicate the intention of the underlying code (Guidelines~\ref{guide:sensory-capabilities} and \ref{guide:dominant-channels}). 
 
 The stages of this visualisation attempted to address the issues indicated during the exploratory field study. These included the lack of an overview of the source code and program behaviour, the difficulty in linking changes to the source code and the flicking between source code screens. The didactic visualisations proceeded through four stages, with progression made depending on the number of active functions (instruments).
 
-Phase one, as shown in Figure~\ref{fig:didactic-one}, displayed the name of the one active function in the centre of the screen. Two other major visual elements were present including a short circular line segment rotating and a pulsing circle. Both visual elements were mapped to the callback rate of the active function. Phase two, as shown in Figure~\ref{fig:didactic-two}, displayed the name of two active functions. Two ring-shaped visual elements represented the two functions. Each ring-shape was divided into ten segments with each segment coloured according to the callback progress of the active functions. Phase three, as shown in Figure~\ref{fig:didactic-three}, displayed three active functions as pulsing circles according to the progress of the active function callbacks. Finally, phase four, as shown in Figure~\ref{fig:didactic-four}, displayed four active functions as circles with a colour fill according to the progress of the active function callbacks.
+Phase one (see Figure~\ref{fig:didactic-one}) displayed the name of the one active function in the centre of the screen (Guideline~\ref{guide:attention}). Two other major visual elements were present including a short circular line segment rotating and a pulsing circle. Both visual elements were mapped to the callback rate of the active function (Guideline~\ref{guide:redundancy}). Phase two (see Figure~\ref{fig:didactic-two}) displayed the name of two active functions. Two ring-shaped visual elements represented the two functions. Each ring-shape was divided into ten segments with each segment coloured according to the callback progress of the active functions. Phase three (see Figure~\ref{fig:didactic-three}) displayed three active functions as pulsing circles according to the progress of the active function callbacks. Finally, phase four (see Figure~\ref{fig:didactic-four}) displayed four active functions as circles with a colour fill according to the progress of the active function callbacks.
 
 \subsection{Aesthetic Visualisation}
 \label{sec:aesthetic-visualisation}
