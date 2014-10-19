@@ -15,8 +15,17 @@
 \usepackage{subcaption}
 
 % for text numbered as equations
+\newcounter{question}[chapter]
+\renewcommand{\thequestion}{\thechapter.\arabic{question}}
 \makeatletter
-\newcommand{\qlab}[1]{\leavevmode\hfill\refstepcounter{equation}\label{#1}\textup{\tagform@{Question \theequation}}}
+\newcommand{\qlab}[1]{\leavevmode\hfill\refstepcounter{question}\label{#1}\textup{\tagform@{Question \thequestion}}}
+\makeatother
+
+% for guidelines
+\newcounter{guideline}[chapter]
+\renewcommand{\theguideline}{\thechapter.\arabic{guideline}}
+\makeatletter
+\newcommand{\glab}[1]{\leavevmode\hfill\refstepcounter{guideline}\label{#1}\textup{\tagform@{Guideline \theguideline}}}
 \makeatother
 
 % for `inspirational' quotes - from http://tex.stackexchange.com/questions/53377/inspirational-quote-at-start-of-chapter

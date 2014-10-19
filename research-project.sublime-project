@@ -23,7 +23,7 @@
 				"*.lot",
 				"*.fdb_latexmk"
 			],
-			"follow_symlinks": true,
+			"follow_symlinks": false,
 			"path": "."
 		},
 		{
@@ -42,6 +42,7 @@
 				"*.cmake",
 				"*.marks"
 			],
+			"follow_symlinks": false,
 			"path": "/Users/arrian/Dev/polycode-dev/Core"
 		},
 		{
@@ -51,6 +52,7 @@
 				"*.cmake",
 				"*.marks"
 			],
+			"follow_symlinks": false,
 			"path": "/Users/arrian/Dev/polycode-dev/Modules/Contents"
 		}
 	]
