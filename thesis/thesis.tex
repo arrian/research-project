@@ -48,15 +48,6 @@
 \newcommand{\fix}{{\color{red} [fix this]}}
 
 
-% Acronyms
-\acrodef{IDE}[IDE]{integrated development environment}
-\acrodef{OSC}[OSC]{Open Sound Control}
-\acrodef{SoW}[SoW]{state of the world}
-\acrodef{SoC}[SoC]{state of the code}
-\acrodef{SDLC}[SDLC]{software development life cycle}
-\acrodef{REPL}[REPL]{read-eval-print-loop}
-\acrodef{SLOC}[SLOC]{source lines of code}
-
 % --------------------------------------------------
 \title{Art and Understanding through Code Visualisation}
 \author{Arrian Purcell}
@@ -94,11 +85,7 @@
 \pagestyle{headings}
 \markboth{Contents}{Contents}
 
-{\tableofcontents \let\cleardoublepage\clearpage \listoffigures}
-
-% \tableofcontents
-% \listoffigures
-% \listoftables
+{\tableofcontents \let\cleardoublepage\clearpage \input{acronyms} \listoffigures}
 
 \mainmatter
 
@@ -115,12 +102,24 @@
 
 \backmatter
 
+
 \cleardoublepage % leave page between appendices and references
 \bibliographystyle{acmnew-xref}
 % \bibliographystyle{ieeetr}
 \bibliography{thesis}
 
 \printindex
+
+% \chapter{List of Acronyms}
+% \begin{acronym}
+% \acro{IDE}[IDE]{integrated development environment}
+% \acro{OSC}[OSC]{Open Sound Control}
+% \acro{SoW}[SoW]{state of the world}
+% \acro{SoC}[SoC]{state of the code}
+% \acro{SDLC}[SDLC]{software development life cycle}
+% \acro{REPL}[REPL]{read-eval-print-loop}
+% \acro{SLOC}[SLOC]{source lines of code}
+% \end{acronym}
 
 \end{document}
 

@@ -1,4 +1,71 @@
 
+
+% The concepts of code comprehension identified and subsequently evaluated within audiences with limited programming experience has relevance to software engineering practice. \more
+% More general application to software development
+
+
+% \section{Recommendations}
+
+% A number of statements were examined throughout the preceding chapters.
+% -there is a need for increased audience understanding within live coding
+% -there is a need for increased audience enjoyment within live coding
+% -there is a need for increased live coder understanding within live coding
+% -there is a need for increased live coder enjoyment within live coding
+% -there is a measurable effect on enjoyment with the visualisations compared to without
+% -there is a measurable effect on understanding with the visualisations compared to without
+
+% -visualisations have a place in live coding
+% -visualisations have a place in understanding the coding process
+% -visualisations can communicate the coding process more effectively than without
+% -visualisations have a place in understanding code structures
+
+% -qualitative factors seemed to contribute more to the appreciation of the visualisations. People tended towards suggesting that the visualisations should match the music more than the code?
+
+
+
+
+
+
+
+Finally, a method 
+% Finally, a novel approach to visualising the programming process has been developed.
+
+Updated software visualisation taxonomy built on the existing software visualisation frameworks...
+
+Method of developing process driven software visualisation for live coding...
+
+Process-driven software visualisation showing software as it is being developed (live, as in live-coding)...
+
+Evaluation of a process-driven software visualisation...
+
+Contribution to live coding process and outcome... A multi-disciplinary approach, implementation and evaluation of a software application.
+
+``...methodological issues have to be studied further. This concerns questions like how to design visualizations and how to measure and evaluate the effectiveness of various solutions.''~\cite{VanWijk2005} A methodology for visualisation design has been developed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------
+
+% \begin{chapquote}{Frederick Brooks, \textit{The Mythical Man-Month}}
+% ``Geometric abstractions are powerful tools. The floor plan of a building helps both architect and client evaluate spaces, traffic flows, views. Contradictions become obvious, omissions can be caught. Scale drawings of mechanical parts and stick-figure models of molecules, although abstractions, serve the same purpose. A geometric reality is captured in a geometric abstraction.''
+% \end{chapquote}
+
+
+
+
+
+
 % As the complexity of software increases, better methods are required for communicating software structure, software changes and, perhaps most importantly, communicating the process of developing software. 
 
 
