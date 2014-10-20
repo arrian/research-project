@@ -3,7 +3,35 @@
 \chapter{Literature Review}
 \label{chap:literature-review}
 
-Software visualisation is building momentum within the space of live coding. This section seeks to identify the reason for this momentum and identify the purpose and potential for visualisations within this field.
+Visualisation is building momentum within the space of live coding. This section seeks to identify the reason for this momentum and identify the purpose and potential for visualisations within this field.
+
+\section{Live Coding}
+
+\begin{figure}
+\centering
+\includegraphics[width=1.0\textwidth]{../images/live-coding-setup.pdf}
+\caption[The live coding process]{Conceptual diagram of the live coding process.}
+\label{fig:live-coding-setup}
+\end{figure}
+
+Live coding can be broadly defined as writing a program while it runs~\cite{Ward2004}. More specifically, live coding is identified as the artistic process of musical and visual expression through programming~\cite{Collins2003}. Figure~\ref{fig:live-coding-setup} shows the standard live coding setup.
+
+Live coding emphasises the concept of \emph{liveness}, a concept covered comprehensively within the literature~\cite{Auslander,Masura2007}. Liveness is foundational to the performance aspect of live coding in which the mantra is ``show us your screens''~\cite{Toplap}, asserting that all live coders should display their raw program source code to the audience.
+
+A unique opportunity is provided through live coding to combine both source code and software visualisation techniques~\cite{McLean2010a}. This is due to the approach of live coding involving effective sensory communication, a goal of transparency of the coding process, and direct manipulation and refinement of the running program.
+
+Firstly, live coding is built around communicating visually and audibly. This extends beyond the physical process of programming. Human input is visible in the creative process, demonstrating a link between physical actions and artistic output \cite{Mclean}. Studies of live coding regarding the effects of visual and audible communication have indicated... \more
+
+Secondly, live coding has a history exposing audiences to code with the goal of live coding to ensure the transparency of the coding process~\cite{Collins2011,McLean2010a}. It provides a space in which there is a direct mapping from the human interaction with the source code to the musical or visual output~\cite{Mclean}. This relationship allows for visuals to map the interaction with the output.
+
+Lastly, live coding allows for direct manipulation and refinement of the running program~\cite{Swift2013}. This provides the capacity for uninterrupted visualisation of the dynamic aspects of the program combined with the static nature of the source code. Similarly, manipulation and refinement of the running program allows for manipulation of the software visualisation~\cite{McLean2010a}.
+%- what does this achieve?
+%- how do visualisations apply... what can they achieve within this space
+
+% {\color{red} Studies conducted into the communication of the live coding process suggest that audiences may have a sense of exclusion from the live coding performance.}
+
+% discuss functions, callbacks and other details relevant to live coding eg. evaluation...
+
 
 \section{Software}
 
@@ -44,33 +72,6 @@ Visualisations have the capacity to present information more effectively than tr
 % how have others implemented visualisations into other fields... what have been the strategies, how successful has it been, what are the general guidelines...
 
 In a process-oriented activity such as live coding, different code visualisation techniques are necessary~\cite{McLean2010a,Magnusson2013}. However, these academic treatments of code visualisation in live coding adopt a survey-based approach, and the techniques discussed have not been subject to empirical evaluation.
-
-\section{Live Coding}
-
-\begin{figure}
-\centering
-\includegraphics[width=1.0\textwidth]{../images/live-coding-setup.pdf}
-\caption[The live coding process]{Conceptual diagram of the live coding process.}
-\label{fig:live-coding-setup}
-\end{figure}
-
-Live coding can be broadly defined as writing a program while it runs~\cite{Ward2004}. More specifically, live coding is identified as the artistic process of musical and visual expression through programming~\cite{Collins2003}. Figure~\ref{fig:live-coding-setup} shows the standard live coding setup.
-
-Live coding emphasises the concept of \emph{liveness}, a concept covered comprehensively within the literature~\cite{Auslander,Masura2007}. Liveness is foundational to the performance aspect of live coding in which the mantra is ``show us your screens''~\cite{Toplap}, asserting that all live coders should display their raw program source code to the audience.
-
-A unique opportunity is provided through live coding to combine both source code and software visualisation techniques~\cite{McLean2010a}. This is due to the approach of live coding involving effective sensory communication, a goal of transparency of the coding process, and direct manipulation and refinement of the running program.
-
-Firstly, live coding is built around communicating visually and audibly. This extends beyond the physical process of programming. Human input is visible in the creative process, demonstrating a link between physical actions and artistic output \cite{Mclean}. Studies of live coding regarding the effects of visual and audible communication have indicated... \more
-
-Secondly, live coding has a history exposing audiences to code with the goal of live coding to ensure the transparency of the coding process~\cite{Collins2011,McLean2010a}. It provides a space in which there is a direct mapping from the human interaction with the source code to the musical or visual output~\cite{Mclean}. This relationship allows for visuals to map the interaction with the output.
-
-Lastly, live coding allows for direct manipulation and refinement of the running program~\cite{Swift2013}. This provides the capacity for uninterrupted visualisation of the dynamic aspects of the program combined with the static nature of the source code. Similarly, manipulation and refinement of the running program allows for manipulation of the software visualisation~\cite{McLean2010a}.
-%- what does this achieve?
-%- how do visualisations apply... what can they achieve within this space
-
-% {\color{red} Studies conducted into the communication of the live coding process suggest that audiences may have a sense of exclusion from the live coding performance.}
-
-% discuss functions, callbacks and other details relevant to live coding eg. evaluation...
 
 \section{The Programmer and the Observer}
 
@@ -134,5 +135,5 @@ Reviewing the model in Figure~\ref{fig:model-of-visualisation} from the didactic
 
 The literature identifies some gaps in the current understanding of live coding. Questions raised include, ``why show the source code at all during a live coding performance?'' and ``are there better methods of demonstrating the programming process?''. Systematic and empirical studies are yet to be conducted within live coding to answer these questions. Similarly, although metrics for evaluating visualisations exist, no studies have been conducted to evaluate effective metrics for analysis of the live coding process and the display of source code or visuals.
 
-To attempt to answer some of these questions, these limitations within the literature were to be investigated in an exploratory field study in an effort to define the direction of the development and implementation of software visualisations within live coding.
+In an attempt to answer some of the questions raised within the literature, an exploratory field study was conducted in an effort to define the direction of the development and implementation of software visualisations within live coding.
 
