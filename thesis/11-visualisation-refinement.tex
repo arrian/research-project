@@ -3,8 +3,7 @@
 \chapter{Visualisation Refinement}
 \label{chap:visualisation-refinement}
 
-
-Following the first user study (Chapter~\ref{chap:user-study}), limitations with both the visualisations and the evaluation method were identified and corrective steps were taken. The steps taken to correct these limitations are outlined in this chapter.
+Following the first user study (Chapter~\ref{chap:user-study}), limitations with both the visualisations and the evaluation method were identified and corrective steps were taken. The steps taken to correct these limitations and the resulting refined visualisation are outlined in this chapter.
 
 \section{Rationale}
 
@@ -18,11 +17,11 @@ The goal of this iteration of the visualisations was to align the mental model o
 
 % ``the aesthetic of fixing nodes and edges to an underlying unit grid was prominent''~\cite{Purchase2014} (also~\cite{Purchase2001,Purchase1996})
 
-\section{Requirements}
+% \section{Requirements}
 
-Following the user study, some additional audience requirements were identified. These included the need to stop the visualisation from obscuring the code, 
+-stop the visualisation from obscuring the code, 
 
-\more
+% \more
 
 \section{Design}
 
@@ -33,15 +32,14 @@ As with the previous visualisation iteration, guidelines were identified, adapte
 \item ``Consider using pictorial icons for pedagogical purposes in infographics.''~\cite[p.~320]{Ware2013a} \glab{guide:icons}
 \end{itemize}
 
-Elements taken from the previous study included:
+Some more specific guidelines and improvement taken from the previous study included:
 
-% \begin{itemize}
-% \end{itemize}
+\begin{itemize}
+\item ``\ldots relate every beat\ldots~to the code responsible for that beat'' (see Section~\ref{section:improvements}) \glab{guide:code-responsible}
+\item Respond to the programmer's typing (see Section~\ref{section:liveness}) \glab{guide:typing}
+\item Reduce visualisation distraction (see Section~\ref{section:user-study-discussion}) \glab{guide:distraction}
 
-
-
-
-
+\end{itemize}
 
 
 % \cite{Purchase1996}...
@@ -54,10 +52,7 @@ Elements taken from the previous study included:
 
 Three sources of data were to be combined and visualised including the state of the source code, the state of the running program and the manipulation between the two by the live coder. To achieve this, three major components were required including an application manager, a code manager and an editor plugin (see the class diagram in Figure~\ref{fig:visualisation-class-diagram}). The following sections detail the implementation of these components.
 
-This visualisation was, as with the previous iteration, rendered under the source code. However, \more
-
-
-
+This visualisation was, as with the previous iteration, rendered under the source code. 
 
 % \cite{Heer2006} might be useful for explaining the design of this visualisation...
 
@@ -105,20 +100,19 @@ Function size and shape was represented visually through the use of ``attractors
 % -function beat+callback duration
 
 To ensure the relationship between the actions of the programmer, the changes to the source code and the changes to the music were easily identified, an icon representing the programmer was displayed closest to the function being edited. This mapping intended to provide the audience with a better overview of the movements of the programmer among the functions than would otherwise be visible through the cursor alone.  
-% -programmer editing behaviour
 
-From presentation:
+% From presentation:
 
-developed one visualisation taking features from both aesthetic and didactic conditions of the previous user study
-used this to visualise high level code structure and high level live coder actions
+% developed one visualisation taking features from both aesthetic and didactic conditions of the previous user study
+% used this to visualise high level code structure and high level live coder actions
 
-shows:
-state of the active code
-what sections of code are being edited
+% shows:
+% state of the active code
+% what sections of code are being edited
 
--  each hexagon indicates a line of code
-the programmer is shown editing one of the functions
-pulses with the musical output of each function
+% -  each hexagon indicates a line of code
+% the programmer is shown editing one of the functions
+% pulses with the musical output of each function
 
 \section{Development}
 
