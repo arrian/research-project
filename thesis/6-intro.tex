@@ -8,6 +8,10 @@
 \end{chapquote}
 
 
+A fundamental challenge of modern software is of utility. Questions regarding how software interacts with the world and how those that use the software benefit from it drives modern research. There is no doubt software is becoming more useful. However, software is becoming more complex and the methods of interacting with the software are diversifying.
+
+Live coding is one area in which the utility of software has not been thoroughly examined. Live coding, the artistic process of programming for an audience, asks the performer (the live coder) to show the audience their screens. This results in many live coding performances showing the audience raw source code. Immediately, this raises the question: ``why show the screen at all?'' for audiences that have no programming experience. Answering this question would not only have immediate benefit in understanding how to enhance the audience's experience during live coding performances but could also have the wider benefit of understanding how to communicate the programming process.
+
 % what is the problem
 
 % state the problem more clearly
@@ -22,25 +26,21 @@
 
 % don't reference mclean paper so much. discuss once, use results of discussion for making points
 
-Live coding, the artistic process of coding for an audience, has a problem. Audiences may have very little experience in coding and not be able to comprehend or appreciate live coding performances. Meeting this challenge could enhance how audiences inexperienced in programming appreciate the process of programming.
+% Live coding, the artistic process of coding for an audience, has a problem. Audiences may have very little experience in coding and not be able to comprehend or appreciate live coding performances. Meeting this challenge could enhance how audiences inexperienced in programming appreciate the process of programming.
 
-Live coding is the artistic process of programming for the entertainment or education of an audience. Source code is projected on a screen for audiences to observe, criticise or interact with the programming process. Often the output is music or visuals but the generation of these is always based in the source code.
+% Live coding is the artistic process of programming for the entertainment or education of an audience. Source code is projected on a screen for audiences to observe, criticise or interact with the programming process. Often the output is music or visuals but the generation of these is always based in the source code.
 
-Visualisations may assist in the appreciation and comprehension of live coding performances. In software, visualisations have attempted to provide a higher level of understanding but have rarely been effective in communicating the fundamental processes of software development. The Mythical Man-Month goes so far as to suggest that ``software is invisible and unvisualizable''\cite{Brooks1995} sparking debate as to the effectiveness of all software visualisations used in the understanding of software.
+Visualisations have been suggested as a method of assisting the audience in the appreciation and comprehension of live coding performances. Historically in software, visualisations have attempted to provide a higher level of understanding of the structure of programs but have rarely been effective in communicating the fundamental processes of software development. The Mythical Man-Month goes so far as to suggest that ``software is invisible and unvisualizable''\cite{Brooks1995} sparking debate as to the effectiveness of all software visualisation techniques.
 
-Within the last two decades, the development of ``live coding'' has presented a unique application space for visualisations and the potential for effective communication directly with audiences. These new developments could challenge the long-held belief that ``software is invisible and unvisualizable''.
-
-% The intention of software visualisations is to communicate software effectively. Software visualisation is the... \more
+Recently, the development of ``live coding'' has presented a unique application space for visualisations and the potential for effective communication directly with audiences. These new developments could challenge the long-held belief that ``software is invisible and unvisualizable''.
 
 There has been a push to develop effective software visualisations as the audience of software becomes more diverse, multidisciplinary teams within the industry become the standard, and multimedia and the arts become more focussed on effective software development. Live coding presents a space in which a wide audience and dynamic software is common and in which visualisations could provide significant benefit to the experience of observers. Live coding is a means of combining the artistic goal of enjoyment and the educational aspects associated with programming with visualisations to effectively communicate software.
 
 This thesis investigates the proposition that ``code visualisations improve the experience of observers'' in the setting of a live arts practice. More specifically, this thesis investigates the question: ``can the application of visualisation techniques to live coding enhance audience experience by increasing understanding and enjoyment?''. These questions were examined through a process of prototype development, user study evaluation and refinement.
 
-Software visualisations were applied to the process of live coding through a process of design iteration and evaluation in collaboration with a live coding artist. Three studies were administered, including one field study and two laboratory studies as a means to determine if understanding and enjoyment could be influenced by the introduction of visualisations to live coding.
-
 \section{Background}
 
-For most of its history, source code has been displayed as simple text. This is due to the expressiveness of the text format and despite its inefficiencies. 
+For most of its history, source code has been displayed as simple text. This is due to the expressiveness of the text format and despite its inefficiencies.
 % what inefficiencies?
 It is only recently, due to ever increasing programming language complexity, increasing screen fidelity and increasing computational power, that code annotations and syntax highlighting have become more commonplace. Nevertheless, these visual enhancements rarely provide information beyond the basic grammar of the language they are intended to augment. The limitations of this approach are becoming ever more apparent as programming languages and interactive programming environments move towards the need for real-time comprehension and a need to understand the source code within the context of a running program.
 
@@ -54,7 +54,9 @@ A number of existing software visualisation techniques exist. Some of the most c
 
 While diagrams and syntax highlighting provide information regarding the structure of source code, the fundamental nature of software is to change~\cite{Brooks1995}. Understanding these changes requires visualising the software development process. Techniques to visualise the changes occurring during software development process include Gource~\cite{Caudwell2010} (Figure~\ref{fig:gource}) and Code Swarm~\cite{Ogawa2012} (Figure~\ref{fig:code-swarm}). These visualisation techniques show historic source code changes, based on source code repository data.
 
-\input{images/code-visualisations}
+\input{images/code-diagrams}
+
+\input{images/code-visualisations}  
 
 Showing historic source code changes allows the process of programming to be understood. However, this information is not immediately useful to programmers or observers. Visualisation of active software has shown potential in providing useful and interesting information, allowing the programmer to take actions based on the visualisations and allowing the observers to make relevant judgement of what actions the programmer is taking. Visualisation techniques such as inline annotations~\cite{Swift2013,Beck2013} provide direct feedback useful to both the programmer and observers, and technologies such Light Table~\cite{Kodowa2014} with an inline interactive terminal or \ac{REPL} have further identified how useful visual feedback can be.
 
@@ -66,6 +68,8 @@ Techniques of visualising active software is directly relevant to live coding. E
 % -why is it still a good approach for evaluating understanding.
 
 \section{Structure}
+
+Software visualisations were applied to the process of live coding through a process of design iteration and evaluation in collaboration with a live coding artist. Three studies were administered, including one field study and two laboratory studies as a means to determine if understanding and enjoyment could be influenced by the introduction of visualisations to live coding.
 
 The structure of this thesis consists of Chapter~\ref{chap:literature-review} summarising the literature including the basis for and the direction of this thesis. The current state of software visualisations and the state of the application of visualisations to live coding is examined with particular reference to the goals and future directions of the field.
 
