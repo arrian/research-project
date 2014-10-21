@@ -10,7 +10,7 @@
 
 A fundamental challenge of modern software is of utility. Questions regarding how software interacts with the world and how those that use the software benefit from it drives modern research. There is no doubt software is becoming more useful. However, software is becoming more complex and the methods of interacting with the software are diversifying.
 
-Live coding is one area in which the utility of software has not been thoroughly examined. Live coding, the artistic process of programming for an audience, asks the performer (the live coder) to show the audience their screens. This results in many live coding performances showing the audience raw source code. Immediately, this raises the question: ``why show the screen at all?'' for audiences that have no programming experience. Answering this question would not only have immediate benefit in understanding how to enhance the audience's experience during live coding performances but could also have the wider benefit of understanding how to communicate the programming process.
+Live coding is one area in which the utility of software has not been thoroughly examined. Live coding, the artistic process of programming for an audience, asks the performer (the live coder) to show the audience their screens. This results in many live coding performances projecting raw source code for the audience. Immediately, this raises the question: ``why show the screen at all?'' for audiences that have no programming experience and ``what can be gained by showing the source code?''. Answering this question would not only have immediate benefit in understanding how to enhance the audience's experience during live coding performances but could also have the wider benefit in communicating the programming process.
 
 % what is the problem
 
@@ -44,6 +44,8 @@ For most of its history, source code has been displayed as simple text. This is 
 % what inefficiencies?
 It is only recently, due to ever increasing programming language complexity, increasing screen fidelity and increasing computational power, that code annotations and syntax highlighting have become more commonplace. Nevertheless, these visual enhancements rarely provide information beyond the basic grammar of the language they are intended to augment. The limitations of this approach are becoming ever more apparent as programming languages and interactive programming environments move towards the need for real-time comprehension and a need to understand the source code within the context of a running program.
 
+\input{images/code-diagrams}
+
 A number of modern software environments are supporting the concept of hotswapping source code. Within software environments, hotswapping refers to the process of modifying program source code at runtime to achieve desired behaviour without interrupting or restarting the system. Examples of languages and platforms supporting this workflow include Java with HotSwap or JRebel~\cite{ZeroTurnaround2014} and Python, in addition to a variety of other custom platforms and modifications (e.g.~\cite{Thomas2011}). This workflow has also inspired the programming practice of ``live coding''. 
 
 Live coding further develops the concept of hotswapping source code, applying it to live musical and visual performance. In live coding a programmer performs for an audience. The audience observes the programmer as they modify an active program to produce music and visuals. Some of the most important and influential live coding environments over the last decade have included SuperCollider~\cite{McCartney}, ChucK~\cite{Wang2008} and Extempore~\cite{Sorensen}. These environments have a growing following as the field of live coding matures.
@@ -53,8 +55,6 @@ Live coding further develops the concept of hotswapping source code, applying it
 A number of existing software visualisation techniques exist. Some of the most common software visualisations include static diagrams and syntax highlighting (see Figure~\ref{fig:syntax-highlighting}). These techniques generally model the structure of the program to allow for more effective navigation around structures and take advantage of visual memory.
 
 While diagrams and syntax highlighting provide information regarding the structure of source code, the fundamental nature of software is to change~\cite{Brooks1995}. Understanding these changes requires visualising the software development process. Techniques to visualise the changes occurring during software development process include Gource~\cite{Caudwell2010} (Figure~\ref{fig:gource}) and Code Swarm~\cite{Ogawa2012} (Figure~\ref{fig:code-swarm}). These visualisation techniques show historic source code changes, based on source code repository data.
-
-\input{images/code-diagrams}
 
 \input{images/code-visualisations}  
 
