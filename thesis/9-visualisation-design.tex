@@ -23,7 +23,7 @@ The intended audience was identified as a critical stakeholder in the ultimate e
 
 % The source code caused fatigue, however to understand the program, seeing the whole development process (all the code) was necessary.
 
-% Requirements identified by the audience during the intial field study indicated that \more
+% Requirements identified by the audience during the intial field study indicated that...
 % -discuss audience requirements identified from first study
 
 Fundamental to live coding is the performance element. Live coding requires a reliable programming environment. Visualisations developed for this environment required that the chance of failure were minimised. To mitigate the chance of a failure in the live coding environment, a test strategy was developed for the visualisations to ensure that they did not cause unrecoverable failures and did not cause memory leaks.
@@ -32,7 +32,7 @@ Fundamental to live coding is the performance element. Live coding requires a re
 
 % -ensure that the visualisations would provide a benefit and would not negatively impact the performance... mitigated by the iteration based approach to developing the visualisations
 
-% -ensure that the visualisations would not interfere with the live coder... \more
+% -ensure that the visualisations would not interfere with the live coder...
 
 \section{Design}
 
@@ -48,14 +48,14 @@ The first visualisation condition was labelled the ``aesthetic'' condition refle
 
 % The design of the initial visualisations focussed on the application of the literature on visualisation design to the field of software visualisation and the application to the visualisation of live code.
 
-% -music visualisation is an extremely rich and open-ended task, so to guide the development of the visualisations for our lab study... \more
+% -music visualisation is an extremely rich and open-ended task, so to guide the development of the visualisations for our lab study...
 
 % -guidelines set out by mclean were used in understanding the application of visualisation to live coding...
-% \cite{McLean2010a}... \more
+% \cite{McLean2010a}...
 
 % -guidelines set out by ware were used in developing the visualisations...
 % % - what are the guidelines used
-% \cite{Ware2013a}... \more
+% \cite{Ware2013a}...
 
 A number of guidelines from a variety of sources were adapted to develop these visualisations. A selection of these guidelines are listed below and are referred to in the following sections to identify the basis of design decisions:
 \begin{itemize}
@@ -99,11 +99,15 @@ Phase one (see Figure~\ref{fig:aesthetic-one}) displayed pulsing bars across the
 
 \section{Development}
 
-Collaboration with a live coder was required to ensure the visualisations integrated with the live coding performance workflow and progression.
+Development of the visualisations took place in collaboration with a live coder. This collaboration ensured that the visualisations integrated with the live coding performance and that the performance aspects of live coding such as the workflow and the musical progression were not interrupted. Similarly, this collaboration allowed both the visualisations to be influenced by the musical structures common in live coding and the musical structures to be influenced by the expressiveness and limitations of the visualisations.
+
+
 
 Cairo was used as the supporting graphics library for visualisations implementation with the final prototype consisting of 1000 \ac{SLOC}. Visualisations were written in pure xtlang, as part of the Extempore live coding environment.
 
 \subsection{Testing}
+
+\more
 
 % what other considerations had to be made during development?
 

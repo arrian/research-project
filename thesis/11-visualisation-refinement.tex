@@ -7,6 +7,8 @@ Following the first user study (Chapter~\ref{chap:user-study}), limitations with
 
 \section{Rationale}
 
+\more
+
 The intial user study identified some improvement in enjoyment through the use of visualisations. However, the study had conflicting results regarding understanding. A new visualisation prototype was developed to bring together features positively impacting enjoyment and understanding in one visualisation. This visualisation prototype built on a combination of the aesthetic and didactic visualisations evaluated in the previous study.
 
 
@@ -20,8 +22,6 @@ The goal of this iteration of the visualisations was to align the mental model o
 % \section{Requirements}
 
 -stop the visualisation from obscuring the code, 
-
-% \more
 
 \section{Design}
 
@@ -73,7 +73,8 @@ To gather information regarding the actions of the programmer, a method of inter
 
 \subsection{Code Manager}
 
-Both static analysis of source code and the dynamic analysis (see~\cite{Eisenbarth2003} and~\cite{Jerding1997}) of the program were combined into this iteration of the visualisation prototype in order to provide the audience with a link between the \ac{SoW} and the \ac{SoC}~\cite{Swift2013}. {\color{red} explain what the \ac{SoW} and the \ac{SoC} actually is and show the link between the \ac{SoW} with dynamic analysis and the \ac{SoC} with static analysis...}
+Both static analysis of source code and the dynamic analysis (see~\cite{Eisenbarth2003} and~\cite{Jerding1997}) of the program were combined into this iteration of the visualisation prototype in order to provide the audience with a link between the \acf{SoW} and the \acf{SoC}~\cite{Swift2013}.
+% {\color{red} explain what the \ac{SoW} and the \ac{SoC} actually is and show the link between the \ac{SoW} with dynamic analysis and the \ac{SoC} with static analysis...}
 
 Static analysis of the source code involved parsing the changing source code input by the programmer. Data requiring this static analysis was received from the editor plugin (see~\ref{sec:interface-manager}) and stored as the current \ac{SoC}.
 
@@ -116,17 +117,21 @@ To ensure the relationship between the actions of the programmer, the changes to
 
 \section{Development}
 
+\more
+
 The final prototype consisted of approximately 3600~\ac{SLOC}, consisting of 2300~\ac{SLOC} of C++ and C bindings, and 1300~\ac{SLOC} of xtlang.
 
 \subsection{Testing}
 
-Stability was of primary concern during the live performance. To ensure no failures occurred during the live performance, a number of testing strategies were adopted. \more
+\more
+
+Stability was of primary concern during the live performance. To ensure no failures occurred during the live performance, a number of testing strategies were adopted.
 
 Unit testing was carried out on each component.
 
-Integration testing... \more
+Integration testing...
 
-System testing... \more
+System testing...
 
 Finally, evaluation during a user study would act as the acceptance test for the software visualisation method.
 
