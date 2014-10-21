@@ -50,7 +50,7 @@ Some more specific guidelines and improvement taken from the previous study incl
 \label{fig:knowledge-flow-refined}
 \end{figure}
 
-Three sources of data were to be combined and visualised including the state of the source code, the state of the running program and the manipulation between the two by the live coder. To achieve this, three major components were required including an application manager, a code manager and an editor plugin (see the class diagram in Figure~\ref{fig:visualisation-class-diagram}). The following sections detail the implementation of these components.
+Three sources of data were to be combined and visualised including the state of the source code, the state of the running program and the manipulation between the two by the live coder. To achieve this, three major components were required including an application manager, a code manager and an editor plugin (see Figure~\ref{fig:visualisation-class-diagram}). The following sections detail the implementation of these components.
 
 This visualisation was, as with the previous iteration, rendered under the source code. 
 
@@ -117,9 +117,13 @@ To ensure the relationship between the actions of the programmer, the changes to
 
 \section{Development}
 
+A similar approach to the previous iteration of visualisation prototype was taken. This process involved a collaborative approach to development with a live coding artist to develop visualisations appropriate for the live coding context.
+
 \more
 
-The final prototype consisted of approximately 3600~\ac{SLOC}, consisting of 2300~\ac{SLOC} of C++ and C bindings, and 1300~\ac{SLOC} of xtlang.
+The final prototype consisted of approximately 3600 \acf{SLOC}, consisting of 2300 \ac{SLOC} of C++ and C bindings, and 1300 \ac{SLOC} of xtlang.
+
+-discuss reusable infrastructure for static and dynamic code analysis... \more
 
 \subsection{Testing}
 
