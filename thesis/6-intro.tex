@@ -38,17 +38,54 @@ There has been a push to develop effective software visualisations as the audien
 
 This thesis investigates the proposition that ``code visualisations improve the experience of observers'' in the setting of a live arts practice. More specifically, this thesis investigates the question: ``can the application of visualisation techniques to live coding enhance audience experience by increasing understanding and enjoyment?''. These questions were examined through a process of prototype development, user study evaluation and refinement.
 
+\input{images/code-diagrams}
+
 \section{Background}
 
 For most of its history, source code has been displayed as simple text. This is due to the expressiveness of the text format and despite its inefficiencies.
 % what inefficiencies?
 It is only recently, due to ever increasing programming language complexity, increasing screen fidelity and increasing computational power, that code annotations and syntax highlighting have become more commonplace. Nevertheless, these visual enhancements rarely provide information beyond the basic grammar of the language they are intended to augment. The limitations of this approach are becoming ever more apparent as programming languages and interactive programming environments move towards the need for real-time comprehension and a need to understand the source code within the context of a running program.
 
-\input{images/code-diagrams}
-
 A number of modern software environments are supporting the concept of hotswapping source code. Within software environments, hotswapping refers to the process of modifying program source code at runtime to achieve desired behaviour without interrupting or restarting the system. Examples of languages and platforms supporting this workflow include Java with HotSwap or JRebel~\cite{ZeroTurnaround2014} and Python, in addition to a variety of other custom platforms and modifications (e.g.~\cite{Thomas2011}). This workflow has also inspired the programming practice of ``live coding''. 
 
 Live coding further develops the concept of hotswapping source code, applying it to live musical and visual performance. In live coding a programmer performs for an audience. The audience observes the programmer as they modify an active program to produce music and visuals. Some of the most important and influential live coding environments over the last decade have included SuperCollider~\cite{McCartney}, ChucK~\cite{Wang2008} and Extempore~\cite{Sorensen}. These environments have a growing following as the field of live coding matures.
+
+\subsection{Live Coding}
+
+\begin{figure}
+\centering
+\includegraphics[width=1.0\textwidth]{../images/code/live-coding-screen.png}
+\caption[Typical live coding screen]{A typical live coder projection includes the raw source code of the musical performance such as the pictured screen. Audiences observe the changes to the source code on a projector screen while listening to the musical output. In the source code pictured here, the live coder is making changes to the musical ``bassline''.}
+\label{fig:live-coding-screen}
+\end{figure}
+
+% \begin{figure}
+% \centering
+% \includegraphics[width=1.0\textwidth]{../images/live-coding-setup.pdf}
+% \caption[The live coding process]{Conceptual diagram of the live coding process.}
+% \label{fig:live-coding-setup}
+% \end{figure}
+
+Live coding can be broadly defined as writing a program while it runs~\cite{Ward2004}. More specifically, live coding is identified as the artistic process of musical and visual expression through programming~\cite{Collins2003}. Figure~\ref{fig:live-coding-screen} shows the standard screen projected for a live coding audience.
+
+Live coding emphasises the concept of \emph{liveness}, a concept covered comprehensively within the literature~\cite{Auslander,Masura2007}. Liveness is foundational to the performance aspect of live coding in which the mantra is ``show us your screens''~\cite{Toplap}, asserting that all live coders should display their raw program source code to the audience.
+
+A unique opportunity is provided through live coding to combine both source code and software visualisation techniques~\cite{McLean2010a}. This is due to the approach of live coding involving effective sensory communication, a goal of transparency of the coding process, and direct manipulation and refinement of the running program.
+
+Firstly, live coding is built around communicating visually and audibly. This extends beyond the physical process of programming. Human input is visible in the creative process, demonstrating a link between physical actions and artistic output \cite{Mclean}.
+% Studies of live coding regarding the effects of visual and audible communication have indicated...
+
+Secondly, live coding has a history exposing audiences to code with the goal of live coding to ensure the transparency of the coding process~\cite{Collins2011,McLean2010a}. It provides a space in which there is a direct mapping from the human interaction with the source code to the musical or visual output~\cite{Mclean}. This relationship allows for visuals to map the interaction with the output.
+
+Lastly, live coding allows for direct manipulation and refinement of the running program~\cite{Swift2013}. This provides the capacity for uninterrupted visualisation of the dynamic aspects of the program combined with the static nature of the source code. Similarly, manipulation and refinement of the running program allows for manipulation of the software visualisation~\cite{McLean2010a}.
+%- what does this achieve?
+%- how do visualisations apply... what can they achieve within this space
+
+% {\color{red} Studies conducted into the communication of the live coding process suggest that audiences may have a sense of exclusion from the live coding performance.}
+
+% discuss functions, callbacks and other details relevant to live coding eg. evaluation...
+
+
 
 \section{Related Work}
 
@@ -83,7 +120,6 @@ Chapter~\ref{chap:visualisation-refinement} discusses refinement of the visualis
 
 Chapter~\ref{chap:follow-up-user-study} discusses the follow-up user study conducted to analyse the refined visualisations. A similar approach to the initial user study was taken, examining live coding audiences within the context of a live coding performance. However, in this case the examination compared the refined visualisation prototype to presenting just the plain source code within the live coding performance.
 
-Chapter~\ref{chap:summary} summarises the results of the user studies, contributions, limitations and future work. Results of the field study and the two user studies are compared and the findings are discussed. Following this, the contributions made to the field of software visualisation and the visualisation of live coding are listed. Limitations with the contributions and limitations of the studies are then discussed. Finally, future work in the field of software visualisation and the visualisation of live code are discussed with particular reference to developments of the methodlogy, improvements to the user studies and application spaces of the visualisation techniques discussed.
+Chapter~\ref{chap:conclusion} summarises the results of the user studies, contributions, limitations and future work. Results of the field study and the two user studies are compared and the findings are discussed. Following this, the contributions made to the field of software visualisation and the visualisation of live coding are listed. Limitations with the contributions and limitations of the studies are then discussed. Future work in the field of software visualisation and the visualisation of live code are discussed with particular reference to developments of the methodlogy, improvements to the user studies and application spaces of the visualisation techniques discussed. A reflection on the process of combining a scientific approach with the arts is presented. Finally, some closing words are presented to conclude the thesis.
 
-Finally, Chapter~\ref{chap:conclusion} provides some words to conclude this thesis, discussing the ambition of live coding and the future application of visualisation.
 
