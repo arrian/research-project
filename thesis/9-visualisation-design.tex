@@ -95,19 +95,28 @@ The emphasis for the aesthetic visualisation was on the artistic appeal of the v
 
 As with the didactic visualisations, the aesthetic visualisations proceeded through four stages, again with progression made depending on the number of active functions (intruments).
 
-Phase one (see Figure~\ref{fig:aesthetic-one}) displayed pulsing bars across the screen and indicated the active state of the function. The pulsing bars were matched to the tempo of the music. Phase two (see Figure~\ref{fig:aesthetic-two}) displayed random small coloured squares across the screen, designed to match the musical aesthetic. Phase three (see Figure~\ref{fig:aesthetic-three}) displayed groups of arcs, again designed to match the musical aesthetic. Finally, phase four (see Figure~\ref{fig:aesthetic-four}) displayed four sets of rotating circles, with the size of each set based on the musical output (volume) of an associated function (intrument).
+Phase one (see Figure~\ref{fig:aesthetic-one}) displayed pulsing bars across the screen and indicated the active state of the function. The pulsing bars were matched to the tempo of the music. Phase two (see Figure~\ref{fig:aesthetic-two}) displayed random small coloured squares across the screen, designed to match the musical aesthetic. Phase three (see Figure~\ref{fig:aesthetic-three}) displayed groups of arcs, again designed to match the musical aesthetic. Finally, phase four (see Figure~\ref{fig:aesthetic-four}) displayed four sets of rotating circles, with the size of each set based on the musical output (volume) of an associated function (instrument).
 
 \section{Development}
 
 Development of the visualisations took place in collaboration with a live coder. This collaboration ensured that the visualisations integrated with the live coding performance and that the performance aspects of live coding such as the workflow and the musical progression were not interrupted. Similarly, this collaboration allowed both the visualisations to be influenced by the musical structures common in live coding and the musical structures to be influenced by the expressiveness and limitations of the visualisations.
 
+Development was conducted within the standard live coding environment, in Extempore. The prototype consisted of a set of functions to be used during the performance as a replacement for some existing structures. This consisted of a callback hook labelled ``cv-callback'' in replacement of Extempore's standard ``callback'' function. In Extempore, the callback function allows for repeatedly calling functions with a time based interval. This structure is fundamental to the musical aspects of live coding, allowing for the sequencing of musical structures and the patterns common in live coding music.
 
+The ``cv-callback'' function allowed information regarding the dynamic aspects of the running program to be collected for display within the visualisations such as active function names, callback time, beat and duration information specific to each instrument.
 
-Cairo was used as the supporting graphics library for visualisations implementation with the final prototype consisting of 1000 \ac{SLOC}. Visualisations were written in pure xtlang, as part of the Extempore live coding environment.
+Additionally, a \ac{VU} meter function was adapted to the prototype to allow for collecting volume information specific to each active instrument. This would allow for the real musical output of the musical structures to be determined and visualised.
 
-\subsection{Testing}
+Information from both the ``cv-callback'' and the \ac{VU} meter were integrated into the visualisation technique. Specifically, the didactic visualisations made use of the ``cv-callback'' as more precise information about the active functions. The aesthetic visualisations, on the other hand, made use of the \ac{VU} meter as more abstract high level information about the running functions and their output.
 
-\more
+To develop the visualisations, Cairo~\cite{Worth2012} was used through Extempore bindings, as the supporting graphics library for visualisation implementation. Visualisations were written in pure xtlang, as part of the Extempore live coding environment. The final prototype consisted of a total of 1000 \ac{SLOC}.
+
+% To ensure 
+% Performance and stability were required 
+
+% \subsection{Testing}
+
+% \more
 
 % what other considerations had to be made during development?
 
