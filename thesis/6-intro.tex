@@ -43,8 +43,11 @@ This thesis investigates the proposition that ``code visualisations improve the 
 \section{Background}
 
 For most of its history, source code has been displayed as simple text. This is due to the expressiveness of the text format and despite its inefficiencies.
+
 % what inefficiencies?
 It is only recently, due to ever increasing programming language complexity, increasing screen fidelity and increasing computational power, that code annotations and syntax highlighting have become more commonplace. Nevertheless, these visual enhancements rarely provide information beyond the basic grammar of the language they are intended to augment. The limitations of this approach are becoming ever more apparent as programming languages and interactive programming environments move towards the need for real-time comprehension and a need to understand the source code within the context of a running program.
+
+Historically, source code diagrams have attempted to display the high level structure of source code. Class diagrams (see Figure~\ref{fig:class-diagram}) are commonly used to document the structure of a program whereas flowcharts (see Figure~\ref{fig:flow-chart}) have been used extensively to represent simple software behaviours. Sequence diagrams (see Figure~\ref{fig:sequence-diagram}) have allowed the visualisation of interacting objects and actors in a software system, putting the focus on the users of the software system rather than the structure of the program. Edge bundling of software call stacks~\cite{Zhou2013} (see Figure~\ref{fig:bundle-graph}) has allowed the visualisation of the lifecycle of a program, showing which software components were called at what time and the volume of calls made.
 
 A number of modern software environments are supporting the concept of hotswapping source code. Within software environments, hotswapping refers to the process of modifying program source code at runtime to achieve desired behaviour without interrupting or restarting the system. Examples of languages and platforms supporting this workflow include Java with HotSwap or JRebel~\cite{ZeroTurnaround2014} and Python, in addition to a variety of other custom platforms and modifications (e.g.~\cite{Thomas2011}). This workflow has also inspired the programming practice of ``live coding''. 
 
@@ -55,7 +58,7 @@ Live coding further develops the concept of hotswapping source code, applying it
 \begin{figure}
 \centering
 \includegraphics[width=1.0\textwidth]{../images/code/live-coding-screen.png}
-\caption[Typical live coding screen]{A typical live coder projection includes the raw source code of the musical performance such as the pictured screen. Audiences observe the changes to the source code on a projector screen while listening to the musical output. In the source code pictured here, the live coder is making changes to the musical ``bassline'' during a performance.}
+\caption[Typical live coding screen]{A typical live coder projection includes the raw source code of the musical performance such as the screen pictured above. Audiences observe the changes to the source code on a projector screen while listening to the musical output. In the source code pictured here, the live coder is making changes to the musical ``bassline'' during a performance.}
 \label{fig:live-coding-screen}
 \end{figure}
 
@@ -97,7 +100,7 @@ While diagrams and syntax highlighting provide information regarding the structu
 
 Showing historic source code changes allows the process of programming to be understood. However, this information is not immediately useful to programmers or observers. Visualisation of active software has shown potential in providing useful and interesting information, allowing the programmer to take actions based on the visualisations and allowing the observers to make relevant judgement of what actions the programmer is taking. Visualisation techniques such as inline annotations~\cite{Swift2013,Beck2013} provide direct feedback useful to both the programmer and observers, and technologies such Light Table~\cite{Kodowa2014} with an inline interactive terminal or \ac{REPL} have further identified how useful visual feedback can be.
 
-Techniques of visualising active software is directly relevant to live coding. Examples of existing software visualisations within live coding include Scheme Bricks (Figure~\ref{fig:scheme-bricks}) and a number of others (see~\cite{McLean2010a} for a review). These visualisation techniques suggest potential within live coding for effective process-driven visuals intending to enhance the observer's experience. However, no systematic studies of process-driven visualisations have been conducted within live coding.
+A number of attempts have been made in visualising active software within live coding. Examples of existing software visualisations within live coding include Scheme Bricks (Figure~\ref{fig:scheme-bricks}), Daisy Chain, Betablocker and a number of others~\cite{McLean2010a}. These visualisation techniques suggest potential within live coding for effective process-driven visuals intending to enhance the observer's experience. However, no systematic studies of process-driven visualisations have been conducted within live coding.
 
 % The art and science of live coding. The approach to evaluating the arts...
 % The artistic nature of the live coding field cannot be ignored when evaluating the effect of aesthetic and didactic approaches on the enjoyment and understanding of the audience.
@@ -106,7 +109,7 @@ Techniques of visualising active software is directly relevant to live coding. E
 
 \section{Structure}
 
-Software visualisations were applied to the process of live coding through a process of design iteration and evaluation in collaboration with a live coding artist. Three studies were administered, including one field study and two laboratory studies as a means to determine if understanding and enjoyment could be influenced by the introduction of visualisations to live coding.
+Software visualisations were applied to live coding through a process of design iteration and evaluation in collaboration with a live coding artist. Three studies were administered, including one field study and two laboratory studies as a means to determine if understanding and enjoyment could be influenced by the introduction of visualisations to live coding.
 
 The structure of this thesis consists of Chapter~\ref{chap:literature-review} summarising the literature including the basis for and the direction of this thesis. The current state of software visualisations and the state of the application of visualisations to live coding is examined with particular reference to the goals and future directions of the field.
 

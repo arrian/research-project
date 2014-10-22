@@ -76,7 +76,7 @@ To gather information regarding the actions of the programmer, a method of inter
 Both static analysis of source code and the dynamic analysis (see~\cite{Eisenbarth2003} and~\cite{Jerding1997}) of the program were combined into this iteration of the visualisation prototype in order to provide the audience with a link between the \acf{SoW} and the \acf{SoC}~\cite{Swift2013}.
 % {\color{red} explain what the \ac{SoW} and the \ac{SoC} actually is and show the link between the \ac{SoW} with dynamic analysis and the \ac{SoC} with static analysis...}
 
-Static analysis of the source code involved parsing the changing source code input by the programmer. Data requiring this static analysis was received from the editor plugin (see~\ref{sec:interface-manager}) and stored as the current \ac{SoC}.
+Static analysis of the source code involved parsing the source code written by the programmer and analysing any changes made, mapping these changes to historic source code states. The source code written by the programmer was sent from an editor plugin (see~\ref{sec:interface-manager}) to the Extempore visualisation program and stored as the current \ac{SoC}. Mappings to previous states were then made for each function within the source code.
 
 Dynamic analysis of the running program involved providing mechanisms for the programmer to send running state information to be stored as the \ac{SoW}. A callback hook was provided to be used when creating an instrument during performance. This hook would provide data on the names of the instruments, the state of the callbacks and would allow links to be determined between the \ac{SoC} and the \ac{SoW}.
 
@@ -123,17 +123,18 @@ A similar approach to the previous iteration of visualisation prototype was take
 
 The final prototype consisted of approximately 3600 \acf{SLOC}, consisting of 2300 \ac{SLOC} of C++ and C bindings, and 1300 \ac{SLOC} of xtlang.
 
--discuss reusable infrastructure for static and dynamic code analysis... \more
+
+As a result of the development process, significant portions of the infrastructure developed could be further adapted to future static and dynamic analysis of code. The infrastructure developed provides a method of matching active code structures to the associated source code all while the program is running and the code is being edited. Further adaptions could take advantage of this infrastructure and further manipulate visualisations based on the data extracted.
+
+% -discuss reusable infrastructure for static and dynamic code analysis... \more
 
 \subsection{Testing}
 
-\more
-
 Stability was of primary concern during the live performance. To ensure no failures occurred during the live performance, a number of testing strategies were adopted.
 
-Unit testing was carried out on each component.
+Unit testing was carried out on each component of the prototype.
 
-Integration testing...
+Integration testing proved to be most challenging within the context of the dynamic manipulation of source code. 
 
 System testing...
 
