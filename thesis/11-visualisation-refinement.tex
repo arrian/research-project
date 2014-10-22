@@ -7,7 +7,7 @@ Following the first user study (see Chapter~\ref{chap:user-study}), limitations 
 
 \section{Rationale}
 
-The intial user study (see Chapter~\ref{chap:user-study}) identified some improvement in enjoyment through the use of visualisations. However, the study had conflicting results regarding understanding with audiences reporting high levels of understanding attributed to the didactic visualisations when asked directly, but with lower overall understanding during the beginning stages of the live coding performance (see Section~\ref{section:user-study-understanding}). A new visualisation prototype was developed to bring together features identified as positively impacting enjoyment and understanding in one visualisation. This visualisation prototype built on a combination of the aesthetic and didactic visualisations evaluated in the previous study. The intention of this visualisation was to smooth the early transition into the more educational aspects of the visualisations through the aesthetic features identified.
+The initial user study (see Chapter~\ref{chap:user-study}) identified some improvement in enjoyment through the use of visualisations. However, the study had conflicting results regarding understanding with audiences reporting high levels of understanding attributed to the didactic visualisations when asked directly, but with lower overall understanding during the beginning stages of the live coding performance (see Section~\ref{section:user-study-understanding}). A new visualisation prototype was developed to bring together features identified as positively impacting enjoyment and understanding in one visualisation. This visualisation prototype built on a combination of the aesthetic and didactic visualisations evaluated in the previous study. The intention of this visualisation was to smooth the early transition into the more educational aspects of the visualisations through the aesthetic features identified.
 
 Technical limitations identified in the previous iteration of the visualisation prototype including incorrect timing and beat, no direct feedback from the programmer and limited links between the visuals and the source code. 
 
@@ -148,16 +148,16 @@ Analysis of the source code involved parsing the source code and extracting func
 
 % During this phase of visualisation development, the strategy for the integration of the static source code and the dynamic running prgoram 
 
-During this phase of the 
--intially unsure about the direction of the visualisations
--knew that they required static analysis of the source code and mapping this to the dynamic running program
--developed iteratively... examined various approaches in solving this problem.
+% During this phase of the 
+% -initially unsure about the direction of the visualisations
+% -knew that they required static analysis of the source code and mapping this to the dynamic running program
+% -developed iteratively... examined various approaches in solving this problem.
 
--wrote custom simple parser for xtlang. the complexity of more standard tools was not required though was examined early within development.
--complex full grammar parsing was examined and implemented but proved to be unnecessarily complex when it came to matching the previous state of the code to the current state of the code to the active state of the code
--
+% -wrote custom simple parser for xtlang. the complexity of more standard tools was not required though was examined early within development.
+% -complex full grammar parsing was examined and implemented but proved to be unnecessarily complex when it came to matching the previous state of the code to the current state of the code to the active state of the code
+% -
 
-\more
+% \more
 
 The final prototype consisted of approximately 3600 \acf{SLOC}, consisting of 2300 \ac{SLOC} of C++ and C bindings, and 1300 \ac{SLOC} of xtlang.
 
@@ -166,17 +166,17 @@ As a result of the development process, significant portions of the infrastructu
 
 % -discuss reusable infrastructure for static and dynamic code analysis... \more
 
-\subsection{Testing}
+% \subsection{Testing}
 
-Stability was of primary concern during the live performance. To ensure no failures occurred during the live performance, a number of testing strategies were adopted.
+% Stability was of primary concern during the live performance. To ensure no failures occurred during the live performance, a number of testing strategies were adopted.
 
-Unit testing was carried out on each component of the prototype.
+% Unit testing was carried out on each component of the prototype.
 
-Integration testing proved to be most challenging within the context of the dynamic manipulation of source code. 
+% Integration testing proved to be most challenging within the context of the dynamic manipulation of source code. 
 
-System testing...
+% System testing...
 
-Finally, evaluation during a user study would act as the acceptance test for the software visualisation method.
+% Finally, evaluation during a user study would act as the acceptance test for the software visualisation method.
 
 \section{Summary}
 
