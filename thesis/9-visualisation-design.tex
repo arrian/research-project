@@ -57,6 +57,7 @@ The first visualisation condition was labelled the ``aesthetic'' condition refle
 % % - what are the guidelines used
 % \cite{Ware2013a}...
 
+
 A number of guidelines from a variety of sources were adapted to develop these visualisations. A selection of these guidelines are listed below and are referred to in the following sections to identify the basis of design decisions:
 \begin{itemize}
 \item Design for important elements to be percieved quickly \cite[p.~14]{Ware2013a}~\glab{guide:sensory-capabilities}
@@ -70,6 +71,8 @@ A number of guidelines from a variety of sources were adapted to develop these v
 \item ``A one-to-many mapping makes use of redundancies by mapping a data variable to multiple glyph channels. Such a mapping can reduce the risk of information loss by encoding important variables multiple times'' \cite[p.~52]{Borgo2013}~\glab{guide:redundancy}
 \item ``Important variables should be enhanced in the visualization\ldots~the mapping should guide the user's focus of attention'' \cite[p.~52]{Borgo2013}~\glab{guide:attention}
 \end{itemize}
+
+A number of general standards exist for the design of interfaces and the standard approaches for multimedia \ac{HCI} design (see~\cite{ISO2002} and \cite{Bevan2006}). However, as the space of the visualisation of live coding has not been fully defined, these standards have yet to be evaluated as relevant and effective. In these visualisations, these standards were taken as guidelines to allow for the possibility of the emergence of new, effective visualisation techniques.
 
 Colour schemes, although varying slightly throughout the visualisations, consisted of a colour palette of red, orange and blue with red and orange used heavily throughout the visualisations and blue used for emphasis and visual interest (Guidelines~\ref{guide:dominant-channels} and \ref{guide:color-saturation}). Animations were used throughout to draw attention to parts of the visualisations (see Guideline~\ref{guide:attention}).
 
@@ -93,7 +96,7 @@ The aesthetic visualisation technique was designed to react to the programmer's 
 
 The emphasis for the aesthetic visualisation was on the artistic appeal of the visuals (see Figure~\ref{fig:aesthetic-visualisations}), including more variety in visual structure and colour. As in the didactic condition, the aesthetic visualisations proceeded through four stages, based on the number of active functions (instruments), but these visuals had no textual labels and they moved and interacted with each other over the entire projected scene.
 
-As with the didactic visualisations, the aesthetic visualisations proceeded through four stages, again with progression made depending on the number of active functions (intruments).
+As with the didactic visualisations, the aesthetic visualisations proceeded through four stages, again with progression made depending on the number of active functions (instruments).
 
 Phase one (see Figure~\ref{fig:aesthetic-one}) displayed pulsing bars across the screen and indicated the active state of the function. The pulsing bars were matched to the tempo of the music. Phase two (see Figure~\ref{fig:aesthetic-two}) displayed random small coloured squares across the screen, designed to match the musical aesthetic. Phase three (see Figure~\ref{fig:aesthetic-three}) displayed groups of arcs, again designed to match the musical aesthetic. Finally, phase four (see Figure~\ref{fig:aesthetic-four}) displayed four sets of rotating circles, with the size of each set based on the musical output (volume) of an associated function (instrument).
 
@@ -101,13 +104,13 @@ Phase one (see Figure~\ref{fig:aesthetic-one}) displayed pulsing bars across the
 
 Development of the visualisations took place in collaboration with a live coder. This collaboration ensured that the visualisations integrated with the live coding performance and that the performance aspects of live coding such as the workflow and the musical progression were not interrupted. Similarly, this collaboration allowed both the visualisations to be influenced by the musical structures common in live coding and the musical structures to be influenced by the expressiveness and limitations of the visualisations.
 
-Development was conducted within the standard live coding environment, in Extempore. The prototype consisted of a set of functions to be used during the performance as a replacement for some existing structures. This consisted of a callback hook labelled ``cv-callback'' in replacement of Extempore's standard ``callback'' function. In Extempore, the callback function allows for repeatedly calling functions with a time based interval. This structure is fundamental to the musical aspects of live coding, allowing for the sequencing of musical structures and the patterns common in live coding music.
+Development was conducted within the standard live coding environment, in Extempore. The prototype consisted of a set of functions to be used during the performance as a replacement for some existing structures. This consisted of a callback hook labelled \textit{cv-callback} in replacement of Extempore's standard \textit{callback} function. In Extempore, the \textit{callback} function allows for repeatedly calling functions with a time based interval. This structure is fundamental to the musical aspects of live coding, allowing for the sequencing of musical structures and the patterns common in live coding music.
 
-The ``cv-callback'' function allowed information regarding the dynamic aspects of the running program to be collected for display within the visualisations such as active function names, callback time, beat and duration information specific to each instrument.
+The \textit{cv-callback} function allowed information regarding the dynamic aspects of the running program to be collected for display within the visualisations such as active function names, callback time, beat and duration information specific to each instrument.
 
 Additionally, a \ac{VU} meter function was adapted to the prototype to allow for collecting volume information specific to each active instrument. This would allow for the real musical output of the musical structures to be determined and visualised.
 
-Information from both the ``cv-callback'' and the \ac{VU} meter were integrated into the visualisation technique. Specifically, the didactic visualisations made use of the ``cv-callback'' as more precise information about the active functions. The aesthetic visualisations, on the other hand, made use of the \ac{VU} meter as more abstract high level information about the running functions and their output.
+Information from both the \textit{cv-callback} and the \ac{VU} meter were integrated into the visualisation technique. Specifically, the didactic visualisations made use of the \textit{cv-callback} as more precise information about the active functions. The aesthetic visualisations, on the other hand, made use of the \ac{VU} meter as more abstract high level information about the running functions and their output.
 
 To develop the visualisations, Cairo~\cite{Worth2012} was used through Extempore bindings, as the supporting graphics library for visualisation implementation. Visualisations were written in pure xtlang, as part of the Extempore live coding environment. The final prototype consisted of a total of 1000 \ac{SLOC}.
 

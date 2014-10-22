@@ -15,11 +15,9 @@ The steps involved in and the issues with interpreting and comprehending source 
 
 The concept of alternative source code representations is not new. Alternative representations of the source code include diagrams~\cite{Rumbaugh2004}, visual languages~\cite{Cox2007} and combinations of the two (e.g.~\cite{Lucanin2011}). Modern software development environments may also include tools that allow for alternative representations of code~\cite{Cox2007}. Diagrams, visual languages and modern software development environments vary greatly in the relation to the source code with visualisations representing many levels of abstraction~\cite{Jerding1997}. Despite the differences in the level of abstraction and goal of the alternative representations, these approaches are all related through their common use of visualisation techniques.
 
--discuss difficulties in understanding the \ac{SoW} and the \ac{SoC}...
-
 \section{Visualisation}
 
-Visualisation is widely understood as ``the use of computer-supported, interactive, visual representations of data to amplify cognition''~\cite{Card1999}. Further extensions of this definition discuss the need to perform cognitive work more efficiently~\cite{Ware2013a} and the need to transfer knowledge~\cite{Burkhard}. These definitions are summarised in the model shown in Figure~\ref{fig:model-of-visualisation}.
+Visualisation is widely understood as ``the use of computer-supported, interactive, visual representations of data to amplify cognition''~\cite{Card1999}. Further extensions of this definition discuss the need to perform cognitive work more efficiently~\cite{Ware2013a} and the need to transfer knowledge~\cite{Burkhard}. These definitions are summarised in the model shown in Figure~\ref{fig:model-of-visualisation}. This model shows the feedback loop attributed to a change in knowledge. Changes to knowledge both impact perception but may also effect the user's exploration of the visualisation.
 
 \begin{figure}
   \centering \includegraphics[width=\columnwidth]{../images/diagrams/wijk-model-of-visualisation.pdf}
@@ -57,19 +55,9 @@ In the literature, live coding audiences are yet to be surveyed as to whether th
 
 \section{Measuring Audience's Experiences}
 
-\more
-
-% introduce enjoyment and understanding
-
 There is currently a search for software visualisations that increase enjoyment and understanding~\cite{McLean2010a}. Here enjoyment refers to the perceived benefit gained from observing the visualisations regardless of the level of understanding. Understanding refers to the ability of an observer or audience to comprehend the abstract thinking process of the programmer.
 
-Enjoyment is the most common reaction to the positive effect of media~\cite{Vorderer2004}. Increasing enjoyment is one of the fundamental goals of the modern media entertainment industry and with increased enjoyment usually characterised by ``pleasurable affective response to a stimulus''~\cite{Brock2004}.
-
-% Enjoyment results in increased attention to the stimulus and has been suggested to increase learning outcomes~\citetemp{x}
-% -how do these factors relate to understanding?\\
-% -how do these factors relate to visualisations?\\
-% -how can these two factors contribute to effective visualisations?\\
-% -the concept assignment problem~\cite{Biggerstaff1994}
+Enjoyment is the most common reaction to the positive effect of media~\cite{Vorderer2004}. Increasing enjoyment is one of the fundamental goals of the modern media entertainment industry with increased enjoyment usually characterised by ``pleasurable affective response to a stimulus''~\cite{Brock2004}. Enjoyment, and the closely related concept of entertainment, are characterised or caused by a wide range of emotional responses including exhilaration, suspense, aesthetic appeal and a sense of achievement~\cite{Vorderer2004}. 
 
 Understanding of a particular program is said to be achieved when the program can be explained ``in terms that are qualitatively different from the tokens used to construct the source code''~\cite{Biggerstaff1994}. Source code comprehension has a large body of research both within the understanding of text-based source code and within the space of software visualisation~\cite{Hosking2005}.
 
@@ -100,13 +88,17 @@ Some frameworks for both aesthetic evaluation of visualisations~\cite{Cawthon200
 The goal of live coding is an open question...
 The target audience of live coding is still an open question...
 
+-discuss difficulties in understanding the \ac{SoW} and the \ac{SoC}...
+
 \section{Future Directions}
 
-The introduction (see Chapter~\ref{chap:introduction}) identified the need for enhancing audience's experience within live coding. The literature discussed here demonstrates that those involved in live coding are looking for new and interesting ways of approaching this problem. The literature also identifies that visualisation of software is not a new technique for enhancing the audience's experience but no empirical evaluations of the application of visualisation to live coding have been conducted.
+Chapter~\ref{chap:introduction} identified the need for enhancing audience's experience within live coding. The literature discussed here demonstrates that those involved in live coding are looking for new and interesting ways of approaching this problem. The visualisation of software is not a new technique for enhancing the audience's experience but no empirical evaluations of the application of visualisation to live coding have been conducted.
 
 Regarding the visualisation of live code, the most important questions identified include how can visualisations be applied to live coding and what should be used as the metric to measure the success of the application of visualisations. Furthermore, the the limitations of the current methods of software visualisation in general have been identified including how to best visualise the process of programming, how to visualise the evolution of software~\cite{Gall1999} and how to improve understanding and enjoyment of programming.
 
-The model in Figure~\ref{fig:model-of-visualisation} identifies some limitations in the current understanding and evaluation of visualisations. Within this model, a gain in knowledge is the only measurement of value and the only identified method for increased cognitive performance and increased exploration. The literature has identified that this may not be the only relevant metric for the success of visualisations, though this model could have the potential to be adjusted and applied to the space of live coding. 
+The model in Figure~\ref{fig:model-of-visualisation} identifies some limitations in the current understanding and evaluation of visualisations. Firstly, within this model, a gain in knowledge is the only measurement of value and the only identified method for increased cognitive performance and increased exploration. Secondly, this model of visualisation inherently describes \textit{interactive} visualisations, where increased exploration allows for the adaptation of the specification. Many visualisations may not allow for adaptation step to take place. 
+
+The literature has identified that there may be more metrics appropriate for the evaluation of visualisations. Furthermore, live coding appears to be a space in which it may be possible to apply this model as a \textit{process} in the development of visualisations. Perhaps the exploration phases of this model could be adapted to meet the challenge presented within live coding to develop methods of source code visualisation that enhance the audiences experience, iteratively developing and adapting effective visualisation techniques.
 
 Questions identified through the introduction (Chapter~\ref{chap:introduction}) and the literature review include, ``why show the source code at all during a live coding performance?'' and ``are there better methods of demonstrating the programming process?''. Systematic and empirical studies are yet to be conducted within live coding to answer these questions. Similarly, no studies have been conducted to evaluate effective metrics for analysis of the live coding process and the display of source code or visuals.
 

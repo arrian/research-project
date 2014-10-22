@@ -7,15 +7,11 @@ Following the first user study (see Chapter~\ref{chap:user-study}), limitations 
 
 \section{Rationale}
 
-The intial user study (see Chapter~\ref{chap:user-study}) identified some improvement in enjoyment through the use of visualisations. However, the study had conflicting results regarding understanding with audiences reporting high levels of understanding attributed to the didactic visualisations when asked directly, but with lower overall understanding during the beginning stages of the live coding performance (see Section~\ref{section:user-study-understanding}). A new visualisation prototype was developed to bring together features identified as positively impacting enjoyment and understanding in one visualisation. This visualisation prototype built on a combination of the aesthetic and didactic visualisations evaluated in the previous study. This was intended to smooth the early transition into the more educational aspects of the visualisations through the aesthetic features identified.
+The intial user study (see Chapter~\ref{chap:user-study}) identified some improvement in enjoyment through the use of visualisations. However, the study had conflicting results regarding understanding with audiences reporting high levels of understanding attributed to the didactic visualisations when asked directly, but with lower overall understanding during the beginning stages of the live coding performance (see Section~\ref{section:user-study-understanding}). A new visualisation prototype was developed to bring together features identified as positively impacting enjoyment and understanding in one visualisation. This visualisation prototype built on a combination of the aesthetic and didactic visualisations evaluated in the previous study. The intention of this visualisation was to smooth the early transition into the more educational aspects of the visualisations through the aesthetic features identified.
 
-A number of technical limitations were identified in the previous iteration of the visualisation prototype including incorrect timing and beat, no direct feedback from the programmer and limited visual linking between the source code and the visualisation.
+Technical limitations identified in the previous iteration of the visualisation prototype including incorrect timing and beat, no direct feedback from the programmer and limited links between the visuals and the source code. 
 
 The goal of this iteration of the visualisations was to align the mental model of the audience with that of the programmer, representing the state of the code visually and showing the iteraction of the programmer with the source code.
-
-% ``the aesthetic of fixing nodes and edges to an underlying unit grid was prominent''~\cite{Purchase2014} (also~\cite{Purchase2001,Purchase1996})
-
-% \section{Requirements}
 
 -stop the visualisation from obscuring the code, 
 
@@ -65,7 +61,38 @@ The visualisation manager handled all visual elements on the screen. The Polycod
 \subsection{Interface Mananger}
 \label{sec:interface-manager}
 
-To gather information regarding the actions of the programmer, a method of interfacing with the live coder's programming environment was required. This was acheived using a text editor plugin sending programmer interactions over an \ac{OSC} protocol. The interactions sent included cursor movement, all source code changes, file focus and source code evaluation.
+To gather information regarding the actions of the programmer, a method of interfacing with the live coder's programming environment (text editor) was required. This was acheived using a text editor plugin sending programmer actions over an \ac{OSC} protocol. The interactions sent included cursor movement, all source code changes, file focus and source code evaluation. This protocol was implemented as a standard way of communicating between the text editor in use and the visualisations. Table~\ref{table:osc-protocol} describes the protocol.
+
+Two text editor plugins implementing the protocol were developed including a plugin for EMACS~\cite{Stallman1981} and a plugin for Sublime Text~\cite{Skinner2013}.
+
+\begin{table}
+  \centering
+  \begin{tabular}{|l|p{4.75cm}|p{4.75cm}|}
+  \hline
+  \textbf{OSC Address} & \textbf{Arguments} & \textbf{Description}\\
+  \hline
+	/interface/code & source\_code & Sent when the source code within the text editor changes.\\
+	\hline
+	/interface/evaluate & evaluated\_code & Sent when a block of source code within the text editor is evaluated (activated). \\
+	\hline
+	/interface/error & error\_text & Sent when an error occurs within the text editor or the evaluation of source code fails.\\
+	\hline
+	/interface/focus & file\_name & Sent when the file currently being edited changes.\\
+	\hline
+	/interface/cursor & cursor\_position \newline screen\_minimum\_position \newline screen\_maximum\_position \newline cursor\_position\_x \newline cursor\_position\_y & Sent when the text editor cursor selection changes. \\
+  \hline
+  \end{tabular}
+  \caption{The OSC protocol developed for standardised interaction between text editors and the visualisation.}
+  \label{table:osc-protocol}
+\end{table}
+
+% /interface/selection"  data));; args: count start end start end... 
+% /interface/code"  (event_get_data e)));; args: code
+% /interface/evaluate"  (event_get_data e))) ;; args: evaluated_code
+% /interface/keyboard"  data));; unused
+% /interface/error"  (event_get_data e))) ;; args: message
+% /interface/focus"  (event_get_data e))) ;; args: file_name
+% /interface/cursor"  data))
 
 \subsection{Code Manager}
 
@@ -113,8 +140,15 @@ To ensure the relationship between the actions of the programmer, the changes to
 
 \section{Development}
 
-A similar approach to the previous iteration of visualisation prototype was taken. This process involved collaborating with a live coding artist to develop visualisations appropriate for the live coding context. 
+A similar approach to the previous iteration of visualisation prototype was taken. This process involved collaborating with a live coding artist to further develop visualisations appropriate for the live coding context.
 
+A strategy for combining static source code and the dynamic program structures was developed. This involved storing the state of each function within the program and storing the function change history, active state, current state and editing metadata. The function change history was extracted from source code sent from the text editor to the interface manager. On each modification of the source code within the editor, a new version of the source code was sent to be analysed.
+
+Analysis of the source code involved parsing the source code and extracting functions and the function names. Initially, full parsing was performed on the source code, however, it was determined that this would not be necessary for informative visualisations and would also cause difficulties when partial changes to the source code were made. To solve this problem, a heuristic source code parser
+
+% During this phase of visualisation development, the strategy for the integration of the static source code and the dynamic running prgoram 
+
+During this phase of the 
 -intially unsure about the direction of the visualisations
 -knew that they required static analysis of the source code and mapping this to the dynamic running program
 -developed iteratively... examined various approaches in solving this problem.
