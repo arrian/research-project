@@ -58,7 +58,7 @@ This visualisation was, as with the previous iteration, rendered under the sourc
 
 The visualisation manager handled all visual elements on the screen. The Polycode~\cite{Safrin2013} library was bound to the live coding environment allowing for more advanced two-dimensional graphical manipulations than the previous visualisation iteration through scene graph manipulation. Using this technique, the intention was to represent the state of the source code, the manipulation of the source code and the state of the active source code in the same visual environment.
 
-\subsection{Interface Mananger}
+\subsection{Interface Manager}
 \label{sec:interface-manager}
 
 To gather information regarding the actions of the programmer, a method of interfacing with the live coder's programming environment (text editor) was required. This was acheived using a text editor plugin sending programmer actions over an \ac{OSC} protocol. The interactions sent included cursor movement, all source code changes, file focus and source code evaluation. This protocol was implemented as a standard way of communicating between the text editor in use and the visualisations. Table~\ref{table:osc-protocol} describes the protocol.
