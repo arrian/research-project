@@ -3,15 +3,11 @@
 \chapter{Visualisation Refinement}
 \label{chap:visualisation-refinement}
 
-Following the first user study (Chapter~\ref{chap:user-study}), limitations with both the visualisations and the evaluation method were identified and corrective steps were taken. The steps taken to correct these limitations and the resulting refined visualisation are outlined in this chapter.
+Following the first user study (see Chapter~\ref{chap:user-study}), limitations with both the visualisations and the evaluation method were identified and corrective steps were taken. The steps taken to correct these limitations and the resulting refined visualisation are outlined in this chapter.
 
 \section{Rationale}
 
-\more
-
-The intial user study identified some improvement in enjoyment through the use of visualisations. However, the study had conflicting results regarding understanding. A new visualisation prototype was developed to bring together features positively impacting enjoyment and understanding in one visualisation. This visualisation prototype built on a combination of the aesthetic and didactic visualisations evaluated in the previous study.
-
-
+The intial user study (see Chapter~\ref{chap:user-study}) identified some improvement in enjoyment through the use of visualisations. However, the study had conflicting results regarding understanding with audiences reporting high levels of understanding attributed to the didactic visualisations when asked directly, but with lower overall understanding during the beginning stages of the live coding performance (see Section~\ref{section:user-study-understanding}). A new visualisation prototype was developed to bring together features identified as positively impacting enjoyment and understanding in one visualisation. This visualisation prototype built on a combination of the aesthetic and didactic visualisations evaluated in the previous study. This was intended to smooth the early transition into the more educational aspects of the visualisations through the aesthetic features identified.
 
 A number of technical limitations were identified in the previous iteration of the visualisation prototype including incorrect timing and beat, no direct feedback from the programmer and limited visual linking between the source code and the visualisation.
 
@@ -28,16 +24,16 @@ The goal of this iteration of the visualisations was to align the mental model o
 As with the previous visualisation iteration, guidelines were identified, adapted and applied to the design process. A selection of the design guidelines are outlined below:
 
 \begin{itemize}
-\item Show relationships between entities using lines~\cite[p.~183]{Ware2013a} \glab{guide:links}
-\item ``Consider using pictorial icons for pedagogical purposes in infographics.''~\cite[p.~320]{Ware2013a} \glab{guide:icons}
+\item Show relationships between entities using lines \cite[p.~183]{Ware2013a}~\glab{guide:links}
+\item ``Consider using pictorial icons for pedagogical purposes in infographics.'' \cite[p.~320]{Ware2013a}~\glab{guide:icons}
 \end{itemize}
 
 Some more specific guidelines and improvement taken from the previous study included:
 
 \begin{itemize}
-\item ``\ldots relate every beat\ldots~to the code responsible for that beat'' (see Section~\ref{section:improvements}) \glab{guide:code-responsible}
-\item Respond to the programmer's typing (see Section~\ref{section:liveness}) \glab{guide:typing}
-\item Reduce visualisation distraction (see Section~\ref{section:user-study-discussion}) \glab{guide:distraction}
+\item ``\ldots relate every beat\ldots~to the code responsible for that beat'' (see Section~\ref{section:improvements})~\glab{guide:code-responsible}
+\item Respond to the programmer's typing (see Section~\ref{section:liveness})~\glab{guide:typing}
+\item Reduce visualisation distraction (see Section~\ref{section:user-study-discussion})~\glab{guide:distraction}
 
 \end{itemize}
 
@@ -117,7 +113,15 @@ To ensure the relationship between the actions of the programmer, the changes to
 
 \section{Development}
 
-A similar approach to the previous iteration of visualisation prototype was taken. This process involved collaborating with the live coding artist to develop visualisations appropriate for the live coding context. 
+A similar approach to the previous iteration of visualisation prototype was taken. This process involved collaborating with a live coding artist to develop visualisations appropriate for the live coding context. 
+
+-intially unsure about the direction of the visualisations
+-knew that they required static analysis of the source code and mapping this to the dynamic running program
+-developed iteratively... examined various approaches in solving this problem.
+
+-wrote custom simple parser for xtlang. the complexity of more standard tools was not required though was examined early within development.
+-complex full grammar parsing was examined and implemented but proved to be unnecessarily complex when it came to matching the previous state of the code to the current state of the code to the active state of the code
+-
 
 \more
 
@@ -142,6 +146,6 @@ Finally, evaluation during a user study would act as the acceptance test for the
 
 \section{Summary}
 
-In summary, this visualisation technique attempted to bring together effective features identified within the aesthetic and didactic visualisations of the previous iteration. The prototype developed included three major components including the visualisation manager, the interface manager and the code manager. Technical limitations with the first iteration of the visualsation prototype were addressed and an attempt was made to communicate the state of the source code, the state of the running program and the manipulation between the two by the live coder. The effectiveness of aligning the mental models of the audience and the live coder was to be evaluated in a follow-up user study.
+In summary, this visualisation technique attempted to bring together effective features identified within the aesthetic and didactic visualisations of the previous iteration. The prototype developed included three major components, consisting of the visualisation manager, the interface manager and the code manager. Technical limitations with the first iteration of the visualsation prototype were addressed and an attempt was made to communicate the state of the source code, the state of the running program and the manipulation between the two by the live coder. The effectiveness of aligning the mental models of the audience and the live coder was to be evaluated in a follow-up user study.
 
 
