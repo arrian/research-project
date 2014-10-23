@@ -1,4 +1,17 @@
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Results from these questions were evaluated against a criteria for understanding level (see Table~\ref{table:understanding-levels}).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
 % The small sample size demonstrated only small differences between the two conditions examined. A larger sample may have provided more significance in the results.
 
 
