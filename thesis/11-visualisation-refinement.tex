@@ -118,42 +118,13 @@ To ensure the relationship between the actions of the programmer, the changes to
 
 \section{Development}
 
-A similar approach to the previous iteration of visualisation prototype was taken. This process involved collaborating with a live coding artist to further develop visualisations appropriate for the live coding context.
+A similar development approach to the previous iteration of the visualisation prototype was taken. This process involved collaborating with a live coding artist to further develop visualisations appropriate for the live coding context.
 
-A strategy for combining static source code and the dynamic program structures was developed. This involved storing the state of each function within the program and storing the function change history, active state, current state and editing metadata. The function change history was extracted from source code sent from the text editor to the interface manager. On each modification of the source code within the editor, a new version of the source code was sent to be analysed.
+A strategy for combining static source code and the dynamic program structures was developed. This required storing the state of each function within the program comprised of the function change history, active state, current state and editing metadata. The function change history was extracted from source code sent from the text editor to the interface manager to be analysed.
 
-Analysis of the source code involved parsing the source code and extracting functions and function names. Initially, full parsing was performed on the source code, however, it was determined that this would not be necessary for informative visualisations and would also cause difficulties when partial changes to the source code were made. 
-% To solve this problem, a heuristic source code parser
+Analysis of the source code involved parsing the source code and extracting functions and function names. It was determined early within the development process that full parsing of the syntax would not be necessary for informative visualisations. Instead, a heuristic line-by-line approach was implemented, separating functions in the source based on a set of simple rules. This approach allowed for managing syntax errors and incomplete syntax common while \textit{writing} a program. 
 
-\more
-
-% During this phase of visualisation development, the strategy for the integration of the static source code and the dynamic running prgoram 
-
-% During this phase of the 
-% -initially unsure about the direction of the visualisations
-% -knew that they required static analysis of the source code and mapping this to the dynamic running program
-% -developed iteratively... examined various approaches in solving this problem.
-
-% -wrote custom simple parser for xtlang. the complexity of more standard tools was not required though was examined early within development.
-% -complex full grammar parsing was examined and implemented but proved to be unnecessarily complex when it came to matching the previous state of the code to the current state of the code to the active state of the code
-% -
-
-
- % associated source code all while the program is running and the code is being edited. Further adaptions could take advantage of this infrastructure and further manipulate visualisations based on the data extracted.
-
-% -discuss reusable infrastructure for static and dynamic code analysis...
-
-% \subsection{Testing}
-
-% Stability was of primary concern during the live performance. To ensure no failures occurred during the live performance, a number of testing strategies were adopted.
-
-% Unit testing was carried out on each component of the prototype.
-
-% Integration testing proved to be most challenging within the context of the dynamic manipulation of source code. 
-
-% System testing...
-
-% Finally, evaluation during a user study would act as the acceptance test for the software visualisation method.
+Development took an iterative approach, testing components thoroughly. Testing strategies employed included unit testing, integration testing and system testing. Low level unit tests were written for the three components of the visualisation system: the interface manager, the code manager and the visualisation manager. Integration testing was considered essential due to the large numbers of interacting components and was conducted throughout the development process. Finally, system testing (and to some extent, user testing) was conducted with the live coder to ensure correct functionality within the system as a whole.
 
 \section{Summary}
 
