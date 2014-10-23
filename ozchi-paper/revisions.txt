@@ -4,11 +4,11 @@ List of Revisions
 
 2) We include a sample of the visualisations presented to the audience during the field study as Figure 4. (Reviewer 2)
 
-3) We state the size of the audience at the arts festival in section 2.1 in the intial paragraph. (Reviewer 2)
+3) We state the size of the audience at the arts festival in section 2.1 in the initial paragraph. (Reviewer 2)
 
 4) The projected visuals during all performances were large enough to be clearly seen by the audience. The visuals were front and center to the performances. There is no need to include their actual dimensions for the purposes of this revision. (Reviewer 2)
 
-5) During the laboratory experiment, the livecoding performer made efforts to ensure that the musical performances were as consistent as possible in their style and artistic effect. Clearly this is a subjective process and is one of the uncertainties of applying scientific methodologies to the arts. We have commented on this in section 3.1 in the intial paragraph. (Reviewer 2)
+5) During the laboratory experiment, the livecoding performer made efforts to ensure that the musical performances were as consistent as possible in their style and artistic effect. Clearly this is a subjective process and is one of the uncertainties of applying scientific methodologies to the arts. We have commented on this in section 3.1 in the initial paragraph. (Reviewer 2)
 
 6) We felt that there was no need to broaden the discussion here to consider editing dance performance using kinect. The short paper format makes it difficult to move outside of the immediate format of our study. (Reviewer 2)
 

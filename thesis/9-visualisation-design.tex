@@ -7,26 +7,27 @@ Following the exploratory field study (see Chapter~\ref{chap:exploratory-field-s
 
 \section{Rationale}
 
-% {\color{red}\cite{Ware2013a,McLean2010a,Purchase1996} will be useful here.}
-
 The exploratory field study established and examined questions regarding the projection of source code during live coding performances including: ``Is source code the best method of communicating the performance?'' and ``Are there alternative methods?''. Results suggested that there was potential for visualisation of the live coding process and identified understanding and enjoyment as valid measures of the audience.
 
 Evaluation of the literature had identified the need for visualisations that helped live coding audiences understand and enjoy the live coding performance. To this end, two sets of visualisations were developed. The first was intended to increase the enjoyment of the audience, enhancing aesthetic appeal and was labelled the ``aesthetic visualisation''. The second was intended to communicate the live coding process, help the audience to understand the programmatic aspects of the performance and was labelled the ``didactic visualisation''.
 
-In order to systematically and efficiently develop a visualisation design strategy, two stakeholders were identified. These included the live coder and the intended audience.
+Application to a real live coding performance would be necessary to realistically evaluate the visualisations. To this end, discussions with the live coder identified that speed was critical, as the nature of live coding is realtime, and reliability, as a single failure in the visualisations could cause catastrophic failure within the live coding performance.
 
-Evaluation of the visualisation prototype required application to a live coding performance. To achieve this, the live coder would need to apply the visualisations to a live performance. To this end, discussions with the live coder identified requirements including simultaneous display of source code and visualisations and visualisations depicting the progression of the performance accurately. It was also identified that performance of the visualisations was essential, as the nature of live coding is realtime, and reliability, as a single failure in the visualisations could cause catastrophic failure within the live coding performance.
+Typical live coding performances consist of around four instruments. This is to maintain musical consistency throughout the performance but to also allow for musical progression. It was identified that to accurately visualise a live coding performance, the visuals would need to have similar progression while also maintaining consistency throughout the performance using a visual palette of colours, shapes and animations.
 
-Typical live coding performances consist of around four instruments. This is to maintain musical consistency throughout the performance but to also allow for musical progression. It was identified that to accurately visualise a live coding performance, the visuals would also need to have similar progression while also maintaining consistency throughout the performance using a visual palette of colours, shapes and animations.
+Fundamental to live coding is the performance element. Live coding requires a reliable programming environment. Visualisations developed for this environment required that the chance of failure were minimised. To mitigate the chance of a failure in the live coding environment, a test strategy was developed for the visualisations to ensure that they did not cause unrecoverable failures and did not cause memory leaks.
 
-The intended audience was identified as a critical stakeholder in the ultimate effectiveness of the visualisations developed. The audience evaluated in the initial field study provided the basis for these requirements.
+% {\color{red}\cite{Ware2013a,McLean2010a,Purchase1996} will be useful here.}
+
+% In order to systematically and efficiently develop a visualisation design strategy, two stakeholders were identified. These were the live coder and the intended audience.
+
+
+% The intended audience was identified as a critical stakeholder in the ultimate effectiveness of the visualisations developed. The audience evaluated in the initial field study provided the basis for these requirements.
 
 % The source code caused fatigue, however to understand the program, seeing the whole development process (all the code) was necessary.
 
 % Requirements identified by the audience during the initial field study indicated that...
 % -discuss audience requirements identified from first study
-
-Fundamental to live coding is the performance element. Live coding requires a reliable programming environment. Visualisations developed for this environment required that the chance of failure were minimised. To mitigate the chance of a failure in the live coding environment, a test strategy was developed for the visualisations to ensure that they did not cause unrecoverable failures and did not cause memory leaks.
 
 % Timeline constraints were also identified as a potential risk factor in the development and evaluation of the visualisations. Mitigation involved developing a flexible, iteration based development plan with estimated milestones.
 
@@ -38,11 +39,13 @@ Fundamental to live coding is the performance element. Live coding requires a re
 
 \begin{figure}
   \centering \includegraphics[width=\columnwidth]{../images/diagrams/knowledge-flow-initial.pdf}
-  \caption{Knowledge flow from programmer to observer as directed by the visualisation technique employed.}
+  \caption{Knowledge flow from programmer to observer for the intial visualisation prototype.}
 \label{fig:knowledge-flow-initial}
 \end{figure}
 
-The initial iteration of the visualisation prototype consisted of two separate conditions. Each condition consisted of four visual progressions with the intention of representing the addition and removal of instruments during the live coding performance. Visualisations employed dynamic analysis of the running program to generate the visuals. The model of knowledge flow from programmer to observer is shown in Figure~\ref{fig:knowledge-flow-initial}.
+The initial iteration of the visualisation prototype consisted of two separate conditions. Each condition consisted of four visual progressions with the intention of representing the addition and removal of instruments during the live coding performance. Visualisations employed dynamic analysis of the running program to generate the visuals. 
+
+The intended model of knowledge flow from programmer to observer is shown in Figure~\ref{fig:knowledge-flow-initial}. The programmer, writing source code would activate the source code in the live coding programming environment. During dynamic analysis, information regarding the running program would be collected and organised into the current state of the running program. This dynamic information would then be visualised and projected onto a screen to be observed by an audience. 
 
 The first visualisation condition was labelled the ``aesthetic'' condition reflecting the intention to improve enjoyment during the live coding performance. The second visualisation condition was labelled the ``didactic'' condition with an intended goal of improving understanding during the live coding performance.
 
@@ -57,8 +60,7 @@ The first visualisation condition was labelled the ``aesthetic'' condition refle
 % % - what are the guidelines used
 % \cite{Ware2013a}...
 
-
-A number of guidelines from a variety of sources were adapted to develop these visualisations. A selection of these guidelines are listed below and are referred to in the following sections to identify the basis of design decisions:
+Guidelines from a variety of sources were adapted to develop these visualisations. Some of these guidelines are listed below and are referred to in the following sections to identify the basis of design decisions:
 \begin{itemize}
 \item Design for important elements to be perceived quickly \cite[p.~14]{Ware2013a}~\glab{guide:sensory-capabilities}
 \item Use colour saturation to represent numerical values \cite[p.~117]{Ware2013a}~\glab{guide:color-saturation}
@@ -72,7 +74,7 @@ A number of guidelines from a variety of sources were adapted to develop these v
 \item ``Important variables should be enhanced in the visualization\ldots~the mapping should guide the user's focus of attention'' \cite[p.~52]{Borgo2013}~\glab{guide:attention}
 \end{itemize}
 
-A number of general standards exist for the design of interfaces and the standard approaches for multimedia \ac{HCI} design (see~\cite{ISO2002} and \cite{Bevan2006}). However, as the space of the visualisation of live coding has not been fully defined, these standards have yet to be evaluated as relevant and effective. In these visualisations, these standards were taken as guidelines to allow for the possibility of the emergence of new, effective visualisation techniques.
+A number of general standards exist for the design of interfaces and approaches for multimedia \ac{HCI} design (see~\cite{ISO2002} and \cite{Bevan2006}). However, as the space of the visualisation of live coding has not been fully defined, these standards have yet to be evaluated as relevant and effective. In these visualisations, these standards were taken as guidelines to allow for the possibility of the emergence of new, effective visualisation techniques.
 
 Colour schemes, although varying slightly throughout the visualisations, consisted of a colour palette of red, orange and blue with red and orange used heavily throughout the visualisations and blue used for emphasis and visual interest (Guidelines~\ref{guide:dominant-channels} and \ref{guide:color-saturation}). Animations were used throughout to draw attention to parts of the visualisations (see Guideline~\ref{guide:attention}).
 
@@ -85,14 +87,14 @@ The didactic visualisation (shown in Figure~\ref{fig:didactic-visualisations}) a
 
 The stages of this visualisation attempted to address the issues indicated during the exploratory field study. These included the lack of an overview of the source code and program behaviour, the difficulty in linking changes to the source code and the flicking between source code screens. The didactic visualisations proceeded through four stages, with progression made depending on the number of active functions (instruments).
 
-Phase one (see Figure~\ref{fig:didactic-one}) displayed the name of the one active function in the centre of the screen (see Guideline~\ref{guide:attention}). Two other major visual elements were present including a short circular line segment rotating and a pulsing circle. Both visual elements were mapped to the callback rate of the active function (see Guideline~\ref{guide:redundancy}). Phase two (see Figure~\ref{fig:didactic-two}) displayed the name of two active functions. Two ring-shaped visual elements represented the two functions. Each ring-shape was divided into ten segments with each segment coloured according to the callback progress of the active functions. Phase three (see Figure~\ref{fig:didactic-three}) displayed three active functions as pulsing circles according to the progress of the active function callbacks. Finally, phase four (see Figure~\ref{fig:didactic-four}) displayed four active functions as circles with a colour fill according to the progress of the active function callbacks.
+Phase one (see Figure~\ref{fig:didactic-one}) displayed the name of the one active function in the centre of the screen (see Guideline~\ref{guide:attention}). Two other major visual elements were present: a short circular line segment rotating and a pulsing circle. Both visual elements were mapped to the callback rate of the active function (see Guideline~\ref{guide:redundancy}). Phase two (see Figure~\ref{fig:didactic-two}) displayed the name of two active functions. Two ring-shaped visual elements represented the two functions. Each ring-shape was divided into ten segments with each segment coloured according to the callback progress of the active functions. Phase three (see Figure~\ref{fig:didactic-three}) displayed three active functions as pulsing circles according to the progress of the active function callbacks. Finally, phase four (see Figure~\ref{fig:didactic-four}) displayed four active functions as circles with a colour fill according to the progress of the active function callbacks.
 
 \input{images/aesthetic-visualisations}
 
 \subsection{Aesthetic Visualisation}
 \label{sec:aesthetic-visualisation}
 
-The aesthetic visualisation technique was designed to react to the programmer's activity in a more abstract way, to maximise aesthetic appeal~\cite{Cawthon2007} and to engage the audience's interest. Although still based on the source code and the livecoder's edits, the generation of shapes was driven by instrument volume and synchronised with the musical beat. These were secondary features of the programming language and features resulting from the output of the running program as opposed to the callback rate, a primary feature, used in the didactic visualisations.
+The aesthetic visualisation technique was designed to react to the programmer's activity in a more abstract way, to maximise aesthetic appeal~\cite{Cawthon2007} and to engage the audience's interest. Although still based on the source code and the live coder's edits, the generation of shapes was driven by instrument volume and synchronised with the musical beat. These were secondary features of the programming language and features resulting from the output of the running program as opposed to the callback rate, a primary feature, used in the didactic visualisations.
 
 The emphasis for the aesthetic visualisation was on the artistic appeal of the visuals (see Figure~\ref{fig:aesthetic-visualisations}), including more variety in visual structure and colour. As in the didactic condition, the aesthetic visualisations proceeded through four stages, based on the number of active functions (instruments), but these visuals had no textual labels and they moved and interacted with each other over the entire projected scene.
 

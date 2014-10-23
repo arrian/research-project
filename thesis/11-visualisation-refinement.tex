@@ -13,7 +13,7 @@ Technical limitations identified in the previous iteration of the visualisation 
 
 The goal of this iteration of the visualisations was to align the mental model of the audience with that of the programmer, representing the state of the code visually and showing the iteraction of the programmer with the source code.
 
--stop the visualisation from obscuring the code, 
+% -stop the visualisation from obscuring the code, 
 
 \section{Design}
 
@@ -86,14 +86,6 @@ Two text editor plugins implementing the protocol were developed including a plu
   \label{table:osc-protocol}
 \end{table}
 
-% /interface/selection"  data));; args: count start end start end... 
-% /interface/code"  (event_get_data e)));; args: code
-% /interface/evaluate"  (event_get_data e))) ;; args: evaluated_code
-% /interface/keyboard"  data));; unused
-% /interface/error"  (event_get_data e))) ;; args: message
-% /interface/focus"  (event_get_data e))) ;; args: file_name
-% /interface/cursor"  data))
-
 \subsection{Code Manager}
 
 Both static analysis of source code and the dynamic analysis (see~\cite{Eisenbarth2003} and~\cite{Jerding1997}) of the program were combined into this iteration of the visualisation prototype in order to provide the audience with a link between the \acf{SoW} and the \acf{SoC}~\cite{Swift2013}.
@@ -108,7 +100,7 @@ Dynamic analysis of the running program involved providing mechanisms for the pr
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{../images/final-visualisations/final-code-visualisation.png}
-\caption[Prototype (second iteration) example]{An example of the visualisation developed.}
+\caption{An example of the visualisation developed following the refinement process.}
 \label{fig:final-visualisation}
 \end{figure}
 
@@ -157,12 +149,8 @@ Analysis of the source code involved parsing the source code and extracting func
 % -complex full grammar parsing was examined and implemented but proved to be unnecessarily complex when it came to matching the previous state of the code to the current state of the code to the active state of the code
 % -
 
-% \more
-
-The final prototype consisted of approximately 3600 \acf{SLOC}, consisting of 2300 \ac{SLOC} of C++ and C bindings, and 1300 \ac{SLOC} of xtlang.
-
-
-As a result of the development process, significant portions of the infrastructure developed could be further adapted to future static and dynamic analysis of code. The infrastructure developed provides a method of matching active code structures to the associated source code all while the program is running and the code is being edited. Further adaptions could take advantage of this infrastructure and further manipulate visualisations based on the data extracted.
+% \mor
+ associated source code all while the program is running and the code is being edited. Further adaptions could take advantage of this infrastructure and further manipulate visualisations based on the data extracted.
 
 % -discuss reusable infrastructure for static and dynamic code analysis... \more
 
@@ -180,6 +168,6 @@ As a result of the development process, significant portions of the infrastructu
 
 \section{Summary}
 
-In summary, this visualisation technique attempted to bring together effective features identified within the aesthetic and didactic visualisations of the previous iteration. The prototype developed included three major components, consisting of the visualisation manager, the interface manager and the code manager. Technical limitations with the first iteration of the visualsation prototype were addressed and an attempt was made to communicate the state of the source code, the state of the running program and the manipulation between the two by the live coder. The effectiveness of aligning the mental models of the audience and the live coder was to be evaluated in a follow-up user study.
+In summary, this visualisation technique attempted to bring together effective features identified within the aesthetic and didactic visualisations of the previous iteration. The prototype developed included three major components, consisting of the visualisation manager, the interface manager and the code manager. Technical limitations with the first iteration of the visualsation prototype were addressed and  An example of the the staVisualisation developed following the refinement process.the state of the running program and the manipulation between the two by the live coder. The effectiveness of aligning the mental models of the audience and the live coder was to be evaluated in a follow-up user study.
 
 
