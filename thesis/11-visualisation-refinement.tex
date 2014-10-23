@@ -3,7 +3,7 @@
 \chapter{Visualisation Refinement}
 \label{chap:visualisation-refinement}
 
-Following the first user study (see Chapter~\ref{chap:user-study}), limitations with both the visualisations and the evaluation method were identified and corrective steps were taken. The steps taken to correct these limitations and the resulting refined visualisation are outlined in this chapter.
+Following the first user study (see Chapter~\ref{chap:user-study}), limitations of both the visualisations and the evaluation method were identified and corrective steps were taken. The steps taken to correct these limitations and the resulting refined visualisation are outlined in this chapter.
 
 \begin{figure}
   \centering \includegraphics[width=\columnwidth]{../images/diagrams/knowledge-flow-refined.pdf}
@@ -13,11 +13,9 @@ Following the first user study (see Chapter~\ref{chap:user-study}), limitations 
 
 \section{Rationale}
 
-The initial user study (see Chapter~\ref{chap:user-study}) identified some improvement in enjoyment through the use of visualisations. However, the study had conflicting results regarding understanding with audiences reporting high levels of understanding attributed to the didactic visualisations when asked directly, but with lower overall understanding during the beginning stages of the live coding performance (see Section~\ref{section:user-study-understanding}). A new visualisation prototype was developed to bring together features identified as positively impacting enjoyment and understanding in one visualisation. This visualisation prototype built on a combination of the aesthetic and didactic visualisations evaluated in the previous study. The intention of this visualisation was to smooth the early transition into the more educational aspects of the visualisations through the aesthetic features identified.
+The initial user study (see Chapter~\ref{chap:user-study}) identified some improvement in enjoyment through the use of visualisations. However, the study had conflicting results regarding understanding, with audiences reporting high levels of understanding attributed to the didactic visualisations when asked directly, but with lower overall understanding during the beginning stages of the live coding performance (see Section~\ref{section:user-study-understanding}). A new visualisation prototype was developed to bring together features identified as positively impacting enjoyment and understanding in one visualisation. This visualisation prototype built on a combination of the aesthetic and didactic visualisations evaluated in the previous study. The intention of this visualisation was to smooth the early transition into the more educational aspects of the visualisations through the aesthetic features identified.
 
-Technical limitations identified in the previous iteration of the visualisation prototype including incorrect timing and beat, no direct feedback from the programmer and limited links between the visuals and the source code. 
-
-The goal of this iteration of the visualisations was to align the mental model of the audience with that of the programmer, representing the state of the code visually and showing the iteraction of the programmer with the source code.
+Some technical limitations identified in the previous iteration of the visualisation prototype included incorrect timing and beat, no direct feedback from the programmer and limited links between the visuals and the source code. The goal of this iteration of the visualisation prototype was to rectify these issues while aligning the mental model of the audience with that of the programmer.
 
 \section{Design}
 
@@ -53,8 +51,6 @@ Three sources of data were to be combined and visualised: the state of the sourc
 
 The refined model of knowledge flow from programmer to observer is shown in Figure~\ref{fig:knowledge-flow-refined}. As with the intial model of knowledge flow (see Figure~\ref{fig:knowledge-flow-initial}), dynamic analysis of the programming environment occurs. In this case however, the dynamic analysis is combined with static analysis of the source code before mapping to a visualisation.
 
-% \cite{Heer2006} might be useful for explaining the design of this visualisation...
-
 \subsection{Visualisation Manager}
 
 The visualisation manager handled all visual elements on the screen. The Polycode~\cite{Safrin2013} library was bound to the live coding environment allowing for more advanced two-dimensional graphical manipulations than the previous visualisation iteration through scene graph manipulation. Using this technique, the intention was to represent the state of the source code, the manipulation of the source code and the state of the active source code in the same visual environment.
@@ -62,7 +58,7 @@ The visualisation manager handled all visual elements on the screen. The Polycod
 \subsection{Interface Manager}
 \label{sec:interface-manager}
 
-To gather information regarding the actions of the programmer, a method of interfacing with the live coder's programming environment (text editor) was required. This was acheived using a text editor plugin sending programmer actions over an \ac{OSC} protocol. The interactions sent included cursor movement, all source code changes, file focus and source code evaluation. This protocol was implemented as a standard way of communicating between the text editor in use and the visualisations. Table~\ref{table:osc-protocol} describes the protocol.
+To gather information regarding the actions of the programmer, a method of interfacing with the live coder's programming environment (text editor) was required. This was achieved using a text editor plugin sending programmer actions over an \ac{OSC} protocol. The interactions sent included cursor movement, all source code changes, file focus and source code evaluation. This protocol was implemented as a standard way of communicating between the text editor in use and the visualisations. Table~\ref{table:osc-protocol} describes the protocol.
 
 Two text editor plugins implementing the protocol were developed including a plugin for EMACS~\cite{Stallman1981} and a plugin for Sublime Text~\cite{Skinner2013}.
 
@@ -89,12 +85,11 @@ Two text editor plugins implementing the protocol were developed including a plu
 
 \subsection{Code Manager}
 
-Both static analysis of source code and the dynamic analysis (see~\cite{Eisenbarth2003} and~\cite{Jerding1997}) of the program were combined into this iteration of the visualisation prototype in order to provide the audience with a link between the \acf{SoW} and the \acf{SoC}~\cite{Swift2013}. \more
-% {\color{red} explain what the \ac{SoW} and the \ac{SoC} actually is and show the link between the \ac{SoW} with dynamic analysis and the \ac{SoC} with static analysis...}
+Both static analysis of source code and dynamic analysis (see~\cite{Eisenbarth2003} and~\cite{Jerding1997}) of the program were combined into this iteration of the visualisation prototype in order to provide the audience with a link between the \acf{SoW} (the current active program) and the \acf{SoC} (the edits made to the source code not yet activated)~\cite{Swift2013}.
 
 Static analysis of the source code involved parsing the source code written by the programmer and analysing any changes made, mapping these changes to historic source code states. The source code written by the programmer was sent from an editor plugin (see~\ref{sec:interface-manager}) to the Extempore visualisation program and stored as the current \ac{SoC}. Mappings to previous states were then made for each function within the source code.
 
-Dynamic analysis of the running program involved providing mechanisms for the programmer to send running state information to be stored as the \ac{SoW}. A callback hook was provided to be used when creating an instrument during performance. This hook would provide data on the names of the instruments, the state of the callbacks and would allow links to be determined between the \ac{SoC} and the \ac{SoW}.
+Dynamic analysis of the running program involved providing mechanisms for the programmer to send running state information to be stored as the \ac{SoW}. A callback hook was provided to be used when creating an instrument during performance. This hook would provide data on the names of the instruments and the state of the callbacks, and would allow links to be determined between the \ac{SoC} and the \ac{SoW}.
 
 \subsection{Mappings}
 
@@ -115,29 +110,11 @@ Function count was mapped to the number of large visual elements on screen. When
 \label{fig:visualisation-class-diagram}
 \end{figure}
 
-Each large visual element represented the state of active and inactive functions. In live coding, the programmer triggers functions to change between active and inactive states. The mapping represented this through the use of washed out grey and white colours while inactive, and vibrant, bright colours while active. In addition, the active functions were animated, with moving visual elements.
+Each large visual element represented the state of active and inactive functions. In live coding, the programmer triggers functions to change between active and inactive states. The mapping represented this through the use of washed out grey and white shades while inactive, and vibrant, bright colours while active. In addition, the active functions were animated, with moving visual elements.
 
-Function size and shape was represented visually through the use of ``attractors'' with each line of code mapped to one of the visual elements. Visual elements would grow and shrink according to the length of the line of source code directly mapping the typing actions of the programmer to visual elements.  
-% -programmer typing behaviour
-
-% -function beat+callback duration
+Function size and shape were represented visually through the use of ``attractors'' with each line of code mapped to one of the visual elements. Visual elements would grow and shrink according to the length of the line of source code directly mapping the typing actions of the programmer to visual elements.  
 
 To ensure the relationship between the actions of the programmer, the changes to the source code and the changes to the music were easily identified, an icon representing the programmer was displayed closest to the function being edited. This mapping intended to provide the audience with a better overview of the movements of the programmer among the functions than would otherwise be visible through the cursor alone.  
-
-% From presentation:
-
-% developed one visualisation taking features from both aesthetic and didactic conditions of the previous user study
-% used this to visualise high level code structure and high level live coder actions
-
-% shows:
-% state of the active code
-% what sections of code are being edited
-
-% -  each hexagon indicates a line of code
-% the programmer is shown editing one of the functions
-% pulses with the musical output of each function
-
-
 
 \section{Development}
 
@@ -145,7 +122,7 @@ A similar approach to the previous iteration of visualisation prototype was take
 
 A strategy for combining static source code and the dynamic program structures was developed. This involved storing the state of each function within the program and storing the function change history, active state, current state and editing metadata. The function change history was extracted from source code sent from the text editor to the interface manager. On each modification of the source code within the editor, a new version of the source code was sent to be analysed.
 
-Analysis of the source code involved parsing the source code and extracting functions and the function names. Initially, full parsing was performed on the source code, however, it was determined that this would not be necessary for informative visualisations and would also cause difficulties when partial changes to the source code were made. 
+Analysis of the source code involved parsing the source code and extracting functions and function names. Initially, full parsing was performed on the source code, however, it was determined that this would not be necessary for informative visualisations and would also cause difficulties when partial changes to the source code were made. 
 % To solve this problem, a heuristic source code parser
 
 \more
@@ -180,6 +157,6 @@ Analysis of the source code involved parsing the source code and extracting func
 
 \section{Summary}
 
-In summary, this visualisation technique attempted to bring together effective features identified within the aesthetic and didactic visualisations of the previous iteration. The prototype developed included three major components, consisting of the visualisation manager, the interface manager and the code manager. Technical limitations with the first iteration of the visualsation prototype were addressed and  An example of the the staVisualisation developed following the refinement process.the state of the running program and the manipulation between the two by the live coder. The effectiveness of aligning the mental models of the audience and the live coder was to be evaluated in a follow-up user study.
+In summary, this visualisation technique attempted to bring together effective features identified within the aesthetic and didactic visualisations of the previous iteration (see Chapter~\ref{chap:visualisation-design}). The prototype developed included three major components, consisting of the visualisation manager, the interface manager and the code manager. Technical limitations with the first iteration of the visualisation prototype were addressed and the state of the running program and the manipulation of the source code were mapped to visual elements. The effectiveness of aligning the mental models of the audience and the live coder was to be evaluated in a follow-up user study.
 
 
