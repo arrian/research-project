@@ -31,15 +31,11 @@ Initial efforts to classify software visualisations identified two axes: whether
 
 Although it is the nature of software to change, static diagrams have traditionally been used to represent software systems visually. These diagrams typically show the structure (class diagrams) or function (state diagrams) of a software system at a specific moment in time~\cite{Rumbaugh2004}. The usefulness of these diagrams lies in their ability to represent fundamental structures within the program more concisely than the source code itself. However, it is not possible to represent a program's behaviour using these types of static diagrams~\cite{Baecker1998} and it is difficult to represent the evolution of the software using nothing but static diagrams.
 
-% Visual languages provide an alternative method of interaction with the software development process. However, visual languages are often not suited to general purpose programming~\cite{Myers1989}, providing only a subset of a full-featured text-based language.
-
 Approaches to dealing with the visualisation of software evolution and realtime feedback have been integrated into modern software development environments. Modern software development systems and \acp{IDE} may feature syntax highlighting to assist in comprehension~\cite{Chen2005,Reis}, source code annotations, and the generation of visualisations based on the source code~\cite{Hendrix2004}, and allow the programmer to interact with the running program. These modern \acp{IDE} emphasise the relationship between the source code and the running program but are still fundamentally tools for source code manipulation.
 
 Only the initial steps have been taken in order to implement and evaluate methods of communicating source code intent outside the field of programmer comprehension. Studies hint at the limitations of static diagrams, visual languages and modern software development environments and identify the need for alternative software representations and evaluation of their effectiveness for those with limited programming knowledge and experience. 
 
 Visualisations have the capacity to present information more effectively than traditional programming languages. Nevertheless, software visualisations still require significant development to provide a benefit to the observers in the understanding of the complexity of software ~\cite{Baecker1995}. Effective software visualisations contribute to making software easier to understand, reflecting the software's history through the lifecycle, facilitating the transfer of knowledge from the programmer to the observer, making important structures visible and managing software complexity~\cite{Baecker1995}.
-
-% how have others implemented visualisations into other fields... what have been the strategies, how successful has it been, what are the general guidelines...
 
 In a process-oriented activity such as live coding, different code visualisation techniques are necessary~\cite{McLean2010a,Magnusson2013}. However, these academic treatments of code visualisation in live coding adopt a survey-based approach, and the techniques discussed have not been subject to empirical evaluation.
 
@@ -47,32 +43,17 @@ In a process-oriented activity such as live coding, different code visualisation
 
 The relationship between the programmer and the observer has significant implications not just within the field of live coding but also within software engineering practice.
 
-Commonly within live coding, the live coding artist is performing in front of an audience. This setup includes the live coder as the programmer and the audience as a passive observer. Similar structures occur within software engineering practice in pair programming and with the concept of the maintenance programmer~\cite{Robson1991}. In this case, rather than a passive role, the observer takes the active role of communicating mistakes or considering new ideas.
-
-% The similarity between the observer within live coding and the observer within pair programming is that both observers are required to perform a task: understanding the code as the programmer is writing it.
+Commonly within live coding, the live coding artist is performing in front of an audience. This setup includes the live coder as the programmer and the audience as a passive observer. Similar structures occur within software engineering practice in pair programming and with the concept of the maintenance programmer~\cite{Robson1991}. In this case, rather than a passive role, the observer takes the active role of communicating mistakes or considering new ideas. Due to the similarities between these two fields, there is potential to apply software engineering techniques to the live coding process, and the potential to generalise the examination of live coding to software engineering practice.
 
 In the literature, live coding audiences are yet to be surveyed as to whether the projected code within a live coding performance gives a greater sense of communication between the programmer and observer or a greater sense of alienation~\cite{Mclean2011}. Similarly, studies are yet to be conducted to determine if source code is the best way of communicating the programming process.
 
-\more
-
-\section{Measuring Audience's Experiences}
+\section{Measuring Audiences' Experiences}
 
 There is currently a search for software visualisations that increase enjoyment and understanding~\cite{McLean2010a}. Here enjoyment refers to the perceived benefit gained from observing the visualisations regardless of the level of understanding. Understanding refers to the ability of an observer or audience to comprehend the abstract thinking process of the programmer.
 
 Enjoyment is the most common reaction to the positive effect of media~\cite{Vorderer2004}. Increased enjoyment is usually characterised by ``pleasurable affective response to a stimulus''~\cite{Brock2004} and is one of the fundamental goals of the modern media entertainment industry. Enjoyment, and the closely related concept of entertainment, are characterised or caused by a wide range of emotional responses including exhilaration, suspense, aesthetic appeal and a sense of achievement~\cite{Vorderer2004}. The literature identifies that further investigation into how design impacts enjoyment is needed~\cite{Reed1999}.
-% The level of aesthetic enjoyment provides a measure of the patterns in art~\cite{Mclean2011}.
 
 Understanding of a particular program is said to be achieved when the program can be explained ``in terms that are qualitatively different from the tokens used to construct the source code''~\cite{Biggerstaff1994}. Source code comprehension has a large body of research both within the understanding of text-based source code and within the space of software visualisation~\cite{Hosking2005}. In the space of live coding, this understanding is required to avoid a sense of distraction or exclusion~\cite{McLean2010a}. Measuring understanding could identify methods to reduce distraction and exclusion and provide a method to evaluate live coding.
-
-% However, understanding software while it is changing presents an additional challenge~\cite{Eisenbarth2003}. 
-
-% Understanding and enjoyment are often considered opposite concepts when implementing strategies to increase one or the other. 
-% -enjoyment is not completely separable from understanding. (not dual?)\\
-% -why can we not separate the two?\\
-% -what is the duality?\\
-% -how does this relate to visualisations?
-
-% \section{The Goal of Live Coding}
 
 Enjoyment and understanding align closely with the concepts of aestheticism and didacticism. Didacticism refers to the ultimate goal of teaching. This approach mirrors the concept of understanding from the previous section. A didactic approach intends to increase the level of understanding. Aestheticism refers to the ultimate goal of appealing to the senses. This approach mirrors the concept of enjoyment from the previous section. An aesthetic approach intends to increase visualisation usability and increase retention~\cite{Cawthon2007}. 
 
@@ -85,11 +66,6 @@ The educational aspects of software visualisations have been examined in a numbe
 There has been an initial examination of the aesthetics in graph drawing~\cite{Purchase1996,Purchase2001} and within the space of information visualisations~\cite{Cawthon2007,Bell}, though no studies have examined the effectiveness of process-driven software visualisations. This is particularly the case for the examination of live coded visualisations and the effect on audiences.
 
 Some frameworks for both aesthetic evaluation of visualisations~\cite{Cawthon2007,Purchase1996} and didactic evaluation of visualisations~\cite{VanWijk2005} have been developed, though a thorough evaluation of the combination of the two concepts has not been considered.
-
-% The goal of live coding is an open question...
-% The target audience and the goal of live coding is still an open question...
-
-% -discuss difficulties in understanding the \ac{SoW} and the \ac{SoC}...
 
 \section{Future Directions}
 

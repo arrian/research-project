@@ -61,19 +61,55 @@ The first visualisation condition was labelled the ``aesthetic'' condition refle
 % \cite{Ware2013a}...
 
 % A table might be better here...
-Guidelines from a variety of sources were adapted to develop these visualisations. Some of these guidelines are listed below and are referred to in the following sections to identify the basis of design decisions:
-\begin{itemize}
-\item Design for important elements to be perceived quickly \cite[p.~14]{Ware2013a}~\glab{guide:sensory-capabilities}
-\item Use colour saturation to represent numerical values \cite[p.~117]{Ware2013a}~\glab{guide:color-saturation}
-\item ``Use strong preattentive cues before weak ones where ease of search is critical'' \cite[p.~156]{Ware2013a}~\glab{guide:preattentive-cues}
-\item Use the dominant variables of colour and size to help focus attention \cite[p.~45]{Borgo2013}~\glab{guide:dominant-channels}
-\item Use a distinctive feature channel for a popout effect \cite[p.~157]{Ware2013a}~\glab{guide:distinctive-feature-channel}
-\item Related symbols should be placed in close proximity \cite[p.~181]{Ware2013a}~\glab{guide:close-together}
-\item Use words when the number of categories is few and space is available \cite[p.~321]{Ware2013a}~\glab{guide:words-on-chart}
-\item Text should appear ``as close as possible to the related parts of a diagram'' \cite[p.~333]{Ware2013a}~\glab{guide:close-text}
-\item ``A one-to-many mapping makes use of redundancies by mapping a data variable to multiple glyph channels. Such a mapping can reduce the risk of information loss by encoding important variables multiple times'' \cite[p.~52]{Borgo2013}~\glab{guide:redundancy}
-\item ``Important variables should be enhanced in the visualization\ldots~the mapping should guide the user's focus of attention'' \cite[p.~52]{Borgo2013}~\glab{guide:attention}
-\end{itemize}
+
+% \begin{itemize}
+% \item Design for important elements to be perceived quickly \cite[p.~14]{Ware2013a}~\glab{guide:sensory-capabilities}
+% \item Use colour saturation to represent numerical values \cite[p.~117]{Ware2013a}~\glab{guide:color-saturation}
+% \item ``Use strong preattentive cues before weak ones where ease of search is critical'' \cite[p.~156]{Ware2013a}~\glab{guide:preattentive-cues}
+% \item Use the dominant variables of colour and size to help focus attention \cite[p.~45]{Borgo2013}~\glab{guide:dominant-channels}
+% \item Use a distinctive feature channel for a popout effect \cite[p.~157]{Ware2013a}~\glab{guide:distinctive-feature-channel}
+% \item Related symbols should be placed in close proximity \cite[p.~181]{Ware2013a}~\glab{guide:close-together}
+% \item Use words when the number of categories is few and space is available \cite[p.~321]{Ware2013a}~\glab{guide:words-on-chart}
+% \item Text should appear ``as close as possible to the related parts of a diagram'' \cite[p.~333]{Ware2013a}~\glab{guide:close-text}
+% \item ``A one-to-many mapping makes use of redundancies by mapping a data variable to multiple glyph channels. Such a mapping can reduce the risk of information loss by encoding important variables multiple times'' \cite[p.~52]{Borgo2013}~\glab{guide:redundancy}
+% \item ``Important variables should be enhanced in the visualization\ldots~the mapping should guide the user's focus of attention'' \cite[p.~52]{Borgo2013}~\glab{guide:attention}
+% \end{itemize}
+
+{\renewcommand{\arraystretch}{2}
+\begin{table}
+  \centering
+  \begin{tabular}{|p{6cm}|p{4cm}|p{3cm}|}
+  \hline
+  \textbf{Guideline} & \textbf{Reference} & \textbf{Identifier}\\
+  \hline
+
+Design for important elements to be perceived quickly&\cite[p.~14]{Ware2013a}&\glab{guide:sensory-capabilities}\\
+\hline
+Use colour saturation to represent numerical values&\cite[p.~117]{Ware2013a}&\glab{guide:color-saturation}\\
+\hline
+``Use strong preattentive cues before weak ones where ease of search is critical''&\cite[p.~156]{Ware2013a}&\glab{guide:preattentive-cues}\\
+\hline
+Use the dominant variables of colour and size to help focus attention&\cite[p.~45]{Borgo2013}&\glab{guide:dominant-channels}\\
+\hline
+Use a distinctive feature channel for a popout effect&\cite[p.~157]{Ware2013a}&\glab{guide:distinctive-feature-channel}\\
+\hline
+Related symbols should be placed in close proximity&\cite[p.~181]{Ware2013a}&\glab{guide:close-together}\\
+\hline
+Use words when the number of categories is few and space is available&\cite[p.~321]{Ware2013a}&\glab{guide:words-on-chart}\\
+\hline
+Text should appear ``as close as possible to the related parts of a diagram''&\cite[p.~333]{Ware2013a}&\glab{guide:close-text}\\
+\hline
+``A one-to-many mapping makes use of redundancies by mapping a data variable to multiple glyph channels. Such a mapping can reduce the risk of information loss by encoding important variables multiple times''&\cite[p.~52]{Borgo2013}&\glab{guide:redundancy}\\
+\hline
+``Important variables should be enhanced in the visualization\ldots~the mapping should guide the user's focus of attention''&\cite[p.~52]{Borgo2013}&\glab{guide:attention}\\
+	\hline
+  \end{tabular}
+  \caption{Guidelines for design decisions.}
+  \label{table:visualisation-design-guidelines}
+\end{table}
+}
+
+Guidelines from a variety of sources were adapted to develop these visualisations. Some of these guidelines are listed in Table~\ref{table:visualisation-design-guidelines} and are  referred to in the following sections to identify the basis of design decisions.
 
 A number of general standards exist for the design of interfaces and approaches for multimedia \ac{HCI} design (see~\cite{ISO2002} and \cite{Bevan2006}). However, as the space of the visualisation of live coding has not been fully defined, these standards have yet to be evaluated as relevant and effective. In these visualisations, these standards were taken as guidelines to allow for the possibility of the emergence of new, effective visualisation techniques.
 
