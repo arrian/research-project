@@ -1,4 +1,61 @@
 
+% The small sample size demonstrated only small differences between the two conditions examined. A larger sample may have provided more significance in the results.
+
+
+% Even with the sensitivities afforded to the artistic process, the software design and the research methodology provided a solid practical and theoretical basis for the evaluation conducted.
+
+% -discuss more of the approach... difficulties in examining the artistic process from a scientific perspective...
+
+% -refer to notes from meeting
+
+
+
+
+
+
+
+
+
+
+
+% \begin{itemize}
+% \item  \qlab{question:study-3-early-stages}
+% \item What do you think the performer was doing in the very last stages of the performance? \qlab{question:study-3-last-stages}
+% \end{itemize}
+
+
+% Table showing the criteria for understanding
+% \begin{table}
+% \begin{center}
+% \begin{tabular}{ |l|p{7cm}| }
+% \hline
+% Understanding Level & Concepts \\ \hline
+% \multirow{3}{*}{Basic} & Identify functions or note distinctions between functions \\
+%  & Identify that the programmer has started writing a function \\
+%  & Refer to text selection or text editing \\ \hline
+% \multirow{3}{*}{Intermediate} & Identify when the programmer begins editing or modifying a function \\
+%  & Identify the activation of a function\\
+%  & Identify the deactivation of a function \\ \hline
+% \multirow{3}{*}{Advanced} & Identify when an error occurs \\
+%  & Identify function mapping to instruments or sound output \\
+%  & Identify programmer long-term goals \\
+% \hline
+% \end{tabular}
+% \end{center}
+% \caption[Understanding levels]{Levels for evaluating audience understanding.}
+% \label{table:understanding-levels}
+% \end{table}
+
+
+
+
+
+
+
+
+
+
+
 
 % -restate research question
 % More specifically, this thesis investigates the question: ``can the application of visualisation techniques to live coding enhance audience experience by increasing understanding and enjoyment?''. These questions were examined through a process of prototype development, user study evaluation and refinement.
