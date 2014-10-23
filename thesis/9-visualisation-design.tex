@@ -11,29 +11,11 @@ The exploratory field study established and examined questions regarding the pro
 
 Evaluation of the literature had identified the need for visualisations that helped live coding audiences understand and enjoy the live coding performance. To this end, two sets of visualisations were developed. The first was intended to increase the enjoyment of the audience, enhancing aesthetic appeal and was labelled the ``aesthetic visualisation''. The second was intended to communicate the live coding process, help the audience to understand the programmatic aspects of the performance and was labelled the ``didactic visualisation''.
 
-Application to a real live coding performance would be necessary to realistically evaluate the visualisations. To this end, discussions with the live coder identified that speed was critical, as the nature of live coding is realtime, and reliability, as a single failure in the visualisations could cause catastrophic failure within the live coding performance.
+Application to a real live coding performance would be necessary to realistically evaluate the visualisations. To this end, discussions with the live coder identified that critical requirements of the implementation of visualisations would be speed, as the nature of live coding is realtime, and reliability, as a single failure in the visualisations could cause catastrophic failure of the live coding performance. 
 
-Typical live coding performances consist of around four instruments. This is to maintain musical consistency throughout the performance but to also allow for musical progression. It was identified that to accurately visualise a live coding performance, the visuals would need to have similar progression while also maintaining consistency throughout the performance using a visual palette of colours, shapes and animations.
+% To mitigate the chance of a failure in the live coding environment, a test strategy was developed for the visualisations to ensure that they did not cause unrecoverable failures and did not cause memory leaks.
 
-Fundamental to live coding is the performance element. Live coding requires a reliable programming environment. Visualisations developed for this environment required that the chance of failure were minimised. To mitigate the chance of a failure in the live coding environment, a test strategy was developed for the visualisations to ensure that they did not cause unrecoverable failures and did not cause memory leaks.
-
-% {\color{red}\cite{Ware2013a,McLean2010a,Purchase1996} will be useful here.}
-
-% In order to systematically and efficiently develop a visualisation design strategy, two stakeholders were identified. These were the live coder and the intended audience.
-
-
-% The intended audience was identified as a critical stakeholder in the ultimate effectiveness of the visualisations developed. The audience evaluated in the initial field study provided the basis for these requirements.
-
-% The source code caused fatigue, however to understand the program, seeing the whole development process (all the code) was necessary.
-
-% Requirements identified by the audience during the initial field study indicated that...
-% -discuss audience requirements identified from first study
-
-% Timeline constraints were also identified as a potential risk factor in the development and evaluation of the visualisations. Mitigation involved developing a flexible, iteration based development plan with estimated milestones.
-
-% -ensure that the visualisations would provide a benefit and would not negatively impact the performance... mitigated by the iteration based approach to developing the visualisations
-
-% -ensure that the visualisations would not interfere with the live coder...
+Typical live coding performances utilise around four instruments. This is not only to maintain musical consistency throughout the performance but also to allow for musical progression. It was identified that to accurately visualise a live coding performance, the visuals would need to have similar progression while using a visual palette of colours, shapes and animations to maintain consistency throughout the performance.
 
 \section{Design}
 
@@ -45,35 +27,9 @@ Fundamental to live coding is the performance element. Live coding requires a re
 
 The initial iteration of the visualisation prototype consisted of two separate conditions. Each condition consisted of four visual progressions with the intention of representing the addition and removal of instruments during the live coding performance. Visualisations employed dynamic analysis of the running program to generate the visuals. 
 
-The intended model of knowledge flow from programmer to observer is shown in Figure~\ref{fig:knowledge-flow-initial}. The programmer, writing source code would activate the source code in the live coding programming environment. During dynamic analysis, information regarding the running program would be collected and organised into the current state of the running program. This dynamic information would then be visualised and projected onto a screen to be observed by an audience. 
+The intended model of knowledge flow from programmer to observer is shown in Figure~\ref{fig:knowledge-flow-initial}. The programmer writing source code would activate the source code in the live coding programming environment. During dynamic analysis, information regarding the running program would be collected and organised into the current state of the running program. This dynamic information would then be visualised and projected onto a screen to be observed by an audience. 
 
 The first visualisation condition was labelled the ``aesthetic'' condition reflecting the intention to improve enjoyment during the live coding performance. The second visualisation condition was labelled the ``didactic'' condition with an intended goal of improving understanding during the live coding performance.
-
-% The design of the initial visualisations focussed on the application of the literature on visualisation design to the field of software visualisation and the application to the visualisation of live code.
-
-% -music visualisation is an extremely rich and open-ended task, so to guide the development of the visualisations for our lab study...
-
-% -guidelines set out by mclean were used in understanding the application of visualisation to live coding...
-% \cite{McLean2010a}...
-
-% -guidelines set out by ware were used in developing the visualisations...
-% % - what are the guidelines used
-% \cite{Ware2013a}...
-
-% A table might be better here...
-
-% \begin{itemize}
-% \item Design for important elements to be perceived quickly \cite[p.~14]{Ware2013a}~\glab{guide:sensory-capabilities}
-% \item Use colour saturation to represent numerical values \cite[p.~117]{Ware2013a}~\glab{guide:color-saturation}
-% \item ``Use strong preattentive cues before weak ones where ease of search is critical'' \cite[p.~156]{Ware2013a}~\glab{guide:preattentive-cues}
-% \item Use the dominant variables of colour and size to help focus attention \cite[p.~45]{Borgo2013}~\glab{guide:dominant-channels}
-% \item Use a distinctive feature channel for a popout effect \cite[p.~157]{Ware2013a}~\glab{guide:distinctive-feature-channel}
-% \item Related symbols should be placed in close proximity \cite[p.~181]{Ware2013a}~\glab{guide:close-together}
-% \item Use words when the number of categories is few and space is available \cite[p.~321]{Ware2013a}~\glab{guide:words-on-chart}
-% \item Text should appear ``as close as possible to the related parts of a diagram'' \cite[p.~333]{Ware2013a}~\glab{guide:close-text}
-% \item ``A one-to-many mapping makes use of redundancies by mapping a data variable to multiple glyph channels. Such a mapping can reduce the risk of information loss by encoding important variables multiple times'' \cite[p.~52]{Borgo2013}~\glab{guide:redundancy}
-% \item ``Important variables should be enhanced in the visualization\ldots~the mapping should guide the user's focus of attention'' \cite[p.~52]{Borgo2013}~\glab{guide:attention}
-% \end{itemize}
 
 {\renewcommand{\arraystretch}{2}
 \begin{table}
@@ -111,7 +67,7 @@ Text should appear ``as close as possible to the related parts of a diagram''&\c
 
 Guidelines from a variety of sources were adapted to develop these visualisations. Some of these guidelines are listed in Table~\ref{table:visualisation-design-guidelines} and are  referred to in the following sections to identify the basis of design decisions.
 
-A number of general standards exist for the design of interfaces and approaches for multimedia \ac{HCI} design (see~\cite{ISO2002} and \cite{Bevan2006}). However, as the space of the visualisation of live coding has not been fully defined, these standards have yet to be evaluated as relevant and effective. In these visualisations, these standards were taken as guidelines to allow for the possibility of the emergence of new, effective visualisation techniques.
+A number of general standards exist for the design of interfaces and approaches for multimedia \ac{HCI} design (see~\cite{ISO2002} and \cite{Bevan2006}). However, as the space of the visualisation of live coding has not been fully defined, these standards have yet to be evaluated for relevance and effectiveness. In these visualisations, these standards were taken as guidelines to allow for the possibility of the emergence of new, effective visualisation techniques.
 
 Colour schemes, although varying slightly throughout the visualisations, consisted of a colour palette of red, orange and blue with red and orange used heavily throughout the visualisations and blue used for emphasis and visual interest (Guidelines~\ref{guide:dominant-channels} and \ref{guide:color-saturation}). Animations were used throughout to draw attention to parts of the visualisations (see Guideline~\ref{guide:attention}).
 
@@ -137,15 +93,15 @@ The emphasis for the aesthetic visualisation was on the artistic appeal of the v
 
 As with the didactic visualisations, the aesthetic visualisations proceeded through four stages, again with progression made depending on the number of active functions (instruments).
 
-Phase one (see Figure~\ref{fig:aesthetic-one}) displayed pulsing bars across the screen and indicated the active state of the function. The pulsing bars were matched to the tempo of the music. Phase two (see Figure~\ref{fig:aesthetic-two}) displayed random small coloured squares across the screen, designed to match the musical aesthetic. Phase three (see Figure~\ref{fig:aesthetic-three}) displayed groups of arcs, again designed to match the musical aesthetic. Finally, phase four (see Figure~\ref{fig:aesthetic-four}) displayed four sets of rotating circles, with the size of each set based on the musical output (volume) of an associated function (instrument).
+Phase one (see Figure~\ref{fig:aesthetic-one}) displayed pulsing bars across the screen and indicated the active state of the instrument and the underlying active functions. The pulsing bars were matched to the tempo of the music. Phase two (see Figure~\ref{fig:aesthetic-two}) displayed random small coloured squares across the screen, designed to match the musical aesthetic. Phase three (see Figure~\ref{fig:aesthetic-three}) displayed groups of arcs, again designed to match the musical aesthetic. Finally, phase four (see Figure~\ref{fig:aesthetic-four}) displayed four sets of rotating circles, with the size of each set based on the musical output (volume) of an associated function (instrument).
 
 \section{Development}
 
 Development of the visualisations took place in collaboration with a live coder. This collaboration ensured that the visualisations integrated with the live coding performance and that the performance aspects of live coding such as the workflow and the musical progression were not interrupted. Similarly, this collaboration allowed both the visualisations to be influenced by the musical structures common in live coding and the musical structures to be influenced by the expressiveness and limitations of the visualisations.
 
-Development was conducted within the standard live coding environment, in Extempore. The prototype consisted of a set of functions to be used during the performance as a replacement for some existing structures. This consisted of a callback hook labelled \textit{cv-callback} in replacement of Extempore's standard \textit{callback} function. In Extempore, the \textit{callback} function allows for repeatedly calling functions with a time based interval. This structure is fundamental to the musical aspects of live coding, allowing for the sequencing of musical structures and the patterns common in live coding music.
+Development was conducted within the standard live coding environment, in Extempore. The prototype consisted of a set of functions to be used during the performance as a replacement for some existing structures. This consisted of a callback hook labelled \textit{cv-callback} replacing Extempore's standard \textit{callback} function. In Extempore, the \textit{callback} function allows for repeatedly calling functions with a time based interval. This structure is fundamental to the musical aspects of live coding, allowing for the sequencing of musical structures and the patterns common in live coding music.
 
-The \textit{cv-callback} function allowed information regarding the dynamic aspects of the running program to be collected for display within the visualisations such as active function names, callback time, beat and duration information specific to each instrument.
+The \textit{cv-callback} function allowed information regarding the dynamic aspects of the running program to be collected for display within the visualisations. Examples of these dynamic aspects are active function names, callback time, beat and duration information specific to each instrument.
 
 Additionally, a \ac{VU} meter function was adapted to the prototype to allow for collecting volume information specific to each active instrument. This would allow for the real musical output of the musical structures to be determined and visualised.
 
@@ -153,16 +109,9 @@ Information from both the \textit{cv-callback} and the \ac{VU} meter were integr
 
 To develop the visualisations, Cairo~\cite{Worth2012} was used through Extempore bindings, as the supporting graphics library for visualisation implementation. Visualisations were written in pure xtlang, as part of the Extempore live coding environment. The final prototype consisted of a total of 1000 \ac{SLOC}.
 
-% To ensure 
-% Performance and stability were required 
-
-% \subsection{Testing}
-
-% what other considerations had to be made during development?
-
 \section{Summary}
 
-This chapter has described two sets of visualisations developed in collaboration with a live coding artist in an attempt to visualise the live coding process. The literature (see Chapter~\ref{chap:literature-review}) had identified the need to evaluate the effect of visualisations on audience experience within live coding in terms of the dimensions of enjoyment and understanding. The two sets of visualisations described here each target one of these dimensions with the aesthetic visualisation targeting enjoyment and the didactic visualisations targeting understanding. 
+This chapter has described two sets of visualisations developed in collaboration with a live coding artist in an attempt to visualise the live coding process. The literature (see Chapter~\ref{chap:literature-review}) had identified the need to evaluate the effect of visualisations on audience experience within live coding in terms of the dimensions of enjoyment and understanding. The two sets of visualisations described here each target one of these dimensions with the aesthetic visualisations targeting enjoyment and the didactic visualisations targeting understanding. 
 
 However, evaluation of the two resulting sets of visualisations was required. Although based on the literature and the results of the field study, assumptions made over the course of the development process required careful evaluation within the application space of live coding to confirm or invalidate these visualisations. The following chapter (see Chapter~\ref{chap:user-study}) discusses the evaluation of these visualisations within the space of live coding, further informing future iterations of the visualisation technique and development methodology.
 

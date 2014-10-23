@@ -1,4 +1,28 @@
 
+% {\color{red}\cite{Ware2013a,McLean2010a,Purchase1996} will be useful here.}
+
+% In order to systematically and efficiently develop a visualisation design strategy, two stakeholders were identified. These were the live coder and the intended audience.
+
+
+% The intended audience was identified as a critical stakeholder in the ultimate effectiveness of the visualisations developed. The audience evaluated in the initial field study provided the basis for these requirements.
+
+% The source code caused fatigue, however to understand the program, seeing the whole development process (all the code) was necessary.
+
+% Requirements identified by the audience during the initial field study indicated that...
+% -discuss audience requirements identified from first study
+
+% Timeline constraints were also identified as a potential risk factor in the development and evaluation of the visualisations. Mitigation involved developing a flexible, iteration based development plan with estimated milestones.
+
+% -ensure that the visualisations would provide a benefit and would not negatively impact the performance... mitigated by the iteration based approach to developing the visualisations
+
+% -ensure that the visualisations would not interfere with the live coder...
+
+
+
+
+
+
+
 
 % The concepts of code comprehension identified and subsequently evaluated within audiences with limited programming experience has relevance to software engineering practice.
 % More general application to software development
