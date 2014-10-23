@@ -89,7 +89,13 @@
 \pagestyle{headings}
 \markboth{Contents}{Contents}
 
-{\tableofcontents \cleardoublepage \addcontentsline{toc}{chapter}{\listfigurename} \listoffigures \input{acronyms}}
+\tableofcontents
+\cleardoublepage
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+\addcontentsline{toc}{chapter}{\listtablename}
+\listoftables
+\input{acronyms}
 
 \mainmatter
 
