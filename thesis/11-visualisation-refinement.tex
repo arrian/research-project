@@ -17,7 +17,7 @@ The goal of this iteration of the visualisations was to align the mental model o
 
 \section{Design}
 
-As with the previous visualisation iteration, guidelines were identified, adapted and applied to the design process. A selection of the design guidelines are outlined below:
+As with the previous visualisation iteration, guidelines were identified, adapted and applied to the design process. Some of the design guidelines are outlined below:
 
 \begin{itemize}
 \item Show relationships between entities using lines \cite[p.~183]{Ware2013a}~\glab{guide:links}
@@ -42,15 +42,15 @@ Some more specific guidelines and improvement taken from the previous study incl
 \label{fig:knowledge-flow-refined}
 \end{figure}
 
-Three sources of data were to be combined and visualised including the state of the source code, the state of the running program and the manipulation between the two by the live coder. To achieve this, three major components were required including an application manager, a code manager and an editor plugin (see Figure~\ref{fig:visualisation-class-diagram}). The following sections detail the implementation of these components.
+Three sources of data were to be combined and visualised: the state of the source code; the state of the running program; and the manipulation between the two by the live coder. To achieve this, three major components were required: an application manager; a code manager; and an editor plugin (see Figure~\ref{fig:visualisation-class-diagram}). The following sections detail the implementation of these components.
 
-This visualisation was, as with the previous iteration, rendered under the source code. 
+This visualisation was, as with the previous iteration, rendered under the source code. \more
 
 % \cite{Heer2006} might be useful for explaining the design of this visualisation...
 
 \begin{figure}
   \centering \includegraphics[width=\columnwidth]{../images/diagrams/visualisation-class-diagram.pdf}
-  \caption[Prototype (second iteration) class diagram]{Class diagram of the visualisation technique employed. The three major components included the visualisation manager, the interface manager and the code manager.}
+  \caption[The refined visualisation class diagram]{The refined visualisation class diagram. The three major components included the visualisation manager, the interface manager and the code manager. The visualisation manager handled the mapping from the state of the live coding program to the visual elements. The interface manager received details of the state of the text editor from a text editor plugin. Finally, the code manager collected data from both the running live coding program and the static source code retrieved from the text editor to combine into the current state of the live coding program.}
 \label{fig:visualisation-class-diagram}
 \end{figure}
 
@@ -88,7 +88,7 @@ Two text editor plugins implementing the protocol were developed including a plu
 
 \subsection{Code Manager}
 
-Both static analysis of source code and the dynamic analysis (see~\cite{Eisenbarth2003} and~\cite{Jerding1997}) of the program were combined into this iteration of the visualisation prototype in order to provide the audience with a link between the \acf{SoW} and the \acf{SoC}~\cite{Swift2013}.
+Both static analysis of source code and the dynamic analysis (see~\cite{Eisenbarth2003} and~\cite{Jerding1997}) of the program were combined into this iteration of the visualisation prototype in order to provide the audience with a link between the \acf{SoW} and the \acf{SoC}~\cite{Swift2013}. \more
 % {\color{red} explain what the \ac{SoW} and the \ac{SoC} actually is and show the link between the \ac{SoW} with dynamic analysis and the \ac{SoC} with static analysis...}
 
 Static analysis of the source code involved parsing the source code written by the programmer and analysing any changes made, mapping these changes to historic source code states. The source code written by the programmer was sent from an editor plugin (see~\ref{sec:interface-manager}) to the Extempore visualisation program and stored as the current \ac{SoC}. Mappings to previous states were then made for each function within the source code.
@@ -108,7 +108,7 @@ A number of specific mappings were assigned to the visualisation. These visual m
 
 Function count was mapped to the number of large visual elements on screen. When adding a new function, a new element was introduced. This mapping was intended to allow the audience to associate the simplified geometric shape to the source code and allow the audience to separate functions visually.
 
-Each large visual element represented the state of active and inactive functions. In live coding, the programmer triggers functions to change between active and inactive states. The mapping represented this though the use of washed out grey and white colours while inactive and vibrant, bright colours while active. In addition, the active functions were animated, with moving visual elements.
+Each large visual element represented the state of active and inactive functions. In live coding, the programmer triggers functions to change between active and inactive states. The mapping represented this through the use of washed out grey and white colours while inactive, and vibrant, bright colours while active. In addition, the active functions were animated, with moving visual elements.
 
 Function size and shape was represented visually through the use of ``attractors'' with each line of code mapped to one of the visual elements. Visual elements would grow and shrink according to the length of the line of source code directly mapping the typing actions of the programmer to visual elements.  
 % -programmer typing behaviour
@@ -136,7 +136,10 @@ A similar approach to the previous iteration of visualisation prototype was take
 
 A strategy for combining static source code and the dynamic program structures was developed. This involved storing the state of each function within the program and storing the function change history, active state, current state and editing metadata. The function change history was extracted from source code sent from the text editor to the interface manager. On each modification of the source code within the editor, a new version of the source code was sent to be analysed.
 
-Analysis of the source code involved parsing the source code and extracting functions and the function names. Initially, full parsing was performed on the source code, however, it was determined that this would not be necessary for informative visualisations and would also cause difficulties when partial changes to the source code were made. To solve this problem, a heuristic source code parser
+Analysis of the source code involved parsing the source code and extracting functions and the function names. Initially, full parsing was performed on the source code, however, it was determined that this would not be necessary for informative visualisations and would also cause difficulties when partial changes to the source code were made. 
+% To solve this problem, a heuristic source code parser
+
+\more
 
 % During this phase of visualisation development, the strategy for the integration of the static source code and the dynamic running prgoram 
 
@@ -149,10 +152,10 @@ Analysis of the source code involved parsing the source code and extracting func
 % -complex full grammar parsing was examined and implemented but proved to be unnecessarily complex when it came to matching the previous state of the code to the current state of the code to the active state of the code
 % -
 
-% \mor
- associated source code all while the program is running and the code is being edited. Further adaptions could take advantage of this infrastructure and further manipulate visualisations based on the data extracted.
 
-% -discuss reusable infrastructure for static and dynamic code analysis... \more
+ % associated source code all while the program is running and the code is being edited. Further adaptions could take advantage of this infrastructure and further manipulate visualisations based on the data extracted.
+
+% -discuss reusable infrastructure for static and dynamic code analysis...
 
 % \subsection{Testing}
 

@@ -1,6 +1,6 @@
 
 
-% The concepts of code comprehension identified and subsequently evaluated within audiences with limited programming experience has relevance to software engineering practice. \more
+% The concepts of code comprehension identified and subsequently evaluated within audiences with limited programming experience has relevance to software engineering practice.
 % More general application to software development
 
 
