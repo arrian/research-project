@@ -74,10 +74,10 @@
     
     (if (null? CONNECTOR_CODE) 
       (begin 
-        (set! CONNECTOR_CODE (poly_scene_line_create (- hex_x (/ CONNECTOR_CIRCLE_RADIUS 2.0)) hex_y code_x code_y)) 
+        (set! CONNECTOR_CODE (poly_scene_line_create (- hex_x (/ CONNECTOR_CIRCLE_RADIUS 2.0)) hex_y 0.0 0.0)) 
         (poly_scene_add_child POLY_SCENE CONNECTOR_CODE)
         void)
-      (poly_scene_line_set_points CONNECTOR_CODE (- hex_x (/ CONNECTOR_CIRCLE_RADIUS 2.0)) hex_y code_x code_y))
+      (poly_scene_line_set_points CONNECTOR_CODE (- hex_x (/ CONNECTOR_CIRCLE_RADIUS 2.0)) hex_y 0.0 0.0))
     ;; (if (null? CONNECTOR_CIRCLE) 
     ;;   (begin 
     ;;     (set! CONNECTOR_CIRCLE (poly_scene_primitive_create_line_circle CONNECTOR_CIRCLE_RADIUS CONNECTOR_CIRCLE_RADIUS 16)) 

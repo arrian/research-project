@@ -1,0 +1,240 @@
+{"title" : "Enjoyment with No Visualisation",
+ "nodes":[
+  {"name":"high"},
+  {"name":"medium"},
+  {"name":"low"},
+  {"name":"high"},
+  {"name":"medium"},
+  {"name":"low"},
+  {"name":"high"},
+  {"name":"medium"},
+  {"name":"low"}
+],
+"links":[
+  {"source":0,"target":4,"value":1,"init":0},
+  {"source":4,"target":7,"value":1,"init":0},
+  {"source":1,"target":3,"value":1,"init":1},
+  {"source":3,"target":7,"value":1,"init":1},
+  {"source":1,"target":5,"value":1,"init":1},
+  {"source":5,"target":8,"value":1,"init":1},
+  {"source":1,"target":4,"value":1,"init":1},
+  {"source":4,"target":7,"value":1,"init":1},
+  {"source":1,"target":3,"value":2,"init":1},
+  {"source":3,"target":6,"value":2,"init":1},
+  {"source":2,"target":3,"value":3,"init":2},
+  {"source":3,"target":7,"value":3,"init":2},
+  {"source":1,"target":4,"value":1,"init":1},
+  {"source":4,"target":6,"value":1,"init":1},
+  {"source":2,"target":4,"value":3,"init":2},
+  {"source":4,"target":8,"value":3,"init":2},
+  {"source":2,"target":4,"value":4,"init":2},
+  {"source":4,"target":6,"value":4,"init":2},
+  {"source":0,"target":3,"value":2,"init":0},
+  {"source":3,"target":6,"value":2,"init":0},
+  {"source":0,"target":4,"value":1,"init":0},
+  {"source":4,"target":8,"value":1,"init":0},
+  {"source":1,"target":5,"value":1,"init":1},
+  {"source":5,"target":7,"value":1,"init":1},
+  {"source":2,"target":4,"value":3,"init":2},
+  {"source":4,"target":7,"value":3,"init":2},
+  {"source":1,"target":5,"value":1,"init":1},
+  {"source":5,"target":6,"value":1,"init":1}
+]};
+
+
+
+(['low', 'low', 'low'], 7)
+(['high', 'medium', 'medium'], 0)
+(['high', 'low', 'low'], 0)
+(['medium', 'medium', 'low'], 0)
+(['high', 'low', 'high'], 0)
+(['medium', 'high', 'medium'], 0)
+(['medium', 'low', 'low'], 0)
+(['medium', 'high', 'low'], 0)
+(['medium', 'medium', 'medium'], 9)
+(['high', 'high', 'low'], 0)
+(['medium', 'high', 'high'], 0)
+(['low', 'low', 'medium'], 2)
+(['low', 'high', 'medium'], 0)
+(['medium', 'medium', 'high'], 0)
+(['high', 'low', 'medium'], 0)
+(['low', 'high', 'low'], 0)
+(['low', 'medium', 'low'], 0)
+(['low', 'low', 'high'], 0)
+(['high', 'medium', 'high'], 1)
+(['low', 'medium', 'high'], 1)
+(['low', 'high', 'high'], 1)
+(['high', 'high', 'high'], 2)
+(['high', 'medium', 'low'], 1)
+(['high', 'high', 'medium'], 0)
+(['medium', 'low', 'medium'], 0)
+(['low', 'medium', 'medium'], 1)
+(['medium', 'low', 'high'], 0)
+{"title" : "Understanding with No Visualisation",
+ "nodes":[
+  {"name":"high"},
+  {"name":"medium"},
+  {"name":"low"},
+  {"name":"high"},
+  {"name":"medium"},
+  {"name":"low"},
+  {"name":"high"},
+  {"name":"medium"},
+  {"name":"low"}
+],
+"links":[
+  {"source":2,"target":5,"value":7,"init":2},
+  {"source":5,"target":8,"value":7,"init":2},
+  {"source":1,"target":4,"value":9,"init":1},
+  {"source":4,"target":7,"value":9,"init":1},
+  {"source":2,"target":5,"value":2,"init":2},
+  {"source":5,"target":7,"value":2,"init":2},
+  {"source":0,"target":4,"value":1,"init":0},
+  {"source":4,"target":6,"value":1,"init":0},
+  {"source":2,"target":4,"value":1,"init":2},
+  {"source":4,"target":6,"value":1,"init":2},
+  {"source":2,"target":3,"value":1,"init":2},
+  {"source":3,"target":6,"value":1,"init":2},
+  {"source":0,"target":3,"value":2,"init":0},
+  {"source":3,"target":6,"value":2,"init":0},
+  {"source":0,"target":4,"value":1,"init":0},
+  {"source":4,"target":8,"value":1,"init":0},
+  {"source":2,"target":4,"value":1,"init":2},
+  {"source":4,"target":7,"value":1,"init":2}
+]};
+
+
+
+(['low', 'low', 'low'], 1)
+(['high', 'medium', 'medium'], 0)
+(['high', 'low', 'low'], 0)
+(['medium', 'medium', 'low'], 0)
+(['high', 'low', 'high'], 0)
+(['medium', 'high', 'medium'], 2)
+(['medium', 'low', 'low'], 0)
+(['medium', 'high', 'low'], 1)
+(['medium', 'medium', 'medium'], 2)
+(['high', 'high', 'low'], 0)
+(['medium', 'high', 'high'], 1)
+(['low', 'low', 'medium'], 0)
+(['low', 'high', 'medium'], 2)
+(['medium', 'medium', 'high'], 3)
+(['high', 'low', 'medium'], 0)
+(['low', 'high', 'low'], 0)
+(['low', 'medium', 'low'], 3)
+(['low', 'low', 'high'], 1)
+(['high', 'medium', 'high'], 1)
+(['low', 'medium', 'high'], 2)
+(['low', 'high', 'high'], 1)
+(['high', 'high', 'high'], 2)
+(['high', 'medium', 'low'], 0)
+(['high', 'high', 'medium'], 1)
+(['medium', 'low', 'medium'], 0)
+(['low', 'medium', 'medium'], 2)
+(['medium', 'low', 'high'], 0)
+{"title" : "Enjoyment with Visualisation",
+ "nodes":[
+  {"name":"high"},
+  {"name":"medium"},
+  {"name":"low"},
+  {"name":"high"},
+  {"name":"medium"},
+  {"name":"low"},
+  {"name":"high"},
+  {"name":"medium"},
+  {"name":"low"}
+],
+"links":[
+  {"source":2,"target":5,"value":1,"init":2},
+  {"source":5,"target":8,"value":1,"init":2},
+  {"source":1,"target":3,"value":2,"init":1},
+  {"source":3,"target":7,"value":2,"init":1},
+  {"source":1,"target":3,"value":1,"init":1},
+  {"source":3,"target":8,"value":1,"init":1},
+  {"source":1,"target":4,"value":2,"init":1},
+  {"source":4,"target":7,"value":2,"init":1},
+  {"source":1,"target":3,"value":1,"init":1},
+  {"source":3,"target":6,"value":1,"init":1},
+  {"source":2,"target":3,"value":2,"init":2},
+  {"source":3,"target":7,"value":2,"init":2},
+  {"source":1,"target":4,"value":3,"init":1},
+  {"source":4,"target":6,"value":3,"init":1},
+  {"source":2,"target":4,"value":3,"init":2},
+  {"source":4,"target":8,"value":3,"init":2},
+  {"source":2,"target":5,"value":1,"init":2},
+  {"source":5,"target":6,"value":1,"init":2},
+  {"source":0,"target":4,"value":1,"init":0},
+  {"source":4,"target":6,"value":1,"init":0},
+  {"source":2,"target":4,"value":2,"init":2},
+  {"source":4,"target":6,"value":2,"init":2},
+  {"source":2,"target":3,"value":1,"init":2},
+  {"source":3,"target":6,"value":1,"init":2},
+  {"source":0,"target":3,"value":2,"init":0},
+  {"source":3,"target":6,"value":2,"init":0},
+  {"source":0,"target":3,"value":1,"init":0},
+  {"source":3,"target":7,"value":1,"init":0},
+  {"source":2,"target":4,"value":2,"init":2},
+  {"source":4,"target":7,"value":2,"init":2}
+]};
+
+
+
+(['low', 'low', 'low'], 6)
+(['high', 'medium', 'medium'], 0)
+(['high', 'low', 'low'], 0)
+(['medium', 'medium', 'low'], 0)
+(['high', 'low', 'high'], 0)
+(['medium', 'high', 'medium'], 0)
+(['medium', 'low', 'low'], 0)
+(['medium', 'high', 'low'], 0)
+(['medium', 'medium', 'medium'], 5)
+(['high', 'high', 'low'], 0)
+(['medium', 'high', 'high'], 1)
+(['low', 'low', 'medium'], 2)
+(['low', 'high', 'medium'], 0)
+(['medium', 'medium', 'high'], 4)
+(['high', 'low', 'medium'], 0)
+(['low', 'high', 'low'], 0)
+(['low', 'medium', 'low'], 1)
+(['low', 'low', 'high'], 0)
+(['high', 'medium', 'high'], 0)
+(['low', 'medium', 'high'], 0)
+(['low', 'high', 'high'], 0)
+(['high', 'high', 'high'], 2)
+(['high', 'medium', 'low'], 0)
+(['high', 'high', 'medium'], 0)
+(['medium', 'low', 'medium'], 2)
+(['low', 'medium', 'medium'], 2)
+(['medium', 'low', 'high'], 0)
+{"title" : "Understanding with Visualisation",
+ "nodes":[
+  {"name":"high"},
+  {"name":"medium"},
+  {"name":"low"},
+  {"name":"high"},
+  {"name":"medium"},
+  {"name":"low"},
+  {"name":"high"},
+  {"name":"medium"},
+  {"name":"low"}
+],
+"links":[
+  {"source":2,"target":5,"value":6,"init":2},
+  {"source":5,"target":8,"value":6,"init":2},
+  {"source":1,"target":4,"value":5,"init":1},
+  {"source":4,"target":7,"value":5,"init":1},
+  {"source":1,"target":3,"value":1,"init":1},
+  {"source":3,"target":6,"value":1,"init":1},
+  {"source":2,"target":5,"value":2,"init":2},
+  {"source":5,"target":7,"value":2,"init":2},
+  {"source":1,"target":4,"value":4,"init":1},
+  {"source":4,"target":6,"value":4,"init":1},
+  {"source":2,"target":4,"value":1,"init":2},
+  {"source":4,"target":8,"value":1,"init":2},
+  {"source":0,"target":3,"value":2,"init":0},
+  {"source":3,"target":6,"value":2,"init":0},
+  {"source":1,"target":5,"value":2,"init":1},
+  {"source":5,"target":7,"value":2,"init":1},
+  {"source":2,"target":4,"value":2,"init":2},
+  {"source":4,"target":7,"value":2,"init":2}
+]};

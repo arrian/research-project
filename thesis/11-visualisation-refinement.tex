@@ -120,7 +120,7 @@ To ensure the relationship between the actions of the programmer, the changes to
 
 A similar development approach to the previous iteration of the visualisation prototype was taken. This process involved collaborating with a live coding artist to further develop visualisations appropriate for the live coding context.
 
-A strategy for combining static source code and the dynamic program structures was developed. This required storing the state of each function within the program comprised of the function change history, active state, current state and editing metadata. The function change history was extracted from source code sent from the text editor to the interface manager to be analysed.
+A strategy was developed for combining information retrieved from static source code and the dynamic program structures. This required storing the state of each function within the program comprised of the function change history, active state, current state and editing metadata. The function change history was extracted from source code sent from the text editor to the interface manager to be analysed.
 
 Analysis of the source code involved parsing the source code and extracting functions and function names. It was determined early within the development process that full parsing of the syntax would not be necessary for informative visualisations. Instead, a heuristic line-by-line approach was implemented, separating functions in the source based on a set of simple rules. This approach allowed for managing syntax errors and incomplete syntax common while \textit{writing} a program. 
 
