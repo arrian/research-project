@@ -311,24 +311,46 @@
 % *********************************************
 % Gerry Murray 11/30/2006
 % *********************************************
-\newfont{\secfnt}{ptmb8t at 12pt}
-\newfont{\secit}{ptmbi8t at 12pt}    %13 Jan 00 gkmt
-\newfont{\subsecfnt}{ptmri8t at 11pt}
-\newfont{\subsecit}{ptmbi8t at 11pt}  % 
-\newfont{\ttlfnt}{phvb8t at 18pt}
-\newfont{\ttlit}{phvbo8t at 18pt}    % GM 2/4/2000
-\newfont{\subttlfnt}{phvr8t at 14pt}
-\newfont{\subttlit}{phvro8t at 14pt} % GM 2/4/2000
-\newfont{\subttlbf}{phvb8t at 14pt}  % 13 Jan 00 gkmt
-\newfont{\aufnt}{phvr8t at 12pt}
-\newfont{\auit}{phvro8t at 12pt}     % GM 2/4/2000
-\newfont{\affaddr}{phvr8t at 10pt}
-\newfont{\affaddrit}{phvro8t at 10pt} % GM 2/4/2000
-\newfont{\eaddfnt}{phvr8t at 12pt}
-\newfont{\ixpt}{ptmr8t at 9pt}
-\newfont{\confname}{ptmri8t at 8pt}
-\newfont{\crnotice}{ptmr8t at 8pt}
-\newfont{\ninept}{ptmr8t at 9pt}
+%\newfont{\secfnt}{ptmb8t at 12pt}
+%\newfont{\secit}{ptmbi8t at 12pt}    %13 Jan 00 gkmt
+%\newfont{\subsecfnt}{ptmri8t at 11pt}
+%\newfont{\subsecit}{ptmbi8t at 11pt}  % 
+%\newfont{\ttlfnt}{phvb8t at 18pt}
+%\newfont{\ttlit}{phvbo8t at 18pt}    % GM 2/4/2000
+%\newfont{\subttlfnt}{phvr8t at 14pt}
+%\newfont{\subttlit}{phvro8t at 14pt} % GM 2/4/2000
+%\newfont{\subttlbf}{phvb8t at 14pt}  % 13 Jan 00 gkmt
+%\newfont{\aufnt}{phvr8t at 12pt}
+%\newfont{\auit}{phvro8t at 12pt}     % GM 2/4/2000
+%\newfont{\affaddr}{phvr8t at 10pt}
+%\newfont{\affaddrit}{phvro8t at 10pt} % GM 2/4/2000
+%\newfont{\eaddfnt}{phvr8t at 12pt}
+%\newfont{\ixpt}{ptmr8t at 9pt}
+%\newfont{\confname}{ptmri8t at 8pt}
+%\newfont{\crnotice}{ptmr8t at 8pt}
+%\newfont{\ninept}{ptmr8t at 9pt}
+
+
+\newfont{\secfnt}{phvb7t at 9pt}                    % 05-16-2006 atd
+\newfont{\secit}{phvbo7t at 9pt}                    % 05-16-2006 atd
+\newfont{\subsecfnt}{phvro7t at 9pt}                    % 05-16-2006 atd
+\newfont{\subsecit}{phvr7t at 9pt}                    % 05-16-2006 atd
+\newfont{\ttlfnt}{phvb7t at 18pt}                    % 05-16-2006 atd
+\newfont{\ttlit}{phvbo7t at 18pt}                    % 05-16-2006 atd
+\newfont{\subttlfnt}{phvr7t at 14pt}                    % 05-16-2006 atd
+\newfont{\subttlit}{phvro7t at 14pt}                     % 05-16-2006 atd
+\newfont{\subttlbf}{phvb7t at 14pt}                    % 05-16-2006 atd
+\newfont{\aufnt}{ptmb7t at 12pt}                    % 05-16-2006 atd
+\newfont{\auit}{ptmbo7t at 12pt}                    % 05-16-2006 atd
+\newfont{\affaddr}{ptmr7t at 12pt}                    % 05-16-2006 atd
+\newfont{\affaddrit}{ptmro7t at 12pt}                    % 05-16-2006 atd
+\newfont{\eaddfnt}{ptmr7t at 12pt}                    % 05-16-2006 atd
+\newfont{\ixpt}{ptmr7t at 10pt}                    % 05-16-2006 atd
+\newfont{\confname}{ptmri7t at 8pt}                    % 05-16-2006 atd
+\newfont{\crnotice}{ptmr7t at 8pt}                    % 05-16-2006 atd
+\newfont{\ninept}{ptmr7t at 10pt}                    % 05-16-2006 atd
+
+
 % +++++++++++++++++++++++++++++++++++++++++++++
 % -- End of block B --
 
@@ -1422,15 +1444,15 @@
 \newtoks\copyrtyr
 \newtoks\acmcopyr
 \newtoks\boilerplate
-\global\acmcopyr={978-1-4503-1438-1/12/11}  % Default - 5/11/2001 *** Gerry
-\global\copyrtyr={2012}                % Default - 3/3/2003 *** Gerry
+\global\acmcopyr={978-1-4503-0653-9}  % Default - 5/11/2001 *** Gerry
+\global\copyrtyr={2014}                % Default - 3/3/2003 *** Gerry
 \def\CopyrightYear#1{\global\copyrtyr{#1}}
 \def\crdata#1{\global\acmcopyr{#1}}
 \def\permission#1{\global\boilerplate{#1}}
 %
 \global\boilerplate={Permission to make digital or hard copies of all or part of this work for personal or classroom use is granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page.  To copy otherwise, to republish, to post on servers or to redistribute to lists, requires prior specific permission and/or a fee.}
 \newtoks\copyrightetc
-\global\copyrightetc{Copyright \the\copyrtyr\ ACM \the\acmcopyr\ ...\$10.00}
+\global\copyrightetc{Copyright \the\copyrtyr\ ACM \the\acmcopyr\ ...\$15.00}
 \toappear{\the\boilerplate\par
 {\confname{\the\conf}} \the\confinfo\par \the\copyrightetc.}
 %\DeclareFixedFont{\altcrnotice}{OT1}{tmr}{m}{n}{8}  % << patch needed for accenting e.g. Montreal - Gerry, May 2007

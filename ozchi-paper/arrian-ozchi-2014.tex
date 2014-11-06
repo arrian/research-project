@@ -1,7 +1,17 @@
 \documentclass{sig-alternate}
 
+\usepackage[round]{natbib}
+\setlength{\bibsep}{0pt plus 0.3ex}
+
+\renewcommand{\refname}{REFERENCES}
+
 \begin{document}
+
+\permission{Permission to make digital or hard copies of all or part of this work for personal or classroom use is granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page. To copy otherwise, to republish, to post on servers or to redistribute to lists, requires prior specific permission and/or a fee.}
 \conferenceinfo{OZCHI}{'14, Dec 2-5, 2014, Sydney, Australia}
+\crdata{978-1-4503-0653-9}
+\CopyrightYear{2014}
+\copyrightetc{Copyright \textcopyright\ \the\copyrtyr\ ACM \the\acmcopyr...\$15.00}
 
 \title{Visualising a Live Coding Arts Process}
 
@@ -47,10 +57,12 @@
 
 \keywords{Live coding, musical performance, software visualisation}
 
-\section{Introduction}
+\enlargethispage{10pt}
+
+\section*{INTRODUCTION}
 
 ``Show us your screens\ldots Code should be seen as well as heard'',
-declares the draft manifesto of ``TOPLAP''~\cite{Toplap}, an
+declares the draft manifesto of ``TOPLAP''~\citep{Toplap}, an
 international organisation devoted to the artistic performance
 practice of ``live coding''. In live coding, computer code is written
 in front of a live audience to generate music and visuals in real
@@ -69,11 +81,11 @@ audience's response to that computer code and whether, from an
 audience perspective, code really should be ``seen as well as heard''.
 
 Traditional approaches to source code visualisation
-(see~\cite{Novais2013} for a review) often focus on the structure of
+(see~\citealp{Novais2013} for a review) often focus on the structure of
 the source code (e.g. visualising complex object/class relationships)
 rather than the \emph{process} of programming. In a process-oriented
 activity such as live coding, different code visualisation techniques
-are thought to be necessary~\cite{McLean2010a,Magnusson2013}.
+are thought to be necessary~\citep{McLean2010a,Magnusson2013}.
 However, until now, academic treatments of code visualisations in live
 coding have adopted theoretical and descriptive approaches, and have
 not included empirical evaluation of the visualisation techniques.
@@ -86,7 +98,7 @@ investigations commenced with a field study at a contemporary-arts
 festival and subsequently included a controlled, laboratory-based
 audience study.
 
-\section{Exploratory Field Study}
+\section*{EXPLORATORY FIELD STUDY}
 
 Immediately following a live-coding performance at the \emph{You Are
 Here} arts festival in Canberra, Australia, in March 2014, we asked
@@ -101,10 +113,10 @@ The curve trajectories in this survey allowed for ``high'',
 ``medium'', and ``low'' levels of enjoyment/understanding for the
 (self-determined) ``beginning'', ``middle'' and ``end'' phases of the
 performance. Other survey questions addressed the ``liveness'' of the
-performance (c.f.~\cite{Auslander}) and whether the projected code was
-confusing.\\
+performance (c.f.~\citealp{Auslander}) and whether the projected code was
+confusing.
 
-\subsection{Field Study Results}
+\subsection*{Field Study Results}
 
 Of the thirteen survey responses received (roughly $80\%$ of the total
 audience), six audience members reported a high level of enjoyment
@@ -137,7 +149,7 @@ whose enjoyment remained high, and we wished to test whether
 augmenting code projections with additional visualisations might give
 rise to similar responses across the wider audience.
 
-\section{Laboratory Study}
+\section*{LABORATORY STUDY}
 
 \begin{figure}
 \centering
@@ -173,7 +185,7 @@ code.
 
 The \emph{aesthetic} visualisation technique, was designed to react to
 the programmer's activity in a more abstract way, to maximise
-aesthetic appeal~\cite{Cawthon2007} and to engage the audience's
+aesthetic appeal~\citep{Cawthon2007} and to engage the audience's
 interest. Although still based on the source code and the live coder's
 edits, the generation of shapes was driven by instrument volume and
 synchronised with the musical beat. The emphasis for the aesthetic
@@ -190,7 +202,7 @@ audience understanding through the performance. In contrast, we
 predicted that the aesthetic visualisations would more positively
 influence audience enjoyment.
 
-\subsection{Experimental Design}
+\subsection*{Experimental Design}
 
 \begin{figure*}
 \centering
@@ -227,10 +239,10 @@ shown in Figure~\ref{fig:understanding-over-time}). There was also a
 free-format question for suggested improvements to the visualisations.
 
 Following this laboratory study, a
-video-cued-recall~\cite{Suchman:1992tk} interview was conducted with
+video-cued-recall~\citep{Suchman1992} interview was conducted with
 the live coder using a video of the performance.
 
-\subsection{Laboratory Study Results}
+\subsection*{Laboratory Study Results}
 
 Of the $41$ audience participants, $66\%$ were male, $76\%$ were aged
 between 18 and 32, and $78\%$ had never seen a live coding performance
@@ -239,7 +251,7 @@ the (low/high) category trends shown in
 Figure~\ref{fig:enjoyment-understanding}. A significance level of
 $0.05$ was used for the Chi-squared analysis.
 
-\subsubsection{Enjoyment}
+\subsubsection*{Enjoyment}
 
 Overall, the majority of the participants reported that \emph{both}
 visualisation conditions had a positive effect on their
@@ -258,7 +270,7 @@ visualisation (around $40\%$). Notably, only a very small percentage
 reported low enjoyment for the aesthetic visualisations during the
 middle and end of the performance.
 
-\subsubsection{Understanding}
+\subsubsection*{Understanding}
 
 In response to a specific survey question, $37\%$ of participants
 stated that, overall, the didactic visualisations ``helped them to
@@ -276,7 +288,7 @@ performances both distributions looked very similar indeed.
 
 \pagebreak
 
-\subsection{Discussion}
+\subsection*{Discussion}
 
 The overall effect of visualisations on enjoyment was high for both
 the aesthetic and didactic visualisations. Reported enjoyment of the
@@ -322,7 +334,7 @@ between the visuals and the music through the performance.''}
 \label{fig:understanding-over-time}
 \end{figure}
 
-\section{Conclusion}
+\section*{CONCLUSION}
 
 In this first empirical study of audience perception of code
 visualisation in live coding, we have identified an opportunity for
@@ -355,59 +367,125 @@ Over sixty years ago, the media theorist Marshall McLuhan stated that
 feelings which are to be conceptually ordered, but a direct
 participation in an experience. The whole tendency of modern
 communication\ldots is towards participation in a process, rather than
-apprehension of concepts.''~\cite{McLuhan} Our hope is that future
+apprehension of concepts.''~\citep{McLuhan} Our hope is that future
 developments in visualisations for live coding may bring audiences
 further into the \emph{process} of a highly-skilled live coding
 artist.
 
-\bibliographystyle{abbrv}
+\enlargethispage{10pt}
 
-\begin{thebibliography}{1}
+\bibliographystyle{plainnat}%abbrv}
+% \bibliography{thesis}
 
-\bibitem{Auslander}
-P.~Auslander.
-\newblock {\em {Liveness: Performance in a Mediatized Culture}}.
-\newblock Routledge, second edition, 2008.
 
-\bibitem{Cawthon2007}
-N.~Cawthon and A.~V. Moere.
+\begin{thebibliography}{8}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\raggedright
+
+\bibitem[Auslander(2008)]{Auslander}
+Philip Auslander.
+\newblock \emph{{Liveness: Performance in a Mediatized Culture}}.
+\newblock Routledge, 2nd edition, 2008.
+
+\bibitem[Cawthon and Moere(2007)]{Cawthon2007}
+Nick Cawthon and Andrew~Vande Moere.
 \newblock {The Effect of Aesthetic on the Usability of Data Visualization}.
-\newblock {\em 2007 11th International Conference Information Visualization (IV
-  '07)}, pages 637--648, July 2007.
+\newblock \emph{2007 11th International Conference Information Visualization
+  (IV '07)}, pages 637--648, July 2007.
+\newblock ISSN 1550-6037.
 
-\bibitem{Magnusson2013}
-T.~Magnusson.
+\bibitem[Magnusson(2011)]{Magnusson2013}
+Thor Magnusson.
 \newblock {Algorithms as Scores: Coding Live Music}.
-\newblock {\em Leonardo Music Journal}, 21:19--23, 2011.
+\newblock \emph{Leonardo Music Journal}, 21:\penalty0 19--23, 2011.
 
-\bibitem{McLean2010a}
-A.~Mclean, D.~Griffiths, N.~Collins, and G.~Wiggins.
+\bibitem[Mclean et~al.(2010)Mclean, Griffiths, Collins, and
+  Wiggins]{McLean2010a}
+Alex Mclean, Dave Griffiths, Nick Collins, and Geraint Wiggins.
 \newblock {Visualisation of live code}.
-\newblock {\em Visualisation and the Arts}, pages 1--5, 2010.
+\newblock \emph{Visualisation and the Arts}, pages 1--5, 2010.
 
-\bibitem{McLuhan}
-M.~McLuhan.
+\bibitem[McLuhan(1996)]{McLuhan}
+Marshall McLuhan.
 \newblock {Letter to Harold Adam Innis, March 14 1951}.
-\newblock In E.~McLuhan and F.~Zingrone, editors, {\em Essential McLuhan},
-  page~73.
+\newblock In Eric McLuhan and Frank Zingrone, editors, \emph{Essential
+  McLuhan}, page~73. 1996.
 
-\bibitem{Novais2013}
-R.~L. Novais, A.~Torres, T.~S. Mendes, M.~Mendon\c{c}a, and N.~Zazworka.
+\bibitem[Novais et~al.(2013)Novais, Torres, Mendes, Mendon\c{c}a, and
+  Zazworka]{Novais2013}
+Renato~Lima Novais, Andr\'{e} Torres, Thiago~Souto Mendes, Manoel Mendon\c{c}a,
+  and Nico Zazworka.
 \newblock {Software evolution visualization: A systematic mapping study}.
-\newblock {\em Information and Software Technology}, 55(11):1860--1883, Nov.
-  2013.
+\newblock \emph{Information and Software Technology}, 55\penalty0
+  (11):\penalty0 1860--1883, November 2013.
+\newblock ISSN 09505849.
 
-\bibitem{Suchman:1992tk}
-L.~A. Suchman and R.~H. Trigg.
+\bibitem[Suchman and Trigg(1992)]{Suchman1992}
+Lucy~A Suchman and Randall~H Trigg.
 \newblock {Understanding practice: video as a medium for reflection and
   design}.
-\newblock pages 65--90, 1992.
+\newblock In \emph{Design at work}, pages 65--90. 1992.
 
-\bibitem{Toplap}
+\bibitem[Toplap(2010)]{Toplap}
 Toplap.
 \newblock {Toplap Manifesto}.
 \newblock http://toplap.org/wiki/ManifestoDraft, 2010.
 
 \end{thebibliography}
+
+% \begin{thebibliography}{1}
+
+
+
+% \bibitem{Auslander}
+% P.~Auslander.
+% \newblock {\em {Liveness: Performance in a Mediatized Culture}}.
+% \newblock Routledge, second edition, 2008.
+
+% \bibitem{Cawthon2007}
+% N.~Cawthon and A.~V. Moere.
+% \newblock {The Effect of Aesthetic on the Usability of Data Visualization}.
+% \newblock {\em 2007 11th International Conference Information Visualization (IV
+%   '07)}, pages 637--648, July 2007.
+
+% \bibitem{Magnusson2013}
+% T.~Magnusson.
+% \newblock {Algorithms as Scores: Coding Live Music}.
+% \newblock {\em Leonardo Music Journal}, 21:19--23, 2011.
+
+% \bibitem{McLean2010a}
+% A.~Mclean, D.~Griffiths, N.~Collins, and G.~Wiggins.
+% \newblock {Visualisation of live code}.
+% \newblock {\em Visualisation and the Arts}, pages 1--5, 2010.
+
+% \bibitem{McLuhan}
+% M.~McLuhan.
+% \newblock {Letter to Harold Adam Innis, March 14 1951}.
+% \newblock In E.~McLuhan and F.~Zingrone, editors, {\em Essential McLuhan},
+%   page~73.
+
+% \bibitem{Novais2013}
+% R.~L. Novais, A.~Torres, T.~S. Mendes, M.~Mendon\c{c}a, and N.~Zazworka.
+% \newblock {Software evolution visualization: A systematic mapping study}.
+% \newblock {\em Information and Software Technology}, 55(11):1860--1883, Nov.
+%   2013.
+
+% \bibitem{Suchman:1992tk}
+% L.~A. Suchman and R.~H. Trigg.
+% \newblock {Understanding practice: video as a medium for reflection and
+%   design}.
+% \newblock pages 65--90, 1992.
+
+% \bibitem{Toplap}
+% Toplap.
+% \newblock {Toplap Manifesto}.
+% \newblock http://toplap.org/wiki/ManifestoDraft, 2010.
+
+% \end{thebibliography}
 
 \end{document}
