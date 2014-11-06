@@ -374,118 +374,118 @@ artist.
 
 \enlargethispage{10pt}
 
-\bibliographystyle{plainnat}%abbrv}
+\bibliographystyle{ACM-Reference-Format-Journals}%plainnat}%abbrv}
 % \bibliography{thesis}
 
 
-\begin{thebibliography}{8}
-\providecommand{\natexlab}[1]{#1}
-\providecommand{\url}[1]{\texttt{#1}}
-\expandafter\ifx\csname urlstyle\endcsname\relax
-  \providecommand{\doi}[1]{doi: #1}\else
-  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+\begin{thebibliography}{00}
 
 \raggedright
 
-\bibitem[Auslander(2008)]{Auslander}
-Philip Auslander.
-\newblock \emph{{Liveness: Performance in a Mediatized Culture}}.
-\newblock Routledge, 2nd edition, 2008.
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
 
-\bibitem[Cawthon and Moere(2007)]{Cawthon2007}
-Nick Cawthon and Andrew~Vande Moere.
-\newblock {The Effect of Aesthetic on the Usability of Data Visualization}.
-\newblock \emph{2007 11th International Conference Information Visualization
-  (IV '07)}, pages 637--648, July 2007.
-\newblock ISSN 1550-6037.
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{{\tt DOI:}\penalty0{#1}\ }
+  \fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       #1{#1}          \fi
 
-\bibitem[Magnusson(2011)]{Magnusson2013}
-Thor Magnusson.
-\newblock {Algorithms as Scores: Coding Live Music}.
-\newblock \emph{Leonardo Music Journal}, 21:\penalty0 19--23, 2011.
+\bibitem[\protect\citeauthoryear{Auslander}{Auslander}{2008}]%
+        {Auslander}
+{Auslander, P.} 
+\newblock {\em {Liveness: Performance in a Mediatized Culture}\/} (2nd ed.).
+\newblock Routledge (2008).
+\newblock
 
-\bibitem[Mclean et~al.(2010)Mclean, Griffiths, Collins, and
-  Wiggins]{McLean2010a}
-Alex Mclean, Dave Griffiths, Nick Collins, and Geraint Wiggins.
-\newblock {Visualisation of live code}.
-\newblock \emph{Visualisation and the Arts}, pages 1--5, 2010.
 
-\bibitem[McLuhan(1996)]{McLuhan}
-Marshall McLuhan.
-\newblock {Letter to Harold Adam Innis, March 14 1951}.
-\newblock In Eric McLuhan and Frank Zingrone, editors, \emph{Essential
-  McLuhan}, page~73. 1996.
+\bibitem[\protect\citeauthoryear{Cawthon and Moere}{Cawthon and Moere}{2007}]%
+        {Cawthon2007}
+{Cawthon, N.} {and} {Moere, A.~V.}
+\newblock \showarticletitle{{The Effect of Aesthetic on the Usability of Data
+  Visualization}}.
+\newblock {\em 2007 11th International Conference Information Visualization (IV
+  '07)\/} (July 2007), 637--648.
+\newblock
+\showISBNx{0-7695-2900-3}
+\showISSN{1550-6037}
 
-\bibitem[Novais et~al.(2013)Novais, Torres, Mendes, Mendon\c{c}a, and
-  Zazworka]{Novais2013}
-Renato~Lima Novais, Andr\'{e} Torres, Thiago~Souto Mendes, Manoel Mendon\c{c}a,
-  and Nico Zazworka.
-\newblock {Software evolution visualization: A systematic mapping study}.
-\newblock \emph{Information and Software Technology}, 55\penalty0
-  (11):\penalty0 1860--1883, November 2013.
-\newblock ISSN 09505849.
 
-\bibitem[Suchman and Trigg(1992)]{Suchman1992}
-Lucy~A Suchman and Randall~H Trigg.
-\newblock {Understanding practice: video as a medium for reflection and
-  design}.
-\newblock In \emph{Design at work}, pages 65--90. 1992.
+\bibitem[\protect\citeauthoryear{Magnusson}{Magnusson}{2011}]%
+        {Magnusson2013}
+{Magnusson, T.}
+\newblock \showarticletitle{{Algorithms as Scores: Coding Live Music}}.
+\newblock {\em Leonardo Music Journal\/}  {21} (2011), 19--23.
+\newblock
 
-\bibitem[Toplap(2010)]{Toplap}
-Toplap.
+
+\bibitem[\protect\citeauthoryear{Mclean, Griffiths, Collins, and
+  Wiggins}{Mclean et~al\mbox{.}}{2010}]%
+        {McLean2010a}
+{Mclean, A.}, {Griffiths, D.}, {Collins, N.}, {and} {Wiggins, G.} 2010.
+\newblock \showarticletitle{{Visualisation of live code}}.
+\newblock {\em Visualisation and the Arts\/} (2010), 1--5.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{McLuhan}{McLuhan}{1996}]%
+        {McLuhan}
+{McLuhan, M.}
+\newblock \showarticletitle{{Letter to Harold Adam Innis, March 14 1951}}.
+\newblock In {\em Essential McLuhan}, {Eric McLuhan} {and} {Frank Zingrone}
+  (Eds.) (1996), 73.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Novais, Torres, Mendes, Mendon\c{c}a, and
+  Zazworka}{Novais et~al\mbox{.}}{2013}]%
+        {Novais2013}
+{Novais, R.~L.}, {Torres, A.}, {Mendes, T.~S.}, {Mendon\c{c}a, M.}, {and}
+  {Zazworka, N.} 2013.
+\newblock \showarticletitle{{Software evolution visualization: A systematic
+  mapping study}}.
+\newblock {\em Information and Software Technology\/} {55}, 11 (Nov. 2013),
+  1860--1883.
+\newblock
+\showISSN{09505849}
+
+
+\bibitem[\protect\citeauthoryear{Suchman and Trigg}{Suchman and Trigg}{1992}]%
+        {Suchman1992}
+{Suchman, L.~A.} {and} {Trigg, R.~H.}
+\newblock \showarticletitle{{Understanding practice: video as a medium for
+  reflection and design}}.
+\newblock In {\em Design at work} (1992), 65--90.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Toplap}{Toplap}{2010}]%
+        {Toplap}
+{Toplap}.
 \newblock {Toplap Manifesto}.
-\newblock http://toplap.org/wiki/ManifestoDraft, 2010.
+\newblock http://toplap.org/wiki/ManifestoDraft, (2010).
+\newblock
+
 
 \end{thebibliography}
-
-% \begin{thebibliography}{1}
-
-
-
-% \bibitem{Auslander}
-% P.~Auslander.
-% \newblock {\em {Liveness: Performance in a Mediatized Culture}}.
-% \newblock Routledge, second edition, 2008.
-
-% \bibitem{Cawthon2007}
-% N.~Cawthon and A.~V. Moere.
-% \newblock {The Effect of Aesthetic on the Usability of Data Visualization}.
-% \newblock {\em 2007 11th International Conference Information Visualization (IV
-%   '07)}, pages 637--648, July 2007.
-
-% \bibitem{Magnusson2013}
-% T.~Magnusson.
-% \newblock {Algorithms as Scores: Coding Live Music}.
-% \newblock {\em Leonardo Music Journal}, 21:19--23, 2011.
-
-% \bibitem{McLean2010a}
-% A.~Mclean, D.~Griffiths, N.~Collins, and G.~Wiggins.
-% \newblock {Visualisation of live code}.
-% \newblock {\em Visualisation and the Arts}, pages 1--5, 2010.
-
-% \bibitem{McLuhan}
-% M.~McLuhan.
-% \newblock {Letter to Harold Adam Innis, March 14 1951}.
-% \newblock In E.~McLuhan and F.~Zingrone, editors, {\em Essential McLuhan},
-%   page~73.
-
-% \bibitem{Novais2013}
-% R.~L. Novais, A.~Torres, T.~S. Mendes, M.~Mendon\c{c}a, and N.~Zazworka.
-% \newblock {Software evolution visualization: A systematic mapping study}.
-% \newblock {\em Information and Software Technology}, 55(11):1860--1883, Nov.
-%   2013.
-
-% \bibitem{Suchman:1992tk}
-% L.~A. Suchman and R.~H. Trigg.
-% \newblock {Understanding practice: video as a medium for reflection and
-%   design}.
-% \newblock pages 65--90, 1992.
-
-% \bibitem{Toplap}
-% Toplap.
-% \newblock {Toplap Manifesto}.
-% \newblock http://toplap.org/wiki/ManifestoDraft, 2010.
-
-% \end{thebibliography}
 
 \end{document}
